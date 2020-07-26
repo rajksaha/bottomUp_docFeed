@@ -5,7 +5,7 @@
 
 	<bean id="testDS" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://localhost/echo_spring_dev?connectTimeout=5000000&amp;socketTimeout=8000000"/>
+		<property name="url" value="jdbc:mysql://localhost/doctor_feed?connectTimeout=5000000&amp;socketTimeout=8000000"/>
 		<property name="username" value="root"/>
 		<property name="password" value=""/>
 	</bean>

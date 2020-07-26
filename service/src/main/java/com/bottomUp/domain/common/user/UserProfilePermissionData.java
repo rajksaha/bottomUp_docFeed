@@ -10,19 +10,19 @@ import java.util.Map;
 public class UserProfilePermissionData implements Serializable{
 
 
-    private Integer userID;
+    private Long userID;
     private String userName;
-    private Integer companyID;
+    private Long companyID;
     private Integer status;
     private List<GroupPermissionData> groupPermissionDataList;
     private Map<String, Boolean> permissions;
     private UserProfileData profileData;
 
-    public Integer getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
@@ -50,11 +50,11 @@ public class UserProfilePermissionData implements Serializable{
         this.userName = userName;
     }
 
-    public Integer getCompanyID() {
+    public Long getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Integer companyID) {
+    public void setCompanyID(Long companyID) {
         this.companyID = companyID;
     }
 

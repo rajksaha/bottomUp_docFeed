@@ -19,7 +19,7 @@ public class SQL2OConnection {
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            DataSource datasource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/medical");
+            DataSource datasource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/doctor_feed");
             sql2o = new Sql2o(datasource);
             dbConnectionInstance = sql2o.open();
 

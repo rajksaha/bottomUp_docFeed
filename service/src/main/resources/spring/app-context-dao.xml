@@ -10,7 +10,8 @@
 	<!-- define the SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="configLocation" value="classpath:myBatis/mybatis-config.xml"></property>
-        <property name="typeAliasesPackage" value="com.com.bottomUp.domain" />
+        <property name="typeAliasesPackage" value="com.bottomUp.domain" />
+		<property name="dataSource" ref="dataSource" />
     </bean>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
@@ -18,10 +19,11 @@
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-	  <property name="basePackage" value="com.com.bottomUp.myBatis.persistence" />
+	  <property name="basePackage" value="com.bottomUp.myBatis.persistence" />
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />

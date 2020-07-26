@@ -9,7 +9,7 @@ import com.bottomUp.domain.common.BaseData;
 public class UserGroupAssignmentData extends BaseData {
 
     private Integer userGroupAssignmentID;
-    private Integer userID;
+    private Long userID;
     private Integer userGroupID;
     private Integer status;
 
@@ -21,11 +21,9 @@ public class UserGroupAssignmentData extends BaseData {
         this.userGroupAssignmentID = userGroupAssignmentID;
     }
 
-    public Integer getUserID() {
-        return userID;
-    }
 
-    public void setUserID(Integer userID) {
+
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 

@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 public class BaseTest {
     public static final String DBCP_DS = "testDS";
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseTest.class);
-    protected static ApplicationContext testContext = new ClassPathXmlApplicationContext("app-context-test.xml");
+    protected static ApplicationContext testContext = null;
     protected static ApplicationContext applicationContext = null;
 
     static {

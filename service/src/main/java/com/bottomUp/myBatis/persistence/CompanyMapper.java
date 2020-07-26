@@ -1,4 +1,4 @@
-package com.bottomUp.myBatis.persistence.common;
+package com.bottomUp.myBatis.persistence;
 
 
 import com.bottomUp.common.exception.BottomUpException;
@@ -16,7 +16,7 @@ public interface CompanyMapper {
 
     public void update(CompanyData data) throws BottomUpException;
 
-    public CompanyData getByID(Integer ID) throws BottomUpException;
+    public CompanyData getByID(Long ID) throws BottomUpException;
 
     public List<CompanyData> getByParam(Map<String, Object> param) throws BottomUpException;
 

@@ -11,7 +11,16 @@
 	<typeAliases>
 
 		<!--com.bottomUp-->
-		<typeAlias alias="Company" type="com.com.bottomUp.domain.common.CompanyData"/>
+		<typeAlias alias="Company" type="com.bottomUp.domain.common.CompanyData"/>
+		<typeAlias alias="Module" type="com.bottomUp.domain.common.ModuleData"/>
+		<typeAlias alias="CompanyModule" type="com.bottomUp.domain.common.CompanyModuleData"/>
+		<typeAlias alias="User" type="com.bottomUp.domain.common.user.UserData"/>
+		<typeAlias alias="UserProfile" type="com.bottomUp.domain.common.user.UserProfileData"/>
+		<typeAlias alias="UserGroup" type="com.bottomUp.domain.common.user.UserGroupData"/>
+		<typeAlias alias="UserGroupAssignment" type="com.bottomUp.domain.common.user.UserGroupAssignmentData"/>
+		<typeAlias alias="UserGroupPermission" type="com.bottomUp.domain.common.user.GroupPermissionData"/>
+		<typeAlias alias="Permission" type="com.bottomUp.domain.common.user.PermissionData"/>
+		<typeAlias alias="ContentDetail" type="com.bottomUp.domain.common.user.ContentDetailData"/>
 
 
 		<!--docFeed-->
@@ -24,6 +33,6 @@
 	</typeAliases>
 
     <plugins>
-        <plugin interceptor="com.docfeed.mybatis.interceptor.MapperInterceptor"/>
+        <plugin interceptor="com.bottomUp.myBatis.interceptor.MapperInterceptor"/>
     </plugins>
 </configuration>

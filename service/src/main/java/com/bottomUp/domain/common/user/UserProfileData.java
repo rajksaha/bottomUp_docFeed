@@ -13,9 +13,9 @@ import java.util.List;
 public class UserProfileData extends BaseData {
 
 
-    private Integer userProfileID;
+    private Long userProfileID;
     private String userName;
-    private Integer userID;
+    private Long userID;
     private String firstName;
     private String lastName;
     private String employeeCode;
@@ -37,11 +37,11 @@ public class UserProfileData extends BaseData {
     private List<UserGroupAssignmentData> groupAssignmentList;
     private List<UserGroupData> userGroupList;
 
-    public Integer getUserProfileID() {
+    public Long getUserProfileID() {
         return userProfileID;
     }
 
-    public void setUserProfileID(Integer userProfileID) {
+    public void setUserProfileID(Long userProfileID) {
         this.userProfileID = userProfileID;
     }
 
@@ -53,11 +53,11 @@ public class UserProfileData extends BaseData {
         this.userName = userName;
     }
 
-    public Integer getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 

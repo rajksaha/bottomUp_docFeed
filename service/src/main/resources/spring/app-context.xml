@@ -9,7 +9,7 @@
 	<bean name="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:com.bottomUp.properties</value>
+				<value>classpath:bottomUp.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -17,7 +17,7 @@
     <bean id="echoProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
-                <value>classpath:com.bottomUp.properties</value>
+                <value>classpath:bottomUp.properties</value>
             </list>
         </property>
     </bean>

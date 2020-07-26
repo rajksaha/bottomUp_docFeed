@@ -2,7 +2,7 @@ package com.bottomUp.service.common;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.common.CompanyData;
-import com.bottomUp.myBatis.persistence.common.CompanyMapper;
+import com.bottomUp.myBatis.persistence.CompanyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +19,15 @@ public class CompanyService {
     @Autowired
     private CompanyMapper companyMapper;
 
-    public void create(CompanyData companyData) throws BottomUpException {
-        companyMapper.create(companyData);
+    public void create(CompanyData data) throws BottomUpException {
+        companyMapper.create(data);
     }
 
-    public void update(CompanyData companyData) throws BottomUpException {
-        companyMapper.update(companyData);
+    public void update(CompanyData data) throws BottomUpException {
+        companyMapper.update(data);
     }
 
-    public CompanyData getByID(Integer ID)throws BottomUpException {
+    public CompanyData getByID(Long ID)throws BottomUpException {
         return this.companyMapper.getByID(ID);
     }
 
