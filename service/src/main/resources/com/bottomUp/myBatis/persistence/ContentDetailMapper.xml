@@ -7,7 +7,7 @@
 
 	<insert id="create" parameterType="ContentDetail" useGeneratedKeys="true" keyProperty="contentDetailID">
 
-		INSERT INTO `echo_content_detail`
+		INSERT INTO `bottom_up_content_detail`
 		(
 			`entityType`,
 			`entityID`,
@@ -40,7 +40,7 @@
 
 	<update id="update" parameterType="ContentDetail">
 
-		UPDATE `echo_content_detail`
+		UPDATE `bottom_up_content_detail`
 		SET
 		`entityType` = #{entityType},
 		`entityID` = #{entityID},
@@ -72,7 +72,7 @@
 			`updatedBy`,
 			`createdOn`,
 			`createdBy`
-		FROM `echo_content_detail`
+		FROM `bottom_up_content_detail`
 
 		WHERE contentDetailID = #{contentDetailID};
 
@@ -92,7 +92,7 @@
 		`updatedBy`,
 		`createdOn`,
 		`createdBy`
-		FROM `echo_content_detail`
+		FROM `bottom_up_content_detail`
 		WHERE 1 = 1
 
 		<if test="entityType != null">
@@ -126,7 +126,7 @@
 
 	<delete id="deleteByParam" parameterType="map">
 
-		DELETE FROM echo_content_detail
+		DELETE FROM bottom_up_content_detail
 		WHERE 1 = 1
 		<if test="contentDetailID != null">
 			AND contentDetailID = #{contentDetailID}
@@ -148,7 +148,7 @@
 
 	<select id="getDuplicateApprover" resultType="UserData" parameterType="map">
 		SELECT  COUNT(ecd.shortName) status, ecd.shortName AS userName
-		FROM echo_content_detail ecd
+		FROM bottom_up_content_detail ecd
 		WHERE ecd.entityID = 1
 		AND ecd.entityType = #{entityType}
 		GROUP BY ecd.shortName HAVING status > 1;
@@ -169,9 +169,9 @@
 			ccd2.`updatedBy`,
 			ccd2.`createdOn`,
 			ccd2.`createdBy`
-		FROM echo_content_detail ccd
+		FROM bottom_up_content_detail ccd
 		JOIN  company_formation_mapping cfm ON ccd.contentDetailID = cfm.itemParentID
-		JOIN echo_content_detail ccd2 ON cfm.itemID = ccd2.contentDetailID
+		JOIN bottom_up_content_detail ccd2 ON cfm.itemID = ccd2.contentDetailID
 		WHERE 1 =1
 
 		<if test="entityType != null">

@@ -8,7 +8,7 @@
 
 	<insert id="create" parameterType="Permission"  useGeneratedKeys="true" keyProperty="permissionID">
 
-		INSERT INTO `echo_permission`
+		INSERT INTO `bottom_up_permission`
 		(
 			`companyModuleID`,
 			`functionCode`,
@@ -33,7 +33,7 @@
 	
 	<update id="update" parameterType="Permission">
 
-		UPDATE `echo_permission`
+		UPDATE `bottom_up_permission`
 		SET
 		`companyModuleID` = #{companyModuleID},
 		`functionCode` = #{functionCode},
@@ -54,7 +54,7 @@
 			`updatedBy`,
 			`createdOn`,
 			`createdBy`
-		FROM `echo_permission`
+		FROM `bottom_up_permission`
 
 		WHERE permissionID = #{permissionID}
 
@@ -71,9 +71,9 @@
 		ep.`updatedBy`,
 		ep.`createdOn`,
 		ep.`createdBy`
-		FROM `echo_permission` ep
-		JOIN echo_company_module ecm ON ecm.companyModuleID = ep.companyModuleID
-		JOIN echo_company ec ON ecm.companyID = ec.companyID
+		FROM `bottom_up_permission` ep
+		JOIN bottom_up_company_module ecm ON ecm.companyModuleID = ep.companyModuleID
+		JOIN bottom_up_company ec ON ecm.companyID = ec.companyID
 		WHERE 1 = 1
 		<if test="permissionID != null">
 			AND ep.permissionID = #{permissionID}
@@ -100,9 +100,9 @@
 			THEN true
 			ELSE false
 		END AS isAssigned
-		FROM `echo_permission` ep
-		JOIN echo_company_module ecm ON ecm.companyModuleID = ep.companyModuleID
-        LEFT JOIN echo_group_permission egp ON ep.permissionID = egp.permissionID AND egp.userGroupID = #{userGroupID}
+		FROM `bottom_up_permission` ep
+		JOIN bottom_up_company_module ecm ON ecm.companyModuleID = ep.companyModuleID
+        LEFT JOIN bottom_up_group_permission egp ON ep.permissionID = egp.permissionID AND egp.userGroupID = #{userGroupID}
 		WHERE 1 = 1
 		<if test="companyID != null">
 			AND ecm.companyID = #{companyID}

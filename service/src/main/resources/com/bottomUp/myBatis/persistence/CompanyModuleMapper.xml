@@ -6,7 +6,7 @@
 
 	<insert id="create" parameterType="CompanyModule" useGeneratedKeys="true" keyProperty="companyModuleID" >
 
-		INSERT INTO `echo_company_module`
+		INSERT INTO `bottom_up_company_module`
 		(
 			`companyID`,
 			`shortName`,
@@ -31,7 +31,7 @@
 	</insert>
 	
 	<update id="update" parameterType="CompanyModule">
-		UPDATE echo_company_module SET
+		UPDATE bottom_up_company_module SET
 			companyID = #{companyID},
 			shortName = #{shortName},
 			moduleID = #{moduleID} ,
@@ -42,17 +42,17 @@
 
 	<select id="getByID" parameterType="int" resultType="CompanyModule">
 		SELECT ecm.companyModuleID, ecm.companyID, ecm.shortName, ecm.moduleID, ecm.updatedOn, ecm.updatedBy, ecm.`createdOn`, ecm.`createdBy`, ec.companyName AS companyName, em.moduleName AS moduleName
-		FROM echo_company_module ecm
-		JOIN echo_company ec ON ecm.companyID = ec.companyID
-		JOIN echo_module em ON ecm.moduleID = em.moduleID
+		FROM bottom_up_company_module ecm
+		JOIN bottom_up_company ec ON ecm.companyID = ec.companyID
+		JOIN bottom_up_module em ON ecm.moduleID = em.moduleID
 		WHERE companyModuleID = #{companyModuleID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="CompanyModule">
 		SELECT ecm.companyModuleID, ecm.companyID, ecm.moduleID, ecm.shortName, ecm.updatedOn, ecm.updatedBy, ecm.`createdOn`, ecm.`createdBy`, ec.companyName AS companyName, em.moduleName AS moduleName
-		FROM echo_company_module ecm
-		JOIN echo_company ec ON ecm.companyID = ec.companyID
-		JOIN echo_module em ON ecm.moduleID = em.moduleID
+		FROM bottom_up_company_module ecm
+		JOIN bottom_up_company ec ON ecm.companyID = ec.companyID
+		JOIN bottom_up_module em ON ecm.moduleID = em.moduleID
 		WHERE 1 = 1
 		<if test="companyModuleID != null">
 			AND ecm.companyModuleID = #{companyModuleID}
@@ -67,7 +67,7 @@
 	</select>
 
     <delete id="delete" parameterType="map">
-		DELETE  FROM echo_module WHERE moduleID = #{moduleID}
+		DELETE  FROM bottom_up_module WHERE moduleID = #{moduleID}
 	</delete>
 
 

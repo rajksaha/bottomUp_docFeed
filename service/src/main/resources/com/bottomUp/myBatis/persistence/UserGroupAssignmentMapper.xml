@@ -8,7 +8,7 @@
 
 	<insert id="create" parameterType="UserGroupAssignment"  useGeneratedKeys="true" keyProperty="userGroupAssignmentID">
 
-		INSERT INTO `echo_user_group_assignment`
+		INSERT INTO `bottom_up_user_group_assignment`
 		(
 			`userID`,
 			`userGroupID`,
@@ -34,7 +34,7 @@
 	
 	<update id="update" parameterType="UserGroupAssignment">
 
-		UPDATE `echo_user_group_assignment`
+		UPDATE `bottom_up_user_group_assignment`
 		SET
 		`userID` = #{userID},
 		`userGroupID` = #{userGroupID},
@@ -56,7 +56,7 @@
 			`updatedBy`,
 			`createdOn`,
 			`createdBy`
-		FROM `echo_user_group_assignment`
+		FROM `bottom_up_user_group_assignment`
 		WHERE userGroupAssignmentID = #{userGroupAssignmentID}
 
 	</select>
@@ -72,8 +72,8 @@
 			euga.`updatedBy`,
 			euga.`createdOn`,
 			euga.`createdBy`
-		FROM `echo_user_group_assignment` euga
-		JOIN `echo_user` eu ON euga.userID = eu.userID
+		FROM `bottom_up_user_group_assignment` euga
+		JOIN `bottom_up_user` eu ON euga.userID = eu.userID
 		WHERE 1 = 1
 		<if test="userGroupAssignmentID != null">
 			AND euga.userGroupAssignmentID = #{userGroupAssignmentID}
@@ -91,7 +91,7 @@
 	</select>
 
 	<delete id="deleteByUserID" parameterType="int">
-		DELETE FROM echo_user_group_assignment WHERE userID = #{userID}
+		DELETE FROM bottom_up_user_group_assignment WHERE userID = #{userID}
 	</delete>
 
 

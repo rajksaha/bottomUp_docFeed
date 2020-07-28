@@ -8,7 +8,7 @@
 
 	<insert id="create" parameterType="UserGroup"  useGeneratedKeys="true" keyProperty="userGroupID">
 
-		INSERT INTO `echo_user_group`
+		INSERT INTO `bottom_up_user_group`
 		(
 			`shortName`,
 			`longDesc`,
@@ -35,7 +35,7 @@
 	
 	<update id="update" parameterType="UserGroup">
 
-		UPDATE `echo_user_group`
+		UPDATE `bottom_up_user_group`
 		SET
 		`shortName` = #{shortName},
 		`longDesc` = #{longDesc},
@@ -59,10 +59,10 @@
 			eug.`updatedBy`,
 			eug.`createdOn`,
 			eug.`createdBy`
-		FROM `echo_user_group` eug
-		JOIN echo_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
-        JOIN echo_company ec ON ecm.companyID = ec.companyID
-        JOIN echo_module em ON ecm.moduleID = em.moduleID
+		FROM `bottom_up_user_group` eug
+		JOIN bottom_up_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
+        JOIN bottom_up_company ec ON ecm.companyID = ec.companyID
+        JOIN bottom_up_module em ON ecm.moduleID = em.moduleID
 
 		WHERE eug.userGroupID = #{userGroupID}
 
@@ -82,10 +82,10 @@
 			eug.`updatedBy`,
 			eug.`createdOn`,
 			eug.`createdBy`
-		FROM `echo_user_group` eug
-		JOIN echo_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
-		JOIN echo_company ec ON ecm.companyID = ec.companyID
-		JOIN echo_module em ON ecm.moduleID = em.moduleID
+		FROM `bottom_up_user_group` eug
+		JOIN bottom_up_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
+		JOIN bottom_up_company ec ON ecm.companyID = ec.companyID
+		JOIN bottom_up_module em ON ecm.moduleID = em.moduleID
 		WHERE 1 = 1
 		<if test="userGroupID != null">
 			AND eug.userGroupID = #{userGroupID}
@@ -109,10 +109,10 @@
 	<select id="getCountByParam" parameterType="map" resultType="int">
 
 		SELECT COUNT(eug.userGroupID)
-		FROM `echo_user_group` eug
-		JOIN echo_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
-		JOIN echo_company ec ON ecm.companyID = ec.companyID
-		JOIN echo_module em ON ecm.moduleID = em.moduleID
+		FROM `bottom_up_user_group` eug
+		JOIN bottom_up_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
+		JOIN bottom_up_company ec ON ecm.companyID = ec.companyID
+		JOIN bottom_up_module em ON ecm.moduleID = em.moduleID
 		WHERE 1 = 1
 		<if test="userGroupID != null">
 			AND eug.userGroupID = #{userGroupID}
@@ -144,9 +144,9 @@
 			THEN true
 			ELSE false
 		END AS isAssigned
-		FROM `echo_user_group` eug
-		JOIN echo_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
-		LEFT JOIN echo_user_group_assignment euga ON eug.userGroupID = euga.userGroupID AND euga.userID = #{userID}
+		FROM `bottom_up_user_group` eug
+		JOIN bottom_up_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
+		LEFT JOIN bottom_up_user_group_assignment euga ON eug.userGroupID = euga.userGroupID AND euga.userID = #{userID}
 
 		WHERE 1 = 1
 		<if test="companyID != null">
@@ -156,7 +156,7 @@
 
 	<select id="getUserGroupCountByParam" parameterType="map" resultType="int">
 		SELECT COUNT(userGroupID)
-		FROM echo_user_group
+		FROM bottom_up_user_group
 		WHERE 1 = 1
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

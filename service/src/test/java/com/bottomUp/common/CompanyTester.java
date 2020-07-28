@@ -21,6 +21,8 @@ public class CompanyTester extends BaseTest {
 
     @Autowired
     private CompanyService companyService;
+
+
     @Test
     public void TestCompanyInsert()throws BottomUpException {
 

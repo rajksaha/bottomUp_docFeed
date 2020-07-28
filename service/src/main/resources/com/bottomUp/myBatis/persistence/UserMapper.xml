@@ -7,7 +7,7 @@
 
 	<insert id="create" parameterType="User" useGeneratedKeys="true" keyProperty="userID">
 
-		INSERT INTO `echo_user`
+		INSERT INTO `bottom_up_user`
 		(
 			`userName`,
 			`password`,
@@ -41,7 +41,7 @@
 
 	<update id="update" parameterType="User">
 
-		UPDATE `echo_user`
+		UPDATE `bottom_up_user`
 		SET
 		`userName` = #{userName},
 		`password` = #{password},
@@ -59,7 +59,7 @@
 	<update id="updatePassword" parameterType="User">
 
 
-		UPDATE `echo_user`
+		UPDATE `bottom_up_user`
 		SET
 		`password` = #{password},
 		`updatedOn` = #{updatedOn},
@@ -71,7 +71,7 @@
 
 	<update id="updateStatus" parameterType="User">
 
-		UPDATE `echo_user`
+		UPDATE `bottom_up_user`
 		SET
 		`status` = #{status},
 		`updatedOn` = #{updatedOn},
@@ -99,8 +99,8 @@
 			eu.`createdOn`,
 			eu.`createdBy`,
 			eup.lastWorkingDay AS lastWorkingDay
-		FROM echo_user eu
-		LEFT JOIN echo_user_profile eup ON eu.userID = eup.userID
+		FROM bottom_up_user eu
+		LEFT JOIN bottom_up_user_profile eup ON eu.userID = eup.userID
 		WHERE userName = #{userName};
 
 	</select>
@@ -119,7 +119,7 @@
 		`updatedBy`,
 		`createdOn`,
 		`createdBy`
-		FROM echo_user
+		FROM bottom_up_user
 		WHERE userID = #{userID};
 
 	</select>
@@ -138,7 +138,7 @@
 		`updatedBy`,
 		`createdOn`,
 		`createdBy`
-		FROM echo_user
+		FROM bottom_up_user
 		WHERE 1 = 1
 
 		<if test="userID != null">
@@ -157,10 +157,10 @@
 	<select id="getUserPermissionByUserID" parameterType="int" resultType="UserGroupPermission">
 		SELECT
 			p.functionCode
-		FROM echo_user u
-		JOIN echo_user_group_assignment uga ON u.userID = uga.userID
-		JOIN echo_group_permission gp ON uga.userGroupID = gp.userGroupID
-		JOIN echo_permission p ON gp.permissionID = p.permissionID
+		FROM bottom_up_user u
+		JOIN bottom_up_user_group_assignment uga ON u.userID = uga.userID
+		JOIN bottom_up_group_permission gp ON uga.userGroupID = gp.userGroupID
+		JOIN bottom_up_permission p ON gp.permissionID = p.permissionID
 		WHERE u.userID = #{userID};
 	</select>
 

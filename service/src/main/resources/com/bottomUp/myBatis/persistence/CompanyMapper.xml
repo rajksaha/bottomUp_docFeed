@@ -6,7 +6,7 @@
 
 	<insert id="create" parameterType="Company" useGeneratedKeys="true" keyProperty="companyID" >
 
-		INSERT INTO `echo_company`
+		INSERT INTO `bottom_up_company`
 		(
 			`companyCode`,
 			`companyName`,
@@ -28,7 +28,7 @@
 	</insert>
 	
 	<update id="update" parameterType="Company">
-		UPDATE echo_company SET
+		UPDATE bottom_up_company SET
 			companyCode = #{companyCode},
 			companyName = #{companyName} ,
 			`updatedOn` = #{updatedOn},
@@ -38,13 +38,13 @@
 
 	<select id="getByID" parameterType="int" resultType="Company">
 		SELECT companyID, companyCode, companyName, updatedOn, updatedBy, `createdOn`, `createdBy`
-		FROM echo_company
+		FROM bottom_up_company
 		WHERE companyID = #{companyID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="Company">
 		SELECT companyID, companyCode, companyName, updatedOn, updatedBy, `createdOn`, `createdBy`
-		FROM echo_company
+		FROM bottom_up_company
 		WHERE 1 = 1
 		<if test="companyID != null">
 			AND companyID = #{companyID}
@@ -56,7 +56,7 @@
 	</select>
 
     <delete id="delete" parameterType="map">
-		DELETE  FROM echo_company WHERE companyID = #{companyID}
+		DELETE  FROM bottom_up_company WHERE companyID = #{companyID}
 	</delete>
 
 

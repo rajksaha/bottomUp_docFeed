@@ -8,7 +8,7 @@
 
 	<insert id="create" parameterType="UserGroupPermission"  useGeneratedKeys="true" keyProperty="groupPermissionID">
 
-		INSERT INTO `echo_group_permission`
+		INSERT INTO `bottom_up_group_permission`
 		(
 			`userGroupID`,
 			`permissionID`,
@@ -34,7 +34,7 @@
 	
 	<update id="update" parameterType="UserGroupPermission">
 
-		UPDATE `echo_group_permission`
+		UPDATE `bottom_up_group_permission`
 		SET
 		`userGroupID` = #{userGroupID},
 		`permissionID` = #{permissionID},
@@ -55,7 +55,7 @@
 			`updatedBy`,
 			`createdOn`,
 			`createdBy`
-		FROM `echo_group_permission`
+		FROM `bottom_up_group_permission`
 
 		WHERE groupPermissionID = #{groupPermissionID}
 
@@ -72,7 +72,7 @@
 		`updatedBy`,
 		`createdOn`,
 		`createdBy`
-		FROM `echo_group_permission`
+		FROM `bottom_up_group_permission`
 		WHERE 1 = 1
 		<if test="groupPermissionID != null">
 			AND groupPermissionID = #{groupPermissionID}
@@ -81,7 +81,7 @@
 	</select>
 
 	<delete id="deletePermissionByGroup" parameterType="int">
-			DELETE FROM echo_group_permission WHERE userGroupID = #{userGroupID}
+			DELETE FROM bottom_up_group_permission WHERE userGroupID = #{userGroupID}
 	</delete>
 
 

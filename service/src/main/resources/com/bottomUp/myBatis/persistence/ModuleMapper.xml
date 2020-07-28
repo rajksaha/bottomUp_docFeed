@@ -6,7 +6,7 @@
 
 	<insert id="create" parameterType="Module" useGeneratedKeys="true" keyProperty="moduleID" >
 
-		INSERT INTO `echo_module`
+		INSERT INTO `bottom_up_module`
 		(
 		`moduleCode`,
 		`moduleName`,
@@ -28,7 +28,7 @@
 	</insert>
 	
 	<update id="update" parameterType="Module">
-		UPDATE echo_module SET
+		UPDATE bottom_up_module SET
 			moduleCode = #{moduleCode},
 			moduleName = #{moduleName} ,
 			`updatedOn` = #{updatedOn},
@@ -38,13 +38,13 @@
 
 	<select id="getByID" parameterType="int" resultType="Module">
 		SELECT moduleID, moduleCode, moduleName, updatedOn, updatedBy, `createdOn`, `createdBy`
-		FROM echo_module
+		FROM bottom_up_module
 		WHERE moduleID = #{moduleID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="Module">
 		SELECT moduleID, moduleCode, moduleName, updatedOn, updatedBy, `createdOn`, `createdBy`
-		FROM echo_module
+		FROM bottom_up_module
 		WHERE 1 = 1
 		<if test="moduleID != null">
 			AND moduleID = #{moduleID}
@@ -56,7 +56,7 @@
 	</select>
 
     <delete id="delete" parameterType="map">
-		DELETE  FROM echo_module WHERE moduleID = #{moduleID}
+		DELETE  FROM bottom_up_module WHERE moduleID = #{moduleID}
 	</delete>
 
 
