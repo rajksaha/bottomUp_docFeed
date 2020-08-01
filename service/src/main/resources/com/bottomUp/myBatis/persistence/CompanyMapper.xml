@@ -36,7 +36,7 @@
 		WHERE companyID = #{companyID}
 	</update>
 
-	<select id="getByID" parameterType="int" resultType="Company">
+	<select id="getByID" parameterType="long" resultType="Company">
 		SELECT companyID, companyCode, companyName, updatedOn, updatedBy, `createdOn`, `createdBy`
 		FROM bottom_up_company
 		WHERE companyID = #{companyID}

@@ -45,7 +45,7 @@
 
 	</update>
 
-	<select id="getByID" parameterType="int" resultType="UserGroupAssignment">
+	<select id="getByID" parameterType="long" resultType="UserGroupAssignment">
 
 		SELECT
 			`userGroupAssignmentID`,
@@ -90,7 +90,7 @@
 
 	</select>
 
-	<delete id="deleteByUserID" parameterType="int">
+	<delete id="deleteByUserID" parameterType="long">
 		DELETE FROM bottom_up_user_group_assignment WHERE userID = #{userID}
 	</delete>
 

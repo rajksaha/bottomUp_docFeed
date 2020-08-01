@@ -79,7 +79,7 @@
 
 	</update>
 
-	<select id="getUserProfileByID" parameterType="int" resultType="UserProfile">
+	<select id="getUserProfileByID" parameterType="long" resultType="UserProfile">
 
 		SELECT
 			`eup`.`userProfileID`,

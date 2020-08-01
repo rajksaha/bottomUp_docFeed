@@ -8,31 +8,33 @@ import com.bottomUp.domain.common.BaseData;
  */
 public class UserGroupAssignmentData extends BaseData {
 
-    private Integer userGroupAssignmentID;
+    private Long userGroupAssignmentID;
     private Long userID;
-    private Integer userGroupID;
+    private Long userGroupID;
     private Integer status;
 
-    public Integer getUserGroupAssignmentID() {
+    public Long getUserGroupAssignmentID() {
         return userGroupAssignmentID;
     }
 
-    public void setUserGroupAssignmentID(Integer userGroupAssignmentID) {
+    public void setUserGroupAssignmentID(Long userGroupAssignmentID) {
         this.userGroupAssignmentID = userGroupAssignmentID;
     }
 
+    public Long getUserGroupID() {
+        return userGroupID;
+    }
 
+    public void setUserGroupID(Long userGroupID) {
+        this.userGroupID = userGroupID;
+    }
 
     public void setUserID(Long userID) {
         this.userID = userID;
     }
 
-    public Integer getUserGroupID() {
-        return userGroupID;
-    }
-
-    public void setUserGroupID(Integer userGroupID) {
-        this.userGroupID = userGroupID;
+    public Long getUserID() {
+        return userID;
     }
 
     public Integer getStatus() {

@@ -45,7 +45,7 @@
 		WHERE `userGroupID` = #{userGroupID};
 	</update>
 
-	<select id="getByID" parameterType="int" resultType="UserGroup">
+	<select id="getByID" parameterType="long" resultType="UserGroup">
 
 		SELECT
 			eug.`userGroupID`,

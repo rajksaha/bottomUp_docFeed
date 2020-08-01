@@ -24,7 +24,7 @@ import java.sql.Timestamp;
 import java.util.*;
 
 
-public class EchoUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+public class BottomUpUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
 
     @Value("${login.fail.count}")

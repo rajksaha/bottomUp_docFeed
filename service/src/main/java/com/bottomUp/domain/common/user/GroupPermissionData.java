@@ -5,18 +5,25 @@ package com.bottomUp.domain.common.user;
  */
 public class GroupPermissionData extends PermissionData {
 
-    private Integer groupPermissionID;
-    private Integer userGroupID;
-    private Integer permissionID;
+    private Long groupPermissionID;
+    private Long userGroupID;
+    private Long permissionID;
     private Integer statusValue;
 
-
-    public Integer getGroupPermissionID() {
+    public Long getGroupPermissionID() {
         return groupPermissionID;
     }
 
-    public void setGroupPermissionID(Integer groupPermissionID) {
+    public void setGroupPermissionID(Long groupPermissionID) {
         this.groupPermissionID = groupPermissionID;
+    }
+
+    public Long getUserGroupID() {
+        return userGroupID;
+    }
+
+    public void setUserGroupID(Long userGroupID) {
+        this.userGroupID = userGroupID;
     }
 
     public Integer getStatusValue() {
@@ -25,21 +32,5 @@ public class GroupPermissionData extends PermissionData {
 
     public void setStatusValue(Integer statusValue) {
         this.statusValue = statusValue;
-    }
-
-    public Integer getUserGroupID() {
-        return userGroupID;
-    }
-
-    public void setUserGroupID(Integer userGroupID) {
-        this.userGroupID = userGroupID;
-    }
-
-    public Integer getPermissionID() {
-        return permissionID;
-    }
-
-    public void setPermissionID(Integer permissionID) {
-        this.permissionID = permissionID;
     }
 }

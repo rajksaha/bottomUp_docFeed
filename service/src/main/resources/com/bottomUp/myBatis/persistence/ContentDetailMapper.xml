@@ -58,7 +58,7 @@
 	</update>
 
 
-	<select id="getID" parameterType="int" resultType="ContentDetail">
+	<select id="getID" parameterType="long" resultType="ContentDetail">
 		SELECT
 			`contentDetailID`,
 			`entityType`,

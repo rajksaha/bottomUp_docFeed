@@ -105,7 +105,7 @@
 
 	</select>
 
-	<select id="getUserByUserByID" parameterType="int" resultType="User">
+	<select id="getUserByUserByID" parameterType="long" resultType="User">
 		SELECT
 		`userID`,
 		`userName`,
@@ -154,7 +154,7 @@
 
 	</select>
 
-	<select id="getUserPermissionByUserID" parameterType="int" resultType="UserGroupPermission">
+	<select id="getUserPermissionByUserID" parameterType="long" resultType="UserGroupPermission">
 		SELECT
 			p.functionCode
 		FROM bottom_up_user u

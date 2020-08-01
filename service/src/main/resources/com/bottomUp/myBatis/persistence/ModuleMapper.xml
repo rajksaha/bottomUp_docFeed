@@ -36,7 +36,7 @@
 		WHERE moduleID = #{moduleID}
 	</update>
 
-	<select id="getByID" parameterType="int" resultType="Module">
+	<select id="getByID" parameterType="long" resultType="Module">
 		SELECT moduleID, moduleCode, moduleName, updatedOn, updatedBy, `createdOn`, `createdBy`
 		FROM bottom_up_module
 		WHERE moduleID = #{moduleID}

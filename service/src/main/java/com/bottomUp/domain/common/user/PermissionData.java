@@ -8,17 +8,17 @@ import com.bottomUp.domain.common.BaseData;
  */
 public class PermissionData extends BaseData {
 
-    private Integer permissionID;
+    private Long permissionID;
     private Integer companyModuleID;
     private String functionCode;
     private String shortName;
     private Boolean isAssigned;
 
-    public Integer getPermissionID() {
+    public Long getPermissionID() {
         return permissionID;
     }
 
-    public void setPermissionID(Integer permissionID) {
+    public void setPermissionID(Long permissionID) {
         this.permissionID = permissionID;
     }
 

@@ -43,7 +43,7 @@
 		WHERE `permissionID` = #{permissionID};
 	</update>
 
-	<select id="getByID" parameterType="int" resultType="Permission">
+	<select id="getByID" parameterType="long" resultType="Permission">
 
 		SELECT
 			`permissionID`,

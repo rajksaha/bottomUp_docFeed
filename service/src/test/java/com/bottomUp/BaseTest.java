@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 public class BaseTest {
     public static final String DBCP_DS = "testDS";
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseTest.class);
-    protected static ApplicationContext testContext = null;
+    protected static ApplicationContext testContext = new ClassPathXmlApplicationContext("app-context-test.xml");;
     protected static ApplicationContext applicationContext = null;
 
     static {
@@ -30,7 +30,7 @@ public class BaseTest {
     public static void setJndiDataSource(String dataSourceBeanId) throws Exception {
         DataSource ds = (DataSource) BaseTest.testContext.getBean(dataSourceBeanId);
         SimpleNamingContextBuilder builder = SimpleNamingContextBuilder.emptyActivatedContextBuilder();
-        builder.bind("java:/comp/env/jdbc/echo_platform", ds);
+        builder.bind("java:/comp/env/jdbc/docFeed", ds);
     }
 
 }

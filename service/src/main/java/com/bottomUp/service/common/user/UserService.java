@@ -94,7 +94,7 @@ public class UserService {
         if(userProfileData.getUserType() == 1){
             UserGroupAssignmentData userGroupAssignmentData = new UserGroupAssignmentData();
             userGroupAssignmentData.setUserID(userData.getUserID());
-            userGroupAssignmentData.setUserGroupID(2);
+            userGroupAssignmentData.setUserGroupID(new Long(2));
             userGroupAssignmentData.setStatus(1);
             userGroupAssignmentMapper.create(userGroupAssignmentData);
         }

@@ -44,7 +44,7 @@
 		WHERE `groupPermissionID` = #{groupPermissionID};
 	</update>
 
-	<select id="getByID" parameterType="int" resultType="UserGroupPermission">
+	<select id="getByID" parameterType="long" resultType="UserGroupPermission">
 
 		SELECT
 			`userGroupID`,
@@ -80,7 +80,7 @@
 
 	</select>
 
-	<delete id="deletePermissionByGroup" parameterType="int">
+	<delete id="deletePermissionByGroup" parameterType="long">
 			DELETE FROM bottom_up_group_permission WHERE userGroupID = #{userGroupID}
 	</delete>
 

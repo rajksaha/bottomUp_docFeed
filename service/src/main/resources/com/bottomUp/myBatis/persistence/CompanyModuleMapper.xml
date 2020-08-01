@@ -40,7 +40,7 @@
 		WHERE companyModuleID = #{companyModuleID}
 	</update>
 
-	<select id="getByID" parameterType="int" resultType="CompanyModule">
+	<select id="getByID" parameterType="long" resultType="CompanyModule">
 		SELECT ecm.companyModuleID, ecm.companyID, ecm.shortName, ecm.moduleID, ecm.updatedOn, ecm.updatedBy, ecm.`createdOn`, ecm.`createdBy`, ec.companyName AS companyName, em.moduleName AS moduleName
 		FROM bottom_up_company_module ecm
 		JOIN bottom_up_company ec ON ecm.companyID = ec.companyID

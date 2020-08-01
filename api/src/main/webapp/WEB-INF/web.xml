@@ -39,7 +39,7 @@
 
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
-        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
     <session-config>
@@ -49,5 +49,9 @@
     <!--<listener>
         <listener-class>com.raydar.common.session.SessionTimeoutSetter</listener-class>
     </listener>-->
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
 </web-app>

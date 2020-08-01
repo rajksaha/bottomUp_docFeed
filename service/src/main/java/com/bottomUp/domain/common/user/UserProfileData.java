@@ -21,7 +21,7 @@ public class UserProfileData extends BaseData {
     private String employeeCode;
     private String emailAddress;
     private Integer status;
-    private Integer companyID;
+    private Long companyID;
     private Timestamp lastWorkingDay;
     private String startTime;
     private String endTime;
@@ -101,11 +101,9 @@ public class UserProfileData extends BaseData {
         this.status = status;
     }
 
-    public Integer getCompanyID() {
-        return companyID;
-    }
 
-    public void setCompanyID(Integer companyID) {
+
+    public void setCompanyID(Long companyID) {
         this.companyID = companyID;
     }
 

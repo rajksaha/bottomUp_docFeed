@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class UserGroupData extends BaseData {
 
-    private Integer userGroupID;
+    private Long userGroupID;
     private String shortName;
     private String longDesc;
     private Integer companyModuleID;
@@ -22,11 +22,11 @@ public class UserGroupData extends BaseData {
 
     private List<PermissionData> groupPermissionList;
 
-    public Integer getUserGroupID() {
+    public Long getUserGroupID() {
         return userGroupID;
     }
 
-    public void setUserGroupID(Integer userGroupID) {
+    public void setUserGroupID(Long userGroupID) {
         this.userGroupID = userGroupID;
     }
 

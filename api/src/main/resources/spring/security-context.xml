@@ -11,11 +11,11 @@
 
 	<context:component-scan base-package="com.bottomUp.security" />
 	<security:global-method-security pre-post-annotations="enabled"/>
-	<beans:bean id="echoUserDetailService" class="com.bottomUp.security.EchoUserDetailsService" />
+	<beans:bean id="bottomUpUserDetailsService" class="com.bottomUp.security.BottomUpUserDetailsService" />
 	<beans:bean id="encoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
 
 	<security:authentication-manager alias="authenticationManager" erase-credentials="true">
-		<security:authentication-provider user-service-ref="echoUserDetailService">
+		<security:authentication-provider user-service-ref="bottomUpUserDetailsService">
 			<security:password-encoder ref="encoder"></security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
@@ -30,9 +30,9 @@
 		<security:access-denied-handler ref="forBiddenEntryPoint"/>
 		<security:csrf disabled="true"/>
 		<security:http-basic entry-point-ref="unauthorisedEntryPoint"/>
-		<security:intercept-url pattern="/api/login/**" access="permitAll" />
-		<security:intercept-url pattern="/api/logout" access="permitAll" />
-		<security:intercept-url pattern="/api/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/rest/login/**" access="permitAll" />
+		<security:intercept-url pattern="/rest/logout" access="permitAll" />
+		<security:intercept-url pattern="/rest/**" access="isAuthenticated()" />
 		<!--<security:logout invalidate-session="true" delete-cookies="JSESSIONID" logout-url="/rest/logout" />-->
 		<security:session-management session-fixation-protection="newSession"/>
 		<!--<security:remember-me remember-me-parameter="remember-me" remember-me-cookie="echo_remember_me_cookie" token-validity-seconds="604800" key="KVJGH$$^#C326" />-->
