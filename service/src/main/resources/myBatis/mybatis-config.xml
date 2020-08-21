@@ -24,6 +24,7 @@
 
 
 		<!--docFeed-->
+		<typeAlias alias="appointment" type="com.bottomUp.domain.AppointmentData"/>
 
 
 

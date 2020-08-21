@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.AppointmentMapper">
+
+	<insert id="create" parameterType="Appointment" useGeneratedKeys="true" keyProperty="appointmentID" >
+
+		INSERT INTO `appointment`(
+			`doctorID`,
+			`patientID`,
+			`date`,
+			`time`,
+			`status`,
+			`appointmentType`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#{patientID},
+			#{date},
+			#{time},
+			#{status},
+			#{appointmentType},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="Appointment">
+		UPDATE `appointment`
+		SET
+		`doctorID` = #{doctorID},
+		`patientID` = #{doctorID},
+		`date` = #{doctorID},
+		`time` =#{doctorID},
+		`status` = #{doctorID},
+		`appointmentType` = #{doctorID},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE appointmentID = #{appointmentID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="Appointment">
+		SELECT
+			`appointment`.`appointmentID`,
+			`appointment`.`doctorID`,
+			`appointment`.`patientID`,
+			`appointment`.`date`,
+			`appointment`.`time`,
+			`appointment`.`status`,
+			`appointment`.`appointmentType`,
+			`appointment`.`updatedBy`,
+			`appointment`.`updatedOn`,
+			`appointment`.`createdBy`,
+			`appointment`.`createdOn`
+		FROM `doctor_feed`.`appointment`
+
+		WHERE appointmentID = #{appointmentID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="Appointment">
+		SELECT
+		`appointment`.`appointmentID`,
+		`appointment`.`doctorID`,
+		`appointment`.`patientID`,
+		`appointment`.`date`,
+		`appointment`.`time`,
+		`appointment`.`status`,
+		`appointment`.`appointmentType`,
+		`appointment`.`updatedBy`,
+		`appointment`.`updatedOn`,
+		`appointment`.`createdBy`,
+		`appointment`.`createdOn`
+		FROM `doctor_feed`.`appointment`
+		WHERE 1 = 1
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM appointment
+		WHERE 1=1
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+	</delete>
+
+
+</mapper>
