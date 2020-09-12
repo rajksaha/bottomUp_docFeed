@@ -11,6 +11,6 @@
     <title>docFeed</title>
 </head>
 <body>
-    <h1>Web Started</h1>
+    <h1>WebApp Started</h1>
 </body>
 </html>
