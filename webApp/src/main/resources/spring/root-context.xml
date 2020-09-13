@@ -13,6 +13,5 @@
     </bean>
 
     <!--service context-->
-    <import resource="classpath:spring/app-context.xml"/>
 
 </beans>
