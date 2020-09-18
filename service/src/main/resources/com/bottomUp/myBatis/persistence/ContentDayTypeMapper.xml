@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentDayTypeMapper">
+
+	<insert id="create" parameterType="contentDayType" useGeneratedKeys="true" keyProperty="dayTypeID" >
+
+		INSERT INTO `content_day_type`(
+			`bangla`,
+			`pdf`,
+			`english`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{bangla},
+			#{pdf},
+			#{english},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentDayType">
+		UPDATE `content_day_type`
+		SET
+		`bangla` = #{bangla},
+		`pdf` = #{pdf},
+		`english` = #{english},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE dayTypeID = #{dayTypeID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentDayType">
+		SELECT
+			`dayTypeID`,
+			`bangla`,
+			`pdf`,
+			`english`,
+		    `updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+
+		FROM `content_day_type`
+
+		WHERE dayTypeID = #{dayTypeID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentDayType">
+		SELECT
+		`dayTypeID`,
+		`bangla`,
+		`pdf`,
+		`english`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_day_type`
+		WHERE 1 = 1
+		<if test="dayTypeID != null">
+			AND dayTypeID = #{dayTypeID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_day_type
+		WHERE 1=1
+		<if test="content_day_type!= null">
+			AND content_day_type = #{content_day_type}
+		</if>
+	</delete>
+
+
+</mapper>

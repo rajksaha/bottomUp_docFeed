@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionReferenceMapper">
+
+	<insert id="create" parameterType="prescriptionReference" useGeneratedKeys="true" keyProperty="prescriptionReferenceID" >
+
+		INSERT INTO `prescription_reference`(
+			`appointMentID`,
+			`referredDoctorID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{appointMentID},
+			#{referredDoctorID},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="prescriptionReference">
+		UPDATE `prescription_reference`
+		SET
+		`appointMentID` = #{appointMentID},
+		`referredDoctorID` = #{referredDoctorID},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE prescriptionReferenceID = #{prescriptionReferenceID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="prescriptionReference">
+		SELECT
+			`prescriptionReferenceID`,
+			`appointMentID`,
+			`referredDoctorID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `prescription_reference`
+
+		WHERE prescriptionReferenceID = #{prescriptionReferenceID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="prescriptionReference">
+		SELECT
+		`prescriptionReferenceID`,
+		`appointMentID`,
+		`referredDoctorID`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `prescription_reference`
+		WHERE 1 = 1
+		<if test="prescriptionReferenceID != null">
+			AND prescriptionReferenceID = #{prescriptionReferenceID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM prescription_reference
+		WHERE 1=1
+		<if test="prescription_reference != null">
+			AND prescription_reference = #{prescription_reference}
+		</if>
+	</delete>
+
+
+</mapper>

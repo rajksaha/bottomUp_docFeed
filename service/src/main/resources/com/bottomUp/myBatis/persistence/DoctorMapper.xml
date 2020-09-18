@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorMapper">
+
+	<insert id="create" parameterType="Doctor" useGeneratedKeys="true" keyProperty="doctorID" >
+
+		INSERT INTO `doctor`(
+			`userID`,
+			`doctorCode`,
+			`hospitalID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{userID},
+			#{doctorCode},
+			#{hospitalID},
+			#{time},
+			#{status},
+			#{appointmentType},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="Doctor">
+		UPDATE `doctor`
+		SET
+		`userID` = #{userID},
+		`doctorCode` = #{doctorCode},
+		`hospitalID` = #{hospitalID},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE doctorID = #{doctorID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="Doctor">
+		SELECT
+			`doctorID`,
+			`userID`,
+			`doctorCode`,
+			`hospitalID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor`
+
+		WHERE doctorID = #{doctorID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="Doctor">
+		SELECT
+		`doctorID`,
+		`userID`,
+		`doctorCode`,
+		`hospitalID`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor`
+		WHERE 1 = 1
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor
+		WHERE 1=1
+		<if test="doctor != null">
+			AND doctor = #{doctor}
+		</if>
+	</delete>
+
+
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentVitalOptionMapper">
+
+	<insert id="create" parameterType="contentVitalOption" useGeneratedKeys="true" keyProperty="vitalOptionID" >
+
+		INSERT INTO `content_vital_option`(
+			`vitalId`,
+			`optionName`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{vitalId},
+			#{optionName},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentVitalOption">
+		UPDATE `content_vital_option`
+		SET
+		`vitalId` = #{vitalId},
+		`optionName` = #{optionName},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE vitalOptionID = #{vitalOptionID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentVitalOption">
+		SELECT
+			`vitalOptionID`,
+			`vitalId`,
+			`optionName`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `content_vital_option`
+
+		WHERE vitalOptionID = #{vitalOptionID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentVitalOption">
+		SELECT
+		`vitalOptionID`,
+		`vitalId`,
+		`optionName`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_vital_option`
+		WHERE 1 = 1
+		<if test="vitalOptionID != null">
+			AND vitalOptionID = #{vitalOptionID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_vital_option
+		WHERE 1=1
+		<if test="content_vital_option != null">
+			AND content_vital_option = #{content_vital_option}
+		</if>
+	</delete>
+
+
+</mapper>

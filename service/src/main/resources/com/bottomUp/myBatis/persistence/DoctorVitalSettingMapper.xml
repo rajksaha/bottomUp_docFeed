@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorVitalSettingMapper">
+
+	<insert id="create" parameterType="doctorVitalSetting" useGeneratedKeys="true" keyProperty="vitalSettingID" >
+
+		INSERT INTO `doctor_vital_setting`(
+			`doctorID`,
+			`vitalID`,
+			`displayOrder`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#vitalID},
+			#{displayOrder},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorVitalSetting">
+		UPDATE `doctor_vital_setting`
+		SET
+		`doctorID` = #{doctorID},
+		`vitalID` = #{vitalID},
+		`displayOrder` = #{displayOrder},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE vitalSettingID = #{vitalSettingID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorVitalSetting">
+		SELECT
+			`vitalSettingID`,
+			`doctorID`,
+			`vitalID`,
+			`displayOrder`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_vital_setting`
+
+		WHERE  vitalSettingID = #{ vitalSettingID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorVitalSetting">
+		SELECT
+		`vitalSettingID`,
+		`doctorID`,
+		`vitalID`,
+		`displayOrder`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_vital_setting`
+		WHERE 1 = 1
+		<if test=" vitalSettingID != null">
+			AND  vitalSettingID = #{vitalSettingID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_vital_setting
+		WHERE 1=1
+		<if test="doctor_vital_setting != null">
+			AND doctor_vital_setting = #{doctor_vital_setting}
+		</if>
+	</delete>
+
+
+</mapper>

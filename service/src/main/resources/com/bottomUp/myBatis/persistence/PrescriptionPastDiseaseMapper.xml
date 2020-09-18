@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionPastDiseaseMapper">
+
+	<insert id="create" parameterType="prescriptionPastDisease" useGeneratedKeys="true" keyProperty="presPastDiseaseID" >
+
+		INSERT INTO `prescription_past_disease`(
+			`appointMentID`,
+			`pastDiseaseID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{appointMentID},
+			#{pastDiseaseID},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="prescriptionPastDisease">
+		UPDATE `prescription_past_disease`
+		SET
+		`appointMentID` = #{appointMentID},
+		`pastDiseaseID` = #{pastDiseaseID},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE presPastDiseaseID = #{presPastDiseaseID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="prescriptionPastDisease">
+		SELECT
+			`presPastDiseaseID`,
+			`appointMentID`,
+			`pastDiseaseID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `prescription_past_disease`
+
+		WHERE presPastDiseaseID = #{presPastDiseaseID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="prescriptionPastDisease">
+		SELECT
+		`presPastDiseaseID`,
+		`appointMentID`,
+		`pastDiseaseID`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `prescription_past_disease`
+		WHERE 1 = 1
+		<if test="presPastDiseaseID != null">
+			AND presPastDiseaseID = #{presPastDiseaseID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM prescription_past_disease
+		WHERE 1=1
+		<if test="prescription_past_disease != null">
+			AND prescription_past_disease = #{prescription_past_disease}
+		</if>
+	</delete>
+
+
+</mapper>

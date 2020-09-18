@@ -20,11 +20,72 @@
 		<typeAlias alias="UserGroupAssignment" type="com.bottomUp.domain.common.user.UserGroupAssignmentData"/>
 		<typeAlias alias="UserGroupPermission" type="com.bottomUp.domain.common.user.GroupPermissionData"/>
 		<typeAlias alias="Permission" type="com.bottomUp.domain.common.user.PermissionData"/>
-		<typeAlias alias="ContentDetail" type="com.bottomUp.domain.common.user.ContentDetailData"/>
+		<typeAlias alias="contentDetail" type="com.bottomUp.domain.common.user.ContentDetailData"/>
 
 
 		<!--docFeed-->
 		<typeAlias alias="appointment" type="com.bottomUp.domain.AppointmentData"/>
+		<typeAlias alias="appointmentType" type="com.bottomUp.domain.AppointmentTypeData"/>
+		<typeAlias alias="contentAdvice" type="com.bottomUp.domain.ContentAdviceData"/>
+		<typeAlias alias="contentAdvice" type="com.bottomUp.domain.ContentAdviceData"/>
+		<typeAlias alias="contentDayType" type="com.bottomUp.domain.ContentDayTypeData"/>
+		<typeAlias alias="contentDisease" type="com.bottomUp.domain.ContentDiseaseData"/>
+
+		<typeAlias alias="contentDoctorCategory" type="com.bottomUp.domain.ContentDoctorCategoryData"/>
+		<typeAlias alias="contentDrugAdvice" type="com.bottomUp.domain.ContentDrugAdviceData"/>
+		<typeAlias alias="contentDrugCompany" type="com.bottomUp.domain.ContentDrugCompanyData"/>
+		<typeAlias alias="contentDrug" type="com.bottomUp.domain.ContentDrugData"/>
+		<typeAlias alias="contentDrugType" type="com.bottomUp.domain.ContentDrugTypeData"/>
+		<typeAlias alias="contentInv" type="com.bottomUp.domain.ContentInvData"/>
+		<typeAlias alias="contentRelation" type="com.bottomUp.domain.ContentRelationData"/>
+		<typeAlias alias="contentSymptom" type="com.bottomUp.domain.ContentSymptomData"/>
+		<typeAlias alias="contentVital" type="com.bottomUp.domain.ContentVitalData"/>
+		<typeAlias alias="contentVitalOption" type="com.bottomUp.domain.ContentVitalOptionData"/>
+		<typeAlias alias="contentWhenType" type="com.bottomUp.domain.ContentWhenTypeData"/>
+		<typeAlias alias="doctorAdviceDiseaseTemplate" type="com.bottomUp.domain.DoctorAdviceDiseaseTemplateData"/>
+		<typeAlias alias="doctorDataBackup" type="com.bottomUp.domain.DoctorDataBackupData"/>
+		<typeAlias alias="doctorDoseDrugDiseaseTemplate" type="com.bottomUp.domain.DoctorDoseDrugDiseaseTemplateData"/>
+		<typeAlias alias="doctorDrugDiseaseTemplate" type="com.bottomUp.domain.DoctorDrugDiseaseTemplateData"/>
+		<typeAlias alias="doctorDrugDoseSetting" type="com.bottomUp.domain.DoctorDrugDoseSettingData"/>
+		<typeAlias alias="doctorDrugSetting" type="com.bottomUp.domain.DoctorDrugSettingData"/>
+		<typeAlias alias="doctorFollowUpSetting" type="com.bottomUp.domain.DoctorFollowUpSettingData"/>
+		<typeAlias alias="doctorHistorySetting" type="com.bottomUp.domain.DoctorHistorySettingData"/>
+		<typeAlias alias="doctorInvDiseaseTemplate" type="com.bottomUp.domain.DoctorInvDiseaseTemplateData"/>
+		<typeAlias alias="Doctor" type="com.bottomUp.domain.DoctorData"/>
+		<typeAlias alias="doctorPreferenceAdvice" type="com.bottomUp.domain.DoctorPreferenceAdviceData"/>
+		<typeAlias alias="doctorPreferenceInv" type="com.bottomUp.domain.DoctorPreferenceInvData"/>
+		<typeAlias alias="doctorSetting" type="com.bottomUp.domain.DoctorSettingData"/>
+		<typeAlias alias="doctorVitalSetting" type="com.bottomUp.domain.DoctorVitalSettingData"/>
+		<typeAlias alias="followUpResult" type="com.bottomUp.domain.FollowUpResultData"/>
+		<typeAlias alias="history" type="com.bottomUp.domain.HistoryData"/>
+		<typeAlias alias="historyOption" type="com.bottomUp.domain.HistoryOptionData"/>
+		<typeAlias alias="invReport" type="com.bottomUp.domain.InvReportData"/>
+		<typeAlias alias="invCategory" type="com.bottomUp.domain.InvCategoryData"/>
+		<typeAlias alias="invReportDate" type="com.bottomUp.domain.InvReportDateData"/>
+		<typeAlias alias="menu" type="com.bottomUp.domain.MenuData"/>
+		<typeAlias alias="menuSetting" type="com.bottomUp.domain.MenuSettingData"/>
+		<typeAlias alias="patientDetail" type="com.bottomUp.domain.PatientDetailData"/>
+		<typeAlias alias="patientDrugHistory" type="com.bottomUp.domain.PatientDrugHistoryData"/>
+		<typeAlias alias="patientFamilyHistory" type="com.bottomUp.domain.PatientFamilyHistoryData"/>
+		<typeAlias alias="patientFollowUp" type="com.bottomUp.domain.PatientFollowUpData"/>
+		<typeAlias alias="patientHistory" type="com.bottomUp.domain.PatientHistoryData"/>
+		<typeAlias alias="patient" type="com.bottomUp.domain.PatientData"/>
+		<typeAlias alias="patientPastDisease" type="com.bottomUp.domain.PatientPastDiseaseData"/>
+		<typeAlias alias="patientType" type="com.bottomUp.domain.PatientTypeData"/>
+		<typeAlias alias="prescriptionAdvice" type="com.bottomUp.domain.PrescriptionAdviceData"/>
+		<typeAlias alias="prescriptionComplain" type="com.bottomUp.domain.PrescriptionComplainData"/>
+		<typeAlias alias="prescriptionDiagnosis" type="com.bottomUp.domain.PrescriptionDiagnosisData"/>
+		<typeAlias alias="prescriptionDrugDose" type="com.bottomUp.domain.PrescriptionDrugDoseData"/>
+		<typeAlias alias="prescriptionDrug" type="com.bottomUp.domain.PrescriptionDrugData"/>
+		<typeAlias alias="prescriptionFamilyDisease" type="com.bottomUp.domain.PrescriptionFamilyDiseaseData"/>
+		<typeAlias alias="prescriptionHistory" type="com.bottomUp.domain.PrescriptionHistoryData"/>
+		<typeAlias alias="prescriptionInv" type="com.bottomUp.domain.PrescriptionInvData"/>
+		<typeAlias alias="prescriptionNextVisit" type="com.bottomUp.domain.PrescriptionNextVisitData"/>
+		<typeAlias alias="prescriptionPastDisease" type="com.bottomUp.domain.PrescriptionPastDiseaseData"/>
+		<typeAlias alias="prescriptionReference" type="com.bottomUp.domain.PrescriptionReferenceData"/>
+		<typeAlias alias="prescriptionVital" type="com.bottomUp.domain.PrescriptionVitalData"/>
+		<typeAlias alias="referredDoctor" type="com.bottomUp.domain.ReferredDoctorData"/>
+
 
 
 

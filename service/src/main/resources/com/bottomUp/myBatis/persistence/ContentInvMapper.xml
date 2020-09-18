@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentInvMapper">
+
+	<insert id="create" parameterType="contentInv" useGeneratedKeys="true" keyProperty="invID" >
+
+		INSERT INTO `content_inv`(
+			`categoryID`,
+			`name`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{categoryID},
+			#{name},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentInv">
+		UPDATE `content_inv`
+		SET
+		`categoryID` = #{categoryID},
+		`name` = #{name},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE invID = #{invID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentInv">
+		SELECT
+		    `invID`,
+			`categoryID`,
+			`name`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `content_inv`
+
+		WHERE invID = #{invID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentInv">
+		SELECT
+		`invID`,
+		`categoryID`,
+		`name`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_inv`
+		WHERE 1 = 1
+		<if test="invID != null">
+			AND invID = #{invID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_inv
+		WHERE 1=1
+		<if test="content_inv != null">
+			AND content_inv = #{content_inv}
+		</if>
+	</delete>
+
+
+</mapper>

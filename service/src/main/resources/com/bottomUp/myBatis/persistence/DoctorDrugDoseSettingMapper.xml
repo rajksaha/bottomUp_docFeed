@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorDrugDoseSettingMapper">
+
+	<insert id="create" parameterType="doctorDrugDoseSetting" useGeneratedKeys="true" keyProperty="drugDoseSettingID" >
+
+		INSERT INTO `doctor_drug_dose_setting`(
+			`drugSettingID`,
+			`dose`,
+			`numOfDay`,
+			`durationType`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{drugSettingID},
+			#{patientID},
+			#{date},
+			#{time},
+			#{status},
+			#{appointmentType},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorDrugDoseSetting">
+		UPDATE `doctor_drug_dose_setting`
+		SET
+		`drugSettingID` = #{drugSettingID},
+		`dose` = #{dose},
+		`numOfDay` = #{numOfDay},
+		`durationType` =#{durationType},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE drugDoseSettingID = #{drugDoseSettingID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorDrugDoseSetting">
+		SELECT
+			`drugDoseSettingID`,
+			`dose`,
+			`numOfDay`,
+			`durationType`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_drug_dose_setting`
+
+		WHERE drugDoseSettingID = #{drugDoseSettingID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorDrugDoseSetting">
+		SELECT
+		`drugDoseSettingID`,
+		`dose`,
+		`numOfDay`,
+		`durationType`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_drug_dose_setting`
+		WHERE 1 = 1
+		<if test="drugDoseSettingID != null">
+			AND drugDoseSettingID = #{drugDoseSettingID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_drug_dose_setting
+		WHERE 1=1
+		<if test="doctor_drug_dose_setting!= null">
+			AND doctor_drug_dose_setting = #{doctor_drug_dose_setting}
+		</if>
+	</delete>
+
+
+</mapper>

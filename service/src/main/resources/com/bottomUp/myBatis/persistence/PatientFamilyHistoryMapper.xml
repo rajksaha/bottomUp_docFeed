@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PatientFamilyHistoryMapper">
+
+	<insert id="create" parameterType="patientFamilyHistory" useGeneratedKeys="true" keyProperty="familyHistoryID" >
+
+		INSERT INTO `patient_family_history`(
+			`patientID`,
+			`diseaseID`,
+			`relation`,
+			`present`,
+			`type`,
+			`detail`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{patientID},
+			#{diseaseID},
+			#{relation},
+			#{present},
+			#{type},
+			#{detail},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="patientFamilyHistory">
+		UPDATE `patient_family_history`
+		SET
+		`patientID` = #{patientID},
+		`diseaseID` = #{diseaseID},
+		`relation` = #{relation},
+		`present` =#{present},
+		`type` = #{type},
+		`detail` = #{detail},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE familyHistoryID = #{familyHistoryID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="patientFamilyHistory">
+		SELECT
+			`familyHistoryID`,
+			`patientID`,
+			`diseaseID`,
+			`relation`,
+			`present`,
+			`type`,
+			`detail`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `patient_family_history`
+
+		WHERE familyHistoryID = #{familyHistoryID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="patientFamilyHistory">
+		SELECT
+		`familyHistoryID`,
+		`patientID`,
+		`diseaseID`,
+		`relation`,
+		`present`,
+		`type`,
+		`detail`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `patient_family_history`
+		WHERE 1 = 1
+		<if test="familyHistoryID != null">
+			AND familyHistoryID = #{familyHistoryID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM patient_family_history
+		WHERE 1=1
+		<if test="patient_family_history != null">
+			AND patient_family_history = #{patient_family_history}
+		</if>
+	</delete>
+
+
+</mapper>

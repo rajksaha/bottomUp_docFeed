@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionAdviceMapper">
+
+	<insert id="create" parameterType="prescriptionAdvice" useGeneratedKeys="true" keyProperty="presAdviceIS" >
+
+		INSERT INTO `prescription_advice`(
+			`appointMentID`,
+			`adviceID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{appointMentID},
+			#{adviceID},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="prescriptionAdvice">
+		UPDATE `prescription_advice`
+		SET
+		`appointMentID` = #{appointMentID},
+		`adviceID` = #{adviceID},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE presAdviceIS = #{presAdviceIS}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="prescriptionAdvice">
+		SELECT
+			`presAdviceIS`,
+			`appointMentID`,
+			`adviceID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `prescription_advice`
+
+		WHERE presAdviceIS = #{presAdviceIS}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="prescriptionAdvice">
+		SELECT
+		`presAdviceIS`,
+		`appointMentID`,
+		`adviceID`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `prescription_advice`
+		WHERE 1 = 1
+		<if test="presAdviceIS != null">
+			AND presAdviceIS = #{presAdviceIS}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM prescription_advice
+		WHERE 1=1
+		<if test="prescription_advice != null">
+			AND prescription_advice = #{prescription_advice}
+		</if>
+	</delete>
+
+
+</mapper>

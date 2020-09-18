@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionDrugDoseMapper">
+
+	<insert id="create" parameterType="prescriptionDrugDose" useGeneratedKeys="true" keyProperty="presDrugID" >
+
+		INSERT INTO `prescription_drug_dose`(
+			`presDrugID`,
+			`dose`,
+			`numOfDay`,
+			`durationType`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{presDrugID},
+			#{dose},
+			#{numOfDay},
+			#{durationType},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="prescriptionDrugDose">
+		UPDATE `prescription_drug_dose`
+		SET
+		`presDrugID` = #{presDrugID},
+		`dose` = #{dose},
+		`numOfDay` = #{numOfDay},
+		`durationType` =#{durationType},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE presDrugID = #{presDrugID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="prescriptionDrugDose">
+		SELECT
+			`presDrugID`,
+			`presDrugID`,
+			`dose`,
+			`numOfDay`,
+			`durationType`,
+		FROM `prescription_drug_dose`
+
+		WHERE presDrugID = #{presDrugID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="prescriptionDrugDose">
+		SELECT
+		`presDrugID`,
+		`presDrugID`,
+		`dose`,
+		`numOfDay`,
+		`durationType`,
+		FROM `prescription_drug_dose`
+		WHERE 1 = 1
+		<if test="presDrugID != null">
+			AND presDrugID = #{presDrugID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM prescription_drug_dose
+		WHERE 1=1
+		<if test="prescription_drug_dose != null">
+			AND prescription_drug_dose = #{prescription_drug_dose}
+		</if>
+	</delete>
+
+
+</mapper>

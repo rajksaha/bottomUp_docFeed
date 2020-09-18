@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorSettingMapper">
+
+	<insert id="create" parameterType="doctorSetting" useGeneratedKeys="true" keyProperty="doctorSettingID" >
+
+		INSERT INTO `doctor_setting`(
+			`doctorID`,
+			`category`,
+			`state`,
+			`patientType`,
+			`patientState`,
+			`prescriptionStyle`,
+			`companyID`,
+			`photoSupport`,
+			`personCodeInitial`,
+			`pdfPage`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#{category},
+			#{state},
+			#{patientType},
+			#{patientState},
+			#{prescriptionStyle},
+			#{companyID},
+			#{photoSupport},
+			#{personCodeInitial},
+			#{pdfPage},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorSetting">
+		UPDATE `doctor_setting`
+		SET
+		`doctorID` = #{doctorID},
+		`category` = #{category},
+		`state` = #{state},
+		`patientType` =#{patientType},
+		`patientState` = #{patientState},
+		`prescriptionStyle` = #{prescriptionStyle},
+		`companyID` = #{companyID},
+		`photoSupport` = #{photoSupport},
+		`personCodeInitial` = #{doctorID},
+		`pdfPage` = #{pdfPage},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE doctorSettingID = #{doctorSettingID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorSetting">
+		SELECT
+			`doctorSettingID`,
+			`doctorID`,
+			`category`,
+			`state`,
+			`patientType`,
+			`patientState`,
+			`prescriptionStyle`,
+			`companyID`,
+			`photoSupport`,
+			`personCodeInitial`,
+			`pdfPage`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_setting`
+
+		WHERE doctorSettingID = #{doctorSettingID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorSetting">
+		SELECT
+		`doctorSettingID`,
+		`doctorID`,
+		`category`,
+		`state`,
+		`patientType`,
+		`patientState`,
+		`prescriptionStyle`,
+		`companyID`,
+		`photoSupport`,
+		`personCodeInitial`,
+		`pdfPage`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_setting`
+		WHERE 1 = 1
+		<if test="doctorSettingID != null">
+			AND doctorSettingID = #{doctorSettingID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_setting
+		WHERE 1=1
+		<if test="doctor_setting != null">
+			AND doctor_setting = #{doctor_setting}
+		</if>
+	</delete>
+
+
+</mapper>

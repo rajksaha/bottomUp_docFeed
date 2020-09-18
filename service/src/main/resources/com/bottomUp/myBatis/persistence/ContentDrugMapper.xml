@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentDrugMapper">
+
+	<insert id="create" parameterType="contentDrug" useGeneratedKeys="true" keyProperty="drugID" >
+
+		INSERT INTO `content_drug`(
+			`typeID`,
+			`genericID`,
+			`companyID`,
+			`drugName`,
+			`strength`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{typeID},
+			#{genericID},
+			#{companyID},
+			#{drugName},
+			#{strength},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentDrug">
+		UPDATE `content_drug`
+		SET
+		`typeID` = #{typeID},
+		`genericID` = #{genericID},
+		`companyID` = #{companyID},
+		`drugName` =#{drugName},
+		`strength` = #{strength},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE drugID = #{drugID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="Appointment">
+		SELECT
+			`drugID`,
+			`typeID`,
+			`genericID`,
+			`companyID`,
+			`drugName`,
+			`strength`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `content_drug`
+
+		WHERE drugID = #{drugID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="Appointment">
+		SELECT
+		`drugID`,
+		`typeID`,
+		`genericID`,
+		`companyID`,
+		`drugName`,
+		`strength`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_drug`
+		WHERE 1 = 1
+		<if test="drugID != null">
+			AND drugID = #{drugID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_drug
+		WHERE 1=1
+		<if test="content_drug != null">
+			AND content_drug = #{appointmentID}
+		</if>
+	</delete>
+
+
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.AppointmentTypeMapper">
+
+	<insert id="create" parameterType="appointmentType" useGeneratedKeys="true" keyProperty="appointmentTypeID" >
+
+		INSERT INTO `appointment_type`(
+			`appointmentTypeID`,
+			`shortName`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{name},
+			#{shortName},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="appointmentType">
+		UPDATE `appointment_type`
+		SET
+		`name` = #{name},
+		`shortName` = #{shortName},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE appointmentTypeID = #{appointmentTypeID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="appointmentType">
+		SELECT
+			`appointmentTypeID`,
+			`name`,
+			`shortName`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `appointment_type`
+
+		WHERE appointmentTypeID = #{appointmentTypeID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="appointmentType">
+		SELECT
+		`appointmentTypeID`,
+		`name`,
+		`shortName`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `appointment_type`
+		WHERE 1 = 1
+		<if test="appointmentTypeID != null">
+			AND appointmentTypeID = #{appointmentTypeID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM appointment_type
+		WHERE 1=1
+		<if test="appointment_type != null">
+			AND appointment_type = #{appointment_type}
+		</if>
+	</delete>
+
+
+</mapper>

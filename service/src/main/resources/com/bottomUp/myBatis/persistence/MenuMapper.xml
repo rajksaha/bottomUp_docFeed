@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.MenuMapper">
+
+	<insert id="create" parameterType="Menu" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `menu`(
+			`menuID`,
+			`menuURL`,
+			`defaultName`,
+			`isPopUp`,
+			`functionName`,
+			`inPrescription`,
+			`displayOrder`,
+
+		)
+		VALUES(
+			#menuID},
+			#{menuURL},
+			#{defaultName},
+			#{isPopUp},
+			#{functionName},
+			#{inPrescription},
+			#{displayOrder},
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="Menu">
+		UPDATE `menu`
+		SET
+		`menuID` = #{menuID},
+		`menuURL` = #{menuURL},
+		`defaultName` = #{defaultName},
+		`isPopUp` =#{isPopUp},
+		`functionName` = #{functionName},
+		`inPrescription` = #{inPrescription},
+		`displayOrder` = #{displayOrder},
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="Menu">
+		SELECT
+			`id`,
+			`menuID`,
+			`menuURL`,
+			`defaultName`,
+			`isPopUp`,
+			`functionName`,
+			`inPrescription`,
+			`displayOrder`,
+		FROM `menu`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="Menu">
+		SELECT
+		`id`,
+		`appointment`.`doctorID`,
+		`appointment`.`patientID`,
+		`appointment`.`date`,
+		`appointment`.`time`,
+		`appointment`.`status`,
+		`appointment`.`appointmentType`,
+		`appointment`.`updatedBy`,
+		`appointment`.`updatedOn`,
+		`appointment`.`createdBy`,
+		`appointment`.`createdOn`
+		FROM `menu`
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM menu
+		WHERE 1=1
+		<if test="menu != null">
+			AND menu = #{menu}
+		</if>
+	</delete>
+
+
+</mapper>

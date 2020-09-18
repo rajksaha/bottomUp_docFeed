@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorFollowUpSettingMapper">
+
+	<insert id="create" parameterType="doctorFollowUpSetting" useGeneratedKeys="true" keyProperty="followUpSettingID" >
+
+		INSERT INTO `doctor_follow_up_setting`(
+			`doctorID`,
+			`invID`,
+			`patientTypeId`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#invID},
+			#{patientTypeId},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorFollowUpSetting">
+		UPDATE `doctor_follow_up_setting`
+		SET
+		`doctorID` = #{doctorID},
+		`invID` = #{invID},
+		`patientTypeId` = #{patientTypeId},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE followUpSettingID = #{followUpSettingID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorFollowUpSetting">
+		SELECT
+			`followUpSettingID`,
+			`doctorID`,
+			`invID`,
+			`patientTypeId`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_follow_up_setting`
+
+		WHERE followUpSettingID = #{followUpSettingID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorFollowUpSetting">
+		SELECT
+		`followUpSettingID`,
+		`doctorID`,
+		`invID`,
+		`patientTypeId`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_follow_up_setting`
+		WHERE 1 = 1
+		<if test="followUpSettingID != null">
+			AND followUpSettingID = #{followUpSettingID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_follow_up_setting
+		WHERE 1=1
+		<if test="doctor_follow_up_setting != null">
+			AND doctor_follow_up_setting = #{doctor_follow_up_setting}
+		</if>
+	</delete>
+
+
+</mapper>

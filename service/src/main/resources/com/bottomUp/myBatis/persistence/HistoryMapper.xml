@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.HistoryMapper">
+
+	<insert id="create" parameterType="History" useGeneratedKeys="true" keyProperty="historyID" >
+
+		INSERT INTO `history`(
+			`typeCode`,
+			`name`,
+			`shortName`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{typeCode},
+			#{name},
+			#{shortName},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="History">
+		UPDATE `history`
+		SET
+		`typeCode` = #{typeCode},
+		`name` = #{name},
+		`shortName` = #{shortName},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE historyID = #{historyID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="History">
+		SELECT
+			`historyID`,
+			`typeCode`,
+			`name`,
+			`shortName`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `history`
+
+		WHERE historyID = #{historyID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="History">
+		SELECT
+		`historyID`,
+		`typeCode`,
+		`name`,
+		`shortName`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `history`
+		WHERE 1 = 1
+		<if test="historyID != null">
+			AND historyID = #{historyID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM history
+		WHERE 1=1
+		<if test="history != null">
+			AND history = #{history}
+		</if>
+	</delete>
+
+
+</mapper>

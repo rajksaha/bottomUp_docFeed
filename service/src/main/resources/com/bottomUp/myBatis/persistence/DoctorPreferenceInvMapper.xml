@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorPreferenceInvMapper">
+
+	<insert id="create" parameterType="doctorPreferenceInv" useGeneratedKeys="true" keyProperty="invPreferenceID" >
+
+		INSERT INTO `doctor_preference_inv`(
+			`doctorID`,
+			`invID`,
+			`displayOrder`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#{invID},
+			#{displayOrder},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorPreferenceInv">
+		UPDATE `doctor_preference_inv`
+		SET
+		`doctorID` = #{doctorID},
+		`invID` = #{invID},
+		`displayOrder` = #{displayOrder},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE invPreferenceID = #{invPreferenceID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorPreferenceInv">
+		SELECT
+			`invPreferenceID`,
+			`doctorID`,
+			`invID`,
+			`displayOrder`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_preference_inv`
+
+		WHERE invPreferenceID = #{invPreferenceID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorPreferenceInv">
+		SELECT
+		`invPreferenceID`,
+		`doctorID`,
+		`invID`,
+		`displayOrder`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_preference_inv`
+		WHERE 1 = 1
+		<if test="invPreferenceID != null">
+			AND invPreferenceID = #{invPreferenceID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_preference_inv
+		WHERE 1=1
+		<if test="doctor_preference_inv!= null">
+			AND doctor_preference_inv = #{doctor_preference_inv}
+		</if>
+	</delete>
+
+
+</mapper>

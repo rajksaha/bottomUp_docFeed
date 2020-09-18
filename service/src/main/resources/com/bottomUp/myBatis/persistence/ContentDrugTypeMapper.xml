@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentDrugTypeMapper">
+
+	<insert id="create" parameterType="contentDrugType" useGeneratedKeys="true" keyProperty="drugTypeID" >
+
+		INSERT INTO `content_drug_type`(
+			`name`,
+			`initial`,
+			`unit`,
+			`unitInitial`,
+			`optionalUnitInitial`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{name},
+			#{initial},
+			#{unit},
+			#{unitInitial},
+			#{optionalUnitInitial},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentDrugType">
+		UPDATE `content_drug_type`
+		SET
+		`name` = #{name},
+		`initial` = #{initial},
+		`unit` = #{unit},
+		`unitInitial` =#{unitInitial},
+		`optionalUnitInitial` = #{optionalUnitInitial},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE drugTypeID = #{drugTypeID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentDrugType">
+		SELECT
+			`drugTypeID`,
+		    `name`,
+			`initial`,
+			`unit`,
+			`unitInitial`,
+			`optionalUnitInitial`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `content_drug_type`
+
+		WHERE  drugTypeID = #{ drugTypeID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentDrugType">
+		SELECT
+		`drugTypeID`,
+		`name`,
+		`initial`,
+		`unit`,
+		`unitInitial`,
+		`optionalUnitInitial`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_drug_type`
+		WHERE 1 = 1
+		<if test="drugTypeID != null">
+			AND drugTypeID = #{drugTypeID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_drug_type
+		WHERE 1=1
+		<if test="content_drug_type != null">
+			AND content_drug_type = #{content_drug_type}
+		</if>
+	</delete>
+
+
+</mapper>

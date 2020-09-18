@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorPreferenceAdviceMapper">
+
+	<insert id="create" parameterType="doctorPreferenceAdvice" useGeneratedKeys="true" keyProperty="advicePreferenceID" >
+
+		INSERT INTO `doctor_preference_advice`(
+			`doctorID`,
+			`adviceID`,
+			`displayOrder`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#{adviceID},
+			#{displayOrder},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorPreferenceAdvice">
+		UPDATE `doctor_preference_advice`
+		SET
+		`doctorID` = #{doctorID},
+		`adviceID` = #{adviceID},
+		`displayOrder` = #{displayOrder},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE advicePreferenceID = #{advicePreferenceID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorPreferenceAdvice">
+		SELECT
+			`advicePreferenceID`,
+			`doctorID`,
+			`adviceID`,
+			`displayOrder`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_preference_advice`
+
+		WHERE advicePreferenceID = #{advicePreferenceID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorPreferenceAdvice">
+		SELECT
+		`advicePreferenceID`,
+		`doctorID`,
+		`adviceID`,
+		`displayOrder`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_preference_advice`
+		WHERE 1 = 1
+		<if test="advicePreferenceID != null">
+			AND advicePreferenceID = #{advicePreferenceID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_preference_advice
+		WHERE 1=1
+		<if test="doctor_preference_advice != null">
+			AND doctor_preference_advice = #{doctor_preference_advice}
+		</if>
+	</delete>
+
+
+</mapper>

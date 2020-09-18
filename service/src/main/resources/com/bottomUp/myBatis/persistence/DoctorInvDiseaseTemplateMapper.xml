@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorInvDiseaseTemplateMapper">
+
+	<insert id="create" parameterType="doctorInvDiseaseTemplate" useGeneratedKeys="true" keyProperty="templateID" >
+
+		INSERT INTO `doctor_inv_disease_template`(
+			`doctorID`,
+			`diseaseID`,
+			`invID`,
+			`note`,
+			`checked`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#{diseaseID},
+			#invID},
+			#{note},
+			#{checked},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorInvDiseaseTemplate">
+		UPDATE `doctor_inv_disease_template`
+		SET
+		`doctorID` = #{doctorID},
+		`diseaseID` = #{diseaseID},
+		`invID` = #{invID},
+		`note` =#{note},
+		`checked` = #{checked},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE appointmentID = #{appointmentID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorInvDiseaseTemplate">
+		SELECT
+			`templateID`,
+			`doctorID`,
+			`diseaseID`,
+			`invID`,
+			`note`,
+			`checked`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_inv_disease_template`
+
+		WHERE templateID = #{templateID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorInvDiseaseTemplate">
+		SELECT
+		`templateID`,
+		`doctorID`,
+		`diseaseID`,
+		`invID`,
+		`note`,
+		`checked`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_inv_disease_template`
+		WHERE 1 = 1
+		<if test="templateID != null">
+			AND templateID = #{templateID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_inv_disease_template
+		WHERE 1=1
+		<if test="doctor_inv_disease_template != null">
+			AND doctor_inv_disease_template = #{doctor_inv_disease_template}
+		</if>
+	</delete>
+
+
+</mapper>

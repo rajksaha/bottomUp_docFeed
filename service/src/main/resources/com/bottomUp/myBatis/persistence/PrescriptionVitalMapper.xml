@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionVitalMapper">
+
+	<insert id="create" parameterType="prescriptionVital" useGeneratedKeys="true" keyProperty="presVitalID" >
+
+		INSERT INTO `prescription_vital`(
+			`appointMentID`,
+			`vitalID`,
+			`vitalResult`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{appointMentID},
+			#{vitalID},
+			#{vitalResult},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="prescriptionVital">
+		UPDATE `prescription_vital`
+		SET
+		`appointMentID` = #{appointMentID},
+		`vitalID` = #{vitalID},
+		`vitalResult` = #{vitalResult},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE presVitalID = #{presVitalID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="prescriptionVital">
+		SELECT
+			`presVitalID`,
+			`appointMentID`,
+			`vitalID`,
+			`vitalResult`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `prescription_vital`
+
+		WHERE presVitalID = #{presVitalID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="prescriptionVital">
+		SELECT
+		`presVitalID`,
+		`appointMentID`,
+		`vitalID`,
+		`vitalResult`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `prescription_vital`
+		WHERE 1 = 1
+		<if test="presVitalID != null">
+			AND presVitalID = #{presVitalID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM prescription_vital
+		WHERE 1=1
+		<if test="prescription_vital != null">
+			AND prescription_vital = #{prescription_vital}
+		</if>
+	</delete>
+
+
+</mapper>

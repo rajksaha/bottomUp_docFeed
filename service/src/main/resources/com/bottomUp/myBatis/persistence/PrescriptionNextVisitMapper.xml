@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionNextVisitMapper">
+
+	<insert id="create" parameterType="prescriptionNextVisit" useGeneratedKeys="true" keyProperty="appointmentID" >
+
+		INSERT INTO `prescription_next_visit`(
+			`nextVisitType`,
+			`date`,
+			`numOfDay`,
+			`dayType`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{nextVisitType},
+			#{date},
+			#{numOfDay},
+			#{dayType},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="prescriptionNextVisit">
+		UPDATE `prescription_next_visit`
+		SET
+		`nextVisitType` = #{nextVisitType},
+		`date` = #{date},
+		`numOfDay` = #{numOfDay},
+		`dayType` =#{dayType},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE appointmentID = #{appointmentID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="prescriptionNextVisit">
+		SELECT
+			`appointmentID`,
+			`nextVisitType`,
+			`date`,
+			`numOfDay`,
+			`dayType`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `prescription_next_visit`
+
+		WHERE appointmentID = #{appointmentID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="prescriptionNextVisit">
+		SELECT
+		`appointmentID`,
+		`nextVisitType`,
+		`date`,
+		`numOfDay`,
+		`dayType`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `prescription_next_visit`
+		WHERE 1 = 1
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM prescription_next_visit
+		WHERE 1=1
+		<if test="prescription_next_visit != null">
+			AND prescription_next_visit = #{prescription_next_visit}
+		</if>
+	</delete>
+
+
+</mapper>

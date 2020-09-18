@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorDrugSettingMapper">
+
+	<insert id="create" parameterType="doctorDrugSetting" useGeneratedKeys="true" keyProperty="drugSettingID" >
+
+		INSERT INTO `doctor_drug_setting`(
+			`doctorID`,
+			`drugID`,
+			`drugTimeID`,
+			`drugDoseUnit`,
+			`drugWhenID`,
+			`drugAdviceID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#{drugID},
+			#{drugTimeID},
+			#{drugDoseUnit},
+			#{drugWhenID},
+			#{drugAdviceID},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorDrugSetting">
+		UPDATE `doctor_drug_setting`
+		SET
+		`doctorID` = #{doctorID},
+		`drugID` = #{drugID},
+		`drugTimeID` = #{drugTimeID},
+		`drugDoseUnit` =#{drugDoseUnit},
+		`drugWhenID` = #{drugWhenID},
+		`drugAdviceID` = #{drugAdviceID},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE drugSettingID = #{drugSettingID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorDrugSetting">
+		SELECT
+			`drugSettingID`,
+			`doctorID`,
+			`drugID`,
+			`drugTimeID`,
+			`drugDoseUnit`,
+			`drugWhenID`,
+			`drugAdviceID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_drug_setting`
+
+		WHERE drugSettingID = #{drugSettingID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorDrugSetting">
+		SELECT
+		`drugSettingID`,
+		`doctorID`,
+		`drugID`,
+		`drugTimeID`,
+		`drugDoseUnit`,
+		`drugWhenID`,
+		`drugAdviceID`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_drug_setting`
+		WHERE 1 = 1
+		<if test="drugSettingID != null">
+			AND drugSettingID = #{drugSettingID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_drug_setting
+		WHERE 1=1
+		<if test="appointmentID != null">
+			AND doctor_drug_setting = #{doctor_drug_setting}
+		</if>
+	</delete>
+
+
+</mapper>

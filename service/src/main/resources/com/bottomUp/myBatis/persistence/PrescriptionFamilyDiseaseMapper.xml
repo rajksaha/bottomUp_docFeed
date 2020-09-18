@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionFamilyDiseaseMapper">
+
+	<insert id="create" parameterType="prescriptionFamilyDisease" useGeneratedKeys="true" keyProperty="presFamilyDiseaseID" >
+
+		INSERT INTO `prescription_family_disease`(
+			`appointMentID`,
+			`familyDiseaseID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{appointMentID},
+			#familyDiseaseID},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="prescriptionFamilyDisease">
+		UPDATE `prescription_family_disease`
+		SET
+		`appointMentID` = #{appointMentID},
+		`familyDiseaseID` = #{familyDiseaseID},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE presFamilyDiseaseID = #{presFamilyDiseaseID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="prescriptionFamilyDisease">
+		SELECT
+			`presFamilyDiseaseID`,
+			`appointMentID`,
+			`familyDiseaseID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `prescription_family_disease`
+
+		WHERE presFamilyDiseaseID = #{presFamilyDiseaseID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="prescriptionFamilyDisease">
+		SELECT
+		`presFamilyDiseaseID`,
+		`appointMentID`,
+		`familyDiseaseID`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `prescription_family_disease`
+		WHERE 1 = 1
+		<if test="presFamilyDiseaseID != null">
+			AND presFamilyDiseaseID = #{presFamilyDiseaseID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM prescription_family_disease
+		WHERE 1=1
+		<if test="prescription_family_disease != null">
+			AND prescription_family_disease = #{prescription_family_disease}
+		</if>
+	</delete>
+
+
+</mapper>

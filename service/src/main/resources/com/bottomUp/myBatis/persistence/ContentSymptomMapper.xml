@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentSymptomMapper">
+
+	<insert id="create" parameterType="contentSymptom" useGeneratedKeys="true" keyProperty="symptomID" >
+
+		INSERT INTO `content_symptom`(
+			`symptomName`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{symptomName},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentSymptom">
+		UPDATE `content_symptom`
+		SET
+		`symptomName` = #{symptomName},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE appointmentID = #{appointmentID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentSymptom">
+		SELECT
+			`symptomID`,
+			`symptomName`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `content_symptom`
+
+		WHERE symptomID = #{symptomID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentSymptom">
+		SELECT
+		`symptomID`,
+		`symptomName`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_symptom`
+		WHERE 1 = 1
+		<if test="symptomID != null">
+			AND symptomID = #{symptomID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_symptom
+		WHERE 1=1
+		<if test="content_symptom != null">
+			AND content_symptom = #{content_symptom}
+		</if>
+	</delete>
+
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PatientPastDiseaseMapper">
+
+	<insert id="create" parameterType="patientPastDisease" useGeneratedKeys="true" keyProperty="patientPastDiseaseID" >
+
+		INSERT INTO `patient_past_disease`(
+			`patientID`,
+			`diseaseID`,
+			`isPresent`,
+			`detail`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{patientID},
+			#{diseaseID},
+			#{isPresent},
+			#{detail},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="patientPastDisease">
+		UPDATE `patient_past_disease`
+		SET
+		`patientID` = #{patientID},
+		`diseaseID` = #{diseaseID},
+		`isPresent` = #{isPresent},
+		`detail` =#{detail},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE patientPastDiseaseID = #{patientPastDiseaseID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="patientPastDisease">
+		SELECT
+			`patientPastDiseaseID`,
+			`patientID`,
+			`diseaseID`,
+			`isPresent`,
+			`detail`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `patient_past_disease`
+
+		WHERE patientPastDiseaseID = #{patientPastDiseaseID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="patientPastDisease">
+		SELECT
+		`patientPastDiseaseID`,
+		`patientID`,
+		`diseaseID`,
+		`isPresent`,
+		`detail`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `patient_past_disease`
+		WHERE 1 = 1
+		<if test="patientPastDiseaseID != null">
+			AND patientPastDiseaseID = #{patientPastDiseaseID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM patient_past_disease
+		WHERE 1=1
+		<if test="patient_past_disease != null">
+			AND patient_past_disease = #{patient_past_disease}
+		</if>
+	</delete>
+
+
+</mapper>

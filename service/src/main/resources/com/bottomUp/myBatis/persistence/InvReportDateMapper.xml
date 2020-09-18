@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.InvReportDateMapper">
+
+	<insert id="create" parameterType="invReportDate" useGeneratedKeys="true" keyProperty="invReportDateId" >
+
+		INSERT INTO `inv_report_date`(
+			`patientId`,
+			`reportDate`,
+			`reportLocation`,
+			`fileName`,
+			`ext`,
+
+		)
+		VALUES(
+			#{patientId},
+			#{reportDate},
+			#{reportLocation},
+			#{fileName},
+			#{ext},
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="invReportDate">
+		UPDATE `inv_report_date`
+		SET
+		`patientId` = #{patientId},
+		`reportDate` = #{reportDate},
+		`reportLocation` = #{reportLocation},
+		`fileName` =#{fileName},
+		`ext` = #{ext},
+		WHERE invReportDateId = #{invReportDateId}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="invReportDate">
+		SELECT
+			`invReportDateId`,
+			`patientId`,
+			`reportDate`,
+			`reportLocation`,
+			`fileName`,
+			`ext`,
+		FROM `inv_report_date`
+
+		WHERE invReportDateId = #{invReportDateId}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="invReportDate">
+		SELECT
+		`invReportDateId`,
+		`patientId`,
+		`reportDate`,
+		`reportLocation`,
+		`fileName`,
+		`ext`,
+		FROM `inv_report_date`
+		WHERE 1 = 1
+		<if test="invReportDateId != null">
+			AND invReportDateId = #{invReportDateId}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM inv_report_date
+		WHERE 1=1
+		<if test="inv_report_date != null">
+			AND inv_report_date = #{inv_report_date}
+		</if>
+	</delete>
+
+
+</mapper>

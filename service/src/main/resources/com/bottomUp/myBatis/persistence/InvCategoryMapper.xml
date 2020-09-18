@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.InvCategoryMapper">
+
+	<insert id="create" parameterType="invCategory" useGeneratedKeys="true" keyProperty="invCategoryID" >
+
+		INSERT INTO `inv_category`(
+			`name`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{name},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="invCategory">
+		UPDATE `inv_category`
+		SET
+		`name` = #{name},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE invCategoryID = #{invCategoryID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="invCategory">
+		SELECT
+			`invCategoryID`,
+			`name`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `inv_category`
+
+		WHERE invCategoryID  = #{invCategoryID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="invCategory">
+		SELECT
+		`invCategoryID`,
+		`name`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `inv_category`
+		WHERE 1 = 1
+		<if test="invCategoryID != null">
+			AND invCategoryID = #{invCategoryID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM inv_category
+		WHERE 1=1
+		<if test="inv_category != null">
+			AND inv_category = #{inv_category}
+		</if>
+	</delete>
+
+
+</mapper>

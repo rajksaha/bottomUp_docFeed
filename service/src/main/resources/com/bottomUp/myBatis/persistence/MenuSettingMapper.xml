@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.MenuSettingMapper">
+
+	<insert id="create" parameterType="menuSetting" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `menusettings`(
+			`doctorID`,
+			`menuID`,
+			`menuHeader`,
+			`order`,
+
+		)
+		VALUES(
+			#{doctorID},
+			#{menuID},
+			#{menuHeader},
+			#{order},
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="menuSetting">
+		UPDATE `menusettings`
+		SET
+		`doctorID` = #{doctorID},
+		`menuID` = #{menuID},
+		`menuHeader` = #{menuHeader},
+		`order` =#{order},
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="menuSetting">
+		SELECT
+			`id`,
+			`doctorID`,
+			`menuID`,
+			`menuHeader`,
+			`order`,
+
+		FROM `menu_settings`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="menuSetting">
+		SELECT
+		`id`,
+		`doctorID`,
+		`menuID`,
+		`menuHeader`,
+		`order`,
+		FROM `menu_settings`
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM menusettings
+		WHERE 1=1
+		<if test="menusettings != null">
+			AND menusettings = #{menusettings}
+		</if>
+	</delete>
+
+
+</mapper>

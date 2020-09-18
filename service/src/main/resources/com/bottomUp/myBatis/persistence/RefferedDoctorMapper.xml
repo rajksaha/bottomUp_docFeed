@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ReferredDoctorMapper">
+
+	<insert id="create" parameterType="referredDoctor" useGeneratedKeys="true" keyProperty="referredDoctorID" >
+
+		INSERT INTO `referred_doctor`(
+			`doctorName`,
+			`doctorAddress`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorName},
+			#{doctorAddress},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="referredDoctor">
+		UPDATE `referred_doctor`
+		SET
+		`doctorName` = #{doctorName},
+		`doctorAddress` = #{doctorAddress},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE referredDoctorID = #{referredDoctorID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="referredDoctor">
+		SELECT
+			`referredDoctorID`,
+			`doctorName`,
+			`doctorAddress`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `referred_doctor`
+
+		WHERE referredDoctorID = #{referredDoctorID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="referredDoctor">
+		SELECT
+		`referredDoctorID`,
+		`doctorName`,
+		`doctorAddress`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `referred_doctor`
+		WHERE 1 = 1
+		<if test="referredDoctorID != null">
+			AND referredDoctorID = #{referredDoctorID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM referred_doctor
+		WHERE 1=1
+		<if test="referred_doctor != null">
+			AND referred_doctor = #{referred_doctor}
+		</if>
+	</delete>
+
+
+</mapper>

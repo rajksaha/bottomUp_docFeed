@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentAdviceMapper">
+
+	<insert id="create" parameterType="contentAdvice " useGeneratedKeys="true" keyProperty="adviceID" >
+
+		INSERT INTO `content_advice`(
+			`type`,
+			`lang`,
+			`advice`,
+			`pdf`,
+		    `updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{type},
+			#{lang},
+			#{advice},
+			#{pdf},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentAdvice">
+		UPDATE `content_advice`
+		SET
+		`type` = #{type},
+		`lang` = #{lang},
+		`advice` = #{advice},
+		`pdf` =#{pdf},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE appointmentID = #{appointmentID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentAdvice">
+		SELECT
+			`adviceID`,
+			`type`,
+			`lang`,
+			`advice`,
+			`pdf`,
+		    `updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+
+		FROM `content_advice`
+
+		WHERE adviceID = #{adviceID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentAdvice">
+		SELECT
+		`adviceID`,
+		`type`,
+		`lang`,
+		`advice`,
+		`pdf`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+
+		FROM `content_advice`
+
+		WHERE 1 = 1
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_advice
+		WHERE 1=1
+		<if test="content_advice != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+		AND content_advice = #{content_advice}
+	</delete>
+
+
+</mapper>

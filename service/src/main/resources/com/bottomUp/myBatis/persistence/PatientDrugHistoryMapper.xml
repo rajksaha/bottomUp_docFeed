@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PatientDrugHistoryMapper">
+
+	<insert id="create" parameterType="patientDrugHistory" useGeneratedKeys="true" keyProperty="drugHistoryID" >
+
+		INSERT INTO `patient_drug_history`(
+			`patientID`,
+			`drugName`,
+			`currentStatus`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{patientID},
+			#drugName},
+			#{currentStatus},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="patientDrugHistory">
+		UPDATE `patient_drug_history`
+		SET
+		`patientID` = #{patientID},
+		`drugName` = #{drugName},
+		`currentStatus` = #{currentStatus},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE drugHistoryID = #{drugHistoryID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="patientDrugHistory">
+		SELECT
+			`drugHistoryID`,
+			`patientID`,
+			`drugName`,
+			`currentStatus`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `patient_drug_history`
+
+		WHERE drugHistoryID = #{drugHistoryID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="patientDrugHistory">
+		SELECT
+		`drugHistoryID`,
+		`patientID`,
+		`drugName`,
+		`currentStatus`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `patient_drug_history`
+		WHERE 1 = 1
+		<if test="drugHistoryID != null">
+			AND drugHistoryID = #{drugHistoryID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM patient_drug_history
+		WHERE 1=1
+		<if test="patient_drug_history != null">
+			AND patient_drug_history = #{patient_drug_history}
+		</if>
+	</delete>
+
+
+</mapper>

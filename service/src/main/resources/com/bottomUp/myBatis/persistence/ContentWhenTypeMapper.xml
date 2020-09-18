@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentWhenTypeMapper">
+
+	<insert id="create" parameterType="contentWhenType" useGeneratedKeys="true" keyProperty="whenTypeID" >
+
+		INSERT INTO `content_when_type`(
+			`bangla`,
+			`english`,
+			`pdf`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{bangla},
+			#{english},
+			#{pdf},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentWhenType">
+		UPDATE `content_when_type`
+		SET
+		`bangla` = #{bangla},
+		`english` = #{english},
+		`pdf` = #{pdf},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE whenTypeID = #{whenTypeID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentWhenType">
+		SELECT
+			`whenTypeID`,
+			`bangla`,
+			`english`,
+			`pdf`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`,
+
+
+		FROM `content_when_type`
+
+		WHERE whenTypeID = #{whenTypeID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentWhenType">
+		SELECT
+		`whenTypeID`,
+		`bangla`,
+		`english`,
+		`pdf`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`,
+
+		FROM `content_when_type`
+		WHERE 1 = 1
+		<if test="whenTypeID != null">
+			AND whenTypeID = #{whenTypeID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_when_type
+		WHERE 1=1
+		<if test="content_when_type != null">
+			AND content_when_type = #{content_when_type}
+		</if>
+	</delete>
+
+
+</mapper>

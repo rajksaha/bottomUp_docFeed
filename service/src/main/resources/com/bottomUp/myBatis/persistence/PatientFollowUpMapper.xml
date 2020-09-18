@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PatientFollowUpMapper">
+
+	<insert id="create" parameterType="patientFollowUp" useGeneratedKeys="true" keyProperty="patientFollowUpID" >
+
+		INSERT INTO `patient_follow_up`(
+			`patientID`,
+			`doctorID`,
+			`invID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{patientID},
+			#{doctorID},
+			#{invID},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="patientFollowUp">
+		UPDATE `patient_follow_up`
+		SET
+		`patientID` = #{patientID},
+		`doctorID` = #{doctorID},
+		`invID` = #{invID},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE patientFollowUpID = #{patientFollowUpID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="patientFollowUp">
+		SELECT
+			`patientFollowUpID`,
+			`patientID`,
+			`doctorID`,
+			`invID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `patient_follow_up`
+
+		WHERE patientFollowUpID = #{patientFollowUpID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="patientFollowUp">
+		SELECT
+		`patientFollowUpID`,
+		`patientID`,
+		`doctorID`,
+		`invID`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `patient_follow_up`
+		WHERE 1 = 1
+		<if test="PatientFollowUpID != null">
+			AND patientFollowUpID = #{patientFollowUpID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM patient_follow_up
+		WHERE 1=1
+		<if test="patient_follow_up != null">
+			AND patient_follow_up = #{patient_follow_up}
+		</if>
+	</delete>
+
+
+</mapper>

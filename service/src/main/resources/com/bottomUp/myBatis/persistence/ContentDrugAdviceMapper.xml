@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentDrugAdviceMapper">
+
+	<insert id="create" parameterType="contentDrugAdvice" useGeneratedKeys="true" keyProperty="drugAdviceID" >
+
+		INSERT INTO `content_drug_advice`(
+			`doctorType`,
+			`bangla`,
+			`english`,
+			`pdf`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorType},
+			#{bangla},
+			#{english},
+			#{pdf},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentDrugAdvice">
+		UPDATE `content_drug_advice`
+		SET
+		`doctorType` = #{doctorType},
+		`bangla` = #{bangla},
+		`english` =#{english},
+		`pdf` = #{pdf},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE drugAdviceID = #{drugAdviceID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentDrugAdvice">
+		SELECT
+		     `drugAdviceID`,
+			`doctorType`,
+			`bangla`,
+			`english`,
+			`pdf`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+        FROM `content_drug_advice`
+
+
+		WHERE drugAdviceID= #{drugAdviceID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentDrugAdvice">
+		SELECT
+		`drugAdviceID`,
+		`doctorType`,
+		`bangla`,
+		`english`,
+		`pdf`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_drug_advice`
+		WHERE 1 = 1
+		<if test="drugAdviceID != null">
+			AND drugAdviceID = #{drugAdviceID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_drug_advice
+		WHERE 1=1
+		<if test="content_drug_advice != null">
+			AND content_drug_advice = #{content_drug_advice}
+		</if>
+	</delete>
+
+
+</mapper>

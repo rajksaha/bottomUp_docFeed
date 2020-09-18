@@ -19,7 +19,7 @@ public interface ContentDetailMapper {
 
     public void update(ContentDetailData data) throws BottomUpException;
 
-    public ContentDetailData getByID(Integer userProfileID) throws BottomUpException;
+    public ContentDetailData getByID(Long userProfileID) throws BottomUpException;
 
     public List<ContentDetailData> getByParam(Map<String, Object> param) throws BottomUpException;
 

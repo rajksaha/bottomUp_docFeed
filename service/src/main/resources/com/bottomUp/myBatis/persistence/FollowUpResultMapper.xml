@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.FollowUpResultMapper">
+
+	<insert id="create" parameterType="followUpResult" useGeneratedKeys="true" keyProperty="resultID" >
+
+		INSERT INTO `follow_up_result`(
+			`appID`,
+			`followUpID`,
+			`data`,
+			`entryDate`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{appID},
+			#{followUpID},
+			#{data},
+			#{entryDate},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="followUpResult">
+		UPDATE `follow_up_result`
+		SET
+		`appID` = #{appID},
+		`followUpID` = #{followUpID},
+		`data` = #{data},
+		`entryDate` =#{entryDate},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE resultID = #{resultID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="followUpResult">
+		SELECT
+			`resultID`,
+			`appID`,
+			`followUpID`,
+			`data`,
+			`entryDate`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `follow_up_result`
+
+		WHERE resultID = #{resultID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="followUpResult">
+		SELECT
+		`resultID`,
+		`appID`,
+		`followUpID`,
+		`data`,
+		`entryDate`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `follow_up_result`
+		WHERE 1 = 1
+		<if test="resultID != null">
+			AND resultID = #{resultID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM follow_up_result
+		WHERE 1=1
+		<if test="follow_up_result != null">
+			AND follow_up_result = #{follow_up_result}
+		</if>
+	</delete>
+
+
+</mapper>

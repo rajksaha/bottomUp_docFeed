@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PatientMapper">
+
+	<insert id="create" parameterType="Patient" useGeneratedKeys="true" keyProperty="patientID" >
+
+		INSERT INTO `patient`(
+			`userID`,
+			`patientCode`,
+			`occupation`,
+			`referredBy`,
+			`hospitalName`,
+			`bedNum`,
+			`wardNum`,
+			`headOfUnit`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{userID},
+			#{patientCode},
+			#occupation},
+			#{referredBy},
+			#{hospitalName},
+			#{bedNum},
+			#{doctorID},
+			#{doctorID},
+
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="Patient">
+		UPDATE `patient`
+		SET
+		`userID` = #{userID},
+		`patientCode` = #{patientCode},
+		`occupation` = #{occupation},
+		`referredBy` =#{referredBy},
+		`hospitalName` = #{hospitalName},
+		`bedNum` = #{bedNum},
+		`wardNum` = #{wardNum},
+		`headOfUnit` = #{headOfUnit},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE patientID = #{patientID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="Patient">
+		SELECT
+			`patientID`,
+			`userID`,
+			`patientCode`,
+			`occupation`,
+			`referredBy`,
+			`hospitalName`,
+			`bedNum`,
+			`wardNum`,
+			`headOfUnit`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `patient`
+
+		WHERE patientID = #{patientID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="Patient">
+		SELECT
+		`patientID`,
+		`userID`,
+		`patientCode`,
+		`occupation`,
+		`referredBy`,
+		`hospitalName`,
+		`bedNum`,
+		`wardNum`,
+		`headOfUnit`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `patient`
+		WHERE 1 = 1
+		<if test="patientID != null">
+			AND patientID = #{patientID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM patient
+		WHERE 1=1
+		<if test="patient != null">
+			AND patient = #{patient}
+		</if>
+	</delete>
+
+
+</mapper>

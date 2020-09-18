@@ -6,7 +6,7 @@ import com.bottomUp.domain.common.BaseData;
 import java.sql.Date;
 import java.sql.Time;
 
-public class AppointmentData extends BaseData{
+public class AppointmentData extends BaseData {
 
   private long appointmentID;
   private long doctorID;

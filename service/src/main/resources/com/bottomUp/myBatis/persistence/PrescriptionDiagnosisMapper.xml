@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionDiagnosisMapper">
+
+	<insert id="create" parameterType="prescriptionDiagnosis" useGeneratedKeys="true" keyProperty="diagnosisID" >
+
+		INSERT INTO `prescription_diagnosis`(
+			`appointMentID`,
+			`diseaseID`,
+			`note`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{appointMentID},
+			#{diseaseID},
+			#{note},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="prescriptionDiagnosis">
+		UPDATE `prescription_diagnosis`
+		SET
+		`appointMentID` = #{appointMentID},
+		`diseaseID` = #{diseaseID},
+		`note` = #{note},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE diagnosisID = #{diagnosisID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="prescriptionDiagnosis">
+		SELECT
+			`diagnosisID`,
+			`appointMentID`,
+			`diseaseID`,
+			`note`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `prescription_diagnosis`
+
+		WHERE diagnosisID = #{diagnosisID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="prescriptionDiagnosis">
+		SELECT
+		`diagnosisID`,
+		`appointMentID`,
+		`diseaseID`,
+		`note`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `prescription_diagnosis`
+		WHERE 1 = 1
+		<if test="diagnosisID != null">
+			AND diagnosisID = #{diagnosisID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM prescription_diagnosis
+		WHERE 1=1
+		<if test="prescription_diagnosis != null">
+			AND prescription_diagnosis = #{prescription_diagnosis}
+		</if>
+	</delete>
+
+
+</mapper>

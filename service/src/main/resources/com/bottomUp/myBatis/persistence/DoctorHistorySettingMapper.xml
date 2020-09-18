@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DoctorHistorySettingMapper">
+
+	<insert id="create" parameterType="doctorHistorySetting" useGeneratedKeys="true" keyProperty="historySettingID" >
+
+		INSERT INTO `doctor_history_setting`(
+			`doctorID`,
+			`historyID`,
+			`displayOrder`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doctorID},
+			#{historyID},
+			#{displayOrder},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="doctorHistorySetting">
+		UPDATE `doctor_history_setting`
+		SET
+		`doctorID` = #{doctorID},
+		`historyID` = #{historyID},
+		`displayOrder` = #{displayOrder},
+		`updatedBy` = #{doctorID},
+		`updatedOn` = #{doctorID}
+		WHERE historySettingID = #{historySettingID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="doctorHistorySetting">
+		SELECT
+			`historySettingID`,
+			`doctorID`,
+			`historyID`,
+			`displayOrder`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+
+		FROM `doctor_history_setting`
+
+		WHERE historySettingID = #{historySettingID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="doctorHistorySetting">
+		SELECT
+		`historySettingID`,
+		`historyID`,
+		`displayOrder`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `doctor_history_setting`
+		WHERE 1 = 1
+		<if test="historySettingID != null">
+			AND historySettingID = #{historySettingID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM doctor_history_setting
+		WHERE 1=1
+		<if test="doctor_history_setting != null">
+			AND doctor_history_setting = #{doctor_history_setting}
+		</if>
+	</delete>
+
+
+</mapper>
