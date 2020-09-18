@@ -7,25 +7,15 @@
 
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-	<context:component-scan base-package="com.bottomUp.security" />
-	<security:global-method-security pre-post-annotations="enabled"/>
-	<beans:bean id="bottomUpUserDetailsService" class="com.bottomUp.security.BottomUpUserDetailsService" />
-	<beans:bean id="encoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
 
-	<security:authentication-manager alias="authenticationManager" erase-credentials="true">
-		<security:authentication-provider user-service-ref="bottomUpUserDetailsService">
-			<security:password-encoder ref="encoder"></security:password-encoder>
-		</security:authentication-provider>
-	</security:authentication-manager>
+
+	<security:global-method-security pre-post-annotations="enabled"/>
+
 
 	<security:http pattern="/resources/**" security="none" />
 
 	<!--<beans:bean id="tokenRepository" class="org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl" />-->
-	<beans:bean id="unauthorisedEntryPoint" class="com.bottomUp.security.UnauthorisedEntryPoint" />
-	<beans:bean id="forBiddenEntryPoint" class="com.bottomUp.security.ForbiddenEntryPoint" />
 
 
 
 </beans:beans>
-
-
