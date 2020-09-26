@@ -37,8 +37,8 @@
 		`followUpID` = #{followUpID},
 		`data` = #{data},
 		`entryDate` =#{entryDate},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE resultID = #{resultID}
 	</update>
 
@@ -83,8 +83,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM follow_up_result
 		WHERE 1=1
-		<if test="follow_up_result != null">
-			AND follow_up_result = #{follow_up_result}
+		<if test="resultID != null">
+			AND resultID = #{resultID}
 		</if>
 	</delete>
 

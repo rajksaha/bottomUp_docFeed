@@ -8,7 +8,7 @@
 
 		INSERT INTO `prescription_reference`(
 			`appointMentID`,
-			`referredDoctorID`,
+			`refferedDoctorID`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -16,7 +16,7 @@
 		)
 		VALUES(
 			#{appointMentID},
-			#{referredDoctorID},
+			#{refferedDoctorID},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -30,9 +30,9 @@
 		UPDATE `prescription_reference`
 		SET
 		`appointMentID` = #{appointMentID},
-		`referredDoctorID` = #{referredDoctorID},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`refferedDoctorID` = #{refferedDoctorID},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE prescriptionReferenceID = #{prescriptionReferenceID}
 	</update>
 
@@ -40,7 +40,7 @@
 		SELECT
 			`prescriptionReferenceID`,
 			`appointMentID`,
-			`referredDoctorID`,
+			`refferedDoctorID`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -54,7 +54,7 @@
 		SELECT
 		`prescriptionReferenceID`,
 		`appointMentID`,
-		`referredDoctorID`,
+		`refferedDoctorID`,
 		`updatedBy`,
 		`updatedOn`,
 		`createdBy`,
@@ -73,8 +73,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM prescription_reference
 		WHERE 1=1
-		<if test="prescription_reference != null">
-			AND prescription_reference = #{prescription_reference}
+		<if test="prescriptionReferenceID != null">
+			AND prescriptionReferenceID = #{prescriptionReferenceID}
 		</if>
 	</delete>
 

@@ -4,9 +4,9 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.MenuSettingMapper">
 
-	<insert id="create" parameterType="menuSetting" useGeneratedKeys="true" keyProperty="id" >
+	<insert id="create" parameterType="menuSetting" useGeneratedKeys="true" keyProperty="menuSettingID" >
 
-		INSERT INTO `menusettings`(
+		INSERT INTO `menu_setting`(
 			`doctorID`,
 			`menuID`,
 			`menuHeader`,
@@ -25,39 +25,39 @@
 	</insert>
 	
 	<update id="update" parameterType="menuSetting">
-		UPDATE `menusettings`
+		UPDATE `menu_setting`
 		SET
 		`doctorID` = #{doctorID},
 		`menuID` = #{menuID},
 		`menuHeader` = #{menuHeader},
 		`order` =#{order},
-		WHERE id = #{id}
+		WHERE menuSettingID = #{menuSettingID}
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="menuSetting">
 		SELECT
-			`id`,
+			`menuSettingID`,
 			`doctorID`,
 			`menuID`,
 			`menuHeader`,
 			`order`,
 
-		FROM `menu_settings`
+		FROM `menu_setting`
 
-		WHERE id = #{id}
+		WHERE menuSettingID = #{menuSettingID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="menuSetting">
 		SELECT
-		`id`,
+		`menuSettingID`,
 		`doctorID`,
 		`menuID`,
 		`menuHeader`,
 		`order`,
-		FROM `menu_settings`
+		FROM `menu_setting`
 		WHERE 1 = 1
-		<if test="id != null">
-			AND id = #{id}
+		<if test="menuSettingID != null">
+			AND menuSettingID = #{menuSettingID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
@@ -66,10 +66,10 @@
 	</select>
 
     <delete id="delete" parameterType="map">
-		DELETE  FROM menusettings
+		DELETE  FROM menu_setting
 		WHERE 1=1
-		<if test="menusettings != null">
-			AND menusettings = #{menusettings}
+		<if test="menuSettingID != null">
+			AND menuSettingID = #{menuSettingID}
 		</if>
 	</delete>
 

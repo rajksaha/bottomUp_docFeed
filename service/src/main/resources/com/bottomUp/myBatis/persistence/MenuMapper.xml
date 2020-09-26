@@ -61,16 +61,13 @@
 	<select id="getByParam" parameterType="map" resultType="Menu">
 		SELECT
 		`id`,
-		`appointment`.`doctorID`,
-		`appointment`.`patientID`,
-		`appointment`.`date`,
-		`appointment`.`time`,
-		`appointment`.`status`,
-		`appointment`.`appointmentType`,
-		`appointment`.`updatedBy`,
-		`appointment`.`updatedOn`,
-		`appointment`.`createdBy`,
-		`appointment`.`createdOn`
+		`menuID`,
+		`menuURL`,
+		`defaultName`,
+		`isPopUp`,
+		`functionName`,
+		`inPrescription`,
+		`displayOrder`,
 		FROM `menu`
 		WHERE 1 = 1
 		<if test="id != null">
@@ -85,8 +82,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM menu
 		WHERE 1=1
-		<if test="menu != null">
-			AND menu = #{menu}
+		<if test="id != null">
+			AND id = #{id}
 		</if>
 	</delete>
 

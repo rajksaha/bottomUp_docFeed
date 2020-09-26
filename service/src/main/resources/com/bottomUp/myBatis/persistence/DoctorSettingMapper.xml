@@ -55,8 +55,8 @@
 		`photoSupport` = #{photoSupport},
 		`personCodeInitial` = #{doctorID},
 		`pdfPage` = #{pdfPage},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE doctorSettingID = #{doctorSettingID}
 	</update>
 
@@ -113,8 +113,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM doctor_setting
 		WHERE 1=1
-		<if test="doctor_setting != null">
-			AND doctor_setting = #{doctor_setting}
+		<if test="doctorSettingID != null">
+			AND doctorSettingID = #{doctorSettingID}
 		</if>
 	</delete>
 

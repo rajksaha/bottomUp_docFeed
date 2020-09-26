@@ -8,7 +8,7 @@
 
 		INSERT INTO `referred_doctor`(
 			`doctorName`,
-			`doctorAddress`,
+			`doctorAdress`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -16,7 +16,7 @@
 		)
 		VALUES(
 			#{doctorName},
-			#{doctorAddress},
+			#{doctorAdress},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -30,9 +30,9 @@
 		UPDATE `referred_doctor`
 		SET
 		`doctorName` = #{doctorName},
-		`doctorAddress` = #{doctorAddress},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`doctorAdress` = #{doctorAdress},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE referredDoctorID = #{referredDoctorID}
 	</update>
 
@@ -40,7 +40,7 @@
 		SELECT
 			`referredDoctorID`,
 			`doctorName`,
-			`doctorAddress`,
+			`doctorAdress`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -54,7 +54,7 @@
 		SELECT
 		`referredDoctorID`,
 		`doctorName`,
-		`doctorAddress`,
+		`doctorAdress`,
 		`updatedBy`,
 		`updatedOn`,
 		`createdBy`,
@@ -73,8 +73,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM referred_doctor
 		WHERE 1=1
-		<if test="referred_doctor != null">
-			AND referred_doctor = #{referred_doctor}
+		<if test="referredDoctorID != null">
+			AND referredDoctorID = #{referredDoctorID}
 		</if>
 	</delete>
 

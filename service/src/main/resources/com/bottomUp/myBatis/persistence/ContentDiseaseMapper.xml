@@ -28,8 +28,8 @@
 		UPDATE `content_disease`
 		SET
 		`diseaseName` = #diseaseName},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE diseaseID = #{diseaseID}
 	</update>
 
@@ -69,8 +69,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_disease
 		WHERE 1=1
-		<if test="content_disease != null">
-			AND content_disease = #{content_disease}
+		<if test="diseaseID != null">
+			AND diseaseID = #{diseaseID}
 		</if>
 	</delete>
 

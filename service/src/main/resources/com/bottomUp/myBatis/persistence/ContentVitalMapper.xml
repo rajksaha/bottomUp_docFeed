@@ -34,9 +34,9 @@
 		`vitalName` = #{vitalName},
 		`shortName` = #{shortName},
 		`vitalUnit` = #{vitalUnit},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
-		WHERE appointmentID = #{appointmentID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE vitalID = #{vitalID}
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="contentVital">
@@ -78,8 +78,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_vital
 		WHERE 1=1
-		<if test="content_vital != null">
-			AND content_vital = #{content_vital}
+		<if test="vitalID != null">
+			AND vitalID = #{vitalID}
 		</if>
 	</delete>
 

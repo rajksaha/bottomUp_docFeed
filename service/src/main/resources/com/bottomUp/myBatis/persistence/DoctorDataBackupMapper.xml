@@ -28,8 +28,8 @@
 		UPDATE `doctor_data_backup`
 		SET
 		`lastBackupDate` = #{lastBackupDate},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE doctorID = #{doctorID}
 	</update>
 
@@ -68,8 +68,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM doctor_data_backup
 		WHERE 1=1
-		<if test="doctor_data_backup != null">
-			AND doctor_data_backup = #{doctor_data_backup}
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
 		</if>
 	</delete>
 

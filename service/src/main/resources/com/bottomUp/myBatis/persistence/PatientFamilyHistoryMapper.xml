@@ -43,8 +43,8 @@
 		`present` =#{present},
 		`type` = #{type},
 		`detail` = #{detail},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE familyHistoryID = #{familyHistoryID}
 	</update>
 
@@ -93,8 +93,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM patient_family_history
 		WHERE 1=1
-		<if test="patient_family_history != null">
-			AND patient_family_history = #{patient_family_history}
+		<if test="familyHistoryID != null">
+			AND familyHistoryID = #{familyHistoryID}
 		</if>
 	</delete>
 

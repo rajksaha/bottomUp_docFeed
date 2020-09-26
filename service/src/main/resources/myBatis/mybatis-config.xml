@@ -27,7 +27,6 @@
 		<typeAlias alias="appointment" type="com.bottomUp.domain.AppointmentData"/>
 		<typeAlias alias="appointmentType" type="com.bottomUp.domain.AppointmentTypeData"/>
 		<typeAlias alias="contentAdvice" type="com.bottomUp.domain.ContentAdviceData"/>
-		<typeAlias alias="contentAdvice" type="com.bottomUp.domain.ContentAdviceData"/>
 		<typeAlias alias="contentDayType" type="com.bottomUp.domain.ContentDayTypeData"/>
 		<typeAlias alias="contentDisease" type="com.bottomUp.domain.ContentDiseaseData"/>
 

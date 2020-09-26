@@ -31,8 +31,8 @@
 		SET
 		`categoryID` = #{categoryID},
 		`name` = #{name},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE invID = #{invID}
 	</update>
 
@@ -73,8 +73,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_inv
 		WHERE 1=1
-		<if test="content_inv != null">
-			AND content_inv = #{content_inv}
+		<if test="invID != null">
+			AND invID = #{invID}
 		</if>
 	</delete>
 

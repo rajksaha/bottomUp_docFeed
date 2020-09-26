@@ -34,8 +34,8 @@
 		`doctorID` = #{doctorID},
 		`diseaseID` = #{diseaseID},
 		`adviceID` = #{adviceID},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE templateID = #{templateID}
 	</update>
 
@@ -78,8 +78,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM doctor_advice_disease_template
 		WHERE 1=1
-		<if test="doctor_advice_disease_template != null">
-			AND doctor_advice_disease_template = #{doctor_advice_disease_template}
+		<if test="templateID != null">
+			AND templateID = #{templateID}
 		</if>
 	</delete>
 

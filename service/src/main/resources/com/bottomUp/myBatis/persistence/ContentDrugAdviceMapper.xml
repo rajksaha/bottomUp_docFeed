@@ -37,8 +37,8 @@
 		`bangla` = #{bangla},
 		`english` =#{english},
 		`pdf` = #{pdf},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE drugAdviceID = #{drugAdviceID}
 	</update>
 
@@ -84,8 +84,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_drug_advice
 		WHERE 1=1
-		<if test="content_drug_advice != null">
-			AND content_drug_advice = #{content_drug_advice}
+		<if test="drugAdviceID != null">
+			AND drugAdviceID = #{drugAdviceID}
 		</if>
 	</delete>
 

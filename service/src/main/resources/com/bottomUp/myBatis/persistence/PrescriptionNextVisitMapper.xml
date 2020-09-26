@@ -37,8 +37,8 @@
 		`date` = #{date},
 		`numOfDay` = #{numOfDay},
 		`dayType` =#{dayType},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE appointmentID = #{appointmentID}
 	</update>
 
@@ -83,8 +83,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM prescription_next_visit
 		WHERE 1=1
-		<if test="prescription_next_visit != null">
-			AND prescription_next_visit = #{prescription_next_visit}
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
 		</if>
 	</delete>
 

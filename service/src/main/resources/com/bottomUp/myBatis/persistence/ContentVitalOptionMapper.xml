@@ -31,8 +31,8 @@
 		SET
 		`vitalId` = #{vitalId},
 		`optionName` = #{optionName},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE vitalOptionID = #{vitalOptionID}
 	</update>
 
@@ -73,8 +73,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_vital_option
 		WHERE 1=1
-		<if test="content_vital_option != null">
-			AND content_vital_option = #{content_vital_option}
+		<if test="vitalOptionID != null">
+			AND vitalOptionID = #{vitalOptionID}
 		</if>
 	</delete>
 

@@ -50,8 +50,8 @@
 		`bedNum` = #{bedNum},
 		`wardNum` = #{wardNum},
 		`headOfUnit` = #{headOfUnit},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE patientID = #{patientID}
 	</update>
 
@@ -104,8 +104,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM patient
 		WHERE 1=1
-		<if test="patient != null">
-			AND patient = #{patient}
+		<if test="patientID != null">
+			AND patientID = #{patientID}
 		</if>
 	</delete>
 

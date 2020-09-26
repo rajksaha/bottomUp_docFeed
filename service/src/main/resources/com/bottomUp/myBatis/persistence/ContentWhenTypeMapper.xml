@@ -34,8 +34,8 @@
 		`bangla` = #{bangla},
 		`english` = #{english},
 		`pdf` = #{pdf},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE whenTypeID = #{whenTypeID}
 	</update>
 
@@ -81,8 +81,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_when_type
 		WHERE 1=1
-		<if test="content_when_type != null">
-			AND content_when_type = #{content_when_type}
+		<if test="whenTypeID != null">
+			AND whenTypeID = #{whenTypeID}
 		</if>
 	</delete>
 

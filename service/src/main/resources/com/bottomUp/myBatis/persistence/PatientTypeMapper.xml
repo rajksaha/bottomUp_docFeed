@@ -31,8 +31,8 @@
 		SET
 		`doctorType` = #{doctorType},
 		`typeName` = #{typeName},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE patientTypeID = #{patientTypeID}
 	</update>
 
@@ -73,8 +73,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM patient_type
 		WHERE 1=1
-		<if test="patient_type != null">
-			AND patient_type = #{patient_type}
+		<if test="patientTypeID != null">
+			AND patientTypeID = #{patientTypeID}
 		</if>
 	</delete>
 

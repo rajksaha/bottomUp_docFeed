@@ -34,8 +34,8 @@
 		`appointMentID` = #{appointMentID},
 		`diseaseID` = #{diseaseID},
 		`note` = #{note},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE diagnosisID = #{diagnosisID}
 	</update>
 
@@ -78,8 +78,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM prescription_diagnosis
 		WHERE 1=1
-		<if test="prescription_diagnosis != null">
-			AND prescription_diagnosis = #{prescription_diagnosis}
+		<if test="diagnosisID != null">
+			AND diagnosisID = #{diagnosisID}
 		</if>
 	</delete>
 

@@ -7,24 +7,26 @@
 	<insert id="create" parameterType="Appointment" useGeneratedKeys="true" keyProperty="appointmentID" >
 
 		INSERT INTO `appointment`(
-			`doctorID`,
-			`patientID`,
+			`doctorCode`,
+			`patientCode`,
 			`date`,
 			`time`,
 			`status`,
 			`appointmentType`,
+			`addedBy`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
 			`createdOn`
 		)
 		VALUES(
-			#{doctorID},
-			#{patientID},
+			#{doctorCode},
+			#{patientCode},
 			#{date},
 			#{time},
 			#{status},
 			#{appointmentType},
+			#{addedBy},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -37,30 +39,32 @@
 	<update id="update" parameterType="Appointment">
 		UPDATE `appointment`
 		SET
-		`doctorID` = #{doctorID},
-		`patientID` = #{doctorID},
-		`date` = #{doctorID},
-		`time` =#{doctorID},
-		`status` = #{doctorID},
-		`appointmentType` = #{doctorID},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`doctorCode` = #{doctorCode},
+		`patientCode` = #{patientCode},
+		`date` = #{date},
+		`time` =#{time},
+		`status` = #{status},
+		`appointmentType` = #{appointmentType},
+		`addedBy` = #{addedBy},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE appointmentID = #{appointmentID}
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="Appointment">
 		SELECT
-			`appointment`.`appointmentID`,
-			`appointment`.`doctorID`,
-			`appointment`.`patientID`,
-			`appointment`.`date`,
-			`appointment`.`time`,
-			`appointment`.`status`,
-			`appointment`.`appointmentType`,
-			`appointment`.`updatedBy`,
-			`appointment`.`updatedOn`,
-			`appointment`.`createdBy`,
-			`appointment`.`createdOn`
+			`appointmentID`,
+			`doctorCode`,
+			`patientCode`,
+			`date`,
+			`time`,
+			`status`,
+			`appointmentType`,
+			`addedBy`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
 		FROM `doctor_feed`.`appointment`
 
 		WHERE appointmentID = #{appointmentID}
@@ -68,17 +72,18 @@
 
 	<select id="getByParam" parameterType="map" resultType="Appointment">
 		SELECT
-		`appointment`.`appointmentID`,
-		`appointment`.`doctorID`,
-		`appointment`.`patientID`,
-		`appointment`.`date`,
-		`appointment`.`time`,
-		`appointment`.`status`,
-		`appointment`.`appointmentType`,
-		`appointment`.`updatedBy`,
-		`appointment`.`updatedOn`,
-		`appointment`.`createdBy`,
-		`appointment`.`createdOn`
+		`appointmentID`,
+		`doctorCode`,
+		`patientCode`,
+		`date`,
+		`time`,
+		`status`,
+		`appointmentType`,
+		`addedBy`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
 		FROM `doctor_feed`.`appointment`
 		WHERE 1 = 1
 		<if test="appointmentID != null">

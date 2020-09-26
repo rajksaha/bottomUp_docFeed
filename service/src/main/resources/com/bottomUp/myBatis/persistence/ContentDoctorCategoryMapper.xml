@@ -28,8 +28,8 @@
 		UPDATE `content_doctor_category`
 		SET
 		`categortName` = #{categortName},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE categoryID = #{categoryID}
 	</update>
 
@@ -68,8 +68,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_doctor_category
 		WHERE 1=1
-		<if test="content_doctor_category != null">
-			AND content_doctor_category = #{content_doctor_category}
+		<if test="categoryID != null">
+			AND categoryID = #{categoryID}
 		</if>
 	</delete>
 

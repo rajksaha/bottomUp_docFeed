@@ -31,8 +31,8 @@
 		SET
 		`appointMentID` = #{appointMentID},
 		`patientHistoryID` = #{patientHistoryID},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE presHistoryID = #{presHistoryID}
 	</update>
 
@@ -73,8 +73,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM prescription_history
 		WHERE 1=1
-		<if test="prescription_history != null">
-			AND prescription_history = #{prescription_history}
+		<if test="presHistoryID != null">
+			AND presHistoryID = #{presHistoryID}
 		</if>
 	</delete>
 

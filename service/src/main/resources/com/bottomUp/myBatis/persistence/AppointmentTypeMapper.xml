@@ -73,8 +73,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM appointment_type
 		WHERE 1=1
-		<if test="appointment_type != null">
-			AND appointment_type = #{appointment_type}
+		<if test="appointmentTypeID != null">
+			AND appointmentTypeID = #{appointmentTypeID}
 		</if>
 	</delete>
 

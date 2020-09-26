@@ -37,8 +37,8 @@
 		`userID` = #{userID},
 		`doctorCode` = #{doctorCode},
 		`hospitalID` = #{hospitalID},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE doctorID = #{doctorID}
 	</update>
 
@@ -81,8 +81,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM doctor
 		WHERE 1=1
-		<if test="doctor != null">
-			AND doctor = #{doctor}
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
 		</if>
 	</delete>
 

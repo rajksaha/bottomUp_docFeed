@@ -37,8 +37,8 @@
 		`diseaseID` = #{diseaseID},
 		`isPresent` = #{isPresent},
 		`detail` =#{detail},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE patientPastDiseaseID = #{patientPastDiseaseID}
 	</update>
 
@@ -83,8 +83,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM patient_past_disease
 		WHERE 1=1
-		<if test="patient_past_disease != null">
-			AND patient_past_disease = #{patient_past_disease}
+		<if test="patientPastDiseaseID != null">
+			AND patientPastDiseaseID = #{patientPastDiseaseID}
 		</if>
 	</delete>
 

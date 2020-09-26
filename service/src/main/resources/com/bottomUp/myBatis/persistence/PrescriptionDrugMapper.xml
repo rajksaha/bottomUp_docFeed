@@ -49,8 +49,8 @@
 		`drugWhenID` = #{drugWhenID},
 		`drugAdviceID` = #{drugAdviceID},
 		`presNum` = #{presNum},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE presDrugID = #{presDrugID}
 	</update>
 
@@ -103,8 +103,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM prescription_drug
 		WHERE 1=1
-		<if test="prescription_drug != null">
-			AND prescription_drug = #{prescription_drug}
+		<if test="presDrugID != null">
+			AND presDrugID = #{presDrugID}
 		</if>
 	</delete>
 

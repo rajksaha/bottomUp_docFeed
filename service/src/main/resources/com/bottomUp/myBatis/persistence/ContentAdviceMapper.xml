@@ -4,7 +4,7 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentAdviceMapper">
 
-	<insert id="create" parameterType="contentAdvice " useGeneratedKeys="true" keyProperty="adviceID" >
+	<insert id="create" parameterType="contentAdvice" useGeneratedKeys="true" keyProperty="adviceID" >
 
 		INSERT INTO `content_advice`(
 			`type`,
@@ -37,9 +37,9 @@
 		`lang` = #{lang},
 		`advice` = #{advice},
 		`pdf` =#{pdf},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
-		WHERE appointmentID = #{appointmentID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE adviceID = #{adviceID}
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="contentAdvice">
@@ -74,8 +74,8 @@
 		FROM `content_advice`
 
 		WHERE 1 = 1
-		<if test="appointmentID != null">
-			AND appointmentID = #{appointmentID}
+		<if test="adviceID != null">
+			AND adviceID = #{adviceID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
@@ -86,10 +86,9 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_advice
 		WHERE 1=1
-		<if test="content_advice != null">
-			AND appointmentID = #{appointmentID}
+		<if test="adviceID != null">
+			AND adviceID = #{adviceID}
 		</if>
-		AND content_advice = #{content_advice}
 	</delete>
 
 

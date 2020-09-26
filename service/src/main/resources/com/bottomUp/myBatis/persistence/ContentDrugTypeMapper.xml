@@ -40,8 +40,8 @@
 		`unit` = #{unit},
 		`unitInitial` =#{unitInitial},
 		`optionalUnitInitial` = #{optionalUnitInitial},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE drugTypeID = #{drugTypeID}
 	</update>
 
@@ -88,8 +88,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_drug_type
 		WHERE 1=1
-		<if test="content_drug_type != null">
-			AND content_drug_type = #{content_drug_type}
+		<if test="drugTypeID != null">
+			AND drugTypeID = #{drugTypeID}
 		</if>
 	</delete>
 

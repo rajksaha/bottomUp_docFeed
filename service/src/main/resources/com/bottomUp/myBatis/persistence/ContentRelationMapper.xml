@@ -28,8 +28,8 @@
 		UPDATE `content_relation`
 		SET
 		`relationName` = #{relationName},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE relationID = #{relationID}
 	</update>
 
@@ -69,8 +69,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_relation
 		WHERE 1=1
-		<if test="content_relation != null">
-			AND content_relation = #{content_relation}
+		<if test="relationID != null">
+			AND relationID = #{relationID}
 		</if>
 	</delete>
 

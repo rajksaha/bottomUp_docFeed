@@ -40,9 +40,9 @@
 		`invID` = #{invID},
 		`note` =#{note},
 		`checked` = #{checked},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
-		WHERE appointmentID = #{appointmentID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE templateID = #{templateID}
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="doctorInvDiseaseTemplate">
@@ -88,8 +88,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM doctor_inv_disease_template
 		WHERE 1=1
-		<if test="doctor_inv_disease_template != null">
-			AND doctor_inv_disease_template = #{doctor_inv_disease_template}
+		<if test="templateID != null">
+			AND templateID = #{templateID}
 		</if>
 	</delete>
 

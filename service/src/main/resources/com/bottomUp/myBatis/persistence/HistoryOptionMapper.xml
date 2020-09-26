@@ -28,8 +28,8 @@
 		UPDATE `history_option`
 		SET
 		`optionName` = #{optionName},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE historyID = #{historyID}
 	</update>
 
@@ -68,8 +68,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM history_option
 		WHERE 1=1
-		<if test="history_option != null">
-			AND history_option = #{history_option}
+		<if test="historyID != null">
+			AND historyID = #{historyID}
 		</if>
 	</delete>
 

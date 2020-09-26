@@ -40,8 +40,8 @@
 		`durationNum` = #{durationNum},
 		`durationType` =#{durationType},
 		`detail` = #{detail},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE complainID = #{complainID}
 	</update>
 
@@ -88,8 +88,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM prescription_complain
 		WHERE 1=1
-		<if test="prescription_complain != null">
-			AND prescription_complain = #{prescription_complain}
+		<if test="complainID != null">
+			AND complainID = #{complainID}
 		</if>
 	</delete>
 

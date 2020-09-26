@@ -16,7 +16,7 @@ import java.util.Map;
  */
 
 @Service
-public class DoctorInvDIseaseTemplateService {
+public class DoctorInvDiseaseTemplateService {
 
     @Autowired
     private DoctorInvDiseaseTemplateMapper doctorInvDiseaseTemplateMapper;

@@ -71,8 +71,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM inv_report_date
 		WHERE 1=1
-		<if test="inv_report_date != null">
-			AND inv_report_date = #{inv_report_date}
+		<if test="invReportDateId != null">
+			AND invReportDateId = #{invReportDateId}
 		</if>
 	</delete>
 

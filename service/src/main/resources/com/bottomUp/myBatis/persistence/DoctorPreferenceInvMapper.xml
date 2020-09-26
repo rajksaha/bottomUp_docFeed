@@ -34,8 +34,8 @@
 		`doctorID` = #{doctorID},
 		`invID` = #{invID},
 		`displayOrder` = #{displayOrder},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE invPreferenceID = #{invPreferenceID}
 	</update>
 
@@ -78,8 +78,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM doctor_preference_inv
 		WHERE 1=1
-		<if test="doctor_preference_inv!= null">
-			AND doctor_preference_inv = #{doctor_preference_inv}
+		<if test="invPreferenceID!= null">
+			AND invPreferenceID = #{invPreferenceID}
 		</if>
 	</delete>
 

@@ -39,8 +39,8 @@
 		`dose` = #{dose},
 		`numOfDay` = #{numOfDay},
 		`durationType` =#{durationType},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE drugDoseSettingID = #{drugDoseSettingID}
 	</update>
 
@@ -83,8 +83,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM doctor_drug_dose_setting
 		WHERE 1=1
-		<if test="doctor_drug_dose_setting!= null">
-			AND doctor_drug_dose_setting = #{doctor_drug_dose_setting}
+		<if test="drugDoseSettingID!= null">
+			AND drugDoseSettingID = #{drugDoseSettingID}
 		</if>
 	</delete>
 

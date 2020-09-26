@@ -34,10 +34,12 @@
 		`bangla` = #{bangla},
 		`pdf` = #{pdf},
 		`english` = #{english},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+
 		WHERE dayTypeID = #{dayTypeID}
-	</update>
+
+    </update>
 
 	<select id="getByID" parameterType="long" resultType="contentDayType">
 		SELECT
@@ -79,8 +81,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM content_day_type
 		WHERE 1=1
-		<if test="content_day_type!= null">
-			AND content_day_type = #{content_day_type}
+		<if test="dayTypeID!= null">
+			AND dayTypeID = #{dayTypeID}
 		</if>
 	</delete>
 

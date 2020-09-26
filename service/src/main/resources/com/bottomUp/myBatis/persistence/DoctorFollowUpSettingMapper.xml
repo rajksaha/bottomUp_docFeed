@@ -34,8 +34,8 @@
 		`doctorID` = #{doctorID},
 		`invID` = #{invID},
 		`patientTypeId` = #{patientTypeId},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE followUpSettingID = #{followUpSettingID}
 	</update>
 
@@ -78,8 +78,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM doctor_follow_up_setting
 		WHERE 1=1
-		<if test="doctor_follow_up_setting != null">
-			AND doctor_follow_up_setting = #{doctor_follow_up_setting}
+		<if test="followUpSettingID != null">
+			AND followUpSettingID = #{followUpSettingID}
 		</if>
 	</delete>
 

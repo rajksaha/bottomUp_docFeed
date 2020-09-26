@@ -34,8 +34,8 @@
 		`typeCode` = #{typeCode},
 		`name` = #{name},
 		`shortName` = #{shortName},
-		`updatedBy` = #{doctorID},
-		`updatedOn` = #{doctorID}
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
 		WHERE historyID = #{historyID}
 	</update>
 
@@ -78,8 +78,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM history
 		WHERE 1=1
-		<if test="history != null">
-			AND history = #{history}
+		<if test="historyID != null">
+			AND historyID = #{historyID}
 		</if>
 	</delete>
 
