@@ -37,11 +37,11 @@ public class ContentVitalOptionController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{vitalOptionID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentVitalOptionData getByID(@PathVariable("vitalOptionID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public ContentVitalOptionData getByID(@PathVariable("vitalOptionID") Integer vitalOptionID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentVitalOptionService.getByID(Long.valueOf(companyID));
+        return this.contentVitalOptionService.getByID(Long.valueOf(vitalOptionID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class ContentVitalOptionController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentVitalOptionData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentVitalOptionService.create(data);
+        result.put("data", this.contentVitalOptionService.create(data));
         return result;
     }
 
@@ -58,14 +58,14 @@ public class ContentVitalOptionController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentVitalOptionData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentVitalOptionService.update(data);
+        result.put("data", this.contentVitalOptionService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{vitalOptionID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("vitalOptionID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("vitalOptionID") Integer vitalOptionID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("vitalOptionID", appointmentID);
+        param.put("vitalOptionID", vitalOptionID);
         this.contentVitalOptionService.delete(param);
     }
 }

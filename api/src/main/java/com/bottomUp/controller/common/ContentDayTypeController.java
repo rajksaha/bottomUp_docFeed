@@ -36,11 +36,11 @@ public class ContentDayTypeController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{dayTypeId}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentDayTypeData getByID(@PathVariable("dayTypeId") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public ContentDayTypeData getByID(@PathVariable("dayTypeId") Integer dayTypeId, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentDayTypeService.getByID(Long.valueOf(companyID));
+        return this.contentDayTypeService.getByID(Long.valueOf(dayTypeId));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class ContentDayTypeController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentDayTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentDayTypeService.create(data);
+        result.put("data", this.contentDayTypeService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class ContentDayTypeController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentDayTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentDayTypeService.update(data);
+        result.put("data", this.contentDayTypeService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{dayTypeId}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("dayTypeId") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("dayTypeId") Integer dayTypeID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("dayTypeId", appointmentID);
+        param.put("dayTypeID", dayTypeID);
         this.contentDayTypeService.delete(param);
     }
 }

@@ -22,12 +22,12 @@ public class DoctorDrugDiseaseTemplateService {
     @Autowired
     private DoctorDrugDiseaseTemplateMapper doctorDrugDiseaseTemplateMapper;
 
-    public void create(DoctorDrugDiseaseTemplateData data) throws BottomUpException {
-        doctorDrugDiseaseTemplateMapper.create(data);
+    public DoctorDrugDiseaseTemplateData create(DoctorDrugDiseaseTemplateData data) throws BottomUpException {
+        return this.doctorDrugDiseaseTemplateMapper.create(data);
     }
 
-    public void update(DoctorDrugDiseaseTemplateData data) throws BottomUpException {
-        doctorDrugDiseaseTemplateMapper.update(data);
+    public DoctorDrugDiseaseTemplateData update(DoctorDrugDiseaseTemplateData data) throws BottomUpException {
+        return this.doctorDrugDiseaseTemplateMapper.update(data);
     }
 
     public DoctorDrugDiseaseTemplateData getByID(Long ID)throws BottomUpException {

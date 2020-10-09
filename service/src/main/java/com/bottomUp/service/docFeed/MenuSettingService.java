@@ -19,12 +19,12 @@ public class MenuSettingService {
     @Autowired
     private MenuSettingMapper menuSettingMapper;
 
-    public void create(MenuSettingData data) throws BottomUpException {
-        menuSettingMapper.create(data);
+    public MenuSettingData create(MenuSettingData data) throws BottomUpException {
+        return this.menuSettingMapper.create(data);
     }
 
-    public void update(MenuSettingData data) throws BottomUpException {
-        menuSettingMapper.update(data);
+    public MenuSettingData update(MenuSettingData data) throws BottomUpException {
+        return this.menuSettingMapper.update(data);
     }
 
     public MenuSettingData getByID(Long ID)throws BottomUpException {

@@ -21,16 +21,16 @@ public class InvReportService {
     @Autowired
     private InvReportMapper invReportMapper;
 
-    public void create(InvReportData data) throws BottomUpException {
-        invReportMapper.create(data);
+    public InvReportData create(InvReportData data) throws BottomUpException {
+        return this.invReportMapper.create(data);
     }
 
-    public void update(InvReportData data) throws BottomUpException {
-        invReportMapper.update(data);
+    public InvReportData update(InvReportData data) throws BottomUpException {
+        return this.invReportMapper.update(data);
     }
 
     public InvReportData getByID(Long ID)throws BottomUpException {
-        return this.invReportMapper.getByID(ID);
+       return this.invReportMapper.getByID(ID);
     }
 
     public List<InvReportData> getByParam(Map<String, Object> param) throws BottomUpException {

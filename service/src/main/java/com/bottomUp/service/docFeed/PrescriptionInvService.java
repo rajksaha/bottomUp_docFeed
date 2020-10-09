@@ -21,12 +21,12 @@ public class PrescriptionInvService {
     @Autowired
     private PrescriptionInvMapper PrescriptionInvMapper;
 
-    public void create(PrescriptionInvData data) throws BottomUpException {
-        PrescriptionInvMapper.create(data);
+    public PrescriptionInvData create(PrescriptionInvData data) throws BottomUpException {
+        return this.PrescriptionInvMapper.create(data);
     }
 
-    public void update(PrescriptionInvData  data) throws BottomUpException {
-        PrescriptionInvMapper.update(data);
+    public PrescriptionInvData update(PrescriptionInvData  data) throws BottomUpException {
+        return this.PrescriptionInvMapper.update(data);
     }
 
     public PrescriptionInvData  getByID(Long ID)throws BottomUpException {

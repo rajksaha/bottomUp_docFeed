@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface InvReportMapper {
 
-    public void create(InvReportData data) throws BottomUpException;
+    public InvReportData create(InvReportData data) throws BottomUpException;
 
-    public void update(InvReportData data) throws BottomUpException;
+    public InvReportData update(InvReportData data) throws BottomUpException;
 
     public InvReportData getByID(Long ID) throws BottomUpException;
 

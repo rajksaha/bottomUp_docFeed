@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface ContentWhenTypeMapper {
 
-    public void create(ContentWhenTypeData data) throws BottomUpException;
+    public ContentWhenTypeData create(ContentWhenTypeData data) throws BottomUpException;
 
-    public void update(ContentWhenTypeData  data) throws BottomUpException;
+    public ContentWhenTypeData update(ContentWhenTypeData  data) throws BottomUpException;
 
     public ContentWhenTypeData  getByID(Long ID) throws BottomUpException;
 

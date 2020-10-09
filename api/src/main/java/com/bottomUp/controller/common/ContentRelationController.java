@@ -36,11 +36,11 @@ public class ContentRelationController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{relationID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentRelationData getByID(@PathVariable("relationID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public ContentRelationData getByID(@PathVariable("relationID") Integer relationID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentRelationService.getByID(Long.valueOf(companyID));
+        return this.contentRelationService.getByID(Long.valueOf(relationID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class ContentRelationController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentRelationData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentRelationService.create(data);
+        result.put("data", this.contentRelationService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class ContentRelationController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentRelationData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentRelationService.update(data);
+        result.put("data", this.contentRelationService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{relationID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("relationID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("relationID") Integer relationID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("relationID", appointmentID);
+        param.put("relationID", relationID);
         this.contentRelationService.delete(param);
     }
 }

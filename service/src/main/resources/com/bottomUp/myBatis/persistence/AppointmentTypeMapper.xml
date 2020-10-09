@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="appointmentType" useGeneratedKeys="true" keyProperty="appointmentTypeID" >
 
 		INSERT INTO `appointment_type`(
-			`appointmentTypeID`,
+			`name`,
 			`shortName`,
 			`updatedBy`,
 			`updatedOn`,

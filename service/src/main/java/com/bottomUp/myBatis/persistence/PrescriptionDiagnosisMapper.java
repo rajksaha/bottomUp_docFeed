@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface PrescriptionDiagnosisMapper {
 
-    public void create(PrescriptionDiagnosisData data) throws BottomUpException;
+    public PrescriptionDiagnosisData create(PrescriptionDiagnosisData data) throws BottomUpException;
 
-    public void update(PrescriptionDiagnosisData data) throws BottomUpException;
+    public PrescriptionDiagnosisData update(PrescriptionDiagnosisData data) throws BottomUpException;
 
     public PrescriptionDiagnosisData getByID(Long ID) throws BottomUpException;
 

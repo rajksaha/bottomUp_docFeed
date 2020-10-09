@@ -21,12 +21,12 @@ public class DoctorPreferenceAdviceService {
     @Autowired
     private DoctorPreferenceAdviceMapper doctorPreferenceAdviceMapper;
 
-    public void create(DoctorPreferenceAdviceData data) throws BottomUpException {
-        doctorPreferenceAdviceMapper.create(data);
+    public DoctorPreferenceAdviceData create(DoctorPreferenceAdviceData data) throws BottomUpException {
+        return this.doctorPreferenceAdviceMapper.create(data);
     }
 
-    public void update(DoctorPreferenceAdviceData  data) throws BottomUpException {
-        doctorPreferenceAdviceMapper.update(data);
+    public DoctorPreferenceAdviceData update(DoctorPreferenceAdviceData  data) throws BottomUpException {
+        return this.doctorPreferenceAdviceMapper.update(data);
     }
 
     public DoctorPreferenceAdviceData  getByID(Long ID)throws BottomUpException {

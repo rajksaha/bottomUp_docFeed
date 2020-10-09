@@ -21,12 +21,12 @@ public class PrescriptionDrugDoseService {
     @Autowired
     private PrescriptionDrugDoseMapper prescriptionDrugDoseMapper;
 
-    public void create(PrescriptionDrugDoseData data) throws BottomUpException {
-        prescriptionDrugDoseMapper.create(data);
+    public PrescriptionDrugDoseData create(PrescriptionDrugDoseData data) throws BottomUpException {
+        return this.prescriptionDrugDoseMapper.create(data);
     }
 
-    public void update(PrescriptionDrugDoseData data) throws BottomUpException {
-        prescriptionDrugDoseMapper.update(data);
+    public PrescriptionDrugDoseData update(PrescriptionDrugDoseData data) throws BottomUpException {
+        return this.prescriptionDrugDoseMapper.update(data);
     }
 
     public PrescriptionDrugDoseData getByID(Long ID)throws BottomUpException {

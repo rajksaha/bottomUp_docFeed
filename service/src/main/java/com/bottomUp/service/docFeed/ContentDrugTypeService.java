@@ -21,12 +21,12 @@ public class ContentDrugTypeService {
     @Autowired
     private ContentDrugTypeMapper contentDrugTypeMapper;
 
-    public void create(ContentDrugTypeData data) throws BottomUpException {
-        contentDrugTypeMapper.create(data);
+    public ContentDrugTypeData create(ContentDrugTypeData data) throws BottomUpException {
+        return this. contentDrugTypeMapper.create(data);
     }
 
-    public void update(ContentDrugTypeData data) throws BottomUpException {
-        contentDrugTypeMapper.update(data);
+    public ContentDrugTypeData update(ContentDrugTypeData data) throws BottomUpException {
+        return this. contentDrugTypeMapper.update(data);
     }
 
     public ContentDrugTypeData getByID(Long ID)throws BottomUpException {

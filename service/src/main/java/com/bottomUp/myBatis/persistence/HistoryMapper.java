@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface HistoryMapper {
 
-    public void create(HistoryData data) throws BottomUpException;
+    public HistoryData create(HistoryData data) throws BottomUpException;
 
-    public void update(HistoryData data) throws BottomUpException;
+    public HistoryData update(HistoryData data) throws BottomUpException;
 
     public HistoryData getByID(Long ID) throws BottomUpException;
 

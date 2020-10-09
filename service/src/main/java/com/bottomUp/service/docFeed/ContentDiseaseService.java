@@ -21,12 +21,12 @@ public class ContentDiseaseService {
     @Autowired
     private ContentDiseaseMapper contentDiseaseMapper;
 
-    public void create(ContentDiseaseData data) throws BottomUpException {
-        contentDiseaseMapper.create(data);
+    public ContentDiseaseData create(ContentDiseaseData data) throws BottomUpException {
+        return this.contentDiseaseMapper.create(data);
     }
 
-    public void update(ContentDiseaseData data) throws BottomUpException {
-        contentDiseaseMapper.update(data);
+    public ContentDiseaseData update(ContentDiseaseData data) throws BottomUpException {
+        return this. contentDiseaseMapper.update(data);
     }
 
     public ContentDiseaseData getByID(Long ID)throws BottomUpException {

@@ -48,7 +48,7 @@ public class DoctorDoseDrugDiseaseTemplateController extends BaseController {
     public Map<String, Object> save(@RequestBody DoctorDoseDrugDiseaseTemplateData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.doctorDoseDrugDiseaseTemplateService.create(data);
+        result.put("data", this.doctorDoseDrugDiseaseTemplateService.create(data));
         return result;
     }
 
@@ -57,7 +57,7 @@ public class DoctorDoseDrugDiseaseTemplateController extends BaseController {
     public Map<String, Object> update(@RequestBody DoctorDoseDrugDiseaseTemplateData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.doctorDoseDrugDiseaseTemplateService.update(data);
+        result.put("data", this.doctorDoseDrugDiseaseTemplateService.update(data));
         return result;
     }
 

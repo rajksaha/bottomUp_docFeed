@@ -34,11 +34,11 @@ public class AppointmentController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public AppointmentData getByID(@PathVariable("appointmentID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public AppointmentData getByID(@PathVariable("appointmentID") Integer appointmentID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.appointmentService.getByID(Long.valueOf(companyID));
+        return this.appointmentService.getByID(Long.valueOf(appointmentID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -46,7 +46,7 @@ public class AppointmentController extends BaseController {
     public Map<String, Object> save(@RequestBody AppointmentData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.appointmentService.create(data);
+        result.put("data", this.appointmentService.create(data));
         return result;
     }
 
@@ -55,7 +55,7 @@ public class AppointmentController extends BaseController {
     public Map<String, Object> update(@RequestBody AppointmentData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.appointmentService.update(data);
+        result.put("data", this.appointmentService.update(data));
         return result;
     }
 

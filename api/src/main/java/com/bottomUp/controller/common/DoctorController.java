@@ -34,13 +34,13 @@ public class DoctorController extends BaseController {
         return this.doctorService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/getByID/{appointmentTypeID}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByID/{doctorID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DoctorData getByID(@PathVariable("appointmentTypeID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public DoctorData getByID(@PathVariable("doctorID") Integer doctorID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.doctorService.getByID(Long.valueOf(companyID));
+        return this.doctorService.getByID(Long.valueOf(doctorID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class DoctorController extends BaseController {
     public Map<String, Object> save(@RequestBody DoctorData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.doctorService.create(data);
+        result.put("data", this.doctorService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class DoctorController extends BaseController {
     public Map<String, Object> update(@RequestBody DoctorData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.doctorService.update(data);
+        result.put("data", this.doctorService.update(data));
         return result;
     }
 
-    @RequestMapping(value = "/delete/{appointmentTypeID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("appointmentTypeID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    @RequestMapping(value = "/delete/{doctorID}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("doctorID") Integer doctorID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("appointmentTypeID", appointmentID);
+        param.put("doctorID", doctorID);
         this.doctorService.delete(param);
     }
 }

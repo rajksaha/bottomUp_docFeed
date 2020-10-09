@@ -21,12 +21,12 @@ public class ContentRelationService {
     @Autowired
     private ContentRelationMapper contentRelationMapper;
 
-    public void create(ContentRelationData data) throws BottomUpException {
-        contentRelationMapper.create(data);
+    public ContentRelationData create(ContentRelationData data) throws BottomUpException {
+        return this.contentRelationMapper.create(data);
     }
 
-    public void update(ContentRelationData data) throws BottomUpException {
-        contentRelationMapper.update(data);
+    public ContentRelationData update(ContentRelationData data) throws BottomUpException {
+        return this.contentRelationMapper.update(data);
     }
 
     public ContentRelationData getByID(Long ID)throws BottomUpException {

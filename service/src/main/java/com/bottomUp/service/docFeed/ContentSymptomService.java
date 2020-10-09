@@ -21,12 +21,12 @@ public class ContentSymptomService {
     @Autowired
     private ContentSymptomMapper contentSymptomMapper;
 
-    public void create(ContentSymptomData data) throws BottomUpException {
-        contentSymptomMapper.create(data);
+    public ContentSymptomData create(ContentSymptomData data) throws BottomUpException {
+        return this.contentSymptomMapper.create(data);
     }
 
-    public void update(ContentSymptomData  data) throws BottomUpException {
-        contentSymptomMapper.update(data);
+    public ContentSymptomData update(ContentSymptomData  data) throws BottomUpException {
+        return this.contentSymptomMapper.update(data);
     }
 
     public ContentSymptomData  getByID(Long ID)throws BottomUpException {

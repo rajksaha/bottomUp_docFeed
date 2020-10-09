@@ -21,12 +21,12 @@ public class PrescriptionPastDiseaseService {
     @Autowired
     private PrescriptionPastDiseaseMapper prescriptionPastDiseaseMapper;
 
-    public void create(PrescriptionPastDiseaseData data) throws BottomUpException {
-        prescriptionPastDiseaseMapper.create(data);
+    public PrescriptionPastDiseaseData create(PrescriptionPastDiseaseData data) throws BottomUpException {
+        return this.prescriptionPastDiseaseMapper.create(data);
     }
 
-    public void update(PrescriptionPastDiseaseData data) throws BottomUpException {
-        prescriptionPastDiseaseMapper.update(data);
+    public PrescriptionPastDiseaseData update(PrescriptionPastDiseaseData data) throws BottomUpException {
+        return this.prescriptionPastDiseaseMapper.update(data);
     }
 
     public PrescriptionPastDiseaseData getByID(Long ID)throws BottomUpException {

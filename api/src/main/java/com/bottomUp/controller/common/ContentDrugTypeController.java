@@ -36,11 +36,11 @@ public class ContentDrugTypeController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{drugTypeID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentDrugTypeData getByID(@PathVariable("drugTypeID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public ContentDrugTypeData getByID(@PathVariable("drugTypeID") Integer drugTypeID, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentDrugTypeService.getByID(Long.valueOf(companyID));
+        return this.contentDrugTypeService.getByID(Long.valueOf(drugTypeID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class ContentDrugTypeController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentDrugTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentDrugTypeService.create(data);
+        result.put("data", this.contentDrugTypeService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class ContentDrugTypeController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentDrugTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentDrugTypeService.update(data);
+        result.put("data", this.contentDrugTypeService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{drugTypeID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("drugTypeID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("drugTypeID") Integer drugTypeID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("drugTypeID", appointmentID);
+        param.put("drugTypeID", drugTypeID);
         this.contentDrugTypeService.delete(param);
     }
 }

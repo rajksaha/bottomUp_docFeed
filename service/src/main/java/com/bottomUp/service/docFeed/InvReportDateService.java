@@ -21,12 +21,12 @@ public class InvReportDateService {
     @Autowired
     private InvReportDateMapper invReportDateMapper;
 
-    public void create(InvReportDateData data) throws BottomUpException {
-        invReportDateMapper.create(data);
+    public InvReportDateData create(InvReportDateData data) throws BottomUpException {
+        return this.invReportDateMapper.create(data);
     }
 
-    public void update(InvReportDateData data) throws BottomUpException {
-        invReportDateMapper.update(data);
+    public InvReportDateData update(InvReportDateData data) throws BottomUpException {
+        return this.invReportDateMapper.update(data);
     }
 
     public InvReportDateData getByID(Long ID)throws BottomUpException {

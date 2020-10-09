@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface ContentRelationMapper {
 
-    public void create(ContentRelationData data) throws BottomUpException;
+    public ContentRelationData create(ContentRelationData data) throws BottomUpException;
 
-    public void update(ContentRelationData data) throws BottomUpException;
+    public ContentRelationData update(ContentRelationData data) throws BottomUpException;
 
     public ContentRelationData getByID(Long ID) throws BottomUpException;
 

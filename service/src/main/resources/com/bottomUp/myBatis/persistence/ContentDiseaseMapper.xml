@@ -27,7 +27,7 @@
 	<update id="update" parameterType="contentDisease">
 		UPDATE `content_disease`
 		SET
-		`diseaseName` = #diseaseName},
+		`diseaseName` = #{diseaseName},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE diseaseID = #{diseaseID}

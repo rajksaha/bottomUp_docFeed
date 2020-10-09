@@ -36,11 +36,11 @@ public class FollowUpResultController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{resultID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public FollowUpResultData getByID(@PathVariable("resultID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public FollowUpResultData getByID(@PathVariable("resultID") Integer resultID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.followUpResultService.getByID(Long.valueOf(companyID));
+        return this.followUpResultService.getByID(Long.valueOf(resultID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class FollowUpResultController extends BaseController {
     public Map<String, Object> save(@RequestBody FollowUpResultData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.followUpResultService.create(data);
+        result.put("data", this.followUpResultService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class FollowUpResultController extends BaseController {
     public Map<String, Object> update(@RequestBody FollowUpResultData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.followUpResultService.update(data);
+        result.put("data", this.followUpResultService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{resultID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("resultID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("resultID") Integer resultID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("resultID", appointmentID);
+        param.put("resultID", resultID);
         this.followUpResultService.delete(param);
     }
 }

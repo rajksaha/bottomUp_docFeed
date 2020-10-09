@@ -44,7 +44,7 @@
 
 	<select id="getByID" parameterType="long" resultType="contentDrugAdvice">
 		SELECT
-		     `drugAdviceID`,
+		    `drugAdviceID`,
 			`doctorType`,
 			`bangla`,
 			`english`,

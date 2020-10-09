@@ -45,7 +45,7 @@
 		WHERE drugID = #{drugID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="Appointment">
+	<select id="getByID" parameterType="long" resultType="contentDrug">
 		SELECT
 			`drugID`,
 			`typeID`,
@@ -62,7 +62,7 @@
 		WHERE drugID = #{drugID}
 	</select>
 
-	<select id="getByParam" parameterType="map" resultType="Appointment">
+	<select id="getByParam" parameterType="map" resultType="contentDrug">
 		SELECT
 		`drugID`,
 		`typeID`,

@@ -21,12 +21,12 @@ public class MenuService {
     @Autowired
     private MenuMapper menuMapper;
 
-    public void create(MenuData data) throws BottomUpException {
-        menuMapper.create(data);
+    public MenuData create(MenuData data) throws BottomUpException {
+        return this.menuMapper.create(data);
     }
 
-    public void update(MenuData data) throws BottomUpException {
-        menuMapper.update(data);
+    public MenuData update(MenuData data) throws BottomUpException {
+        return this.menuMapper.update(data);
     }
 
     public MenuData getByID(Long ID)throws BottomUpException {

@@ -21,12 +21,12 @@ public class InvCategoryService {
     @Autowired
     private InvCategoryMapper invCategoryMapper;
 
-    public void create(InvCategoryData data) throws BottomUpException {
-        invCategoryMapper.create(data);
+    public InvCategoryData create(InvCategoryData data) throws BottomUpException {
+        return this.invCategoryMapper.create(data);
     }
 
-    public void update(InvCategoryData data) throws BottomUpException {
-        invCategoryMapper.update(data);
+    public InvCategoryData update(InvCategoryData data) throws BottomUpException {
+        return this.invCategoryMapper.update(data);
     }
 
     public InvCategoryData getByID(Long ID)throws BottomUpException {

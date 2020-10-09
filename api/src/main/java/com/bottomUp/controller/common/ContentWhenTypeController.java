@@ -36,11 +36,11 @@ public class ContentWhenTypeController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{whenTypeID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentWhenTypeData getByID(@PathVariable("whenTypeID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public ContentWhenTypeData getByID(@PathVariable("whenTypeID") Integer whenTypeID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentWhenTypeService.getByID(Long.valueOf(companyID));
+        return this.contentWhenTypeService.getByID(Long.valueOf(whenTypeID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class ContentWhenTypeController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentWhenTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentWhenTypeService.create(data);
+        result.put("data", this.contentWhenTypeService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class ContentWhenTypeController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentWhenTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentWhenTypeService.update(data);
+        result.put("data", this.contentWhenTypeService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{whenTypeID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("whenTypeID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("whenTypeID") Integer whenTypeID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("whenTypeID", appointmentID);
+        param.put("whenTypeID", whenTypeID);
         this.contentWhenTypeService.delete(param);
     }
 }

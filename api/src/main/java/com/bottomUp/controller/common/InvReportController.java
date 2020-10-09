@@ -36,11 +36,11 @@ public class InvReportController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{id}"}, method = RequestMethod.GET)
     @ResponseBody
-    public InvReportData getByID(@PathVariable("id") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public InvReportData getByID(@PathVariable("id") Integer id, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+       // Map<String, Object> params = this.parseParameter(request);
 
-        return this.invReportService.getByID(Long.valueOf(companyID));
+        return this.invReportService.getByID(Long.valueOf(id));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class InvReportController extends BaseController {
     public Map<String, Object> save(@RequestBody InvReportData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.invReportService.create(data);
+        result.put("data", this.invReportService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class InvReportController extends BaseController {
     public Map<String, Object> update(@RequestBody InvReportData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.invReportService.update(data);
+        result.put("data", this.invReportService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("id") Integer id, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("id", appointmentID);
+        param.put("id", id);
         this.invReportService.delete(param);
     }
 }

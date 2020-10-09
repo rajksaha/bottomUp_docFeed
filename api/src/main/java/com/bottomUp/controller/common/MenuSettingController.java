@@ -37,11 +37,11 @@ public class MenuSettingController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{menuSettingID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public MenuSettingData getByID(@PathVariable("menuSettingID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public MenuSettingData getByID(@PathVariable("menuSettingID") Integer menuSettingID, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = this.parseParameter(request);
 
-        return this.menuSettingService.getByID(Long.valueOf(companyID));
+        return this.menuSettingService.getByID(Long.valueOf(menuSettingID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class MenuSettingController extends BaseController {
     public Map<String, Object> save(@RequestBody MenuSettingData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.menuSettingService.create(data);
+        result.put("data",  this.menuSettingService.create(data));
         return result;
     }
 
@@ -58,14 +58,14 @@ public class MenuSettingController extends BaseController {
     public Map<String, Object> update(@RequestBody MenuSettingData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.menuSettingService.update(data);
+        result.put("data",  this.menuSettingService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{menuSettingID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("menuSettingID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("menuSettingID") Integer menuSettingID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("menuSettingID", appointmentID);
+        param.put("menuSettingID", menuSettingID);
         this.menuSettingService.delete(param);
     }
 }

@@ -36,11 +36,11 @@ public class PrescriptionNextVisitController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{  appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public   PrescriptionNextVisitData getByID(@PathVariable("  appointmentID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public   PrescriptionNextVisitData getByID(@PathVariable("  appointmentID") Integer appointmentID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+       // Map<String, Object> params = this.parseParameter(request);
 
-        return this.prescriptionNextVisitService.getByID(Long.valueOf(companyID));
+        return this.prescriptionNextVisitService.getByID(Long.valueOf(appointmentID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class PrescriptionNextVisitController extends BaseController {
     public Map<String, Object> save(@RequestBody   PrescriptionNextVisitData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.prescriptionNextVisitService.create(data);
+        result.put("data", this.prescriptionNextVisitService.create(data));
         return result;
     }
 
@@ -57,7 +57,7 @@ public class PrescriptionNextVisitController extends BaseController {
     public Map<String, Object> update(@RequestBody   PrescriptionNextVisitData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.prescriptionNextVisitService.update(data);
+        result.put("data", this.prescriptionNextVisitService.update(data));
         return result;
     }
 

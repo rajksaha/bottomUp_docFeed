@@ -36,11 +36,11 @@ public class InvReportDateController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{invReportDateId}"}, method = RequestMethod.GET)
     @ResponseBody
-    public InvReportDateData getByID(@PathVariable("invReportDateId") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public InvReportDateData getByID(@PathVariable("invReportDateId") Integer invReportDateId, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.invReportDateService.getByID(Long.valueOf(companyID));
+        return this.invReportDateService.getByID(Long.valueOf(invReportDateId));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class InvReportDateController extends BaseController {
     public Map<String, Object> save(@RequestBody InvReportDateData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.invReportDateService.create(data);
+        result.put("data", this.invReportDateService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class InvReportDateController extends BaseController {
     public Map<String, Object> update(@RequestBody InvReportDateData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.invReportDateService.update(data);
+        result.put("data", this.invReportDateService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{invReportDateId}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("invReportDateId") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("invReportDateId") Integer invReportDateId, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("invReportDateId", appointmentID);
+        param.put("invReportDateId", invReportDateId);
         this.invReportDateService.delete(param);
     }
 }

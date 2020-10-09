@@ -21,12 +21,12 @@ public class PatientFamilyHistoryService {
     @Autowired
     private PatientFamilyHistoryMapper patientFamilyHistoryMapper;
 
-    public void create(PatientFamilyHistoryData data) throws BottomUpException {
-        patientFamilyHistoryMapper.create(data);
+    public PatientFamilyHistoryData create(PatientFamilyHistoryData data) throws BottomUpException {
+        return this.patientFamilyHistoryMapper.create(data);
     }
 
-    public void update(PatientFamilyHistoryData data) throws BottomUpException {
-        patientFamilyHistoryMapper.update(data);
+    public PatientFamilyHistoryData update(PatientFamilyHistoryData data) throws BottomUpException {
+        return this.patientFamilyHistoryMapper.update(data);
     }
 
     public PatientFamilyHistoryData getByID(Long ID)throws BottomUpException {

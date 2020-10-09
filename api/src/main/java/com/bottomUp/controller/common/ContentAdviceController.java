@@ -36,11 +36,11 @@ public class ContentAdviceController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{adviceId}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentAdviceData getByID(@PathVariable("adviceId") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public ContentAdviceData getByID(@PathVariable("adviceId") Integer adviceId, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentAdviceService.getByID(Long.valueOf(companyID));
+        return this.contentAdviceService.getByID(Long.valueOf(adviceId));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class ContentAdviceController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentAdviceData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentAdviceService.create(data);
+        result.put("data", this.contentAdviceService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class ContentAdviceController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentAdviceData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentAdviceService.update(data);
+        result.put("data", this.contentAdviceService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{adviceId}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("adviceId") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("adviceId") Integer adviceID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("adviceId", appointmentID);
+        param.put("adviceID", adviceID);
         this.contentAdviceService.delete(param);
     }
 }

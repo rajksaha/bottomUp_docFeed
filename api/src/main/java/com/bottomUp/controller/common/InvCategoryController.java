@@ -36,11 +36,11 @@ public class InvCategoryController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{invCategoryID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public InvCategoryData getByID(@PathVariable("invCategoryID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public InvCategoryData getByID(@PathVariable("invCategoryID") Integer invCategoryID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        //Map<String, Object> params = this.parseParameter(request);
 
-        return this.invCategoryService.getByID(Long.valueOf(companyID));
+        return this.invCategoryService.getByID(Long.valueOf(invCategoryID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class InvCategoryController extends BaseController {
     public Map<String, Object> save(@RequestBody InvCategoryData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.invCategoryService.create(data);
+        result.put("data",  this.invCategoryService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class InvCategoryController extends BaseController {
     public Map<String, Object> update(@RequestBody InvCategoryData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.invCategoryService.update(data);
+        result.put("data",  this.invCategoryService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{invCategoryID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("invCategoryID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("invCategoryID") Integer invCategoryID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("invCategoryID", appointmentID);
+        param.put("invCategoryID", invCategoryID);
         this.invCategoryService.delete(param);
     }
 }

@@ -36,11 +36,11 @@ public class PatientController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{patientID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public PatientData getByID(@PathVariable("patientID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public PatientData getByID(@PathVariable("patientID") Integer patientID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+       // Map<String, Object> params = this.parseParameter(request);
 
-        return this.patientService.getByID(Long.valueOf(companyID));
+        return this.patientService.getByID(Long.valueOf(patientID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class PatientController extends BaseController {
     public Map<String, Object> save(@RequestBody PatientData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.patientService.create(data);
+        result.put("data", this.patientService.create(data));
         return result;
     }
 
@@ -57,14 +57,14 @@ public class PatientController extends BaseController {
     public Map<String, Object> update(@RequestBody PatientData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.patientService.update(data);
+        result.put("data", this.patientService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{patientID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("patientID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("patientID") Integer patientID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("patientID", appointmentID);
+        param.put("patientID", patientID);
         this.patientService.delete(param);
     }
 }

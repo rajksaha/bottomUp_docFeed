@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public interface AppointmentTypeMapper {
 
-    public void create(AppointmentTypeData data) throws BottomUpException;
+    public AppointmentTypeData create(AppointmentTypeData data) throws BottomUpException;
 
-    public void update(AppointmentTypeData data) throws BottomUpException;
+    public AppointmentTypeData update(AppointmentTypeData data) throws BottomUpException;
 
     public AppointmentTypeData getByID(Long ID) throws BottomUpException;
 

@@ -22,12 +22,12 @@ public class DoctorDrugSettingService {
     @Autowired
     private DoctorDrugSettingMapper doctorDrugSettingMapper;
 
-    public void create(DoctorDrugSettingData data) throws BottomUpException {
-        doctorDrugSettingMapper.create(data);
+    public DoctorDrugSettingData create(DoctorDrugSettingData data) throws BottomUpException {
+        return this.doctorDrugSettingMapper.create(data);
     }
 
-    public void update(DoctorDrugSettingData data) throws BottomUpException {
-        doctorDrugSettingMapper.update(data);
+    public DoctorDrugSettingData update(DoctorDrugSettingData data) throws BottomUpException {
+        return this.doctorDrugSettingMapper.update(data);
     }
 
     public DoctorDrugSettingData getByID(Long ID)throws BottomUpException {

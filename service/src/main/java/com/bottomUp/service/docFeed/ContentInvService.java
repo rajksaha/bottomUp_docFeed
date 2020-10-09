@@ -21,12 +21,12 @@ public class ContentInvService {
     @Autowired
     private ContentInvMapper contentInvMapper;
 
-    public void create(ContentInvData data) throws BottomUpException {
-        contentInvMapper.create(data);
+    public ContentInvData create(ContentInvData data) throws BottomUpException {
+        return this.contentInvMapper.create(data);
     }
 
-    public void update(ContentInvData data) throws BottomUpException {
-        contentInvMapper.update(data);
+    public ContentInvData update(ContentInvData data) throws BottomUpException {
+        return this.contentInvMapper.update(data);
     }
 
     public ContentInvData getByID(Long ID)throws BottomUpException {

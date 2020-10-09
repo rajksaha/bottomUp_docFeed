@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface DoctorPreferenceAdviceMapper {
 
-    public void create(DoctorPreferenceAdviceData data) throws BottomUpException;
+    public DoctorPreferenceAdviceData create(DoctorPreferenceAdviceData data) throws BottomUpException;
 
-    public void update(DoctorPreferenceAdviceData data) throws BottomUpException;
+    public DoctorPreferenceAdviceData update(DoctorPreferenceAdviceData data) throws BottomUpException;
 
     public DoctorPreferenceAdviceData getByID(Long ID) throws BottomUpException;
 

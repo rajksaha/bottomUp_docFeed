@@ -21,12 +21,12 @@ public class PrescriptionNextVisitService {
     @Autowired
     private PrescriptionNextVisitMapper prescriptionNextVisitMapper;
 
-    public void create(PrescriptionNextVisitData data) throws BottomUpException {
-        prescriptionNextVisitMapper.create(data);
+    public PrescriptionNextVisitData create(PrescriptionNextVisitData data) throws BottomUpException {
+        return this.prescriptionNextVisitMapper.create(data);
     }
 
-    public void update(PrescriptionNextVisitData data) throws BottomUpException {
-        prescriptionNextVisitMapper.update(data);
+    public PrescriptionNextVisitData update(PrescriptionNextVisitData data) throws BottomUpException {
+        return this.prescriptionNextVisitMapper.update(data);
     }
 
     public PrescriptionNextVisitData getByID(Long ID)throws BottomUpException {

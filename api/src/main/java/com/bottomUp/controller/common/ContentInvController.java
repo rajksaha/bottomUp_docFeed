@@ -35,11 +35,11 @@ public class ContentInvController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{invId}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentInvData getByID(@PathVariable("invId") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public ContentInvData getByID(@PathVariable("invId") Integer invId, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentInvService.getByID(Long.valueOf(companyID));
+        return this.contentInvService.getByID(Long.valueOf(invId));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -47,7 +47,7 @@ public class ContentInvController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentInvData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentInvService.create(data);
+        result.put("data",  this.contentInvService.create(data));
         return result;
     }
 
@@ -56,14 +56,14 @@ public class ContentInvController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentInvData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.contentInvService.update(data);
+        result.put("data",  this.contentInvService.update(data));
         return result;
     }
 
     @RequestMapping(value = "/delete/{invId}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("invId") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("invId") Integer invId, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("invId", appointmentID);
+        param.put("invId", invId);
         this.contentInvService.delete(param);
     }
 }
