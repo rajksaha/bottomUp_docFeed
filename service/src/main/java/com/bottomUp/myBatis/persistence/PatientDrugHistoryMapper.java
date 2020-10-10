@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface PatientDrugHistoryMapper {
 
-    public PatientDrugHistoryData create(PatientDrugHistoryData data) throws BottomUpException;
+    public void create(PatientDrugHistoryData data) throws BottomUpException;
 
-    public PatientDrugHistoryData update(PatientDrugHistoryData data) throws BottomUpException;
+    public void update(PatientDrugHistoryData data) throws BottomUpException;
 
     public PatientDrugHistoryData getByID(Long ID) throws BottomUpException;
 

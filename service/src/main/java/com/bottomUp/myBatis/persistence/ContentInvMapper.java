@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface ContentInvMapper {
 
-    public ContentInvData create(ContentInvData data) throws BottomUpException;
+    public void create(ContentInvData data) throws BottomUpException;
 
-    public ContentInvData update(ContentInvData data) throws BottomUpException;
+    public void update(ContentInvData data) throws BottomUpException;
 
     public ContentInvData getByID(Long ID) throws BottomUpException;
 

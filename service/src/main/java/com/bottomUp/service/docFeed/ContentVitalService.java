@@ -21,12 +21,12 @@ public class ContentVitalService {
     @Autowired
     private ContentVitalMapper contentVitalMapper;
 
-    public ContentVitalData create(ContentVitalData data) throws BottomUpException {
-        return this.contentVitalMapper.create(data);
+    public void create(ContentVitalData data) throws BottomUpException {
+        contentVitalMapper.create(data);
     }
 
-    public ContentVitalData update(ContentVitalData  data) throws BottomUpException {
-        return this.contentVitalMapper.update(data);
+    public void update(ContentVitalData  data) throws BottomUpException {
+        contentVitalMapper.update(data);
     }
 
     public ContentVitalData  getByID(Long ID)throws BottomUpException {

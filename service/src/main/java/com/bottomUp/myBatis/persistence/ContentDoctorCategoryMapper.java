@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface ContentDoctorCategoryMapper {
 
-    public ContentDoctorCategoryData create(ContentDoctorCategoryData data) throws BottomUpException;
+    public void create(ContentDoctorCategoryData data) throws BottomUpException;
 
-    public ContentDoctorCategoryData update(ContentDoctorCategoryData data) throws BottomUpException;
+    public void update(ContentDoctorCategoryData data) throws BottomUpException;
 
     public ContentDoctorCategoryData getByID(Long ID) throws BottomUpException;
 

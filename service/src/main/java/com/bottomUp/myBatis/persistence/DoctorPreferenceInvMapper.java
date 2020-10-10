@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface DoctorPreferenceInvMapper {
 
-    public DoctorPreferenceInvData create(DoctorPreferenceInvData data) throws BottomUpException;
+    public void create(DoctorPreferenceInvData data) throws BottomUpException;
 
-    public DoctorPreferenceInvData update(DoctorPreferenceInvData data) throws BottomUpException;
+    public void update(DoctorPreferenceInvData data) throws BottomUpException;
 
     public DoctorPreferenceInvData getByID(Long ID) throws BottomUpException;
 

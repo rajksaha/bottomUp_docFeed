@@ -21,12 +21,12 @@ public class FollowUpResultService {
     @Autowired
     private FollowUpResultMapper followUpResultMapper;
 
-    public FollowUpResultData create(FollowUpResultData data) throws BottomUpException {
-        return this.followUpResultMapper.create(data);
+    public void create(FollowUpResultData data) throws BottomUpException {
+        followUpResultMapper.create(data);
     }
 
-    public FollowUpResultData update(FollowUpResultData data) throws BottomUpException {
-        return this.followUpResultMapper.update(data);
+    public void update(FollowUpResultData data) throws BottomUpException {
+        followUpResultMapper.update(data);
     }
 
     public FollowUpResultData getByID(Long ID)throws BottomUpException {

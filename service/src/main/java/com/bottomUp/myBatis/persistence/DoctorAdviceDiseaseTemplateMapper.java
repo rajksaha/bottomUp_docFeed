@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface DoctorAdviceDiseaseTemplateMapper {
 
-    public DoctorAdviceDiseaseTemplateData create(DoctorAdviceDiseaseTemplateData data) throws BottomUpException;
+    public void create(DoctorAdviceDiseaseTemplateData data) throws BottomUpException;
 
-    public DoctorAdviceDiseaseTemplateData update(DoctorAdviceDiseaseTemplateData data) throws BottomUpException;
+    public void update(DoctorAdviceDiseaseTemplateData data) throws BottomUpException;
 
     public DoctorAdviceDiseaseTemplateData  getByID(Long ID) throws BottomUpException;
 

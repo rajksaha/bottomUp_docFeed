@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface PrescriptionNextVisitMapper {
 
-    public PrescriptionNextVisitData create(PrescriptionNextVisitData data) throws BottomUpException;
+    public void create(PrescriptionNextVisitData data) throws BottomUpException;
 
-    public PrescriptionNextVisitData update(PrescriptionNextVisitData data) throws BottomUpException;
+    public void update(PrescriptionNextVisitData data) throws BottomUpException;
 
     public PrescriptionNextVisitData getByID(Long ID) throws BottomUpException;
 

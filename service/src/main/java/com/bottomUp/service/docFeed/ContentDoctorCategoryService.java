@@ -21,12 +21,12 @@ public class ContentDoctorCategoryService {
     @Autowired
     private ContentDoctorCategoryMapper contentDoctorCategoryMapper;
 
-    public ContentDoctorCategoryData create(ContentDoctorCategoryData data) throws BottomUpException {
-        return this.contentDoctorCategoryMapper.create(data);
+    public void create(ContentDoctorCategoryData data) throws BottomUpException {
+        contentDoctorCategoryMapper.create(data);
     }
 
-    public ContentDoctorCategoryData update(ContentDoctorCategoryData data) throws BottomUpException {
-        return this.contentDoctorCategoryMapper.update(data);
+    public void update(ContentDoctorCategoryData data) throws BottomUpException {
+        contentDoctorCategoryMapper.update(data);
     }
 
     public ContentDoctorCategoryData getByID(Long ID)throws BottomUpException {

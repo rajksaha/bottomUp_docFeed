@@ -36,11 +36,11 @@ public class ReferredDoctorController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{  referredDoctorID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public   ReferredDoctorData getByID(@PathVariable("  referredDoctorID") Integer referredDoctorID, HttpServletRequest request) throws BottomUpException {
+    public   ReferredDoctorData getByID(@PathVariable("  referredDoctorID") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
-        //Map<String, Object> params = this.parseParameter(request);
+        Map<String, Object> params = this.parseParameter(request);
 
-        return this.referredDoctorService.getByID(Long.valueOf(referredDoctorID));
+        return this.referredDoctorService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class ReferredDoctorController extends BaseController {
     public Map<String, Object> save(@RequestBody   ReferredDoctorData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.referredDoctorService.create(data));
+        this.referredDoctorService.create(data);
         return result;
     }
 
@@ -57,14 +57,14 @@ public class ReferredDoctorController extends BaseController {
     public Map<String, Object> update(@RequestBody   ReferredDoctorData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.referredDoctorService.update(data));
+        this.referredDoctorService.update(data);
         return result;
     }
 
     @RequestMapping(value = "/delete/{  referredDoctorID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("  referredDoctorID") Integer referredDoctorID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("  referredDoctorID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("  referredDoctorID", referredDoctorID);
+        param.put("  referredDoctorID", appointmentID);
         this.referredDoctorService.delete(param);
     }
 }

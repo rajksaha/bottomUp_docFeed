@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface ContentSymptomMapper {
 
-    public ContentSymptomData create(ContentSymptomData data) throws BottomUpException;
+    public void create(ContentSymptomData data) throws BottomUpException;
 
-    public ContentSymptomData update(ContentSymptomData  data) throws BottomUpException;
+    public void update(ContentSymptomData  data) throws BottomUpException;
 
     public ContentSymptomData  getByID(Long ID) throws BottomUpException;
 

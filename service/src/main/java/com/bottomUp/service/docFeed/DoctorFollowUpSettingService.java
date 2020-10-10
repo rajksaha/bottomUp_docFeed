@@ -21,12 +21,12 @@ public class DoctorFollowUpSettingService {
     @Autowired
     private DoctorFollowUpSettingMapper doctorFollowUpSettingMapper;
 
-    public DoctorFollowUpSettingData create(DoctorFollowUpSettingData data) throws BottomUpException {
-        return this.doctorFollowUpSettingMapper.create(data);
+    public void create(DoctorFollowUpSettingData data) throws BottomUpException {
+        doctorFollowUpSettingMapper.create(data);
     }
 
-    public DoctorFollowUpSettingData update(DoctorFollowUpSettingData data) throws BottomUpException {
-        return this.doctorFollowUpSettingMapper.update(data);
+    public void update(DoctorFollowUpSettingData data) throws BottomUpException {
+        doctorFollowUpSettingMapper.update(data);
     }
 
     public DoctorFollowUpSettingData getByID(Long ID)throws BottomUpException {

@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface InvCategoryMapper {
 
-    public InvCategoryData create(InvCategoryData data) throws BottomUpException;
+    public void create(InvCategoryData data) throws BottomUpException;
 
-    public InvCategoryData update(InvCategoryData data) throws BottomUpException;
+    public void update(InvCategoryData data) throws BottomUpException;
 
     public InvCategoryData getByID(Long ID) throws BottomUpException;
 

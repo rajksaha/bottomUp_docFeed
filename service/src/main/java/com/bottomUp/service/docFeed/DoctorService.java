@@ -8,6 +8,7 @@ import com.bottomUp.myBatis.persistence.DoctorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,8 @@ public class DoctorService {
     @Autowired
     private DoctorMapper doctorMapper;
 
-    public DoctorData create(DoctorData data) throws BottomUpException {
-        return this.doctorMapper.create(data);
+    public void create(DoctorData data) throws BottomUpException {
+        this.doctorMapper.create(data);
     }
 
     public DoctorData update(DoctorData data) throws BottomUpException {
@@ -31,6 +32,16 @@ public class DoctorService {
 
     public DoctorData getByID(Long ID)throws BottomUpException {
         return this.doctorMapper.getByID(ID);
+    }
+
+    public DoctorData getByUser(Long userID)throws BottomUpException {
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("userID", userID);
+        List<DoctorData> doctorDataList = this.doctorMapper.getByParam(param);
+        if(doctorDataList != null && doctorDataList.size() == 0){
+            return doctorDataList.get(0);
+        }
+        return null;
     }
 
     public List<DoctorData> getByParam(Map<String, Object> param) throws BottomUpException {

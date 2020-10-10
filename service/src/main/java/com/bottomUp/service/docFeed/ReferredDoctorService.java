@@ -20,12 +20,12 @@ public class ReferredDoctorService {
     @Autowired
     private ReferredDoctorMapper refferedDoctorMapper;
 
-    public ReferredDoctorData create(ReferredDoctorData data) throws BottomUpException {
-        return this.refferedDoctorMapper.create(data);
+    public void create(ReferredDoctorData data) throws BottomUpException {
+        refferedDoctorMapper.create(data);
     }
 
-    public ReferredDoctorData update(ReferredDoctorData data) throws BottomUpException {
-        return this.refferedDoctorMapper.update(data);
+    public void update(ReferredDoctorData data) throws BottomUpException {
+        refferedDoctorMapper.update(data);
     }
 
     public ReferredDoctorData getByID(Long ID)throws BottomUpException {

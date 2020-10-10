@@ -21,12 +21,12 @@ public class ContentDayTypeService {
     @Autowired
     private ContentDayTypeMapper contentDayTypeMapper;
 
-    public ContentDayTypeData create(ContentDayTypeData data) throws BottomUpException {
-        return this. contentDayTypeMapper.create(data);
+    public void create(ContentDayTypeData data) throws BottomUpException {
+        contentDayTypeMapper.create(data);
     }
 
-    public ContentDayTypeData update(ContentDayTypeData data) throws BottomUpException {
-        return this. contentDayTypeMapper.update(data);
+    public void update(ContentDayTypeData data) throws BottomUpException {
+        contentDayTypeMapper.update(data);
     }
 
     public ContentDayTypeData getByID(Long ID)throws BottomUpException {

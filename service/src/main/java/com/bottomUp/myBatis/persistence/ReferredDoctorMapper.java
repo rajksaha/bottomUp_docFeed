@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface ReferredDoctorMapper {
 
-    public ReferredDoctorData create(ReferredDoctorData data) throws BottomUpException;
+    public void create(ReferredDoctorData data) throws BottomUpException;
 
-    public ReferredDoctorData update(ReferredDoctorData data) throws BottomUpException;
+    public void update(ReferredDoctorData data) throws BottomUpException;
 
     public ReferredDoctorData getByID(Long ID) throws BottomUpException;
 

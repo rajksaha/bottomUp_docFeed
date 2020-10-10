@@ -21,12 +21,12 @@ public class ContentWhenTypeService {
     @Autowired
     private ContentWhenTypeMapper contentWhenTypeMapper;
 
-    public ContentWhenTypeData create(ContentWhenTypeData data) throws BottomUpException {
-        return this.contentWhenTypeMapper.create(data);
+    public void create(ContentWhenTypeData data) throws BottomUpException {
+        contentWhenTypeMapper.create(data);
     }
 
-    public ContentWhenTypeData update(ContentWhenTypeData data) throws BottomUpException {
-        return this.contentWhenTypeMapper.update(data);
+    public void update(ContentWhenTypeData data) throws BottomUpException {
+        contentWhenTypeMapper.update(data);
     }
 
     public ContentWhenTypeData getByID(Long ID)throws BottomUpException {

@@ -21,12 +21,12 @@ public class DoctorPreferenceInvService {
     @Autowired
     private DoctorPreferenceInvMapper doctorPreferenceInvMapper;
 
-    public DoctorPreferenceInvData create(DoctorPreferenceInvData data) throws BottomUpException {
-        return this.doctorPreferenceInvMapper.create(data);
+    public void create(DoctorPreferenceInvData data) throws BottomUpException {
+        doctorPreferenceInvMapper.create(data);
     }
 
-    public DoctorPreferenceInvData update(DoctorPreferenceInvData data) throws BottomUpException {
-        return this.doctorPreferenceInvMapper.update(data);
+    public void update(DoctorPreferenceInvData data) throws BottomUpException {
+        doctorPreferenceInvMapper.update(data);
     }
 
     public DoctorPreferenceInvData getByID(Long ID)throws BottomUpException {

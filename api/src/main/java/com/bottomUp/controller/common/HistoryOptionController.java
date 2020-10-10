@@ -36,11 +36,11 @@ public class HistoryOptionController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{historyID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public HistoryOptionData getByID(@PathVariable("historyID") Integer historyID, HttpServletRequest request) throws BottomUpException {
+    public HistoryOptionData getByID(@PathVariable("historyID") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
-       // Map<String, Object> params = this.parseParameter(request);
+        Map<String, Object> params = this.parseParameter(request);
 
-        return this.historyOptionService.getByID(Long.valueOf(historyID));
+        return this.historyOptionService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class HistoryOptionController extends BaseController {
     public Map<String, Object> save(@RequestBody HistoryOptionData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.historyOptionService.create(data));
+        this.historyOptionService.create(data);
         return result;
     }
 
@@ -57,14 +57,14 @@ public class HistoryOptionController extends BaseController {
     public Map<String, Object> update(@RequestBody HistoryOptionData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.historyOptionService.update(data));
+        this.historyOptionService.update(data);
         return result;
     }
 
     @RequestMapping(value = "/delete/{historyID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("historyID") Integer historyID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("historyID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("historyID", historyID);
+        param.put("historyID", appointmentID);
         this.historyOptionService.delete(param);
     }
 }

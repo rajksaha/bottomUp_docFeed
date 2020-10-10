@@ -21,12 +21,12 @@ public class DoctorDataBackupService {
     @Autowired
     private DoctorDataBackupMapper doctorDataBackupMapper;
 
-    public DoctorDataBackupData create(DoctorDataBackupData data) throws BottomUpException {
-        return this.doctorDataBackupMapper.create(data);
+    public void create(DoctorDataBackupData data) throws BottomUpException {
+        doctorDataBackupMapper.create(data);
     }
 
-    public DoctorDataBackupData update(DoctorDataBackupData data) throws BottomUpException {
-        return this.doctorDataBackupMapper.update(data);
+    public void update(DoctorDataBackupData data) throws BottomUpException {
+        doctorDataBackupMapper.update(data);
     }
 
     public DoctorDataBackupData getByID(Long ID)throws BottomUpException {

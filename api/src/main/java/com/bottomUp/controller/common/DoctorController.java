@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by raj on 8/9/2020.
  */
 @Controller
-@RequestMapping("/Doctor")
+@RequestMapping("/doctor")
 public class DoctorController extends BaseController {
 
     @Autowired
@@ -45,19 +45,21 @@ public class DoctorController extends BaseController {
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> save(@RequestBody DoctorData data) throws BottomUpException {
+    public Map<String, Object> save(@RequestBody DoctorData doctorData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.doctorService.create(data));
+        this.doctorService.create(doctorData);
+        result.put("data", doctorData);
         return result;
     }
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> update(@RequestBody DoctorData data) throws BottomUpException {
+    public Map<String, Object> update(@RequestBody DoctorData doctorData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.doctorService.update(data));
+        this.doctorService.update(doctorData);
+        result.put("doctorData", doctorData);
         return result;
     }
 

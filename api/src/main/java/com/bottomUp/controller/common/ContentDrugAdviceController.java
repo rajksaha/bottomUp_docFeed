@@ -36,11 +36,11 @@ public class ContentDrugAdviceController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{drugAdviceID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentDrugAdviceData getByID(@PathVariable("drugAdviceID") Integer drugAdviceID, HttpServletRequest request) throws BottomUpException {
+    public ContentDrugAdviceData getByID(@PathVariable("drugAdviceID") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentDrugAdviceService.getByID(Long.valueOf(drugAdviceID));
+        return this.contentDrugAdviceService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class ContentDrugAdviceController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentDrugAdviceData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.contentDrugAdviceService.create(data));
+        this.contentDrugAdviceService.create(data);
         return result;
     }
 
@@ -57,7 +57,7 @@ public class ContentDrugAdviceController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentDrugAdviceData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.contentDrugAdviceService.update(data));
+        this.contentDrugAdviceService.update(data);
         return result;
     }
 

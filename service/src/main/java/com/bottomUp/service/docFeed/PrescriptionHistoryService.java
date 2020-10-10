@@ -21,12 +21,12 @@ public class PrescriptionHistoryService {
     @Autowired
     private PrescriptionHistoryMapper prescriptionHistoryMapper;
 
-    public PrescriptionHistoryData create(PrescriptionHistoryData data) throws BottomUpException {
-        return this.prescriptionHistoryMapper.create(data);
+    public void create(PrescriptionHistoryData data) throws BottomUpException {
+        prescriptionHistoryMapper.create(data);
     }
 
-    public PrescriptionHistoryData update(PrescriptionHistoryData data) throws BottomUpException {
-        return this.prescriptionHistoryMapper.update(data);
+    public void update(PrescriptionHistoryData data) throws BottomUpException {
+        prescriptionHistoryMapper.update(data);
     }
 
     public PrescriptionHistoryData getByID(Long ID)throws BottomUpException {

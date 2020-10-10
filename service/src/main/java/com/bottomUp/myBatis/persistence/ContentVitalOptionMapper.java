@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface ContentVitalOptionMapper {
 
-    public ContentVitalOptionData create(ContentVitalOptionData data) throws BottomUpException;
+    public void create(ContentVitalOptionData data) throws BottomUpException;
 
-    public ContentVitalOptionData update(ContentVitalOptionData data) throws BottomUpException;
+    public void update(ContentVitalOptionData data) throws BottomUpException;
 
     public ContentVitalOptionData  getByID(Long ID) throws BottomUpException;
 

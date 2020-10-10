@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface ContentDrugCompanyMapper {
 
-    public ContentDrugCompanyData create(ContentDrugCompanyData data) throws BottomUpException;
+    public void create(ContentDrugCompanyData data) throws BottomUpException;
 
-    public ContentDrugCompanyData update(ContentDrugCompanyData data) throws BottomUpException;
+    public void update(ContentDrugCompanyData data) throws BottomUpException;
 
     public ContentDrugCompanyData getByID(Long ID) throws BottomUpException;
 

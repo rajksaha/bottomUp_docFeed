@@ -21,12 +21,12 @@ public class HistoryService {
     @Autowired
     private HistoryMapper historyMapper;
 
-    public HistoryData create(HistoryData data) throws BottomUpException {
-        return this.historyMapper.create(data);
+    public void create(HistoryData data) throws BottomUpException {
+        historyMapper.create(data);
     }
 
-    public HistoryData update(HistoryData data) throws BottomUpException {
-        return this.historyMapper.update(data);
+    public void update(HistoryData data) throws BottomUpException {
+        historyMapper.update(data);
     }
 
     public HistoryData getByID(Long ID)throws BottomUpException {

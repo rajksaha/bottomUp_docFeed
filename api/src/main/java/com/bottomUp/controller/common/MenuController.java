@@ -37,11 +37,11 @@ public class MenuController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{id}"}, method = RequestMethod.GET)
     @ResponseBody
-    public MenuData getByID(@PathVariable("id") Integer id, HttpServletRequest request) throws BottomUpException {
+    public MenuData getByID(@PathVariable("id") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = this.parseParameter(request);
 
-        return this.menuService.getByID(Long.valueOf(id));
+        return this.menuService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class MenuController extends BaseController {
     public Map<String, Object> save(@RequestBody MenuData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.menuService.create(data));
+        this.menuService.create(data);
         return result;
     }
 
@@ -58,14 +58,14 @@ public class MenuController extends BaseController {
     public Map<String, Object> update(@RequestBody MenuData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.menuService.update(data));
+        this.menuService.update(data);
         return result;
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Integer id, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("id") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("id", id);
+        param.put("id", appointmentID);
         this.menuService.delete(param);
     }
 }

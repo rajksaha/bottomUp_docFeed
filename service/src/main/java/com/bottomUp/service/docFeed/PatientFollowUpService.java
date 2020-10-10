@@ -21,12 +21,12 @@ public class PatientFollowUpService {
     @Autowired
     private PatientFollowUpMapper patientFollowUpMapper;
 
-    public PatientFollowUpData create(PatientFollowUpData data) throws BottomUpException {
-        return this.patientFollowUpMapper.create(data);
+    public void create(PatientFollowUpData data) throws BottomUpException {
+        patientFollowUpMapper.create(data);
     }
 
-    public PatientFollowUpData update(PatientFollowUpData data) throws BottomUpException {
-        return this.patientFollowUpMapper.update(data);
+    public void update(PatientFollowUpData data) throws BottomUpException {
+        patientFollowUpMapper.update(data);
     }
 
     public PatientFollowUpData getByID(Long ID)throws BottomUpException {

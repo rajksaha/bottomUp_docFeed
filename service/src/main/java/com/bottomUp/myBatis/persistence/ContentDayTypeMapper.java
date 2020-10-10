@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public interface ContentDayTypeMapper {
 
-    public ContentDayTypeData create(ContentDayTypeData data) throws BottomUpException;
+    public void create(ContentDayTypeData data) throws BottomUpException;
 
-    public ContentDayTypeData update(ContentDayTypeData data) throws BottomUpException;
+    public void update(ContentDayTypeData data) throws BottomUpException;
 
     public ContentDayTypeData getByID(Long ID) throws BottomUpException;
 

@@ -21,12 +21,12 @@ public class PrescriptionReferenceService {
     @Autowired
     private PrescriptionReferenceMapper prescriptionReferenceMapper;
 
-    public PrescriptionReferenceData create(PrescriptionReferenceData data) throws BottomUpException {
-        return this.prescriptionReferenceMapper.create(data);
+    public void create(PrescriptionReferenceData data) throws BottomUpException {
+        prescriptionReferenceMapper.create(data);
     }
 
-    public PrescriptionReferenceData update(PrescriptionReferenceData data) throws BottomUpException {
-        return this.prescriptionReferenceMapper.update(data);
+    public void update(PrescriptionReferenceData data) throws BottomUpException {
+        prescriptionReferenceMapper.update(data);
     }
 
     public PrescriptionReferenceData getByID(Long ID)throws BottomUpException {

@@ -19,12 +19,12 @@ public class ContentAdviceService {
     @Autowired
     private ContentAdviceMapper contentAdviceMapper;
 
-    public ContentAdviceData create(ContentAdviceData data) throws BottomUpException {
-        return this.contentAdviceMapper .create(data);
+    public void create(ContentAdviceData data) throws BottomUpException {
+        this.contentAdviceMapper .create(data);
     }
 
-    public ContentAdviceData update(ContentAdviceData data) throws BottomUpException {
-        return this.contentAdviceMapper.update(data);
+    public void update(ContentAdviceData data) throws BottomUpException {
+         this.contentAdviceMapper.update(data);
     }
 
     public ContentAdviceData getByID(Long ID)throws BottomUpException {

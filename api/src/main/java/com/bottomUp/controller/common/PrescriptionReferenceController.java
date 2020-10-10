@@ -36,11 +36,11 @@ public class PrescriptionReferenceController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{  prescriptionReferenceID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public   PrescriptionReferenceData getByID(@PathVariable("  prescriptionReferenceID") Integer prescriptionReferenceID, HttpServletRequest request) throws BottomUpException {
+    public   PrescriptionReferenceData getByID(@PathVariable("  prescriptionReferenceID") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
-        //Map<String, Object> params = this.parseParameter(request);
+        Map<String, Object> params = this.parseParameter(request);
 
-        return this.prescriptionReferenceService.getByID(Long.valueOf(prescriptionReferenceID));
+        return this.prescriptionReferenceService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class PrescriptionReferenceController extends BaseController {
     public Map<String, Object> save(@RequestBody   PrescriptionReferenceData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.prescriptionReferenceService.create(data));
+        this.prescriptionReferenceService.create(data);
         return result;
     }
 
@@ -57,14 +57,14 @@ public class PrescriptionReferenceController extends BaseController {
     public Map<String, Object> update(@RequestBody   PrescriptionReferenceData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.prescriptionReferenceService.update(data));
+        this.prescriptionReferenceService.update(data);
         return result;
     }
 
     @RequestMapping(value = "/delete/{  prescriptionReferenceID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("  prescriptionReferenceID") Integer prescriptionReferenceID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("  prescriptionReferenceID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("  prescriptionReferenceID", prescriptionReferenceID);
+        param.put("  prescriptionReferenceID", appointmentID);
         this.prescriptionReferenceService.delete(param);
     }
 }

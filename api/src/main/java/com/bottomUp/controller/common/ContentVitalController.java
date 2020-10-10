@@ -36,11 +36,11 @@ public class ContentVitalController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{vitalID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentVitalData getByID(@PathVariable("vitalID") Integer vitalID, HttpServletRequest request) throws BottomUpException {
+    public ContentVitalData getByID(@PathVariable("vitalID") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
-        //Map<String, Object> params = this.parseParameter(request);
+        Map<String, Object> params = this.parseParameter(request);
 
-        return this.contentVitalService.getByID(Long.valueOf(vitalID));
+        return this.contentVitalService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class ContentVitalController extends BaseController {
     public Map<String, Object> save(@RequestBody ContentVitalData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data",  this.contentVitalService.create(data));
+        this.contentVitalService.create(data);
         return result;
     }
 
@@ -57,14 +57,14 @@ public class ContentVitalController extends BaseController {
     public Map<String, Object> update(@RequestBody ContentVitalData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data",  this.contentVitalService.update(data));
+        this.contentVitalService.update(data);
         return result;
     }
 
     @RequestMapping(value = "/delete/{vitalID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("vitalID") Integer vitalID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("vitalID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("vitalID", vitalID);
+        param.put("vitalID", appointmentID);
         this.contentVitalService.delete(param);
     }
 }

@@ -21,12 +21,12 @@ public class PrescriptionFamilyDiseaseService {
     @Autowired
     private PrescriptionFamilyDiseaseMapper prescriptionFamilyDiseaseMapper;
 
-    public PrescriptionFamilyDiseaseData create(PrescriptionFamilyDiseaseData data) throws BottomUpException {
-        return this.prescriptionFamilyDiseaseMapper.create(data);
+    public void create(PrescriptionFamilyDiseaseData data) throws BottomUpException {
+        prescriptionFamilyDiseaseMapper.create(data);
     }
 
-    public PrescriptionFamilyDiseaseData update(PrescriptionFamilyDiseaseData data) throws BottomUpException {
-        return this.prescriptionFamilyDiseaseMapper.update(data);
+    public void update(PrescriptionFamilyDiseaseData data) throws BottomUpException {
+        prescriptionFamilyDiseaseMapper.update(data);
     }
 
     public PrescriptionFamilyDiseaseData getByID(Long ID)throws BottomUpException {

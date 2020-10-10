@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface MenuSettingMapper {
 
-    public MenuSettingData create(MenuSettingData data) throws BottomUpException;
+    public void create(MenuSettingData data) throws BottomUpException;
 
-    public MenuSettingData update(MenuSettingData data) throws BottomUpException;
+    public void update(MenuSettingData data) throws BottomUpException;
 
     public MenuSettingData getByID(Long ID) throws BottomUpException;
 

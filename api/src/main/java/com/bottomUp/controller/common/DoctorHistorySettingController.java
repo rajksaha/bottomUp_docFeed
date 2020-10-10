@@ -36,11 +36,11 @@ public class DoctorHistorySettingController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{historySettingID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DoctorHistorySettingData getByID(@PathVariable("historySettingID") Integer historySettingID, HttpServletRequest request) throws BottomUpException {
+    public DoctorHistorySettingData getByID(@PathVariable("historySettingID") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
-        //Map<String, Object> params = this.parseParameter(request);
+        Map<String, Object> params = this.parseParameter(request);
 
-        return this.doctorHistorySettingService.getByID(Long.valueOf(historySettingID));
+        return this.doctorHistorySettingService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class DoctorHistorySettingController extends BaseController {
     public Map<String, Object> save(@RequestBody DoctorHistorySettingData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.doctorHistorySettingService.create(data));
+        this.doctorHistorySettingService.create(data);
         return result;
     }
 
@@ -57,7 +57,7 @@ public class DoctorHistorySettingController extends BaseController {
     public Map<String, Object> update(@RequestBody DoctorHistorySettingData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.doctorHistorySettingService.update(data));
+        this.doctorHistorySettingService.update(data);
         return result;
     }
 

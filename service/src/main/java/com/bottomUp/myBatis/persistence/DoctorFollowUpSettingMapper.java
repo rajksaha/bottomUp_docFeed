@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public interface DoctorFollowUpSettingMapper {
 
-    public DoctorFollowUpSettingData create(DoctorFollowUpSettingData data) throws BottomUpException;
+    public void create(DoctorFollowUpSettingData data) throws BottomUpException;
 
-    public DoctorFollowUpSettingData update(DoctorFollowUpSettingData data) throws BottomUpException;
+    public void update(DoctorFollowUpSettingData data) throws BottomUpException;
 
     public DoctorFollowUpSettingData getByID(Long ID) throws BottomUpException;
 
