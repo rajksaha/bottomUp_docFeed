@@ -59,7 +59,7 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 					}
 		        });
 			}else{
-				alert("Please call admistrator to add Bangla Advice");
+				alert("Please call administrator to add Bangla Advice");
 			}
 			
 			
