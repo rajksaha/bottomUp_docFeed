@@ -2,6 +2,7 @@ package com.bottomUp.security;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.BottomUpUserDetail;
+import com.bottomUp.domain.DoctorData;
 import com.bottomUp.domain.common.CompanyData;
 import com.bottomUp.domain.common.user.GroupPermissionData;
 import com.bottomUp.domain.common.user.UserData;
@@ -10,6 +11,7 @@ import com.bottomUp.domain.common.user.UserProfilePermissionData;
 import com.bottomUp.service.common.CompanyService;
 import com.bottomUp.service.common.user.UserPermissionService;
 import com.bottomUp.service.common.user.UserService;
+import com.bottomUp.service.docFeed.DoctorService;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class BottomUpUserDetailsService implements org.springframework.security.
 
     @Autowired
     private UserPermissionService userPermissionService;
+
+    @Autowired
+    private DoctorService doctorService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -106,8 +111,10 @@ public class BottomUpUserDetailsService implements org.springframework.security.
                 param.put("companyID", userData.getCompanyID());
                 CompanyData companyData = companyService.getByID(userData.getCompanyID());
 
-                //companyData.setGlobalRuleData(this.companyGlobalRuleService.getGlobalRuleByCompanyID(userData.getCompanyID()));
-
+                DoctorData doctorData = doctorService.getByUser(userData.getUserID());
+                if(doctorData != null){
+                    echoUserDetail.setDoctorData(doctorData);
+                }
                 echoUserDetail.setCompanyData(companyData);
             }
 

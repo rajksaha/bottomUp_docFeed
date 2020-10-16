@@ -1,12 +1,14 @@
 package com.bottomUp.controller;
 
 import com.bottomUp.domain.BottomUpUserDetail;
+import com.bottomUp.utility.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +24,10 @@ public class BaseController {
 
     public BottomUpUserDetail getUserDetail() {
         return (BottomUpUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    public Date getCurrentDate(){
+        return DateUtil.getDateOnly(new Date());
     }
 
     public Map<String, Object> parseParameter(HttpServletRequest request) {

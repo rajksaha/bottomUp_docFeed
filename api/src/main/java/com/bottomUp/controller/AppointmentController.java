@@ -3,12 +3,14 @@ package com.bottomUp.controller;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.AppointmentData;
 import com.bottomUp.service.docFeed.AppointmentService;
+import com.bottomUp.utility.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,28 +27,27 @@ public class AppointmentController extends BaseController {
 
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<AppointmentData> getAll(HttpServletRequest request) throws BottomUpException {
+    public List<AppointmentData> getByParam(HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
-
+        params.put("date", DateUtil.getDateOnly(new Date()));
+        params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
         return this.appointmentService.getByParam(params);
     }
 
     @RequestMapping(value = {"/getByID/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public AppointmentData getByID(@PathVariable("appointmentID") Integer appointmentID, HttpServletRequest request) throws BottomUpException {
-
-        //Map<String, Object> params = this.parseParameter(request);
-
-        return this.appointmentService.getByID(Long.valueOf(appointmentID));
+    public AppointmentData getByID(@PathVariable("appointmentID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+        return this.appointmentService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody AppointmentData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
+        this.appointmentService.create(data);
         result.put("success", true);
-        result.put("data", this.appointmentService.create(data));
+        result.put("appointmentData", data);
         return result;
     }
 
@@ -55,7 +56,8 @@ public class AppointmentController extends BaseController {
     public Map<String, Object> update(@RequestBody AppointmentData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.appointmentService.update(data));
+        this.appointmentService.update(data);
+        result.put("appointmentData", data);
         return result;
     }
 

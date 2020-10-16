@@ -1,4 +1,4 @@
-app.controller('AppointmentController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter) {
+app.controller('AppointmentController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, AppointmentService) {
 	
 	$scope.numberOfAppointment = 0;
  	$scope.limit = 10;
@@ -40,16 +40,13 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
 
         dataString = "query=0";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.doctorData = result;
-        	$rootScope.doctorData = $scope.doctorData;
-        }, function(error){
-        	$location.path("/login");
+        AppointmentService.getDoctorData.query({}, dataString).$promise.then(function(result) {
+            if(result.length == 0){
+                $scope.doctorData = result;
+                $rootScope.doctorData = $scope.doctorData;
+            }else{
+                $location.path("/login");
+            }
         });
     };
 
@@ -166,16 +163,13 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     	
     	var  dataString='filteredDate='+  filteredDate +'&query='+1;
 
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.appointmentList = result;
-        	$scope.numberOfAppointment = $scope.appointmentList.length;
-        }, function(error){
-            $location.path("/login");
+        AppointmentService.getByParam.query({}, {}).$promise.then(function(result) {
+            if(result.length == 0){
+                $scope.appointmentList = result;
+                $scope.numberOfAppointment = $scope.appointmentList.length;
+            }else{
+                $location.path("/login");
+            }
         });
     };
     
@@ -184,16 +178,14 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     	var addAppointAdderData = {};
     		addAppointAdderData.doctorCode = $scope.doctorData.doctorCode;
     		addAppointAdderData.personCodeInitial = $scope.doctorData.personCodeInitial;
-    		
+
     	var modalInstance = $modal.open({
             templateUrl: 'javascript/templates/appointment/addNewPatient.html',
             windowClass: 'fade in',
             controller: 'AppointmentController.AddNewPatientController',
             resolve: {
-            	data: function () {
-                    return {
-                    	addAppointAdderData
-                    };
+                modalConfig: function () {
+                    return addAppointAdderData;
                 }
             },
             backdrop: 'static'
@@ -407,7 +399,7 @@ app.controller('AppointmentController.InformationModalController', function($sco
 	
 });
 
-app.controller('AppointmentController.AddNewPatientController', function($scope, $modalInstance, data, $http) {
+app.controller('AppointmentController.AddNewPatientController', function($scope, $modalInstance, data, AppointmentService) {
 	
 	$scope.patientData = {};
 	$scope.error = false;
@@ -422,7 +414,7 @@ app.controller('AppointmentController.AddNewPatientController', function($scope,
 		
 		if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
 			var dataString = 'doctorCode='+ data.addAppointAdderData.doctorCode +
-                '&dotorPatInitial='+ data.addAppointAdderData.personCodeInitial +
+                '&doctorPatInitial='+ data.addAppointAdderData.personCodeInitial +
                 '&doctorID='+ $scope.doctorData.doctorID +
 			    '&name='+ $scope.patientData.name +
                 '&age='+ $scope.patientData.age +
@@ -437,14 +429,12 @@ app.controller('AppointmentController.AddNewPatientController', function($scope,
                 '&headOfUnit='+ $scope.patientData.headOfUnit +
                 '&query=2';
 
-	        $http({
-	            method: 'POST',
-	            url: "phpServices/appointment/appointmentHelper.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	$modalInstance.close(result);
-	        });
+
+            AppointmentService.create.save({}, dataString ).$promise.then(function(result) {
+                if(result && result.success) {
+                    $modalInstance.close(result);
+                }
+            });
 		}else{
 			$scope.error = true;
 		}

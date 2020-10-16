@@ -70,7 +70,7 @@ app.controller('ChangePasswordModal', function($scope, $modalInstance, $timeout,
                 }
             });
         }
-    }
+    };
     $scope.cancel = function (){
         $modalInstance.dismiss('cancel');
     };

@@ -20,6 +20,12 @@ public class BottomUpUserDetail extends User {
 
     private CompanyData companyData;
 
+    private DoctorData doctorData;
+
+    private PatientData patientData;
+
+    private Long appointmentID;
+
     public UserProfilePermissionData getUserProfilePermissionData() {
         return userProfilePermissionData;
     }
@@ -34,5 +40,29 @@ public class BottomUpUserDetail extends User {
 
     public void setCompanyData(CompanyData companyData) {
         this.companyData = companyData;
+    }
+
+    public Long getAppointmentID() {
+        return appointmentID;
+    }
+
+    public void setAppointmentID(Long appointmentID) {
+        this.appointmentID = appointmentID;
+    }
+
+    public DoctorData getDoctorData() {
+        return doctorData;
+    }
+
+    public void setDoctorData(DoctorData doctorData) {
+        this.doctorData = doctorData;
+    }
+
+    public PatientData getPatientData() {
+        return patientData;
+    }
+
+    public void setPatientData(PatientData patientData) {
+        this.patientData = patientData;
     }
 }

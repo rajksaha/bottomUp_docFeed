@@ -26,8 +26,8 @@ public class DoctorService {
         this.doctorMapper.create(data);
     }
 
-    public DoctorData update(DoctorData data) throws BottomUpException {
-        return this.doctorMapper.update(data);
+    public void update(DoctorData data) throws BottomUpException {
+        this.doctorMapper.update(data);
     }
 
     public DoctorData getByID(Long ID)throws BottomUpException {

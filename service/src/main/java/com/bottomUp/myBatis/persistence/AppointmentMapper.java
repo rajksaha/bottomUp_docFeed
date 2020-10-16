@@ -12,13 +12,13 @@ import java.util.Map;
  */
 public interface AppointmentMapper {
 
-    public AppointmentData create(AppointmentData data) throws BottomUpException;
+    void create(AppointmentData data) throws BottomUpException;
 
-    public AppointmentData update(AppointmentData data) throws BottomUpException;
+    void update(AppointmentData data) throws BottomUpException;
 
-    public AppointmentData getByID(Long ID) throws BottomUpException;
+    AppointmentData getByID(Long ID) throws BottomUpException;
 
-    public List<AppointmentData> getByParam(Map<String, Object> param) throws BottomUpException;
+    List<AppointmentData> getByParam(Map<String, Object> param) throws BottomUpException;
 
-    public void delete(Map<String, Object> param) throws BottomUpException;
+    void delete(Map<String, Object> param) throws BottomUpException;
 }

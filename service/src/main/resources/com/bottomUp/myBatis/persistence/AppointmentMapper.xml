@@ -6,27 +6,25 @@
 
 	<insert id="create" parameterType="Appointment" useGeneratedKeys="true" keyProperty="appointmentID" >
 
-		INSERT INTO `appointment`(
-			`doctorCode`,
-			`patientCode`,
+		INSERT INTO `doctor_feed`.`appointment`(
+			`doctorID`,
+			`patientID`,
 			`date`,
 			`time`,
 			`status`,
 			`appointmentType`,
-			`addedBy`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
 			`createdOn`
 		)
 		VALUES(
-			#{doctorCode},
-			#{patientCode},
+			#{doctorID},
+			#{patientID},
 			#{date},
 			#{time},
 			#{status},
 			#{appointmentType},
-			#{addedBy},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -37,15 +35,14 @@
 	</insert>
 	
 	<update id="update" parameterType="Appointment">
-		UPDATE `appointment`
+		UPDATE `doctor_feed`.`appointment`
 		SET
-		`doctorCode` = #{doctorCode},
-		`patientCode` = #{patientCode},
+		`doctorID` = #{doctorID},
+		`patientID` = #{patientID},
 		`date` = #{date},
 		`time` =#{time},
 		`status` = #{status},
 		`appointmentType` = #{appointmentType},
-		`addedBy` = #{addedBy},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE appointmentID = #{appointmentID}
@@ -54,13 +51,12 @@
 	<select id="getByID" parameterType="long" resultType="Appointment">
 		SELECT
 			`appointmentID`,
-			`doctorCode`,
-			`patientCode`,
+			`doctorID`,
+			`patientID`,
 			`date`,
 			`time`,
 			`status`,
 			`appointmentType`,
-			`addedBy`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -73,13 +69,12 @@
 	<select id="getByParam" parameterType="map" resultType="Appointment">
 		SELECT
 		`appointmentID`,
-		`doctorCode`,
-		`patientCode`,
+		`doctorID`,
+		`patientID`,
 		`date`,
 		`time`,
 		`status`,
 		`appointmentType`,
-		`addedBy`,
 		`updatedBy`,
 		`updatedOn`,
 		`createdBy`,
@@ -89,6 +84,15 @@
 		<if test="appointmentID != null">
 			AND appointmentID = #{appointmentID}
 		</if>
+		<if test="patientID != null">
+			AND patientID = #{patientID}
+		</if>
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
+		</if>
+		<if test="date != null">
+			AND date = #{date}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}
@@ -96,7 +100,7 @@
 	</select>
 
     <delete id="delete" parameterType="map">
-		DELETE  FROM appointment
+		DELETE  FROM `doctor_feed`.appointment
 		WHERE 1=1
 		<if test="appointmentID != null">
 			AND appointmentID = #{appointmentID}

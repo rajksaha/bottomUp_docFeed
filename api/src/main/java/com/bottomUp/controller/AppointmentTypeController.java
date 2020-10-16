@@ -47,7 +47,8 @@ public class AppointmentTypeController extends BaseController {
     public Map<String, Object> save(@RequestBody AppointmentTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.appointmentTypeService.create(data));
+        this.appointmentTypeService.create(data);
+        result.put("data", data);
         return result;
     }
 
@@ -56,7 +57,8 @@ public class AppointmentTypeController extends BaseController {
     public Map<String, Object> update(@RequestBody AppointmentTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        result.put("data", this.appointmentTypeService.update(data));
+        this.appointmentTypeService.update(data);
+        result.put("data", data);
         return result;
     }
 

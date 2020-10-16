@@ -19,12 +19,12 @@ public class AppointmentTypeService {
     @Autowired
     private AppointmentTypeMapper appointmentTypeMapper;
 
-    public AppointmentTypeData create(AppointmentTypeData data) throws BottomUpException {
-        return this.appointmentTypeMapper.create(data);
+    public void create(AppointmentTypeData data) throws BottomUpException {
+        this.appointmentTypeMapper.create(data);
     }
 
-    public AppointmentTypeData update(AppointmentTypeData data) throws BottomUpException {
-        return this.appointmentTypeMapper.update(data);
+    public void update(AppointmentTypeData data) throws BottomUpException {
+        this.appointmentTypeMapper.update(data);
     }
 
     public AppointmentTypeData getByID(Long ID)throws BottomUpException {
