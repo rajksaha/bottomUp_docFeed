@@ -25,17 +25,14 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
 
         var dataString = "query=2";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/admin/adminModuleService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.userAccessInfo = result;
-            $rootScope.userAccessInfo = $scope.userAccessInfo;
-            $scope.initiateDashboard();
-        }, function(error){
-            $location.path("/login");
+        AppointmentService.getAccessInfo.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.userAccessInfo = result;
+                $rootScope.userAccessInfo = $scope.userAccessInfo;
+                $scope.initiateDashboard();
+            }else{
+                $location.path("/login");  
+            }
         });
 
         dataString = "query=0";
@@ -78,53 +75,46 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
 
         var dataString = "query=0";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/dashboard/dashboardHelperService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            var chart = new CanvasJS.Chart("chartContainer1", {
-                title: {
-                    text: "Daily Patient History"
-                },
-                data: [{
-                    type: "pie",
-                    startAngle: 45,
-                    showInLegend: "true",
-                    legendText: "{label}",
-                    indexLabel: "{label} ({y})",
-                    dataPoints: [
-                        { label: "Old Patient", y: result.oldPatient },
-                        { label: "New Patient", y: result.newPatient },
-                        { label: "Report", y: result.report },
-                        { label: "Free", y: result.freePatient },
-                        { label: "Relative", y: result.relative }
-                    ]
-                }]
-            });
-            chart.render();
-
-            var chart2 = new CanvasJS.Chart("chartContainer2", {
-                title: {
-                    text: "By Gender"
-                },
-                data: [{
-                    type: "column",
-                    dataPoints: [
-                        { label: "Male",  y: result.male  },
-                        { label: "Female", y: result.feMale  }
-                    ]
-                }]
-            });
-            chart2.render();
-
-        }, function(error){
-            $location.path("/login");
+        AppointmentService.getAppoinmentType.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                var chart = new CanvasJS.Chart("chartContainer1", {
+                    title: {
+                        text: "Daily Patient History"
+                    },
+                    data: [{
+                        type: "pie",
+                        startAngle: 45,
+                        showInLegend: "true",
+                        legendText: "{label}",
+                        indexLabel: "{label} ({y})",
+                        dataPoints: [
+                            { label: "Old Patient", y: result.oldPatient },
+                            { label: "New Patient", y: result.newPatient },
+                            { label: "Report", y: result.report },
+                            { label: "Free", y: result.freePatient },
+                            { label: "Relative", y: result.relative }
+                        ]
+                    }]
+                });
+                chart.render();
+    
+                var chart2 = new CanvasJS.Chart("chartContainer2", {
+                    title: {
+                        text: "By Gender"
+                    },
+                    data: [{
+                        type: "column",
+                        dataPoints: [
+                            { label: "Male",  y: result.male  },
+                            { label: "Female", y: result.feMale  }
+                        ]
+                    }]
+                });
+                chart2.render();
+            }else{
+                $location.path("/login");  
+            }
         });
-
-
-
     };
 
     $scope.hasAccess = function(accessKey){
@@ -220,15 +210,13 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     	
 
         var  dataString = 'patientCode='+ appointMentData.patientCode  +'&patientID='+ appointMentData.patientID +'&appointmentID='+ appointMentData.appointmentID +'&query='+4;
-        
 
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$location.path("/prescription");
+        AppointmentService.makePrescription.query({}, $scope.dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $location.path("/prescription");
+            }else{
+    
+            }
         });
     };
     
@@ -238,7 +226,7 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
         
         return $http({
             method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
+            url: "rest/autoComplete/appointment",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -270,7 +258,7 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
           
           return $http({
               method: 'POST',
-              url: "phpServices/appointment/appointmentHelper.php",
+              url: "rest/autoComplete/appointment",
               data: dataString,
               headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           }).then(function(result) {
@@ -290,7 +278,7 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
             
             return $http({
                 method: 'POST',
-                url: "phpServices/appointment/appointmentHelper.php",
+                url: "rest/autoComplete/appointment",
                 data: dataString,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function(result) {
@@ -324,50 +312,44 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
      	
     	 
     	 var  dataString='doctorCode='+ $scope.doctorData.doctorCode +'&patientCode='+  $scope.addAppointMentData.patientCode +'&doctorID='+ $scope.doctorData.doctorID +'&query='+3 + '&filteredDate='+  filteredDate;
-         
-          $http({
-             method: 'POST',
-             url: "phpServices/appointment/appointmentHelper.php",
-             data: dataString,
-             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-         }).then(function(result) {
-        	 $scope.addByCode = false;
-        	 $scope.addByName = false;
-        	 $scope.addByID = false;
-        	 $scope.patientCode = "";
-        	 $scope.patientName = "";
-        	 $scope.patientPhone = "";
-        	 $scope.bringAppointment();
-        	 $scope.initiateDashboard();
+
+         AppointmentService.createAppointment.query({}, dataString).$promise.then(function (result) {
+             if (result && result.success) {
+                 $scope.addByCode = false;
+                 $scope.addByName = false;
+                 $scope.addByID = false;
+                 $scope.patientCode = "";
+                 $scope.patientName = "";
+                 $scope.patientPhone = "";
+                 $scope.bringAppointment();
+                 $scope.initiateDashboard();
+             } else {
+             }
          });
      };
      
      $scope.removeFromAppointment = function(appointmentID){
     	 
     	 var  dataString='appointmentID='+  appointmentID +'&query='+9;
-         
-    	 $http({
-             method: 'POST',
-             url: "phpServices/appointment/appointmentHelper.php",
-             data: dataString,
-             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-         }).success(function (result) {
-        	 $scope.bringAppointment();
-         });
+
+         AppointmentService.deleteAppointment.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.bringAppointment();
+            } else {
+            }
+        });
      };
      
      $scope.removeFromAppointmentList = function(appointmentID){
     	 
     	 var  dataString='appointmentID='+  appointmentID +'&query='+10;
-         
-    	 $http({
-             method: 'POST',
-             url: "phpServices/appointment/appointmentHelper.php",
-             data: dataString,
-             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-         }).success(function (result) {
-        	 $scope.bringAppointment();
-         });
+
+         AppointmentService.updateAppointment.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.bringAppointment();
+            } else {
+            }
+        });
      };
     
 

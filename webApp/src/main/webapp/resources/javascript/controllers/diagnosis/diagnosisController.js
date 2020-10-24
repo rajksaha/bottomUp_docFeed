@@ -1,4 +1,4 @@
-app.controller('PrescribeDiagnosisController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter) {
+app.controller('PrescribeDiagnosisController', function($scope, $modal, $rootScope, limitToFilter, $location, $filter, DiagnosisService) {
 	
 	
 	$scope.diagnosisData = {};
@@ -17,36 +17,29 @@ app.controller('PrescribeDiagnosisController', function($scope, $http, $modal, $
 			dataString = "query=" + 2 + '&diagnosisName=' + $('.diagnosisAdderName').val() + '&note=' + $scope.diagnosisNote;
 		}
 		
-
-        $http({
-            method: 'POST',
-            url: "phpServices/diagnosis/diagnosis.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	
-        	$location.path("/prescription");
-        });
+		DiagnosisService.createorupdateDiagnosis.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$location.path("/prescription");
+			} else {
+			}
+		});
 	};
 	
 	$scope.bringDiagnosisData = function(){
 		
 		var dataString = "query=1";
+		
+		DiagnosisService.getDiagnosisData.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.diagnosisData = result;
+				if ($scope.diagnosisData.id) {
+					$scope.diagnosisName = $scope.diagnosisData.diseaseName;
+					$scope.diagnosisNote = $scope.diagnosisData.note;
+				}
+			} else {
 
-        $http({
-            method: 'POST',
-            url: "phpServices/diagnosis/diagnosis.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.diagnosisData = result;
-        	if($scope.diagnosisData.id){
-        		$scope.diagnosisName = $scope.diagnosisData.diseaseName;
-            	$scope.diagnosisNote = $scope.diagnosisData.note;
-        	}
-        	
-        	
-        });
+			}
+		});
 	};
 	
 	

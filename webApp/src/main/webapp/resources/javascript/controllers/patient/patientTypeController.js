@@ -1,4 +1,4 @@
-app.controller('PatientTypeController', function($scope, $http, $modalInstance, limitToFilter, $filter, record) {
+app.controller('PatientTypeController', function($scope, $http, $modalInstance, limitToFilter, $filter, record, PatientTypeService) {
     $scope.patientTypeList = record.data.patientTypeList;
     $scope.globalAdd = true;
     $scope.doctorTypeId = record.data.doctorTypeId;
@@ -21,32 +21,31 @@ app.controller('PatientTypeController', function($scope, $http, $modalInstance, 
             query = 2;
         }
         var dataString = "query="+ query + '&doctorType=' + $scope.doctorTypeId + "&name=" + patientType.typeName + "&id=" + patientType.id;
-        $http({
-            method: 'POST',
-            url: "phpServices/patient/patientTypeService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            patientType.editMode = false;
-            if(!patientType.id){
-                patientType.id = result;
-            }
-            $scope.globalAdd = true;
-            $scope.error = false;
+        
+        PatientTypeService.createAndupdatePatientType.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                patientType.editMode = false;
+                if (!patientType.id) {
+                    patientType.id = result;
+                }
+                $scope.globalAdd = true;
+                $scope.error = false;
+            } else {
 
+            }
         });
     };
 
     $scope.deletePatientType = function (patientTypeId, index) {
 
         var dataString = "query="+ 3  +"&id=" + patientTypeId;
-        $http({
-            method: 'POST',
-            url: "phpServices/patient/patientTypeService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.patientTypeList.splice(index, 1);
+        
+        PatientTypeService.delPatientType.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.patientTypeList.splice(index, 1);
+            } else {
+
+            }
         });
     };
 

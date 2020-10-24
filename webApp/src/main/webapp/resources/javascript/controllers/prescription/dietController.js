@@ -1,4 +1,4 @@
-app.controller('PrescriptionController.PrescribeDietController', function($scope, $http, $modalInstance, limitToFilter, $filter, record) {
+app.controller('PrescriptionController.PrescribeDietController', function($scope, $http, $modalInstance, limitToFilter, $filter, record, DietService) {
 
     $scope.dietData = {};
 
@@ -24,14 +24,12 @@ app.controller('PrescriptionController.PrescribeDietController', function($scope
                 dataString = "query=" + 2 + '&dietName=' + $scope.dietData.dietName;
             }
 
-            $http({
-                method: 'POST',
-                url: "phpServices/diet/dietHelper.php",
-                data: dataString,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (result) {
-                $modalInstance.close(true);
-
+            DietService.setAndInContentDetail.query({}, dataString).$promise.then(function(result) {
+                if (result && result.success) {
+                    $modalInstance.close(true);
+                }else{
+        
+                }
             });
         }else{
             $scope.error = true;
@@ -48,7 +46,7 @@ app.controller('PrescriptionController.PrescribeDietController', function($scope
 
         return $http({
             method: 'POST',
-            url: "phpServices/diet/dietHelper.php",
+            url: "rest/autoComplete/diet",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {

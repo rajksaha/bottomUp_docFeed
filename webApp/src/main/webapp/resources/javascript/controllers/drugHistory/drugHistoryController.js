@@ -1,4 +1,4 @@
-app.controller('DrugHistoryController', function($scope, $http, $modal, $rootScope, limitToFilter, $location) {
+app.controller('DrugHistoryController', function($scope, $modal, $rootScope, limitToFilter, $location, DrugHistoryService) {
 	
 	$scope.currentDrugList = [];
 	$scope.oldDrugList = [];
@@ -12,15 +12,14 @@ app.controller('DrugHistoryController', function($scope, $http, $modal, $rootSco
     
 	$scope.bringCurrentDrugList = function (){
 		var dataString = {'status' : 1, 'query': 1};
-
-        $http({
-            method: 'POST',
-            url: "phpServices/drugHistory/drugHistoryHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/json'}
-        }).success(function (result) {
-        	$scope.currentDrugList = result;
-        });
+		
+		DrugHistoryService.getDrugHistory.query({}, dataString).$promise.then(function(result) {
+			if (result && result.success) {
+				$scope.currentDrugList = result;
+			}else{
+	
+			}
+		});
 		
 	};
 	
@@ -28,15 +27,14 @@ app.controller('DrugHistoryController', function($scope, $http, $modal, $rootSco
 		
 		
 		var dataString = {'status' : 0,  'query': 1};
-
-        $http({
-            method: 'POST',
-            url: "phpServices/drugHistory/drugHistoryHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/json'}
-        }).success(function (result) {
-        	$scope.oldDrugList = result;
-        });
+		
+		DrugHistoryService.createDrugHistory.query({}, dataString).$promise.then(function(result) {
+			if (result && result.success) {
+				$scope.oldDrugList = result;
+			}else{
+	
+			}
+		});
 		
 	};
 	
@@ -68,36 +66,34 @@ app.controller('DrugHistoryController', function($scope, $http, $modal, $rootSco
     	
     	var data = {'drugName': data.drugName, 'status': status, 'query': 2};
         
-    	$http({
-            method: 'POST',
-            url: "phpServices/drugHistory/drugHistoryHelper.php",
-            data: data,
-            headers: {'Content-Type': 'application/json'}
-        }).success(function (result) {
-        	if(status == 1){
-        		$scope.bringCurrentDrugList();
-        	}else{
-        		$scope.bringOldDrugList();
-        	}
-        });
+		DrugHistoryService.saveDrugHistoryList.query({}, data).$promise.then(function(result) {
+			if (result && result.success) {
+				if(status == 1){
+					$scope.bringCurrentDrugList();
+				}else{
+					$scope.bringOldDrugList();
+				}
+			}else{
+	
+			}
+		});
     };
     
     $scope.delDrug = function(data, status) {
     	
     	var data = {'delId': data.drugHistoryID, 'query': 3};
-        
-    	$http({
-            method: 'POST',
-            url: "phpServices/drugHistory/drugHistoryHelper.php",
-            data: data,
-            headers: {'Content-Type': 'application/json'}
-        }).success(function (result) {
-        	if(status == 1){
-        		$scope.bringCurrentDrugList();
-        	}else{
-        		$scope.bringOldDrugList();
-        	}
-        });
+		
+		DrugHistoryService.deleteDrugHistory.query({}, data).$promise.then(function(result) {
+			if (result && result.success) {
+				if(status == 1){
+					$scope.bringCurrentDrugList();
+				}else{
+					$scope.bringOldDrugList();
+				}
+			}else{
+	
+			}
+		});
     };
     
 	$scope.addToPresPast = function(data){
@@ -105,29 +101,27 @@ app.controller('DrugHistoryController', function($scope, $http, $modal, $rootSco
 		if(data.addedToPres == 0){
 			
 			var dataStr = {'drugName': data.drugName, 'status': data.currentStatus, 'query': 7};
-	        
-	    	$http({
-	            method: 'POST',
-	            url: "phpServices/drugHistory/drugHistoryHelper.php",
-	            data: dataStr,
-	            headers: {'Content-Type': 'application/json'}
-	        }).success(function (result) {
-	        	data.contentDetailID = result;
-	        	data.addedToPres = true;
-	        });
+			
+			DrugHistoryService.addContentDetail.query({}, dataStr).$promise.then(function(result) {
+				if (result && result.success) {
+					data.contentDetailID = result;
+	        		data.addedToPres = true;
+				}else{
+		
+				}
+			});
 	        
 	    }else{
 			
 	    	var dataStr = {'contentDetailID': data.contentDetailID, 'query': 8};
-	        
-	    	$http({
-	            method: 'POST',
-	            url: "phpServices/drugHistory/drugHistoryHelper.php",
-	            data: dataStr,
-	            headers: {'Content-Type': 'application/json'}
-	        }).success(function (result) {
-	        	data.addedToPres = false;
-	        });
+			
+			DrugHistoryService.delContentDetail.query({}, dataStr).$promise.then(function(result) {
+				if (result && result.success) {
+					data.addedToPres = false;
+				}else{
+		
+				}
+			});
 	    }
 	    
 		};

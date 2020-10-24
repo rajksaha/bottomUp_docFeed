@@ -1,4 +1,4 @@
-app.controller('SettingSelectionController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter) {
+app.controller('SettingSelectionController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, SettingSelectionService) {
 	$scope.changePage = function (page) {
 		$scope.selectedPage = page;
 		if(page == 1){
@@ -24,16 +24,13 @@ app.controller('SettingSelectionController', function($scope, $http, $modal, $ro
     $scope.bringDoctorInfo = function (){
         var dataString = "query=2";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/admin/adminModuleService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.userAccessInfo = result;
-            $rootScope.userAccessInfo = $scope.userAccessInfo;
-        }, function(error){
-            $location.path("/login");
+        SettingSelectionService.getAccessAppUser.query({}, $scope.searchData).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.userAccessInfo = result;
+                $rootScope.userAccessInfo = $scope.userAccessInfo;
+            }else{
+                $location.path("/login");
+            }
         });
     };
 

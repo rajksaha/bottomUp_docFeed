@@ -1,4 +1,4 @@
-app.controller('PatientController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, $window) {
+app.controller('PatientController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, $window, PatientService) {
 	
 	$scope.numberOfAppointment = 0;
  	$scope.limit = 10;
@@ -28,14 +28,14 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
         $scope.nextDate = yyyy + '-' + mm + '-' + dd;
         var filteredDate = $filter('date')( $scope.nextDate, "yyyy-MM-dd");		
         var  dataString='filteredDate='+  filteredDate +'&query='+11;
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.appointmentNextList = result;
-            $scope.numberOfAppointedPatient = $scope.appointmentNextList.length;
+        
+        PatientService.getNextAppointedPatient.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.appointmentNextList = result;
+                $scope.numberOfAppointedPatient = $scope.appointmentNextList.length;
+            }else{
+    
+            }
         });
     };
 
@@ -44,32 +44,32 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
 	$scope.bringByDatesing = function (appointmentDatesingle){
         var filteredDate = $filter('date')(appointmentDatesingle, "yyyy-MM-dd");
         var  dataString='filteredDate='+  filteredDate +'&query='+1;
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.appointmentList = result;
-            $scope.numberOfAppointment = $scope.appointmentList.length;
+        
+        PatientService.getAppoinmentByDatesing.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.appointmentList = result;
+                $scope.numberOfAppointment = $scope.appointmentList.length;
+            }else{
+    
+            }
         });
     };
 
 
     $scope.bringByDisease = function (disease){
         var  dataString='filteredDate='+ disease +'&query='+981;
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.appointmentList = result;
-            $scope.numberOfAppointment = $scope.appointmentList.length;
-			
-			$scope.patientList = result;
-            $scope.numberOfPatient = $scope.patientList.length;
-            return limitToFilter($scope.patientCode, 10);
+        
+        PatientService.getAppoinmentByDisease.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.appointmentList = result;
+                $scope.numberOfAppointment = $scope.appointmentList.length;
+
+                $scope.patientList = result;
+                $scope.numberOfPatient = $scope.patientList.length;
+                return limitToFilter($scope.patientCode, 10);
+            } else {
+
+            }
         });
     };
 
@@ -78,7 +78,7 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
         var  dataString='data='+  term +'&query='+77;
         return $http({
             method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
+            url: "rest/autoComplete/appointment",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -93,7 +93,7 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
         var  dataString='data='+  term +'&query='+68;
         return $http({
             method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
+            url: "rest/autoComplete/appointment",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -105,15 +105,15 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
 
     $scope.bringByPatientAddd = function (pCode){
         var  dataString='filteredDate='+ pCode +'&query='+888;
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.appointmentList = result;
-            $scope.numberOfAppointment = $scope.appointmentList.length;
+        
+        PatientService.getAppoinmentByPatient.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.appointmentList = result;
+                $scope.numberOfAppointment = $scope.appointmentList.length;
             return limitToFilter($scope.patientCode, 10);
+            } else {
+
+            }
         });
     };
 
@@ -122,7 +122,7 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
         var  dataString='data='+  term +'&query='+75;
         return $http({
             method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
+            url: "rest/autoComplete/appointment",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -136,7 +136,7 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
         var  dataString='data='+  term +'&query='+12;
         return $http({
             method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
+            url: "rest/autoComplete/appointment",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -149,15 +149,15 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
 
 	$scope.bringByPatientType = function (name){
         var  dataString='filteredDate='+ $.trim(name) +'&query='+13;
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {			
-			$scope.patientList = result;
-            $scope.numberOfPatient = $scope.patientList.length;
-			return limitToFilter($scope.patientCode, 10);
+        
+        PatientService.getAppoinmentByPatientType.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.patientList = result;
+                $scope.numberOfPatient = $scope.patientList.length;
+			    return limitToFilter($scope.patientCode, 10);
+            } else {
+
+            }
         });
     };
 	
@@ -165,37 +165,37 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
 
     $scope.bringByPatientName = function (name){
         var  dataString='filteredDate='+ name +'&query='+999;
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.appointmentList = result;
-            $scope.numberOfAppointment = $scope.appointmentList.length;
-			
-			$scope.patientList = result;
-            $scope.numberOfPatient = $scope.patientList.length;
-			
-            return limitToFilter($scope.patientCode, 10);
+        
+        PatientService.getDrugsAppoinment.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.appointmentList = result;
+                $scope.numberOfAppointment = $scope.appointmentList.length;
+
+                $scope.patientList = result;
+                $scope.numberOfPatient = $scope.patientList.length;
+
+                return limitToFilter($scope.patientCode, 10);
+            } else {
+
+            }
         });
     };
 
 		$scope.bringAllPatient = function(){
         var  dataString='query=14';
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.appointmentList = result;
-            $scope.numberOfAppointment = $scope.appointmentList.length;
-			
-			$scope.patientList = result;
-            $scope.numberOfPatient = $scope.patientList.length;
-			
-            return limitToFilter($scope.patientCode, 10);
+        
+        PatientService.getPatientOfAllType.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.appointmentList = result;
+                $scope.numberOfAppointment = $scope.appointmentList.length;
+
+                $scope.patientList = result;
+                $scope.numberOfPatient = $scope.patientList.length;
+
+                return limitToFilter($scope.patientCode, 10);
+            } else {
+
+            }
         });
     };
 
@@ -203,57 +203,55 @@ app.controller('PatientController', function($scope, $http, $modal, $rootScope, 
     	var filteredDate = $filter('date')(appointmentDate, "yyyy-MM-dd");
     	var endDate = $filter('date')(end, "yyyy-MM-dd");
     	var  dataString='filteredDate='+  filteredDate +'&endDate=' + endDate +'&query='+99;
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.appointmentList = result;
-        	$scope.numberOfAppointment = $scope.appointmentList.length;
+        
+        PatientService.getPatientOfAllType.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.appointmentList = result;
+        	    $scope.numberOfAppointment = $scope.appointmentList.length;
+            } else {
+
+            }
         });
     };
     
     $scope.printPreview = function (appointmentData){
     	var  dataString = 'patientCode='+ appointmentData.patientCode  +'&patientID='+ appointmentData.patientID +'&appointmentID='+ appointmentData.appointmentID +'&query='+18;
-        $http({
-            method: 'POST',
-            url: "phpServices/prescription/prescriptionHelperService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	 $window.open("mpdf/" + $scope.doctorData.pdfPage + ".php", '_blank');
-        	 
-        });    	
+        
+        PatientService.printAppoinment.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $window.open("mpdf/" + $scope.doctorData.pdfPage + ".php", '_blank');
+            } else {
+
+            }
+        });   	
     };
     
     $scope.addINAppointment  = function (patientCode){   	 
     	 var currentDate = new Date();
       	 var filteredDate = $filter('date')(currentDate, "yyyy-MM-dd");   	 
      	 var  dataString='doctorCode='+ $scope.doctorData.doctorCode +'&patientCode='+ patientCode +'&doctorID='+ $scope.doctorData.doctorID +'&query='+3 + '&filteredDate='+  filteredDate;
-         $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function(result) {
+         
+        PatientService.createAppoinment.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                
+            } else {
+                
+            }
         });
     };
     
      
      $scope.bringDoctorInfo = function (){     	
          var dataString = "query=0";
-         $http({
-             method: 'POST',
-             url: "phpServices/appointment/appointmentHelper.php",
-             data: dataString,
-             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-         }).success(function (result) {
-         	$scope.doctorData = result;
-         	$rootScope.doctorData = $scope.doctorData;
-         }, function(error){
-         	$location.path("/login");
-         });
+         
+         PatientService.getInformationDoctor.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.doctorData = result;
+         	    $rootScope.doctorData = $scope.doctorData;
+            } else {
+                location.path("/login");
+            }
+        });
      };
 
 	(function(){

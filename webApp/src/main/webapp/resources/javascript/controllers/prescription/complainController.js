@@ -1,4 +1,4 @@
-app.controller('PrescriptionController.PrescribeComplainController', function($scope, $http, $modalInstance, JsonService, record, limitToFilter) {
+app.controller('PrescriptionController.PrescribeComplainController', function($scope, $http, $modalInstance, JsonService, record, limitToFilter, ComplainService) {
 
     $scope.symptom = {};
     $scope.complainList = [];
@@ -19,49 +19,48 @@ app.controller('PrescriptionController.PrescribeComplainController', function($s
 
         var dataString = "query=1";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/drugs/drugsService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.drugDayTypeList = result;
+        ComplainService.getDayTypeDrug.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.drugDayTypeList = result;
 
-            //$scope.drugDayTypeList.splice(5, 1);
-            $scope.drugDayTypeList.splice(4, 1);
+                //$scope.drugDayTypeList.splice(5, 1);
+                $scope.drugDayTypeList.splice(4, 1);
 
-            if(addMood){
-                var data = {"title": "Symptom 1","numOfDay" : $scope.drugNumOfDayList[1], "dayType" : $scope.drugDayTypeList[4],"note" : "","id" : 0};
-                $scope.complainList.push(data);
-                data = {"title": "Symptom 2","numOfDay" : $scope.drugNumOfDayList[1], "dayType" : $scope.drugDayTypeList[4],"note" :"","id" : 0};
-                $scope.complainList.push(data);
-                data = {"title": "Symptom 3","numOfDay" : $scope.drugNumOfDayList[1], "dayType" : $scope.drugDayTypeList[4],"note" :"","id" : 0};
-                $scope.complainList.push(data);
-                data = {"title": "Symptom 4","numOfDay" : $scope.drugNumOfDayList[1], "dayType" : $scope.drugDayTypeList[4],"note" :"","id" : 0};
-                $scope.complainList.push(data);
+                if (addMood) {
+                    var data = { "title": "Symptom 1", "numOfDay": $scope.drugNumOfDayList[1], "dayType": $scope.drugDayTypeList[4], "note": "", "id": 0 };
+                    $scope.complainList.push(data);
+                    data = { "title": "Symptom 2", "numOfDay": $scope.drugNumOfDayList[1], "dayType": $scope.drugDayTypeList[4], "note": "", "id": 0 };
+                    $scope.complainList.push(data);
+                    data = { "title": "Symptom 3", "numOfDay": $scope.drugNumOfDayList[1], "dayType": $scope.drugDayTypeList[4], "note": "", "id": 0 };
+                    $scope.complainList.push(data);
+                    data = { "title": "Symptom 4", "numOfDay": $scope.drugNumOfDayList[1], "dayType": $scope.drugDayTypeList[4], "note": "", "id": 0 };
+                    $scope.complainList.push(data);
 
-            }else{
+                } else {
 
-                $scope.complainData = {"title": "Symptom"};
+                    $scope.complainData = { "title": "Symptom" };
 
-                angular.forEach($scope.drugNumOfDayList, function(data, key) {
-                    if(data.value == record.copmplainData.durationNum){
-                        $scope.complainData.numOfDay = data;
-                    }
-                });
+                    angular.forEach($scope.drugNumOfDayList, function (data, key) {
+                        if (data.value == record.copmplainData.durationNum) {
+                            $scope.complainData.numOfDay = data;
+                        }
+                    });
 
-                angular.forEach($scope.drugDayTypeList, function(value, key) {
-                    if(value.id == record.copmplainData.durationID){
-                        $scope.complainData.dayType = value;
-                    }
-                });
-                $scope.complainData.id = record.copmplainData.id;
+                    angular.forEach($scope.drugDayTypeList, function (value, key) {
+                        if (value.id == record.copmplainData.durationID) {
+                            $scope.complainData.dayType = value;
+                        }
+                    });
+                    $scope.complainData.id = record.copmplainData.id;
 
-                $scope.complainData.name = record.copmplainData.symptomName;
+                    $scope.complainData.name = record.copmplainData.symptomName;
 
-                $scope.complainList.push($scope.complainData);
+                    $scope.complainList.push($scope.complainData);
+                }
+
+            } else {
+
             }
-
         });
 
     };
@@ -144,7 +143,7 @@ app.controller('PrescriptionController.PrescribeComplainController', function($s
 
         return $http({
             method: 'POST',
-            url: "phpServices/complain/complainService.php",
+            url: "rest/autoComplete/complain",
             data: JSON.stringify(data),
             headers: {'Content-Type': 'application/json'}
         }).then(function(result) {

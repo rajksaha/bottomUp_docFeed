@@ -1,4 +1,4 @@
-app.controller('PrescribeComplainController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, JsonService) {
+app.controller('PrescribeComplainController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, JsonService, ComplainService) {
 	
 	$scope.symptom = {};
 	$scope.complainList = [];
@@ -13,28 +13,26 @@ app.controller('PrescribeComplainController', function($scope, $http, $modal, $r
 	$scope.bringdrugsDayType = function (addMood, selectedDayTypeID){
 		
 		var dataString = "query=1";
+		
+		ComplainService.getDrugDayType.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.drugDayTypeList = result;
+				if (addMood) {
+					var data = { "title": "Symptom 1", "numOfDay": $scope.drugNumOfDayList[1], "dayType": $scope.drugDayTypeList[0], "note": "" };
+					$scope.complainList.push(data);
+					data = { "title": "Symptom 2", "numOfDay": $scope.drugNumOfDayList[1], "dayType": $scope.drugDayTypeList[0], "note": "" };
+					$scope.complainList.push(data);
+					data = { "title": "Symptom 3", "numOfDay": $scope.drugNumOfDayList[1], "dayType": $scope.drugDayTypeList[0], "note": "" };
+					$scope.complainList.push(data);
+					data = { "title": "Symptom 4", "numOfDay": $scope.drugNumOfDayList[1], "dayType": $scope.drugDayTypeList[0], "note": "" };
+					$scope.complainList.push(data);
 
-        $http({
-            method: 'POST',
-            url: "phpServices/drugs/drugsService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.drugDayTypeList = result;
-        	if(addMood){
-        		var data = {"title": "Symptom 1","numOfDay" : $scope.drugNumOfDayList[1], "dayType" : $scope.drugDayTypeList[0],"note" : ""};
-        		$scope.complainList.push(data);
-        		data = {"title": "Symptom 2","numOfDay" : $scope.drugNumOfDayList[1], "dayType" : $scope.drugDayTypeList[0],"note" :""};
-        		$scope.complainList.push(data);
-        		data = {"title": "Symptom 3","numOfDay" : $scope.drugNumOfDayList[1], "dayType" : $scope.drugDayTypeList[0],"note" :""};
-        		$scope.complainList.push(data);
-        		data = {"title": "Symptom 4","numOfDay" : $scope.drugNumOfDayList[1], "dayType" : $scope.drugDayTypeList[0],"note" :""};
-        		$scope.complainList.push(data);
-        		
-        	}else{
-        	}
-        	
-        });
+				} else {
+				}
+			} else {
+
+			}
+		});
 		
 	};
 	
@@ -48,13 +46,12 @@ app.controller('PrescribeComplainController', function($scope, $http, $modal, $r
 				
 				var dataString = {'complainName ': value.name , 'numOfDay' : value.numOfDay ,'dayType' :  value.dayType, 'note' : value.note, 'complainPrescribeID' : value.id, 'query' : 2};
 				
-		        $http({
-		            method: 'POST',
-		            url: "phpServices/complain/complainService.php",
-		            data: JSON.stringify(dataString),
-		            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		        }).success(function (result) {
-		        });
+				ComplainService.updateComplain.query({}, dataString).$promise.then(function (result) {
+					if (result && result.success) {
+			
+					} else {
+					}
+				});
 			}
 		});
 		
@@ -73,7 +70,7 @@ app.controller('PrescribeComplainController', function($scope, $http, $modal, $r
         
         return $http({
             method: 'POST',
-            url: "phpServices/complain/complainService.php",
+            url: "rest/autoComplete/complain",
             data: JSON.stringify(data),
             headers: {'Content-Type': 'application/json'}
         }).then(function(result) {

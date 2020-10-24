@@ -1,29 +1,29 @@
-app.controller('DiseaseModificationController', function($scope, $http, $modal, $rootScope, limitToFilter, $location) {
+app.controller('DiseaseModificationController', function($scope, $modal, $rootScope, limitToFilter, $location, DiseaseModificationService) {
 	
 	$scope.diseaseList = [];	
     
 	$scope.getdiseases = function(){  	
     	var dataString = "query=0";
-        $http({
-            method: 'POST',
-            url: "phpServices/disease/diseaseHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.diseaseList = result;
+
+        DiseaseModificationService.getDiseasesList.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.diseaseList = result;
+            }else{
+    
+            }
         });
     };
 	
 	
 	$scope.deletediseases = function(disease_id, index){  
     	var dataString = "query=1&disease_id="+disease_id;
-        $http({
-            method: 'POST',
-            url: "phpServices/disease/diseaseHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.getdiseases();
+
+        DiseaseModificationService.delDisease.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.getdiseases();
+            }else{
+    
+            }
         });
     };
 	  
@@ -43,13 +43,12 @@ app.controller('DiseaseModificationController', function($scope, $http, $modal, 
     	if(validator.validateForm("#validateReq","#lblMsg",null)) {
     		
     		var  dataString = "query=2" + '&disease_id=' + diseaseData.id + "&diseaseName=" +diseaseData.name;
-            $http({
-                method: 'POST',
-                url: "phpServices/disease/diseaseHelper.php",
-                data: dataString,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (result) {
-            	$scope.getdiseases();
+
+            DiseaseModificationService.updateDisease.query({}, dataString).$promise.then(function (result) {
+                if (result && result.success) {
+                    $scope.getdiseases();
+                } else {
+                }
             });
             
     	}else{
