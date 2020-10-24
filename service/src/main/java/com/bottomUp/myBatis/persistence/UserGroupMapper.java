@@ -19,6 +19,8 @@ public interface UserGroupMapper {
 
     public UserGroupData getByID(Integer ID) throws BottomUpException;
 
+    public UserGroupData getSingleByParam(Map<String, Object> param) throws BottomUpException;
+
     public List<UserGroupData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     public Integer getCountByParam(Map<String, Object> param) throws BottomUpException;

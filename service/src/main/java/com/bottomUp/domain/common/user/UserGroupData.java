@@ -13,7 +13,8 @@ public class UserGroupData extends BaseData {
     private Long userGroupID;
     private String shortName;
     private String longDesc;
-    private Integer companyModuleID;
+    private Long companyModuleID;
+    private Long companyID;
     private String companyModuleName;
     private String companyName;
     private String moduleName;
@@ -46,11 +47,11 @@ public class UserGroupData extends BaseData {
         this.longDesc = longDesc;
     }
 
-    public Integer getCompanyModuleID() {
+    public Long getCompanyModuleID() {
         return companyModuleID;
     }
 
-    public void setCompanyModuleID(Integer companyModuleID) {
+    public void setCompanyModuleID(Long companyModuleID) {
         this.companyModuleID = companyModuleID;
     }
 
@@ -92,5 +93,13 @@ public class UserGroupData extends BaseData {
 
     public void setGroupPermissionList(List<PermissionData> groupPermissionList) {
         this.groupPermissionList = groupPermissionList;
+    }
+
+    public Long getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(Long companyID) {
+        this.companyID = companyID;
     }
 }

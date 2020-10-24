@@ -4,41 +4,41 @@
 app.service('UserSetupService', function ($resource) {
     return {
 
-        getUserProfile : $resource('rest/user/getUserProfile/userID/:userID', {}, {
+        getUserProfile : $resource('/api/rest/user/getUserProfile/userID/:userID', {}, {
             'query':  {
                 method:'GET',
                 params: {userID : '@userID'},
                 isArray:false
             }
         }),
-        sendResetPasswordMail : $resource('rest/login/resetPassword', {}, {
+        sendResetPasswordMail : $resource('/api/rest/login/resetPassword', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        updateUserPassword: $resource('rest/user/updateUserPassword', {}, {
+        updateUserPassword: $resource('/api/rest/user/updateUserPassword', {}, {
             'query': {
                 method: 'POST'
             }
         }),
-        updateUserPasswordByKey: $resource('rest/login/updateUserPasswordByKey', {}, {
+        updateUserPasswordByKey: $resource('/api/rest/login/updateUserPasswordByKey', {}, {
             'query': {
                 method: 'POST'
             }
         }),
-        updateUserStatus: $resource('rest/user/updateUserStatus', {}, {
+        updateUserStatus: $resource('/api/rest/user/updateUserStatus', {}, {
             'query': {
                 method: 'POST'
             }
         }),
-        save: $resource('rest/user/save', {}, {
+        save: $resource('/api/rest/user/save', {}, {
             'query': {
                 method: 'POST'
             }
         }),
 
-        update : $resource('rest/user/update', {}, {
+        update : $resource('/api/rest/user/update', {}, {
             'query': {
                 method  : 'POST',
                 isArray : false

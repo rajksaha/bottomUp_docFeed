@@ -46,15 +46,17 @@
 	<select id="getByID" parameterType="long" resultType="Permission">
 
 		SELECT
-			`permissionID`,
-			`companyModuleID`,
-			`functionCode`,
-			`shortName`,
-			`updatedOn`,
-			`updatedBy`,
-			`createdOn`,
-			`createdBy`
-		FROM `bottom_up_permission`
+			`p.permissionID`,
+			`p.companyModuleID`,
+			`cm.shortName` AS companyModuleName,
+			`p.functionCode`,
+			`p.shortName`,
+			`p.updatedOn`,
+			`p.updatedBy`,
+			`p.createdOn`,
+			`p.createdBy`
+		FROM `bottom_up_permission` p
+		JOIN `bottom_up_company_module` cm ON cm.companyModuleID = p.companyModuleID
 
 		WHERE permissionID = #{permissionID}
 
@@ -65,6 +67,7 @@
 		SELECT
 		ep.`permissionID`,
 		ep.`companyModuleID`,
+		ecm.`shortName` AS companyModuleName,
 		ep.`functionCode`,
 		ep.`shortName`,
 		ep.`updatedOn`,

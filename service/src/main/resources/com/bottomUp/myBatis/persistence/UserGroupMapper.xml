@@ -12,6 +12,7 @@
 		(
 			`shortName`,
 			`longDesc`,
+			`companyID`,
 			`companyModuleID`,
 			`updatedOn`,
 			`updatedBy`,
@@ -22,6 +23,7 @@
 		(
 			#{shortName},
 			#{longDesc},
+			#{companyID},
 			#{companyModuleID},
 			#{updatedOn},
 			#{updatedBy},
@@ -51,6 +53,7 @@
 			eug.`userGroupID`,
 			eug.`shortName`,
 			eug.`longDesc`,
+			eug.`companyID`,
 			eug.`companyModuleID`,
 			ecm.shortName AS companyModuleName,
             ec.companyName AS companyName,
@@ -68,12 +71,39 @@
 
 	</select>
 
+	<select id="getSingleByParam" parameterType="map" resultType="UserGroup">
+
+		SELECT
+		eug.`userGroupID`,
+		eug.`shortName`,
+		eug.`longDesc`,
+		eug.`companyID`,
+		eug.`companyModuleID`,
+		eug.`updatedOn`,
+		eug.`updatedBy`,
+		eug.`createdOn`,
+		eug.`createdBy`
+		FROM `bottom_up_user_group` eug
+		WHERE 1 = 1
+		<if test="companyID != null">
+			AND eug.companyID = #{companyID}
+		</if>
+		<if test="shortName != null">
+			AND eug.shortName = #{shortName}
+		</if>
+		<if test="userGroupCode != null">
+			AND eug.longDesc = #{userGroupCode}
+		</if>
+
+	</select>
+
 	<select id="getByParam" parameterType="map" resultType="UserGroup">
 
 		SELECT
 			eug.`userGroupID`,
 			eug.`shortName`,
 			eug.`longDesc`,
+			eug.`companyID`,
 			eug.`companyModuleID`,
 			ecm.shortName AS companyModuleName,
 			ec.companyName AS companyName,
@@ -92,6 +122,9 @@
 		</if>
 		<if test="companyID != null">
 			AND ecm.companyID = #{companyID}
+		</if>
+		<if test="shortName != null">
+			AND eug.shortName = #{shortName}
 		</if>
 		<if test="userGroupCode != null">
 			AND eug.longDesc = #{userGroupCode}
@@ -135,6 +168,7 @@
 			eug.`userGroupID`,
 			eug.`shortName`,
 			eug.`longDesc`,
+			eug.`companyID`,
 			eug.`companyModuleID`,
 			eug.`updatedOn`,
 			eug.`updatedBy`,
@@ -145,12 +179,10 @@
 			ELSE false
 		END AS isAssigned
 		FROM `bottom_up_user_group` eug
-		JOIN bottom_up_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
 		LEFT JOIN bottom_up_user_group_assignment euga ON eug.userGroupID = euga.userGroupID AND euga.userID = #{userID}
-
 		WHERE 1 = 1
 		<if test="companyID != null">
-			AND ecm.companyID = #{companyID}
+			AND eug.companyID = #{companyID}
 		</if>
 	</select>
 

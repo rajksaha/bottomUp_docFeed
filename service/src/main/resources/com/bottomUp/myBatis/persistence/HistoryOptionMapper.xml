@@ -59,6 +59,9 @@
 		<if test="historyID != null">
 			AND historyID = #{historyID}
 		</if>
+		<if test="term != null">
+			AND optionName LIKE '%'${term}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

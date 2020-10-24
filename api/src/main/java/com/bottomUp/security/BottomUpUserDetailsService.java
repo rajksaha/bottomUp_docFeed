@@ -11,7 +11,7 @@ import com.bottomUp.domain.common.user.UserProfilePermissionData;
 import com.bottomUp.service.common.CompanyService;
 import com.bottomUp.service.common.user.UserPermissionService;
 import com.bottomUp.service.common.user.UserService;
-import com.bottomUp.service.docFeed.DoctorService;
+import com.bottomUp.service.docFeed.crud.DoctorService;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;

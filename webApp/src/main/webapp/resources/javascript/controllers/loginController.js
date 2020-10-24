@@ -11,7 +11,7 @@ app.directive('ngEnter', function () {
     };
 });
 
-app.controller('LoginController', function($scope, $rootScope, $state, $http, $timeout, $location, ApplicationService) {
+app.controller('LoginController', function($scope, $rootScope, $filter, $state, $http, $timeout, $location, ApplicationService) {
 
 	$scope.username = "";
 	$scope.password = "";
@@ -52,8 +52,12 @@ app.controller('LoginController', function($scope, $rootScope, $state, $http, $t
             $scope.$emit('event:loginRequest', $scope.credentials.username, $scope.credentials.password, function() {
                 ApplicationService.getAppData.query().$promise.then(function(result) {
                     $rootScope.userData = result.userData;
-                    $rootScope.updateMode = false;
-                    $state.go('root.appointment');
+                    if($rootScope.userData.permissions.SUPER_ADMIN || $rootScope.userData.permissions.COMPANY_ADMIN){
+                        $state.go('root.userHome');
+					}else{
+                        $state.go('root.appointment');
+					}
+
                 });
             });
         }

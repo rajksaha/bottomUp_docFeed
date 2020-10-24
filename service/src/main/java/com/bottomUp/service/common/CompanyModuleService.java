@@ -3,6 +3,7 @@ package com.bottomUp.service.common;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.common.CompanyModuleData;
 import com.bottomUp.myBatis.persistence.CompanyModuleMapper;
+import com.bottomUp.service.CompanyDefaultSetupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,17 @@ import java.util.Map;
 public class CompanyModuleService {
 
     @Autowired
+    private CompanyDefaultSetupService companyDefaultSetupService;
+
+    @Autowired
     private CompanyModuleMapper companyModuleMapper;
 
     public void create(CompanyModuleData data) throws BottomUpException {
         this.companyModuleMapper.create(data);
+        companyDefaultSetupService.createDefaultPermissionAndGroupForModule(data);
     }
+
+
 
     public void update(CompanyModuleData data) throws BottomUpException {
         this.companyModuleMapper.update(data);

@@ -21,4 +21,6 @@ public interface PermissionMapper {
     public List<PermissionData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     public List<PermissionData> getCompanyModulePermission(Map<String, Object> param) throws BottomUpException;
+
+    public void delete(Map<String, Object> param) throws BottomUpException;
 }

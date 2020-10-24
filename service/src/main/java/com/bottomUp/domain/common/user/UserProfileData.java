@@ -32,6 +32,8 @@ public class UserProfileData extends BaseData {
     private Integer categoryID;
     private Integer userType;
     private String sex;
+    private String JsonString;
+    private Boolean isCompanyAdmin;
 
     private List<CompanyLevelData> companyLevelList;
     private List<UserGroupAssignmentData> groupAssignmentList;
@@ -101,7 +103,9 @@ public class UserProfileData extends BaseData {
         this.status = status;
     }
 
-
+    public Long getCompanyID() {
+        return companyID;
+    }
 
     public void setCompanyID(Long companyID) {
         this.companyID = companyID;
@@ -209,5 +213,21 @@ public class UserProfileData extends BaseData {
 
     public void setUserGroupList(List<UserGroupData> userGroupList) {
         this.userGroupList = userGroupList;
+    }
+
+    public String getJsonString() {
+        return JsonString;
+    }
+
+    public void setJsonString(String jsonString) {
+        JsonString = jsonString;
+    }
+
+    public Boolean getCompanyAdmin() {
+        return isCompanyAdmin;
+    }
+
+    public void setCompanyAdmin(Boolean companyAdmin) {
+        isCompanyAdmin = companyAdmin;
     }
 }

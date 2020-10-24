@@ -59,6 +59,9 @@
 		<if test="symptomID != null">
 			AND symptomID = #{symptomID}
 		</if>
+		<if test="term != null">
+			AND symptomName LIKE '%'${term}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

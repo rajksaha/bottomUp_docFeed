@@ -1,17 +1,23 @@
 package com.bottomUp.controller;
 
+import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.BottomUpUserDetail;
+import com.bottomUp.domain.common.BaseData;
 import com.bottomUp.utility.DateUtil;
+import com.itextpdf.text.DocumentException;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by raj on 7/26/2020.
@@ -91,5 +97,64 @@ public class BaseController {
         }*/
         return url.toString();
 
+    }
+
+    /**
+     * build resultSet for pagination
+     * @param list List of data
+     * @param count total count of list
+     * @return resultMap Map<String, Object>
+     */
+    public Map<String, Object> buildResultForGrid(List list, Integer count, Map<String, Object> param) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Integer offset = param.get("offset") != null ? Integer.parseInt(param.get("offset").toString()) : 0;
+        offset++; // change 0 based to 1 based
+        if (CollectionUtils.isNotEmpty(list) && list.get(0) instanceof BaseData) {
+            for (int i = 0; i < list.size(); i++) {
+                BaseData object = (BaseData) list.get(i);
+                object.setSerial(offset);
+                offset++;
+            }
+        }
+        resultMap.put("list", list);
+        resultMap.put("count", count);
+        return resultMap;
+    }
+
+    public void exportToExcel(HttpServletResponse response, Workbook wb, String reportName) throws BottomUpException, IOException {
+
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.addHeader("Pragma", "No-cache");
+        response.addHeader("Cache-control", "no-cache");
+        response.addDateHeader("Expires",1 );
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", reportName);
+        response.setHeader(headerKey, headerValue);
+
+        OutputStream outStream = response.getOutputStream();
+        wb.write(outStream);
+        wb.close();
+
+        // close what's open
+        outStream.close();
+    }
+
+    public void exportToPdf(HttpServletResponse response, ByteArrayOutputStream baos, String reportName) throws BottomUpException, IOException, DocumentException {
+
+        response.setContentLength(baos.size());
+        response.setHeader("Expires", "0");
+        response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+        response.setHeader("Pragma", "public");
+        // setting the content type
+        response.setContentType("application/pdf");
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", reportName);
+        response.setHeader(headerKey, headerValue);
+
+
+        OutputStream os = response.getOutputStream();
+        baos.writeTo(os);
+        os.flush();
+        os.close();
     }
 }

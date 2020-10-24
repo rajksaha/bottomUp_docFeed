@@ -79,6 +79,12 @@
 		<if test="drugID != null">
 			AND drugID = #{drugID}
 		</if>
+		<if test="term != null">
+			AND drugName LIKE '%'${term}
+		</if>
+		<if test="typeID != null">
+			AND typeID = #{typeID}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

@@ -31,7 +31,6 @@
     <link href="<c:url value="/resources/lib/css/animate.css"/>" type="text/css" rel="stylesheet"/>
 
 
-    <link href="<c:url value="/resources/css/theme/kaitair/common.css"/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/theme/kaitair/login.css"/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/theme/kaitair/approval-center.css"/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/theme/kaitair/colors.css"/>" type="text/css" rel="stylesheet"/>
@@ -46,6 +45,9 @@
 
     <!-- Sticky Footer -->
     <link href="<c:url value="/resources/css/common/sticky-footer.css"/>" rel='stylesheet' />
+
+    <%--Adapt-Strap table--%>
+    <link href="<c:url value="/resources/lib/adapt-strap/adapt-strap.min.css"/>" rel="stylesheet"/>
 
 
     <title>Doctor</title>
@@ -129,6 +131,11 @@
 <script type="text/javascript" src="<c:url value="/resources/javascript/inputValidator/inputValidator.0.1.js"/>"></script>
 <script src="<c:url value="/resources/javascript/controllers/angular-sortable.js"/>"></script>
 <script src="<c:url value="/resources/lib/javascript/resource/angular-resource.js"/>"></script>
+
+
+<%--Adapt-Strap table--%>
+<script src="<c:url value="/resources/lib/adapt-strap/adapt-strap.js"/>"></script>
+<script src="<c:url value="/resources/lib/adapt-strap/adapt-strap.tpl.js"/>"></script>
 
 
 

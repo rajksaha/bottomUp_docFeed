@@ -7,8 +7,10 @@ import com.bottomUp.common.utility.EmailType;
 import com.bottomUp.common.utility.PasswordEncryptor;
 import com.bottomUp.domain.common.user.UserData;
 import com.bottomUp.domain.common.user.UserGroupAssignmentData;
+import com.bottomUp.domain.common.user.UserGroupData;
 import com.bottomUp.domain.common.user.UserProfileData;
 import com.bottomUp.myBatis.persistence.UserGroupAssignmentMapper;
+import com.bottomUp.myBatis.persistence.UserGroupMapper;
 import com.bottomUp.myBatis.persistence.UserMapper;
 import com.bottomUp.myBatis.persistence.UserProfileMapper;
 import org.apache.commons.collections.CollectionUtils;
@@ -17,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -26,6 +29,7 @@ import java.util.*;
  */
 
 @Service
+@Transactional(rollbackFor = BottomUpException.class)
 public class UserService {
 
 
@@ -36,6 +40,9 @@ public class UserService {
 
     @Autowired
     private UserProfileMapper userProfileMapper;
+
+    @Autowired
+    private UserGroupMapper userGroupMapper;
 
     @Autowired
     private QueueProducer queueProducer;
@@ -74,9 +81,7 @@ public class UserService {
         return userProfileData;
     }
 
-    public void createUserProfile(UserProfileData userProfileData, Long companyID) throws BottomUpException {
-
-
+    public UserData createUserProfile(UserProfileData userProfileData, Long companyID) throws BottomUpException {
         UserData userData = new UserData();
         userData.setUserName(userProfileData.getUserName());
         userData.setCompanyID(companyID);
@@ -85,23 +90,32 @@ public class UserService {
         userData.setPassword(encryptor.encrypt(defaultPassword));
         userData.setStatus(2);
         userData.setIsBlocked(false);
-
         this.create(userData);
-
         userProfileData.setUserID(userData.getUserID());
         this.userProfileMapper.create(userProfileData);
 
-        if(userProfileData.getUserType() == 1){
-            UserGroupAssignmentData userGroupAssignmentData = new UserGroupAssignmentData();
-            userGroupAssignmentData.setUserID(userData.getUserID());
-            userGroupAssignmentData.setUserGroupID(new Long(2));
-            userGroupAssignmentData.setStatus(1);
-            userGroupAssignmentMapper.create(userGroupAssignmentData);
+        if(userProfileData.getCompanyAdmin()){
+            Map<String, Object> param = new HashMap<String, Object>();
+            param.put("shortName", "COMPANY_ADMIN");
+            param.put("companyID", companyID);
+            UserGroupData groupData = userGroupMapper.getSingleByParam(param);
+            if(groupData != null){
+                UserGroupAssignmentData groupAssignmentData = new UserGroupAssignmentData();
+                groupAssignmentData.setUserID(userData.getUserID());
+                groupAssignmentData.setUserGroupID(groupData.getUserGroupID());
+                userGroupAssignmentMapper.create(groupAssignmentData);
+            }
         }
+
+        return userData;
     }
 
     public void updateUserProfile(UserProfileData userProfileData) throws BottomUpException {
         this.userProfileMapper.update(userProfileData);
+        UserData userData = new UserData();
+        userData.setStatus(userProfileData.getStatus());
+        userData.setUserID(userProfileData.getUserID());
+        this.userMapper.updateStatus(userData);
     }
 
     public List<UserProfileData> getUserProfileByParam(Map<String, Object> param) throws BottomUpException {

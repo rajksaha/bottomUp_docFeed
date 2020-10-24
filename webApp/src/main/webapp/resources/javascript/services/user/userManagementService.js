@@ -6,55 +6,55 @@ app.service('UserManagementService', function ($resource) {
     return {
 
         // User Group
-        getAllUserGroup: $resource('rest/userGroup/getAllUserGroup', {}, {
+        getAllUserGroup: $resource('/api/rest/userGroup/getAllUserGroup', {}, {
             'query':  {
                 method:'GET',
                 isArray:true
             }
         }),
-        getGroupByCompanyID : $resource('rest/userGroup/getGroupByCompanyID/companyID/:companyID', {}, {
+        getGroupByCompanyID : $resource('/api/rest/userGroup/getGroupByCompanyID/companyID/:companyID', {}, {
             'query':  {
                 method:'GET',
                 params: {companyID : '@companyID'},
                 isArray:true
             }
         }),
-        saveUserGroup: $resource('rest/userGroup/save', {}, {
+        saveUserGroup: $resource('/api/rest/userGroup/save', {}, {
             'query': {
                 method: 'POST'
             }
         }),
 
-        updateUserGroup : $resource('rest/userGroup/update', {}, {
+        updateUserGroup : $resource('/api/rest/userGroup/update', {}, {
             'query': {
                 method  : 'POST'
             }
         }),
 
-        deleteUserGroup: $resource('rest/userGroup/delete/:userGroupID', {}, {
+        deleteUserGroup: $resource('/api/rest/userGroup/delete/:userGroupID', {}, {
             'remove': {
                 method: 'DELETE',
                 params  : {userGroupID: '@userGroupID'}
             }
         }),
-        getUserGroup: $resource('rest/user/getUserGroupForUser', {}, {
+        getUserGroup: $resource('/api/rest/user/getUserGroupForUser', {}, {
             'query': {
                 method: 'POST',
                 isArray:true
             }
         }),
-        updateUserGroupAssignment: $resource('rest/user/updateUserGroupAssignment', {}, {
+        updateUserGroupAssignment: $resource('/api/rest/user/updateUserGroupAssignment', {}, {
             'query': {
                 method: 'POST'
             }
         }),
-        getCompanyModulePermission: $resource('rest/groupPermission/getCompanyModulePermission', {}, {
+        getCompanyModulePermission: $resource('/api/rest/groupPermission/getCompanyModulePermission', {}, {
             'query': {
                 method: 'POST',
                 isArray:true
             }
         }),
-        updateGroupPermission: $resource('rest/groupPermission/updateGroupPermission', {}, {
+        updateGroupPermission: $resource('/api/rest/groupPermission/updateGroupPermission', {}, {
             'query': {
                 method: 'POST'
             }

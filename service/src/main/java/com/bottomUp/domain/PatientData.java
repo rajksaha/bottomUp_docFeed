@@ -7,6 +7,7 @@ public class PatientData extends BaseData {
 
   private long patientID;
   private long userID;
+  private long userProfileID;
   private String patientCode;
   private String occupation;
   private String referredBy;
@@ -14,6 +15,13 @@ public class PatientData extends BaseData {
   private String bedNum;
   private String wardNum;
   private String headOfUnit;
+  private String userName;
+  private String firstName;
+  private String lastName;
+  private Long companyID;
+  private String sex;
+  private String contactNo;
+  private String emailAddress;
 
   public long getPatientID() {
     return patientID;
@@ -85,5 +93,61 @@ public class PatientData extends BaseData {
 
   public void setHeadOfUnit(String headOfUnit) {
     this.headOfUnit = headOfUnit;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public Long getCompanyID() {
+    return companyID;
+  }
+
+  public void setCompanyID(Long companyID) {
+    this.companyID = companyID;
+  }
+
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+
+  public String getContactNo() {
+    return contactNo;
+  }
+
+  public void setContactNo(String contactNo) {
+    this.contactNo = contactNo;
+  }
+
+  public String getEmailAddress() {
+    return emailAddress;
+  }
+
+  public void setEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
   }
 }
