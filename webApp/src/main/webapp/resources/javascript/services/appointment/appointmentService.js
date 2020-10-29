@@ -5,7 +5,7 @@
 app.service('AppointmentService', function ($resource) {
     return {
 
-        getByParam : $resource('rest/appointment/getByParam', {}, {
+        getAccessInfo : $resource('rest/appointment/getAccessInfo', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
@@ -17,31 +17,36 @@ app.service('AppointmentService', function ($resource) {
                 isArray:true
             }
         }),
-        getByID : $resource('rest/appointment/getByID/appointmentID/:appointmentID', {}, {
+        getAppoinmentType : $resource('rest/appointment/getAppoinmentType', {}, {
             'query':  {
-                method:'GET',
-                params: {appointmentID : '@appointmentID'},
+                method:'POST',
                 isArray:false
             }
         }),
-        create: $resource('rest/appointment/save', {}, {
-            'save': {
-                method: 'POST',
-                isArray : false
+        makePrescription : $resource('rest/appointment/makePrescription', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
             }
         }),
-        update : $resource('rest/appointment/update', {}, {
-            query: {
-                method  : 'POST',
-                isArray : false
+        createAppointment : $resource('rest/appointment/createAppointment', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
             }
         }),
-        delete : $resource('rest/appointment/delete/:appointmentID', {}, {
-            'remove':  {
-                method:'DELETE',
-                params: {appointmentID : '@appointmentID'}
+        deleteAppointment : $resource('rest/appointment/deleteAppointment', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
             }
-        })
+        }),
+        updateAppointment : $resource('rest/appointment/updateAppointment', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
 
     };
 });

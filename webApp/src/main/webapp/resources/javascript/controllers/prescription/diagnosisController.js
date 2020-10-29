@@ -1,4 +1,4 @@
-app.controller('PrescriptionController.PrescribeDiagnosisController', function($scope, $http, $modalInstance, limitToFilter, $filter, record) {
+app.controller('PrescriptionController.PrescribeDiagnosisController', function($scope, $http, $modalInstance, limitToFilter, $filter, record, DiagnosisService) {
 
     $scope.diagnosisData = {};
 
@@ -25,15 +25,12 @@ app.controller('PrescriptionController.PrescribeDiagnosisController', function($
                 dataString = "query=" + 2 + '&diagnosisName=' + $scope.diagnosisData.diseaseName + '&note=' + $scope.diagnosisData.note;
             }
 
-            $http({
-                method: 'POST',
-                url: "phpServices/diagnosis/diagnosis.php",
-                data: dataString,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (result) {
-
-                $modalInstance.close();
-
+            DiagnosisService.getDiseaseInDiagnosis.query({}, dataString).$promise.then(function(result) {
+                if (result && result.success) {
+                    $modalInstance.close();
+                }else{
+        
+                }
             });
         }else{
             $scope.error = true;
@@ -54,7 +51,7 @@ app.controller('PrescriptionController.PrescribeDiagnosisController', function($
 
         return $http({
             method: 'POST',
-            url: "phpServices/diagnosis/diagnosis.php",
+            url: "rest/autoComplete/diagnosis",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {

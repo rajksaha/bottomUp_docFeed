@@ -15,12 +15,6 @@ app.service('SampleService', function ($resource) {
                 isArray:true
             }
         }),
-        getDoctorData : $resource('rest/appointment/getDoctorData', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
         getSingleByID : $resource('rest/appointment/getByID/sampleID/:sampleID', {}, {
             'query':  {
                 method:'GET',
@@ -43,7 +37,7 @@ app.service('SampleService', function ($resource) {
             }
         }),
         update : $resource('rest/appointment/update', {}, {
-            query: {
+            'query': {
                 method  : 'POST',
                 isArray : false
             }

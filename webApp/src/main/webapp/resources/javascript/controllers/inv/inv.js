@@ -1,4 +1,4 @@
-app.controller('PrescribeInvController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $modalInstance) {
+app.controller('PrescribeInvController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $modalInstance, InvService) {
 	
 
 	$scope.invNameData = {};
@@ -19,7 +19,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
         
         return $http({
             method: 'POST',
-            url: "phpServices/inv/invService.php",
+            url: "rest/inv/inv",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -48,19 +48,17 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=2'+ '&invName=' + $scope.invName + '&displayOrder=' + displayOrder;
 
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	if(isAnother){
-                $scope.invName = "";
-			}else {
-                $scope.docTorINVSetter = false;
-                $scope.bringINVDetail();
-			}
-
+        InvService.createDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
+            if (result && result.success) {
+                if(isAnother){
+                    $scope.invName = "";
+                }else {
+                    $scope.docTorINVSetter = false;
+                    $scope.bringINVDetail();
+                }
+            }else{
+    
+            }
         });
 		
 	};
@@ -69,13 +67,12 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=6'+ '&invSettingID=' + invSettingID;
 
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.invSettingData.splice(index,1);
+        InvService.deleteDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.invSettingData.splice(index,1);
+            }else{
+    
+            }
         });
 	};
 	
@@ -95,13 +92,12 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=4'+ '&invName=' + invName + '&note=' + note;
 
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.bringPrescribedInv();
+        InvService.createInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.bringPrescribedInv();
+            }else{
+    
+            }
         });
 	};
 	
@@ -109,14 +105,13 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=5'+ '&id=' + id;
 
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.bringPrescribedInv();
-        	$scope.bringINVDetail();
+        InvService.deleteInvPrescriptionById.query({}, $scope.searchData).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.bringPrescribedInv();
+        	    $scope.bringINVDetail();
+            }else{
+    
+            }
         });
 	};
 	
@@ -124,14 +119,12 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=10'+ '&invID=' + invID;
 
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.bringPrescribedInv();
-        	
+        InvService.deleteInvPrescriptionByInvId.query({}, $scope.searchData).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.bringPrescribedInv();
+            }else{
+    
+            }
         });
 	};
 
@@ -144,20 +137,19 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 
         var dataString = "query=17" + '&categoryId=' + invCategoryID;
 
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.invSettingData = result;
-            angular.forEach($scope.invSettingData, function(value, key) {
-                if(parseInt(value.prescribedInvID) > 0){
-                    value.addedToPrescription = true;
-                }else{
-                    value.addedToPrescription = false;
-                }
-            });
+        InvService.getInvDoctor.query({}, $scope.searchData).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.invSettingData = result;
+                angular.forEach($scope.invSettingData, function (value, key) {
+                    if (parseInt(value.prescribedInvID) > 0) {
+                        value.addedToPrescription = true;
+                    } else {
+                        value.addedToPrescription = false;
+                    }
+                });
+            } else {
+
+            }
         });
     };
 	
@@ -166,32 +158,29 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 
         var dataString = "query=15";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.invCategoryList = result;
-            $scope.invCategoryList.push({name : "No Category", invCategoryID : 0});
-            var dataString = "query=1";
+        InvService.getInvDetail.query({}, $scope.searchData).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.invCategoryList = result;
+                $scope.invCategoryList.push({ name: "No Category", invCategoryID: 0 });
+                var dataString = "query=1";
 
-            $http({
-                method: 'POST',
-                url: "phpServices/inv/invService.php",
-                data: dataString,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (result) {
-                $scope.invSettingData = result;
-                angular.forEach($scope.invSettingData, function(value, key) {
-                    if(parseInt(value.prescribedInvID) > 0){
-                        value.addedToPrescription = true;
-                    }else{
-                        value.addedToPrescription = false;
+                InvService.getInvCategory.query({}, $scope.searchData).$promise.then(function (result) {
+                    if (result && result.success) {
+                        $scope.invSettingData = result;
+                        angular.forEach($scope.invSettingData, function (value, key) {
+                            if (parseInt(value.prescribedInvID) > 0) {
+                                value.addedToPrescription = true;
+                            } else {
+                                value.addedToPrescription = false;
+                            }
+                        });
+                    } else {
+
                     }
                 });
-            });
+            } else {
 
+            }
         });
 
 
@@ -203,14 +192,13 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = "query=7";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.prescribedInvData = result;
-        	$scope.numberOfInvAdded = $scope.prescribedInvData.length;
+        InvService.getInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.prescribedInvData = result;
+        	    $scope.numberOfInvAdded = $scope.prescribedInvData.length;
+            }else{
+    
+            }
         });
 	};
 	
@@ -228,15 +216,14 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 			
 			var dataString = 'query=3'+ '&invName=' + invAdderData.name;
 
-	        $http({
-	            method: 'POST',
-	            url: "phpServices/inv/invService.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	$scope.addInvToPresciption(result, invAdderData.note);
-	        	$scope.bringPrescribedInv();
-	        });
+            InvService.createDoctorInVSettings.query({}, $scope.searchData).$promise.then(function(result) {
+                if (result && result.success) {
+                    $scope.addInvToPresciption(result, invAdderData.note);
+	        	    $scope.bringPrescribedInv();
+                }else{
+        
+                }
+            });
 	        
 		}
 	};
@@ -318,7 +305,7 @@ app.controller('PrescribeInvController.InvMasterContoller', function($scope, $ht
 
         return $http({
             method: 'POST',
-            url: "phpServices/inv/invService.php",
+            url: "rest/autoComplete/inv",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -343,21 +330,21 @@ app.controller('PrescribeInvController.InvMasterContoller', function($scope, $ht
 
 			}
 
-			 $http({
-		            method: 'POST',
-		            url: "phpServices/inv/invService.php",
-		            data: dataString,
-		            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		        }).success(function (result) {
-		        	if(another){
+            InvService.createAndupdateInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
+                if (result && result.success) {
+                    if (another) {
                         $scope.invAdderData = {};
                         $scope.error = false;
                         $scope.success = true;
                         $scope.errorMessage = "Inv added to your prescription, Please add another";
-					}else{
+                    } else {
                         $modalInstance.close();
-					}
-		        });
+                    }
+                }else{
+        
+                }
+            });
+                
 		}else{
             $scope.success = false;
 			$scope.error = true;
@@ -378,7 +365,7 @@ app.controller('PrescribeInvController.InvMasterContoller', function($scope, $ht
 
         return $http({
             method: 'POST',
-            url: "phpServices/diagnosis/diagnosis.php",
+            url: "rest/autoComplete/diagnosis",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {

@@ -1,4 +1,4 @@
-app.controller('PrescribeVitalController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance) {
+app.controller('PrescribeVitalController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance, VitalService) {
 	
 	
 	$scope.vitalData = {};
@@ -13,7 +13,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
         
         return $http({
             method: 'POST',
-            url: "phpServices/vital/vitalService.php",
+            url: "rest/autoComplete/vital",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -43,15 +43,14 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 					
 					var dataString = 'query=6'+ '&vitalName=' + $scope.vitalData.vitalName + '&shortName=' + $scope.vitalData.shortName + '&unit=' + $scope.vitalData.unit;
 
-			        $http({
-			            method: 'POST',
-			            url: "phpServices/vital/vitalService.php",
-			            data: dataString,
-			            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-			        }).success(function (result) {
-			        	$scope.vitalSameAS = false;
-			        	$scope.addToDoctorPreference(result);
-			        });
+					VitalService.createVitalToDoctorPreference.query({}, dataString).$promise.then(function(result) {
+						if (result && result.success) {
+							$scope.vitalSameAS = false;
+			        		$scope.addToDoctorPreference(result);
+						}else{
+				
+						}
+					});
 					
 				}else{
 					$scope.vitalSameAS = false;
@@ -79,14 +78,13 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 			
 			var dataString = 'query=7'+ '&vitalID=' + vitID + '&displayOrder=' + displayOrder;
 
-	        $http({
-	            method: 'POST',
-	            url: "phpServices/vital/vitalService.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	$scope.bringVitalDetail();
-	        });
+			VitalService.createDoctorVitalSettings.query({}, dataString).$promise.then(function(result) {
+				if (result && result.success) {
+					$scope.bringVitalDetail();
+				}else{
+		
+				}
+			});
 			
 		};
 		
@@ -94,28 +92,26 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 			
 			var dataString = 'query=8'+ '&vitalSettingID=' + vitalSettingID;
 
-	        $http({
-	            method: 'POST',
-	            url: "phpServices/vital/vitalService.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	$scope.bringVitalDetail();
-	        });
+			VitalService.deleteDoctorVitalSettings.query({}, dataString).$promise.then(function(result) {
+				if (result && result.success) {
+					$scope.bringVitalDetail();
+				}else{
+		
+				}
+			});
 		};
 	
 	$scope.bringVitalDetail = function (){
 		
 		var dataString = "query=0";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/vital/vitalService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.prescribedVitalData = result;
-        });
+		VitalService.getVitalDoctorDetail.query({}, dataString).$promise.then(function(result) {
+			if (result && result.success) {
+				$scope.prescribedVitalData = result;
+			}else{
+	
+			}
+		});
 	};
 
     $scope.getVitalOption = function(vital, term) {
@@ -124,7 +120,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 
         return $http({
             method: 'POST',
-            url: "phpServices/vital/vitalService.php",
+            url: "rest/autoComplete/vital",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -150,20 +146,19 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 		
 		var dataString = 'query=1'+ '&vitalID=' + vitalData.vitalId;
 
-        $http({
-            method: 'POST',
-            url: "phpServices/vital/vitalService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	vitalData.optionList = result;
-        	var data = {"id" : -1,"vitalOptionID" : -1, "name": 'Add Options'};
-        	var data1 = {"id" : -2,"vitalOptionID" : -2, "name": 'Close'};
-        	vitalData.optionList.unshift(data1,data);
-        	vitalData.optionSelector = vitalData.optionList[0];
-        	vitalData.optionListON = true;
-        	vitalData.optionAdderON = false;
-        });
+		VitalService.getVitalOptionList.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				vitalData.optionList = result;
+				var data = { "id": -1, "vitalOptionID": -1, "name": 'Add Options' };
+				var data1 = { "id": -2, "vitalOptionID": -2, "name": 'Close' };
+				vitalData.optionList.unshift(data1, data);
+				vitalData.optionSelector = vitalData.optionList[0];
+				vitalData.optionListON = true;
+				vitalData.optionAdderON = false;
+			} else {
+
+			}
+		});
 	};
 	
 	$scope.performVital = function(vital){
@@ -181,15 +176,15 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 	$scope.addVitalOption = function (vitalData){
 		if(vitalData.optionAdder){
 			var dataString = 'query=2'+ '&vitalID=' + vitalData.vitalId + '&vitalOptionName=' + vitalData.optionAdder ;
-	        $http({
-	            method: 'POST',
-	            url: "phpServices/vital/vitalService.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	vitalData.optionAdder = "";
-	        	$scope.bringVitalOption(vitalData);
-	        });
+	        
+			VitalService.createVitalOption.query({}, dataString).$promise.then(function (result) {
+				if (result && result.success) {
+					vitalData.optionAdder = "";
+	        		$scope.bringVitalOption(vitalData);
+				} else {
+	
+				}
+			});
 			
 		}else{
 			//maybe a pop- up saying please enter a value
@@ -204,31 +199,34 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 		angular.forEach(prescribedVital, function(value, key) {
 			if(parseInt(value.prescribedVitalID) > 0 && value.vitalResult){ // update
 				var dataString = 'query=4'+ '&vitalID=' + value.vitalId + '&vitalResult=' + value.vitalResult ;
-		        $http({
-		            method: 'POST',
-		            url: "phpServices/vital/vitalService.php",
-		            data: dataString,
-		            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		        }).success(function (result) {
-		        });
+		        
+				VitalService.updateVitalPrescription.query({}, dataString).$promise.then(function (result) {
+					if (result && result.success) {
+						
+					} else {
+		
+					}
+				});
 			}else if(!(parseInt(value.prescribedVitalID) > 0) &&  value.vitalResult){// insert
 				var dataString = 'query=3'+ '&vitalID=' + value.vitalId + '&vitalResult=' + value.vitalResult ;
-		        $http({
-		            method: 'POST',
-		            url: "phpServices/vital/vitalService.php",
-		            data: dataString,
-		            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		        }).success(function (result) {
-		        });
+		        
+				VitalService.createVitalPrescription.query({}, dataString).$promise.then(function (result) {
+					if (result && result.success) {
+						
+					} else {
+		
+					}
+				});
 			}else if(parseInt(value.prescribedVitalID) > 0 && value.vitalResult == ""){
 				var dataString = 'query=9'+ '&prescribedVitalID=' + value.prescribedVitalID;
-		        $http({
-		            method: 'POST',
-		            url: "phpServices/vital/vitalService.php",
-		            data: dataString,
-		            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		        }).success(function (result) {
-		        });
+		        
+				VitalService.deleteVitalprescription.query({}, dataString).$promise.then(function (result) {
+					if (result && result.success) {
+						
+					} else {
+		
+					}
+				});
 			}
 		});
         $modalInstance.close(true);

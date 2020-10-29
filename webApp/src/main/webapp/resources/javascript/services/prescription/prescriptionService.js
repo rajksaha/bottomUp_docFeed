@@ -119,10 +119,10 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:true
             }
         }),
-        delDrugHistoryById : $resource('rest/prescription/delDrugHistoryById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delDrugHistoryById: $resource('rest/prescription/delDrugHistoryById/:contentDetailID', {}, {
+            'remove': {
+                method: 'DELETE',
+                params  : {contentDetailID: '@contentDetailID'}
             }
         }),
         delClinicalHistoryById : $resource('rest/prescription/delClinicalHistoryById', {}, {

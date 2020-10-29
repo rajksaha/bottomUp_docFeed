@@ -1,4 +1,4 @@
-app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootScope, limitToFilter, $location) {
+app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, FollowUpSetupService) {
 	
 	
 
@@ -21,7 +21,7 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
         
         return $http({
             method: 'POST',
-            url: "phpServices/inv/invCategoryService.php",
+            url: "rest/autoComplete/invCategory",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -36,13 +36,13 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
     $scope.getPatientType = function () {
 
         var dataString = "query=6" + "&doctorType=" + $scope.doctorTypeId;
-        $http({
-            method: 'POST',
-            url: "phpServices/patient/patientTypeService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.patientTypeList = result;
+
+        FollowUpSetupService.getPatientType.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.patientTypeList = result;
+            }else{
+    
+            }
         });
     };
       
@@ -58,29 +58,27 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
           $scope.followUpInvName = "";
           $("#fInvName").val("");
           var dataString = 'query=11'+ '&invName=' + followUpInvName + "&patientTypeId=" + $scope.patientTypeId;;
-
-	        $http({
-	            method: 'POST',
-	            url: "phpServices/inv/invCategoryService.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-                $scope.bringFollowUpChart($scope.patientTypeId);
-	        });
+            
+            FollowUpSetupService.createInvToFollowUpSet.query({}, dataString).$promise.then(function(result) {
+                if (result && result.success) {
+                    $scope.bringFollowUpChart($scope.patientTypeId);
+                }else{
+        
+                }
+            });
 	  };
 	  
 	  $scope.delete = function(id){
 		  
 		  var dataString = 'query=13'+ '&id=' + id;
-
-	        $http({
-	            method: 'POST',
-	            url: "phpServices/inv/invCategoryService.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	$scope.bringFollowUpChart($scope.patientTypeId);
-	        });
+            
+            FollowUpSetupService.deleteInvToFollowUpSet.query({}, dataString).$promise.then(function(result) {
+                if (result && result.success) {
+                    $scope.bringFollowUpChart($scope.patientTypeId);
+                }else{
+        
+                }
+            });
 	  };
 
 	  $scope.bringFollowUpChart = function (patientTypeId) {
@@ -89,13 +87,13 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
 
           $scope.patientTypeId = patientTypeId;
           var dataString = 'query=12' + "&patientTypeId=" + patientTypeId;
-          $http({
-              method: 'POST',
-              url: "phpServices/inv/invCategoryService.php",
-              data: dataString,
-              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-          }).success(function (result) {
-              $scope.followUpList = result;
+
+          FollowUpSetupService.getFollowUpChart.query({}, dataString).$promise.then(function (result) {
+              if (result && result.success) {
+                  $$scope.followUpList = result;
+              } else {
+
+              }
           });
       };
 	  
@@ -112,17 +110,33 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
             $scope.doctorTypeId = result;
 
             var dataString = "query=4" + "&doctorType=" + $scope.doctorTypeId;
-            $http({
-                method: 'POST',
-                url: "phpServices/patient/patientTypeService.php",
-                data: dataString,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (result) {
-                $scope.patientTypeList = result;
+
+            FollowUpSetupService.getPatientWithDoctor.query({}, dataString).$promise.then(function (result) {
+                if (result && result.success) {
+                    $scope.patientTypeList = result;
+                } else {
+  
+                }
             });
         });
 
+        FollowUpSetupService.getDoectorFromSettings.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.doctorTypeId = result;
 
+                var dataString = "query=4" + "&doctorType=" + $scope.doctorTypeId;
+
+                FollowUpSetupService.getPatientWithDoctor.query({}, dataString).$promise.then(function (result) {
+                    if (result && result.success) {
+                        $scope.patientTypeList = result;
+                    } else {
+
+                    }
+                });
+            } else {
+
+            }
+        });
 
 
 	};

@@ -370,7 +370,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/prescription/prescriptionController.js',
+                        files: ['resources/javascript/controllers/prescription/prescriptionController.js' + jsVersion,
                             'resources/javascript/controllers/inv/inv.js',
                             'resources/javascript/controllers/prescription/complainController.js',
                             'resources/javascript/controllers/prescription/diagnosisController.js',
@@ -383,7 +383,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                             'resources/javascript/controllers/advice/advice.js'
                         ]
                     });
-            }]
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/prescription/prescriptionService.js' + jsVersion]
+                    });
+            }],
         }
     };
 

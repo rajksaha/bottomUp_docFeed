@@ -1,4 +1,4 @@
-app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter) {
+app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, FamilyHisoryService) {
 	
 	
 	$scope.familyHistoryList = [];
@@ -25,18 +25,16 @@ app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootSc
 				+ '&present=' + familyHistoryData.present + '&type=' + familyHistoryData.type + '&detail=' + familyHistoryData.detail;
 			}
 			
+			FamilyHisoryService.createAndupdateFamilyHistory.query({}, dataString).$promise.then(function (result) {
+				if (result && result.success) {
+					$scope.succcess = true;
+					$scope.error = false;
+					$scope.message = "Information Updated Successfully";
+					$scope.bringFamilyHistoryData();
+				} else {
 
-	        $http({
-	            method: 'POST',
-	            url: "phpServices/history/familyHistoryHelper.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	$scope.succcess = true;
-				$scope.error = false;
-				$scope.message = "Information Updated Successfully";
-	        	$scope.bringFamilyHistoryData();
-	        });
+				}
+			});
 	        
 		}else{
 			$scope.message = "";
@@ -50,18 +48,17 @@ app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootSc
 		
 		$scope.addMoreButton = true;
 		var dataString = "query=0";
+		
+		FamilyHisoryService.getFamilyDiseaseHistory.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.familyHistoryList = result;
+				if ($scope.familyHistoryList.length == 0) {
+					$scope.addFamilyHistory();
+				}
+			} else {
 
-        $http({
-            method: 'POST',
-            url: "phpServices/history/familyHistoryHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.familyHistoryList = result;
-        	if($scope.familyHistoryList.length == 0){
-        		$scope.addFamilyHistory();
-        	}
-        });
+			}
+		});
 	};
 	
 	$scope.addFamilyHistory = function (){
@@ -111,33 +108,31 @@ app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootSc
 			
 			var dataString = "query=" + 3 + "&familyHistoryID=" +  data.id;
 			
-			$http({
-	            method: 'POST',
-	            url: "phpServices/history/familyHistoryHelper.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	$scope.succcess = true;
-				$scope.error = false;
-				$scope.message = "Information Deleted From Prescription";
-	        	data.addedToPres = false;
-	        });
+			FamilyHisoryService.deleteFamilyDisease.query({}, dataString).$promise.then(function (result) {
+				if (result && result.success) {
+					$scope.succcess = true;
+					$scope.error = false;
+					$scope.message = "Information Deleted From Prescription";
+					data.addedToPres = false;
+				} else {
+
+				}
+			});
 	        
 	    }else{
 			
 			var dataString = "query=" + 2 + "&familyHistoryID=" + data.id;
-	        
-			$http({
-	            method: 'POST',
-	            url: "phpServices/history/familyHistoryHelper.php",
-	            data: dataString,
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-	        }).success(function (result) {
-	        	$scope.succcess = true;
-				$scope.error = false;
-				$scope.message = "Information Added To Prescription";
-	        	data.addedToPres = true;
-	        });
+			
+			FamilyHisoryService.createFamilyDisease.query({}, dataString).$promise.then(function (result) {
+				if (result && result.success) {
+					$scope.succcess = true;
+					$scope.error = false;
+					$scope.message = "Information Added To Prescription";
+					data.addedToPres = true;
+				} else {
+
+				}
+			});
 	    }
 	    
 		};
@@ -147,15 +142,14 @@ app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootSc
 		
 		
 		var dataString = "query=6";
+		
+		FamilyHisoryService.getRelationList.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.relationList = result;
+			} else {
 
-        $http({
-            method: 'POST',
-            url: "phpServices/history/familyHistoryHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.relationList = result;
-        });
+			}
+		});
         
 	};
 	
@@ -166,18 +160,17 @@ app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootSc
 	$scope.deleteFamilyHistory = function(id){
 		
 		var dataString = "query=" + 5 + "&familyHistoryID=" + id;
-        
-		$http({
-            method: 'POST',
-            url: "phpServices/history/familyHistoryHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.succcess = true;
-			$scope.error = false;
-			$scope.message = "Information Deleted Successfully";
-        	$scope.bringFamilyHistoryData();
-        });
+		
+		FamilyHisoryService.deletePatientFamilyHistory.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.succcess = true;
+				$scope.error = false;
+				$scope.message = "Information Deleted Successfully";
+				$scope.bringFamilyHistoryData();
+			} else {
+
+			}
+		});
 	};
 	
 	$scope.getDisease = function(term) {
@@ -186,7 +179,7 @@ app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootSc
         
         return $http({
             method: 'POST',
-            url: "phpServices/diagnosis/diagnosis.php",
+            url: "rest/autoComplete/diagnosis",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {

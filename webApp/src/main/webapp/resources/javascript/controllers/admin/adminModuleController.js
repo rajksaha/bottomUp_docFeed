@@ -1,46 +1,47 @@
-app.controller('AdminModuleController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter) {
+app.controller('AdminModuleController', function($scope, $modal, $rootScope, limitToFilter, $location, $filter, AdminModuleService) {
 	
 	$scope.userProfileList = [];
     
 	$scope.getUserProfileList = function(){
-    	var dataString = "query=0";
-        $http({
-            method: 'POST',
-            url: "phpServices/admin/adminModuleService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.userProfileList = result;
+        var dataString = "query=0";
+    
+        AdminModuleService.getUserProfileList.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.userProfileList = result;
+            }else{
+    
+            }
         });
     };
 
 	$scope.processEditor = function (datastring, userProfile) {
 
-        $http({
-            method: 'POST',
-            url: "phpServices/admin/adminModuleService.php",
-            data: datastring,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            userProfile.accessList = $scope.processAccessList(result);
-            var modalInstance = $modal.open({
-                templateUrl: 'javascript/templates/admin/addNewUser.html',
-                windowClass: 'fade in',
-                size: 'lg',
-                controller: 'AdminModuleController.UserProfileEditorController',
-                resolve: {
-                    data: function () {
-                        return {
-                            userProfile
-                        };
-                    }
-                },
-                backdrop: 'static'
-            });
-            modalInstance.result.then(function(result) {
-                $scope.getUserProfileList();
-            });
+        AdminModuleService.getAppAccess.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                userProfile.accessList = $scope.processAccessList(result);
+                var modalInstance = $modal.open({
+                    templateUrl: 'javascript/templates/admin/addNewUser.html',
+                    windowClass: 'fade in',
+                    size: 'lg',
+                    controller: 'AdminModuleController.UserProfileEditorController',
+                    resolve: {
+                        data: function () {
+                            return {
+                                userProfile
+                            };
+                        }
+                    },
+                    backdrop: 'static'
+                });
+                modalInstance.result.then(function(result) {
+                    $scope.getUserProfileList();
+                });
+            }else{
+    
+            }
         });
+
+
     };
 
 
@@ -54,13 +55,12 @@ app.controller('AdminModuleController', function($scope, $http, $modal, $rootSco
     $scope.changeUserStatus = function (userProfile, status) {
 
         var dataString = "query=6" + "&userId=" + userProfile.userID + '&activeStatus=' + status ;
-        $http({
-            method: 'POST',
-            url: "phpServices/admin/adminModuleService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            userProfile.isActive = status;
+
+        AdminModuleService.updateUserStatus.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                userProfile.isActive = status;  
+            } else {
+            }
         });
     };
 
@@ -96,7 +96,7 @@ app.controller('AdminModuleController', function($scope, $http, $modal, $rootSco
 });
 
 
-app.controller('AdminModuleController.UserProfileEditorController', function($scope, $modalInstance, data, $http) {
+app.controller('AdminModuleController.UserProfileEditorController', function($scope, $modalInstance, data, AdminModuleService) {
 
     $scope.userProfile = data.userProfile;
     $scope.error = false;
@@ -113,15 +113,16 @@ app.controller('AdminModuleController.UserProfileEditorController', function($sc
 
     $scope.save = function (){
         if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
-            var entryData = $scope.userProfile;
-            console.log(entryData);
-            jQuery.post("phpServices/admin/userAdderService.php",  {json: JSON.stringify(entryData)}, function(data){
-                console.log(data);
-                if(data.trim() == '-1'){
-                    $scope.error = true;
-                    $scope.errorMessage = "Login name already exist, please select another login name";
+            AdminModuleService.manegeUserProfile.query({}, $scope.userProfile).$promise.then(function(result) {
+                if (result && result.success) {
+                    if(data.trim() == '-1'){
+                        $scope.error = true;
+                        $scope.errorMessage = "Login name already exist, please select another login name";
+                    }else{
+                        $modalInstance.close(null);
+                    }
                 }else{
-                    $modalInstance.close(null);
+        
                 }
             });
         }else{

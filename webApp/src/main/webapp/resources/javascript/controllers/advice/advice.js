@@ -1,4 +1,4 @@
-app.controller('PrescribeAdviceController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance) {
+app.controller('PrescribeAdviceController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance, AdviceService) {
 	
 
 	$scope.adviceSettingData = {};
@@ -22,7 +22,7 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
         
         return $http({
             method: 'POST',
-            url: "phpServices/advice/adviceService.php",
+            url: "rest/autoComplete/advice",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -44,25 +44,22 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 		if(!$scope.addByName){
 			if(true){
 				var dataString = 'query=2'+ '&adviceName=' + $scope.adviceAdderData.name + '&type=' + $scope.doctorData.category + '&pdf=' + $scope.adviceAdderData.pdf + '&lang=' + $scope.adviceAdderData.lang;
-
-		        $http({
-		            method: 'POST',
-		            url: "phpServices/advice/adviceService.php",
-		            data: dataString,
-		            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		        }).success(function (result) {
-		        	if(addAnother){
-                        $scope.adviceAdderData = {};
-                        $scope.adviceAdderData.lang = 0;
-					}else{
-                        $scope.addToDoctorPreference(result);
+				
+				AdviceService.createAdvice.query({}, dataString).$promise.then(function (result) {
+					if (result && result.success) {
+						if(addAnother){
+							$scope.adviceAdderData = {};
+							$scope.adviceAdderData.lang = 0;
+						}else{
+							$scope.addToDoctorPreference(result);
+						}		
+					} else {
 					}
-		        });
+				});
+
 			}else{
 				alert("Please call administrator to add Bangla Advice");
-			}
-			
-			
+			}			
 			
 		}else{
 			
@@ -79,30 +76,26 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 		}
 		
 		var dataString = 'query=3'+ '&adviceID=' + parseInt(adviceID) + '&displayOrder=' + displayOrder;
-
-        $http({
-            method: 'POST',
-            url: "phpServices/advice/adviceService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.bringPrescribedAdvice();
-        });
+		
+		AdviceService.createDoctorPreference.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.bringPrescribedAdvice();	
+			} else {
+			}
+		});
 		
 	};
 	
 	$scope.delAdviceFromSetting = function (adviceSettingID){
 		
 		var dataString = 'query=6'+ '&adviceSettingID=' + adviceSettingID;
-
-        $http({
-            method: 'POST',
-            url: "phpServices/advice/adviceService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.bringPrescribedAdvice();
-        });
+		
+		AdviceService.delAdviceSettings.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.bringPrescribedAdvice();
+			} else {
+			}
+		});
 	};
 	
 	$scope.deciderAdvice = function (addedToPrescription,advice){
@@ -121,29 +114,25 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 	$scope.addAdviceToPresciption = function (adviceId){
 		
 		var dataString = 'query=4'+ '&adviceID=' + parseInt(adviceId);
-
-        $http({
-            method: 'POST',
-            url: "phpServices/advice/adviceService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.bringPrescribedAdvice();
-        });
+		
+		AdviceService.createAdviceToPresciption.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.bringPrescribedAdvice();
+			} else {
+			}
+		});
 	};
 	
 	$scope.deleteAdviceFromPrescibtion = function (adviceId){
 		
 		var dataString = 'query=5'+ '&adviceID=' + parseInt(adviceId);
-
-        $http({
-            method: 'POST',
-            url: "phpServices/advice/adviceService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.bringPrescribedAdvice();
-        });
+		
+		AdviceService.delPrescibtionAdvice.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.bringPrescribedAdvice();
+			} else {
+			}
+		});
 	};
 	
 	/*$scope.bringINVDetail = function (){
@@ -202,37 +191,35 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 		$scope.adviceAdderData.lang = 0;
 		
 		var dataString = "query=1";
+		
+		AdviceService.getPrescribedAdvice.query({}, dataString).$promise.then(function (result) {
+			if (result && result.success) {
+				$scope.advcieSettingData = result;
+				angular.forEach($scope.advcieSettingData, function (value, key) {
+					if (parseInt(value.prescribedAdviceID) > 0) {
+						value.addedToPrescription = true;
+					} else {
+						value.addedToPrescription = false;
+					}
+				});
+			} else {
 
-        $http({
-            method: 'POST',
-            url: "phpServices/advice/adviceService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.advcieSettingData = result;
-        	angular.forEach($scope.advcieSettingData, function(value, key) {
-    			if(parseInt(value.prescribedAdviceID) > 0){
-    				value.addedToPrescription = true;
-    			}else{
-    				value.addedToPrescription = false;
-    			}
-    		});
-        });
+			}
+		});
 	};
 	
 	$scope.bringDoctorInfo = function (){
     	
         var dataString = "query=0";
-
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.doctorData = result;
-        	$rootScope.doctorData = $scope.doctorData;
-        });
+		
+		AdviceService.getDoctorInfo.query({}, dataString).$promise.then(function(result) {
+			if (result && result.success) {
+				$scope.doctorData = result;
+        		$rootScope.doctorData = $scope.doctorData;
+			}else{
+	
+			}
+		});
     };
     
     $scope.addAdvice = function (){
@@ -268,7 +255,7 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 	
 });
 
-app.controller('PrescribeAdviceController.AddAdvcieToDB', function($scope, $modalInstance, data, $http, $window, $location,limitToFilter) {
+app.controller('PrescribeAdviceController.AddAdvcieToDB', function($scope, $modalInstance, data, $window, $location,limitToFilter, AdviceService) {
 	
 	$scope.postData = data;
 	
@@ -284,15 +271,13 @@ app.controller('PrescribeAdviceController.AddAdvcieToDB', function($scope, $moda
 				
 			
 				var dataString = "query=7" + "&adviceName=" + $scope.name + '&pdf=' + $scope.code + '&lang=' + $scope.langSelector;
-
-		        $http({
-		            method: 'POST',
-		            url: "phpServices/advice/adviceService.php",
-		            data: dataString,
-		            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		        }).success(function (result) {
-		        	$modalInstance.dismiss('cancel');
-		        });
+				
+				AdviceService.delDoctorAdvice.query({}, dataString).$promise.then(function (result) {
+					if (result && result.success) {
+						$modalInstance.dismiss('cancel');
+					} else {
+					}
+				});
 		        
 			}else{
 				$scope.error = true;

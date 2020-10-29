@@ -1,4 +1,4 @@
-app.controller('invReportController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $upload) {
+app.controller('invReportController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $upload, InvReportService) {
 	
 	$scope.patientData = {};
 	$scope.oldAppoinmentList =[];
@@ -10,14 +10,13 @@ app.controller('invReportController', function($scope, $http, $modal, $rootScope
 
 		var dataString = "query=0";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/prescription/prescriptionHelperService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.patientData = result;
-        	$scope.bringPatientOldReport();
+        InvReportService.getPatientInfo.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.patientData = result;
+        	    $scope.bringPatientOldReport();
+            }else{
+    
+            }
         });
 	};
 
@@ -26,33 +25,32 @@ app.controller('invReportController', function($scope, $http, $modal, $rootScope
     	
 		var dataString = "query=0";
 
-        $http({
-            method: 'POST',
-            url: "phpServices/invReports/invReportDateHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-        	$scope.oldReportList = result;
-        	if($scope.oldReportList.length > 0){
-                $scope.appoinmentData.selector = $scope.oldReportList[0];
-                $scope.getInvReports($scope.appoinmentData.selector.reportDate);
-			}
+        InvReportService.getInvReportDate.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.oldReportList = result;
+                if ($scope.oldReportList.length > 0) {
+                    $scope.appoinmentData.selector = $scope.oldReportList[0];
+                    $scope.getInvReports($scope.appoinmentData.selector.reportDate);
+                }
+            } else {
+
+            }
         });
     };
     
     $scope.getInvReports = function(reportDate){
         $scope.prescriptionViewDate = reportDate;
     	var dataString = "query=1" + '&formattedDate=' + reportDate;
-        $http({
-            method: 'POST',
-            url: "phpServices/invReports/invReportDateHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.showPrescriptionView = true;
-        	$scope.invReportList = result;
-            if($scope.invReportList){
-                $scope.showLastUploadedPhoto($scope.invReportList[0]);
+        
+        InvReportService.getInvReportDateLocation.query({}, dataString).$promise.then(function (result) {
+            if (result && result.success) {
+                $scope.showPrescriptionView = true;
+                $scope.invReportList = result;
+                if ($scope.invReportList) {
+                    $scope.showLastUploadedPhoto($scope.invReportList[0]);
+                }
+            } else {
+
             }
         });
     };

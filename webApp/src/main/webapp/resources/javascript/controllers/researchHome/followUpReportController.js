@@ -1,4 +1,4 @@
-app.controller('FollowUpReportController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, $window) {
+app.controller('FollowUpReportController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, $window, FollowUpReportService) {
 
 
     $scope.search = function () {
@@ -44,7 +44,7 @@ app.controller('FollowUpReportController', function($scope, $http, $modal, $root
         var  dataString='data='+  term +'&query='+68;
         return $http({
             method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
+            url: "rest/autoComplete/appointment",
             data: dataString,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
@@ -57,13 +57,13 @@ app.controller('FollowUpReportController', function($scope, $http, $modal, $root
     $scope.getPatientType = function () {
 
         var dataString = "query=58" + "&doctorType=" + 1;
-        $http({
-            method: 'POST',
-            url: "phpServices/appointment/appointmentHelper.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.patientTypeList = result;
+        
+        FollowUpReportService.getDataFromPatioentType.query({}, $scope.searchData).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.patientTypeList = result;
+            }else{
+    
+            }
         });
     };
 

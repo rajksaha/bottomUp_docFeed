@@ -1,4 +1,4 @@
-app.controller('InvCategoryController', function($scope, $http, $modal, $rootScope, limitToFilter, $location) {
+app.controller('InvCategoryController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, InvCategoryService) {
 
 
     $scope.invCategoryList = [];
@@ -14,13 +14,13 @@ app.controller('InvCategoryController', function($scope, $http, $modal, $rootSco
         $scope.hasError = false;
         var dataString = "query=14"+ '&perPage=' + $scope.pageInfo.perPage + '&from=' + $scope.pageInfo.from;
         $scope.pageInfo.to = parseInt($scope.pageInfo.from)  + parseInt($scope.pageInfo.perPage);
-        $http({
-            method: 'POST',
-            url: "phpServices/inv/invCategoryService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.invList = result;
+
+        InvCategoryService.getInvCategoryList.query({}, dataString).$promise.then(function(result) {
+            if (result && result.success) {
+                $scope.invList = result;
+            }else{
+    
+            }
         });
     };
     
@@ -29,14 +29,14 @@ app.controller('InvCategoryController', function($scope, $http, $modal, $rootSco
             var dataString = "query=16"+ '&invList=' + JSON.stringify($scope.invList);
 
             $scope.pageInfo.to = parseInt($scope.pageInfo.from)  + parseInt($scope.pageInfo.perPage);
-            $http({
-                method: 'POST',
-                url: "phpServices/inv/invCategoryService.php",
-                data: dataString,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (result) {
-                $scope.pageInfo.from += $scope.pageInfo.perPage;
-                $scope.bringInvCategoryData();
+
+            InvCategoryService.updateInvByCategoryId.query({}, dataString).$promise.then(function (result) {
+                if (result && result.success) {
+                    $scope.pageInfo.from += $scope.pageInfo.perPage;
+                    $scope.bringInvCategoryData();
+                } else {
+
+                }
             });
         }else{
             $scope.hasError = true;
@@ -52,14 +52,13 @@ app.controller('InvCategoryController', function($scope, $http, $modal, $rootSco
        
        var dataString = "query=15";
 
-       $http({
-           method: 'POST',
-           url: "phpServices/inv/invCategoryService.php",
-           data: dataString,
-           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-       }).success(function (result) {
-           $scope.invCategoryList = result;
-       });
+       InvCategoryService.getCategoryOfInv.query({}, dataString).$promise.then(function (result) {
+        if (result && result.success) {
+            $scope.invCategoryList = result;
+        } else {
+
+        }
+    });
    };
 
 
