@@ -14,6 +14,7 @@ public class PermissionData extends BaseData {
     private String functionCode;
     private String shortName;
     private Boolean isAssigned;
+    private Integer isUserDefined;
 
     public Long getPermissionID() {
         return permissionID;
@@ -61,5 +62,13 @@ public class PermissionData extends BaseData {
 
     public void setCompanyModuleName(String companyModuleName) {
         this.companyModuleName = companyModuleName;
+    }
+
+    public Integer getIsUserDefined() {
+        return isUserDefined;
+    }
+
+    public void setIsUserDefined(Integer isUserDefined) {
+        this.isUserDefined = isUserDefined;
     }
 }

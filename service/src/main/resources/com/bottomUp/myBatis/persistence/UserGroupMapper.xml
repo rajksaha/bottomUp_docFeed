@@ -14,6 +14,7 @@
 			`longDesc`,
 			`companyID`,
 			`companyModuleID`,
+			`isUserDefined`,
 			`updatedOn`,
 			`updatedBy`,
 			`createdOn`,
@@ -25,6 +26,7 @@
 			#{longDesc},
 			#{companyID},
 			#{companyModuleID},
+			#{isUserDefined},
 			#{updatedOn},
 			#{updatedBy},
 			#{createdOn},
@@ -42,6 +44,7 @@
 		`shortName` = #{shortName},
 		`longDesc` = #{longDesc},
 		`companyModuleID` = #{companyModuleID},
+		`isUserDefined` = #{isUserDefined},
 		`updatedOn` = #{updatedOn},
 		`updatedBy` = #{updatedBy}
 		WHERE `userGroupID` = #{userGroupID};
@@ -55,6 +58,7 @@
 			eug.`longDesc`,
 			eug.`companyID`,
 			eug.`companyModuleID`,
+			eug.`isUserDefined`,
 			ecm.shortName AS companyModuleName,
             ec.companyName AS companyName,
             em.moduleName AS moduleName,
@@ -79,6 +83,7 @@
 		eug.`longDesc`,
 		eug.`companyID`,
 		eug.`companyModuleID`,
+		eug.`isUserDefined`,
 		eug.`updatedOn`,
 		eug.`updatedBy`,
 		eug.`createdOn`,
@@ -93,6 +98,9 @@
 		</if>
 		<if test="userGroupCode != null">
 			AND eug.longDesc = #{userGroupCode}
+		</if>
+		<if test="isUserDefined != null">
+			AND eug.isUserDefined = #{isUserDefined}
 		</if>
 
 	</select>
@@ -132,6 +140,9 @@
 		<if test="companyModuleID != null">
 			AND eug.companyModuleID = #{companyModuleID}
 		</if>
+		<if test="isUserDefined != null">
+			AND eug.isUserDefined = #{isUserDefined}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}
@@ -159,6 +170,9 @@
 		<if test="companyModuleID != null">
 			AND eug.companyModuleID = #{companyModuleID}
 		</if>
+		<if test="isUserDefined != null">
+			AND eug.isUserDefined = #{isUserDefined}
+		</if>
 
 	</select>
 
@@ -183,6 +197,9 @@
 		WHERE 1 = 1
 		<if test="companyID != null">
 			AND eug.companyID = #{companyID}
+		</if>
+		<if test="isUserDefined != null">
+			AND eug.isUserDefined = #{isUserDefined}
 		</if>
 	</select>
 

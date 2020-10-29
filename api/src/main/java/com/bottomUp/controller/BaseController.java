@@ -3,12 +3,12 @@ package com.bottomUp.controller;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.BottomUpUserDetail;
 import com.bottomUp.domain.common.BaseData;
-import com.bottomUp.utility.DateUtil;
 import com.itextpdf.text.DocumentException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.security.core.context.SecurityContextHolder;
+import utility.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,11 +31,6 @@ public class BaseController {
     public BottomUpUserDetail getUserDetail() {
         return (BottomUpUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
-
-    public Date getCurrentDate(){
-        return DateUtil.getDateOnly(new Date());
-    }
-
     public Map<String, Object> parseParameter(HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         Enumeration names = request.getParameterNames();

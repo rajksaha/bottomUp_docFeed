@@ -1,13 +1,14 @@
 package com.bottomUp.model;
 
+import com.bottomUp.domain.common.BaseData;
+
 /**
  * Created by raj on 10/24/2020.
  */
-public class PatientViewData {
+public class PatientViewData extends BaseData {
 
     private long patientID;
     private long userID;
-    private long userProfileID;
     private String patientCode;
     private String occupation;
     private String referredBy;
@@ -15,6 +16,7 @@ public class PatientViewData {
     private String bedNum;
     private String wardNum;
     private String headOfUnit;
+    private long userProfileID;
     private String userName;
     private String firstName;
     private String lastName;
@@ -22,6 +24,7 @@ public class PatientViewData {
     private String sex;
     private String contactNo;
     private String emailAddress;
+
 
     public long getPatientID() {
         return patientID;

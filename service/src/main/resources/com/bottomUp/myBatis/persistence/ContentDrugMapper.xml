@@ -80,7 +80,7 @@
 			AND drugID = #{drugID}
 		</if>
 		<if test="term != null">
-			AND drugName LIKE '%'${term}
+			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>
 		<if test="typeID != null">
 			AND typeID = #{typeID}

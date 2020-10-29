@@ -36,15 +36,21 @@ public class PermissionController extends BaseController {
 
         Map<String, Object> params = this.parseParameter(request);
         params.put("companyID", this.getUserDetail().getCompanyData().getCompanyID());
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("isUserDefined", 1);
+        }
         List<PermissionData> permissionDataList = this.permissionService.getByParam(params);
-
         return this.buildResultForGrid(permissionDataList, permissionDataList.size(), params);
     }
 
     @RequestMapping(value = {"/getAllPermission"}, method = RequestMethod.GET)
     @ResponseBody
     public List<PermissionData> getAllPermission(HttpServletRequest request) throws BottomUpException {
-        return this.permissionService.getByParam(null);
+        Map<String, Object> params = new HashMap<String, Object>();
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("isUserDefined", 1);
+        }
+        return this.permissionService.getByParam(params);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -52,6 +58,9 @@ public class PermissionController extends BaseController {
     public Map<String, Object> save(@RequestBody PermissionData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
+        if(data.getIsUserDefined() == null && this.getUserDetail().getDoctorData() != null){
+            data.setIsUserDefined(1);
+        }
         this.permissionService.create(data);
         return result;
     }

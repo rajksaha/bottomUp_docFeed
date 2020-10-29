@@ -3,8 +3,9 @@ package com.bottomUp.domain;
 
 import com.bottomUp.domain.common.BaseData;
 
-import java.sql.Date;
 import java.sql.Time;
+import java.util.Date;
+
 
 public class AppointmentData extends BaseData {
 

@@ -1,6 +1,6 @@
 
 
-package com.bottomUp.utility;
+package utility;
 
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.time.DateUtils;
@@ -324,7 +324,7 @@ public class DateUtil
     public static Date getStringToDate(String dateStr, String dateFormate) {
     	Date d = null;
     	String pattern = "MM/dd/yyy";
-    	if(dateFormate != null && !dateFormate.isEmpty()){
+    	if(dateFormate != null){
     		pattern = dateFormate;
     	}
     	SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -465,7 +465,6 @@ public class DateUtil
 
     /**
      * add check in time from properties file
-     * @param timestamp
      * @return
      */
 

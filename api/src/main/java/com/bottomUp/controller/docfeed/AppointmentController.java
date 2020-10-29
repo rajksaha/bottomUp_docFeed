@@ -4,11 +4,13 @@ import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.AppointmentData;
+import com.bottomUp.model.AppointmentViewData;
+import com.bottomUp.service.docFeed.AppointmentViewService;
 import com.bottomUp.service.docFeed.crud.AppointmentService;
-import com.bottomUp.utility.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import utility.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +28,9 @@ public class AppointmentController extends BaseController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private AppointmentViewService appointmentViewService;
 
     @RequestMapping(value = {"/visitPatient"}, method = RequestMethod.POST)
     @ResponseBody
@@ -56,6 +61,15 @@ public class AppointmentController extends BaseController {
         this.appointmentService.create(data);
         result.put("success", true);
         result.put("appointmentData", data);
+        return result;
+    }
+
+    @RequestMapping(value = {"/createAppForNewPatient"}, method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> createAppForNewPatient(@RequestBody AppointmentViewData viewData) throws BottomUpException {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", true);
+        appointmentViewService.createForNewPatient(viewData, this.getUserDetail().getCompanyData().getCompanyID());
         return result;
     }
 

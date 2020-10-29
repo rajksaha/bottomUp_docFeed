@@ -59,16 +59,7 @@ public class BottomUpUserDetailsService implements org.springframework.security.
             }
 
             if (userData.getStatus() == null || userData.getStatus().equals(0)) {
-                if(userData.getUserProfileData() != null && userData.getUserProfileData().getLastWorkingDay() != null){
-                    Timestamp toDay = new Timestamp(new Date().getTime());
-                    Date date = DateUtils.truncate(new Date(), Calendar.DATE);
-                    Date lastDate = new Date(userData.getUserProfileData().getLastWorkingDay().getTime());
-                    if(date.compareTo(lastDate) > 0){
-                        throw new BadCredentialsException("Your account is deactivated. Please contact with administrator");
-                    }
-                }else{
-                    throw new BadCredentialsException("Your account is deactivated. Please contact with administrator");
-                }
+                throw new BadCredentialsException("Your account is deactivated. Please contact with administrator");
             }
 
             if (BooleanUtils.toBoolean(userData.getIsBlocked())) {

@@ -22,22 +22,26 @@ public class UserProfileData extends BaseData {
     private String emailAddress;
     private Integer status;
     private Long companyID;
-    private Timestamp lastWorkingDay;
-    private String startTime;
-    private String endTime;
     private String contactNo;
-    private BigDecimal fee;
-    private String weeklyOff;
     private Timestamp dateOfBirth;
-    private Integer categoryID;
-    private Integer userType;
+    private Long doctorID;
     private String sex;
     private String JsonString;
     private Boolean isCompanyAdmin;
+    private Integer isDoctor;
+    private String doctorCode;
 
     private List<CompanyLevelData> companyLevelList;
     private List<UserGroupAssignmentData> groupAssignmentList;
     private List<UserGroupData> userGroupList;
+
+    public String getDoctorCode() {
+        return doctorCode;
+    }
+
+    public void setDoctorCode(String doctorCode) {
+        this.doctorCode = doctorCode;
+    }
 
     public Long getUserProfileID() {
         return userProfileID;
@@ -111,52 +115,12 @@ public class UserProfileData extends BaseData {
         this.companyID = companyID;
     }
 
-    public Timestamp getLastWorkingDay() {
-        return lastWorkingDay;
-    }
-
-    public void setLastWorkingDay(Timestamp lastWorkingDay) {
-        this.lastWorkingDay = lastWorkingDay;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     public String getContactNo() {
         return contactNo;
     }
 
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
-    }
-
-    public BigDecimal getFee() {
-        return fee;
-    }
-
-    public void setFee(BigDecimal fee) {
-        this.fee = fee;
-    }
-
-    public String getWeeklyOff() {
-        return weeklyOff;
-    }
-
-    public void setWeeklyOff(String weeklyOff) {
-        this.weeklyOff = weeklyOff;
     }
 
     public Timestamp getDateOfBirth() {
@@ -167,20 +131,12 @@ public class UserProfileData extends BaseData {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Integer getCategoryID() {
-        return categoryID;
+    public Long getDoctorID() {
+        return doctorID;
     }
 
-    public void setCategoryID(Integer categoryID) {
-        this.categoryID = categoryID;
-    }
-
-    public Integer getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Integer userType) {
-        this.userType = userType;
+    public void setDoctorID(Long doctorID) {
+        this.doctorID = doctorID;
     }
 
     public String getSex() {
@@ -189,6 +145,22 @@ public class UserProfileData extends BaseData {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getJsonString() {
+        return JsonString;
+    }
+
+    public void setJsonString(String jsonString) {
+        JsonString = jsonString;
+    }
+
+    public Boolean getCompanyAdmin() {
+        return isCompanyAdmin;
+    }
+
+    public void setCompanyAdmin(Boolean companyAdmin) {
+        isCompanyAdmin = companyAdmin;
     }
 
     public List<CompanyLevelData> getCompanyLevelList() {
@@ -215,19 +187,11 @@ public class UserProfileData extends BaseData {
         this.userGroupList = userGroupList;
     }
 
-    public String getJsonString() {
-        return JsonString;
+    public Integer getIsDoctor() {
+        return isDoctor;
     }
 
-    public void setJsonString(String jsonString) {
-        JsonString = jsonString;
-    }
-
-    public Boolean getCompanyAdmin() {
-        return isCompanyAdmin;
-    }
-
-    public void setCompanyAdmin(Boolean companyAdmin) {
-        isCompanyAdmin = companyAdmin;
+    public void setIsDoctor(Integer isDoctor) {
+        this.isDoctor = isDoctor;
     }
 }

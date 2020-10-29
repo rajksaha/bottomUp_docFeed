@@ -20,6 +20,7 @@ public class UserGroupData extends BaseData {
     private String moduleName;
 
     private Boolean isAssigned;
+    private Integer isUserDefined;
 
     private List<PermissionData> groupPermissionList;
 
@@ -101,5 +102,13 @@ public class UserGroupData extends BaseData {
 
     public void setCompanyID(Long companyID) {
         this.companyID = companyID;
+    }
+
+    public Integer getIsUserDefined() {
+        return isUserDefined;
+    }
+
+    public void setIsUserDefined(Integer isUserDefined) {
+        this.isUserDefined = isUserDefined;
     }
 }

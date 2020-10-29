@@ -41,8 +41,11 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
     $scope.columnDefinition = [
         {columnHeaderDisplayName: 'SL', displayProperty: 'serial', width: '4em'},
         {columnHeaderDisplayName: 'Name', displayProperty: 'firstName', sortKey: 'firstName'},
-        {columnHeaderDisplayName: 'Employee Code', displayProperty: 'userName', sortKey: 'userName'},
-        {columnHeaderDisplayName: 'Action', templateUrl: 'action_template', width: '30em'}
+        {columnHeaderDisplayName: 'User Code', displayProperty: 'userName', sortKey: 'userName'},
+        {columnHeaderDisplayName: 'Email', displayProperty: 'emailAddress', sortKey: 'emailAddress'},
+        {columnHeaderDisplayName: 'Phone', displayProperty: 'contactNo', sortKey: 'contactNo'},
+        {columnHeaderDisplayName: 'status', templateUrl: "active_template", sortKey: 'status'},
+        {columnHeaderDisplayName: 'Action', templateUrl: 'action_template', width: '5em'}
     ];
 
     $scope.bringData = function(){
@@ -153,6 +156,7 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
     $scope.add = function(){
         $scope.userProfile = {};
         $scope.userProfile.companyAdmin = false;
+        $scope.userProfile.isDoctor = 0;
         $scope.reset();
         $scope.showForm = true;
     };

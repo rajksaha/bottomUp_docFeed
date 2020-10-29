@@ -61,7 +61,7 @@
 			AND diseaseID = #{diseaseID}
 		</if>
 		<if test="term != null">
-			AND diseaseName LIKE '%'${term}
+			AND LOWER(diseaseName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

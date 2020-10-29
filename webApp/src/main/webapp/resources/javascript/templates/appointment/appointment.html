@@ -16,13 +16,13 @@
             <label>Follow up Patient</label>
         </div>
     </div>
-    <div data-ng-if="hasAccessMenu('8')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(3)">
+    <div data-ng-if="hasAccess('8')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(3)">
         <div class="item-box">
             <i class="fa fa-user-md fa-3x"></i>
             <label>Research</label>
         </div>
     </div>
-    <div data-ng-if="hasAccessMenu('2')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(4)">
+    <div data-ng-if="hasAccess('2')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(4)">
         <div class="item-box">
             <i class="fa fa-cogs fa-3x"></i>
             <label>Setting</label>
@@ -70,7 +70,7 @@
 	</section>
 
 <hr>
-<div class="panel col-md-12 appointment" data-ng-if="hasAccessMenu('16')">
+<div class="panel col-md-12 appointment" data-ng-if="hasAccess('16')">
     <div class="col-md-8 panel panel-primary mainPanelColor panel1" style="padding-top: 12px;padding-bottom: 12px">
         <div  style="padding-top: 25px;">
             <div class="col-xs-12  col-lg-14" >
@@ -120,7 +120,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 panel panel-primary mainPanelColor panel1" style="padding-left:0;padding-right:0;padding-top: 12px;padding-bottom: 12px; height: 560px;" data-ng-if="hasAccessMenu('18')" >
+    <div class="col-md-4 panel panel-primary mainPanelColor panel1" style="padding-left:0;padding-right:0;padding-top: 12px;padding-bottom: 12px; height: 560px;" data-ng-if="hasAccess('18')" >
         <div>
             <div class="col-xs-12 col-lg-12" >
                 <div id="chartContainer1" style="height: 300px; width: 100%;"></div>

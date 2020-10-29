@@ -3,9 +3,15 @@ package com.bottomUp.service.docFeed.crud;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.AppointmentData;
 import com.bottomUp.myBatis.persistence.AppointmentMapper;
+import org.apache.commons.lang3.time.DateUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +26,12 @@ public class AppointmentService {
     private AppointmentMapper appointmentMapper;
 
     public void create(AppointmentData data) throws BottomUpException {
+
+        if(data.getDate() == null ){
+            DateTime now = new DateTime();
+            data.setDate(now.toDate());
+            data.setTime(Time.valueOf(now.toString()));
+        }
         this.appointmentMapper.create(data);
     }
 

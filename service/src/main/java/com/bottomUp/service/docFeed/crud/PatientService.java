@@ -24,8 +24,8 @@ public class PatientService {
     @Autowired
     private PatientMapper patientMapper;
 
-    public void create(PatientViewData data) throws BottomUpException {
-        patientMapper.create(data.getPatientData());
+    public void create(PatientData data) throws BottomUpException {
+        patientMapper.create(data);
     }
 
     public void update(PatientData data) throws BottomUpException {

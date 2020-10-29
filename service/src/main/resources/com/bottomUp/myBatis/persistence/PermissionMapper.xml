@@ -13,6 +13,7 @@
 			`companyModuleID`,
 			`functionCode`,
 			`shortName`,
+			`isUserDefined`,
 			`updatedOn`,
 			`updatedBy`,
 			`createdOn`,
@@ -23,6 +24,7 @@
 			#{companyModuleID},
 			#{functionCode},
 			#{shortName},
+			#{isUserDefined},
 			#{updatedOn},
 			#{updatedBy},
 			#{createdOn},
@@ -38,6 +40,7 @@
 		`companyModuleID` = #{companyModuleID},
 		`functionCode` = #{functionCode},
 		`shortName` = #{shortName},
+		`isUserDefined` = #{isUserDefined},
 		`updatedOn` = #{updatedOn},
 		`updatedBy` = #{updatedBy}
 		WHERE `permissionID` = #{permissionID};
@@ -51,6 +54,7 @@
 			`cm.shortName` AS companyModuleName,
 			`p.functionCode`,
 			`p.shortName`,
+			`p.isUserDefined`,
 			`p.updatedOn`,
 			`p.updatedBy`,
 			`p.createdOn`,
@@ -70,6 +74,7 @@
 		ecm.`shortName` AS companyModuleName,
 		ep.`functionCode`,
 		ep.`shortName`,
+		ep.`isUserDefined`,
 		ep.`updatedOn`,
 		ep.`updatedBy`,
 		ep.`createdOn`,
@@ -84,7 +89,9 @@
 		<if test="companyID != null">
 			AND ec.companyID = #{companyID}
 		</if>
-
+		<if test="isUserDefined != null">
+			AND ep.isUserDefined = #{isUserDefined}
+		</if>
 	</select>
 
 	<select id="getCompanyModulePermission" parameterType="map" resultType="Permission">
@@ -95,6 +102,7 @@
 			ep.`companyModuleID`,
 			ep.`functionCode`,
 			ep.`shortName`,
+			ep.`isUserDefined`,
 			ep.`updatedOn`,
 			ep.`updatedBy`,
 			ep.`createdOn`,
@@ -107,10 +115,12 @@
 		JOIN bottom_up_company_module ecm ON ecm.companyModuleID = ep.companyModuleID
         LEFT JOIN bottom_up_group_permission egp ON ep.permissionID = egp.permissionID AND egp.userGroupID = #{userGroupID}
 		WHERE 1 = 1
+		<if test="isUserDefined != null">
+			AND ep.isUserDefined = #{isUserDefined}
+		</if>
 		<if test="companyID != null">
 			AND ecm.companyID = #{companyID}
 		</if>
-
 	</select>
 
 

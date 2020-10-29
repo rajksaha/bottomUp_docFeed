@@ -65,7 +65,7 @@
 			AND invID = #{invID}
 		</if>
 		<if test="term != null">
-			AND name LIKE '%'${term}
+			AND LOWER(name) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>
 		<if test="categoryID != null">
 			AND categoryID = #{categoryID}

@@ -35,6 +35,9 @@ public class GroupPermissionController extends BaseController {
 
         params.put("userGroupID", data.getEntityID());
         params.put("companyID", data.getEntityType() == null ? this.getUserDetail().getUserProfilePermissionData().getCompanyID() : data.getEntityType());
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("isUserDefined", 1);
+        }
         return this.userGroupService.getCompanyModulePermission(params);
     }
 

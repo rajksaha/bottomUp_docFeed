@@ -13,18 +13,11 @@
 			`userID`,
 			`firstName`,
 			`lastName`,
-			`employeeCode`,
 			`emailAddress`,
-			`lastWorkingDay`,
 			`sex`,
-			`startTime`,
-			`endTime`,
 			`dateOfBirth`,
-			`fee`,
-			`categoryID`,
+			`doctorID`,
 			`contactNo`,
-			`userType`,
-			`weeklyOff`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -35,18 +28,11 @@
 			#{userID},
 			#{firstName},
 			#{lastName},
-			#{employeeCode},
 			#{emailAddress},
-			#{lastWorkingDay},
 			#{sex},
-			#{startTime},
-			#{endTime},
 			#{dateOfBirth},
-			#{fee},
-			#{categoryID},
+			#{doctorID},
 			#{contactNo},
-			#{userType},
-			#{weeklyOff},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -64,14 +50,8 @@
 			`lastName` = #{lastName},
 			`sex` = #{sex},
 			`emailAddress` = #{emailAddress},
-			`startTime` = #{startTime},
-			`endTime` = #{endTime},
 			`dateOfBirth` = #{dateOfBirth},
-			`lastWorkingDay` = #{lastWorkingDay},
-			`fee` = #{fee},
-			`categoryID` = #{categoryID},
-			`userType` = #{userType},
-			`weeklyOff` = #{weeklyOff},
+			`doctorID` = #{doctorID},
 			`contactNo` = #{contactNo},
 			`updatedBy` = #{updatedBy},
 			`updatedOn` = #{updatedOn}
@@ -87,17 +67,10 @@
 			`eup`.`firstName`,
 			`eup`.`lastName`,
 			`eup`.`sex`,
-			`eup`.`employeeCode`,
 			`eup`.`emailAddress`,
-			`eup`.`lastWorkingDay`,
-			`eup`.`startTime`,
-			`eup`.`endTime`,
 			`eup`.`dateOfBirth`,
-			`eup`.`fee`,
-			`eup`.`categoryID`,
+			`eup`.`doctorID`,
 			`eup`.`contactNo`,
-			`eup`.`userType`,
-			eup.weeklyOff,
 			`eup`.`updatedBy`,
 			`eup`.`updatedOn`,
 			`eup`.`createdBy`,
@@ -119,17 +92,10 @@
 			`eup`.`firstName`,
 			`eup`.`lastName`,
 			`eup`.`sex`,
-			`eup`.`employeeCode`,
 			`eup`.`emailAddress`,
-			`eup`.`lastWorkingDay`,
-			`eup`.`startTime`,
-			`eup`.`endTime`,
 			`eup`.`dateOfBirth`,
-			`eup`.`fee`,
-			`eup`.`categoryID`,
+			`eup`.`doctorID`,
 			`eup`.`contactNo`,
-			`eup`.`userType`,
-			eup.weeklyOff,
 			`eup`.`updatedBy`,
 			`eup`.`updatedOn`,
 			`eup`.`createdBy`,
@@ -146,20 +112,17 @@
 		<if test="userID != null">
 			AND eup.userID = #{userID}
 		</if>
+		<if test="userName != null">
+			AND eu.userName = #{userName}
+		</if>
 		<if test="companyID != null">
 			AND eu.companyID = #{companyID}
 		</if>
-		<if test="userType != null">
-			AND eup.userType = #{userType}
-		</if>
-		<if test="employeeCode != null">
-			AND eup.employeeCode = #{employeeCode}
+		<if test="doctorID != null">
+			AND eup.doctorID = #{doctorID}
 		</if>
 		<if test="likeFirstName != null">
 			AND LOWER(eup.firstName) LIKE LOWER(CONCAT('%',#{likeFirstName},'%')) LIMIT 20
-		</if>
-		<if test="likeStaffCode != null">
-			AND LOWER(eup.employeeCode) LIKE LOWER(CONCAT('%',#{likeStaffCode},'%')) LIMIT 20
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

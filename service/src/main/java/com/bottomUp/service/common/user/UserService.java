@@ -5,14 +5,12 @@ import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.common.queue.QueueProducer;
 import com.bottomUp.common.utility.EmailType;
 import com.bottomUp.common.utility.PasswordEncryptor;
+import com.bottomUp.domain.DoctorData;
 import com.bottomUp.domain.common.user.UserData;
 import com.bottomUp.domain.common.user.UserGroupAssignmentData;
 import com.bottomUp.domain.common.user.UserGroupData;
 import com.bottomUp.domain.common.user.UserProfileData;
-import com.bottomUp.myBatis.persistence.UserGroupAssignmentMapper;
-import com.bottomUp.myBatis.persistence.UserGroupMapper;
-import com.bottomUp.myBatis.persistence.UserMapper;
-import com.bottomUp.myBatis.persistence.UserProfileMapper;
+import com.bottomUp.myBatis.persistence.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -49,6 +47,9 @@ public class UserService {
 
     @Autowired
     private UserGroupAssignmentMapper userGroupAssignmentMapper;
+
+    @Autowired
+    private DoctorMapper doctorMapper;
 
 
     public UserData getUserByUserName(String userName) throws BottomUpException {
@@ -91,6 +92,13 @@ public class UserService {
         userData.setStatus(2);
         userData.setIsBlocked(false);
         this.create(userData);
+        if(userProfileData.getIsDoctor() != null && userProfileData.getIsDoctor() == 1){
+            DoctorData doctorData = new DoctorData();
+            doctorData.setUserID(userData.getUserID());
+            doctorData.setDoctorCode(userProfileData.getDoctorCode());
+            this.doctorMapper.create(doctorData);
+            userProfileData.setDoctorID(doctorData.getDoctorID());
+        }
         userProfileData.setUserID(userData.getUserID());
         this.userProfileMapper.create(userProfileData);
 

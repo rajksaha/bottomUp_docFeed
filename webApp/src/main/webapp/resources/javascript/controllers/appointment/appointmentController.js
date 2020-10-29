@@ -4,7 +4,6 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
  	$scope.limit = 10;
  	$scope.addMoreToLimit = 10;
  	$scope.appointmentList = [];
- 	$scope.doctorData = {};
  	$scope.followUpSearch = false;
  	$scope.patientName = "";
  	$scope.addAppointMentData = {};
@@ -22,29 +21,7 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     };
  	
     $scope.bringDoctorInfo = function (){
-
-        var dataString = "query=2";
-
-        AppointmentService.getAccessInfo.query({}, dataString).$promise.then(function(result) {
-            if (result && result.success) {
-                $scope.userAccessInfo = result;
-                $rootScope.userAccessInfo = $scope.userAccessInfo;
-                $scope.initiateDashboard();
-            }else{
-                $location.path("/login");  
-            }
-        });
-
-        dataString = "query=0";
-
-        AppointmentService.getDoctorData.query({}, dataString).$promise.then(function(result) {
-            if(result.length == 0){
-                $scope.doctorData = result;
-                $rootScope.doctorData = $scope.doctorData;
-            }else{
-                $location.path("/login");
-            }
-        });
+        //$scope.initiateDashboard();
     };
 
     $scope.renderGraph = function (result, container) {
@@ -118,11 +95,10 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     };
 
     $scope.hasAccess = function(accessKey){
-        if($scope.userAccessInfo){
-            if($scope.userAccessInfo.userType == 'DOCTOR'){return true;}
-            var temp = $filter('filter')($scope.userAccessInfo.accessList, {accessCode: accessKey}, true)[0];
-            return temp == null ? false : true;
+        if($rootScope.userData.permissions['DOCTOR'] || $rootScope.userData.permissions[accessKey]){
+            return true;
         }
+        return false;
 
     };
 
@@ -148,11 +124,6 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     	$scope.followUpSearch = false;
     	$scope.patientName = "";
     	$scope.addByName = false;
-    	var currentDate = new Date();
-    	var filteredDate = $filter('date')(currentDate, "yyyy-MM-dd");
-    	
-    	var  dataString='filteredDate='+  filteredDate +'&query='+1;
-
         AppointmentService.getByParam.query({}, {}).$promise.then(function(result) {
             if(result.length == 0){
                 $scope.appointmentList = result;
@@ -164,20 +135,10 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     };
     
     $scope.addNewAppointment = function () {
-    	
-    	var addAppointAdderData = {};
-    		addAppointAdderData.doctorCode = $scope.doctorData.doctorCode;
-    		addAppointAdderData.personCodeInitial = $scope.doctorData.personCodeInitial;
-
     	var modalInstance = $modal.open({
-            templateUrl: 'javascript/templates/appointment/addNewPatient.html',
+            templateUrl: 'resources/javascript/templates/appointment/addNewPatient.html',
             windowClass: 'fade in',
             controller: 'AppointmentController.AddNewPatientController',
-            resolve: {
-                modalConfig: function () {
-                    return addAppointAdderData;
-                }
-            },
             backdrop: 'static'
         });
         modalInstance.result.then(function(result) {
@@ -206,12 +167,9 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     	window.location = "followUpAppoinment.php";
     };
     
-    $scope.letsPrescribe = function (appointMentData){
-    	
-
-        var  dataString = 'patientCode='+ appointMentData.patientCode  +'&patientID='+ appointMentData.patientID +'&appointmentID='+ appointMentData.appointmentID +'&query='+4;
-
-        AppointmentService.makePrescription.query({}, $scope.dataString).$promise.then(function(result) {
+    $scope.letsPrescribe = function (appointmentData){
+        var  dataString = 'appointmentID='+ appointmentData.appointmentID;
+        AppointmentService.visitPatient.query({}, dataString).$promise.then(function(result) {
             if (result && result.success) {
                 $location.path("/prescription");
             }else{
@@ -311,7 +269,7 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
      	var filteredDate = $filter('date')(currentDate, "yyyy-MM-dd");
      	
     	 
-    	 var  dataString='doctorCode='+ $scope.doctorData.doctorCode +'&patientCode='+  $scope.addAppointMentData.patientCode +'&doctorID='+ $scope.doctorData.doctorID +'&query='+3 + '&filteredDate='+  filteredDate;
+    	 var  dataString= 'patientCode='+  $scope.addAppointMentData.patientCode + '&filteredDate='+  filteredDate;
 
          AppointmentService.createAppointment.query({}, dataString).$promise.then(function (result) {
              if (result && result.success) {
@@ -373,7 +331,7 @@ app.controller('AppointmentController.InformationModalController', function($sco
 	
 	(function() {
 		
-		$scope.title = "Information"
+		$scope.title = "Information";
 		
 		//$scope.message = modalConfig.message;
 		
@@ -381,7 +339,7 @@ app.controller('AppointmentController.InformationModalController', function($sco
 	
 });
 
-app.controller('AppointmentController.AddNewPatientController', function($scope, $modalInstance, data, AppointmentService) {
+app.controller('AppointmentController.AddNewPatientController', function($scope, $modalInstance, AppointmentService) {
 	
 	$scope.patientData = {};
 	$scope.error = false;
@@ -393,26 +351,8 @@ app.controller('AppointmentController.AddNewPatientController', function($scope,
     $scope.patientData.referredBy = "";
 	
 	$scope.save = function (){
-		
 		if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
-			var dataString = 'doctorCode='+ data.addAppointAdderData.doctorCode +
-                '&doctorPatInitial='+ data.addAppointAdderData.personCodeInitial +
-                '&doctorID='+ $scope.doctorData.doctorID +
-			    '&name='+ $scope.patientData.name +
-                '&age='+ $scope.patientData.age +
-                '&address='+ $scope.patientData.address +
-                '&sex=' + $scope.patientData.sex +
-                '&phone='+ $scope.patientData.phone +
-                '&occupation='+ $scope.patientData.occupation +
-                '&referredBy='+ $scope.patientData.referredBy +
-                '&hospitalName='+ $scope.patientData.hospitalName +
-                '&bedNum='+ $scope.patientData.bedNum +
-                '&wardNum='+ $scope.patientData.wardNum +
-                '&headOfUnit='+ $scope.patientData.headOfUnit +
-                '&query=2';
-
-
-            AppointmentService.create.save({}, dataString ).$promise.then(function(result) {
+            AppointmentService.createAppForNewPatient.save({}, $scope.patientData ).$promise.then(function(result) {
                 if(result && result.success) {
                     $modalInstance.close(result);
                 }
@@ -420,9 +360,7 @@ app.controller('AppointmentController.AddNewPatientController', function($scope,
 		}else{
 			$scope.error = true;
 		}
-		
-
-    }
+    };
 	
 	$scope.cancel = function (){
 		$modalInstance.dismiss('cancel');

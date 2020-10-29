@@ -38,7 +38,7 @@ public class DoctorService {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("userID", userID);
         List<DoctorData> doctorDataList = this.doctorMapper.getByParam(param);
-        if(doctorDataList != null && doctorDataList.size() == 0){
+        if(doctorDataList != null && doctorDataList.size() == 1){
             return doctorDataList.get(0);
         }
         return null;

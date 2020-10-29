@@ -1,14 +1,17 @@
 package com.bottomUp.service.docFeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.domain.DoctorData;
 import com.bottomUp.domain.PatientData;
 import com.bottomUp.domain.common.user.UserData;
 import com.bottomUp.domain.common.user.UserProfileData;
+import com.bottomUp.model.DoctorViewData;
 import com.bottomUp.model.PatientViewData;
+import com.bottomUp.myBatis.persistence.DoctorMapper;
 import com.bottomUp.myBatis.persistence.PatientMapper;
 import com.bottomUp.myBatis.persistence.UserMapper;
+import com.bottomUp.myBatis.persistence.UserProfileMapper;
 import com.bottomUp.service.common.user.UserService;
-import org.apache.commons.beanutils.BeanUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
@@ -22,10 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class PatientViewService
+public class DoctorViewService
 {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PatientViewService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DoctorViewService.class);
 
     @Autowired
     private UserService userService;
@@ -34,55 +37,55 @@ public class PatientViewService
     private UserMapper userMapper;
 
     @Autowired
-    private PatientMapper patientMapper;
+    private DoctorMapper doctorMapper;
+
+    @Autowired
+    private UserProfileMapper userProfileMapper;
 
 
 
-    public PatientData create(PatientViewData patientViewData, Long companyID) throws BottomUpException{
-        PatientData patientData = new PatientData();
+    public DoctorViewData create(DoctorViewData doctorViewData, Long companyID) throws BottomUpException{
+        DoctorData doctorData = new DoctorData();
         try {
-            UserData userData = userMapper.getUserByUserName(patientViewData.getContactNo());
+            UserData userData = userMapper.getUserByUserName(doctorViewData.getDoctorCode());
             if(userData != null){
-                throw new BottomUpException("Phone Number Already in use with another Patient");
+                throw new BottomUpException("Doctor Code Already in use with another Doctor");
             }
             UserProfileData profileData = new UserProfileData();
             ModelMapper modelMapper = new ModelMapper();
             modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-            modelMapper.map(profileData, patientViewData);
-            profileData.setUserName(patientViewData.getContactNo());
+            modelMapper.map(profileData, doctorViewData);
+            profileData.setUserName(doctorViewData.getContactNo());
             userData = userService.createUserProfile(profileData, companyID);
-            modelMapper.map(patientData, patientViewData);
-            patientData.setUserID(userData.getUserID());
-            patientData.setPatientCode(this.createPatientCode());
-            patientMapper.create(patientData);
+            modelMapper.map(doctorData, doctorViewData);
+            doctorData.setUserID(userData.getUserID());
+            doctorMapper.create(doctorData);
+            profileData.setDoctorID(doctorData.getDoctorID());
+            userProfileMapper.update(profileData);
         }catch (Exception ex){
             LOGGER.error(ex.getMessage());
         }
-        return patientData;
+        return doctorViewData;
     }
 
-    public PatientViewData update(PatientViewData patientViewData) throws BottomUpException{
+    public DoctorViewData update(DoctorViewData doctorViewData) throws BottomUpException{
 
         try {
-            UserData userData = userMapper.getUserByUserName(patientViewData.getContactNo());
+            UserData userData = userMapper.getUserByUserName(doctorViewData.getDoctorCode());
             if(userData != null){
-                throw new BottomUpException("Phone Number Already in use with another Patient");
+                throw new BottomUpException("Doctor Code Already in use with another Doctor");
             }
             UserProfileData profileData = new UserProfileData();
             ModelMapper modelMapper = new ModelMapper();
             modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-            modelMapper.map(profileData, patientViewData);
+            modelMapper.map(profileData, doctorViewData);
             userService.updateUserProfile(profileData);
-            PatientData patientData = new PatientData();
-            modelMapper.map(patientData, patientViewData);
-            patientMapper.update(patientData);
+            DoctorData doctorData = new DoctorData();
+            modelMapper.map(doctorData, doctorViewData);
+            doctorMapper.update(doctorData);
         }catch (Exception ex){
             LOGGER.error(ex.getMessage());
         }
-        return patientViewData;
-    }
-
-    private String createPatientCode(){
-        return "000291019000";
+        return doctorViewData;
     }
 }

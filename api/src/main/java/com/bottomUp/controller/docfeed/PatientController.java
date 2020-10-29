@@ -52,7 +52,7 @@ public class PatientController extends BaseController {
     public Map<String, Object> save(@RequestBody PatientViewData patientViewData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.patientViewService.createNewPatient(patientViewData, this.getUserDetail().getCompanyData().getCompanyID());
+        this.patientViewService.create(patientViewData, this.getUserDetail().getCompanyData().getCompanyID());
         return result;
     }
 
@@ -61,7 +61,7 @@ public class PatientController extends BaseController {
     public Map<String, Object> update(@RequestBody PatientViewData patientViewData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.patientViewService.updatePatient(patientViewData);
+        this.patientViewService.update(patientViewData);
         return result;
     }
 

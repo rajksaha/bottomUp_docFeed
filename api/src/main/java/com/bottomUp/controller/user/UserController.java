@@ -4,6 +4,7 @@ import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.common.utility.JsonConverter;
 import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.controller.BaseController;
+import com.bottomUp.domain.DoctorData;
 import com.bottomUp.domain.common.user.CompanyLevelData;
 import com.bottomUp.domain.common.user.UserData;
 import com.bottomUp.domain.common.user.UserGroupData;
@@ -11,6 +12,7 @@ import com.bottomUp.domain.common.user.UserProfileData;
 import com.bottomUp.service.common.user.UserGroupAssignmentService;
 import com.bottomUp.service.common.user.UserGroupService;
 import com.bottomUp.service.common.user.UserService;
+import com.bottomUp.service.docFeed.crud.DoctorService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +47,8 @@ public class UserController extends BaseController {
 
 
         Map<String, Object> params = this.parseParameter(request);
-        if(this.getUserDetail().getUserProfilePermissionData().getCompanyID() == null){
+        Map<String, Boolean> permission = this.getUserDetail().getUserProfilePermissionData().getPermissions();
+        if(permission.get("SUPER_ADMIN") != null && permission.get("SUPER_ADMIN")){
             if(params.get("companyID") == null){
                 params.put("companyID", -1);
             }else{
@@ -53,6 +56,11 @@ public class UserController extends BaseController {
             }
         }else{
             params.put("companyID", this.getUserDetail().getUserProfilePermissionData().getCompanyID());
+            if(permission.get("DOCTOR") != null && permission.get("DOCTOR")){
+                params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
+            }else if(permission.get("DOCTOR_STAFF") != null && permission.get("DOCTOR_STAFF")){
+                params.put("userName", this.getUserDetail().getUsername());
+            }
         }
 
         List<UserProfileData> dataList = this.userService.getUserProfileByParam(params);
@@ -66,6 +74,9 @@ public class UserController extends BaseController {
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("companyID", this.getUserDetail().getUserProfilePermissionData().getCompanyID());
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
+        }
         params.put("likeStaffCode", data);
         params.put("limit", 20);
         return this.userService.getUserProfileByParam(params);
@@ -115,6 +126,9 @@ public class UserController extends BaseController {
         if(companyID == null){
             companyID = this.getUserDetail().getUserProfilePermissionData().getCompanyID();
         }
+        if(this.getUserDetail().getDoctorData() != null){
+            data.setDoctorID(this.getUserDetail().getDoctorData().getDoctorID());
+        }
         this.userService.createUserProfile(data, companyID);
         return result;
     }
@@ -136,6 +150,9 @@ public class UserController extends BaseController {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("userID", data.getUserID());
         params.put("companyID", this.getUserDetail().getUserProfilePermissionData().getCompanyID());
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("isUserDefined", 1);
+        }
         return this.userGroupService.getUserGroupForUser(params);
     }
 

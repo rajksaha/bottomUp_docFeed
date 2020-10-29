@@ -31,8 +31,10 @@ public class UserGroupController extends BaseController {
         Map<String, Object> params = this.parseParameter(request);
 
         params.put("companyID", this.getUserDetail().getUserProfilePermissionData().getCompanyID());
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("isUserDefined", 1);
+        }
         List<UserGroupData> dataList = this.userGroupService.getByParam(params);
-
         Integer count = this.userGroupService.getCountByParam(params);
 
         return this.buildResultForGrid(dataList, count, params);
@@ -47,6 +49,9 @@ public class UserGroupController extends BaseController {
             companyID = this.getUserDetail().getUserProfilePermissionData().getCompanyID();
         }
         params.put("companyID", companyID);
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("isUserDefined", 1);
+        }
         List<UserGroupData> dataList = this.userGroupService.getByParam(params);
 
         return dataList;
@@ -57,6 +62,9 @@ public class UserGroupController extends BaseController {
     public List<UserGroupData> getAllCompany(HttpServletRequest request) throws BottomUpException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("companyID", this.getUserDetail().getUserProfilePermissionData().getCompanyID());
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("isUserDefined", 1);
+        }
         return this.userGroupService.getByParam(params);
     }
 
@@ -65,6 +73,10 @@ public class UserGroupController extends BaseController {
     public Map<String, Object> save(@RequestBody UserGroupData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
+        if(data.getIsUserDefined() == null && this.getUserDetail().getDoctorData() != null){
+            data.setIsUserDefined(1);
+        }
+        data.setCompanyID(this.getUserDetail().getCompanyData().getCompanyID());
         this.userGroupService.create(data);
         return result;
     }
