@@ -35,6 +35,10 @@ app.service('AppointmentService', function ($resource) {
                 isArray:false
             }
         }),
+        deleteAppointment : $resource('rest/appointment/deleteAppointment/:appointmentID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {appointmentID: '@appointmentID'}
         createAppForNewPatient : $resource('/api/rest/appointment/createAppForNewPatient', {}, {
             'query':  {
                 method:'POST',

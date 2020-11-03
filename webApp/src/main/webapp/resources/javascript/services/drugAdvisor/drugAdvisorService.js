@@ -23,10 +23,10 @@ app.service('DrugAdvisorService', function ($resource) {
                 isArray : false
             }
         }),
-        deleteDrugAdviceType : $resource('rest/drugAdvisor/deleteDrugAdviceType', {}, {
-            'query':  {
-                method:'POST',
-                isArray : false
+        deleteDrugAdviceType : $resource('rest/drugAdvisor/deleteDrugAdviceType/:delId', {}, {
+            'remove':  {
+                method:'DELETE',
+                params : {delId: '@delId'}
             }
         }),
         createDrugWhenType: $resource('rest/drugAdvisor/createDrugWhenType', {}, {
@@ -35,10 +35,10 @@ app.service('DrugAdvisorService', function ($resource) {
                 isArray : false
             }
         }),
-        deleteDrugWhenType : $resource('rest/drugAdvisor/deleteDrugWhenType', {}, {
-            'query':  {
-                method:'POST',
-                isArray : false
+        deleteDrugWhenType : $resource('rest/drugAdvisor/deleteDrugWhenType/:delId', {}, {
+            'remove':  {
+                method:'DELETE',
+                params : {delId: '@delId'}
             }
         }),
         

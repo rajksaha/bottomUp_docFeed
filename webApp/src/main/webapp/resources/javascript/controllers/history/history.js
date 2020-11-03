@@ -206,9 +206,9 @@ app.controller('PrescribeHistoryController', function($scope, $stateParams, $htt
 				});
 			}else if(parseInt(value.patientHistoryID) > 0 && value.historyResult == ""){//delete
 				
-				var dataString = 'query=9'+ '&savedHistorysID=' + value.patientHistoryID;
+				// var dataString = 'query=9'+ '&savedHistorysID=' + value.patientHistoryID;
 		        
-				HistoryService.delPatientHistory.query({}, dataString).$promise.then(function(result) {
+				HistoryService.delPatientHistory.remove({savedHistorysID: value.patientHistoryID}).$promise.then(function(result) {
 					if (result && result.success) {
 			
 					}else{
@@ -223,9 +223,9 @@ app.controller('PrescribeHistoryController', function($scope, $stateParams, $htt
 				//do noting
 			}else if(parseInt(value.savedHistorysID) > 0 && value.historyResult && !value.addToPrescription){
 				
-				var dataString = 'query=4'+ '&savedHistorysID=' + value.savedHistorysID;
+				// var dataString = 'query=4'+ '&savedHistorysID=' + value.savedHistorysID;
 		        
-				HistoryService.deletePrescriptionHistory.query({}, dataString).$promise.then(function(result) {
+				HistoryService.deletePrescriptionHistory.remove({savedHistorysID: value.savedHistorysID}).$promise.then(function(result) {
 					if (result && result.success) {
 			
 					}else{
@@ -267,9 +267,9 @@ app.controller('PrescribeHistoryController', function($scope, $stateParams, $htt
 	
 	$scope.deleteHistoyFromSetting = function (id){
 		
-		var dataString = 'query=12'+ '&historySettingID=' + id;
+		// var dataString = 'query=12'+ '&historySettingID=' + id;
         
-		HistoryService.deleteDoctorHistorySettings.query({}, dataString).$promise.then(function(result) {
+		HistoryService.deleteDoctorHistorySettings.remove({historySettingID: id}).$promise.then(function(result) {
 			if (result && result.success) {
 				$scope.bringHistoryDetail();
 			}else{

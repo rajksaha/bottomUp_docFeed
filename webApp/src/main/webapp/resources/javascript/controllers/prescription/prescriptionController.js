@@ -88,9 +88,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 			$scope.nextVisitData.nextVisitType = 1;
 		}
 		
-		var dataString = "query=8" + "&nextVisitDate=" + filteredDate + "&numOfDay=" + numOfDay + "&dayType=" + dayType + "&nextVisitType=" + $scope.nextVisitData.nextVisitType;
+		//var dataString = "query=8" + "&nextVisitDate=" + filteredDate + "&numOfDay=" + numOfDay + "&dayType=" + dayType + "&nextVisitType=" + $scope.nextVisitData.nextVisitType;
 
-        PrescriptionService.deleteAndCreateNextVisit.query({}, dataString).$promise.then(function(result) {
+        PrescriptionService.deleteAndCreateNextVisit.remove({nextVisitDate: filteredDate, numOfDay: numOfDay, dayType: dayType, nextVisitType: $scope.nextVisitData.nextVisitType}).$promise.then(function(result) {
             if (result && result.success) {
     
             }else{
@@ -165,9 +165,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 	  
 	  $scope.deleteReffredDoctor = function(redDocID){
 		  
-          var dataString = 'query=12';
+          //var dataString = 'query=12';
 
-          PrescriptionService.deleteReferncePrescription.query({}, dataString).$promise.then(function (result) {
+          PrescriptionService.deleteReferncePrescription.remove({}).$promise.then(function (result) {
               if (result && result.success) {
                   $scope.bringPrescribedRefferedDoctor($scope.appoinmentData.appointmentID);
               } else {
@@ -464,9 +464,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
     $scope.removeClinicalHistory = function (data){
 
-        var dataString = "query=19" + '&contentDetailID=' + data.contentDetailID;
+        //var dataString = "query=19" + '&contentDetailID=' + data.contentDetailID;
 
-        PrescriptionService.delClinicalHistoryById.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delClinicalHistoryById.remove({contentDetailID: data.contentDetailID}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
             } else {
@@ -478,9 +478,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     
     $scope.deleteInvFromPresciption = function (id){
 		
-		var dataString = 'query=5'+ '&id=' + id;
+		// var dataString = 'query=5'+ '&id=' + id;
 
-        PrescriptionService.delInvPrescriptionById.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delInvPrescriptionById.query({id: id}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPrescribedInv($scope.appoinmentData.appointmentID);
             } else {
@@ -740,7 +740,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = "query=" + 5 + "&pastHistoryID=" + id;
         
-        PrescriptionService.delPatientAndPrescriptionDisease.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delPatientAndPrescriptionDisease.remove({pastHistoryID: id}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPrescribedPastHistory($scope.appoinmentData.appointmentID); 
             } else {
@@ -768,7 +768,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = "query=" + 5 + "&familyHistoryID=" + id;
         
-        PrescriptionService.delFamilyHistoryDisease.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delFamilyHistoryDisease.remove({familyHistoryID: id}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPrescribedFamilyHistory($scope.appoinmentData.appointmentID); 
             } else {
@@ -781,7 +781,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=9'+ '&prescribedVitalID=' + id;
         
-        PrescriptionService.delPrescribedVital.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delPrescribedVital.remove({prescribedVitalID: id}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPrescribedVital($scope.appoinmentData.appointmentID); 
             } else {
@@ -792,9 +792,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 	
 	$scope.deleteCCFromPresciption = function(id){
 		
-		var data = {'id': id, 'query': 4};
+		//var data = {'id': id, 'query': 4};
         
-        PrescriptionService.delComplainById.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delComplainById.remove({id: id}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPrescribedComplain($scope.appoinmentData.appointmentID); 
             } else {
@@ -806,9 +806,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 	$scope.deleteHistory = function(data){
 		
         
-		var dataString = 'query=4'+ '&savedHistorysID=' + data.id;
+		// var dataString = 'query=4'+ '&savedHistorysID=' + data.id;
         
-        PrescriptionService.delPrescriptionHistoryById.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delPrescriptionHistoryById.remove({savedHistorysID: data.id}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPrescribedHistory($scope.appoinmentData.appointmentID, $scope.appoinmentData.patientID); 
             } else {
@@ -819,9 +819,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 	
 	$scope.deleteAdviceFromPresciption = function (adviceId){
 		
-		var dataString = 'query=5'+ '&adviceID=' + parseInt(adviceId);
+		//var dataString = 'query=5'+ '&adviceID=' + parseInt(adviceId);
 
-        PrescriptionService.delPrescriptionAdviceById.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delPrescriptionAdviceById.remove({adviceID: parseInt(adviceId)}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPrescribedAdvice($scope.appoinmentData.appointmentID); 
             } else {
@@ -1057,7 +1057,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = "query=7" + '&drugPrescribeID=' + drugPrescribeID;
 
-        PrescriptionService.delPrescriptionDrugById.query({}, dataString).$promise.then(function (result) {
+        PrescriptionService.delPrescriptionDrugById.remove({drugPrescribeID: drugPrescribeID}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPresCribedDrugs($scope.appoinmentData.appointmentID); 
             } else {

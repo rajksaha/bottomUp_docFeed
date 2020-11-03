@@ -11,10 +11,10 @@ app.service('PatientTypeService', function ($resource) {
                 isArray:false
             }
         }),
-        delPatientType : $resource('rest/patientType/delPatientType', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delPatientType : $resource('rest/patientType/delPatientType/:id', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {id: '@id'}
             }
         })
     };

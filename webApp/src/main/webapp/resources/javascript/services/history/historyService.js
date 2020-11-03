@@ -47,16 +47,16 @@ app.service('HistoryService', function ($resource) {
                 isArray:false
             }
         }),
-        delPatientHistory : $resource('rest/history/delPatientHistory', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delPatientHistory : $resource('rest/history/delPatientHistory/:savedHistorysID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {savedHistorysID: '@savedHistorysID'}
             }
         }),
-        deletePrescriptionHistory : $resource('rest/history/deletePrescriptionHistory', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deletePrescriptionHistory : $resource('rest/history/deletePrescriptionHistory/:savedHistorysID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {savedHistorysID: '@savedHistorysID'}
             }
         }),
         createPrescritionHistory : $resource('rest/history/createPrescritionHistory', {}, {
@@ -65,10 +65,10 @@ app.service('HistoryService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteDoctorHistorySettings : $resource('rest/history/deleteDoctorHistorySettings', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteDoctorHistorySettings : $resource('rest/history/deleteDoctorHistorySettings/:historySettingID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {historySettingID: '@historySettingID'}
             }
         })
     };

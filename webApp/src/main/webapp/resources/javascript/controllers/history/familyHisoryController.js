@@ -108,7 +108,7 @@ app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootSc
 			
 			var dataString = "query=" + 3 + "&familyHistoryID=" +  data.id;
 			
-			FamilyHisoryService.deleteFamilyDisease.query({}, dataString).$promise.then(function (result) {
+			FamilyHisoryService.deleteFamilyDisease.remove({familyHistoryID: data.id}, dataString).$promise.then(function (result) {
 				if (result && result.success) {
 					$scope.succcess = true;
 					$scope.error = false;
@@ -161,7 +161,7 @@ app.controller('FamilyHisoryController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = "query=" + 5 + "&familyHistoryID=" + id;
 		
-		FamilyHisoryService.deletePatientFamilyHistory.query({}, dataString).$promise.then(function (result) {
+		FamilyHisoryService.deletePatientFamilyHistory.remove({familyHistoryID: id}).$promise.then(function (result) {
 			if (result && result.success) {
 				$scope.succcess = true;
 				$scope.error = false;

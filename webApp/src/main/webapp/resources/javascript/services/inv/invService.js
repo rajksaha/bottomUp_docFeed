@@ -11,10 +11,10 @@ app.service('InvService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteDoctorInV : $resource('rest/inv/deleteDoctorInV', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteDoctorInV : $resource('rest/inv/deleteDoctorInV/:invSettingID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {invSettingID: '@invSettingID'}
             }
         }),
         createInvPrescription : $resource('rest/inv/createInvPrescription', {}, {
@@ -23,16 +23,16 @@ app.service('InvService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteInvPrescriptionById : $resource('rest/inv/deleteInvPrescriptionById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteInvPrescriptionById : $resource('rest/inv/deleteInvPrescriptionById/:id', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {id: '@id'}
             }
         }),
-        deleteInvPrescriptionByInvId : $resource('rest/inv/deleteInvPrescriptionByInvId', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteInvPrescriptionByInvId : $resource('rest/inv/deleteInvPrescriptionByInvId/:invID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {invID: '@invID'}
             }
         }),
         getInvDoctor : $resource('rest/inv/getInvDoctor', {}, {

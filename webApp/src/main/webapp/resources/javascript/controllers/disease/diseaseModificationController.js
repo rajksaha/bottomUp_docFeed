@@ -16,9 +16,9 @@ app.controller('DiseaseModificationController', function($scope, $modal, $rootSc
 	
 	
 	$scope.deletediseases = function(disease_id, index){  
-    	var dataString = "query=1&disease_id="+disease_id;
+    	//var dataString = "query=1&disease_id="+disease_id;
 
-        DiseaseModificationService.delDisease.query({}, dataString).$promise.then(function(result) {
+        DiseaseModificationService.delDisease.remove({disease_id: disease_id}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.getdiseases();
             }else{

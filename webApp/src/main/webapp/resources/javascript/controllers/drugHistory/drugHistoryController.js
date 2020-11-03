@@ -81,9 +81,9 @@ app.controller('DrugHistoryController', function($scope, $modal, $rootScope, lim
     
     $scope.delDrug = function(data, status) {
     	
-    	var data = {'delId': data.drugHistoryID, 'query': 3};
+    	//var data = {'delId': data.drugHistoryID, 'query': 3};
 		
-		DrugHistoryService.deleteDrugHistory.query({}, data).$promise.then(function(result) {
+		DrugHistoryService.deleteDrugHistory.remove({delId: data.drugHistoryID}).$promise.then(function(result) {
 			if (result && result.success) {
 				if(status == 1){
 					$scope.bringCurrentDrugList();
@@ -113,9 +113,9 @@ app.controller('DrugHistoryController', function($scope, $modal, $rootScope, lim
 	        
 	    }else{
 			
-	    	var dataStr = {'contentDetailID': data.contentDetailID, 'query': 8};
+	    	//var dataStr = {'contentDetailID': data.contentDetailID, 'query': 8};
 			
-			DrugHistoryService.delContentDetail.query({}, dataStr).$promise.then(function(result) {
+			DrugHistoryService.delContentDetail.remove({contentDetailID: data.contentDetailID}).$promise.then(function(result) {
 				if (result && result.success) {
 					data.addedToPres = false;
 				}else{

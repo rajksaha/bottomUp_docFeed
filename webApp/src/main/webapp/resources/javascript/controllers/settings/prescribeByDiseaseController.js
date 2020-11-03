@@ -82,9 +82,9 @@ app.controller('PrescribeByDiseaseController', function($scope, $http, $modal, $
 	
 	$scope.delAdviceFromSetting = function (advciceSettingID){
 		
-		var dataString = "query=10" + "&advciceSettingID=" + advciceSettingID;
+		// var dataString = "query=10" + "&advciceSettingID=" + advciceSettingID;
 
-        PrescribeByDiseaseService.deleteSettingsAdvice.query({}, dataString).$promise.then(function(result) {
+        PrescribeByDiseaseService.deleteSettingsAdvice.remove({advciceSettingID: advciceSettingID}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringAdviceSettingData($scope.masterDiseaseData.diseaseID);
             }else{
@@ -95,9 +95,9 @@ app.controller('PrescribeByDiseaseController', function($scope, $http, $modal, $
 	
 	$scope.deleteInvFromSetting = function (invSettingID){
 		
-		var dataString = "query=11" + "&invSettingID=" + invSettingID;
+		// var dataString = "query=11" + "&invSettingID=" + invSettingID;
 
-        PrescribeByDiseaseService.deleteSettingsInv.query({}, dataString).$promise.then(function(result) {
+        PrescribeByDiseaseService.deleteSettingsInv.remove({invSettingID: invSettingID}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringInvSettingData($scope.masterDiseaseData.diseaseID);
             }else{
@@ -108,9 +108,9 @@ app.controller('PrescribeByDiseaseController', function($scope, $http, $modal, $
 	
 	$scope.deleteDrugsFromSetting = function (drugSettingID){
 		
-		var dataString = "query=12" + "&drugSettingID=" + drugSettingID;
+		// var dataString = "query=12" + "&drugSettingID=" + drugSettingID;
 
-        PrescribeByDiseaseService.deleteSettingsDrugs.query({}, dataString).$promise.then(function(result) {
+        PrescribeByDiseaseService.deleteSettingsDrugs.remove({drugSettingID: drugSettingID}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringDrugSettingData($scope.masterDiseaseData.diseaseID);
             }else{
@@ -278,9 +278,9 @@ app.controller('PrescribeSettingsController.AddInvToSettings', function($scope, 
 		if(!add){
             inv.addedToPrescription = false;
             if(inv.invSettingId){
-                var dataString = "query=11" + "&invSettingId=" + inv.invSettingId;
+                // var dataString = "query=11" + "&invSettingId=" + inv.invSettingId;
 
-                PrescribeByDiseaseService.deleteInvSetting.query({}, dataString).$promise.then(function (result) {
+                PrescribeByDiseaseService.deleteInvSetting.remove({invSettingId: inv.invSettingId}).$promise.then(function (result) {
                     if (result && result.success) {
                         inv.invSettingId = null;
                     } else {
@@ -324,7 +324,7 @@ app.controller('PrescribeSettingsController.AddAdviceToSettings', function($scop
             if(advice.settingId){
                 var dataString = "query=10" + "&settingID=" + advice.settingId;
 
-                PrescribeByDiseaseService.deleteAdviceSetting.query({}, dataString).$promise.then(function (result) {
+                PrescribeByDiseaseService.deleteAdviceSetting.remove({settingID: advice.settingId}).$promise.then(function (result) {
                     if (result && result.success) {
                         advice.settingId = null;
                     } else {
