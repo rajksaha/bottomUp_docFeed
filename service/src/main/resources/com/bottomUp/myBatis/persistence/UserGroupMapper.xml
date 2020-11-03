@@ -12,9 +12,7 @@
 		(
 			`shortName`,
 			`longDesc`,
-			`companyID`,
 			`companyModuleID`,
-			`isUserDefined`,
 			`updatedOn`,
 			`updatedBy`,
 			`createdOn`,
@@ -24,9 +22,7 @@
 		(
 			#{shortName},
 			#{longDesc},
-			#{companyID},
 			#{companyModuleID},
-			#{isUserDefined},
 			#{updatedOn},
 			#{updatedBy},
 			#{createdOn},
@@ -44,7 +40,6 @@
 		`shortName` = #{shortName},
 		`longDesc` = #{longDesc},
 		`companyModuleID` = #{companyModuleID},
-		`isUserDefined` = #{isUserDefined},
 		`updatedOn` = #{updatedOn},
 		`updatedBy` = #{updatedBy}
 		WHERE `userGroupID` = #{userGroupID};
@@ -56,9 +51,7 @@
 			eug.`userGroupID`,
 			eug.`shortName`,
 			eug.`longDesc`,
-			eug.`companyID`,
 			eug.`companyModuleID`,
-			eug.`isUserDefined`,
 			ecm.shortName AS companyModuleName,
             ec.companyName AS companyName,
             em.moduleName AS moduleName,
@@ -75,43 +68,12 @@
 
 	</select>
 
-	<select id="getSingleByParam" parameterType="map" resultType="UserGroup">
-
-		SELECT
-		eug.`userGroupID`,
-		eug.`shortName`,
-		eug.`longDesc`,
-		eug.`companyID`,
-		eug.`companyModuleID`,
-		eug.`isUserDefined`,
-		eug.`updatedOn`,
-		eug.`updatedBy`,
-		eug.`createdOn`,
-		eug.`createdBy`
-		FROM `bottom_up_user_group` eug
-		WHERE 1 = 1
-		<if test="companyID != null">
-			AND eug.companyID = #{companyID}
-		</if>
-		<if test="shortName != null">
-			AND eug.shortName = #{shortName}
-		</if>
-		<if test="userGroupCode != null">
-			AND eug.longDesc = #{userGroupCode}
-		</if>
-		<if test="isUserDefined != null">
-			AND eug.isUserDefined = #{isUserDefined}
-		</if>
-
-	</select>
-
 	<select id="getByParam" parameterType="map" resultType="UserGroup">
 
 		SELECT
 			eug.`userGroupID`,
 			eug.`shortName`,
 			eug.`longDesc`,
-			eug.`companyID`,
 			eug.`companyModuleID`,
 			ecm.shortName AS companyModuleName,
 			ec.companyName AS companyName,
@@ -131,17 +93,11 @@
 		<if test="companyID != null">
 			AND ecm.companyID = #{companyID}
 		</if>
-		<if test="shortName != null">
-			AND eug.shortName = #{shortName}
-		</if>
 		<if test="userGroupCode != null">
 			AND eug.longDesc = #{userGroupCode}
 		</if>
 		<if test="companyModuleID != null">
 			AND eug.companyModuleID = #{companyModuleID}
-		</if>
-		<if test="isUserDefined != null">
-			AND eug.isUserDefined = #{isUserDefined}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
@@ -170,9 +126,6 @@
 		<if test="companyModuleID != null">
 			AND eug.companyModuleID = #{companyModuleID}
 		</if>
-		<if test="isUserDefined != null">
-			AND eug.isUserDefined = #{isUserDefined}
-		</if>
 
 	</select>
 
@@ -182,7 +135,6 @@
 			eug.`userGroupID`,
 			eug.`shortName`,
 			eug.`longDesc`,
-			eug.`companyID`,
 			eug.`companyModuleID`,
 			eug.`updatedOn`,
 			eug.`updatedBy`,
@@ -193,13 +145,12 @@
 			ELSE false
 		END AS isAssigned
 		FROM `bottom_up_user_group` eug
+		JOIN bottom_up_company_module ecm ON eug.companyModuleID = ecm.companyModuleID
 		LEFT JOIN bottom_up_user_group_assignment euga ON eug.userGroupID = euga.userGroupID AND euga.userID = #{userID}
+
 		WHERE 1 = 1
 		<if test="companyID != null">
-			AND eug.companyID = #{companyID}
-		</if>
-		<if test="isUserDefined != null">
-			AND eug.isUserDefined = #{isUserDefined}
+			AND ecm.companyID = #{companyID}
 		</if>
 	</select>
 

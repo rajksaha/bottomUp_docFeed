@@ -64,12 +64,6 @@
 		<if test="invID != null">
 			AND invID = #{invID}
 		</if>
-		<if test="term != null">
-			AND LOWER(name) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
-		</if>
-		<if test="categoryID != null">
-			AND categoryID = #{categoryID}
-		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

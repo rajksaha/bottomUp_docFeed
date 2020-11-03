@@ -80,11 +80,11 @@
 
 	</update>
 
-	<!--<resultMap id="userProfileMap" type="User">
+	<resultMap id="userProfileMap" type="User">
 		<result property="userProfileData.lastWorkingDay" column="lastWorkingDay"/>
-	</resultMap>-->
+	</resultMap>
 
-	<select id="getUserByUserName" parameterType="string" resultType="User">
+	<select id="getUserByUserName" parameterType="string" resultType="User" resultMap="userProfileMap">
 		SELECT
 			eu.`userID`,
 			eu.`userName`,
@@ -97,8 +97,10 @@
 			eu.`updatedOn`,
 			eu.`updatedBy`,
 			eu.`createdOn`,
-			eu.`createdBy`
+			eu.`createdBy`,
+			eup.lastWorkingDay AS lastWorkingDay
 		FROM bottom_up_user eu
+		LEFT JOIN bottom_up_user_profile eup ON eu.userID = eup.userID
 		WHERE userName = #{userName};
 
 	</select>

@@ -77,9 +77,6 @@
 		<if test="groupPermissionID != null">
 			AND groupPermissionID = #{groupPermissionID}
 		</if>
-		<if test="permissionID != null">
-			AND permissionID = #{permissionID}
-		</if>
 
 	</select>
 

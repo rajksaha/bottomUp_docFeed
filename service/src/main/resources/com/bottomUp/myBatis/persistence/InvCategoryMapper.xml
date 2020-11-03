@@ -59,9 +59,6 @@
 		<if test="invCategoryID != null">
 			AND invCategoryID = #{invCategoryID}
 		</if>
-		<if test="term != null">
-			AND drugName LIKE '%'${term}
-		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

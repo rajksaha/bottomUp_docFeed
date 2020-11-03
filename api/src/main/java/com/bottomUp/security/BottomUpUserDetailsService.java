@@ -11,7 +11,7 @@ import com.bottomUp.domain.common.user.UserProfilePermissionData;
 import com.bottomUp.service.common.CompanyService;
 import com.bottomUp.service.common.user.UserPermissionService;
 import com.bottomUp.service.common.user.UserService;
-import com.bottomUp.service.docFeed.crud.DoctorService;
+import com.bottomUp.service.docFeed.DoctorService;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,16 @@ public class BottomUpUserDetailsService implements org.springframework.security.
             }
 
             if (userData.getStatus() == null || userData.getStatus().equals(0)) {
-                throw new BadCredentialsException("Your account is deactivated. Please contact with administrator");
+                if(userData.getUserProfileData() != null && userData.getUserProfileData().getLastWorkingDay() != null){
+                    Timestamp toDay = new Timestamp(new Date().getTime());
+                    Date date = DateUtils.truncate(new Date(), Calendar.DATE);
+                    Date lastDate = new Date(userData.getUserProfileData().getLastWorkingDay().getTime());
+                    if(date.compareTo(lastDate) > 0){
+                        throw new BadCredentialsException("Your account is deactivated. Please contact with administrator");
+                    }
+                }else{
+                    throw new BadCredentialsException("Your account is deactivated. Please contact with administrator");
+                }
             }
 
             if (BooleanUtils.toBoolean(userData.getIsBlocked())) {

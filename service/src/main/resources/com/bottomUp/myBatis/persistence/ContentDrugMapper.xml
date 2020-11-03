@@ -79,12 +79,6 @@
 		<if test="drugID != null">
 			AND drugID = #{drugID}
 		</if>
-		<if test="term != null">
-			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
-		</if>
-		<if test="typeID != null">
-			AND typeID = #{typeID}
-		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

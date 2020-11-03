@@ -6,7 +6,7 @@ package com.bottomUp.domain.common;
 public class CompanyModuleData extends BaseData {
 
     private Long companyModuleID;
-    private Long companyID;
+    private Integer companyID;
     private Integer moduleID;
     private String shortName;
 
@@ -21,11 +21,11 @@ public class CompanyModuleData extends BaseData {
         this.companyModuleID = companyModuleID;
     }
 
-    public Long getCompanyID() {
+    public Integer getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Long companyID) {
+    public void setCompanyID(Integer companyID) {
         this.companyID = companyID;
     }
 
