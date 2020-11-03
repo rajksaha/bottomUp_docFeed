@@ -359,13 +359,6 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
             }
         },
         resolve: {
-            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
-                return $ocLazyLoad.load(
-                    {
-                        name: 'doctorPlatform',
-                        files: ['resources/javascript/services/jsonService.js' + jsVersion]
-                    });
-            }],
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
@@ -381,7 +374,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                             'resources/javascript/controllers/prescription/prescriptionSettingController.js' + jsVersion,
                             'resources/javascript/controllers/prescription/vitalController.js' + jsVersion,
                             'resources/javascript/controllers/history/pastHistoryController.js' + jsVersion,
-                            'resources/javascript/controllers/advice/advice.js' + jsVersion
+                            'resources/javascript/controllers/advice/advice.js' + jsVersion,
+                            'resources/javascript/services/jsonService.js' + jsVersion
                         ]
                     });
             }],
@@ -464,13 +458,6 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
             }
         },
         resolve : {
-            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load(
-                    {
-                        name: 'doctorPlatform',
-                        files: ['resources/javascript/services/jsonService.js' + jsVersion]
-                    });
-            }],
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
@@ -483,7 +470,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/services/history/familyHisoryService.js' + jsVersion]
+                        files: ['resources/javascript/services/history/familyHisoryService.js' + jsVersion,
+                            'resources/javascript/services/jsonService.js' + jsVersion]
                     });
             }]
         }
@@ -499,13 +487,6 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
             }
         },
         resolve : {
-            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load(
-                    {
-                        name: 'doctorPlatform',
-                        files: ['resources/javascript/services/jsonService.js' + jsVersion]
-                    });
-            }],
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
@@ -518,7 +499,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/services/history/pastHistoryService.js' + jsVersion]
+                        files: ['resources/javascript/services/history/pastHistoryService.js' + jsVersion,
+                            'resources/javascript/services/jsonService.js' + jsVersion]
                     });
             }]
         }
@@ -710,13 +692,6 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
             }
         },
         resolve : {
-            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load(
-                    {
-                        name: 'doctorPlatform',
-                        files: ['resources/javascript/services/jsonService.js' + jsVersion]
-                    });
-            }],
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
@@ -741,10 +716,11 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                     {
                         name: 'doctorPlatform',
                         files: ['resources/javascript/services/settings/drugTemplateService.js' + jsVersion,
-                            'resources/javascript/services/settings/prescribeByDiseaseService.js' + jsVersion
+                            'resources/javascript/services/settings/prescribeByDiseaseService.js' + jsVersion,
+                            'resources/javascript/services/jsonService.js' + jsVersion
                         ]
                     });
-            }],
+            }]
         }
     };
 
