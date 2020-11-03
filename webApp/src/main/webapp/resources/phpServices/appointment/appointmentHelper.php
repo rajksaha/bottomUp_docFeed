@@ -36,7 +36,6 @@ if($query_no==1){
 }
 
 if($query_no==11){
-
 	$filteredDate = $_POST['filteredDate'];
 	echo getNextDateAppointment($doctorID, $filteredDate);
 }
@@ -61,28 +60,18 @@ if($query_no==15){
 
 
 if($query_no==16){
-
 	$drug_search_str = $_POST['filteredDate'];
-
 	echo getPatientByDrugs($doctorID, $drug_search_str);
 }
-
-
-
-
 if($query_no==981){
-
 	$disease_search_str = $_POST['filteredDate'];
-
 	echo getAppointmentByDisease($doctorID, $disease_search_str);
 	
 }
 
 
 if($query_no==888){
-
 	$filteredDate = $_POST['filteredDate'];
-
 	echo PatientAddd($doctorID, $filteredDate);
 }
 

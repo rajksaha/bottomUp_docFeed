@@ -74,6 +74,251 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
         }
     };
 
+    var userHome = {
+        name : 'root.userHome',
+        url : '/userHome',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/user/home.html',
+                controller : 'HomeController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/user/homeController.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
+    var user = {
+        name  : 'root.user',
+        url   : '/user',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/user/user.html',
+                controller : 'UserController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/user/userController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/user/userSetupService.js' + jsVersion,
+                            'resources/javascript/services/user/userManagementService.js' + jsVersion,
+                            'resources/javascript/services/user/userCommonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
+    var userGroup = {
+        name  : 'root.userGroup',
+        url   : '/userGroup',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/user/userGroup.html',
+                controller : 'UserGroupController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/user/userGroupController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/user/userManagementService.js' + jsVersion,
+                            'resources/javascript/services/user/userCommonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
+    var groupPermission = {
+        name  : 'root.groupPermission',
+        url   : '/groupPermission',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/user/groupPermission.html',
+                controller : 'GroupPermissionController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/user/groupPermissionController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/user/userManagementService.js'  + jsVersion,
+                            'resources/javascript/services/user/userCommonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
+
+    var module = {
+        name  : 'root.module',
+        url   : '/module',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/user/module/module.html',
+                controller : 'ModuleController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/user/module/moduleController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/user/userCommonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
+    var company = {
+        name  : 'root.company',
+        url   : '/company',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/user/company/company.html',
+                controller : 'CompanyController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/user/company/companyController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/user/userCommonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
+    var companyModule = {
+        name  : 'root.companyModule',
+        url   : '/companyModule',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/user/companyModule/companyModule.html',
+                controller : 'CompanyModuleController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/user/companyModule/companyModuleController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/user/userCommonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
+    var permission = {
+        name  : 'root.permission',
+        url   : '/permission',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/user/permission/permission.html',
+                controller : 'PermissionController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/user/permission/permissionController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/user/userCommonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
 
     var appointment = {
         name : 'root.appointment',
@@ -776,6 +1021,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
     $stateProvider
         .state(root)
         .state(login)
+        .state(userHome)
+        .state(user)
+        .state(permission)
+        .state(groupPermission)
+        .state(userGroup)
+        .state(module)
+        .state(company)
+        .state(companyModule)
         .state(prescription)
         .state(drugs)
         .state(inv)

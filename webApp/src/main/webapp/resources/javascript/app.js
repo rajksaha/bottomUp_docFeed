@@ -9,5 +9,6 @@ var app = angular.module('doctorPlatform', [
     'ui.bootstrap',
     'ui.event',
     'ui.calendar',
-    'angularFileUpload'
+    'angularFileUpload',
+    'adaptv.adaptStrap',
 ]);

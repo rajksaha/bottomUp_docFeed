@@ -180,7 +180,7 @@ function filterByKeys(keys, values) {
  * @name ui.router.util
  *
  * @description
- * # ui.router.util sub-module
+ * # ui.router.utility sub-module
  *
  * This module is a dependency of other sub-modules. Do not include this module as a dependency
  * in your angular app (use {@link ui.router} module instead).
@@ -282,7 +282,7 @@ function $Resolve(  $q,    $injector) {
   /**
    * @ngdoc function
    * @name ui.router.util.$resolve#study
-   * @methodOf ui.router.util.$resolve
+   * @methodOf ui.router.utility.$resolve
    *
    * @description
    * Studies a set of invocables that are likely to be used multiple times.
@@ -435,7 +435,7 @@ function $Resolve(  $q,    $injector) {
   /**
    * @ngdoc function
    * @name ui.router.util.$resolve#resolve
-   * @methodOf ui.router.util.$resolve
+   * @methodOf ui.router.utility.$resolve
    *
    * @description
    * Resolves a set of invocables. An invocable is a function to be invoked via 
@@ -518,7 +518,7 @@ function $TemplateFactory(  $http,   $templateCache,   $injector) {
   /**
    * @ngdoc function
    * @name ui.router.util.$templateFactory#fromConfig
-   * @methodOf ui.router.util.$templateFactory
+   * @methodOf ui.router.utility.$templateFactory
    *
    * @description
    * Creates a template from a configuration object. 
@@ -552,7 +552,7 @@ function $TemplateFactory(  $http,   $templateCache,   $injector) {
   /**
    * @ngdoc function
    * @name ui.router.util.$templateFactory#fromString
-   * @methodOf ui.router.util.$templateFactory
+   * @methodOf ui.router.utility.$templateFactory
    *
    * @description
    * Creates a template from a string or a function returning a string.
@@ -571,7 +571,7 @@ function $TemplateFactory(  $http,   $templateCache,   $injector) {
   /**
    * @ngdoc function
    * @name ui.router.util.$templateFactory#fromUrl
-   * @methodOf ui.router.util.$templateFactory
+   * @methodOf ui.router.utility.$templateFactory
    * 
    * @description
    * Loads a template from the a URL via `$http` and `$templateCache`.
@@ -593,7 +593,7 @@ function $TemplateFactory(  $http,   $templateCache,   $injector) {
   /**
    * @ngdoc function
    * @name ui.router.util.$templateFactory#fromUrl
-   * @methodOf ui.router.util.$templateFactory
+   * @methodOf ui.router.utility.$templateFactory
    *
    * @description
    * Creates a template by invoking an injectable provider function.
@@ -614,14 +614,14 @@ angular.module('ui.router.util').service('$templateFactory', $TemplateFactory);
 
 /**
  * @ngdoc object
- * @name ui.router.util.type:UrlMatcher
+ * @name ui.router.utility.type:UrlMatcher
  *
  * @description
  * Matches URLs against patterns and extracts named parameters from the path or the search
  * part of the URL. A URL pattern consists of a path pattern, optionally followed by '?' and a list
  * of search parameters. Multiple search parameter names are separated by '&'. Search parameters
  * do not influence whether or not a URL is matched, but their values are passed through into
- * the matched parameters returned by {@link ui.router.util.type:UrlMatcher#methods_exec exec}.
+ * the matched parameters returned by {@link ui.router.utility.type:UrlMatcher#methods_exec exec}.
  * 
  * Path parameter placeholders can be specified using simple colon/catch-all syntax or curly brace
  * syntax, which optionally allows a regular expression for the parameter to be specified:
@@ -655,7 +655,7 @@ angular.module('ui.router.util').service('$templateFactory', $TemplateFactory);
  * @param {string} pattern  the pattern to compile into a matcher.
  *
  * @property {string} prefix  A static prefix of this pattern. The matcher guarantees that any
- *   URL matching this matcher (i.e. any string for which {@link ui.router.util.type:UrlMatcher#methods_exec exec()} returns
+ *   URL matching this matcher (i.e. any string for which {@link ui.router.utility.type:UrlMatcher#methods_exec exec()} returns
  *   non-null) will start with this prefix.
  *
  * @property {string} source  The pattern that was passed into the contructor
@@ -739,8 +739,8 @@ function UrlMatcher(pattern) {
 
 /**
  * @ngdoc function
- * @name ui.router.util.type:UrlMatcher#concat
- * @methodOf ui.router.util.type:UrlMatcher
+ * @name ui.router.utility.type:UrlMatcher#concat
+ * @methodOf ui.router.utility.type:UrlMatcher
  *
  * @description
  * Returns a new matcher for a pattern constructed by appending the path part and adding the
@@ -771,8 +771,8 @@ UrlMatcher.prototype.toString = function () {
 
 /**
  * @ngdoc function
- * @name ui.router.util.type:UrlMatcher#exec
- * @methodOf ui.router.util.type:UrlMatcher
+ * @name ui.router.utility.type:UrlMatcher#exec
+ * @methodOf ui.router.utility.type:UrlMatcher
  *
  * @description
  * Tests the specified path against this matcher, and returns an object containing the captured
@@ -809,8 +809,8 @@ UrlMatcher.prototype.exec = function (path, searchParams) {
 
 /**
  * @ngdoc function
- * @name ui.router.util.type:UrlMatcher#parameters
- * @methodOf ui.router.util.type:UrlMatcher
+ * @name ui.router.utility.type:UrlMatcher#parameters
+ * @methodOf ui.router.utility.type:UrlMatcher
  *
  * @description
  * Returns the names of all path and search parameters of this pattern in an unspecified order.
@@ -824,8 +824,8 @@ UrlMatcher.prototype.parameters = function () {
 
 /**
  * @ngdoc function
- * @name ui.router.util.type:UrlMatcher#format
- * @methodOf ui.router.util.type:UrlMatcher
+ * @name ui.router.utility.type:UrlMatcher#format
+ * @methodOf ui.router.utility.type:UrlMatcher
  *
  * @description
  * Creates a URL that matches this pattern by substituting the specified values
@@ -872,7 +872,7 @@ UrlMatcher.prototype.format = function (values) {
  * @name ui.router.util.$urlMatcherFactory
  *
  * @description
- * Factory for {@link ui.router.util.type:UrlMatcher} instances. The factory is also available to providers
+ * Factory for {@link ui.router.utility.type:UrlMatcher} instances. The factory is also available to providers
  * under the name `$urlMatcherFactoryProvider`.
  */
 function $UrlMatcherFactory() {
@@ -880,10 +880,10 @@ function $UrlMatcherFactory() {
   /**
    * @ngdoc function
    * @name ui.router.util.$urlMatcherFactory#compile
-   * @methodOf ui.router.util.$urlMatcherFactory
+   * @methodOf ui.router.utility.$urlMatcherFactory
    *
    * @description
-   * Creates a {@link ui.router.util.type:UrlMatcher} for the specified pattern.
+   * Creates a {@link ui.router.utility.type:UrlMatcher} for the specified pattern.
    *   
    * @param {string} pattern  The URL pattern.
    * @returns {ui.router.util.type:UrlMatcher}  The UrlMatcher.
@@ -895,7 +895,7 @@ function $UrlMatcherFactory() {
   /**
    * @ngdoc function
    * @name ui.router.util.$urlMatcherFactory#isMatcher
-   * @methodOf ui.router.util.$urlMatcherFactory
+   * @methodOf ui.router.utility.$urlMatcherFactory
    *
    * @description
    * Returns true if the specified object is a UrlMatcher, or false otherwise.
@@ -1489,7 +1489,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
    * - **parent** `{object}` - returns the parent state object.
    * - **data** `{object}` - returns state data, including any inherited data that is not
    *   overridden by own values (if any).
-   * - **url** `{object}` - returns a {link ui.router.util.type:UrlMatcher} or null.
+   * - **url** `{object}` - returns a {link ui.router.utility.type:UrlMatcher} or null.
    * - **navigable** `{object}` - returns closest ancestor state that has a URL (aka is 
    *   navigable).
    * - **params** `{object}` - returns an array of state params that are ensured to 

@@ -4,13 +4,21 @@
 app.controller('HeaderController', function($scope, $rootScope,$state, $location, $timeout, $modal, $http, AuthenticationService, UserSetupService) {
 
     $scope.dateString = new Date();
-
+    $rootScope.baseApiUrl = 'http://localhost:8080/api/rest';
     $scope.logout = function () {
         AuthenticationService.logout().then(function() {
             $rootScope.userData = {};
             $location.path('/login');
             $scope.$emit('event:clearStatus');
         });
+    };
+
+    $scope.goUserHome = function () {
+        $state.go('root.userHome');
+    };
+
+    $scope.toggoleButton = function () {
+        $state.go('root.appointment');
     };
     $scope.changePassword = function(userData){
 

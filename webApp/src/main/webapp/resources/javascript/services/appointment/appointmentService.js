@@ -5,48 +5,61 @@
 app.service('AppointmentService', function ($resource) {
     return {
 
-        getAccessInfo : $resource('rest/appointment/getAccessInfo', {}, {
+        getByParam : $resource('/api/rest/appointment/getByParam', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true
+            }
+        }),
+        getDoctorData : $resource('/api/rest/appointment/getDoctorData', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
             }
         }),
-        getDoctorData : $resource('rest/appointment/getDoctorData', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getAppoinmentType : $resource('rest/appointment/getAppoinmentType', {}, {
+        getAppoinmentType : $resource('/api/rest/appointment/getAppoinmentType', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        makePrescription : $resource('rest/appointment/makePrescription', {}, {
+        visitPatient : $resource('/api/rest/appointment/visitPatient', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createAppointment : $resource('rest/appointment/createAppointment', {}, {
+        createAppointment : $resource('/api/rest/appointment/createAppointment', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
+<<<<<<< HEAD
         deleteAppointment : $resource('rest/appointment/deleteAppointment/:appointmentID', {}, {
             'remove':  {
                 method:'DELETE',
                 params: {appointmentID: '@appointmentID'}
+=======
+        createAppForNewPatient : $resource('/api/rest/appointment/createAppForNewPatient', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+>>>>>>> 03d8cfdde4a9723d8bef3ba2f89e82d798e8005d
             }
         }),
-        updateAppointment : $resource('rest/appointment/updateAppointment', {}, {
+        deleteAppointment : $resource('/api/rest/appointment/deleteAppointment', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
+        updateAppointment : $resource('/api/rest/appointment/updateAppointment', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        })
 
     };
 });
