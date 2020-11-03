@@ -22,5 +22,7 @@ public interface AppointmentMapper {
 
     List<AppointmentData> getByParam(Map<String, Object> param) throws BottomUpException;
 
+    Long getCountByParam(Map<String, Object> param) throws BottomUpException;
+
     void delete(Map<String, Object> param) throws BottomUpException;
 }

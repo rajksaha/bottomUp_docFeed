@@ -125,11 +125,9 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
     	$scope.patientName = "";
     	$scope.addByName = false;
         AppointmentService.getByParam.query({}, {}).$promise.then(function(result) {
-            if(result.length == 0){
+            if(result.length > 0){
                 $scope.appointmentList = result;
                 $scope.numberOfAppointment = $scope.appointmentList.length;
-            }else{
-                $location.path("/login");
             }
         });
     };
@@ -346,13 +344,14 @@ app.controller('AppointmentController.AddNewPatientController', function($scope,
 	$scope.errorMessage = "";
 	$scope.patientData.sex = "MALE";
     $scope.patientData.occupation = "NA";
-	$scope.patientData.phone = "";
-	$scope.patientData.address = "";
-    $scope.patientData.referredBy = "";
-	
+
 	$scope.save = function (){
 		if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
-            AppointmentService.createAppForNewPatient.save({}, $scope.patientData ).$promise.then(function(result) {
+            delete $scope.patientData.dob;
+            var appViewData = {};
+            appViewData.patient = $scope.patientData;
+
+            AppointmentService.createAppForNewPatient.save({}, appViewData).$promise.then(function(result) {
                 if(result && result.success) {
                     $modalInstance.close(result);
                 }

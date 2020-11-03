@@ -2,6 +2,9 @@ package com.bottomUp.model;
 
 import com.bottomUp.domain.common.BaseData;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * Created by raj on 10/24/2020.
  */
@@ -17,6 +20,8 @@ public class PatientViewData extends BaseData {
     private String wardNum;
     private String headOfUnit;
     private long userProfileID;
+    private Integer age;
+    private Date dateOfBirth;
     private String userName;
     private String firstName;
     private String lastName;
@@ -24,6 +29,7 @@ public class PatientViewData extends BaseData {
     private String sex;
     private String contactNo;
     private String emailAddress;
+    private String address;
 
 
     public long getPatientID() {
@@ -160,5 +166,29 @@ public class PatientViewData extends BaseData {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

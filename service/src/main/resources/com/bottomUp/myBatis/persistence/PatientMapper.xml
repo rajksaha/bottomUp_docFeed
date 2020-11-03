@@ -23,13 +23,12 @@
 		VALUES(
 			#{userID},
 			#{patientCode},
-			#occupation},
+			#{occupation},
 			#{referredBy},
 			#{hospitalName},
 			#{bedNum},
-			#{doctorID},
-			#{doctorID},
-
+			#{wardNum},
+			#{headOfUnit},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},

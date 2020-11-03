@@ -11,12 +11,17 @@
     	<div  class="row" id="validateReq">
    			<div class="form-group col-xs-12 col-sm-12">
    				<label>Patient  Name: <span class="red" >*</span></label>
-   				<input type="text" class="form-control required" data-ng-model="patientData.name" errmsg="Please enter patient name" maxlength="40">
+   				<input type="text" class="form-control required" data-ng-model="patientData.firstName" errmsg="Please enter patient name" maxlength="40">
 			</div>
 			
 			<div class="form-group col-sm-12 col-md-6 col-lg-6" >
-				<label>Age: <span class="red" >*</span></label> 
-				<input class="form-control decimal" type="text" maxlength="6" data-ng-model="patientData.age" errmsg="Please enter patient age">
+				<label>{{patientData.dob ? 'Date of Birth' : 'Age'}} <span class="red" >*</span>
+				</label>
+				<i class="fa fa-calendar pull-right link" data-ng-click="patientData.dob = true" data-ng-show="!patientData.dob"></i>
+				<i class="fa fa-sort-numeric-asc pull-right link" data-ng-show="patientData.dob" data-ng-click="patientData.dob = false"></i>
+				<input data-ng-show="patientData.dob" type="text"  class="form-control form-control-date input-sm" data-ng-model="patientData.dateOfBirth"   maxlength="100" placeholder="Date of Birth"
+					   datepicker-popup="dd/MM/yyyy" close-text="Close" is_open="dt1" ng-focus="dt1 = true" ng-click="dt1 = true" >
+				<input data-ng-show="!patientData.dob" class="form-control decimal" type="text" maxlength="6" data-ng-model="patientData.age" errmsg="Please enter patient age">
 			</div>
 			
 			<div class="form-group col-sm-12 col-md-6 col-lg-6">
@@ -42,7 +47,7 @@
 			
 			<div class="form-group col-sm-12 col-md-6 col-lg-6">
 				<label>Phone:</label> 
-				<input class="form-control phnnr" type="text" maxlength="16" data-ng-model="patientData.phone">
+				<input class="form-control phnnr" type="text" maxlength="16" data-ng-model="patientData.contactNo">
 			</div>
 			
 			<div class="form-group col-sm-12 col-md-6 col-lg-6">

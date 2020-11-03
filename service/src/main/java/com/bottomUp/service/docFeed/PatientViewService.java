@@ -5,10 +5,13 @@ import com.bottomUp.domain.PatientData;
 import com.bottomUp.domain.common.user.UserData;
 import com.bottomUp.domain.common.user.UserProfileData;
 import com.bottomUp.model.PatientViewData;
+import com.bottomUp.myBatis.persistence.AppointmentMapper;
 import com.bottomUp.myBatis.persistence.PatientMapper;
 import com.bottomUp.myBatis.persistence.UserMapper;
 import com.bottomUp.service.common.user.UserService;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.map.HashedMap;
+import org.joda.time.DateTime;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
@@ -16,6 +19,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utility.DateUtil;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Created by raj on 10/24/2020.
@@ -36,6 +45,9 @@ public class PatientViewService
     @Autowired
     private PatientMapper patientMapper;
 
+    @Autowired
+    private AppointmentMapper appointmentMapper;
+
 
 
     public PatientData create(PatientViewData patientViewData, Long companyID) throws BottomUpException{
@@ -48,10 +60,13 @@ public class PatientViewService
             UserProfileData profileData = new UserProfileData();
             ModelMapper modelMapper = new ModelMapper();
             modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-            modelMapper.map(profileData, patientViewData);
+            modelMapper.map(patientViewData, profileData);
             profileData.setUserName(patientViewData.getContactNo());
-            userData = userService.createUserProfile(profileData, companyID);
-            modelMapper.map(patientData, patientViewData);
+            if(patientViewData.getDateOfBirth() == null && patientViewData.getAge() != null){
+                profileData.setDateOfBirth(DateUtil.addDays(new Date(), -(365*patientViewData.getAge())));
+            }
+            userData = userService.createUserProfile(profileData, null);
+            modelMapper.map(patientViewData, patientData);
             patientData.setUserID(userData.getUserID());
             patientData.setPatientCode(this.createPatientCode());
             patientMapper.create(patientData);
@@ -82,7 +97,12 @@ public class PatientViewService
         return patientViewData;
     }
 
-    private String createPatientCode(){
-        return "000291019000";
+    private String createPatientCode() throws Exception{
+        DateTime dateTime = new DateTime();
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("date", dateTime);
+        Long numOfAppToday = appointmentMapper.getCountByParam(param);
+        String padded = String.format("%04d", numOfAppToday);
+        return "" + dateTime.getYear() + dateTime.getMonthOfYear() + dateTime.getDayOfMonth()+ padded;
     }
 }

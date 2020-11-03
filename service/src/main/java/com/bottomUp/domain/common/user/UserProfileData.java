@@ -5,6 +5,7 @@ import com.bottomUp.domain.common.BaseData;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,10 +21,11 @@ public class UserProfileData extends BaseData {
     private String lastName;
     private String employeeCode;
     private String emailAddress;
+    private String address;
     private Integer status;
     private Long companyID;
     private String contactNo;
-    private Timestamp dateOfBirth;
+    private Date dateOfBirth;
     private Long doctorID;
     private String sex;
     private String JsonString;
@@ -123,10 +125,6 @@ public class UserProfileData extends BaseData {
         this.contactNo = contactNo;
     }
 
-    public Timestamp getDateOfBirth() {
-        return dateOfBirth;
-    }
-
     public void setDateOfBirth(Timestamp dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
@@ -193,5 +191,21 @@ public class UserProfileData extends BaseData {
 
     public void setIsDoctor(Integer isDoctor) {
         this.isDoctor = isDoctor;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

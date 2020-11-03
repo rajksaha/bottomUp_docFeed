@@ -69,6 +69,7 @@ public class AppointmentController extends BaseController {
     public Map<String, Object> createAppForNewPatient(@RequestBody AppointmentViewData viewData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
+        viewData.setDoctorID(this.getUserDetail().getDoctorData().getDoctorID());
         appointmentViewService.createForNewPatient(viewData, this.getUserDetail().getCompanyData().getCompanyID());
         return result;
     }

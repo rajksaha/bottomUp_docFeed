@@ -108,7 +108,28 @@
 		</if>
 	</select>
 
-    <delete id="delete" parameterType="map">
+	<select id="getCountByParam" parameterType="map" resultType="Long">
+		SELECT COUNT(*)
+		FROM `doctor_feed`.`appointment`
+		WHERE 1 = 1
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+		<if test="patientID != null">
+			AND patientID = #{patientID}
+		</if>
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
+		</if>
+		<if test="date != null">
+			AND date = #{date}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+	<delete id="delete" parameterType="map">
 		DELETE  FROM `doctor_feed`.appointment
 		WHERE 1=1
 		<if test="appointmentID != null">

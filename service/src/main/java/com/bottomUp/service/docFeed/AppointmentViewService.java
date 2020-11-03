@@ -5,11 +5,14 @@ import com.bottomUp.domain.AppointmentData;
 import com.bottomUp.domain.PatientData;
 import com.bottomUp.model.AppointmentViewData;
 import com.bottomUp.myBatis.persistence.AppointmentMapper;
+import org.joda.time.DateTime;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Time;
 
 /**
  * Created by raj on 10/29/2020.
@@ -33,8 +36,16 @@ public class AppointmentViewService {
 
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-        modelMapper.map(appointmentData, viewData);
+        modelMapper.map(viewData, appointmentData);
         appointmentData.setPatientID(patientData.getPatientID());
+        if(appointmentData.getDate() == null ){
+            DateTime now = new DateTime();
+            appointmentData.setDate(now.toDate());
+            appointmentData.setTime(Time.valueOf("" + now.getHourOfDay() + ":" + now.getMinuteOfHour()
+                    + ":" + now.getSecondOfMinute() ));
+        }
+        appointmentData.setStatus(1);
+        appointmentData.setAppointmentType(1);
         appointmentMapper.create(appointmentData);
 
     }
