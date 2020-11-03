@@ -36,10 +36,10 @@ app.service('FollowUpChartService', function ($resource) {
                 isArray:true
             }
         }),
-        delAndcreateFollowUpResult : $resource('rest/followUpChart/delAndcreateFollowUpResult', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delAndcreateFollowUpResult : $resource('rest/followUpChart/delAndcreateFollowUpResult/:jsonArray', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {jsonArray: '@jsonArray'}
             }
         }),
         getPatientDetailSetDoctorFollowUp : $resource('rest/followUpChart/getPatientDetailSetDoctorFollowUp', {}, {

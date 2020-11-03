@@ -35,10 +35,10 @@ app.service('AppointmentService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteAppointment : $resource('rest/appointment/deleteAppointment', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteAppointment : $resource('rest/appointment/deleteAppointment/:appointmentID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {appointmentID: '@appointmentID'}
             }
         }),
         updateAppointment : $resource('rest/appointment/updateAppointment', {}, {

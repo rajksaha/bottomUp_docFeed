@@ -16,9 +16,10 @@ app.controller('SymptomModificationController', function($scope, $http, $modal, 
 	
 	
 	$scope.deleteSymptoms = function(symptom_id, index){  
-    	var dataString = "query=1&symptom_id="+symptom_id;
+
+    	// var dataString = "query=1&symptom_id="+symptom_id;
         
-        SymptomModificationService.delSymptoms.query({}, dataString).$promise.then(function(result) {
+        SymptomModificationService.delSymptoms.remove({symptom_id: symptom_id}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.getSymptoms();
             }else{

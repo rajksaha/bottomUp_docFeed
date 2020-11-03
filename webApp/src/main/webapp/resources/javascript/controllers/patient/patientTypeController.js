@@ -38,9 +38,9 @@ app.controller('PatientTypeController', function($scope, $http, $modalInstance, 
 
     $scope.deletePatientType = function (patientTypeId, index) {
 
-        var dataString = "query="+ 3  +"&id=" + patientTypeId;
+        // var dataString = "query="+ 3  +"&id=" + patientTypeId;
         
-        PatientTypeService.delPatientType.query({}, dataString).$promise.then(function (result) {
+        PatientTypeService.delPatientType.remove({id: patientTypeId}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.patientTypeList.splice(index, 1);
             } else {

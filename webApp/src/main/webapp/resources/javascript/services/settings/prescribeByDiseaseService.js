@@ -35,22 +35,22 @@ app.service('PrescribeByDiseaseService', function ($resource) {
                 isArray:true
             }
         }),
-        deleteSettingsAdvice : $resource('rest/prescribeByDisease/deleteSettingsAdvice', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteSettingsAdvice : $resource('rest/prescribeByDisease/deleteSettingsAdvice/:advciceSettingID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {advciceSettingID: '@advciceSettingID'}
             }
         }),
-        deleteSettingsInv : $resource('rest/prescribeByDisease/deleteSettingsInv', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteSettingsInv : $resource('rest/prescribeByDisease/deleteSettingsInv/:invSettingID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {invSettingID: '@invSettingID'}
             }
         }),
-        deleteSettingsDrugs : $resource('rest/prescribeByDisease/deleteSettingsDrugs', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteSettingsDrugs : $resource('rest/prescribeByDisease/deleteSettingsDrugs/:drugSettingID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {drugSettingID: '@drugSettingID'}
             }
         }),
         getCategoryInv : $resource('rest/prescribeByDisease/getCategoryInv', {}, {
@@ -65,10 +65,10 @@ app.service('PrescribeByDiseaseService', function ($resource) {
                 isArray:true
             }
         }),
-        deleteInvSetting : $resource('rest/prescribeByDisease/deleteInvSetting', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteInvSetting : $resource('rest/prescribeByDisease/deleteInvSetting/:invSettingId', {}, {
+            'remove':  {
+                method:'DELET',
+                params: {invSettingId: '@invSettingId'}
             }
         }),
         createInvSetting : $resource('rest/prescribeByDisease/createInvSetting', {}, {
@@ -77,10 +77,10 @@ app.service('PrescribeByDiseaseService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteAdviceSetting : $resource('rest/prescribeByDisease/deleteAdviceSetting', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteAdviceSetting : $resource('rest/prescribeByDisease/deleteAdviceSetting/:settingID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {settingID: '@settingID'}
             }
         }),
         createAdviceSetting : $resource('rest/prescribeByDisease/createAdviceSetting', {}, {

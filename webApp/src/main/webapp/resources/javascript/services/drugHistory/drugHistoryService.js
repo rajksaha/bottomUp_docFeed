@@ -23,10 +23,10 @@ app.service('DrugHistoryService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteDrugHistory : $resource('rest/drugHistory/deleteDrugHistory', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteDrugHistory : $resource('rest/drugHistory/deleteDrugHistory/:delId', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {delId: '@delId'}
             }
         }),
         addContentDetail : $resource('rest/drugHistory/addContentDetail', {}, {
@@ -35,10 +35,10 @@ app.service('DrugHistoryService', function ($resource) {
                 isArray:false
             }
         }),
-        delContentDetail : $resource('rest/drugHistory/delContentDetail', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delContentDetail : $resource('rest/drugHistory/delContentDetail/:contentDetailID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {contentDetailID: '@contentDetailID'}
             }
         }),
     };

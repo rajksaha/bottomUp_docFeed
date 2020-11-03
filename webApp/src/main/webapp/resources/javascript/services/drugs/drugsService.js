@@ -41,10 +41,10 @@ app.service('DrugsService', function ($resource) {
                 isArray:false
             }
         }),
-        delDrugAndDrugPrescription : $resource('rest/drugs/delDrugAndDrugPrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delDrugAndDrugPrescription : $resource('rest/drugs/delDrugAndDrugPrescription/:drugID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {drugID: '@drugID'}
             }
         }),
         updateDrug : $resource('rest/drugs/updateDrug', {}, {
@@ -53,10 +53,10 @@ app.service('DrugsService', function ($resource) {
                 isArray:false
             }
         }),
-        delFromDrugPrescriptionAndDose : $resource('rest/drugs/delFromDrugPrescriptionAndDose', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delFromDrugPrescriptionAndDose : $resource('rest/drugs/delFromDrugPrescriptionAndDose/:drugPrescribeID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {drugPrescribeID: '@drugPrescribeID'}
             }
         }),
         getPresCribedDrugs : $resource('rest/drugs/getPresCribedDrugs', {}, {

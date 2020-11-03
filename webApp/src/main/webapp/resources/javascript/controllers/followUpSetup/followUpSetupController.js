@@ -70,9 +70,9 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
 	  
 	  $scope.delete = function(id){
 		  
-		  var dataString = 'query=13'+ '&id=' + id;
+		  // var dataString = 'query=13'+ '&id=' + id;
             
-            FollowUpSetupService.deleteInvToFollowUpSet.query({}, dataString).$promise.then(function(result) {
+            FollowUpSetupService.deleteInvToFollowUpSet.remove({id: id}).$promise.then(function(result) {
                 if (result && result.success) {
                     $scope.bringFollowUpChart($scope.patientTypeId);
                 }else{

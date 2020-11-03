@@ -17,10 +17,10 @@ app.service('FamilyHisoryService', function ($resource) {
                 isArray:true
             }
         }),
-        deleteFamilyDisease : $resource('rest/familyHisory/deleteFamilyDisease', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteFamilyDisease : $resource('rest/familyHisory/deleteFamilyDisease/:familyHistoryID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {familyHistoryID: '@familyHistoryID'}
             }
         }),
         createFamilyDisease : $resource('rest/familyHisory/createFamilyDisease', {}, {
@@ -35,10 +35,10 @@ app.service('FamilyHisoryService', function ($resource) {
                 isArray:true
             }
         }),
-        deletePatientFamilyHistory : $resource('rest/familyHisory/deletePatientFamilyHistory', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deletePatientFamilyHistory : $resource('rest/familyHisory/deletePatientFamilyHistory/:familyHistoryID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {familyHistoryID: '@familyHistoryID'}
             }
         }),
     };

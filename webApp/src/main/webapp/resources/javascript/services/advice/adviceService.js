@@ -17,10 +17,10 @@ app.service('AdviceService', function ($resource) {
                 isArray: false
             }
         }),
-        delAdviceSettings : $resource('rest/advice/delAdviceSettings', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delAdviceSettings : $resource('rest/advice/delAdviceSettings/:adviceSettingID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {adviceSettingID: '@adviceSettingID'}
             }
         }),
         createAdviceToPresciption: $resource('rest/advice/createAdviceToPresciption', {}, {
@@ -29,10 +29,10 @@ app.service('AdviceService', function ($resource) {
                 isArray : false
             }
         }),
-        delPrescibtionAdvice : $resource('rest/advice/delPrescibtionAdvice', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delPrescibtionAdvice : $resource('rest/advice/delPrescibtionAdvice/:adviceID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {adviceID: '@adviceID'}
             }
         }),
         getPrescribedAdvice : $resource('rest/advice/getPrescribedAdvice', {}, {
@@ -47,10 +47,10 @@ app.service('AdviceService', function ($resource) {
                 isArray:true
             }
         }),
-        delDoctorAdvice : $resource('rest/advice/delDoctorAdvice', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delDoctorAdvice : $resource('rest/advice/delDoctorAdvice/:adviceName/:pdf/:lang', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {adviceName: '@adviceName', pdf: '@pdf', lang: '@lang'}
             }
         }),
     };

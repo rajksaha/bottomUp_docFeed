@@ -275,9 +275,9 @@ app.controller('PatientFollowUPController', function($scope, $http, $modalInstan
                 var jsonItem = {followUpID : value.patientFollowUpID, data: value.data, entryDate : filteredDate};
                 jsonArray.push(jsonItem);
             });
-            var dataString = 'query=4'+ '&jsonArray=' + JSON.stringify(jsonArray);
+            // var dataString = 'query=4'+ '&jsonArray=' + JSON.stringify(jsonArray);
 
-            FollowUpChartService.delAndcreateFollowUpResult.query({}, dataString).$promise.then(function (result) {
+            FollowUpChartService.delAndcreateFollowUpResult.remove({jsonArray: JSON.stringify(jsonArray)}).$promise.then(function (result) {
                 if (result && result.success) {
                     $modalInstance.close();
                 } else {

@@ -394,9 +394,9 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
 
     $scope.deleteDrugFromDB = function(){
 
-        var dataString = "query=10" + '&drugID=' + $scope.drugData.drugID;
+        //var dataString = "query=10" + '&drugID=' + $scope.drugData.drugID;
 
-        DrugService.deleteDrugById.query({}, dataString).$promise.then(function (result) {
+        DrugService.deleteDrugById.remove({drugID: $scope.drugData.drugID}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringPresCribedDrugs();            
             } else {
@@ -504,11 +504,12 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
             $scope.drugData.drugStr = '';
         }
 
-        var dataString = 'drugType='+ drugType +'&drugName='+ drugName +'&drugStr='+ $scope.drugData.drugStr + '&drugTime='+ drugTime +'&doseUnit='+ doseUnit + '&drugWhen='+ drugWhen +'&drugAdvice='+ drugAdvice +'&query=' + query;
+        // var dataString = 'drugType='+ drugType +'&drugName='+ drugName +'&drugStr='+ $scope.drugData.drugStr + '&drugTime='+ drugTime +'&doseUnit='+ doseUnit + '&drugWhen='+ drugWhen +'&drugAdvice='+ drugAdvice +'&query=' + query;
 
-        DrugService.deleteDocDrugCreateDocDrug.query({}, dataString).$promise.then(function (result) {
+        DrugService.deleteDocDrugCreateDocDrug.query({drugType: drugType, drugName: drugName, drugStr: $scope.drugData.drugStr, drugTime: drugTime,
+                                                    doseUnit: doseUnit, drugWhen: drugWhen, drugAdvice: drugAdvice}).$promise.then(function (result) {
             if (result && result.success) {
-                doctorDrugID = result;
+                doctorDrugID = result;  
                 angular.forEach($scope.drugData.preiodicList, function (preiodicData, key) {
 
                     var drugDose = "";

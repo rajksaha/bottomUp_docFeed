@@ -17,10 +17,10 @@ app.service('FollowUpSetupService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteInvToFollowUpSet : $resource('rest/followUpSetup/deleteInvToFollowUpSet', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteInvToFollowUpSet : $resource('rest/followUpSetup/deleteInvToFollowUpSet/:id', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {id: '@id'}
             }
         }),
         getFollowUpChart : $resource('rest/followUpSetup/getFollowUpChart', {}, {

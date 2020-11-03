@@ -90,9 +90,9 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 		
 		$scope.deleteVitalFromSetting = function (vitalSettingID){
 			
-			var dataString = 'query=8'+ '&vitalSettingID=' + vitalSettingID;
+			// var dataString = 'query=8'+ '&vitalSettingID=' + vitalSettingID;
 
-			VitalService.deleteDoctorVitalSettings.query({}, dataString).$promise.then(function(result) {
+			VitalService.deleteDoctorVitalSettings.remove({vitalSettingID: vitalSettingID}).$promise.then(function(result) {
 				if (result && result.success) {
 					$scope.bringVitalDetail();
 				}else{
@@ -218,9 +218,9 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 					}
 				});
 			}else if(parseInt(value.prescribedVitalID) > 0 && value.vitalResult == ""){
-				var dataString = 'query=9'+ '&prescribedVitalID=' + value.prescribedVitalID;
+				// var dataString = 'query=9'+ '&prescribedVitalID=' + value.prescribedVitalID;
 		        
-				VitalService.deleteVitalprescription.query({}, dataString).$promise.then(function (result) {
+				VitalService.deleteVitalprescription.remove({prescribedVitalID: value.prescribedVitalID}).$promise.then(function (result) {
 					if (result && result.success) {
 						
 					} else {
