@@ -335,7 +335,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/directives/jquery.canvasjs.min.js', 'resources/javascript/controllers/appointment/appointmentController.js' ]
+                        files: ['resources/javascript/directives/jquery.canvasjs.min.js', 
+                            'resources/javascript/controllers/appointment/appointmentController.js' + jsVersion]
                     });
             }],
             loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -357,38 +358,41 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 controller : 'PrescriptionController'
             }
         },
-        resolve : {
-            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+        resolve: {
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
                         files: ['resources/javascript/services/jsonService.js' + jsVersion]
                     });
             }],
-                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
                         files: ['resources/javascript/controllers/prescription/prescriptionController.js' + jsVersion,
-                            'resources/javascript/controllers/inv/inv.js',
-                            'resources/javascript/controllers/prescription/complainController.js',
-                            'resources/javascript/controllers/prescription/diagnosisController.js',
-                            'resources/javascript/controllers/prescription/dietController.js',
-                            'resources/javascript/controllers/prescription/drugController.js',
-                            'resources/javascript/controllers/prescription/pdfSelectionController.js',
-                            'resources/javascript/controllers/prescription/prescriptionSettingController.js',
-                            'resources/javascript/controllers/prescription/vitalController.js',
-                            'resources/javascript/controllers/history/pastHistoryController.js',
-                            'resources/javascript/controllers/advice/advice.js'
+                            'resources/javascript/controllers/inv/inv.js' + jsVersion,
+                            'resources/javascript/controllers/prescription/complainController.js' + jsVersion,
+                            'resources/javascript/controllers/prescription/diagnosisController.js' + jsVersion,
+                            'resources/javascript/controllers/prescription/dietController.js' + jsVersion,
+                            'resources/javascript/controllers/prescription/drugController.js' + jsVersion,
+                            'resources/javascript/controllers/prescription/pdfSelectionController.js' + jsVersion,
+                            'resources/javascript/controllers/prescription/prescriptionSettingController.js' + jsVersion,
+                            'resources/javascript/controllers/prescription/vitalController.js' + jsVersion,
+                            'resources/javascript/controllers/history/pastHistoryController.js' + jsVersion,
+                            'resources/javascript/controllers/advice/advice.js' + jsVersion
                         ]
                     });
             }],
-            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/services/prescription/prescriptionService.js' + jsVersion]
+                        files: ['resources/javascript/services/prescription/prescriptionService.js' + jsVersion,
+                            'resources/javascript/services/prescription/drugService.js' + jsVersion,
+                            'resources/javascript/services/prescription/vitalService.js' + jsVersion
+                        ]
                     });
             }],
         }
@@ -408,7 +412,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/services/jsonService.js' + jsVersion]
+                        files: ['resources/javascript/services/drugs/drugsService.js' + jsVersion]
                     });
             }],
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -416,7 +420,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/drugs/drugs.js' ]
+                        files: ['resources/javascript/controllers/drugs/drugs.js' + jsVersion]
                     });
             }]
         }
@@ -437,7 +441,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/inv/inv.js' ]
+                        files: ['resources/javascript/controllers/inv/inv.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/inv/invService.js' + jsVersion]
                     });
             }]
         }
@@ -467,6 +478,13 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                         name: 'doctorPlatform',
                         files: ['resources/javascript/controllers/history/familyHisoryController.js' ]
                     });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/history/familyHisoryService.js' + jsVersion]
+                    });
             }]
         }
     };
@@ -493,7 +511,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/history/pastHistoryController.js' ]
+                        files: ['resources/javascript/controllers/history/pastHistoryController.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/history/pastHistoryService.js' + jsVersion]
                     });
             }]
         }
@@ -535,7 +560,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/vital/vital.js' ]
+                        files: ['resources/javascript/controllers/vital/vital.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/vital/vitalService.js' + jsVersion]
                     });
             }]
         }
@@ -556,7 +588,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/history/history.js' ]
+                        files: ['resources/javascript/controllers/history/history.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/history/historyService.js' + jsVersion]
                     });
             }]
         }
@@ -577,9 +616,16 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/advice/advice.js' ]
+                        files: ['resources/javascript/controllers/advice/advice.js' + jsVersion]
                     });
-            }]
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/advice/adviceService.js' + jsVersion]
+                    });
+            }],
         }
     };
 
@@ -676,20 +722,29 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/settings/settingSelectionController.js',
-                            'resources/javascript/controllers/settings/prescribeByDiseaseController.js',
-                            'resources/javascript/controllers/settings/drugTemplateController.js',
-                            'resources/javascript/controllers/invCategory/invCategoryController.js',
-                            'resources/javascript/controllers/drugAdvisor/drugAdvisorController.js',
-                            'resources/javascript/controllers/followUpSetup/followUpSetupController.js',
-                            'resources/javascript/controllers/patient/patientTypeController.js',
-							'resources/javascript/controllers/symptom/symptomModificationController.js',
-                            'resources/javascript/controllers/admin/adminModuleController.js',
-							'resources/javascript/controllers/disease/diseaseModificationController.js'
+                        files: ['resources/javascript/controllers/settings/settingSelectionController.js' + jsVersion,
+                            'resources/javascript/controllers/settings/prescribeByDiseaseController.js' + jsVersion,
+                            'resources/javascript/controllers/settings/drugTemplateController.js' + jsVersion,
+                            'resources/javascript/controllers/invCategory/invCategoryController.js' + jsVersion,
+                            'resources/javascript/controllers/drugAdvisor/drugAdvisorController.js' + jsVersion,
+                            'resources/javascript/controllers/followUpSetup/followUpSetupController.js' + jsVersion,
+                            'resources/javascript/controllers/patient/patientTypeController.js' + jsVersion,
+							'resources/javascript/controllers/symptom/symptomModificationController.js' + jsVersion,
+                            'resources/javascript/controllers/admin/adminModuleController.js' + jsVersion,
+							'resources/javascript/controllers/disease/diseaseModificationController.js ' + jsVersion
 							
                         ]
                     });
-            }]
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/settings/drugTemplateService.js' + jsVersion,
+                            'resources/javascript/services/settings/prescribeByDiseaseService.js' + jsVersion
+                        ]
+                    });
+            }],
         }
     };
 
@@ -730,7 +785,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/followUpChart/followUpChartController.js' ]
+                        files: ['resources/javascript/controllers/followUpChart/followUpChartController.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/followUpChart/followUpChartService.js' + jsVersion]
                     });
             }]
         }
@@ -751,7 +813,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/drugHistory/drugHistoryController.js' ]
+                        files: ['resources/javascript/controllers/drugHistory/drugHistoryController.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/drugHistory/drugHistoryService.js' + jsVersion]
                     });
             }]
         }
@@ -772,7 +841,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/drugAdvisor/drugAdvisorController.js' ]
+                        files: ['resources/javascript/controllers/drugAdvisor/drugAdvisorController.js' +jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/drugAdvisor/drugAdvisorService.js' + jsVersion]
                     });
             }]
         }
@@ -818,7 +894,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/followUpSetup/followUpSetupController.js' ]
+                        files: ['resources/javascript/controllers/followUpSetup/followUpSetupController.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/followUpSetup/followUpSetupService.js' + jsVersion]
                     });
             }]
         }
@@ -840,7 +923,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/symptom/symptomModificationController.js' ]
+                        files: ['resources/javascript/controllers/symptom/symptomModificationController.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/symptom/symptomModificationService.js' + jsVersion]
                     });
             }]
         }
@@ -861,7 +951,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/patient/patientController.js' ]
+                        files: ['resources/javascript/controllers/patient/patientController.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/patient/patientTypeService.js' + jsVersion]
                     });
             }]
         }
@@ -883,7 +980,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/disease/DiseaseModificationController.js' ]
+                        files: ['resources/javascript/controllers/disease/DiseaseModificationController.js' + jsVersion]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/disease/diseaseModificationService.js' + jsVersion]
                     });
             }]
         }

@@ -257,9 +257,9 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 	
 	$scope.deleteDrugFromDB = function(){
 		
-		var dataString = "query=10" + '&drugID=' + $scope.drugData.drugID;
+		//var dataString = "query=10" + '&drugID=' + $scope.drugData.drugID;
 		
-		DrugsService.delDrugAndDrugPrescription.query({}, dataString).$promise.then(function (result) {
+		DrugsService.delDrugAndDrugPrescription.remove({drugID: $scope.drugData.drugID}).$promise.then(function (result) {
 			if (result && result.success) {
 				$scope.bringPresCribedDrugs();
 			} else {
@@ -305,9 +305,9 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 	
 	$scope.deletePrescribedDrug = function(drugPrescribeID){
 		
-		var dataString = "query=7" + '&drugPrescribeID=' + drugPrescribeID;
+		//var dataString = "query=7" + '&drugPrescribeID=' + drugPrescribeID;
 		
-		DrugsService.delFromDrugPrescriptionAndDose.query({}, dataString).$promise.then(function (result) {
+		DrugsService.delFromDrugPrescriptionAndDose.remove({drugPrescribeID: drugPrescribeID}).$promise.then(function (result) {
 			if (result && result.success) {
 				$scope.bringPresCribedDrugs();
 			} else {

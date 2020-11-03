@@ -65,9 +65,9 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 	
 	$scope.delINVFromSetting = function (invSettingID, index){
 		
-		var dataString = 'query=6'+ '&invSettingID=' + invSettingID;
+		// var dataString = 'query=6'+ '&invSettingID=' + invSettingID;
 
-        InvService.deleteDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
+        InvService.deleteDoctorInV.remove({invSettingID: invSettingID}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.invSettingData.splice(index,1);
             }else{
@@ -105,7 +105,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=5'+ '&id=' + id;
 
-        InvService.deleteInvPrescriptionById.query({}, $scope.searchData).$promise.then(function(result) {
+        InvService.deleteInvPrescriptionById.remove({id: id}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringPrescribedInv();
         	    $scope.bringINVDetail();
@@ -117,9 +117,9 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 	
 	$scope.deleteInvByInvID = function (invID){
 		
-		var dataString = 'query=10'+ '&invID=' + invID;
+		// var dataString = 'query=10'+ '&invID=' + invID;
 
-        InvService.deleteInvPrescriptionByInvId.query({}, $scope.searchData).$promise.then(function(result) {
+        InvService.deleteInvPrescriptionByInvId.query({invID: invID}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringPrescribedInv();
             }else{

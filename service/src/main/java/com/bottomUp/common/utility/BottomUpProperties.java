@@ -25,11 +25,11 @@ public enum BottomUpProperties {
     private void init() {
         try {
             //load two resource files
-            Resource resource = new ClassPathResource("user.properties");
+            Resource resource = new ClassPathResource("echo.properties");
             //load properties
             bottomUpProperties = PropertiesLoaderUtils.loadProperties(resource);
         } catch (IOException ex) {
-            log.error("error loading user.properties", ex);
+            log.error("error loading echo.properties", ex);
         }
     }
 

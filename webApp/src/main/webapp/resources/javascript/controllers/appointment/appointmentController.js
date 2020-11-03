@@ -286,9 +286,9 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
      
      $scope.removeFromAppointment = function(appointmentID){
     	 
-    	 var  dataString='appointmentID='+  appointmentID +'&query='+9;
+    	//var  dataString='appointmentID='+  appointmentID +'&query='+9;
 
-         AppointmentService.deleteAppointment.query({}, dataString).$promise.then(function (result) {
+        AppointmentService.deleteAppointment.remove({appointmentID: appointmentID}).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.bringAppointment();
             } else {

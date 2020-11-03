@@ -48,15 +48,6 @@
 		WHERE appointmentID = #{appointmentID}
 	</update>
 
-	<update id="updateStatusByID" parameterType="map">
-		UPDATE `doctor_feed`.`appointment`
-		SET
-		`status` = #{status},
-		`updatedBy` = #{updatedBy},
-		`updatedOn` = #{updatedOn}
-		WHERE appointmentID = #{appointmentID}
-	</update>
-
 	<select id="getByID" parameterType="long" resultType="Appointment">
 		SELECT
 			`appointmentID`,

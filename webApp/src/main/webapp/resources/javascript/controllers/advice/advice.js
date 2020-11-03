@@ -90,7 +90,7 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 		
 		var dataString = 'query=6'+ '&adviceSettingID=' + adviceSettingID;
 		
-		AdviceService.delAdviceSettings.query({}, dataString).$promise.then(function (result) {
+		AdviceService.delAdviceSettings.remove({adviceSettingID: adviceSettingID}).$promise.then(function (result) {
 			if (result && result.success) {
 				$scope.bringPrescribedAdvice();
 			} else {
@@ -125,9 +125,9 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 	
 	$scope.deleteAdviceFromPrescibtion = function (adviceId){
 		
-		var dataString = 'query=5'+ '&adviceID=' + parseInt(adviceId);
+		//var dataString = 'query=5'+ '&adviceID=' + parseInt(adviceId);
 		
-		AdviceService.delPrescibtionAdvice.query({}, dataString).$promise.then(function (result) {
+		AdviceService.delPrescibtionAdvice.remove({adviceID: parseInt(adviceId)}).$promise.then(function (result) {
 			if (result && result.success) {
 				$scope.bringPrescribedAdvice();
 			} else {
@@ -263,16 +263,13 @@ app.controller('PrescribeAdviceController.AddAdvcieToDB', function($scope, $moda
 	
 	
 	
-	$scope.saveNewAdvice = function (){
-		
-		
+	$scope.saveNewAdvice = function (){		
 			
 			if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
+							
+				//var dataString = "query=7" + "&adviceName=" + $scope.name + '&pdf=' + $scope.code + '&lang=' + $scope.langSelector;
 				
-			
-				var dataString = "query=7" + "&adviceName=" + $scope.name + '&pdf=' + $scope.code + '&lang=' + $scope.langSelector;
-				
-				AdviceService.delDoctorAdvice.query({}, dataString).$promise.then(function (result) {
+				AdviceService.delDoctorAdvice.remove({adviceName: $scope.name, pdf: $scope.code, lang: $scope.langSelector}).$promise.then(function (result) {
 					if (result && result.success) {
 						$modalInstance.dismiss('cancel');
 					} else {

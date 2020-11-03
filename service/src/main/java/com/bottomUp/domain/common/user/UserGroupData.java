@@ -13,14 +13,12 @@ public class UserGroupData extends BaseData {
     private Long userGroupID;
     private String shortName;
     private String longDesc;
-    private Long companyModuleID;
-    private Long companyID;
+    private Integer companyModuleID;
     private String companyModuleName;
     private String companyName;
     private String moduleName;
 
     private Boolean isAssigned;
-    private Integer isUserDefined;
 
     private List<PermissionData> groupPermissionList;
 
@@ -48,11 +46,11 @@ public class UserGroupData extends BaseData {
         this.longDesc = longDesc;
     }
 
-    public Long getCompanyModuleID() {
+    public Integer getCompanyModuleID() {
         return companyModuleID;
     }
 
-    public void setCompanyModuleID(Long companyModuleID) {
+    public void setCompanyModuleID(Integer companyModuleID) {
         this.companyModuleID = companyModuleID;
     }
 
@@ -94,21 +92,5 @@ public class UserGroupData extends BaseData {
 
     public void setGroupPermissionList(List<PermissionData> groupPermissionList) {
         this.groupPermissionList = groupPermissionList;
-    }
-
-    public Long getCompanyID() {
-        return companyID;
-    }
-
-    public void setCompanyID(Long companyID) {
-        this.companyID = companyID;
-    }
-
-    public Integer getIsUserDefined() {
-        return isUserDefined;
-    }
-
-    public void setIsUserDefined(Integer isUserDefined) {
-        this.isUserDefined = isUserDefined;
     }
 }

@@ -21,15 +21,6 @@ public class UserData extends BaseData {
 
     private UserProfileData userProfileData;
     private String appVersion;
-    private Boolean isCompanyAdmin;
-
-    public Boolean getCompanyAdmin() {
-        return isCompanyAdmin;
-    }
-
-    public void setCompanyAdmin(Boolean companyAdmin) {
-        isCompanyAdmin = companyAdmin;
-    }
 
     public String getAppVersion() {
         return appVersion;

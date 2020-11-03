@@ -59,10 +59,10 @@ app.service('VitalService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteVitalPrescription : $resource('rest/vital/deleteVitalPrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteVitalPrescription : $resource('rest/vital/deleteVitalPrescription/:prescribedVitalID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {prescribedVitalID: '@prescribedVitalID'}
             }
         })
     };

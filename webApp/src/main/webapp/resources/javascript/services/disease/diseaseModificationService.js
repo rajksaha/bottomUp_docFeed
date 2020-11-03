@@ -12,10 +12,10 @@ app.service('DiseaseModificationService', function ($resource) {
             }
         }),
 
-        delDisease : $resource('rest/disease/delDisease', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delDisease : $resource('rest/disease/delDisease/:disease_id', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {disease_id: '@disease_id'}
             }
         }),
 

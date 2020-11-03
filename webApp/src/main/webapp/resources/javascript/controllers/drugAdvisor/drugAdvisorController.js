@@ -80,9 +80,9 @@ app.controller('DrugAdvisorController', function($scope, $modal, $rootScope, lim
     
     $scope.delDrugAdvice = function(data) {
     	
-    	var data = {'delId': data.drugAdviceID, 'query': 3};
+    	//var data = {'delId': data.drugAdviceID, 'query': 3};
 
-        DrugAdvisorService.deleteDrugAdviceType.query({}, data).$promise.then(function(result) {
+        DrugAdvisorService.deleteDrugAdviceType.remove({delId: data.drugAdviceID}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringDrugAdviceList();
             }else{
@@ -126,9 +126,9 @@ app.controller('DrugAdvisorController', function($scope, $modal, $rootScope, lim
     
     $scope.delDrugWhen = function(data) {
     	
-    	var data = {'delId': data.id, 'query': 6};
+    	//var data = {'delId': data.id, 'query': 6};
 
-        DrugAdvisorService.deleteDrugWhenType.query({}, data).$promise.then(function(result) {
+        DrugAdvisorService.deleteDrugWhenType.remove({delId: data.id}).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringDrugWhenList();
             }else{

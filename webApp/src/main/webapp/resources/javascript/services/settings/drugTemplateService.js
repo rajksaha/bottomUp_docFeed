@@ -59,10 +59,10 @@ app.service('DrugTemplateService', function ($resource) {
                 isArray:false
             }
         }),
-        delAndcreateDoctorDrug : $resource('rest/drugTemplate/delAndcreateDoctorDrug', {}, {
+        delAndcreateDoctorDrug : $resource('rest/drugTemplate/delAndcreateDoctorDrug/:drugType/:drugName/:drugStr/:drugTime/:doseUnit/:drugWhen/:drugAdvice', {}, {
             'query':  {
                 method:'POST',
-                isArray:false
+                params: {drugType: '@drugType', drugName: '@drugName', drugStr: '@drugStr', drugTime: '@drugTime', doseUnit: '@doseUnit', drugWhen: '@drugWhen', drugAdvice: '@drugAdvice'}
             }
         })
     };

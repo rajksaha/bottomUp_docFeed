@@ -69,9 +69,6 @@
 		<if test="doctorID != null">
 			AND doctorID = #{doctorID}
 		</if>
-		<if test="userID != null">
-			AND userID = #{userID}
-		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

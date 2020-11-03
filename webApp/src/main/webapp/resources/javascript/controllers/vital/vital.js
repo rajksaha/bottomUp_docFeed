@@ -194,9 +194,9 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 				});
 			}else if(parseInt(value.prescribedVitalID) > 0 && value.vitalResult == ""){
 				
-				var dataString = 'query=9'+ '&prescribedVitalID=' + value.prescribedVitalID;
+				// var dataString = 'query=9'+ '&prescribedVitalID=' + value.prescribedVitalID;
 		        
-				VitalService.deleteVitalPrescription.query({}, dataString).$promise.then(function (result) {
+				VitalService.deleteVitalPrescription.remove({prescribedVitalID: value.prescribedVitalID}).$promise.then(function (result) {
 					if (result && result.success) {
 						
 					} else {

@@ -440,9 +440,10 @@ app.controller('PrescribeSettingsController.AddDrugsToSettings', function($scope
             $scope.drugData.drugStr = '';
         }
 
-        var dataString = 'drugType='+ drugType +'&drugName='+ drugName +'&drugStr='+ $scope.drugData.drugStr + '&drugTime='+ drugTime +'&doseUnit='+ doseUnit + '&drugWhen='+ drugWhen +'&drugAdvice='+ drugAdvice +'&query=' + query;
+        // var dataString = 'drugType='+ drugType +'&drugName='+ drugName +'&drugStr='+ $scope.drugData.drugStr + '&drugTime='+ drugTime +'&doseUnit='+ doseUnit + '&drugWhen='+ drugWhen +'&drugAdvice='+ drugAdvice +'&query=' + query;
 
-        DrugTemplateService.delAndcreateDoctorDrug.query({}, dataString).$promise.then(function (result) {
+        DrugTemplateService.delAndcreateDoctorDrug.query({drugType: drugType, drugName: drugName, drugStr: $scope.drugData.drugStr, drugTime: drugTime, 
+            doseUnit: doseUnit, drugWhen: drugWhen, drugAdvice: drugAdvice}).$promise.then(function (result) {
             if (result && result.success) {
                 doctorDrugID = result;
             angular.forEach($scope.drugData.preiodicList, function(preiodicData, key) {
