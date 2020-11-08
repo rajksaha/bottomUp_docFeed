@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="prescriptionComplain" useGeneratedKeys="true" keyProperty="complainID" >
 
 		INSERT INTO `prescription_complain`(
-			`appointMentID`,
+			`appointmentID`,
 			`symptomID`,
 			`durationNum`,
 			`durationType`,
@@ -18,7 +18,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#{symptomID},
 			#{durationNum},
 			#{durationType},
@@ -35,7 +35,7 @@
 	<update id="update" parameterType="prescriptionComplain">
 		UPDATE `prescription_complain`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`symptomID` = #{symptomID},
 		`durationNum` = #{durationNum},
 		`durationType` =#{durationType},
@@ -47,37 +47,43 @@
 
 	<select id="getByID" parameterType="long" resultType="prescriptionComplain">
 		SELECT
-			`complainID`,
-			`appointMentID`,
-			`symptomID`,
-			`durationNum`,
-			`durationType`,
-			`detail`,
-			`updatedBy`,
-			`updatedOn`,
-			`createdBy`,
-			`createdOn`
-		FROM `prescription_complain`
-
-		WHERE complainID = #{complainID}
+			pc.`complainID`,
+			pc.`appointmentID`,
+			pc.`symptomID`,
+			cs.symptomName,
+			pc.`durationNum`,
+			pc.`durationType`,
+			pc.`detail`,
+			pc.`updatedBy`,
+			pc.`updatedOn`,
+			pc.`createdBy`,
+			pc.`createdOn`
+		FROM doctor_feed.`prescription_complain` pc
+		JOIN doctor_feed.content_symptom cs ON pc.symptomID = cs.symptomID
+		WHERE pc.complainID = #{complainID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionComplain">
 		SELECT
-		`complainID`,
-		`appointMentID`,
-		`symptomID`,
-		`durationNum`,
-		`durationType`,
-		`detail`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_complain`
+			pc.`complainID`,
+			pc.`appointmentID`,
+			pc.`symptomID`,
+			cs.symptomName,
+			pc.`durationNum`,
+			pc.`durationType`,
+			pc.`detail`,
+			pc.`updatedBy`,
+			pc.`updatedOn`,
+			pc.`createdBy`,
+			pc.`createdOn`
+		FROM doctor_feed.`prescription_complain` pc
+		JOIN doctor_feed.content_symptom cs ON pc.symptomID = cs.symptomID
 		WHERE 1 = 1
 		<if test="complainID != null">
-			AND complainID = #{complainID}
+			AND pc.complainID = #{complainID}
+		</if>
+		<if test="appointmentID != null">
+			AND pc.appointmentID = #{appointmentID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

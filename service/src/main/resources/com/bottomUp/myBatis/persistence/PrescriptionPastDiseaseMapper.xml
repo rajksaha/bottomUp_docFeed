@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="prescriptionPastDisease" useGeneratedKeys="true" keyProperty="presPastDiseaseID" >
 
 		INSERT INTO `prescription_past_disease`(
-			`appointMentID`,
+			`appointmentID`,
 			`pastDiseaseID`,
 			`updatedBy`,
 			`updatedOn`,
@@ -15,7 +15,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#{pastDiseaseID},
 			#{updatedBy},
 			#{updatedOn},
@@ -29,7 +29,7 @@
 	<update id="update" parameterType="prescriptionPastDisease">
 		UPDATE `prescription_past_disease`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`pastDiseaseID` = #{pastDiseaseID},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
@@ -38,31 +38,38 @@
 
 	<select id="getByID" parameterType="long" resultType="prescriptionPastDisease">
 		SELECT
-			`presPastDiseaseID`,
-			`appointMentID`,
-			`pastDiseaseID`,
-			`updatedBy`,
-			`updatedOn`,
-			`createdBy`,
-			`createdOn`
-		FROM `prescription_past_disease`
+			pd.`presPastDiseaseID`,
+			pd.`appointmentID`,
+			pd.`pastDiseaseID`,
+			cd.diseaseName,
+			pd.`updatedBy`,
+			pd.`updatedOn`,
+			pd.`createdBy`,
+			pd.`createdOn`
+		FROM doctor_feed.`prescription_past_disease` pd
+		JOIN doctor_feed.content_disease cd ON pd.pastDiseaseID = cd.diseaseID
 
-		WHERE presPastDiseaseID = #{presPastDiseaseID}
+		WHERE pd.presPastDiseaseID = #{presPastDiseaseID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionPastDisease">
 		SELECT
-		`presPastDiseaseID`,
-		`appointMentID`,
-		`pastDiseaseID`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_past_disease`
+		pd.`presPastDiseaseID`,
+		pd.`appointmentID`,
+		pd.`pastDiseaseID`,
+		cd.diseaseName AS diseaseName,
+		pd.`updatedBy`,
+		pd.`updatedOn`,
+		pd.`createdBy`,
+		pd.`createdOn`
+		FROM doctor_feed.`prescription_past_disease` pd
+		JOIN doctor_feed.content_disease cd ON pd.pastDiseaseID = cd.diseaseID
 		WHERE 1 = 1
 		<if test="presPastDiseaseID != null">
 			AND presPastDiseaseID = #{presPastDiseaseID}
+		</if>
+		<if test="appointmentID != null">
+			AND pd.appointmentID = #{appointmentID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

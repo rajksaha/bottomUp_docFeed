@@ -109,4 +109,44 @@
 	</delete>
 
 
+	<select id="patientSearch" parameterType="map" resultType="PatientViewData">
+		SELECT
+			p.`patientID`,
+			p.`userID`,
+			p.`patientCode`,
+			p.`occupation`,
+			p.`referredBy`,
+			p.`hospitalName`,
+			p.`bedNum`,
+			p.`wardNum`,
+			p.`headOfUnit`,
+			p.`updatedBy`,
+			p.`updatedOn`,
+			p.`createdBy`,
+			p.`createdOn`,
+			pup.firstName AS firstName,
+			pup.lastName AS lastName,
+			pup.address AS address,
+			pup.contactNo AS contactNo,
+			pup.dateOfBirth AS dateOfBirth,
+			pup.sex AS sex
+		FROM `patient` p
+		JOIN bottom_up_user pu ON p.userID = pu.userID
+		JOIN bottom_up_user_profile pup ON pu.userID = pup.userID
+		WHERE 1 = 1
+		<if test="patientID != null">
+			AND patientID = #{patientID}
+		</if>
+		<if test="likePatientName != null">
+			AND LOWER(pup.firstName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
+		</if>
+		<if test="likeContactNo != null">
+			AND LOWER(pup.contactNo) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
+		</if>
+		<if test="likePatientCode != null">
+			AND LOWER(p.patientCode) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
+		</if>
+	</select>
+
+
 </mapper>

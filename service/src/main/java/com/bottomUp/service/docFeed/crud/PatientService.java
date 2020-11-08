@@ -43,4 +43,8 @@ public class PatientService {
     public void delete (Map<String,Object> param) throws BottomUpException {
         this.patientMapper.delete(param);
     }
+
+    public List<PatientViewData> patientSearch(Map<String, Object> param) throws BottomUpException{
+        return this.patientMapper.patientSearch(param);
+    }
 }

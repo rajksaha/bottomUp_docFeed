@@ -1,6 +1,7 @@
 package com.bottomUp.model;
 
 import com.bottomUp.domain.common.BaseData;
+import utility.DateUtil;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class PatientViewData extends BaseData {
     private String headOfUnit;
     private long userProfileID;
     private Integer age;
+    private Integer currentAge;
     private Date dateOfBirth;
     private String userName;
     private String firstName;
@@ -31,6 +33,12 @@ public class PatientViewData extends BaseData {
     private String emailAddress;
     private String address;
 
+    public Integer getCurrentAge() {
+        if(this.dateOfBirth != null){
+            return DateUtil.getNoOfDays(this.dateOfBirth, new Date()) / 365;
+        }
+        return null;
+    }
 
     public long getPatientID() {
         return patientID;

@@ -1,7 +1,3 @@
-<!---<div class="col-xs-25 col-sm-25 col-md-25 col-lg-25 alert alert-info">
-		<h4 >Appointment</h4>
-    </div>
-</div>--->
 <hr>
 <div class="row">
     <div  data-ng-if="hasAccess('CREATE_NEW_APP')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="addNewAppointment()">
@@ -10,7 +6,7 @@
             <label>New Patient</label>
         </div>
     </div>
-    <div data-ng-if="hasAccess('CREATE_FOLLOW_APP')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(2)">
+    <div data-ng-if="hasAccess('CREATE_FOLLOW_APP')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="addFollowUpAppointment()">
         <div class="item-box">
             <i class="fa fa-user fa-3x"></i>
             <label>Follow up Patient</label>
@@ -31,44 +27,6 @@
 	
 	
 </div>
-<section  data-ng-show="followUpSearch" class=" contacts row alert alert-info" id="generalInfoContact">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-			 <div class="panel panel-default">
-				 <div class="panel-body">
-					<div class="room-desc form-group m-b-0" id="the-basics" >
-						  <span  class="col-lg-2" > <label for="inputName" class="">ID </label></span>
-						  <span  class="col-lg-7" ><input type="text" data-ng-model="patientCode" typeahead="patients.patientCode for patients in getPatientsByCode($viewValue)"  class="form-control" placeholder="Search Patients By ID" typeahead-on-select='onSelectNamePatientCode($item, $model, $label)'/></span>
-						  <span  class="col-lg-3" ><button class="btn btn-primary" data-ng-click="addAppFollowUP()" data-ng-show="addByCode"><span class='glyphicon glyphicon glyphicon-plus' aria-hidden='true'></span> Add</button></span>
-					</div>
-				 </div>
-			 </div>
-		 </div>
-
-		 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-			 <div class="panel panel-default">
-				 <div class="panel-body">
-					<div class="room-desc">
-						 <span  class="col-lg-2" ><label for="inputName"> Name</label></span></span>
-						 <span  class="col-lg-7" ><input type="text" data-ng-model="patientName" typeahead="patients.name + ' (' + patients.patientCode + ')' for patients in getPatients($viewValue)"  class="form-control" placeholder="Search Patients By Name" typeahead-on-select='onSelectNamePatient($item, $model, $label)'/></span>
-						 <span  class="col-lg-3" ><button class="btn btn-primary pull-right" data-ng-click="addAppFollowUP()" data-ng-show="addByName"><span class='glyphicon glyphicon glyphicon-plus' aria-hidden='true'></span> Add</button></span>
-					</div>
-				 </div>
-			 </div>
-		 </div>
-
-		 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-			 <div class="panel panel-default" >
-				 <div class="panel-body">
-					 <div class="room-desc">
-						 <span  class="col-lg-2" ><label for="inputName">Phone</label></span>
-						 <span  class="col-lg-7" ><input type="text" data-ng-model="patientPhone" typeahead="patients.phone for patients in getPatientsByPhone($viewValue)"  class="form-control" placeholder="Search Patients By Phone" typeahead-on-select='onSelectPhonePatientPhone($item, $model, $label)'/></span>
-						 <span  class="col-lg-3" ><button class="btn btn-primary" data-ng-click="addAppFollowUP()" data-ng-show="addByID"><span class='glyphicon glyphicon glyphicon-plus' aria-hidden='true'></span> Add</button></span>
-					 </div>
-				 </div>
-			 </div>
-		 </div>
-	</section>
-
 <hr>
 <div class="panel col-md-12 appointment" data-ng-if="hasAccess('16')">
     <div class="col-md-8 panel panel-primary mainPanelColor panel1" style="padding-top: 12px;padding-bottom: 12px">
@@ -91,7 +49,7 @@
                 <div class="panelChild">
                     <div class="" data-ng-repeat="appointmentData in appointmentList" >
                         <div class="panelChild-body form-group" data-ng-show="appointmentData.status == 0"  >
-                            <span class="textSpc" data-ng-click="letsPrescribe(appointmentData)" >{{$index + 1}} | {{appointmentData.name}} | {{appointmentData.age}} yrs  | {{appointmentData.address}} | {{appointmentData.time}} - {{appointmentData.appointmentTypeName}}</span>
+                            <span class="textSpc" data-ng-click="letsPrescribe(appointmentData)" >{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}} | {{appointmentData.time}} - {{appointmentData.appointmentType}}</span>
 
 
                             <span class="textSpc pull-right" data-ng-if="hasAccess('DELETE_APPOINTMENT')">
@@ -108,7 +66,7 @@
                               confirmation-message="Want to re-visit this patient?"
                               confirmation-title="Confirmation"
                               item="appointmentData">
-                            <span class="textSpc">{{$index + 1}} | {{appointmentData.name}} | {{appointmentData.age}} yrs  | {{appointmentData.address}}</span>
+                            <span class="textSpc">{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}}</span>
                             <span class="textSpc pull-right">
 										<button class="btn btn-info pull-right" style="margin-top: -8px">
 										    <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>

@@ -3,6 +3,7 @@ package com.bottomUp.controller;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.domain.*;
+import com.bottomUp.model.PatientViewData;
 import com.bottomUp.service.docFeed.crud.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -141,11 +142,11 @@ public class AutoCompleteController extends BaseController{
 
     @RequestMapping(value = {"/patientSearch"}, method = RequestMethod.POST)
     @ResponseBody
-    public List<PatientData> patientSearch(@RequestBody SearchData searchData) throws BottomUpException {
+    public List<PatientViewData> patientSearch(@RequestBody SearchData searchData) throws BottomUpException {
         Map<String, Object> param = new HashMap<>();
-        param.put("searchBy", searchData.getEntityType());
+        param.put(searchData.getEntityType(), searchData.getTerm());
         param.put("term", searchData.getTerm());
-        return patientService.getByParam(param);
+        return patientService.patientSearch(param);
     }
 
     @RequestMapping(value = {"/patientType"}, method = RequestMethod.POST)

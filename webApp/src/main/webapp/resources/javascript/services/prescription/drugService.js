@@ -53,10 +53,10 @@ app.service('DrugService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteDrugById : $resource('rest/drug/deleteDrugById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteDrugById : $resource('rest/drug/deleteDrugById/:drugID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {drugID: '@drugID'}
             }
         }),
         updateDrugByName : $resource('rest/drug/updateDrugByName', {}, {
@@ -77,12 +77,11 @@ app.service('DrugService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteDocDrugCreateDocDrug : $resource('rest/drug/deleteDocDrugCreateDocDrug', {}, {
+        deleteDocDrugCreateDocDrug : $resource('rest/drug/deleteDocDrugCreateDocDrug/:drugType/:drugName/:drugStr/:drugTime/:doseUnit/:drugWhen/:drugAdvice', {}, {
             'query':  {
                 method:'POST',
-                isArray:false
+                params: {drugType: '@drugType', drugName: '@drugName', drugStr: '@drugStr', drugTime: '@drugTime', doseUnit: '@doseUnit', drugWhen: '@drugWhen', drugAdvice: '@drugAdvice'}
             }
         })
     };
 });
-

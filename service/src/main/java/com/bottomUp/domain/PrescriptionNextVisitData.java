@@ -11,7 +11,7 @@ public class PrescriptionNextVisitData  extends BaseData {
   private long nextVisitType;
   private java.sql.Date date;
   private long numOfDay;
-  private long daytype;
+  private long dayType;
 
   public long getAppointmentID() {
     return appointmentID;
@@ -45,11 +45,11 @@ public class PrescriptionNextVisitData  extends BaseData {
     this.numOfDay = numOfDay;
   }
 
-  public long getDaytype() {
-    return daytype;
+  public long getDayType() {
+    return dayType;
   }
 
-  public void setDaytype(long daytype) {
-    this.daytype = daytype;
+  public void setDayType(long dayType) {
+    this.dayType = dayType;
   }
 }

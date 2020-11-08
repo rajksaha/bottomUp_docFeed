@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="prescriptionInv" useGeneratedKeys="true" keyProperty="presInvID" >
 
 		INSERT INTO `prescription_inv`(
-			`appointMentID`,
+			`appointmentID`,
 			`invID`,
 			`note`,
 			`checked`,
@@ -17,7 +17,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#{invID},
 			#{note},
 			#{checked},
@@ -33,7 +33,7 @@
 	<update id="update" parameterType="prescriptionInv">
 		UPDATE `prescription_inv`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`invID` = #{invID},
 		`note` = #{note},
 		`checked` =#{checked},
@@ -44,35 +44,42 @@
 
 	<select id="getByID" parameterType="long" resultType="prescriptionInv">
 		SELECT
-			`presInvID`,
-			`appointMentID`,
-			`invID`,
-			`note`,
-			`checked`,
-			`updatedBy`,
-			`updatedOn`,
-			`createdBy`,
-			`createdOn`
-		FROM `prescription_inv`
+			pi.`presInvID`,
+			pi.`appointmentID`,
+			pi.`invID`,
+			ci.name AS invName,
+			pi.`note`,
+			pi.`checked`,
+			pi.`updatedBy`,
+			pi.`updatedOn`,
+			pi.`createdBy`,
+			pi.`createdOn`
+		FROM doctor_feed.`prescription_inv` pi
+		JOIN doctor_feed.content_inv ci ON pi.invID = ci.invID
 
-		WHERE presInvID = #{presInvID}
+		WHERE pi.presInvID = #{presInvID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionInv">
 		SELECT
-		`presInvID`,
-		`appointMentID`,
-		`invID`,
-		`note`,
-		`checked`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_inv`
+			pi.`presInvID`,
+			pi.`appointmentID`,
+			pi.`invID`,
+			ci.name AS invName,
+			pi.`note`,
+			pi.`checked`,
+			pi.`updatedBy`,
+			pi.`updatedOn`,
+			pi.`createdBy`,
+			pi.`createdOn`
+		FROM doctor_feed.`prescription_inv` pi
+		JOIN doctor_feed.content_inv ci ON pi.invID = ci.invID
 		WHERE 1 = 1
 		<if test="presInvID != null">
-			AND presInvID = #{presInvID}
+			AND pi.presInvID = #{presInvID}
+		</if>
+		<if test="appointmentID != null">
+			AND pi.appointmentID = #{appointmentID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

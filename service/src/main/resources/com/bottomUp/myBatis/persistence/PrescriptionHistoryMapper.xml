@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="prescriptionHistory" useGeneratedKeys="true" keyProperty="presHistoryID" >
 
 		INSERT INTO `prescription_history`(
-			`appointMentID`,
+			`appointmentID`,
 			`patientHistoryID`,
 			`updatedBy`,
 			`updatedOn`,
@@ -15,7 +15,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#{patientHistoryID},
 			#{updatedBy},
 			#{updatedOn},
@@ -29,7 +29,7 @@
 	<update id="update" parameterType="prescriptionHistory">
 		UPDATE `prescription_history`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`patientHistoryID` = #{patientHistoryID},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
@@ -38,31 +38,48 @@
 
 	<select id="getByID" parameterType="long" resultType="prescriptionHistory">
 		SELECT
-			`presHistoryID`,
-			`appointMentID`,
-			`patientHistoryID`,
-			`updatedBy`,
-			`updatedOn`,
-			`createdBy`,
-			`createdOn`
-		FROM `prescription_history`
-
-		WHERE presHistoryID = #{presHistoryID}
+		ph.`presHistoryID`,
+		ph.`appointmentID`,
+		ph.`patientHistoryID`,
+		h.typeCode AS typeCode,
+		h.name AS historyName,
+		h.shortName historyShortName,
+		pathis.historyResult AS historyResult,
+		ph.`updatedBy`,
+		ph.`updatedOn`,
+		ph.`createdBy`,
+		ph.`createdOn`
+		FROM doctor_feed.`prescription_history` ph
+		JOIN doctor_feed.patient_history pathis ON ph.patientHistoryID = pathis.patientHistoryID
+		JOIN doctor_feed.history h ON pathis.historyID = h.historyID
+		WHERE ph.presHistoryID = #{presHistoryID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionHistory">
 		SELECT
-		`presHistoryID`,
-		`appointMentID`,
-		`patientHistoryID`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_history`
+		ph.`presHistoryID`,
+		ph.`appointmentID`,
+		ph.`patientHistoryID`,
+		h.typeCode AS typeCode,
+		h.name AS historyName,
+		h.shortName historyShortName,
+		pathis.historyResult AS historyResult,
+		ph.`updatedBy`,
+		ph.`updatedOn`,
+		ph.`createdBy`,
+		ph.`createdOn`
+		FROM doctor_feed.`prescription_history` ph
+		JOIN doctor_feed.patient_history pathis ON ph.patientHistoryID = pathis.patientHistoryID
+		JOIN doctor_feed.history h ON pathis.historyID = h.historyID
 		WHERE 1 = 1
 		<if test="presHistoryID != null">
-			AND presHistoryID = #{presHistoryID}
+			AND ph.presHistoryID = #{presHistoryID}
+		</if>
+		<if test="patientID != null">
+			AND pathis.patientID = #{patientID}
+		</if>
+		<if test="appointmentID != null">
+			AND ph.appointmentID = #{appointmentID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

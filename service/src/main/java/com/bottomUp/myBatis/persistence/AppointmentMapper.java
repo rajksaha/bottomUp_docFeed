@@ -3,6 +3,7 @@ package com.bottomUp.myBatis.persistence;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.AppointmentData;
+import com.bottomUp.model.AppointmentViewData;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,8 @@ public interface AppointmentMapper {
     AppointmentData getByID(Long ID) throws BottomUpException;
 
     List<AppointmentData> getByParam(Map<String, Object> param) throws BottomUpException;
+
+    List<AppointmentViewData> getAppPatientDetail(Map<String, Object> param) throws BottomUpException;
 
     Long getCountByParam(Map<String, Object> param) throws BottomUpException;
 

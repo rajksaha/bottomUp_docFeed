@@ -1,8 +1,7 @@
-package com.bottomUp.controller.docfeed;
+package com.bottomUp.controller;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.common.utility.SearchData;
-import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.AppointmentData;
 import com.bottomUp.model.AppointmentViewData;
 import com.bottomUp.model.DoctorDashboardData;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import utility.DateUtil;
-import utility.type.AppointmentStatusType;
-import utility.type.AppointmentType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

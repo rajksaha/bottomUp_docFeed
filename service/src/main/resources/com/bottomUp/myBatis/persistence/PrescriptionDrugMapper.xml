@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="prescriptionDrug" useGeneratedKeys="true" keyProperty="presDrugID" >
 
 		INSERT INTO `prescription_drug`(
-			`appointMentID`,
+			`appointmentID`,
 			`drugTypeID`,
 			`drugID`,
 			`drugTimeID`,
@@ -21,7 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#{drugTypeID},
 			#{drugID},
 			#{drugTimeID},
@@ -41,7 +41,7 @@
 	<update id="update" parameterType="prescriptionDrug">
 		UPDATE `prescription_drug`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`drugTypeID` = #{drugTypeID},
 		`drugID` = #{drugID},
 		`drugTimeID` =#{drugTimeID},
@@ -57,7 +57,7 @@
 	<select id="getByID" parameterType="long" resultType="prescriptionDrug">
 		SELECT
 			`presDrugID`,
-			`appointMentID`,
+			`appointmentID`,
 			`drugTypeID`,
 			`drugID`,
 			`drugTimeID`,
@@ -76,23 +76,26 @@
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionDrug">
 		SELECT
-		`presDrugID`,
-		`appointMentID`,
-		`drugTypeID`,
-		`drugID`,
-		`drugTimeID`,
-		`drugDoseUnit`,
-		`drugWhenID`,
-		`drugAdviceID`,
-		`presNum`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
+			`presDrugID`,
+			`appointmentID`,
+			`drugTypeID`,
+			`drugID`,
+			`drugTimeID`,
+			`drugDoseUnit`,
+			`drugWhenID`,
+			`drugAdviceID`,
+			`presNum`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
 		FROM `prescription_drug`
 		WHERE 1 = 1
 		<if test="presDrugID != null">
 			AND presDrugID = #{presDrugID}
+		</if>
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

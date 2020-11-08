@@ -3,10 +3,12 @@ package com.bottomUp.domain;
 
 import com.bottomUp.domain.common.BaseData;
 
+import java.util.List;
+
 public class PrescriptionDrugData extends BaseData {
 
   private long presDrugID;
-  private long appointMentID ;
+  private long appointmentID ;
   private long drugTypeID;
   private long drugID;
   private long drugTimeID;
@@ -15,20 +17,14 @@ public class PrescriptionDrugData extends BaseData {
   private long drugAdviceID;
   private long presNum;
 
+  private List<PrescriptionDrugDoseData> doseList;
+
   public long getPresDrugID() {
     return presDrugID;
   }
 
   public void setPresDrugID(long presDrugID) {
     this.presDrugID = presDrugID;
-  }
-
-  public long getAppointMentID() {
-    return appointMentID;
-  }
-
-  public void setAppointMentID(long appointMentID) {
-    this.appointMentID = appointMentID;
   }
 
   public long getDrugTypeID() {
@@ -85,5 +81,21 @@ public class PrescriptionDrugData extends BaseData {
 
   public void setPresNum(long presNum) {
     this.presNum = presNum;
+  }
+
+  public List<PrescriptionDrugDoseData> getDoseList() {
+    return doseList;
+  }
+
+  public void setDoseList(List<PrescriptionDrugDoseData> doseList) {
+    this.doseList = doseList;
+  }
+
+  public long getAppointmentID() {
+    return appointmentID;
+  }
+
+  public void setAppointmentID(long appointmentID) {
+    this.appointmentID = appointmentID;
   }
 }

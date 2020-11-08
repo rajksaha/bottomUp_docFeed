@@ -85,6 +85,9 @@
 		<typeAlias alias="prescriptionVital" type="com.bottomUp.domain.PrescriptionVitalData"/>
 		<typeAlias alias="referredDoctor" type="com.bottomUp.domain.ReferredDoctorData"/>
 
+		<typeAlias alias="appointmentDetail" type="com.bottomUp.model.AppointmentViewData"/>
+		<typeAlias alias="PatientViewData" type="com.bottomUp.model.PatientViewData"/>
+
 
 
 

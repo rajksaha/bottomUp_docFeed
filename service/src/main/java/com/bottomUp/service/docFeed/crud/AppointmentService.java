@@ -2,6 +2,7 @@ package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.AppointmentData;
+import com.bottomUp.model.AppointmentViewData;
 import com.bottomUp.myBatis.persistence.AppointmentMapper;
 import org.apache.commons.lang3.time.DateUtils;
 import org.joda.time.DateTime;
@@ -49,6 +50,10 @@ public class AppointmentService {
 
     public List<AppointmentData> getByParam(Map<String, Object> param) throws BottomUpException {
         return this.appointmentMapper.getByParam(param);
+    }
+
+    public List<AppointmentViewData> getAppPatientDetail(Map<String, Object> param) throws BottomUpException{
+        return this.appointmentMapper.getAppPatientDetail(param);
     }
 
     public void delete (Map<String,Object> param) throws BottomUpException {

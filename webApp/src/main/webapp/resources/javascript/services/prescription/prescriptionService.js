@@ -5,10 +5,10 @@
 app.service('PrescriptionService', function ($resource) {
     return {
 
-        deleteAndCreateNextVisit : $resource('rest/prescription/deleteAndCreateNextVisit', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteAndCreateNextVisit : $resource('rest/prescription/deleteAndCreateNextVisit/:nextVisitDate/:numOfDay/:dayType/:nextVisitType', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {nextVisitDate: '@nextVisitDate', numOfDay: '@numOfDay', dayType: '@dayType', nextVisitType: '@nextVisitType'}
             }
         }),
         createRefferedDoctor : $resource('rest/prescription/createRefferedDoctor', {}, {
@@ -24,9 +24,9 @@ app.service('PrescriptionService', function ($resource) {
             }
         }),
         deleteReferncePrescription : $resource('rest/prescription/deleteReferncePrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+            'remove':  {
+                method:'DELETE',
+                params: {}
             }
         }),
         getInformationOfPatient : $resource('rest/prescription/getInformationOfPatient', {}, {
@@ -35,9 +35,9 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:false
             }
         }),
-        getSettingsOfMenu : $resource('rest/prescription/getSettingsOfMenu', {}, {
+        getDoctorMenu : $resource('rest/prescription/getDoctorMenu', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:true
             }
         }),
@@ -77,9 +77,9 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:false
             }
         }),
-        getPatientAppointment : $resource('rest/prescription/getPatientAppointment', {}, {
+        getAppointmentInfo : $resource('rest/prescription/getAppointmentInfo', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:false
             }
         }),
@@ -125,16 +125,16 @@ app.service('PrescriptionService', function ($resource) {
                 params  : {contentDetailID: '@contentDetailID'}
             }
         }),
-        delClinicalHistoryById : $resource('rest/prescription/delClinicalHistoryById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delClinicalHistoryById : $resource('rest/prescription/delClinicalHistoryById/:contentDetailID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {contentDetailID: '@contentDetailID'}
             }
         }),
-        delInvPrescriptionById : $resource('rest/prescription/delInvPrescriptionById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delInvPrescriptionById : $resource('rest/prescription/delInvPrescriptionById/:id', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {id: '@id'}
             }
         }),
         getUpInDelContentDetailByComment : $resource('rest/prescription/getUpInDelContentDetailByComment', {}, {
@@ -191,12 +191,6 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:true
             }
         }),
-        getDrugDayTypeList : $resource('rest/prescription/getDrugDayTypeList', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
         getNextVistPrescriptionnByAppointmentId : $resource('rest/prescription/getNextVistPrescriptionnByAppointmentId', {}, {
             'query':  {
                 method:'POST',
@@ -221,10 +215,10 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:true
             }
         }),
-        delPatientAndPrescriptionDisease : $resource('rest/prescription/delPatientAndPrescriptionDisease', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delPatientAndPrescriptionDisease : $resource('rest/prescription/delPatientAndPrescriptionDisease/:pastHistoryID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {pastHistoryID: '@pastHistoryID'}
             }
         }),
         getFamityHistoryPrescriptionnByAppointmentId : $resource('rest/prescription/getFamityHistoryPrescriptionnByAppointmentId', {}, {
@@ -233,40 +227,40 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:true
             }
         }),
-        delFamilyHistoryDisease : $resource('rest/prescription/delFamilyHistoryDisease', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delFamilyHistoryDisease : $resource('rest/prescription/delFamilyHistoryDisease/:familyHistoryID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {familyHistoryID: '@familyHistoryID'}
             }
         }),
-        delPrescribedVital : $resource('rest/prescription/delPrescribedVital', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delPrescribedVital : $resource('rest/prescription/delPrescribedVital/:prescribedVitalID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {prescribedVitalID: '@prescribedVitalID'}
             }
         }),
-        delComplainById : $resource('rest/prescription/delComplainById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delComplainById : $resource('rest/prescription/delComplainById/:id', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {id: '@id'}
             }
         }),
-        delPrescriptionHistoryById : $resource('rest/prescription/delPrescriptionHistoryById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delPrescriptionHistoryById : $resource('rest/prescription/delPrescriptionHistoryById/:savedHistorysID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {savedHistorysID: '@savedHistorysID'}
             }
         }),
-        delPrescriptionAdviceById : $resource('rest/prescription/delPrescriptionAdviceById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delPrescriptionAdviceById : $resource('rest/prescription/delPrescriptionAdviceById/:adviceID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {adviceID: '@adviceID'}
             }
         }),
-        delPrescriptionDrugById : $resource('rest/prescription/delPrescriptionDrugById', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        delPrescriptionDrugById : $resource('rest/prescription/delPrescriptionDrugById/:drugPrescribeID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {drugPrescribeID: '@drugPrescribeID'}
             }
         }),
         getContentDetailByDocId : $resource('rest/prescription/getContentDetailByDocId', {}, {
@@ -286,7 +280,12 @@ app.service('PrescriptionService', function ($resource) {
                 method:'POST',
                 isArray:false
             }
+        }),
+        getPrescriptionInfo : $resource('rest/prescription/getPrescriptionInfo/:appointmentID', {}, {
+            'query':  {
+                method:'GET',
+                params: {appointmentID: '@appointmentID'}
+            }
         })
     };
 });
-

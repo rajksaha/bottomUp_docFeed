@@ -4,10 +4,10 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionAdviceMapper">
 
-	<insert id="create" parameterType="prescriptionAdvice" useGeneratedKeys="true" keyProperty="presAdviceIS" >
+	<insert id="create" parameterType="prescriptionAdvice" useGeneratedKeys="true" keyProperty="presAdviceID" >
 
 		INSERT INTO `prescription_advice`(
-			`appointMentID`,
+			`appointmentID`,
 			`adviceID`,
 			`updatedBy`,
 			`updatedOn`,
@@ -15,7 +15,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#{adviceID},
 			#{updatedBy},
 			#{updatedOn},
@@ -29,40 +29,49 @@
 	<update id="update" parameterType="prescriptionAdvice">
 		UPDATE `prescription_advice`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`adviceID` = #{adviceID},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
-		WHERE presAdviceIS = #{presAdviceIS}
+		WHERE presAdviceID = #{presAdviceID}
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="prescriptionAdvice">
 		SELECT
-			`presAdviceIS`,
-			`appointMentID`,
-			`adviceID`,
-			`updatedBy`,
-			`updatedOn`,
-			`createdBy`,
-			`createdOn`
-		FROM `prescription_advice`
+		pa.`presAdviceID`,
+		pa.`appointmentID`,
+		pa.`adviceID`,
+		ca.advice,
+		ca.lang,
+		pa.`updatedBy`,
+		pa.`updatedOn`,
+		pa.`createdBy`,
+		pa.`createdOn`
+		FROM doctor_feed.`prescription_advice` pa
+		JOIN doctor_feed.content_advice ca ON pa.adviceID = ca.adviceID
 
 		WHERE presAdviceIS = #{presAdviceIS}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionAdvice">
 		SELECT
-		`presAdviceIS`,
-		`appointMentID`,
-		`adviceID`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_advice`
+		pa.`presAdviceID`,
+		pa.`appointmentID`,
+		pa.`adviceID`,
+		ca.advice,
+		ca.lang,
+		pa.`updatedBy`,
+		pa.`updatedOn`,
+		pa.`createdBy`,
+		pa.`createdOn`
+		FROM doctor_feed.`prescription_advice` pa
+		JOIN doctor_feed.content_advice ca ON pa.adviceID = ca.adviceID
 		WHERE 1 = 1
-		<if test="presAdviceIS != null">
-			AND presAdviceIS = #{presAdviceIS}
+		<if test="presAdviceID != null">
+			AND presAdviceID = #{presAdviceID}
+		</if>
+		<if test="appointmentID != null">
+			AND pa.appointmentID = #{appointmentID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

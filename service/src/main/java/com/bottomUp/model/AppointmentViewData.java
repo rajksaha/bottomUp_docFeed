@@ -16,6 +16,13 @@ public class AppointmentViewData {
     private Integer status;
     private Integer appointmentType;
 
+    private Integer numOfMalePatient;
+    private Integer numOfFemalePatient;
+    private Integer numOfNewPatient;
+    private Integer numOfOldPatient;
+    private Integer numOfReportPatient;
+    private Integer numOfFreePatient;
+
     private PatientViewData patient;
     private DoctorViewData doctor;
 

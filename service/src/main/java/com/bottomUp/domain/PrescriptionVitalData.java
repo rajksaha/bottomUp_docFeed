@@ -6,9 +6,11 @@ import com.bottomUp.domain.common.BaseData;
 public class PrescriptionVitalData extends BaseData {
 
   private long presVitalId;
-  private long appointMentId;
+  private long appointmentId;
   private long vitalId;
   private String vitalResult;
+  private String vitalName;
+  private String vitalUnit;
 
   public long getPresVitalId() {
     return presVitalId;
@@ -16,14 +18,6 @@ public class PrescriptionVitalData extends BaseData {
 
   public void setPresVitalId(long presVitalId) {
     this.presVitalId = presVitalId;
-  }
-
-  public long getAppointMentId() {
-    return appointMentId;
-  }
-
-  public void setAppointMentId(long appointMentId) {
-    this.appointMentId = appointMentId;
   }
 
   public long getVitalId() {
@@ -40,5 +34,29 @@ public class PrescriptionVitalData extends BaseData {
 
   public void setVitalResult(String vitalResult) {
     this.vitalResult = vitalResult;
+  }
+
+  public long getAppointmentId() {
+    return appointmentId;
+  }
+
+  public void setAppointmentId(long appointmentId) {
+    this.appointmentId = appointmentId;
+  }
+
+  public String getVitalName() {
+    return vitalName;
+  }
+
+  public void setVitalName(String vitalName) {
+    this.vitalName = vitalName;
+  }
+
+  public String getVitalUnit() {
+    return vitalUnit;
+  }
+
+  public void setVitalUnit(String vitalUnit) {
+    this.vitalUnit = vitalUnit;
   }
 }

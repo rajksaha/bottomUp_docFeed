@@ -358,13 +358,6 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
             }
         },
         resolve : {
-            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load(
-                    {
-                        name: 'doctorPlatform',
-                        files: ['resources/javascript/services/jsonService.js' + jsVersion]
-                    });
-            }],
                 loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
@@ -380,7 +373,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                             'resources/javascript/controllers/prescription/prescriptionSettingController.js',
                             'resources/javascript/controllers/prescription/vitalController.js',
                             'resources/javascript/controllers/history/pastHistoryController.js',
-                            'resources/javascript/controllers/advice/advice.js'
+                            'resources/javascript/controllers/advice/advice.js',
+                            'resources/javascript/services/jsonService.js' + jsVersion
                         ]
                     });
             }],
@@ -390,7 +384,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                         name: 'doctorPlatform',
                         files: ['resources/javascript/services/prescription/prescriptionService.js' + jsVersion]
                     });
-            }],
+            }]
         }
     };
 
@@ -956,9 +950,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
 });
 
 app.config(function ($httpProvider) {
-    //configure $http to view a login whenever a 401 unauthorized response arrives
-    //$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-    $httpProvider.responseInterceptors.push(function ($rootScope, $q, blockUI) {
+    //$httpProvider.interceptors.push('myInterceptorService');
+    $httpProvider.responseInterceptors.push(function ($rootScope, $q) {
         return function (promise) {
             return promise.then(
                 //success -> don't intercept
@@ -967,7 +960,6 @@ app.config(function ($httpProvider) {
                 },
                 //error -> if 401 save the request and broadcast an event
                 function (response) {
-                    blockUI.stop();
                     if (response.status === 401) {
                         // Set the message why is unauthorized
                         $rootScope.warn = true;
@@ -1007,3 +999,38 @@ app.config(function ($httpProvider) {
     });
     httpHeaders = $httpProvider.defaults.headers;
 });
+
+// app.config(["$httpProvider", function ($httpProvider) {
+//     $httpProvider.interceptors.push('myInterceptorService');
+// }]);
+//
+// app.factory('myInterceptorService', ['$q', '$injector','blockUI',
+//     function ($q, $injector, blockUI) {
+//
+//         var myInterceptorServiceFactory = {};
+//
+//         myInterceptorServiceFactory.request = function (config) {
+//             if (blockUI.noOpen == null) {
+//                 blockUI.stop();
+//             } else {
+//                 blockUI.noOpen = null;
+//             }
+//             return config;
+//         };
+//         myInterceptorServiceFactory.responseError = function (rejection) {
+//             return $q.reject(rejection);
+//         };
+//         myInterceptorServiceFactory.response = function (response) {
+//             if (blockUI.noOpen == null) {
+//                 blockUI.stop();
+//             } else {
+//                 blockUI.noOpen = null;
+//             }
+//             return response || $q.when(response);
+//         };
+//
+//         return myInterceptorServiceFactory;
+//     }
+// ]);
+
+

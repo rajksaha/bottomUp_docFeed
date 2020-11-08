@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="prescriptionVital" useGeneratedKeys="true" keyProperty="presVitalID" >
 
 		INSERT INTO `prescription_vital`(
-			`appointMentID`,
+			`appointmentID`,
 			`vitalID`,
 			`vitalResult`,
 			`updatedBy`,
@@ -16,7 +16,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#{vitalID},
 			#{vitalResult},
 			#{updatedBy},
@@ -31,7 +31,7 @@
 	<update id="update" parameterType="prescriptionVital">
 		UPDATE `prescription_vital`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`vitalID` = #{vitalID},
 		`vitalResult` = #{vitalResult},
 		`updatedBy` = #{updatedBy},
@@ -42,7 +42,7 @@
 	<select id="getByID" parameterType="long" resultType="prescriptionVital">
 		SELECT
 			`presVitalID`,
-			`appointMentID`,
+			`appointmentID`,
 			`vitalID`,
 			`vitalResult`,
 			`updatedBy`,
@@ -56,15 +56,18 @@
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionVital">
 		SELECT
-		`presVitalID`,
-		`appointMentID`,
-		`vitalID`,
-		`vitalResult`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_vital`
+		pv.`presVitalID`,
+		pv.`appointmentID`,
+		pv.`vitalID`,
+		cv.vitalName,
+		cv.vitalUnit,
+		pv.`vitalResult`,
+		pv.`updatedBy`,
+		pv.`updatedOn`,
+		pv.`createdBy`,
+		pv.`createdOn`
+		FROM `prescription_vital` pv
+		JOIN doctor_feed.content_vital cv ON pv.vitalID = cv.vitalID
 		WHERE 1 = 1
 		<if test="presVitalID != null">
 			AND presVitalID = #{presVitalID}

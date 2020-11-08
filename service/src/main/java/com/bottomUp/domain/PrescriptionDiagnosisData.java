@@ -5,8 +5,9 @@ import com.bottomUp.domain.common.BaseData;
 public class PrescriptionDiagnosisData extends BaseData {
 
   private long diagnosisID;
-  private long appointMentId;
+  private long appointmentID;
   private long diseaseId;
+  private String diseaseName;
   private String note;
 
   public long getDiagnosisID() {
@@ -17,12 +18,12 @@ public class PrescriptionDiagnosisData extends BaseData {
     this.diagnosisID = diagnosisID;
   }
 
-  public long getAppointMentId() {
-    return appointMentId;
+  public long getAppointmentID() {
+    return appointmentID;
   }
 
-  public void setAppointMentId(long appointMentId) {
-    this.appointMentId = appointMentId;
+  public void setAppointmentID(long appointmentID) {
+    this.appointmentID = appointmentID;
   }
 
   public long getDiseaseId() {
@@ -39,5 +40,13 @@ public class PrescriptionDiagnosisData extends BaseData {
 
   public void setNote(String note) {
     this.note = note;
+  }
+
+  public String getDiseaseName() {
+    return diseaseName;
+  }
+
+  public void setDiseaseName(String diseaseName) {
+    this.diseaseName = diseaseName;
   }
 }

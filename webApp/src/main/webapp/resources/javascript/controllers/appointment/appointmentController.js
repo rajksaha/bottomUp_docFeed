@@ -1,4 +1,4 @@
-app.controller('AppointmentController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, AppointmentService) {
+app.controller('AppointmentController', function($scope, $state, $modal, $rootScope, limitToFilter, $location, $filter, AppointmentService) {
 	
 	$scope.numberOfAppointment = 0;
  	$scope.limit = 10;
@@ -7,21 +7,15 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
  	$scope.followUpSearch = false;
  	$scope.patientName = "";
  	$scope.addAppointMentData = {};
+    $scope.appointmentSearch = "";
  	
 
  	$scope.changePage = function (page) {
-
-        if(page == 2){
-            $scope.followUpSearch = !$scope.followUpSearch;
-        }else if(page == 3){
+         if(page == 3){
             $location.path("/researchHome");
         }else if(page == 4){
             $location.path("/settingSelection");
         }
-    };
- 	
-    $scope.bringDoctorInfo = function (){
-        //$scope.initiateDashboard();
     };
 
     $scope.renderGraph = function (result, container) {
@@ -50,10 +44,8 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
 
     $scope.initiateDashboard = function () {
 
-        var dataString = "query=0";
-
-        AppointmentService.getAppoinmentType.query({}, dataString).$promise.then(function(result) {
-            if (result && result.success) {
+        AppointmentService.getDoctorDashboard.query({}, {}).$promise.then(function(result) {
+            if (result) {
                 var chart = new CanvasJS.Chart("chartContainer1", {
                     title: {
                         text: "Daily Patient History"
@@ -65,11 +57,11 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
                         legendText: "{label}",
                         indexLabel: "{label} ({y})",
                         dataPoints: [
-                            { label: "Old Patient", y: result.oldPatient },
-                            { label: "New Patient", y: result.newPatient },
-                            { label: "Report", y: result.report },
-                            { label: "Free", y: result.freePatient },
-                            { label: "Relative", y: result.relative }
+                            { label: "Old Patient", y: result.numOfOldPatient },
+                            { label: "New Patient", y: result.numOfNewPatient },
+                            { label: "Report", y: result.numOfReportPatient },
+                            { label: "Free", y: result.numOfFreePatient }/*,
+                            { label: "Relative", y: result.numOfFreePatient }*/
                         ]
                     }]
                 });
@@ -82,8 +74,8 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
                     data: [{
                         type: "column",
                         dataPoints: [
-                            { label: "Male",  y: result.male  },
-                            { label: "Female", y: result.feMale  }
+                            { label: "Male",  y: result.numOfMalePatient  },
+                            { label: "Female", y: result.numOfFemalePatient  }
                         ]
                     }]
                 });
@@ -140,10 +132,22 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
             backdrop: 'static'
         });
         modalInstance.result.then(function(result) {
-        	$scope.bringDoctorInfo();
         	$scope.bringAppointment();
             $scope.initiateDashboard();
          });
+    };
+
+    $scope.addFollowUpAppointment = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'resources/javascript/templates/appointment/addFollowUpPatient.html',
+            windowClass: 'fade in',
+            controller: 'AppointmentController.AddFollowUptController',
+            backdrop: 'static'
+        });
+        modalInstance.result.then(function(result) {
+            $scope.bringAppointment();
+            $scope.initiateDashboard();
+        });
     };
     
     $scope.showHelp = function(){    	
@@ -161,129 +165,13 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
 		});
     };
     
-    $scope.addFollowUpAppointment = function (doctorCode){
-    	window.location = "followUpAppoinment.php";
-    };
-    
     $scope.letsPrescribe = function (appointmentData){
-        var  dataString = 'appointmentID='+ appointmentData.appointmentID;
+        var  dataString = {};
+        dataString.appointmentID = appointmentData.appointmentID;
         AppointmentService.visitPatient.query({}, dataString).$promise.then(function(result) {
-            if (result && result.success) {
-                $location.path("/prescription");
-            }else{
-    
-            }
+            $state.go("root.prescription");
         });
     };
-    
-    $scope.getPatients = function(term) {
-        
-        var  dataString='data='+  term +'&query='+5;
-        
-        return $http({
-            method: 'POST',
-            url: "rest/autoComplete/appointment",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function(result) {
-        	$scope.patients = result.data;
-        	return limitToFilter($scope.patients, 10);
-        });
-
-        
-       // return $scope.products;
-      };
-      
-      $scope.onSelectNamePatient = function(item, model, label){
-    	  $scope.addAppointMentData.patientCode = item.patientCode;
-    	  $scope.addByName = true;
-      };
-      $scope.onSelectNamePatientCode = function(item, model, label){
-    	  $scope.addAppointMentData.patientCode = item.patientCode;
-    	  $scope.addByCode = true;
-      };
-      $scope.onSelectPhonePatientPhone = function(item, model, label){
-    	  $scope.addAppointMentData.patientCode = item.patientCode;
-    	  $scope.addByID = true;
-      };
-      
-      $scope.getPatientsByCode = function(term) {
-    	  
-    	  
-          var  dataString='data='+  term +'&query='+7;
-          
-          return $http({
-              method: 'POST',
-              url: "rest/autoComplete/appointment",
-              data: dataString,
-              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-          }).then(function(result) {
-          	$scope.patients = result.data;
-          	return limitToFilter($scope.patients, 10);
-          });
-
-          
-         // return $scope.products;
-        };
-        
-        $scope.getPatientsByPhone = function(term) {
-            
-      	  
-      	  
-            var  dataString='data='+  term +'&query='+8;
-            
-            return $http({
-                method: 'POST',
-                url: "rest/autoComplete/appointment",
-                data: dataString,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).then(function(result) {
-            	$scope.patients = result.data;
-            	return limitToFilter($scope.patients, 10);
-            });
-
-            
-           // return $scope.products;
-          };
-        
-        /*$scope.onSelectNamePatientCode = function(item, model, label){
-      	  $scope.addAppointMentData.patientCode = item.patientCode;
-      	  $scope.addByName = true;
-        };*/
-      
-      $scope.onSelectPhonePatient = function(item, model, label){
-    	  $scope.addAppointMentData.patientCode = item.patientCode;
-    	  $scope.addByPhone = true;
-      };
-      
-      $scope.onSelectIDPatient = function(item, model, label){
-    	  $scope.addAppointMentData.patientCode = item.patientCode;
-    	  $scope.addByID = true;
-      };
-      
-     $scope.addAppFollowUP  = function (){
-    	 
-    	 var currentDate = new Date();
-     	var filteredDate = $filter('date')(currentDate, "yyyy-MM-dd");
-     	
-    	 
-    	 var  dataString= 'patientCode='+  $scope.addAppointMentData.patientCode + '&filteredDate='+  filteredDate;
-
-         AppointmentService.createAppointment.query({}, dataString).$promise.then(function (result) {
-             if (result && result.success) {
-                 $scope.addByCode = false;
-                 $scope.addByName = false;
-                 $scope.addByID = false;
-                 $scope.patientCode = "";
-                 $scope.patientName = "";
-                 $scope.patientPhone = "";
-                 $scope.bringAppointment();
-                 $scope.initiateDashboard();
-             } else {
-             }
-         });
-     };
-     
      $scope.removeFromAppointment = function(appointmentID){
     	 
     	 var  dataString='appointmentID='+  appointmentID +'&query='+9;
@@ -311,8 +199,8 @@ app.controller('AppointmentController', function($scope, $http, $modal, $rootSco
 
 	
 	(function(){
-		$scope.bringDoctorInfo();
     	$scope.bringAppointment();
+        $scope.initiateDashboard();
     })()
 
 	
@@ -364,4 +252,50 @@ app.controller('AppointmentController.AddNewPatientController', function($scope,
 	$scope.cancel = function (){
 		$modalInstance.dismiss('cancel');
 	};
+});
+
+app.controller('AppointmentController.AddFollowUptController', function($scope, $modalInstance, AppointmentService, limitToFilter) {
+
+    $scope.patientData = {};
+    $scope.appointmentViewData = {};
+    $scope.error = false;
+    $scope.errorMessage = "";
+
+    $scope.getPatients = function(term, type) {
+
+        var entityType = type == 0 ? 'likePatientCode' : type == 1 ? 'likePatientName' : 'likeContactNo';
+        var  searchData = {};
+        searchData.entityType = entityType;
+        searchData.term = term;
+
+        return AppointmentService.patientSearch.query({}, searchData).$promise.then(function(result) {
+            $scope.patients = result;
+            return limitToFilter($scope.patients, 10);
+        });
+    };
+
+    $scope.populatePatientInfo = function(item, model, label){
+        $scope.appointmentViewData.patientID = item.patientID;
+        $scope.patientData = item;
+        $scope.patientData.dob = true;
+        $scope.isSelected = true;
+    };
+    $scope.save = function (){
+        if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
+            delete $scope.patientData.dob;
+            $scope.appointmentViewData.patient = $scope.patientData;
+
+            AppointmentService.createFollowUpApp.save({}, $scope.appointmentViewData).$promise.then(function(result) {
+                if(result && result.success) {
+                    $modalInstance.close(result);
+                }
+            });
+        }else{
+            $scope.error = true;
+        }
+    };
+
+    $scope.cancel = function (){
+        $modalInstance.dismiss('cancel');
+    };
 });

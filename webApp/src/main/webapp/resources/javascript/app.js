@@ -2,7 +2,6 @@
 
 var app = angular.module('doctorPlatform', [
     'ngResource',
-    'blockUI',
     'ui.router',
     'oc.lazyLoad',
     'angular-sortable-view',
@@ -10,5 +9,5 @@ var app = angular.module('doctorPlatform', [
     'ui.event',
     'ui.calendar',
     'angularFileUpload',
-    'adaptv.adaptStrap',
+    'adaptv.adaptStrap'
 ]);

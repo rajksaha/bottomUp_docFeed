@@ -108,6 +108,63 @@
 		</if>
 	</select>
 
+	<resultMap id="patientMap" type="appointmentDetail">
+		<result property="patient.firstName" column="firstName"/>
+		<result property="patient.lastName" column="lastName"/>
+		<result property="patient.address" column="address"/>
+		<result property="patient.contactNo" column="contactNo"/>
+		<result property="patient.dateOfBirth" column="dateOfBirth"/>
+		<result property="patient.sex" column="sex"/>
+		<result property="patient.occupation" column="occupation"/>
+	</resultMap>
+
+	<select id="getAppPatientDetail" parameterType="map" resultType="appointmentDetail" resultMap="patientMap">
+		SELECT
+			app.`appointmentID`,
+			app.`doctorID`,
+			app.`patientID`,
+			app.`date`,
+			app.`time`,
+			app.`status`,
+			app.`appointmentType`,
+			app.`updatedBy`,
+			app.`updatedOn`,
+			app.`createdBy`,
+			app.`createdOn`,
+			pup.firstName AS firstName,
+			pup.lastName AS lastName,
+			pup.address AS address,
+			pup.contactNo AS contactNo,
+			pup.dateOfBirth AS dateOfBirth,
+			pup.sex AS sex,
+			p.occupation AS occupation
+		FROM `doctor_feed`.`appointment` app
+		JOIN doctor d ON app.doctorID = d.doctorID
+		JOIN patient p ON app.patientID = p.patientID
+		JOIN `doctor_feed`.`bottom_up_user` pu ON p.userID = pu.userID
+		JOIN bottom_up_user_profile pup ON pu.userID = pup.userID
+		WHERE 1 = 1
+		<if test="appointmentID != null">
+			AND app.appointmentID = #{appointmentID}
+		</if>
+		<if test="patientID != null">
+			AND app.patientID = #{patientID}
+		</if>
+		<if test="doctorID != null">
+			AND app.doctorID = #{doctorID}
+		</if>
+		<if test="date != null">
+			AND app.date = #{date}
+		</if>
+		<if test="startDate != null and endDate !=null">
+			AND app.date IN BETWEEN (DATE(#{startDate}), DATE(#{endDate}))
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
 	<select id="getCountByParam" parameterType="map" resultType="Long">
 		SELECT COUNT(*)
 		FROM `doctor_feed`.`appointment`

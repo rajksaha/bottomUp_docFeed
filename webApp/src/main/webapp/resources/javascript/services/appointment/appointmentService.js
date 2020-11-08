@@ -17,9 +17,9 @@ app.service('AppointmentService', function ($resource) {
                 isArray:true
             }
         }),
-        getAppoinmentType : $resource('/api/rest/appointment/getAppoinmentType', {}, {
+        getDoctorDashboard : $resource('/api/rest/appointment/getDoctorDashboard', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:false
             }
         }),
@@ -41,6 +41,12 @@ app.service('AppointmentService', function ($resource) {
                 isArray:false
             }
         }),
+        createFollowUpApp : $resource('/api/rest/appointment/createFollowUpApp', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
         deleteAppointment : $resource('/api/rest/appointment/deleteAppointment', {}, {
             'query':  {
                 method:'POST',
@@ -51,6 +57,12 @@ app.service('AppointmentService', function ($resource) {
             'query':  {
                 method:'POST',
                 isArray:false
+            }
+        }),
+        patientSearch : $resource('/api/rest/autoComplete/patientSearch', {}, {
+            'query':  {
+                method:'POST',
+                isArray:true
             }
         })
 

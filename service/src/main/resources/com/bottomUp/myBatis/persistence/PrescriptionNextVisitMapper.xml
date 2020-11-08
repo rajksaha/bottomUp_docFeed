@@ -60,15 +60,15 @@
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionNextVisit">
 		SELECT
-		`appointmentID`,
-		`nextVisitType`,
-		`date`,
-		`numOfDay`,
-		`dayType`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
+			`appointmentID`,
+			`nextVisitType`,
+			`date`,
+			`numOfDay`,
+			`dayType`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
 		FROM `prescription_next_visit`
 		WHERE 1 = 1
 		<if test="appointmentID != null">

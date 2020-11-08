@@ -33,7 +33,7 @@ public class PrescriptionInvService {
         return this.PrescriptionInvMapper.getByID(ID);
     }
 
-    public List<PrescriptionInvData > getByParam(Map<String, Object> param) throws BottomUpException {
+    public List<PrescriptionInvData> getByParam(Map<String, Object> param) throws BottomUpException {
         return this.PrescriptionInvMapper.getByParam(param);
     }
 

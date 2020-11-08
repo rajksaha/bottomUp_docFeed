@@ -16,7 +16,6 @@
     <link href="<c:url value="/resources/lib/css/bootstrap.min.css"/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value="/resources/lib/css/smt-bootstrap.css"/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value="/resources/lib/css/custom-icon.css"/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value="/resources/vendors/font-awesome/css/font-awesome.min.css"/>" type="text/css" rel="stylesheet">
     <link href="<c:url value="/resources/lib/css/bootstrap-theme-ktr.css"/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/common/bottomUp.css"/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value="/resources/vendors/font-awesome/css/font-awesome.min.css"/>" type="text/css" rel="stylesheet">
@@ -37,6 +36,7 @@
     <link href="<c:url value="/resources/css/theme/kaitair/menu.css"/>" type="text/css" rel="stylesheet"/>
 
     <link href="<c:url value="/resources/css/common/autocomplete.css"/>" type="text/css" rel="stylesheet"/>
+
 
 
 

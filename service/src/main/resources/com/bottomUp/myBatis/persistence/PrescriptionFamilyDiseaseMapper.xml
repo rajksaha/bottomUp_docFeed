@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="prescriptionFamilyDisease" useGeneratedKeys="true" keyProperty="presFamilyDiseaseID" >
 
 		INSERT INTO `prescription_family_disease`(
-			`appointMentID`,
+			`appointmentID`,
 			`familyDiseaseID`,
 			`updatedBy`,
 			`updatedOn`,
@@ -15,7 +15,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#familyDiseaseID},
 			#{updatedBy},
 			#{updatedOn},
@@ -29,7 +29,7 @@
 	<update id="update" parameterType="prescriptionFamilyDisease">
 		UPDATE `prescription_family_disease`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`familyDiseaseID` = #{familyDiseaseID},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
@@ -39,7 +39,7 @@
 	<select id="getByID" parameterType="long" resultType="prescriptionFamilyDisease">
 		SELECT
 			`presFamilyDiseaseID`,
-			`appointMentID`,
+			`appointmentID`,
 			`familyDiseaseID`,
 			`updatedBy`,
 			`updatedOn`,
@@ -52,17 +52,28 @@
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionFamilyDisease">
 		SELECT
-		`presFamilyDiseaseID`,
-		`appointMentID`,
-		`familyDiseaseID`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_family_disease`
+		pfd.`presFamilyDiseaseID`,
+		pfd.`appointmentID`,
+		pfd.`familyDiseaseID`,
+		pfh.diseaseID,
+		pfh.relation,
+		pfh.present,
+		pfh.type,
+		pfh.detail,
+		cd.diseaseName,
+		pfd.`updatedBy`,
+		pfd.`updatedOn`,
+		pfd.`createdBy`,
+		pfd.`createdOn`
+		FROM doctor_feed.`prescription_family_disease` pfd
+		JOIN doctor_feed.patient_family_history pfh ON pfd.familyDiseaseID = pfh.familyHistoryID
+		JOIN doctor_feed.content_disease cd ON pfh.diseaseID = cd.diseaseID
 		WHERE 1 = 1
 		<if test="presFamilyDiseaseID != null">
-			AND presFamilyDiseaseID = #{presFamilyDiseaseID}
+			AND pfd.presFamilyDiseaseID = #{presFamilyDiseaseID}
+		</if>
+		<if test="appointmentID != null">
+			AND pfd.appointmentID = #{appointmentID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

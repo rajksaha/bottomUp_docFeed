@@ -64,7 +64,7 @@ app.controller('HomeController.ChangePasswordModal', function($scope, $modalInst
                 }
             });
         }
-    }
+    };
     $scope.cancel = function (){
         $modalInstance.close(0);
     };

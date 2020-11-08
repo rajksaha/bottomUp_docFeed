@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="prescriptionReference" useGeneratedKeys="true" keyProperty="prescriptionReferenceID" >
 
 		INSERT INTO `prescription_reference`(
-			`appointMentID`,
+			`appointmentID`,
 			`refferedDoctorID`,
 			`updatedBy`,
 			`updatedOn`,
@@ -15,7 +15,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{appointMentID},
+			#{appointmentID},
 			#{refferedDoctorID},
 			#{updatedBy},
 			#{updatedOn},
@@ -29,7 +29,7 @@
 	<update id="update" parameterType="prescriptionReference">
 		UPDATE `prescription_reference`
 		SET
-		`appointMentID` = #{appointMentID},
+		`appointmentID` = #{appointmentID},
 		`refferedDoctorID` = #{refferedDoctorID},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
@@ -38,31 +38,39 @@
 
 	<select id="getByID" parameterType="long" resultType="prescriptionReference">
 		SELECT
-			`prescriptionReferenceID`,
-			`appointMentID`,
-			`refferedDoctorID`,
-			`updatedBy`,
-			`updatedOn`,
-			`createdBy`,
-			`createdOn`
-		FROM `prescription_reference`
-
-		WHERE prescriptionReferenceID = #{prescriptionReferenceID}
+			pr.`prescriptionReferenceID`,
+			pr.`appointmentID`,
+			pr.`refferedDoctorID`,
+			rd.doctorName,
+			rd.doctorAddress,
+			pr.`updatedBy`,
+			pr.`updatedOn`,
+			pr.`createdBy`,
+			pr.`createdOn`
+		FROM `prescription_reference` pr
+		JOIN doctor_feed.referred_doctor rd ON pr.refferedDoctorID = rd.referredDoctorID
+		WHERE pr.prescriptionReferenceID = #{prescriptionReferenceID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionReference">
 		SELECT
-		`prescriptionReferenceID`,
-		`appointMentID`,
-		`refferedDoctorID`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_reference`
+			pr.`prescriptionReferenceID`,
+			pr.`appointmentID`,
+			pr.`refferedDoctorID`,
+			rd.doctorName,
+			rd.doctorAddress,
+			pr.`updatedBy`,
+			pr.`updatedOn`,
+			pr.`createdBy`,
+			pr.`createdOn`
+		FROM `prescription_reference` pr
+		JOIN doctor_feed.referred_doctor rd ON pr.refferedDoctorID = rd.referredDoctorID
 		WHERE 1 = 1
 		<if test="prescriptionReferenceID != null">
 			AND prescriptionReferenceID = #{prescriptionReferenceID}
+		</if>
+		<if test="appointmentID != null">
+			AND pr.appointmentID = #{appointmentID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

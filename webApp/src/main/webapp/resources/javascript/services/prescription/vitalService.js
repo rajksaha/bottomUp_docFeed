@@ -17,10 +17,10 @@ app.service('VitalService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteDoctorVitalSettings : $resource('rest/vital/deleteDoctorVitalSettings', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteDoctorVitalSettings : $resource('rest/vital/deleteDoctorVitalSettings/:vitalSettingID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {vitalSettingID: '@vitalSettingID'}
             }
         }),
         getVitalDoctorDetail : $resource('rest/vital/getVitalDoctorDetail', {}, {
@@ -53,12 +53,11 @@ app.service('VitalService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteVitalprescription : $resource('rest/vital/deleteVitalprescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteVitalprescription : $resource('rest/vital/deleteVitalprescription/:prescribedVitalID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {prescribedVitalID: '@prescribedVitalID'}
             }
         })
     };
 });
-
