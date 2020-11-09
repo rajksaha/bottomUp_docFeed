@@ -1,6 +1,11 @@
 package com.bottomUp.model;
 
+import com.bottomUp.domain.DoctorSettingData;
+import com.bottomUp.domain.MenuSettingData;
+import com.bottomUp.domain.PatientTypeData;
 import com.bottomUp.domain.common.BaseData;
+
+import java.util.List;
 
 /**
  * Created by raj on 10/24/2020.
@@ -20,6 +25,11 @@ public class DoctorViewData extends BaseData{
     private String sex;
     private String contactNo;
     private String emailAddress;
+
+    private List<MenuSettingData> menuList;
+    private DoctorSettingData doctorSettingData;
+    private List<PatientTypeData> patientTypeList;
+
 
     public long getUserID() {
         return userID;
@@ -115,5 +125,29 @@ public class DoctorViewData extends BaseData{
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public List<MenuSettingData> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<MenuSettingData> menuList) {
+        this.menuList = menuList;
+    }
+
+    public DoctorSettingData getDoctorSettingData() {
+        return doctorSettingData;
+    }
+
+    public void setDoctorSettingData(DoctorSettingData doctorSettingData) {
+        this.doctorSettingData = doctorSettingData;
+    }
+
+    public List<PatientTypeData> getPatientTypeList() {
+        return patientTypeList;
+    }
+
+    public void setPatientTypeList(List<PatientTypeData> patientTypeList) {
+        this.patientTypeList = patientTypeList;
     }
 }

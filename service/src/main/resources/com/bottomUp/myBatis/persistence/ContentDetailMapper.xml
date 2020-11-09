@@ -60,7 +60,6 @@
 
 	<select id="getByParam" parameterType="map" resultType="contentDetail">
 		SELECT
-		SELECT
 		`contentDetailID`,
 		`contentType`,
 		`entityID`,

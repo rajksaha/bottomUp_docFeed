@@ -40,7 +40,7 @@
 			`doctorID`,
 			`menuID`,
 			`menuHeader`,
-			`order`,
+			`order`
 
 		FROM `menu_setting`
 
@@ -49,15 +49,25 @@
 
 	<select id="getByParam" parameterType="map" resultType="menuSetting">
 		SELECT
-		`menuSettingID`,
-		`doctorID`,
-		`menuID`,
-		`menuHeader`,
-		`order`,
-		FROM `menu_setting`
+			ms.`menuSettingID`,
+			ms.`doctorID`,
+			ms.`menuID`,
+			ms.`menuHeader`,
+			ms.`order`,
+			m.menuURL,
+			m.defaultName,
+			m.isPopUp,
+			m.functionName,
+			m.inPrescription,
+			m.displayOrder
+		FROM `menu_setting` ms
+		JOIN menu m ON ms.menuID = m.menuID
 		WHERE 1 = 1
 		<if test="menuSettingID != null">
-			AND menuSettingID = #{menuSettingID}
+			AND ms.menuSettingID = #{menuSettingID}
+		</if>
+		<if test="doctorID != null">
+			AND ms.doctorID = #{doctorID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

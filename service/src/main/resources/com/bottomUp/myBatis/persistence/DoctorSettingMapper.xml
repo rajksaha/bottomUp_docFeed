@@ -82,6 +82,28 @@
 		WHERE doctorSettingID = #{doctorSettingID}
 	</select>
 
+	<select id="getByDoctorID" parameterType="long" resultType="doctorSetting">
+		SELECT
+			`doctorSettingID`,
+			`doctorID`,
+			`category`,
+			`state`,
+			`patientType`,
+			`patientState`,
+			`prescriptionStyle`,
+			`companyID`,
+			`photoSupport`,
+			`personCodeInitial`,
+			`pdfPage`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_setting`
+
+		WHERE doctorID = #{doctorID}
+	</select>
+
 	<select id="getByParam" parameterType="map" resultType="doctorSetting">
 		SELECT
 		`doctorSettingID`,

@@ -1,13 +1,13 @@
 <div class="col-sm-2 col-md-2 col-lg-2 form-group">
-    <label data-ng-show="!patientData.editMode" >Name: <span >{{patientData.name}}</span></label>
-    <input data-ng-show="patientData.editMode" data-ng-model="patientData.name" class="form-control required input-sm" />
+    <label data-ng-show="!patientData.editMode" >Name: <span >{{patientData.firstName}}</span></label>
+    <input data-ng-show="patientData.editMode" data-ng-model="patientData.firstName" class="form-control required input-sm" />
 </div>
 <div class="col-sm-2 col-md-2 col-lg-2 form-group">
     <label data-ng-show="!patientData.editMode" >Address: {{patientData.address}}</label>
     <input data-ng-show="patientData.editMode" data-ng-model="patientData.address" class="form-control input-sm" maxlength="100" placeholder="Address" />
 </div>
 <div class="col-sm-2 col-md-2 col-lg-2 form-group">
-    <label data-ng-show="!patientData.editMode" >Age: {{patientData.age}} yrs</label>
+    <label data-ng-show="!patientData.editMode" >Age: {{patientData.currentAge}} yrs</label>
     <input data-ng-show="patientData.editMode" data-ng-model="patientData.age" class="form-control required input-sm" />
 </div>
 <div class="col-sm-2 col-md-2 col-lg-2 form-group">

@@ -1,25 +1,32 @@
 package com.bottomUp.service.docFeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.domain.DoctorSettingData;
+import com.bottomUp.domain.common.user.ContentDetailData;
+import com.bottomUp.model.DoctorViewData;
 import com.bottomUp.myBatis.persistence.*;
-import com.bottomUp.service.docFeed.crud.PrescriptionComplainService;
 import com.bottomUp.service.docFeed.crud.PrescriptionDrugService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import utility.type.PrescriptionContentType;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by raj on 11/8/2020.
  */
+@Service
+@Transactional
 public class PrescriptionViewService {
 
     @Autowired
-    private PrescriptionDiagnosisMapper diagnosisMapper;
+    private PrescriptionDiagnosisMapper prescriptionDiagnosisMapper;
 
-    @Autowired
-    private PrescriptionDrugService drugService;
+//    @Autowired
+//    private PrescriptionDrugService prescriptionDrugService;
 
     @Autowired
     private PrescriptionComplainMapper complainMapper;
@@ -51,14 +58,41 @@ public class PrescriptionViewService {
     @Autowired
     private ContentDetailMapper contentDetailMapper;
 
+    @Autowired
+    private DoctorSettingMapper doctorSettingMapper;
 
+    @Autowired
+    private PatientTypeMapper patientTypeMapper;
+
+    @Autowired
+    private AppointmentTypeMapper appointmentTypeMapper;
+
+    @Autowired
+    private MenuSettingMapper menuSettingMapper;
+
+
+    public Map<String, Object> getDetailsForPrescription(Long doctorID)throws BottomUpException{
+        Map<String, Object> requestMap = new HashMap<String, Object>();
+        DoctorSettingData doctorSettingData = doctorSettingMapper.getByDoctorID(doctorID);
+        DoctorViewData viewData = new DoctorViewData();
+        requestMap.put("doctorType", doctorSettingData.getCategory());
+        viewData.setPatientTypeList(patientTypeMapper.getByParam(requestMap));
+        viewData.setDoctorID(doctorID);
+        viewData.setDoctorSettingData(doctorSettingData);
+        requestMap.put("doctorID", doctorID);
+        viewData.setMenuList(menuSettingMapper.getByParam(requestMap));
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("doctorData", viewData);
+        result.put("appointmentType", appointmentTypeMapper.getByParam(null));
+        return result;
+    }
 
     public Map<String, Object> getPrescriptionDetail(Long appointmentID)throws BottomUpException{
         Map<String, Object> requestMap = new HashMap<String, Object>();
         requestMap.put("appointmentID", appointmentID);
 
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("diagnosis", diagnosisMapper.getByParam(requestMap));
+        result.put("diagnosis", prescriptionDiagnosisMapper.getByParam(requestMap));
         result.put("inv", invMapper.getByParam(requestMap));
         result.put("advice", adviceMapper.getByParam(requestMap));
         result.put("vital", vitalMapper.getByParam(requestMap));
@@ -68,10 +102,14 @@ public class PrescriptionViewService {
         result.put("history", historyMapper.getByParam(requestMap));
         result.put("reference", referenceMapper.getByParam(requestMap));
         result.put("newtVisit", nextVisitMapper.getByParam(requestMap));
-        result.put("drug", drugService.getByParam(requestMap));
+        //result.put("drug", prescriptionDrugService.getByParam(requestMap));
         requestMap.put("entityID", appointmentID);
         requestMap.put("entityType", PrescriptionContentType.DIET);
-        result.put("diet", contentDetailMapper.getByParam(requestMap));
+
+        List<ContentDetailData> dietList = contentDetailMapper.getByParam(requestMap);
+        if(dietList != null && dietList.size() == 1){
+            result.put("diet", dietList.get(0));
+        }
         requestMap.put("entityType", PrescriptionContentType.DRUG_HISTORY);
         result.put("drugHistory", contentDetailMapper.getByParam(requestMap));
         requestMap.put("entityType", PrescriptionContentType.COMMENT);

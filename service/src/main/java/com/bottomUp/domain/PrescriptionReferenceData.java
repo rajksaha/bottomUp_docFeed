@@ -7,7 +7,7 @@ public class PrescriptionReferenceData extends BaseData {
 
   private long prescriptionReferenceID;
   private long appointmentID;
-  private long referredDoctorId;
+  private long referredDoctorID;
   private String doctorName;
   private String doctorAddress;
 
@@ -27,12 +27,12 @@ public class PrescriptionReferenceData extends BaseData {
     this.appointmentID = appointmentID;
   }
 
-  public long getReferredDoctorId() {
-    return referredDoctorId;
+  public long getReferredDoctorID() {
+    return referredDoctorID;
   }
 
-  public void setReferredDoctorId(long referredDoctorId) {
-    this.referredDoctorId = referredDoctorId;
+  public void setReferredDoctorID(long referredDoctorID) {
+    this.referredDoctorID = referredDoctorID;
   }
 
   public String getDoctorName() {

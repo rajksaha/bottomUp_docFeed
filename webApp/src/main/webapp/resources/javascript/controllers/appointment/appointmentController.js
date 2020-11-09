@@ -91,7 +91,6 @@ app.controller('AppointmentController', function($scope, $state, $modal, $rootSc
             return true;
         }
         return false;
-
     };
 
     $scope.hasAccessMenu = function(main){

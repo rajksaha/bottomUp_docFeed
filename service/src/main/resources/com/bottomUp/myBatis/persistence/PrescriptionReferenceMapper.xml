@@ -8,7 +8,7 @@
 
 		INSERT INTO `prescription_reference`(
 			`appointmentID`,
-			`refferedDoctorID`,
+			`referredDoctorID`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -16,7 +16,7 @@
 		)
 		VALUES(
 			#{appointmentID},
-			#{refferedDoctorID},
+			#{referredDoctorID},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -30,7 +30,7 @@
 		UPDATE `prescription_reference`
 		SET
 		`appointmentID` = #{appointmentID},
-		`refferedDoctorID` = #{refferedDoctorID},
+		`referredDoctorID` = #{referredDoctorID},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE prescriptionReferenceID = #{prescriptionReferenceID}
@@ -40,7 +40,7 @@
 		SELECT
 			pr.`prescriptionReferenceID`,
 			pr.`appointmentID`,
-			pr.`refferedDoctorID`,
+			pr.`referredDoctorID`,
 			rd.doctorName,
 			rd.doctorAddress,
 			pr.`updatedBy`,
@@ -48,7 +48,7 @@
 			pr.`createdBy`,
 			pr.`createdOn`
 		FROM `prescription_reference` pr
-		JOIN doctor_feed.referred_doctor rd ON pr.refferedDoctorID = rd.referredDoctorID
+		JOIN doctor_feed.referred_doctor rd ON pr.referredDoctorID = rd.referredDoctorID
 		WHERE pr.prescriptionReferenceID = #{prescriptionReferenceID}
 	</select>
 
@@ -56,7 +56,7 @@
 		SELECT
 			pr.`prescriptionReferenceID`,
 			pr.`appointmentID`,
-			pr.`refferedDoctorID`,
+			pr.`referredDoctorID`,
 			rd.doctorName,
 			rd.doctorAddress,
 			pr.`updatedBy`,
@@ -64,7 +64,7 @@
 			pr.`createdBy`,
 			pr.`createdOn`
 		FROM `prescription_reference` pr
-		JOIN doctor_feed.referred_doctor rd ON pr.refferedDoctorID = rd.referredDoctorID
+		JOIN doctor_feed.referred_doctor rd ON pr.referredDoctorID = rd.referredDoctorID
 		WHERE 1 = 1
 		<if test="prescriptionReferenceID != null">
 			AND prescriptionReferenceID = #{prescriptionReferenceID}

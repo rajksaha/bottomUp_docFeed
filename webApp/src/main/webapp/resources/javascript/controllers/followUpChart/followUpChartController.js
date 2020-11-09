@@ -103,11 +103,10 @@ app.controller('FollowUpChartController', function($scope, $http, $modal, $rootS
             windowClass: 'fade in',
             controller: 'PatientFollowUPController',
             resolve: {
-                record: function () {
-                    return {
-                        followUp
-                    };
-                }},
+                modalConfig: function () {
+                    return followUp;
+                }
+            },
             backdrop: 'static'
         });
         modalInstance.result.then(function(result) {
@@ -129,11 +128,10 @@ app.controller('FollowUpChartController', function($scope, $http, $modal, $rootS
               windowClass: 'fade in',
               controller: 'PatientFollowUPController',
               resolve: {
-                  record: function () {
-                      return {
-                          followUp
-                      };
-                  }},
+                  modalConfig: function () {
+                      return followUp;
+                  }
+              },
               backdrop: 'static'
           });
           modalInstance.result.then(function(result) {

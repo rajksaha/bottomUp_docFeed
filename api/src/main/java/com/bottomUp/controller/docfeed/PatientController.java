@@ -20,7 +20,7 @@ import java.util.Map;
  * Created by raj on 8/9/2020.
  */
 @Controller
-@RequestMapping("/Patient")
+@RequestMapping("/patient")
 public class PatientController extends BaseController {
 
     @Autowired
@@ -41,9 +41,6 @@ public class PatientController extends BaseController {
     @RequestMapping(value = {"/getByID/{patientID}"}, method = RequestMethod.GET)
     @ResponseBody
     public PatientData getByID(@PathVariable("patientID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
         return this.patientService.getByID(Long.valueOf(companyID));
     }
 

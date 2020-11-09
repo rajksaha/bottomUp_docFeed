@@ -333,7 +333,23 @@ function getAppointmentInfo($appointmentID){
 
 function getPatientInformaition($patientCode){
 	
-	$sql = "SELECT p.`patientID`, p.`patientCode`, p.`name`, p.`age`, p.`sex`, p.`address`, p.`phone`, p.`occupation`, p.`referredBy`, p.`date`, p.`hospitalName`, p.`bedNum`, p.`wardNum`, p.`headOfUnit`, cd.detail as patientImage, pt.type
+	$sql = "SELECT
+	p.`patientID`,
+	p.`patientCode`,
+	p.`name`,
+	p.`age`,
+	p.`sex`,
+	p.`address`,
+	p.`phone`,
+	p.`occupation`,
+	p.`referredBy`,
+	p.`date`,
+	p.`hospitalName`,
+	p.`bedNum`,
+	p.`wardNum`,
+	p.`headOfUnit`,
+	cd.detail as patientImage,
+	pt.type
 	FROM `patient` p
 	LEFT JOIN contentdetail cd ON cd.contentType = 'PATIENTIMG'  AND cd.entityID = '$patientCode'
 	LEFT JOIN patient_detail pt on pt.patientID = p.patientID

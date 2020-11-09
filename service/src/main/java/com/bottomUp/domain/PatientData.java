@@ -8,6 +8,7 @@ public class PatientData extends BaseData {
   private long patientID;
   private long userID;
   private long userProfileID;
+  private Integer patientType;
   private String patientCode;
   private String occupation;
   private String referredBy;
@@ -15,6 +16,7 @@ public class PatientData extends BaseData {
   private String bedNum;
   private String wardNum;
   private String headOfUnit;
+  private String imageURL;
   private String userName;
   private String firstName;
   private String lastName;
@@ -149,5 +151,29 @@ public class PatientData extends BaseData {
 
   public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
+  }
+
+  public long getUserProfileID() {
+    return userProfileID;
+  }
+
+  public void setUserProfileID(long userProfileID) {
+    this.userProfileID = userProfileID;
+  }
+
+  public Integer getPatientType() {
+    return patientType;
+  }
+
+  public void setPatientType(Integer patientType) {
+    this.patientType = patientType;
+  }
+
+  public String getImageURL() {
+    return imageURL;
+  }
+
+  public void setImageURL(String imageURL) {
+    this.imageURL = imageURL;
   }
 }

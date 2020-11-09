@@ -4,67 +4,12 @@
 
 app.service('PatientService', function ($resource) {
     return {
-
-        getNextAppointedPatient : $resource('rest/patient/getNextAppointedPatient', {}, {
+        getPatientDetail : $resource('/api/rest/patient/getByID/:patientID', {}, {
             'query':  {
-                method:'POST',
-                isArray:true
+                method:'GET',
+                params: {patientID: '@patientID'}
             }
-        }),
-        getAppoinmentByDatesing : $resource('rest/patient/getAppoinmentByDatesing', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getAppoinmentByDisease : $resource('rest/patient/getAppoinmentByDisease', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getAppoinmentByPatient : $resource('rest/patient/getAppoinmentByPatient', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getAppoinmentByPatientType : $resource('rest/patient/getAppoinmentByPatientType', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getDrugsAppoinment : $resource('rest/patient/getDrugsAppoinment', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getPatientOfAllType : $resource('rest/patient/getPatientOfAllType', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        printAppoinment : $resource('rest/patient/printAppoinment', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        getInformationDoctor : $resource('rest/patient/getInformationDoctor', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        createAppoinment : $resource('rest/patient/createAppoinment', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
+        })
     };
 });
 

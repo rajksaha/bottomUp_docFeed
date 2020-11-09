@@ -382,7 +382,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/services/prescription/prescriptionService.js' + jsVersion]
+                        files: ['resources/javascript/services/prescription/prescriptionService.js' + jsVersion,
+                            'resources/javascript/services/patient/patientService.js' + jsVersion]
                     });
             }]
         }
