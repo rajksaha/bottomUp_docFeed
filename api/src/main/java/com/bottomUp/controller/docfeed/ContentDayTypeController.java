@@ -28,9 +28,9 @@ public class ContentDayTypeController extends BaseController {
     @ResponseBody
     public List<ContentDayTypeData> getAll(HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = new HashMap<>();
+        //Map<String, Object> params = new HashMap<>();
 
-        return this.contentDayTypeService.getByParam(params);
+        return this.contentDayTypeService.getByParam(null);
     }
 
     @RequestMapping(value = {"/getByID/{dayTypeId}"}, method = RequestMethod.GET)

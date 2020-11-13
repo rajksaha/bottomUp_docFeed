@@ -56,18 +56,31 @@
 
 	<select id="getByParam" parameterType="map" resultType="doctorPreferenceInv">
 		SELECT
-		`invPreferenceID`,
-		`doctorID`,
-		`invID`,
-		`displayOrder`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `doctor_preference_inv`
+		dpi.`invPreferenceID`,
+		dpi.`doctorID`,
+		dpi.`invID`,
+		ci.name AS invName,
+		ci.categoryID AS invCategoryID,
+		<if test="appointmentID != null">
+			PI.presInvID,
+			CASE WHEN PI.presInvID IS NULL THEN FALSE ELSE TRUE END AS addedInPrescription,
+		</if>
+		dpi.`displayOrder`,
+		dpi.`updatedBy`,
+		dpi.`updatedOn`,
+		dpi.`createdBy`,
+		dpi.`createdOn`
+		FROM `doctor_preference_inv` dpi
+		JOIN doctor_feed.content_inv ci on dpi.invID = ci.invID
+		<if test="appointmentID != null">
+			LEFT JOIN doctor_feed.prescription_inv PI ON PI.appointmentID = #{appointmentID} AND PI.invID = dpi.invID
+		</if>
 		WHERE 1 = 1
 		<if test="invPreferenceID != null">
 			AND invPreferenceID = #{invPreferenceID}
+		</if>
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

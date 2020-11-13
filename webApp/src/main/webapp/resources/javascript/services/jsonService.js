@@ -2,6 +2,7 @@ app.service('JsonService', function(){
 	
 	this.numberList = [];
 	this.fractionNumberList = [];
+	this.dayTypeList = [];
 	
 	
 	var data = {"value" : '' , "name" : '--Select--'};
@@ -17,6 +18,16 @@ app.service('JsonService', function(){
 		this.fractionNumberList.push(data);
 		i = i + 0.5;
 	}
+
+	this.dayTypeList = [
+		{"id" : 1, "banName": "দিন", "engName": "Day(s)"},
+        {"id" : 2, "banName": "সপ্তাহ", "engName": "Weeks(s)"},
+        {"id" : 3, "banName": "মাস", "engName": "Month(s)"},
+        {"id" : 4, "banName": "বছর", "engName": "Year(s)"},
+        {"id" : 5, "banName": "চলবে","engName": "Continue"},
+        {"id" : 6, "banName": "মাঝে মাঝে", "engName": "Occasionally"},
+        {"id" : 7, "banName": "", "engName": ""}
+	];
 	
 	 
 	this.timesADay = [
@@ -27,8 +38,7 @@ app.service('JsonService', function(){
 						{"code" : "6", "name" :'4 hourly'},
 						{"code" : "8", "name" :'3 hourly'},
 						{"code" : "12", "name" :'2hourly'},
-						{"code" : "-1", "name" :'Periodic' +
-                        ' Dose'},
+						{"code" : "-1", "name" :'Periodic' + ' Dose'},
 						{"code" : "-2", "name" :'Same As'},
 						{"code" : "-3", "name" :'Empty Dose'},
 						{"code" : "-4", "name" :'Once in a Week'},

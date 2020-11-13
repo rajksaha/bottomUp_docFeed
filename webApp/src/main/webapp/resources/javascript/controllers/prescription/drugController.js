@@ -22,7 +22,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
 
 
 
-    $scope.bringPresCribedDrugs = function (){
+    $scope.bringPrescribedDrugs = function (){
 
         if(record.drugData.id){
 
@@ -218,13 +218,13 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
         $scope.enteredDrugDoseList = [];
 
 
-        $scope.bringdrugsDayType(true , null, drugDoseList);
+        $scope.bringDrugsDayType(true , null, drugDoseList);
     };
 
 
 
 
-    $scope.bringdrugsDayType = function (addMood, selectedDayTypeID, doseDataList){
+    $scope.bringDrugsDayType = function (addMood, selectedDayTypeID, doseDataList){
 
         var dataString = "query=1";
 
@@ -380,7 +380,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
                 });
     
                 if(isAnother){
-                    $scope.bringPresCribedDrugs();
+                    $scope.bringPrescribedDrugs();
                 }else{
                     $modalInstance.close();
                 }
@@ -398,7 +398,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
 
         DrugService.deleteDrugById.query({}, dataString).$promise.then(function (result) {
             if (result && result.success) {
-                $scope.bringPresCribedDrugs();            
+                $scope.bringPrescribedDrugs();
             } else {
 
             }
@@ -416,7 +416,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
                 if(record.drugData.id){
                     $modalInstance.close();
                 }else{
-                    $scope.bringPresCribedDrugs();
+                    $scope.bringPrescribedDrugs();
                 }            
             } else {
 
@@ -476,7 +476,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
     };
 
 
-    $scope.bringPresCribedDrugs();
+    $scope.bringPrescribedDrugs();
 
     $scope.saveToDoctorDrugSetting = function(){
 

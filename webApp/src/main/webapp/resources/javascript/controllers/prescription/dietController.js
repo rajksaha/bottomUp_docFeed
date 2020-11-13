@@ -1,30 +1,14 @@
-app.controller('PrescriptionController.PrescribeDietController', function($scope, $http, $modalInstance, limitToFilter, $filter, record, DietService) {
+app.controller('PrescriptionController.PrescribeDietController', function($scope, $http, $modalInstance, limitToFilter, $filter, dietData, PresSaveService) {
 
     $scope.dietData = {};
 
-    if(record.dietData.id){
-        $scope.dietData = record.dietData;
-    }else{
-        $scope.dietData = {};
+    if(dietData != null && dietData.id){
+        $scope.dietData = dietData;
     }
-    $scope.dietNameData = {};
-
-    $scope.diagnosisNote = "";
-
     $scope.save = function(){
-
         if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
-
-            var dataString = "";
-            if($scope.dietData.id){
-
-                dataString = "query=" + 3 + '&dietName=' + $scope.dietData.dietName + '&id=' + $scope.dietData.id;
-
-            }else{
-                dataString = "query=" + 2 + '&dietName=' + $scope.dietData.dietName;
-            }
-
-            DietService.setAndInContentDetail.query({}, dataString).$promise.then(function(result) {
+            var dataString = {};
+            PresSaveService.setAndInContentDetail.query({}, dataString).$promise.then(function(result) {
                 if (result && result.success) {
                     $modalInstance.close(true);
                 }else{

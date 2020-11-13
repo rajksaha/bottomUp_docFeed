@@ -11,24 +11,16 @@ app.service('DoctorService', function ($resource) {
                 isArray:false
             }
         }),
-        getDoctorMenu : $resource('/api/rest/prescription/getDoctorMenu', {}, {
+        getDoctorPrefInv : $resource('/api/rest/doctorPreferenceInv/getDoctorPrefInv/:doctorID', {}, {
             'query':  {
                 method:'GET',
-                isArray:true
+                params: {doctorID: '@doctorID'}
             }
         }),
-        getDoctorPrefAdvice : $resource('/api/rest/doctorPreferenceAdvice/getDoctorPrefAdvice/:doctorID/:appointmentID', {}, {
+        getDoctorPrefAdvice : $resource('/api/rest/doctorPreferenceAdvice/getDoctorPrefAdvice/:doctorID', {}, {
             'query':  {
                 method:'GET',
-                isArray:true,
-                params: {doctorID: '@doctorID', appointmentID: '@appointmentID'}
-            }
-        }),
-        getDoctorPrefInv : $resource('/api/rest/doctorPreferenceInv/getDoctorPrefInv/:doctorID/:appointmentID', {}, {
-            'query':  {
-                method:'GET',
-                isArray:true,
-                params: {doctorID: '@doctorID', appointmentID: '@appointmentID'}
+                params: {doctorID: '@doctorID'}
             }
         }),
         getDoctorDetail : $resource('/api/rest/prescription/getDoctorDetail/:doctorID', {}, {

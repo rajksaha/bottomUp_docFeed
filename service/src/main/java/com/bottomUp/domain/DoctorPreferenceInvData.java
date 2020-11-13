@@ -9,6 +9,10 @@ public class DoctorPreferenceInvData extends BaseData {
   private long doctorID;
   private long invID;
   private long displayOrder;
+  private String invName;
+  private Long invCategoryID;
+  private Long presInvID;
+  private Boolean addedInPrescription;
 
   public long getInvPreferenceID() {
     return invPreferenceID;
@@ -40,5 +44,37 @@ public class DoctorPreferenceInvData extends BaseData {
 
   public void setDisplayOrder(long displayOrder) {
     this.displayOrder = displayOrder;
+  }
+
+  public String getInvName() {
+    return invName;
+  }
+
+  public void setInvName(String invName) {
+    this.invName = invName;
+  }
+
+  public Long getInvCategoryID() {
+    return invCategoryID;
+  }
+
+  public void setInvCategoryID(Long invCategoryID) {
+    this.invCategoryID = invCategoryID;
+  }
+
+  public Long getPresInvID() {
+    return presInvID;
+  }
+
+  public void setPresInvID(Long presInvID) {
+    this.presInvID = presInvID;
+  }
+
+  public Boolean getAddedInPrescription() {
+    return addedInPrescription;
+  }
+
+  public void setAddedInPrescription(Boolean addedInPrescription) {
+    this.addedInPrescription = addedInPrescription;
   }
 }

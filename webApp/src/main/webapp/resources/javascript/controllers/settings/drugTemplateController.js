@@ -201,13 +201,13 @@ app.controller('PrescribeSettingsController.AddDrugsToSettings', function($scope
         $scope.enteredDrugDoseList = [];
 
 
-        $scope.bringdrugsDayType(true , null, drugDoseList);
+        $scope.bringDrugsDayType(true , null, drugDoseList);
     };
 
 
 
 
-    $scope.bringdrugsDayType = function (addMood, selectedDayTypeID, doseDataList){
+    $scope.bringDrugsDayType = function (addMood, selectedDayTypeID, doseDataList){
 
         var dataString = "query=1";
 

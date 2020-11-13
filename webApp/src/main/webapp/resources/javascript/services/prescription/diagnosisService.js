@@ -5,7 +5,7 @@
 app.service('DiagnosisService', function ($resource) {
     return {
 
-        getDiseaseInDiagnosis : $resource('rest/diagnosis/getDiseaseInDiagnosis', {}, {
+        save : $resource('/api/rest/presDiagnosis/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:true

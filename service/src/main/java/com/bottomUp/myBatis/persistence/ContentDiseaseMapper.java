@@ -19,6 +19,8 @@ public interface ContentDiseaseMapper {
 
     public ContentDiseaseData getByID(Long ID) throws BottomUpException;
 
+    public ContentDiseaseData getByName(String name)throws BottomUpException;
+
     public List<ContentDiseaseData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     public void delete(Map<String, Object> param) throws BottomUpException;

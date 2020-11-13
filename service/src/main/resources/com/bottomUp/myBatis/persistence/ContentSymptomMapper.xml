@@ -46,6 +46,18 @@
 		WHERE symptomID = #{symptomID}
 	</select>
 
+	<select id="getByName" parameterType="string" resultType="contentSymptom">
+		SELECT
+		`symptomID`,
+		`symptomName`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_symptom`
+		WHERE symptomName = #{symptomName}
+	</select>
+
 	<select id="getByParam" parameterType="map" resultType="contentSymptom">
 		SELECT
 		`symptomID`,

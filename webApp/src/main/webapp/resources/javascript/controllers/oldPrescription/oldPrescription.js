@@ -41,7 +41,7 @@ app.controller('OldPrescriptionController', function($scope, $http, $modal, $roo
     
     $scope.prescribedDrugList = [];
 	
-	$scope.bringPresCribedDrugs = function (appointmentID){
+	$scope.bringPrescribedDrugs = function (appointmentID){
 		
 		var dataString = "query=0" + '&appointmentID=' + appointmentID;
 
@@ -168,7 +168,7 @@ app.controller('OldPrescriptionController', function($scope, $http, $modal, $roo
 	
 	$scope.diagnosisData = {};
 	
-	$scope.bringPresCribedDiagnosis = function (appointmentID){
+	$scope.bringPrescribedDiagnosis = function (appointmentID){
         $scope.diagnosisData = {};
 		var dataString = "query=6" + '&appointmentID=' + appointmentID;
 
@@ -224,9 +224,9 @@ app.controller('OldPrescriptionController', function($scope, $http, $modal, $roo
 	
     $scope.viewPrescription = function (data) {
     	
-    	$scope.bringPresCribedDiagnosis(data.appointmentID);
+    	$scope.bringPrescribedDiagnosis(data.appointmentID);
         $scope.bringDietInfo(data.appointmentID);
-    	$scope.bringPresCribedDrugs(data.appointmentID);
+    	$scope.bringPrescribedDrugs(data.appointmentID);
     	$scope.bringPrescribedInv(data.appointmentID);
     	$scope.bringPrescribedAdvice(data.appointmentID);
     	$scope.bringPrescribedVital(data.appointmentID);

@@ -104,7 +104,7 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 		
 	};
 		
-	$scope.bringdrugsDayType = function (addMood, selectedDayTypeID){
+	$scope.bringDrugsDayType = function (addMood, selectedDayTypeID){
 		
 		var dataString = "query=1";
 		
@@ -230,7 +230,7 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 		
 		DrugsService.createorupdatePresCribedDrugs.query({}, dataString).$promise.then(function (result) {
 			if (result && result.success) {
-				$scope.bringPresCribedDrugs();
+				$scope.bringPrescribedDrugs();
 			} else {
 			}
 		});
@@ -261,7 +261,7 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 		
 		DrugsService.delDrugAndDrugPrescription.query({}, dataString).$promise.then(function (result) {
 			if (result && result.success) {
-				$scope.bringPresCribedDrugs();
+				$scope.bringPrescribedDrugs();
 			} else {
 			}
 		});
@@ -275,7 +275,7 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 		
 		DrugsService.updateDrug.query({}, dataString).$promise.then(function (result) {
 			if (result && result.success) {
-				$scope.bringPresCribedDrugs();
+				$scope.bringPrescribedDrugs();
 			} else {
 			}
 		});
@@ -297,7 +297,7 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 		$scope.drugData.drugPrescribeID = drugData.id;
 		$scope.enteredDrugDoseList = drugData.drugDose.split(' - ')
 		$scope.bringdrugsType(false,drugData.drugTypeID,drugData.drugTimeID, drugData.drugNoOfDay);
-		$scope.bringdrugsDayType(false, drugData.drugDayTypeID);
+		$scope.bringDrugsDayType(false, drugData.drugDayTypeID);
 		$scope.bringdrugsWhatType(false,drugData.drugWhenID);
 		$scope.bringdrugsAdviceType(false, drugData.drugAdviceID);
 		
@@ -309,14 +309,14 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 		
 		DrugsService.delFromDrugPrescriptionAndDose.query({}, dataString).$promise.then(function (result) {
 			if (result && result.success) {
-				$scope.bringPresCribedDrugs();
+				$scope.bringPrescribedDrugs();
 			} else {
 			}
 		});
 		
 	};
 	
-	$scope.bringPresCribedDrugs = function (){
+	$scope.bringPrescribedDrugs = function (){
 		
 		var dataString = "query=4";
 		
@@ -331,7 +331,7 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 				$scope.drugData.delDrug = false;
 				$scope.drugData.editName = false;
 				$scope.bringdrugsType(true, null, 3, 7);
-				$scope.bringdrugsDayType(true, null);
+				$scope.bringDrugsDayType(true, null);
 				$scope.bringdrugsWhatType(true, null);
 				$scope.bringdrugsAdviceType(true, null);
 			} else {
@@ -367,7 +367,7 @@ app.controller('PrescribeDrugsController', function($scope, $http, $modal, $root
 	
 	
 	(function(){
-		$scope.bringPresCribedDrugs();
+		$scope.bringPrescribedDrugs();
 		
     })()
 

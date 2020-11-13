@@ -5,27 +5,27 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionComplainData extends BaseData {
 
-  private long complainID;
-  private long appointmentID;
-  private long symptomID;
+  private Long complainID;
+  private Long appointmentID;
+  private Long symptomID;
   private String symptomName;
   private double durationNum;
-  private long durationType;
+  private Long durationType;
   private String detail;
 
-  public long getComplainID() {
+  public Long getComplainID() {
     return complainID;
   }
 
-  public void setComplainID(long complainID) {
+  public void setComplainID(Long complainID) {
     this.complainID = complainID;
   }
 
-  public long getSymptomID() {
+  public Long getSymptomID() {
     return symptomID;
   }
 
-  public void setSymptomID(long symptomID) {
+  public void setSymptomID(Long symptomID) {
     this.symptomID = symptomID;
   }
 
@@ -37,11 +37,11 @@ public class PrescriptionComplainData extends BaseData {
     this.durationNum = durationNum;
   }
 
-  public long getDurationType() {
+  public Long getDurationType() {
     return durationType;
   }
 
-  public void setDurationType(long durationType) {
+  public void setDurationType(Long durationType) {
     this.durationType = durationType;
   }
 
@@ -53,11 +53,11 @@ public class PrescriptionComplainData extends BaseData {
     this.detail = detail;
   }
 
-  public long getAppointmentID() {
+  public Long getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(long appointmentID) {
+  public void setAppointmentID(Long appointmentID) {
     this.appointmentID = appointmentID;
   }
 

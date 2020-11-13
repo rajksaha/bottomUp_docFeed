@@ -35,12 +35,6 @@ app.service('DrugService', function ($resource) {
                 isArray:true
             }
         }),
-        getTypeOfDrugAdvice : $resource('rest/drug/getTypeOfDrugAdvice', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
         createPeriodOfDose : $resource('rest/drug/createPeriodOfDose', {}, {
             'query':  {
                 method:'POST',

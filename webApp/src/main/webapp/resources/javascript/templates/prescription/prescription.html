@@ -33,7 +33,7 @@
                         <div class="image-upload" >
                             <label for="picture">
                                 <img alt="patImg" data-ng-if="patientData.patientImage != null" src="{{patientData.patientImage}}" height="120px" width="120px">
-                                <img alt="patImg" data-ng-if="patientData.patientImage == null" src="images/no-photo.gif" height="120px" width="120px">
+                                <img alt="patImg" data-ng-if="patientData.patientImage == null" src="resources/images/no-photo.gif" height="120px" width="120px">
                             </label>
                             <input type="file" id="picture" class="form-control" name="picture"  data-ng-file-select="onFileSelect($files)" data-ng-click="resetInputFile()"/>
                         </div>

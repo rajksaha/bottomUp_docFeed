@@ -24,22 +24,32 @@ public class DoctorPreferenceInvController extends BaseController {
     @Autowired
     private DoctorPreferenceInvService doctorPreferenceInvService;
 
-    @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByDoctorID/{doctorID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<DoctorPreferenceInvData> getAll(HttpServletRequest request) throws BottomUpException {
+    public List<DoctorPreferenceInvData> getAll(@PathVariable("doctorID") Long doctorID,
+                                                HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
-
+        params.put("doctorID", doctorID);
         return this.doctorPreferenceInvService.getByParam(params);
     }
 
     @RequestMapping(value = {"/getByID/{invPreferenceID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DoctorPreferenceInvData getByID(@PathVariable("invPreferenceID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public DoctorPreferenceInvData getByID(@PathVariable("invPreferenceID") Long invPreferenceID, HttpServletRequest request) throws BottomUpException {
 
-        Map<String, Object> params = this.parseParameter(request);
+        return this.doctorPreferenceInvService.getByID(invPreferenceID);
+    }
 
-        return this.doctorPreferenceInvService.getByID(Long.valueOf(companyID));
+    @RequestMapping(value = {"/getDoctorPrefInv/{doctorID}/{appointmentID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<DoctorPreferenceInvData> getDoctorPrefInv(@PathVariable("doctorID") Long doctorID,
+                                                          @PathVariable("appointmentID") Long appointmentID,
+                                                          HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("doctorID", doctorID);
+        params.put("appointmentID", appointmentID);
+        return this.doctorPreferenceInvService.getByParam(params);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,9 +71,9 @@ public class DoctorPreferenceInvController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{invPreferenceID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("invPreferenceID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("invPreferenceID") Integer invPreferenceID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("invPreferenceID", appointmentID);
+        param.put("invPreferenceID", invPreferenceID);
         this.doctorPreferenceInvService.delete(param);
     }
 }

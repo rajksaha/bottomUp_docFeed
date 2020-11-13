@@ -1,7 +1,7 @@
 <div class="large big">
     <div class="modal-header">
         <div class="col-sm-9 col-md-9 col-lg-9">
-            <h4 class="modal-title">Advice</h4>
+            <h4 class="modal-title"> Prescribe Advice </h4>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">
             <button class="btn btnLanier btn-success" data-ng-click="prescription()" ><span class="fa fa-thumbs-o-up " aria-hidden="true"></span> Done</button>
@@ -55,7 +55,7 @@
             </section>
 
             <div data-ng-show="!docTorAdviceAdder" class="col-sm-12 col-md-12 col-lg-12">
-                <div class="list-item col-sm-6 col-md-6 col-lg-6" data-ng-repeat="advice in advcieSettingData">
+                <div class="list-item col-sm-6 col-md-6 col-lg-6" data-ng-repeat="advice in doctorPrefAdviceList">
                     <span data-ng-click="delAdviceFromSetting(advice.adviceSettingID)" class="glyphicons glyphicon glyphicon-remove" aria-hidden="true"></span>
                     <span class="glyphicon  glyphicon"  data-ng-click="deciderAdvice(!advice.addedToPrescription,advice)" data-ng-class="{'glyphicon-check': advice.addedToPrescription == true,'glyphicon-unchecked': advice.addedToPrescription == false}"></span>
                     <span>{{advice.advice}}</span>

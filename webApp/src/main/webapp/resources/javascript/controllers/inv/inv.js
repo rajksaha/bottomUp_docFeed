@@ -1,4 +1,4 @@
-app.controller('PrescribeInvController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $modalInstance, InvService) {
+app.controller('PrescribeInvController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $modalInstance, PresSaveService) {
 	
 
 	$scope.invNameData = {};
@@ -48,7 +48,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=2'+ '&invName=' + $scope.invName + '&displayOrder=' + displayOrder;
 
-        InvService.createDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
+        PresSaveService.createDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
             if (result && result.success) {
                 if(isAnother){
                     $scope.invName = "";
@@ -67,7 +67,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=6'+ '&invSettingID=' + invSettingID;
 
-        InvService.deleteDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
+        PresSaveService.deleteDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.invSettingData.splice(index,1);
             }else{
@@ -92,7 +92,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=4'+ '&invName=' + invName + '&note=' + note;
 
-        InvService.createInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
+        PresSaveService.createInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringPrescribedInv();
             }else{
@@ -105,7 +105,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=5'+ '&id=' + id;
 
-        InvService.deleteInvPrescriptionById.query({}, $scope.searchData).$promise.then(function(result) {
+        PresSaveService.deleteInvPrescriptionById.query({}, $scope.searchData).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringPrescribedInv();
         	    $scope.bringINVDetail();
@@ -119,7 +119,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = 'query=10'+ '&invID=' + invID;
 
-        InvService.deleteInvPrescriptionByInvId.query({}, $scope.searchData).$promise.then(function(result) {
+        PresSaveService.deleteInvPrescriptionByInvId.query({}, $scope.searchData).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.bringPrescribedInv();
             }else{
@@ -137,7 +137,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 
         var dataString = "query=17" + '&categoryId=' + invCategoryID;
 
-        InvService.getInvDoctor.query({}, $scope.searchData).$promise.then(function (result) {
+        PresSaveService.getInvDoctor.query({}, $scope.searchData).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.invSettingData = result;
                 angular.forEach($scope.invSettingData, function (value, key) {
@@ -158,13 +158,13 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 
         var dataString = "query=15";
 
-        InvService.getInvDetail.query({}, $scope.searchData).$promise.then(function (result) {
+        PresSaveService.getInvDetail.query({}, $scope.searchData).$promise.then(function (result) {
             if (result && result.success) {
                 $scope.invCategoryList = result;
                 $scope.invCategoryList.push({ name: "No Category", invCategoryID: 0 });
                 var dataString = "query=1";
 
-                InvService.getInvCategory.query({}, $scope.searchData).$promise.then(function (result) {
+                PresSaveService.getInvCategory.query({}, $scope.searchData).$promise.then(function (result) {
                     if (result && result.success) {
                         $scope.invSettingData = result;
                         angular.forEach($scope.invSettingData, function (value, key) {
@@ -192,7 +192,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 		
 		var dataString = "query=7";
 
-        InvService.getInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
+        PresSaveService.getInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.prescribedInvData = result;
         	    $scope.numberOfInvAdded = $scope.prescribedInvData.length;
@@ -216,7 +216,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 			
 			var dataString = 'query=3'+ '&invName=' + invAdderData.name;
 
-            InvService.createDoctorInVSettings.query({}, $scope.searchData).$promise.then(function(result) {
+            PresSaveService.createDoctorInVSettings.query({}, $scope.searchData).$promise.then(function(result) {
                 if (result && result.success) {
                     $scope.addInvToPresciption(result, invAdderData.note);
 	        	    $scope.bringPrescribedInv();

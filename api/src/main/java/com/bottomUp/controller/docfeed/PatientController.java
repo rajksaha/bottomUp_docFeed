@@ -40,7 +40,7 @@ public class PatientController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{patientID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public PatientData getByID(@PathVariable("patientID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public PatientViewData getByID(@PathVariable("patientID") Integer companyID, HttpServletRequest request) throws BottomUpException {
         return this.patientService.getByID(Long.valueOf(companyID));
     }
 

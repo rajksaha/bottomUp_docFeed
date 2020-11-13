@@ -105,6 +105,5 @@ public class PatientViewService
         String padded = String.format("%04d", numOfAppToday);
         return "" + dateTime.getYear() + dateTime.getMonthOfYear() + dateTime.getDayOfMonth()+ padded;
     }
-
     //TODO:getPatient Detail included userProfile
 }

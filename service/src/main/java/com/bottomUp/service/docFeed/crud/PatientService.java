@@ -32,7 +32,7 @@ public class PatientService {
         patientMapper.update(data);
     }
 
-    public PatientData getByID(Long ID)throws BottomUpException {
+    public PatientViewData getByID(Long ID)throws BottomUpException {
         return this.patientMapper.getByID(ID);
     }
 

@@ -21,6 +21,13 @@ public class PrescriptionAdviceService {
     @Autowired
     private PrescriptionAdviceMapper prescriptionAdviceMapper;
 
+    public void create(Long appointmentID, Long adviceID) throws BottomUpException {
+        PrescriptionAdviceData prescriptionAdviceData = new PrescriptionAdviceData();
+        prescriptionAdviceData.setAppointmentID(appointmentID);
+        prescriptionAdviceData.setAdviceId(adviceID);
+        prescriptionAdviceMapper.create(prescriptionAdviceData);
+    }
+
     public void create(PrescriptionAdviceData data) throws BottomUpException {
         prescriptionAdviceMapper.create(data);
     }

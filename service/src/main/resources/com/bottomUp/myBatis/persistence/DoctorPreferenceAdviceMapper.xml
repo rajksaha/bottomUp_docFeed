@@ -56,18 +56,32 @@
 
 	<select id="getByParam" parameterType="map" resultType="doctorPreferenceAdvice">
 		SELECT
-		`advicePreferenceID`,
-		`doctorID`,
-		`adviceID`,
-		`displayOrder`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `doctor_preference_advice`
+		dpa.`advicePreferenceID`,
+		dpa.`doctorID`,
+		dpa.`adviceID`,
+		CA.advice,
+		CA.type,
+		CA.lang,
+		<if test="appointmentID != null">
+			PA.presAdviceID,
+			CASE WHEN PA.presAdviceID IS NULL THEN FALSE ELSE TRUE END AS addedInPrescription,
+		</if>
+		dpa.`displayOrder`,
+		dpa.`updatedBy`,
+		dpa.`updatedOn`,
+		dpa.`createdBy`,
+		dpa.`createdOn`
+		FROM doctor_feed.`doctor_preference_advice` dpa
+		JOIN doctor_feed.content_advice CA ON dpa.adviceID = CA.adviceID
+		<if test="appointmentID != null">
+			LEFT JOIN doctor_feed.prescription_advice PA ON PA.appointmentID = #{appointmentID} AND PA.adviceID = dpa.adviceID
+		</if>
 		WHERE 1 = 1
 		<if test="advicePreferenceID != null">
 			AND advicePreferenceID = #{advicePreferenceID}
+		</if>
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

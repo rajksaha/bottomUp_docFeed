@@ -61,9 +61,9 @@ public class PatientDrugHistoryController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{drugHistoryID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("drugHistoryID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("drugHistoryID") Integer drugHistoryID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("drugHistoryID", appointmentID);
+        param.put("drugHistoryID", drugHistoryID);
         this.patientDrugHistoryService.delete(param);
     }
 }

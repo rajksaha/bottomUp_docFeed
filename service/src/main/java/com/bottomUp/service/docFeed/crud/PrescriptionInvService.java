@@ -1,9 +1,7 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentTypeData;
 import com.bottomUp.domain.PrescriptionInvData;
-import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
 import com.bottomUp.myBatis.persistence.PrescriptionInvMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,25 +17,32 @@ import java.util.Map;
 public class PrescriptionInvService {
 
     @Autowired
-    private PrescriptionInvMapper PrescriptionInvMapper;
+    private PrescriptionInvMapper prescriptionInvMapper;
+
+    public void create(Long appointmentID, Long invID) throws BottomUpException{
+        PrescriptionInvData prescriptionInvData = new PrescriptionInvData();
+        prescriptionInvData.setAppointmentID(appointmentID);
+        prescriptionInvData.setInvID(invID);
+        prescriptionInvMapper.create(prescriptionInvData);
+    }
 
     public void create(PrescriptionInvData data) throws BottomUpException {
-        PrescriptionInvMapper.create(data);
+        prescriptionInvMapper.create(data);
     }
 
     public void update(PrescriptionInvData  data) throws BottomUpException {
-        PrescriptionInvMapper.update(data);
+        prescriptionInvMapper.update(data);
     }
 
     public PrescriptionInvData  getByID(Long ID)throws BottomUpException {
-        return this.PrescriptionInvMapper.getByID(ID);
+        return this.prescriptionInvMapper.getByID(ID);
     }
 
     public List<PrescriptionInvData> getByParam(Map<String, Object> param) throws BottomUpException {
-        return this.PrescriptionInvMapper.getByParam(param);
+        return this.prescriptionInvMapper.getByParam(param);
     }
 
     public void delete (Map<String,Object> param) throws BottomUpException {
-        this.PrescriptionInvMapper.delete(param);
+        this.prescriptionInvMapper.delete(param);
     }
 }

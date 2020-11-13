@@ -7,10 +7,10 @@ app.controller('PrescribeComplainController', function($scope, $http, $modal, $r
 	
 	
 	$scope.init = function(){
-		$scope.bringdrugsDayType(true, null);
+		$scope.bringDrugsDayType(true, null);
     };
     
-	$scope.bringdrugsDayType = function (addMood, selectedDayTypeID){
+	$scope.bringDrugsDayType = function (addMood, selectedDayTypeID){
 		
 		var dataString = "query=1";
 		

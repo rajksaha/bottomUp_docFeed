@@ -9,6 +9,12 @@ public class DoctorPreferenceAdviceData extends BaseData {
   private long doctorID;
   private long adviceID;
   private long displayOrder;
+  private long type;
+  private long lang;
+  private String advice;
+  private Long presAdviceID;
+  private Boolean addedInPrescription;
+
 
   public long getAdvicePreferenceID() {
     return advicePreferenceID;
@@ -40,5 +46,45 @@ public class DoctorPreferenceAdviceData extends BaseData {
 
   public void setDisplayOrder(long displayOrder) {
     this.displayOrder = displayOrder;
+  }
+
+  public long getType() {
+    return type;
+  }
+
+  public void setType(long type) {
+    this.type = type;
+  }
+
+  public long getLang() {
+    return lang;
+  }
+
+  public void setLang(long lang) {
+    this.lang = lang;
+  }
+
+  public String getAdvice() {
+    return advice;
+  }
+
+  public void setAdvice(String advice) {
+    this.advice = advice;
+  }
+
+  public Long getPresAdviceID() {
+    return presAdviceID;
+  }
+
+  public void setPresAdviceID(Long presAdviceID) {
+    this.presAdviceID = presAdviceID;
+  }
+
+  public Boolean getAddedInPrescription() {
+    return addedInPrescription;
+  }
+
+  public void setAddedInPrescription(Boolean addedInPrescription) {
+    this.addedInPrescription = addedInPrescription;
   }
 }

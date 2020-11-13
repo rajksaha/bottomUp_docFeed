@@ -5,7 +5,13 @@
 app.service('ComplainService', function ($resource) {
     return {
 
-        getDayTypeDrug : $resource('rest/complain/getDayTypeDrug', {}, {
+        getDrugDayType : $resource('/api/rest/contentDayType/getByParam', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true
+            }
+        }),
+        save : $resource('/api/rest/presComplain/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:true

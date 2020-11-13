@@ -9,7 +9,7 @@ import com.bottomUp.domain.common.BaseData;
 public class ContentDetailData extends BaseData {
 
     private Long contentDetailID;
-    private Integer entityID;
+    private Long entityID;
     private String entityType;
     private String shortName;
     private String longDesc;
@@ -25,11 +25,11 @@ public class ContentDetailData extends BaseData {
         this.contentDetailID = contentDetailID;
     }
 
-    public Integer getEntityID() {
+    public Long getEntityID() {
         return entityID;
     }
 
-    public void setEntityID(Integer entityID) {
+    public void setEntityID(Long entityID) {
         this.entityID = entityID;
     }
 

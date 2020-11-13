@@ -1,5 +1,9 @@
 package com.bottomUp.common.utility;
 
+import com.bottomUp.domain.PrescriptionComplainData;
+
+import java.util.List;
+
 /**
  * Created by raj on 4/7/2016.
  */
@@ -15,6 +19,8 @@ public class SearchData {
 
     private Long appointmentID;
     private Integer intStatus;
+
+    private List<PrescriptionComplainData> complainList;
 
     public Long getAppointmentID() {
         return appointmentID;
@@ -86,5 +92,13 @@ public class SearchData {
 
     public void setIntType(Integer intType) {
         this.intType = intType;
+    }
+
+    public List<PrescriptionComplainData> getComplainList() {
+        return complainList;
+    }
+
+    public void setComplainList(List<PrescriptionComplainData> complainList) {
+        this.complainList = complainList;
     }
 }

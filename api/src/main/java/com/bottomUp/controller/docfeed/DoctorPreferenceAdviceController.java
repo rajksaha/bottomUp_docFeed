@@ -3,6 +3,7 @@ package com.bottomUp.controller.docfeed;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.DoctorPreferenceAdviceData;
+import com.bottomUp.domain.DoctorPreferenceInvData;
 import com.bottomUp.service.docFeed.crud.DoctorPreferenceAdviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,22 +25,30 @@ public class DoctorPreferenceAdviceController extends BaseController {
     @Autowired
     private DoctorPreferenceAdviceService doctorPreferenceAdviceService;
 
-    @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByParam/{doctorID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<DoctorPreferenceAdviceData> getAll(HttpServletRequest request) throws BottomUpException {
+    public List<DoctorPreferenceAdviceData> getAll(@PathVariable("doctorID") Long doctorID, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
+        params.put("doctorID", doctorID);
+        return this.doctorPreferenceAdviceService.getByParam(params);
+    }
 
+    @RequestMapping(value = {"/getDoctorPrefAdvice/{doctorID}/{appointmentID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<DoctorPreferenceAdviceData> getDoctorPrefInv(@PathVariable("doctorID") Integer doctorID,
+                                                             @PathVariable("appointmentID") Long appointmentID,
+                                                             HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("doctorID", doctorID);
+        params.put("appointmentID", appointmentID);
         return this.doctorPreferenceAdviceService.getByParam(params);
     }
 
     @RequestMapping(value = {"/getByID/{advicePreferenceID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DoctorPreferenceAdviceData getByID(@PathVariable("advicePreferenceID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.doctorPreferenceAdviceService.getByID(Long.valueOf(companyID));
+    public DoctorPreferenceAdviceData getByID(@PathVariable("advicePreferenceID") Long advicePreferenceID, HttpServletRequest request) throws BottomUpException {
+        return this.doctorPreferenceAdviceService.getByID(advicePreferenceID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)

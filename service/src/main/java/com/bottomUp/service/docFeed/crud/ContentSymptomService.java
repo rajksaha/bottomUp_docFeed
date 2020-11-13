@@ -2,6 +2,7 @@ package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.AppointmentTypeData;
+import com.bottomUp.domain.ContentDiseaseData;
 import com.bottomUp.domain.ContentSymptomData;
 import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
 import com.bottomUp.myBatis.persistence.ContentSymptomMapper;
@@ -21,6 +22,16 @@ public class ContentSymptomService {
     @Autowired
     private ContentSymptomMapper contentSymptomMapper;
 
+    public Long createByName(String symptomName) throws BottomUpException{
+        ContentSymptomData symptomData = contentSymptomMapper.getByName(symptomName);
+        if(symptomData == null){
+            symptomData = new ContentSymptomData();
+            symptomData.setSymptomName(symptomName);
+            contentSymptomMapper.create(symptomData);
+        }
+        return symptomData.getSymptomID();
+    }
+
     public void create(ContentSymptomData data) throws BottomUpException {
         contentSymptomMapper.create(data);
     }
@@ -29,8 +40,12 @@ public class ContentSymptomService {
         contentSymptomMapper.update(data);
     }
 
-    public ContentSymptomData  getByID(Long ID)throws BottomUpException {
+    public ContentSymptomData getByID(Long ID)throws BottomUpException {
         return this.contentSymptomMapper.getByID(ID);
+    }
+
+    public ContentSymptomData getByName(String symptomName)throws BottomUpException {
+        return this.contentSymptomMapper.getByName(symptomName);
     }
 
     public List<ContentSymptomData > getByParam(Map<String, Object> param) throws BottomUpException {

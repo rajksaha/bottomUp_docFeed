@@ -5,18 +5,18 @@
 app.service('ComplainService', function ($resource) {
     return {
 
-        getDrugDayType : $resource('rest/complain/getDrugDayType', {}, {
+        getDrugDayType : $resource('/api/rest/contentDayType/getByParam', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:true
             }
         }),
-        updateComplain: $resource('rest/complain/updateComplain', {}, {
+        updateComplain: $resource('/api/rest/complain/updateComplain', {}, {
             'query': {
                 method: 'POST',
                 isArray : false
             }
-        }),
+        })
         
     };
 });

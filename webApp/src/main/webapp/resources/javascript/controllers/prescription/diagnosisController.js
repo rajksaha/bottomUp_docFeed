@@ -1,31 +1,14 @@
-app.controller('PrescriptionController.PrescribeDiagnosisController', function($scope, $http, $modalInstance, limitToFilter, $filter, record, DiagnosisService) {
+app.controller('PrescriptionController.PrescribeDiagnosisController', function($scope, $http, $modalInstance, limitToFilter, $filter, diagnosisData, PresSaveService) {
 
     $scope.diagnosisData = {};
 
-    if(record.diagnosisData.id){
-        $scope.diagnosisData = record.diagnosisData;
-    }else{
-        $scope.diagnosisData = {};
-        $scope.diagnosisData.note = "";
+    if($scope.diagnosisData.diagnosisID){
+        $scope.diagnosisData = diagnosisData;
     }
-    $scope.diagnosisNameData = {};
-
-    $scope.diagnosisNote = "";
 
     $scope.save = function(){
-
         if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
-
-            var dataString = "";
-            if($scope.diagnosisData.id){
-
-                dataString = "query=" + 3 + '&diagnosisName=' + $scope.diagnosisData.diseaseName + '&note=' + $scope.diagnosisData.note + '&id=' + $scope.diagnosisData.id;
-
-            }else{
-                dataString = "query=" + 2 + '&diagnosisName=' + $scope.diagnosisData.diseaseName + '&note=' + $scope.diagnosisData.note;
-            }
-
-            DiagnosisService.getDiseaseInDiagnosis.query({}, dataString).$promise.then(function(result) {
+            PresSaveService.saveDiagnosis.query({}, $scope.diagnosisData).$promise.then(function(result) {
                 if (result && result.success) {
                     $modalInstance.close();
                 }else{
@@ -35,10 +18,6 @@ app.controller('PrescriptionController.PrescribeDiagnosisController', function($
         }else{
             $scope.error = true;
         }
-
-
-
-
     };
 
     $scope.cancel = function(){
@@ -46,22 +25,17 @@ app.controller('PrescriptionController.PrescribeDiagnosisController', function($
     };
 
     $scope.getDisease = function(term) {
-
-        var dataString = "query=" + 0 + "&data=" + term;
+        var dataString = {};
+        dataString.term = term;
 
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/diagnosis",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/disease",
+            data: dataString
         }).then(function(result) {
             $scope.diagnosisNameData = result.data;
             return limitToFilter($scope.diagnosisNameData, 10);
         });
-    };
-
-    $scope.onSelectDisease = function(item, model, label){
-        $scope.diagnosisData.diseaseName = item.name;
     };
 
 

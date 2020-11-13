@@ -383,6 +383,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                     {
                         name: 'doctorPlatform',
                         files: ['resources/javascript/services/prescription/prescriptionService.js' + jsVersion,
+                            'resources/javascript/services/prescription/prescriptionSaveService.js' + jsVersion,
+                            'resources/javascript/services/doctor/doctorService.js' + jsVersion,
                             'resources/javascript/services/patient/patientService.js' + jsVersion]
                     });
             }]

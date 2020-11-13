@@ -7,6 +7,7 @@ import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
 import com.bottomUp.myBatis.persistence.PrescriptionComplainMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,31 @@ import java.util.Map;
  */
 
 @Service
+@Transactional
 public class PrescriptionComplainService {
 
     @Autowired
     private PrescriptionComplainMapper prescriptionComplainMapper;
 
+    @Autowired
+    private ContentSymptomService contentSymptomService;
+
+    public void createByList(List<PrescriptionComplainData> complainList)throws BottomUpException{
+        for (PrescriptionComplainData complain: complainList){
+            if(complain.getSymptomName() != null){
+                complain.setSymptomID(contentSymptomService.createByName(complain.getSymptomName()));
+                if(complain.getDurationType() != null && complain.getDurationType() > 4){
+                    complain.setDurationNum(0);
+                }
+                if(complain.getComplainID() == null){
+                    prescriptionComplainMapper.create(complain);
+                }else{
+                    prescriptionComplainMapper.update(complain);
+                }
+
+            }
+        }
+    }
     public void create(PrescriptionComplainData data) throws BottomUpException {
         prescriptionComplainMapper.create(data);
     }
