@@ -8,6 +8,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Time;
 import java.text.DateFormat;
@@ -21,6 +22,7 @@ import java.util.Map;
  */
 
 @Service
+@Transactional
 public class AppointmentService {
 
     @Autowired

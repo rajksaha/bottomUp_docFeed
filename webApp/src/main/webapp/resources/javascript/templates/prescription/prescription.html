@@ -92,10 +92,10 @@
                             </div>
                             <div class="verticalLine col-sm-6 col-md-6 col-lg-6">
                                 <div data-ng-if="hasAccess('DIET')" class="well well-sm" style="border-left: 5px solid #3ac0ff;">
-                                    <a href="javascript:" data-ng-click="performDiet(dietData)" ><label class="mainLabel">Diet : </label></a><span > {{dietData.dietName}}</span>
+                                    <a href="javascript:" data-ng-click="performDiet()" ><label class="mainLabel">Diet : </label></a><span > {{dietData.dietName}}</span>
                                 </div>
                                 <div data-ng-if="hasAccess('DIAGNOSIS')" class="well well-sm" style="border-left: 5px solid #3ac0ff;">
-                                    <a href="javascript:" data-ng-click="performDiganosis(diagnosisData)" ><label class="mainLabel">Diagnosis : </label></a><span > {{diagnosisData.diseaseName}}</span>
+                                    <a href="javascript:" data-ng-click="performDiagnosis()" ><label class="mainLabel">Diagnosis : </label></a><span > {{diagnosisData.diseaseName}}</span>
                                 </div>
                                 <div data-ng-if="hasAccess('PRES_DRUGS')" ng-include="'resources/javascript/templates/prescription/drugInfo.html'"></div>
                                 <div data-ng-if="hasAccess('PRES_ADVICE')" ng-include="'resources/javascript/templates/prescription/advice.html'"></div>

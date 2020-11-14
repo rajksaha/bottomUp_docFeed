@@ -63,13 +63,10 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 	};
 	
 	$scope.addToDoctorPreference = function (adviceID){
-		
-		
 		var displayOrder = 1;
 		if($scope.advcieSettingData != undefined && $scope.advcieSettingData.length > 0){
 			displayOrder = parseInt($scope.advcieSettingData[$scope.advcieSettingData.length -1].displayOrder) + 1;
 		}
-		
 		var dataString = 'query=3'+ '&adviceID=' + parseInt(adviceID) + '&displayOrder=' + displayOrder;
 		
 		PresSaveService.createDoctorPreference.query({}, dataString).$promise.then(function (result) {
@@ -93,28 +90,19 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 		});
 	};
 	
-	$scope.deciderAdvice = function (addedToPrescription,advice){
+	$scope.deciderAdvice = function (addedInPrescription,advice){
 		
-		advice.addedToPrescription = addedToPrescription;
-		if(addedToPrescription){
-			
-			$scope.addAdviceToPresciption(advice.id);
-			
-	        
+		advice.addedToPrescription = addedInPrescription;
+		if(addedInPrescription){
+			$scope.addToPres(advice.adviceID);
 		}else{
-			$scope.deleteAdviceFromPrescibtion(advice.id);
+			$scope.deleteAdviceFromPrescibtion(advice.adviceID);
 		}
 	};
 	
-	$scope.addAdviceToPresciption = function (adviceId){
-		
-		var dataString = 'query=4'+ '&adviceID=' + parseInt(adviceId);
-		
-		PresSaveService.createAdviceToPresciption.query({}, dataString).$promise.then(function (result) {
-			if (result && result.success) {
-				$scope.bringPrescribedAdvice();
-			} else {
-			}
+	$scope.addToPres = function (adviceID){
+		PresSaveService.saveAdviceFromPref.query({}, {appointmentID: appointmentData.appointmentID, adviceID: adviceID}).$promise.then(function (result) {
+            //$scope.bringPrescribedAdvice();
 		});
 	};
 	
@@ -123,15 +111,12 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 		var dataString = 'query=5'+ '&adviceID=' + parseInt(adviceId);
 		
 		PresSaveService.delPrescibtionAdvice.query({}, dataString).$promise.then(function (result) {
-			if (result && result.success) {
-				$scope.bringPrescribedAdvice();
-			} else {
-			}
+            //$scope.bringPrescribedAdvice();
 		});
 	};
 
 	$scope.bringPrescribedAdvice = function (){
-		$scope.adviceAdderData = {};
+		$scope.doctorPrefAdviceList = [];
 		$scope.adviceAdderData.lang = 0;
         DoctorService.getDoctorPrefAdvice.query({}, {doctorID: appointmentData.doctorID, appointmentID : appointmentData.appointmentID}).$promise.then(function (result) {
             $scope.doctorPrefAdviceList = result;

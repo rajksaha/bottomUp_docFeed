@@ -60,10 +60,10 @@ public class PrescriptionAdviceController extends BaseController {
         return result;
     }
 
-    @RequestMapping(value = "/delete/{prescriptionAdviceIS}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("prescriptionAdviceIS") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    @RequestMapping(value = "/delete/{prescriptionAdviceID}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("prescriptionAdviceID") Integer prescriptionAdviceID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("prescriptionAdviceIS", appointmentID);
+        param.put("prescriptionAdviceID", prescriptionAdviceID);
         this.prescriptionAdviceService.delete(param);
     }
 }

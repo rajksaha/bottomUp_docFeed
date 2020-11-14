@@ -3,11 +3,13 @@ package com.bottomUp.controller;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.domain.*;
+import com.bottomUp.domain.common.user.ContentDetailData;
 import com.bottomUp.model.PatientViewData;
 import com.bottomUp.service.docFeed.crud.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import utility.type.PrescriptionContentType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +58,9 @@ public class AutoCompleteController extends BaseController{
 
     @Autowired
     private PatientTypeService patientTypeService;
+
+    @Autowired
+    private ContentDetailService contentDetailService;
 
     @RequestMapping(value = {"/advice"}, method = RequestMethod.POST)
     @ResponseBody
@@ -155,5 +160,14 @@ public class AutoCompleteController extends BaseController{
         Map<String, Object> param = new HashMap<>();
         param.put("term", searchData.getTerm());
         return patientTypeService.getByParam(param);
+    }
+
+    @RequestMapping(value = {"/dietSearch"}, method = RequestMethod.POST)
+    @ResponseBody
+    public List<ContentDetailData> dietSearch(@RequestBody SearchData searchData) throws BottomUpException {
+        Map<String, Object> param = new HashMap<>();
+        param.put("term", searchData.getTerm());
+        param.put("entityType", PrescriptionContentType.DIET);
+        return contentDetailService.getDistinctShortName(param);
     }
 }

@@ -1,19 +1,11 @@
 app.controller('PrescriptionController.PrescribeDietController', function($scope, $http, $modalInstance, limitToFilter, $filter, dietData, PresSaveService) {
 
-    $scope.dietData = {};
+    $scope.dietData = dietData;
 
-    if(dietData != null && dietData.id){
-        $scope.dietData = dietData;
-    }
     $scope.save = function(){
         if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
-            var dataString = {};
-            PresSaveService.setAndInContentDetail.query({}, dataString).$promise.then(function(result) {
-                if (result && result.success) {
-                    $modalInstance.close(true);
-                }else{
-        
-                }
+            PresSaveService.saveDiet.query({},  $scope.dietData).$promise.then(function(result) {
+                $modalInstance.close(true);
             });
         }else{
             $scope.error = true;
@@ -26,13 +18,13 @@ app.controller('PrescriptionController.PrescribeDietController', function($scope
 
     $scope.getDiet = function(term) {
 
-        var dataString = "query=" + 0 + "&data=" + term;
+        var dataString = {};
+        dataString.term = term;
 
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/diet",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/dietSearch",
+            data: dataString
         }).then(function(result) {
             $scope.dietNameData = result.data;
             return limitToFilter($scope.dietNameData, 10);

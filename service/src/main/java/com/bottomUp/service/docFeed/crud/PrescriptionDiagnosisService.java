@@ -9,6 +9,7 @@ import com.bottomUp.myBatis.persistence.ContentDiseaseMapper;
 import com.bottomUp.myBatis.persistence.PrescriptionDiagnosisMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Map;
  */
 
 @Service
+@Transactional
 public class PrescriptionDiagnosisService {
 
     @Autowired
@@ -27,12 +29,16 @@ public class PrescriptionDiagnosisService {
     private ContentDiseaseService contentDiseaseService;
 
     public void save(PrescriptionDiagnosisData data) throws BottomUpException {
-        data.setDiagnosisID(contentDiseaseService.createByName(data.getDiseaseName()));
+        data.setDiseaseID(contentDiseaseService.createByName(data.getDiseaseName()));
         if(data.getDiagnosisID() == null){
             prescriptionDiagnosisMapper.create(data);
         }else{
             prescriptionDiagnosisMapper.update(data);
         }
+    }
+
+    public void create(PrescriptionDiagnosisData data) throws BottomUpException {
+        prescriptionDiagnosisMapper.create(data);
     }
 
     public void update(PrescriptionDiagnosisData data) throws BottomUpException {

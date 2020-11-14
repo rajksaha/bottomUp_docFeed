@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6" data-ng-if="hasAccess('CHIEF_COMPLAIN')">
         <h2 class="item-head">
-            <a href="javascript:" data-ng-click="addCCToPrescription()"><label class="mainLabel">Chief Complaints</label></a>
+            <a href="javascript:" data-ng-click="addComplain()"><label class="mainLabel">Chief Complaints</label></a>
         </h2>
-        <div data-ng-repeat="complain in prescribedComplainData">
-            <a class="link" data-ng-click="editFromPresciption(complain)">
+        <div data-ng-repeat="complain in prescribedComplainList">
+            <a class="link" data-ng-click="editComplain(complain)">
                 <span class="glyphicon glyphicon-pencil link" aria-hidden="true"></span>
             </a>
-            <a class="link" data-ng-click="deleteCCFromPresciption(complain.id)">
+            <a class="link" data-ng-click="deleteComplain(complain.complainID, $index)">
                 <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
             <span>{{getComplainString(complain)}}</span>
@@ -17,11 +17,11 @@
         <h2 class="item-head">
             <a href="javascript:" data-ng-click="addVital()"><label class="mainLabel">On Examination</label></a>
         </h2>
-        <div data-ng-repeat="vitalData in prescribedVitalData">
-            <a class="link" data-ng-click="deleteVitalFromPrescibtion(vitalData.id)">
+        <div data-ng-repeat="vitalData in prescribedVitalList">
+            <a class="link" data-ng-click="deleteVital(vitalData.presVitalId, $index)">
                 <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
-            <span>{{vitalData.vitalDisplayName}} : {{vitalData.vitalResult}}</span>
+            <span>{{vitalData.vitalName}} : {{vitalData.vitalResult}}</span>
         </div>
 
     </div>

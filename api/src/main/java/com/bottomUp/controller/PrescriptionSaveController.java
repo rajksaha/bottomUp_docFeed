@@ -60,7 +60,7 @@ public class PrescriptionSaveController extends BaseController{
 
     @RequestMapping(value = {"/saveAdviceFromPref/{appointmentID}/{adviceID}"}, method = RequestMethod.POST)
     @ResponseBody
-    public void saveAdviceFromPref(HttpServletRequest request, @RequestBody SearchData searchData) throws BottomUpException {
-        this.prescriptionComplainService.createByList(searchData.getComplainList());
+    public void saveAdviceFromPref(HttpServletRequest request, @PathVariable Long appointmentID, @PathVariable Long adviceID) throws BottomUpException {
+        this.prescriptionAdviceService.create(appointmentID, adviceID);
     }
 }

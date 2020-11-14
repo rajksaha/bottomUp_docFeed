@@ -15,7 +15,7 @@ public class ContentDetailData extends BaseData {
     private String longDesc;
     private String content;
     private String url;
-    private String format;
+    private String fileFormat;
 
     public Long getContentDetailID() {
         return contentDetailID;
@@ -73,11 +73,12 @@ public class ContentDetailData extends BaseData {
         this.url = url;
     }
 
-    public String getFormat() {
-        return format;
+    public String getFileFormat() {
+        return fileFormat;
     }
 
-    public void setFormat(String format) {
-        this.format = format;
+    public void setFileFormat(String fileFormat) {
+        this.fileFormat = fileFormat;
     }
+
 }

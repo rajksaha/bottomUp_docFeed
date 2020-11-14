@@ -23,6 +23,8 @@ public interface ContentDetailMapper {
 
     public List<ContentDetailData> getByParam(Map<String, Object> param) throws BottomUpException;
 
+    public List<ContentDetailData> getDistinctShortName(Map<String, Object> param) throws BottomUpException;
+
     public List<ContentDetailData> getChildContentInfo(Map<String, Object> param) throws BottomUpException;
 
     public void deleteByParam(Map<String, Object> param) throws BottomUpException;

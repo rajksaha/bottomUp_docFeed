@@ -82,6 +82,9 @@
 		<if test="doctorID != null">
 			AND doctorID = #{doctorID}
 		</if>
+		<if test="categoryID != null">
+			AND ci.categoryID = #{categoryID}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

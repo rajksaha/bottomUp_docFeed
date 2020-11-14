@@ -57,7 +57,7 @@
             <div data-ng-show="!docTorAdviceAdder" class="col-sm-12 col-md-12 col-lg-12">
                 <div class="list-item col-sm-6 col-md-6 col-lg-6" data-ng-repeat="advice in doctorPrefAdviceList">
                     <span data-ng-click="delAdviceFromSetting(advice.adviceSettingID)" class="glyphicons glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    <span class="glyphicon  glyphicon"  data-ng-click="deciderAdvice(!advice.addedToPrescription,advice)" data-ng-class="{'glyphicon-check': advice.addedToPrescription == true,'glyphicon-unchecked': advice.addedToPrescription == false}"></span>
+                    <span class="glyphicon  glyphicon"  data-ng-click="deciderAdvice(!advice.addedInPrescription,advice)" data-ng-class="{'glyphicon-check': advice.addedInPrescription == true,'glyphicon-unchecked': advice.addedInPrescription == false}"></span>
                     <span>{{advice.advice}}</span>
                 </div>
             </div>

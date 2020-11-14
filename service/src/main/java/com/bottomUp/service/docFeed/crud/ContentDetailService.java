@@ -6,6 +6,7 @@ import com.bottomUp.model.DietData;
 import com.bottomUp.myBatis.persistence.ContentDetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import utility.type.PrescriptionContentType;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Map;
  */
 
 @Service
+@Transactional
 public class ContentDetailService {
 
     @Autowired
@@ -29,6 +31,7 @@ public class ContentDetailService {
         if(dietData.getDietID() == null){
             contentDetailMapper.create(contentDetailData);
         }else{
+            contentDetailData.setContentDetailID(dietData.getDietID());
             contentDetailMapper.update(contentDetailData);
         }
 
@@ -48,6 +51,10 @@ public class ContentDetailService {
 
     public List<ContentDetailData> getByParam(Map<String, Object> param) throws BottomUpException {
         return this .contentDetailMapper.getByParam(param);
+    }
+
+    public List<ContentDetailData> getDistinctShortName(Map<String, Object> param) throws BottomUpException {
+        return this .contentDetailMapper.getDistinctShortName(param);
     }
 
     /*public void delete (Map<String,Object> param) throws BottomUpException {

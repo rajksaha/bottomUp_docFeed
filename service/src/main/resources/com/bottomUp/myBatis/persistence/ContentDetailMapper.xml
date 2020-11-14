@@ -7,20 +7,26 @@
 	<insert id="create" parameterType="contentDetail" useGeneratedKeys="true" keyProperty="contentDetailID" >
 
 		INSERT INTO `content_detail`(
-			`contentType`,
+			`entityType`,
 			`entityID`,
-			`detail`,
-			`code`,
+			`shortName`,
+			`longDesc`,
+			`content`,
+			`url`,
+			`fileFormat`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
 			`createdOn`
 		)
 		VALUES(
-			#{contentType},
+			#{entityType},
 			#{entityID},
-			#{detail},
-			#{code},
+			#{shortName},
+			#{longDesc},
+			#{content},
+			#{url},
+			#{fileFormat},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -33,10 +39,13 @@
 	<update id="update" parameterType="contentDetail">
 		UPDATE `content_detail`
 		SET
-		`contentType` = #{contentType},
+		`entityType` = #{entityType},
 		`entityID` = #{entityID},
-		`detail` = #{detail},
-		`code` =#{code},
+		`shortName` = #{shortName},
+		`longDesc` =#{longDesc},
+		`content` =#{content},
+		`url` =#{url},
+		`fileFormat` =#{fileFormat},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE contentDetailID = #{contentDetailID}
@@ -45,10 +54,13 @@
 	<select id="getByID" parameterType="long" resultType="contentDetail">
 		SELECT
 		    `contentDetailID`,
-			`contentType`,
+			`entityType`,
 			`entityID`,
-			`detail`,
-			`code`,
+			`shortName`,
+			`longDesc`,
+			`content`,
+			`url`,
+			`fileFormat`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -61,10 +73,13 @@
 	<select id="getByParam" parameterType="map" resultType="contentDetail">
 		SELECT
 		`contentDetailID`,
-		`contentType`,
+		`entityType`,
 		`entityID`,
-		`detail`,
-		`code`,
+		`shortName`,
+		`longDesc`,
+		`content`,
+		`url`,
+		`fileFormat`,
 		`updatedBy`,
 		`updatedOn`,
 		`createdBy`,
@@ -73,6 +88,28 @@
 		WHERE 1 = 1
 		<if test="contentDetailID != null">
 			AND contentDetailID = #{contentDetailID}
+		</if>
+		<if test="entityType != null">
+			AND entityType = #{entityType}
+		</if>
+		<if test="entityID != null">
+			AND entityID = #{entityID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+	<select id="getDistinctShortName" parameterType="map" resultType="contentDetail">
+		SELECT DISTINCT `shortName`
+		FROM `content_detail`
+		WHERE 1 = 1
+		<if test="contentDetailID != null">
+			AND contentDetailID = #{contentDetailID}
+		</if>
+		<if test="entityType != null">
+			AND entityType = #{entityType}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

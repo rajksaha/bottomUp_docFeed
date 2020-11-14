@@ -3,6 +3,7 @@ package com.bottomUp.service.docFeed;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.DoctorSettingData;
 import com.bottomUp.domain.common.user.ContentDetailData;
+import com.bottomUp.model.DietData;
 import com.bottomUp.model.DoctorViewData;
 import com.bottomUp.myBatis.persistence.*;
 import com.bottomUp.service.docFeed.crud.PrescriptionDrugService;
@@ -25,8 +26,8 @@ public class PrescriptionViewService {
     @Autowired
     private PrescriptionDiagnosisMapper prescriptionDiagnosisMapper;
 
-//    @Autowired
-//    private PrescriptionDrugService prescriptionDrugService;
+    @Autowired
+    private PrescriptionDrugService prescriptionDrugService;
 
     @Autowired
     private PrescriptionComplainMapper complainMapper;
@@ -92,7 +93,7 @@ public class PrescriptionViewService {
         requestMap.put("appointmentID", appointmentID);
 
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("diagnosis", prescriptionDiagnosisMapper.getByParam(requestMap));
+        result.put("diagnosis", prescriptionDiagnosisMapper.getByAppointmentID(appointmentID));
         result.put("inv", invMapper.getByParam(requestMap));
         result.put("advice", adviceMapper.getByParam(requestMap));
         result.put("vital", vitalMapper.getByParam(requestMap));
@@ -102,13 +103,17 @@ public class PrescriptionViewService {
         result.put("history", historyMapper.getByParam(requestMap));
         result.put("reference", referenceMapper.getByParam(requestMap));
         result.put("newtVisit", nextVisitMapper.getByParam(requestMap));
-        //result.put("drug", prescriptionDrugService.getByParam(requestMap));
+        result.put("drug", prescriptionDrugService.getByParam(requestMap));
         requestMap.put("entityID", appointmentID);
         requestMap.put("entityType", PrescriptionContentType.DIET);
 
         List<ContentDetailData> dietList = contentDetailMapper.getByParam(requestMap);
         if(dietList != null && dietList.size() == 1){
-            result.put("diet", dietList.get(0));
+            DietData dietData = new DietData();
+            dietData.setDietID(dietList.get(0).getContentDetailID());
+            dietData.setAppointmentID(dietList.get(0).getEntityID());
+            dietData.setDietName(dietList.get(0).getShortName());
+            result.put("diet", dietData);
         }
         requestMap.put("entityType", PrescriptionContentType.DRUG_HISTORY);
         result.put("drugHistory", contentDetailMapper.getByParam(requestMap));

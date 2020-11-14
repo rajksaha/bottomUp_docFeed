@@ -33,17 +33,17 @@
 	</section>
 
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <select  class="form-control" id="drugTypeAdder" data-ng-model="invCategoryID" data-ng-change="bringDoctorSetting(invCategoryID)" data-ng-options="category.invCategoryID as category.name for category in invCategoryList" >
+                <select  class="form-control" id="drugTypeAdder" data-ng-model="selectedInvCategoryID" data-ng-change="bringDoctorSetting(invCategoryID)" data-ng-options="category.invCategoryID as category.name for category in invCategoryList" >
                     <option value="">--Select--</option>
                 </select>
                 <hr>
                 <div class="row">
-                    <div class="list-item col-sm-6 col-md-6 col-lg-6" data-ng-repeat="inv in invSettingData | filter : colorFilter">
+                    <div class="list-item col-sm-6 col-md-6 col-lg-6" data-ng-repeat="inv in doctorPrefInvList">
                         <span class="glyphicons glyphicon glyphicon-remove" aria-hidden="true" data-ng-click="delINVFromSetting(inv.invSettingID, $index)"></span>
                         <button class="btn btn-default" data-ng-model="none"   data-ng-click="addORDelINV(!inv.addedToPrescription,inv)">
-                            <span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': inv.addedToPrescription == true,'glyphicon-unchecked': inv.addedToPrescription == false}"></span>
+                            <span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': inv.addedInPrescription == true,'glyphicon-unchecked': inv.addedInPrescription == false}"></span>
                         </button>
-                        <span style="font-size: 14px !important;">{{inv.name}}</span>
+                        <span style="font-size: 14px !important;">{{inv.invName}}</span>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="invData in prescribedInvData">
+                        <tr data-ng-repeat="invData in prescribedInvList">
                             <td>
                                 {{$index + 1}}
                             </td>

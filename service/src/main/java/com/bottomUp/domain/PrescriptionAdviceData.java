@@ -7,7 +7,7 @@ public class PrescriptionAdviceData extends BaseData {
 
   private long presAdviceID;
   private long appointmentID;
-  private long adviceId;
+  private long adviceID;
   private long type;
   private long lang;
   private String advice;
@@ -62,11 +62,11 @@ public class PrescriptionAdviceData extends BaseData {
     this.pdf = pdf;
   }
 
-  public long getAdviceId() {
-    return adviceId;
+  public long getAdviceID() {
+    return adviceID;
   }
 
-  public void setAdviceId(long adviceId) {
-    this.adviceId = adviceId;
+  public void setAdviceID(long adviceID) {
+    this.adviceID = adviceID;
   }
 }

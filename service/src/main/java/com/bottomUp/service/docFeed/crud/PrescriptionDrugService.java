@@ -8,6 +8,7 @@ import com.bottomUp.myBatis.persistence.PrescriptionDrugDoseMapper;
 import com.bottomUp.myBatis.persistence.PrescriptionDrugMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Map;
  */
 
 @Service
+@Transactional
 public class PrescriptionDrugService {
 
     @Autowired

@@ -5,7 +5,7 @@ app.controller('PrescriptionController.PrescribeComplainController', function($s
     $scope.complainList = [];
     $scope.drugNumOfDayList = JsonService.fractionNumberList;
     $scope.drugDayTypeList = JsonService.dayTypeList;
-    $scope.defaultNumOfDay = $scope.drugNumOfDayList[0].value;
+    $scope.defaultNumOfDay = $scope.drugNumOfDayList[1].value;
     $scope.defaultDayType = $scope.drugDayTypeList[6].id;
 
 

@@ -10,13 +10,14 @@ app.service('PrescriptionService', function ($resource) {
                 params: {appointmentID: '@appointmentID'}
             }
         }),
-        getPrescribedComplain : $resource('/api/rest/prescription/getComplainInfo/:appointmentID', {}, {
+        getPrescribedComplain : $resource('/api/rest/prescription/getPrescribedComplain/:appointmentID', {}, {
             'query':  {
                 method:'GET',
+                isArray:true,
                 params: {appointmentID: '@appointmentID'}
             }
         }),
-        getPrescribedInv : $resource('/api/rest/prescription/getInvByAppointmentId/:appointmentID', {}, {
+        getPrescribedInv : $resource('/api/rest/prescription/getPrescribedInv/:appointmentID', {}, {
             'query':  {
                 method:'GET',
                 isArray:true,
@@ -75,7 +76,7 @@ app.service('PrescriptionService', function ($resource) {
         getPrescribedDiet : $resource('/api/rest/prescription/getPrescribedDiet/:appointmentID', {}, {
             'query':  {
                 method:'GET',
-                isArray:false,
+                isArray:true,
                 params: {appointmentID: '@appointmentID'}
             }
         }),
@@ -157,6 +158,12 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:true
             }
         }),
+        getInvDetail : $resource('/api/rest/invCategory/getByParam', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true
+            }
+        }),
 
 
         //Delete zone
@@ -208,10 +215,10 @@ app.service('PrescriptionService', function ($resource) {
                 params: {prescribedVitalID: '@prescribedVitalID'}
             }
         }),
-        deletePrescribedComplain : $resource('/api/rest/prescription/deletePrescribedComplain/:id', {}, {
+        deletePrescribedComplain : $resource('/api/rest/prescriptionDelete/prescribedComplain/:complainID', {}, {
             'remove':  {
                 method:'DELETE',
-                params: {id: '@id'}
+                params: {complainID: '@complainID'}
             }
         }),
         deletePrescribedHistory : $resource('/api/rest/prescription/delete/:savedHistorysID', {}, {
@@ -220,10 +227,10 @@ app.service('PrescriptionService', function ($resource) {
                 params: {savedHistorysID: '@savedHistorysID'}
             }
         }),
-        deletePrescribedAdvice : $resource('/api/rest/prescription/deletePrescribedAdvice/:adviceID', {}, {
+        deletePrescribedAdvice : $resource('/api/rest/prescriptionDelete/prescribedAdvice/:prescriptionAdviceID', {}, {
             'remove':  {
                 method:'DELETE',
-                params: {adviceID: '@adviceID'}
+                params: {prescriptionAdviceID: '@prescriptionAdviceID'}
             }
         }),
         deletePrescribedDrug : $resource('/api/rest/prescription/deletePrescribedDrug/:drugPrescribeID', {}, {

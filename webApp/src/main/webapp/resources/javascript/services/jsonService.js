@@ -28,8 +28,7 @@ app.service('JsonService', function(){
         {"id" : 6, "banName": "মাঝে মাঝে", "engName": "Occasionally"},
         {"id" : 7, "banName": "", "engName": ""}
 	];
-	
-	 
+
 	this.timesADay = [
 						{"code" : "1", "name" :'Once Daily'},
 						{"code" : "2", "name" :'12 hourly'},
@@ -48,3 +47,4 @@ app.service('JsonService', function(){
 
 
 });
+

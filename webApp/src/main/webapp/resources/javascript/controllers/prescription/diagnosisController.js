@@ -2,18 +2,16 @@ app.controller('PrescriptionController.PrescribeDiagnosisController', function($
 
     $scope.diagnosisData = {};
 
-    if($scope.diagnosisData.diagnosisID){
+    if(diagnosisData.diagnosisID){
         $scope.diagnosisData = diagnosisData;
+    }else{
+        $scope.diagnosisData.appointmentID = diagnosisData.appointmentID;
     }
 
     $scope.save = function(){
         if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
             PresSaveService.saveDiagnosis.query({}, $scope.diagnosisData).$promise.then(function(result) {
-                if (result && result.success) {
-                    $modalInstance.close();
-                }else{
-        
-                }
+                $modalInstance.close();
             });
         }else{
             $scope.error = true;

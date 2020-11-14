@@ -8,19 +8,33 @@ app.service('PresSaveService', function ($resource) {
         saveDiagnosis : $resource('/api/rest/prescriptionSave/saveDiagnosis', {}, {
             'query':  {
                 method:'POST',
-                isArray:true
+                isArray:false
             }
         }),
         saveComplain : $resource('/api/rest/prescriptionSave/saveComplain', {}, {
             'query':  {
                 method:'POST',
-                isArray:true
+                isArray:false
             }
         }),
         saveDiet : $resource('/api/rest/prescriptionSave/saveDiet', {}, {
             'query':  {
                 method:'POST',
-                isArray:true
+                isArray:false
+            }
+        }),
+        saveInvFromPref : $resource('/api/rest/prescriptionSave/getDoctorPrefAdvice/:appointmentID/:invID', {}, {
+            'query':  {
+                method:'POST',
+                isArray: true,
+                params: {appointmentID: '@appointmentID', invID: '@invID'}
+            }
+        }),
+        saveAdviceFromPref : $resource('/api/rest/prescriptionSave/saveAdviceFromPref/:appointmentID/:adviceID', {}, {
+            'query':  {
+                method:'POST',
+                isArray: true,
+                params: {appointmentID: '@appointmentID', adviceID: '@adviceID'}
             }
         }),
         createRefferedDoctor : $resource('/api/rest/prescription/createRefferedDoctor', {}, {

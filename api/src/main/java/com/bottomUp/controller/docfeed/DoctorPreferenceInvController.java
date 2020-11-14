@@ -41,14 +41,16 @@ public class DoctorPreferenceInvController extends BaseController {
         return this.doctorPreferenceInvService.getByID(invPreferenceID);
     }
 
-    @RequestMapping(value = {"/getDoctorPrefInv/{doctorID}/{appointmentID}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getDoctorPrefInv/{doctorID}/{appointmentID}/{categoryID}"}, method = RequestMethod.GET)
     @ResponseBody
     public List<DoctorPreferenceInvData> getDoctorPrefInv(@PathVariable("doctorID") Long doctorID,
                                                           @PathVariable("appointmentID") Long appointmentID,
+                                                          @PathVariable("categoryID") Long categoryID,
                                                           HttpServletRequest request) throws BottomUpException {
         Map<String, Object> params = new HashMap<>();
         params.put("doctorID", doctorID);
         params.put("appointmentID", appointmentID);
+        params.put("categoryID", categoryID);
         return this.doctorPreferenceInvService.getByParam(params);
     }
 

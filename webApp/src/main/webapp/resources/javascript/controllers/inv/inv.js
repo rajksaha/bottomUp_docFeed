@@ -1,4 +1,4 @@
-app.controller('PrescribeInvController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $modalInstance, PresSaveService) {
+app.controller('PrescribeInvController', function($scope, $http, $modal, $rootScope, limitToFilter, appointmentData, $modalInstance, DoctorService, PrescriptionService, PresSaveService) {
 	
 
 	$scope.invNameData = {};
@@ -133,73 +133,33 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
             return item;
         }
     };
-    $scope.bringDoctorSetting = function (invCategoryID) {
-
-        var dataString = "query=17" + '&categoryId=' + invCategoryID;
-
-        PresSaveService.getInvDoctor.query({}, $scope.searchData).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.invSettingData = result;
-                angular.forEach($scope.invSettingData, function (value, key) {
-                    if (parseInt(value.prescribedInvID) > 0) {
-                        value.addedToPrescription = true;
-                    } else {
-                        value.addedToPrescription = false;
-                    }
-                });
-            } else {
-
-            }
+    $scope.bringDoctorSetting = function (categoryID) {
+        $scope.doctorPrefInvList = [];
+        DoctorService.getDoctorPrefInv.query({}, {doctorID: appointmentData.doctorID,
+                                                    appointmentID : appointmentData.appointmentID,
+                                                    categoryID: categoryID}).$promise.then(function(result) {
+            $scope.doctorPrefInvList = result;
+            $scope.numberOfInvAdded = $scope.doctorPrefInvList.length;
         });
     };
 	
 	$scope.bringINVDetail = function (){
-
-
-        var dataString = "query=15";
-
-        PresSaveService.getInvDetail.query({}, $scope.searchData).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.invCategoryList = result;
-                $scope.invCategoryList.push({ name: "No Category", invCategoryID: 0 });
-                var dataString = "query=1";
-
-                PresSaveService.getInvCategory.query({}, $scope.searchData).$promise.then(function (result) {
-                    if (result && result.success) {
-                        $scope.invSettingData = result;
-                        angular.forEach($scope.invSettingData, function (value, key) {
-                            if (parseInt(value.prescribedInvID) > 0) {
-                                value.addedToPrescription = true;
-                            } else {
-                                value.addedToPrescription = false;
-                            }
-                        });
-                    } else {
-
-                    }
-                });
-            } else {
-
-            }
+        PrescriptionService.getInvDetail.query({}, {}).$promise.then(function (result) {
+            $scope.invCategoryList = result;
+            $scope.invCategoryList.push({ name: "No Category", invCategoryID: 0 });
+            $scope.selectedInvCategoryID = 0;
+            $scope.bringDoctorSetting($scope.selectedInvCategoryID);
         });
 
 
 	};
 	
 	$scope.bringPrescribedInv = function (){
-		
-		$scope.invAdderData = {};
-		
-		var dataString = "query=7";
-
-        PresSaveService.getInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
-            if (result && result.success) {
-                $scope.prescribedInvData = result;
-        	    $scope.numberOfInvAdded = $scope.prescribedInvData.length;
-            }else{
-    
-            }
-        });
+        $scope.prescribedInvList = [];
+        // DoctorService.getDoctorPrefInv.query({}, {doctorID: appointmentData.doctorID, appointmentID : appointmentData.appointmentID}).$promise.then(function(result) {
+        //     $scope.doctorPrefInvList = result;
+        //     $scope.numberOfInvAdded = $scope.doctorPrefInvList.length;
+        // });
 	};
 	
 	
@@ -227,12 +187,7 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 	        
 		}
 	};
-	
-	
-	
-	
-	
-	
+
 	$scope.addInvToPrescription = function(){
 		
 		var invAdderData = {};
@@ -277,12 +232,14 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 	     });
 		
 	};
-	  
-	
-	(function(){
-		$scope.bringINVDetail();
-		$scope.bringPrescribedInv();
-    })()
+
+
+    $scope.inIt = function (){
+        $scope.bringINVDetail();
+        $scope.bringPrescribedInv();
+    };
+
+    $scope.inIt();
 
 	
 });

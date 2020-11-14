@@ -7,6 +7,7 @@ import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
 import com.bottomUp.myBatis.persistence.PrescriptionAdviceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Map;
  */
 
 @Service
+@Transactional
 public class PrescriptionAdviceService {
 
     @Autowired
@@ -24,7 +26,7 @@ public class PrescriptionAdviceService {
     public void create(Long appointmentID, Long adviceID) throws BottomUpException {
         PrescriptionAdviceData prescriptionAdviceData = new PrescriptionAdviceData();
         prescriptionAdviceData.setAppointmentID(appointmentID);
-        prescriptionAdviceData.setAdviceId(adviceID);
+        prescriptionAdviceData.setAdviceID(adviceID);
         prescriptionAdviceMapper.create(prescriptionAdviceData);
     }
 
