@@ -94,7 +94,7 @@ app.service('PrescriptionService', function ($resource) {
                 params: {appointmentID: '@appointmentID'}
             }
         }),
-        getPrescribedHistory : $resource('/api/rest/prescription/getPrescribedHistory/:patientID/:appointmentID/:typeCode', {}, {
+        getPrescribedHistory : $resource('/api/rest/prescription/getHistoryInfo/:patientID/:appointmentID/:typeCode', {}, {
             'query':  {
                 method:'GET',
                 isArray:true,
@@ -167,10 +167,10 @@ app.service('PrescriptionService', function ($resource) {
 
 
         //Delete zone
-        deleteAndCreateNextVisit : $resource('/api/rest/prescription/deleteAndCreateNextVisit/:nextVisitDate/:numOfDay/:dayType/:nextVisitType', {}, {
-            'remove':  {
-                method:'DELETE',
-                params: {nextVisitDate: '@nextVisitDate', numOfDay: '@numOfDay', dayType: '@dayType', nextVisitType: '@nextVisitType'}
+        saveNextVisit : $resource('/api/rest/prescriptionNextVisit/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
             }
         }),
         deleteReferncePrescription : $resource('/api/rest/prescription/deleteReferncePrescription', {}, {

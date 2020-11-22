@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,24 @@ public class HistoryService {
 
     @Autowired
     private HistoryMapper historyMapper;
+
+    public Long getInsert(String historyName, String typeCode)throws BottomUpException{
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", historyName);
+        params.put("typeCode", typeCode);
+        List<HistoryData> historyList = historyMapper.getByParam(params);
+        HistoryData historyData = null;
+        if(historyList != null && historyList.size() > 0){
+            historyData = historyList.get(0);
+        }else {
+            historyData = new HistoryData();
+            historyData.setName(historyName);
+            historyData.setTypeCode(typeCode);
+            historyMapper.create(historyData);
+        }
+
+        return historyData.getHistoryID();
+    }
 
     public void create(HistoryData data) throws BottomUpException {
         historyMapper.create(data);

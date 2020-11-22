@@ -57,17 +57,37 @@
 
 	<select id="getByParam" parameterType="map" resultType="doctorHistorySetting">
 		SELECT
-		`historySettingID`,
-		`historyID`,
-		`displayOrder`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `doctor_history_setting`
+		dhs.`historySettingID`,
+		dhs.`doctorID`,
+		dhs.`historyID`,
+		h.name,
+		h.shortName,
+		h.typeCode,
+		<if test="appointmentID != null and patientID != null">
+			ph.historyResult,
+			presp_h.presHistoryID,
+			CASE WHEN presp_h.presHistoryID IS NULL THEN FALSE ELSE TRUE END AS addedInPrescription,
+		</if>
+		dhs.`displayOrder`,
+		dhs.`updatedBy`,
+		dhs.`updatedOn`,
+		dhs.`createdBy`,
+		dhs.`createdOn`
+		FROM `doctor_history_setting` dhs
+		JOIN doctor_feed.history h ON dhs.historyID = h.historyID
+		<if test="appointmentID != null and patientID != null"  >
+			LEFT JOIN doctor_feed.patient_history ph ON ph.patientID = #{patientID} AND ph.historyID = dhs.historyID
+			LEFT JOIN doctor_feed.prescription_history presp_h ON presp_h.appointMentID = #{appointmentID} AND presp_h.patientHistoryID = ph.patientHistoryID
+		</if>
 		WHERE 1 = 1
+		<if test="doctorID != null">
+			AND dhs.doctorID = #{doctorID}
+		</if>
+		<if test="typeCode != null">
+			AND h.typeCode = #{typeCode}
+		</if>
 		<if test="historySettingID != null">
-			AND historySettingID = #{historySettingID}
+			AND dhs.historySettingID = #{historySettingID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

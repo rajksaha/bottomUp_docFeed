@@ -15,7 +15,7 @@
 		<div class="form-group col-xs-12 col-sm-12">
 			<div class="form-group col-xs-4 col-sm-4">
 				<label>Type </label>
-				<select  class="form-control" id="drugTypeAdder" data-ng-model="drugData.drugType" data-ng-change="timeChanger(drugData.addMood,drugData.drugType, drugData.timesADay.code, 3)" data-ng-options="drugType.name for drugType in drugTypeList" />
+				<select  class="form-control" data-ng-model="drugData.drugType" data-ng-change="timeChanger(drugData.addMood,drugData.drugType, drugData.timesADay.code, 3)" data-ng-options="drugType.drugTypeID as drugType.name for drugType in drugTypeList" />
 			</div>
 			<div class="form-group col-xs-6 col-sm-6" id="drugName">
 				<label>Drug Name <span class="red" >*</span></label>

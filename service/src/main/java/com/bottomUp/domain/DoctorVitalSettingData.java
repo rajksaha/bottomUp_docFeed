@@ -14,7 +14,7 @@ public class DoctorVitalSettingData extends BaseData {
   private String shortName;
   private String vitalUnit;
 
-  private Long presVitalId;
+  private Long presVitalID;
   private String vitalResult;
   private Boolean addedInPrescription;
 
@@ -74,12 +74,12 @@ public class DoctorVitalSettingData extends BaseData {
     this.vitalUnit = vitalUnit;
   }
 
-  public Long getPresVitalId() {
-    return presVitalId;
+  public Long getPresVitalID() {
+    return presVitalID;
   }
 
-  public void setPresVitalId(Long presVitalId) {
-    this.presVitalId = presVitalId;
+  public void setPresVitalID(Long presVitalID) {
+    this.presVitalID = presVitalID;
   }
 
   public String getVitalResult() {

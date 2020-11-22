@@ -1,5 +1,6 @@
 package com.bottomUp.common.utility;
 
+import com.bottomUp.domain.DoctorHistorySettingData;
 import com.bottomUp.domain.DoctorVitalSettingData;
 import com.bottomUp.domain.PrescriptionComplainData;
 import com.bottomUp.domain.PrescriptionVitalData;
@@ -24,6 +25,7 @@ public class SearchData {
 
     private List<PrescriptionComplainData> complainList;
     private List<DoctorVitalSettingData> vitalList;
+    private List<DoctorHistorySettingData> historyList;
 
     public Long getAppointmentID() {
         return appointmentID;
@@ -111,5 +113,13 @@ public class SearchData {
 
     public void setVitalList(List<DoctorVitalSettingData> vitalList) {
         this.vitalList = vitalList;
+    }
+
+    public List<DoctorHistorySettingData> getHistoryList() {
+        return historyList;
+    }
+
+    public void setHistoryList(List<DoctorHistorySettingData> historyList) {
+        this.historyList = historyList;
     }
 }

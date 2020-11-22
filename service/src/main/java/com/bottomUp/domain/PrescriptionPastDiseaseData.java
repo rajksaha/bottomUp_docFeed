@@ -9,6 +9,7 @@ public class PrescriptionPastDiseaseData  extends BaseData {
   private Long appointmentID;
   private Long pastDiseaseID;
   private String diseaseName;
+  private Integer isPresent;
 
   public Long getPresPastDiseaseID() {
     return presPastDiseaseID;
@@ -40,5 +41,13 @@ public class PrescriptionPastDiseaseData  extends BaseData {
 
   public void setDiseaseName(String diseaseName) {
     this.diseaseName = diseaseName;
+  }
+
+  public Integer getIsPresent() {
+    return isPresent;
+  }
+
+  public void setIsPresent(Integer isPresent) {
+    this.isPresent = isPresent;
   }
 }

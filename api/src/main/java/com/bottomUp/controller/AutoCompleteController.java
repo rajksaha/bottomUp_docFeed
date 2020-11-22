@@ -135,6 +135,7 @@ public class AutoCompleteController extends BaseController{
     public List<HistoryData> history(@RequestBody SearchData searchData) throws BottomUpException {
         Map<String, Object> param = new HashMap<>();
         param.put("term", searchData.getTerm());
+        param.put("typeCode", searchData.getEntityType());
         return historyService.getByParam(param);
     }
 
@@ -143,6 +144,7 @@ public class AutoCompleteController extends BaseController{
     public List<HistoryOptionData> historyOption(@RequestBody SearchData searchData) throws BottomUpException {
         Map<String, Object> param = new HashMap<>();
         param.put("term", searchData.getTerm());
+        param.put("historyID", searchData.getEntityID());
         return historyOptionService.getByParam(param);
     }
 

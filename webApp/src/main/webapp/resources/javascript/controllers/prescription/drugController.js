@@ -1,9 +1,9 @@
-app.controller('PrescriptionController.PrescribeDrugsController', function($scope, $http, $modalInstance, limitToFilter, JsonService, record, DrugService) {
+app.controller('PrescriptionController.PrescribeDrugsController', function($scope, $http, $modalInstance, limitToFilter, JsonService, drugData, DrugService) {
 
     $scope.drugTypeList =[];
     $scope.drugNumOfDayList = JsonService.numberList;
     $scope.drugtimesADay = JsonService.timesADay;
-    $scope.drugDayTypeList =[];
+    $scope.drugDayTypeList =JsonService.dayTypeList;
     $scope.drugsWhenList =[];
     $scope.drugAdviceTypeList =[];
     $scope.drugDoseList =[];
@@ -24,15 +24,15 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
 
     $scope.bringPrescribedDrugs = function (){
 
-        if(record.drugData.id){
+        if(drugData.id){
 
             $scope.drugData = {};
-            $scope.drugData.drugName = record.drugData.drugName;
-            $scope.drugData.drugPrescribeID = record.drugData.id;
-            $scope.drugData.preiodicList = record.drugData.preiodicList;
-            $scope.bringdrugsDayTypeList(false, record.drugData.drugTypeID , record.drugData.drugTimeID);
-            $scope.bringdrugsWhatType(false, record.drugData.drugWhenID);
-            $scope.bringdrugsAdviceType(false, record.drugData.drugAdviceID);
+            $scope.drugData.drugName = drugData.drugName;
+            $scope.drugData.drugPrescribeID = drugData.id;
+            $scope.drugData.preiodicList = drugData.preiodicList;
+            $scope.bringdrugsDayTypeList(false, drugData.drugTypeID , drugData.drugTimeID);
+            $scope.bringdrugsWhatType(false, drugData.drugWhenID);
+            $scope.bringdrugsAdviceType(false, drugData.drugAdviceID);
 
         }else{
 
@@ -41,12 +41,18 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
             $scope.drugData.delDrug = false;
             $scope.drugData.editName = false;
             $scope.drugData.preiodicList = [];
-            $scope.bringdrugsDayTypeList(true, 1 , 3);
+            //$scope.bringdrugsDayTypeList(true, 1 , 3);
             $scope.bringdrugsWhatType(true, null);
             $scope.bringdrugsAdviceType(true, null);
         }
-
     };
+
+    $scope.bringBasic = function () {
+        DrugService.getTypeOfDrug.query({}, {}).$promise.then(function (result) {
+            $scope.drugTypeList = result;
+        });
+    };
+
 
     $scope.bringdrugsDayTypeList = function (addMode, typeID, timeID){
 
@@ -340,7 +346,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
         if($scope.drugData.drugStr == undefined){
             $scope.drugData.drugStr = '';
         }
-        var dataString = 'drugType='+ drugType +'&drugName='+ drugName +'&drugStr='+ $scope.drugData.drugStr + '&drugTime='+ drugTime +'&doseUnit='+ doseUnit + '&drugWhen='+ drugWhen +'&drugAdvice='+ drugAdvice+ '&drugPrescribeID='+ drugPrescribeID +'&query=' + query + '&presNum=' + record.drugData.presNum;
+        var dataString = 'drugType='+ drugType +'&drugName='+ drugName +'&drugStr='+ $scope.drugData.drugStr + '&drugTime='+ drugTime +'&doseUnit='+ doseUnit + '&drugWhen='+ drugWhen +'&drugAdvice='+ drugAdvice+ '&drugPrescribeID='+ drugPrescribeID +'&query=' + query + '&presNum=' + drugData.presNum;
 
         DrugService.createAndUpdateDrugPrescription.query({}, dataString).$promise.then(function (result) {
             if (result && result.success) {
@@ -413,7 +419,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
 
         DrugService.updateDrugByName.query({}, dataString).$promise.then(function (result) {
             if (result && result.success) {
-                if(record.drugData.id){
+                if(drugData.id){
                     $modalInstance.close();
                 }else{
                     $scope.bringPrescribedDrugs();

@@ -81,6 +81,9 @@
 		<if test="appointmentID != null">
 			AND ph.appointmentID = #{appointmentID}
 		</if>
+		<if test="typeCode != null">
+			AND h.typeCode = #{typeCode}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}
@@ -92,6 +95,9 @@
 		WHERE 1=1
 		<if test="presHistoryID != null">
 			AND presHistoryID = #{presHistoryID}
+		</if>
+		<if test="appointmentID != null">
+			AND   appointmentID = #{appointmentID}
 		</if>
 	</delete>
 

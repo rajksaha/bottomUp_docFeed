@@ -57,12 +57,14 @@
 		pd.`presPastDiseaseID`,
 		pd.`appointmentID`,
 		pd.`pastDiseaseID`,
-		cd.diseaseName AS diseaseName,
+		cd.diseaseName,
+		ppd.isPresent,
 		pd.`updatedBy`,
 		pd.`updatedOn`,
 		pd.`createdBy`,
 		pd.`createdOn`
 		FROM doctor_feed.`prescription_past_disease` pd
+		JOIN doctor_feed.patient_past_disease ppd ON ppd.patientPastDiseaseID = pd.pastDiseaseID
 		JOIN doctor_feed.content_disease cd ON pd.pastDiseaseID = cd.diseaseID
 		WHERE 1 = 1
 		<if test="presPastDiseaseID != null">

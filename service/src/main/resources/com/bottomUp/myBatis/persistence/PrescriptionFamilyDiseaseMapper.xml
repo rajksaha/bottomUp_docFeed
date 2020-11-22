@@ -16,7 +16,7 @@
 		)
 		VALUES(
 			#{appointmentID},
-			#familyDiseaseID},
+			#{familyDiseaseID},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},

@@ -31,11 +31,11 @@ app.service('PastHistoryService', function ($resource) {
                 params: {familyHistoryID: '@familyHistoryID'}
             }
         }),
-        addFamilyHistoryInPres : $resource('/api/rest/patientFamilyHistory/addFamilyHistoryInPres/:familyHistoryID/:appointmentID', {}, {
+        addFamilyHistoryInPres : $resource('/api/rest/prescriptionFamilyDisease/addFamilyHistoryInPres/:familyHistoryID/:appointmentID', {}, {
             'query':  {
                 method:'GET',
                 isArray:false,
-                params: {presFamilyDiseaseID: '@presFamilyDiseaseID', appointmentID: '@appointmentID'}
+                params: {familyHistoryID: '@familyHistoryID', appointmentID: '@appointmentID'}
             }
         }),
         deleteFamilyHistoryInPres : $resource('/api/rest/prescriptionFamilyDisease/delete/:presFamilyDiseaseID', {}, {
@@ -131,11 +131,11 @@ app.service('PastHistoryService', function ($resource) {
         }),
 
 
-        getCustomHistoryDetail : $resource('/api/rest/doctorHistorySetting/get/:patientID/:typeCode', {}, {
+        getCustomHistoryDetail : $resource('/api/rest/doctorHistorySetting/getByPatient/:doctorID/:patientID/:appointmentID/:typeCode', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:true,
-                params: {patientID: '@patientID', typeCode: '@typeCode'}
+                params: {doctorID: '@doctorID', patientID: '@patientID', appointmentID: '@appointmentID', typeCode: '@typeCode'}
             }
         }),
         deleteCustomHistory : $resource('/api/rest/doctorHistorySetting/deleteSettingsOfDocHistory/:historySettingID', {}, {
@@ -145,7 +145,7 @@ app.service('PastHistoryService', function ($resource) {
                 params: {historySettingID: '@historySettingID'}
             }
         }),
-        createHistoryToDocPref : $resource('/api/rest/doctorHistorySetting/createHistoryToDocPref', {}, {
+        createHistoryToDocPref : $resource('/api/rest/doctorHistorySetting/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
@@ -157,19 +157,7 @@ app.service('PastHistoryService', function ($resource) {
                 isArray:false
             }
         }),
-        saveCustomHistory : $resource('/api/rest/doctorHistorySetting/save', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        createHistoryOfPatient : $resource('/api/rest/pastHistory/createHistoryOfPatient', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        deleteHistoryOfPatient : $resource('/api/rest/pastHistory/deleteHistoryOfPatient', {}, {
+        saveCustomHistory : $resource('/api/rest/patientHistory/saveCustomHistory', {}, {
             'query':  {
                 method:'POST',
                 isArray:false

@@ -81,6 +81,9 @@
 		<if test="patientHistoryID != null">
 			AND patientHistoryID = #{patientHistoryID}
 		</if>
+		<if test="patientID != null">
+			AND patientID = #{patientID}
+		</if>
 	</delete>
 
 

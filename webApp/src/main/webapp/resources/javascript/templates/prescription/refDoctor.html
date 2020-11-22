@@ -17,9 +17,6 @@
 			
             <input type="text"  class="form-control form-control-date input-sm" data-ng-model="nextVisitData.date" data-ng-change="fixNextVisit()"   maxlength="100" placeholder="Next Visit Date"
                    datepicker-popup="dd/MM/yyyy" close-text="Close" is_open="dt1" ng-focus="dt1 = true" ng-click="dt1 = true" >
-
-            <!--LOL
-            <input type="text"  class="form-control date" id="txtStartDate" placeholder="Next Visit Date" ng-change="fixNextVisit()" datepicker-popup="dd/MM/yyyy" close-text="Close" ng-model="nextVisitData.date" is-open="false"/>-->
             <span  class="input-group-addon" >
                 <i class="glyphicon glyphicon-calendar" ></i>
             </span>
@@ -29,11 +26,11 @@
             <i class="pull-right fa fa-floppy-o link" data-ng-show="nextVisitData.needSaveButton" data-ng-click="fixNextVisit()"></i>
             <div class="row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="form-control "  data-ng-model="nextVisitData.numOfDay"  data-ng-options="drugDay.name for drugDay in dayList" data-ng-change="nextVisitData.needSaveButton = true">
+                    <select class="form-control "  data-ng-model="nextVisitData.numOfDay"  data-ng-options="drugDay.value as drugDay.name for drugDay in numOfDayList" data-ng-change="nextVisitData.needSaveButton = true">
                     </select>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="form-control col-sm-6 col-md-6 col-lg-6"   data-ng-model="nextVisitData.dayType" data-ng-options="drugTime.english for drugTime in dayTypeList" data-ng-change="nextVisitData.needSaveButton = true">
+                    <select class="form-control col-sm-6 col-md-6 col-lg-6"   data-ng-model="nextVisitData.dayType" data-ng-options="drugTime.id as drugTime.engName for drugTime in drugDayTypeList" data-ng-change="nextVisitData.needSaveButton = true">
                     </select>
                 </div>
             </div>

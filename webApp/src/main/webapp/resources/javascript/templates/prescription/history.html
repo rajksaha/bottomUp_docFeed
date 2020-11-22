@@ -32,16 +32,23 @@
             </div>
         </div>
 
-        <div data-ng-if="drugHistory.length > 0">
-            <h2 class="item-head"><label>Drug History</label></h2>
-            <div data-ng-repeat="drug in drugHistory" >
-                <label>{{drug.headerName}}</label>
-                <div data-ng-repeat="data in drug.prescribedDrugList">
-                    <a class="link" data-ng-click="removeDrugHistory(data)">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </a>
-                    <span>{{data.detail}}</span>
-                </div>
+        <div data-ng-if="currentDrugHistoryList.length > 0">
+            <h2 class="item-head"><label>Current Drug History</label></h2>
+            <div data-ng-repeat="data in currentDrugHistoryList">
+                <a class="link" data-ng-click="removeDrugHistory(data)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
+                <span>{{data.shortName}}</span>
+            </div>
+        </div>
+
+        <div data-ng-if="oldDrugHistoryList.length > 0">
+            <h2 class="item-head"><label>Old Drug History</label></h2>
+            <div data-ng-repeat="data in oldDrugHistoryList">
+                <a class="link" data-ng-click="removeDrugHistory(data)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
+                <span>{{data.shortName}}</span>
             </div>
         </div>
 

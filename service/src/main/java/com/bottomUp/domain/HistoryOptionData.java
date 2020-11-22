@@ -5,14 +5,14 @@ import com.bottomUp.domain.common.BaseData;
 
 public class HistoryOptionData extends BaseData {
 
-  private long historyID;
+  private Long historyID;
   private String optionName;
 
-  public long getHistoryID() {
+  public Long getHistoryID() {
     return historyID;
   }
 
-  public void setHistoryID(long historyID) {
+  public void setHistoryID(Long historyID) {
     this.historyID = historyID;
   }
 

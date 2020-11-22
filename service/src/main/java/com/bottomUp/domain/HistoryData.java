@@ -5,16 +5,16 @@ import com.bottomUp.domain.common.BaseData;
 
 public class HistoryData extends BaseData {
 
-  private long historyID;
+  private Long historyID;
   private String typeCode;
   private String name;
   private String shortName;
 
-  public long getHistoryID() {
+  public Long getHistoryID() {
     return historyID;
   }
 
-  public void setHistoryID(long historyID) {
+  public void setHistoryID(Long historyID) {
     this.historyID = historyID;
   }
 

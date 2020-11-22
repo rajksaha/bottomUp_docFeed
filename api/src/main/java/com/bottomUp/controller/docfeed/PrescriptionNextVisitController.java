@@ -26,25 +26,36 @@ public class PrescriptionNextVisitController extends BaseController {
 
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<  PrescriptionNextVisitData> getAll(HttpServletRequest request) throws BottomUpException {
+    public List<PrescriptionNextVisitData> getAll(HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
 
         return this.prescriptionNextVisitService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/getByID/{  appointmentID}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByID/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public   PrescriptionNextVisitData getByID(@PathVariable("  appointmentID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
+    public   PrescriptionNextVisitData getByID(@PathVariable("appointmentID") Integer companyID, HttpServletRequest request) throws BottomUpException {
         return this.prescriptionNextVisitService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody   PrescriptionNextVisitData data) throws BottomUpException {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", true);
+        if(data.getAppointmentID() == null){
+            this.prescriptionNextVisitService.create(data);
+        }else {
+            this.prescriptionNextVisitService.update(data);
+        }
+        result.put("data", data);
+        return result;
+    }
+
+    @RequestMapping(value = {"/create"}, method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> create(@RequestBody   PrescriptionNextVisitData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.prescriptionNextVisitService.create(data);

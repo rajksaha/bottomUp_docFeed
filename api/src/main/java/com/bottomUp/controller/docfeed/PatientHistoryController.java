@@ -1,6 +1,7 @@
 package com.bottomUp.controller.docfeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.PatientHistoryData;
 import com.bottomUp.service.docFeed.crud.PatientHistoryService;
@@ -40,6 +41,15 @@ public class PatientHistoryController extends BaseController {
         Map<String, Object> params = this.parseParameter(request);
 
         return this.patientHistoryService.getByID(Long.valueOf(companyID));
+    }
+
+    @RequestMapping(value = {"/saveCustomHistory"}, method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> saveCustomHistory(@RequestBody SearchData data) throws BottomUpException {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", true);
+        this.patientHistoryService.saveCustomHistory(data.getHistoryList(), data.getEntityID(), data.getAppointmentID());
+        return result;
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)

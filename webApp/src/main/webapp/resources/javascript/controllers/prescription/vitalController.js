@@ -105,29 +105,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
         });
     };
 	
-	$scope.bringVitalOption = function(vitalData){
-		angular.forEach($scope.prescribedVitalData, function(value, key) {
-			value.optionListON = false;
-			value.optionAdderON = false;
-		});
-		
-		var dataString = 'query=1'+ '&vitalID=' + vitalData.vitalId;
 
-		VitalService.getVitalOptionList.query({}, dataString).$promise.then(function (result) {
-			if (result && result.success) {
-				vitalData.optionList = result;
-				var data = { "id": -1, "vitalOptionID": -1, "name": 'Add Options' };
-				var data1 = { "id": -2, "vitalOptionID": -2, "name": 'Close' };
-				vitalData.optionList.unshift(data1, data);
-				vitalData.optionSelector = vitalData.optionList[0];
-				vitalData.optionListON = true;
-				vitalData.optionAdderON = false;
-			} else {
-
-			}
-		});
-	};
-	
 	$scope.performVital = function(vital){
 		if(vital.optionSelector.vitalOptionID == -1){
 			vital.optionListON = false;
@@ -162,7 +140,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 	$scope.saveVital = function(){
 		var prescribedVital = {};
 		prescribedVital.appointmentID = appointmentData.appointmentID;
-		prescribedVital.vitalList = $scope.prescribedVitalData;
+		prescribedVital.vitalList = $scope.doctorVitalList;
         PresSaveService.savePrescribedVital.query({}, prescribedVital).$promise.then(function (result) {
             $modalInstance.close(true);
         });

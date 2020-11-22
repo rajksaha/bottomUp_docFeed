@@ -39,7 +39,7 @@ public class PrescriptionVitalService {
                 ModelMapper modelMapper = new ModelMapper();
                 modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
                 modelMapper.map(settingData, vitalData);
-                vitalData.setAppointmentId(appointmentID);
+                vitalData.setAppointmentID(appointmentID);
                 prescriptionVitalMapper.create(vitalData);
             }
 

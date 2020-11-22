@@ -115,8 +115,10 @@ public class PrescriptionViewService {
             dietData.setDietName(dietList.get(0).getShortName());
             result.put("diet", dietData);
         }
-        requestMap.put("entityType", PrescriptionContentType.DRUG_HISTORY);
-        result.put("drugHistory", contentDetailMapper.getByParam(requestMap));
+        requestMap.put("entityType", PrescriptionContentType.OLD_DRUG);
+        result.put("oldDrugHistory", contentDetailMapper.getByParam(requestMap));
+        requestMap.put("entityType", PrescriptionContentType.CURRENT_DRUG);
+        result.put("currentDrugHistory", contentDetailMapper.getByParam(requestMap));
         requestMap.put("entityType", PrescriptionContentType.COMMENT);
         result.put("comment", contentDetailMapper.getByParam(requestMap));
 

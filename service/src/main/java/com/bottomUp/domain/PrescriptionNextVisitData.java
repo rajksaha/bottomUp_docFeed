@@ -3,29 +3,31 @@ package com.bottomUp.domain;
 
 import com.bottomUp.domain.common.BaseData;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class PrescriptionNextVisitData  extends BaseData {
 
-  private long appointmentID;
-  private long nextVisitType;
-  private java.sql.Date date;
-  private long numOfDay;
-  private long dayType;
+  private Long appointmentID;
+  private Integer nextVisitType;
+  private Date date;
+  private String stringDate;
+  private Integer numOfDay;
+  private Integer dayType;
 
-  public long getAppointmentID() {
+  public Long getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(long appointmentID) {
+  public void setAppointmentID(Long appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public long getNextVisitType() {
+  public Integer getNextVisitType() {
     return nextVisitType;
   }
 
-  public void setNextVisitType(long nextVisitType) {
+  public void setNextVisitType(Integer nextVisitType) {
     this.nextVisitType = nextVisitType;
   }
 
@@ -37,19 +39,27 @@ public class PrescriptionNextVisitData  extends BaseData {
     this.date = date;
   }
 
-  public long getNumOfDay() {
+  public String getStringDate() {
+    return stringDate;
+  }
+
+  public void setStringDate(String stringDate) {
+    this.stringDate = stringDate;
+  }
+
+  public Integer getNumOfDay() {
     return numOfDay;
   }
 
-  public void setNumOfDay(long numOfDay) {
+  public void setNumOfDay(Integer numOfDay) {
     this.numOfDay = numOfDay;
   }
 
-  public long getDayType() {
+  public Integer getDayType() {
     return dayType;
   }
 
-  public void setDayType(long dayType) {
+  public void setDayType(Integer dayType) {
     this.dayType = dayType;
   }
 }

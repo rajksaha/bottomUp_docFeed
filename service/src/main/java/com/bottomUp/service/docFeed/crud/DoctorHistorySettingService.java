@@ -23,7 +23,11 @@ public class DoctorHistorySettingService {
     @Autowired
     private DoctorHistorySettingMapper doctorHistorySettingMapper;
 
+    @Autowired
+    private HistoryService historyService;
+
     public void create(DoctorHistorySettingData data) throws BottomUpException {
+        data.setHistoryID(historyService.getInsert(data.getName(), data.getTypeCode()));
         doctorHistorySettingMapper.create(data);
     }
 

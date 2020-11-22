@@ -11,7 +11,7 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 	
 	
 	$scope.historyData = {};
-	$scope.historySetteingData = {};
+	$scope.historySettingData = {};
 	$scope.paientHistoryList = [];
 	$scope.pageName = "";
 	$scope.typeCode = "";
@@ -212,7 +212,6 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 
         $scope.pastHistoryData.editMode = true;
 
-        //$scope.historyList[0].itemList.splice(0, 0, $scope.pastHistoryData);
         $scope.historyList[0].itemList.push($scope.pastHistoryData);
 
     };
@@ -273,9 +272,14 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
     };
 
     $scope.addDrugToPres = function(data){
-        if(data.addedToPres == 0){
-            PastHistoryService.addDrugPresInPres.query({}, data).$promise.then(function (result) {
-                data.contentDetailID = result;
+        if(!data.addedToPres){
+            delete data.addedToPres;
+            var drugHistory = {};
+            drugHistory.drugName = data.drugName;
+            drugHistory.currentStatus = data.currentStatus;
+            drugHistory.appointmentID = appointmentData.appointmentID;
+            PastHistoryService.addDrugPresInPres.query({}, drugHistory).$promise.then(function (result) {
+                data.contentDetailID = result.contentDetailID;
                 data.addedToPres = true;
             });
         }else{
@@ -359,9 +363,10 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 
     $scope.bringHistoryDetail = function (){
 
-        $scope.historySetteingData = {};
+        $scope.historySettingData = {};
 
-        PastHistoryService.getCustomHistoryDetail.query({}, {typeCode:$scope.typeCode}).$promise.then(function (result) {
+        PastHistoryService.getCustomHistoryDetail.query({}, {doctorID:appointmentData.doctorID,
+            patientID:appointmentData.patientID, appointmentID:appointmentData.appointmentID, typeCode:$scope.typeCode}).$promise.then(function (result) {
             $scope.paientHistoryList = result;
             angular.forEach($scope.paientHistoryList, function (value, key) {
                 if (parseInt(value.savedHistorysID) > 0) {
@@ -385,19 +390,13 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         });
     };
 
-    $scope.onSelectHistory = function(item, model, label){
-        $scope.historySetteingData.historyID = item.id;
-        $scope.historySetteingData.shortName = item.shortName;
-        $scope.addByName = true;
-    };
-
     $scope.bringHistoryOption = function(historydata, term){
         var searchData = {};
         searchData.term = term;
         searchData.entityID= historydata.historyID;
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/history",
+            url: "/api/rest/autoComplete/historyOption",
             data: searchData
         }).then(function(result) {
             $scope.historyOption = result.data;
@@ -411,69 +410,37 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         });
     };
 
-    $scope.addHistoryToDoctorPref = function (){
+    $scope.addHistoryToDoctorPref = function (addAnother){
 
         if(validator.validateForm("#historySetting","#lblMsg",null)) {
-            if($scope.addByName == false){
-                var dataString = 'query=6'+ '&historyName=' + $scope.historySetteingData.historyName + '&shortName=' + $scope.historySetteingData.shortName +  '&typeCode=' + $scope.typeCode;
-                
-                PastHistoryService.createHistoryToDocPref.query({}, dataString).$promise.then(function (result) {
-                    if (result && result.success) {
-                        $scope.addToDoctorPreference(result);
-                    } else {
-        
-                    }
-                });
-            }else{
-                $scope.addToDoctorPreference($scope.historySetteingData.historyID);
+            var displayOrder = 1;
+            if($scope.paientHistoryList != undefined && $scope.paientHistoryList.length > 0){
+                displayOrder = parseInt($scope.paientHistoryList[$scope.paientHistoryList.length -1].displayOrder) + 1;
             }
+            PastHistoryService.createHistoryToDocPref.query({}, $scope.historySettingData).$promise.then(function (result) {
+                $scope.historySettingData = {};
+                if(!addAnother){
+                    $scope.bringHistoryDetail();
+                }
+            });
 
         }else{
-            alert("what");
+            $scope.error = true;
         }
-    };
-
-
-    $scope.addToDoctorPreference = function (historyID){
-
-        var hisID = parseInt(historyID);
-        var displayOrder = 1;
-        if($scope.paientHistoryList != undefined && $scope.paientHistoryList.length > 0){
-            displayOrder = parseInt($scope.paientHistoryList[$scope.paientHistoryList.length -1].displayOrder) + 1;
-        }
-
-        var dataString = 'query=7'+ '&historyID=' + hisID + '&displayOrder=' + displayOrder;
-
-        PastHistoryService.createSettingsOfDocPreference.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.bringHistoryDetail();
-            } else {
-
-            }
-        });
-
     };
 
 
     $scope.saveHistory = function(){
         var prescribedHistory = {};
+        prescribedHistory.entityID = appointmentData.patientID;
+        prescribedHistory.appointmentID = appointmentData.appointmentID;
         prescribedHistory.historyList = $scope.paientHistoryList;
         PastHistoryService.saveCustomHistory.query({}, prescribedHistory).$promise.then(function (result) {
-
+            $scope.succcess = true;
+            $scope.error = false;
+            $scope.message = 'Information Saved Successfully';
         });
-
-        setTimeout(function() {
-            $scope.$apply(function() {
-                $scope.succcess = true;
-                $scope.error = false;
-                $scope.message = 'Information Saved Successfully';
-            });
-        }, 3000);
-
     };
-
-
-
 
 
   $scope.init = function () {

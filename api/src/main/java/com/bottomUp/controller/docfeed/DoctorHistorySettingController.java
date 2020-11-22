@@ -29,7 +29,22 @@ public class DoctorHistorySettingController extends BaseController {
     public List<DoctorHistorySettingData> getAll(HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
+        return this.doctorHistorySettingService.getByParam(params);
+    }
 
+    @RequestMapping(value = {"/getByPatient/{doctorID}/{patientID}/{appointmentID}/{typeCode}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<DoctorHistorySettingData> getByParam(@PathVariable("doctorID") Long doctorID,
+                                                     @PathVariable("patientID") Long patientID,
+                                                     @PathVariable("appointmentID") Long appointmentID,
+                                                     @PathVariable("typeCode") String typeCode,
+                                                     HttpServletRequest request) throws BottomUpException {
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("doctorID", doctorID);
+        params.put("patientID", patientID);
+        params.put("appointmentID", appointmentID);
+        params.put("typeCode", typeCode);
         return this.doctorHistorySettingService.getByParam(params);
     }
 

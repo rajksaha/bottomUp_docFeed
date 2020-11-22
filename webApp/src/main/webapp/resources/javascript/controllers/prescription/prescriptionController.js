@@ -1,6 +1,6 @@
 app.controller('PrescriptionController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter,
                                                   $window, JsonService, $upload, PrescriptionService, PatientService,
-                                                  PresSaveService, DoctorService) {
+                                                  PresSaveService, DoctorService, DrugService) {
 
     $scope.menuDataList = [];
     $scope.patientData = {};
@@ -20,6 +20,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.familyDiseaseList = [];
     $scope.drugHistory = [];
     $scope.diagnosisData = {};
+    $scope.dayTypeList = JsonService.dayTypeList;
+    $scope.numOfDayList = JsonService.numberList;
 
 
     $scope.numberOfPrescribedDrugs = 0;
@@ -32,24 +34,26 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.hideMenu= false;
 
     $scope.bringAppointmentDetail = function (){
-        PrescriptionService.getPrescriptionInfo.query({}, {appointmentID: $scope.appoinmentData.appointmentID}).$promise.then(function (result) {
-            $scope.diagnosisData = result.diagnosis;
-            $scope.dietData = result.diet;
-            $scope.prescribedDrugList = result.drug;
-            $scope.prescribedInvList = result.inv;
-            $scope.prescribedComplainList = result.complain;
-            $scope.prescribedAdviceList = result.advice;
-            $scope.prescribedVitalList = result.vital;
-            $scope.refferedDoctorDataList = result.reference;
-        });
-        //$scope.bringPrescribedHistory($scope.appoinmentData.appointmentID, $scope.appoinmentData.patientID);
-        // $scope.bringPrescribedDrugHistory($scope.appoinmentData.appointmentID);
+        // PrescriptionService.getPrescriptionInfo.query({}, {appointmentID: $scope.appoinmentData.appointmentID}).$promise.then(function (result) {
+        //     $scope.diagnosisData = result.diagnosis;
+        //     $scope.dietData = result.diet;
+        //     $scope.prescribedDrugList = result.drug;
+        //     $scope.prescribedInvList = result.inv;
+        //     $scope.prescribedComplainList = result.complain;
+        //     $scope.prescribedAdviceList = result.advice;
+        //     $scope.prescribedVitalList = result.vital;
+        //     $scope.refferedDoctorDataList = result.reference;
+        //     $scope.pastDiseaseList = result.pastDisease;
+        //     $scope.familyDiseaseList = result.familyHistory;
+        //     $scope.currentDrugHistoryList = result.currentDrugHistory;
+        //     $scope.oldDrugHistoryList = result.oldDrugHistory;
+        // });
+        // $scope.bringPrescribedHistory($scope.appoinmentData.appointmentID, $scope.appoinmentData.patientID);
         //
         //$scope.bringPrescribedReferredDoctor($scope.appoinmentData.appointmentID);
         //
         // $scope.bringPrescribedComment($scope.appoinmentData.appointmentID);
         //
-        // $scope.bringPrescribedNextVisit($scope.appoinmentData.appointmentID);
         // $scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
     };
 
@@ -100,26 +104,16 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.fixNextVisit = function (){
         $scope.nextVisitData.needSaveButton = false;
 
-        var filteredDate = "";
-        var numOfDay = 0;
-        var dayType = 0;
-
         if($scope.nextVisitData.nextVisitType == 2){
-            numOfDay = $scope.nextVisitData.numOfDay.value;
-            dayType = $scope.nextVisitData.dayType.id;
+            $scope.nextVisitData.date = null;
         }else{
-            filteredDate = $filter('date')($scope.nextVisitData.date, "yyyy-MM-dd");
-            $scope.nextVisitData.nextVisitType = 1;
+            $scope.nextVisitData.stringDate = $filter('date')($scope.nextVisitData.date, "yyyy-MM-dd");
+            $scope.nextVisitData.numOfDay = null;
+            $scope.nextVisitData.dayType = null;
         }
-
-        //var dataString = "query=8" + "&nextVisitDate=" + filteredDate + "&numOfDay=" + numOfDay + "&dayType=" + dayType + "&nextVisitType=" + $scope.nextVisitData.nextVisitType;
-
-        PrescriptionService.deleteAndCreateNextVisit.remove({nextVisitDate: filteredDate, numOfDay: numOfDay, dayType: dayType, nextVisitType: $scope.nextVisitData.nextVisitType}).$promise.then(function(result) {
-            if (result && result.success) {
-
-            }else{
-
-            }
+        delete $scope.nextVisitData.needSaveButton;
+        PrescriptionService.saveNextVisit.query({}, $scope.nextVisitData).$promise.then(function(result) {
+            $scope.nextVisitData = result.data;
         });
     };
 
@@ -198,6 +192,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         DoctorService.getDoctorDetail.query({}, {doctorID:doctorID}).$promise.then(function (result) {
             $scope.doctorData = result.doctorData;
             $scope.patientStateList = result.appointmentType;
+            $scope.bringAppointmentDetail();
         });
     };
 
@@ -264,7 +259,6 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             $scope.appoinmentData = result;
             $scope.bringDoctorInfo($scope.appoinmentData.doctorID);
             $scope.bringPatientInfo();
-            $scope.bringAppointmentDetail();
         });
     };
 
@@ -299,7 +293,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         });
     };
     $scope.bringPrescribedHistory = function(appointmentID, patientID){
-        angular.forEach($scope.doctorData.menuDataList, function(value, key) {
+        angular.forEach($scope.doctorData.menuList, function(value, key) {
             if(value.inPrescription == 2){
                 PrescriptionService.getPrescribedHistory.query({}, {patientID: patientID, appointmentID:appointmentID, typeCode: value.defaultName}).$promise.then(function (result) {
                     var historyData = {};
@@ -309,7 +303,6 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
                 });
             }
         });
-
     };
 
     $scope.bringPrescribedDrugHistory = function(appointmentID){
@@ -449,55 +442,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.nextVisitData = {};
 
     $scope.bringPrescribedNextVisit = function (appointmentID){
-        $scope.dayList = JsonService.numberList;
-        $scope.bringDayType = function (addMood, selectedDay, selectedDayTypeID){
-            var dataString = "query=1";
-            PrescriptionService.getDrugDayTypeList.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.dayTypeList = result;
-                    $scope.dayTypeList.splice(5, 1);
-                    $scope.dayTypeList.splice(4, 1);
-                    if(addMood){
-                        $scope.nextVisitData.numOfDay = $scope.dayList[7];
-                        $scope.nextVisitData.dayType = $scope.dayTypeList[0];
-                    }else{
-                        angular.forEach($scope.dayTypeList, function(value, key) {
-                            if(value.id == selectedDayTypeID){
-                                $scope.nextVisitData.dayType = value;
-                            }
-                        });
-                        angular.forEach($scope.dayList, function(data, key) {
-                            if(data.value == selectedDay){
-                                $scope.nextVisitData.numOfDay = data;
-                            }
-                        });
-                    }
-                } else {
-
-                }
-            });
-
-        };
-
-
         PrescriptionService.getPrescribedNextVisit.query({}, {appointmentID:appointmentID}).$promise.then(function (result) {
-            if (result && result.success) {
-                if(result.date){
-                    $scope.nextVisitData = result;
-                    if($scope.nextVisitData.nextVisitType == 2){
-                        $scope.nextVisitData.date = "";
-                        $scope.bringDayType(false, $scope.nextVisitData.numOfDay, $scope.nextVisitData.dayType);
-                    }else{
-                        $scope.bringDayType(true, null);
-                    }
-                }else{
-                    $scope.nextVisitData = {};
-                    $scope.nextVisitData.date = "";
-                    $scope.bringDayType(true, null);
-                }
-            } else {
-
-            }
+            $scope.nextVisitData = result;
         });
     };
 
@@ -766,7 +712,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             windowClass: 'fade in',
             controller: 'PrescriptionController.PrescribeDrugsController',
             resolve: {
-                modalConfig: function () {
+                drugData: function () {
                     return drugData;
                 }
             },
