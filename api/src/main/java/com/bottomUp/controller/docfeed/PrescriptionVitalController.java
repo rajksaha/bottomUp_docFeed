@@ -1,6 +1,7 @@
 package com.bottomUp.controller.docfeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.  PrescriptionVitalData;
 import com.bottomUp.service.docFeed.crud.PrescriptionVitalService;
@@ -24,44 +25,17 @@ public class PrescriptionVitalController extends BaseController {
     @Autowired
     private PrescriptionVitalService prescriptionVitalService;
 
-    @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
-    @ResponseBody
-    public List<  PrescriptionVitalData> getAll(HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = new HashMap<>();
-
-        return this.prescriptionVitalService.getByParam(params);
-    }
-
-    @RequestMapping(value = {"/getByID/{  presVitalID}"}, method = RequestMethod.GET)
-    @ResponseBody
-    public   PrescriptionVitalData getByID(@PathVariable("  presVitalID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.prescriptionVitalService.getByID(Long.valueOf(companyID));
-    }
-
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> save(@RequestBody   PrescriptionVitalData data) throws BottomUpException {
+    public Map<String, Object> save(@RequestBody SearchData searchData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.prescriptionVitalService.create(data);
+        this.prescriptionVitalService.save(searchData.getVitalList(), searchData.getAppointmentID());
         return result;
     }
 
-    @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> update(@RequestBody   PrescriptionVitalData data) throws BottomUpException {
-        Map<String, Object> result = new HashMap<String, Object>();
-        result.put("success", true);
-        this.prescriptionVitalService.update(data);
-        return result;
-    }
-
-    @RequestMapping(value = "/delete/{  presVitalID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("  presVitalID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    @RequestMapping(value = "/delete/{presVitalID}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("presVitalID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("  presVitalID", appointmentID);
         this.prescriptionVitalService.delete(param);

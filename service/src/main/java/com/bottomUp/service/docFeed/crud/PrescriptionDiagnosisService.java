@@ -1,11 +1,7 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentTypeData;
-import com.bottomUp.domain.ContentDiseaseData;
 import com.bottomUp.domain.PrescriptionDiagnosisData;
-import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
-import com.bottomUp.myBatis.persistence.ContentDiseaseMapper;
 import com.bottomUp.myBatis.persistence.PrescriptionDiagnosisMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +25,7 @@ public class PrescriptionDiagnosisService {
     private ContentDiseaseService contentDiseaseService;
 
     public void save(PrescriptionDiagnosisData data) throws BottomUpException {
-        data.setDiseaseID(contentDiseaseService.createByName(data.getDiseaseName()));
+        data.setDiseaseID(contentDiseaseService.getInsert(data.getDiseaseName()));
         if(data.getDiagnosisID() == null){
             prescriptionDiagnosisMapper.create(data);
         }else{

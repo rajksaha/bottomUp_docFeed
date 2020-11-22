@@ -62,6 +62,22 @@
 		WHERE drugID = #{drugID}
 	</select>
 
+	<select id="getByName" parameterType="string" resultType="contentDrug">
+		SELECT
+		`drugID`,
+		`typeID`,
+		`genericID`,
+		`companyID`,
+		`drugName`,
+		`strength`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_drug`
+		WHERE drugName = #{drugName}
+	</select>
+
 	<select id="getByParam" parameterType="map" resultType="contentDrug">
 		SELECT
 		`drugID`,

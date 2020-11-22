@@ -17,7 +17,7 @@
 		)
 		VALUES(
 			#{patientID},
-			#drugName},
+			#{drugName},
 			#{currentStatus},
 			#{updatedBy},
 			#{updatedOn},

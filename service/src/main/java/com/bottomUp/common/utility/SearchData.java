@@ -1,6 +1,8 @@
 package com.bottomUp.common.utility;
 
+import com.bottomUp.domain.DoctorVitalSettingData;
 import com.bottomUp.domain.PrescriptionComplainData;
+import com.bottomUp.domain.PrescriptionVitalData;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class SearchData {
     private Integer intStatus;
 
     private List<PrescriptionComplainData> complainList;
+    private List<DoctorVitalSettingData> vitalList;
 
     public Long getAppointmentID() {
         return appointmentID;
@@ -100,5 +103,13 @@ public class SearchData {
 
     public void setComplainList(List<PrescriptionComplainData> complainList) {
         this.complainList = complainList;
+    }
+
+    public List<DoctorVitalSettingData> getVitalList() {
+        return vitalList;
+    }
+
+    public void setVitalList(List<DoctorVitalSettingData> vitalList) {
+        this.vitalList = vitalList;
     }
 }

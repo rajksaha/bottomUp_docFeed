@@ -5,43 +5,45 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PatientFamilyHistoryData extends BaseData {
 
-  private long familyHistoryID;
-  private long patientID;
-  private long diseaseID;
-  private long relation;
+  private Long familyHistoryID;
+  private Long patientID;
+  private Long diseaseID;
+  private String diseaseName;
+  private Integer relation;
+  private String relationName;
   private String present;
   private String type;
   private String detail;
 
-  public long getFamilyHistoryID() {
+  public Long getFamilyHistoryID() {
     return familyHistoryID;
   }
 
-  public void setFamilyHistoryID(long familyHistoryID) {
+  public void setFamilyHistoryID(Long familyHistoryID) {
     this.familyHistoryID = familyHistoryID;
   }
 
-  public long getPatientID() {
+  public Long getPatientID() {
     return patientID;
   }
 
-  public void setPatientID(long patientID) {
+  public void setPatientID(Long patientID) {
     this.patientID = patientID;
   }
 
-  public long getDiseaseID() {
+  public Long getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(long diseaseID) {
+  public void setDiseaseID(Long diseaseID) {
     this.diseaseID = diseaseID;
   }
 
-  public long getRelation() {
+  public Integer getRelation() {
     return relation;
   }
 
-  public void setRelation(long relation) {
+  public void setRelation(Integer relation) {
     this.relation = relation;
   }
 
@@ -67,5 +69,21 @@ public class PatientFamilyHistoryData extends BaseData {
 
   public void setDetail(String detail) {
     this.detail = detail;
+  }
+
+  public String getDiseaseName() {
+    return diseaseName;
+  }
+
+  public void setDiseaseName(String diseaseName) {
+    this.diseaseName = diseaseName;
+  }
+
+  public String getRelationName() {
+    return relationName;
+  }
+
+  public void setRelationName(String relationName) {
+    this.relationName = relationName;
   }
 }

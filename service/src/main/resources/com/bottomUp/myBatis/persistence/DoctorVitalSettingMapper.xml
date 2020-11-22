@@ -17,7 +17,7 @@
 		)
 		VALUES(
 			#{doctorID},
-			#vitalID},
+			#{vitalID},
 			#{displayOrder},
 			#{updatedBy},
 			#{updatedOn},
@@ -68,6 +68,45 @@
 		WHERE 1 = 1
 		<if test=" vitalSettingID != null">
 			AND  vitalSettingID = #{vitalSettingID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+	<select id="getByDoctorParam" parameterType="map" resultType="doctorVitalSetting">
+		SELECT
+		dvs.vitalSettingID,
+		dvs.displayOrder,
+		dvs.`doctorID`,
+		dvs.`vitalID`,
+		cv.`vitalName`,
+		<if test="appointmentID != null">
+			pv.vitalResult,
+			pv.presVitalID,
+			CASE WHEN pv.presVitalID IS NULL THEN FALSE ELSE TRUE END AS addedInPrescription,
+		</if>
+		cv.`shortName`,
+		cv.`vitalUnit`,
+		dvs.`updatedBy`,
+		dvs.`updatedOn`,
+		dvs.`createdBy`,
+		dvs.`createdOn`
+		FROM doctor_feed.`doctor_vital_setting` dvs
+		JOIN doctor_feed.content_vital cv ON cv.vitalID = dvs.vitalID
+		<if test="appointmentID != null">
+			LEFT JOIN doctor_feed.prescription_vital pv ON pv.appointMentID = #{appointmentID} AND pv.vitalID = dvs.vitalID
+		</if>
+		WHERE 1 = 1
+		<if test="vitalID != null">
+			AND vitalID = #{vitalID}
+		</if>
+		<if test="doctorID != null">
+			AND dvs.doctorID = #{doctorID}
+		</if>
+		<if test="term != null">
+			AND LOWER(vitalName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

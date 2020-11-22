@@ -86,10 +86,10 @@ public class PatientViewService
             UserProfileData profileData = new UserProfileData();
             ModelMapper modelMapper = new ModelMapper();
             modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-            modelMapper.map(profileData, patientViewData);
+            modelMapper.map(patientViewData, profileData);
             userService.updateUserProfile(profileData);
             PatientData patientData = new PatientData();
-            modelMapper.map(patientData, patientViewData);
+            modelMapper.map(patientViewData, patientData);
             patientMapper.update(patientData);
         }catch (Exception ex){
             LOGGER.error(ex.getMessage());

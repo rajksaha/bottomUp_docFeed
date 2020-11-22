@@ -1,6 +1,7 @@
 package com.bottomUp.controller.docfeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.PatientFamilyHistoryData;
 import com.bottomUp.service.docFeed.crud.PatientFamilyHistoryService;
@@ -26,25 +27,37 @@ public class PatientFamilyHistoryController extends BaseController {
 
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<PatientFamilyHistoryData> getAll(HttpServletRequest request) throws BottomUpException {
-
+    public List<PatientFamilyHistoryData> getAll(@RequestBody SearchData data, HttpServletRequest request) throws BottomUpException {
         Map<String, Object> params = new HashMap<>();
-
+        params.put("patientID", data.getEntityID());
         return this.patientFamilyHistoryService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/getByID/{familyHistoryID}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByPatientID/{patientID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public PatientFamilyHistoryData getByID(@PathVariable("familyHistoryID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.patientFamilyHistoryService.getByID(Long.valueOf(companyID));
+    public List<PatientFamilyHistoryData> getByPatientID(@PathVariable("patientID") Long patientID, HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("patientID", patientID);
+        return this.patientFamilyHistoryService.getByParam(params);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody PatientFamilyHistoryData data) throws BottomUpException {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", true);
+        if(data.getFamilyHistoryID() != null){
+            this.patientFamilyHistoryService.update(data);
+        }else{
+            this.patientFamilyHistoryService.create(data);
+        }
+        result.put("familyHistoryID", data.getFamilyHistoryID());
+        return result;
+    }
+
+    @RequestMapping(value = {"/create"}, method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> create(@RequestBody PatientFamilyHistoryData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.patientFamilyHistoryService.create(data);

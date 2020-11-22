@@ -191,10 +191,10 @@ app.service('PrescriptionService', function ($resource) {
                 params: {contentDetailID: '@contentDetailID'}
             }
         }),
-        delInvPrescriptionById : $resource('/api/rest/prescription/delInvPrescriptionById/:id', {}, {
+        deletePrescribedInv : $resource('/api/rest/prescriptionInv/delete/:presInvID', {}, {
             'remove':  {
                 method:'DELETE',
-                params: {id: '@id'}
+                params: {presInvID: '@presInvID'}
             }
         }),
         deletePastHistory : $resource('/api/rest/prescription/deletePastHistory/:pastHistoryID', {}, {
@@ -227,7 +227,7 @@ app.service('PrescriptionService', function ($resource) {
                 params: {savedHistorysID: '@savedHistorysID'}
             }
         }),
-        deletePrescribedAdvice : $resource('/api/rest/prescriptionDelete/prescribedAdvice/:prescriptionAdviceID', {}, {
+        deletePrescribedAdvice : $resource('/api/rest/prescriptionAdvice/delete/:prescriptionAdviceID', {}, {
             'remove':  {
                 method:'DELETE',
                 params: {prescriptionAdviceID: '@prescriptionAdviceID'}

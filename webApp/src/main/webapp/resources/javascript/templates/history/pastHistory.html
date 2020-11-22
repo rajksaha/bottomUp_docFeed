@@ -22,10 +22,10 @@
 				</div>
 				<tabset class="form-group" >
 					<tab data-ng-repeat="history in historyList"  heading="{{history.name}}" data-ng-click="changeTab(history)">
-						<div data-ng-if="history.id == 1" ng-include="'javascript/templates/history/pastDisease.html'"></div>
-						<div data-ng-if="history.id == 2" ng-include="'javascript/templates/history/familyHistory.html'"></div>
-						<div data-ng-if="history.id == 3" ng-include="'javascript/templates/history/drugHistory.html'"></div>
-						<div data-ng-if="history.id != 1 && history.id != 2 && history.id != 3" ng-include="'javascript/templates/history/dynamicHistory.html'"></div>
+						<div data-ng-if="history.id == 1" ng-include="'resources/javascript/templates/history/pastDisease.html'"></div>
+						<div data-ng-if="history.id == 2" ng-include="'resources/javascript/templates/history/familyHistory.html'"></div>
+						<div data-ng-if="history.id == 3" ng-include="'resources/javascript/templates/history/drugHistory.html'"></div>
+						<div data-ng-if="history.id != 1 && history.id != 2 && history.id != 3" ng-include="'resources/javascript/templates/history/customHistory.html'"></div>
 					</tab>
 				</tabset>
 			</div>

@@ -23,11 +23,16 @@ public class PatientFamilyHistoryService {
     @Autowired
     private PatientFamilyHistoryMapper patientFamilyHistoryMapper;
 
+    @Autowired
+    private ContentDiseaseService contentDiseaseService;
+
     public void create(PatientFamilyHistoryData data) throws BottomUpException {
+        data.setDiseaseID(contentDiseaseService.getInsert(data.getDiseaseName()));
         patientFamilyHistoryMapper.create(data);
     }
 
     public void update(PatientFamilyHistoryData data) throws BottomUpException {
+        data.setDiseaseID(contentDiseaseService.getInsert(data.getDiseaseName()));
         patientFamilyHistoryMapper.update(data);
     }
 

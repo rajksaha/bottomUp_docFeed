@@ -21,6 +21,9 @@ public class PrescriptionInvService {
     @Autowired
     private PrescriptionInvMapper prescriptionInvMapper;
 
+    @Autowired
+    private ContentInvService contentInvService;
+
     public void create(Long appointmentID, Long invID) throws BottomUpException{
         PrescriptionInvData prescriptionInvData = new PrescriptionInvData();
         prescriptionInvData.setAppointmentID(appointmentID);
@@ -29,10 +32,16 @@ public class PrescriptionInvService {
     }
 
     public void create(PrescriptionInvData data) throws BottomUpException {
+        if(data != null && data.getInvID() == null){
+            data.setInvID(contentInvService.getInsert(data.getInvName()));
+        }
         prescriptionInvMapper.create(data);
     }
 
     public void update(PrescriptionInvData  data) throws BottomUpException {
+        if(data != null && data.getInvID() == null){
+            data.setInvID(contentInvService.getInsert(data.getInvName()));
+        }
         prescriptionInvMapper.update(data);
     }
 

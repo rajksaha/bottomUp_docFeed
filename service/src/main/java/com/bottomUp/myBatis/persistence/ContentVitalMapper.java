@@ -19,6 +19,8 @@ public interface ContentVitalMapper {
 
     public ContentVitalData getByID(Long ID) throws BottomUpException;
 
+    public ContentVitalData getByName(String name)throws BottomUpException;
+
     public List<ContentVitalData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     public void delete(Map<String, Object> param) throws BottomUpException;

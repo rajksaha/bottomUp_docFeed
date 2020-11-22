@@ -21,7 +21,7 @@
 				<i class="fa fa-sort-numeric-asc pull-right link" data-ng-show="patientData.dob" data-ng-click="patientData.dob = false"></i>
 				<input data-ng-show="patientData.dob" type="text"  class="form-control form-control-date input-sm" data-ng-model="patientData.dateOfBirth"   maxlength="100" placeholder="Date of Birth"
 					   datepicker-popup="dd/MM/yyyy" close-text="Close" is_open="dt1" ng-focus="dt1 = true" ng-click="dt1 = true" >
-				<input data-ng-show="!patientData.dob" class="form-control decimal" type="text" maxlength="6" data-ng-model="patientData.age" errmsg="Please enter patient age">
+				<input data-ng-show="!patientData.dob" class="form-control" type="text" maxlength="6" data-ng-model="patientData.age" errmsg="Please enter patient age">
 			</div>
 			
 			<div class="form-group col-sm-12 col-md-6 col-lg-6">

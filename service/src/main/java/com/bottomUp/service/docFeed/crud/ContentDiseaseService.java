@@ -24,7 +24,7 @@ public class ContentDiseaseService {
     @Autowired
     private ContentDiseaseMapper contentDiseaseMapper;
 
-    public Long createByName(String diseaseName) throws BottomUpException{
+    public Long getInsert(String diseaseName) throws BottomUpException{
 
         ContentDiseaseData diseaseData = contentDiseaseMapper.getByName(diseaseName);
         if(diseaseData == null){

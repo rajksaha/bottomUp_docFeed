@@ -42,12 +42,25 @@ public class PrescriptionFamilyDiseaseController extends BaseController {
         return this.prescriptionFamilyDiseaseService.getByID(Long.valueOf(companyID));
     }
 
+    @RequestMapping(value = {"/addFamilyHistoryInPres/{familyHistoryID}/{appointmentID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> addFamilyHistoryInPres(HttpServletRequest request, @PathVariable Long familyHistoryID, @PathVariable Long appointmentID) throws BottomUpException {
+        PrescriptionFamilyDiseaseData data = new PrescriptionFamilyDiseaseData();
+        data.setAppointmentID(appointmentID);
+        data.setFamilyDiseaseID(familyHistoryID);
+        this.prescriptionFamilyDiseaseService.create(data);
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("presFamilyDiseaseID", data.getPresFamilyDiseaseID());
+        return result;
+    }
+
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody PrescriptionFamilyDiseaseData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.prescriptionFamilyDiseaseService.create(data);
+        result.put("presFamilyDiseaseID", data.getPresFamilyDiseaseID());
         return result;
     }
 
@@ -57,13 +70,14 @@ public class PrescriptionFamilyDiseaseController extends BaseController {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.prescriptionFamilyDiseaseService.update(data);
+        result.put("presFamilyDiseaseID", data.getPresFamilyDiseaseID());
         return result;
     }
 
     @RequestMapping(value = "/delete/{presFamilyDiseaseID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("presFamilyDiseaseID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("presFamilyDiseaseID") Integer presFamilyDiseaseID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("presFamilyDiseaseID", appointmentID);
+        param.put("presFamilyDiseaseID", presFamilyDiseaseID);
         this.prescriptionFamilyDiseaseService.delete(param);
     }
 }

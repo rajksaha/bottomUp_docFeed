@@ -5,33 +5,33 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionPastDiseaseData  extends BaseData {
 
-  private long presPastDiseaseId;
-  private long appointmentId;
-  private long pastDiseaseId;
+  private Long presPastDiseaseID;
+  private Long appointmentID;
+  private Long pastDiseaseID;
   private String diseaseName;
 
-  public long getPresPastDiseaseId() {
-    return presPastDiseaseId;
+  public Long getPresPastDiseaseID() {
+    return presPastDiseaseID;
   }
 
-  public void setPresPastDiseaseId(long presPastDiseaseId) {
-    this.presPastDiseaseId = presPastDiseaseId;
+  public void setPresPastDiseaseID(Long presPastDiseaseID) {
+    this.presPastDiseaseID = presPastDiseaseID;
   }
 
-  public long getPastDiseaseId() {
-    return pastDiseaseId;
+  public Long getAppointmentID() {
+    return appointmentID;
   }
 
-  public void setPastDiseaseId(long pastDiseaseId) {
-    this.pastDiseaseId = pastDiseaseId;
+  public void setAppointmentID(Long appointmentID) {
+    this.appointmentID = appointmentID;
   }
 
-  public long getAppointmentId() {
-    return appointmentId;
+  public Long getPastDiseaseID() {
+    return pastDiseaseID;
   }
 
-  public void setAppointmentId(long appointmentId) {
-    this.appointmentId = appointmentId;
+  public void setPastDiseaseID(Long pastDiseaseID) {
+    this.pastDiseaseID = pastDiseaseID;
   }
 
   public String getDiseaseName() {

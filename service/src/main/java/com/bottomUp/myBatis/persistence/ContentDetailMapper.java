@@ -27,7 +27,7 @@ public interface ContentDetailMapper {
 
     public List<ContentDetailData> getChildContentInfo(Map<String, Object> param) throws BottomUpException;
 
-    public void deleteByParam(Map<String, Object> param) throws BottomUpException;
+    public void delete(Map<String, Object> param) throws BottomUpException;
 
     public List<UserData> getDuplicateApprover(Map<String, Object> param) throws BottomUpException;
 }

@@ -60,19 +60,24 @@
 
 	<select id="getByParam" parameterType="map" resultType="patientPastDisease">
 		SELECT
-		`patientPastDiseaseID`,
-		`patientID`,
-		`diseaseID`,
-		`isPresent`,
-		`detail`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `patient_past_disease`
+		ppd.`patientPastDiseaseID`,
+		ppd.`patientID`,
+		ppd.`diseaseID`,
+		cd.diseaseName,
+		ppd.`isPresent`,
+		ppd.`detail`,
+		ppd.`updatedBy`,
+		ppd.`updatedOn`,
+		ppd.`createdBy`,
+		ppd.`createdOn`
+		FROM `patient_past_disease` ppd
+		JOIN doctor_feed.content_disease cd ON ppd.diseaseID = cd.diseaseID
 		WHERE 1 = 1
 		<if test="patientPastDiseaseID != null">
-			AND patientPastDiseaseID = #{patientPastDiseaseID}
+			AND ppd.patientPastDiseaseID = #{patientPastDiseaseID}
+		</if>
+		<if test="patientID != null">
+			AND ppd.patientID = #{patientID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

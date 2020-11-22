@@ -50,6 +50,20 @@
 		WHERE invID = #{invID}
 	</select>
 
+	<select id="getByName" parameterType="string" resultType="contentInv">
+		SELECT
+		`invID`,
+		`categoryID`,
+		`name`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_inv`
+
+		WHERE name = #{name}
+	</select>
+
 	<select id="getByParam" parameterType="map" resultType="contentInv">
 		SELECT
 		`invID`,

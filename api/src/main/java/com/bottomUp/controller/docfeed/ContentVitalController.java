@@ -3,6 +3,7 @@ package com.bottomUp.controller.docfeed;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.ContentVitalData;
+import com.bottomUp.domain.PrescriptionVitalData;
 import com.bottomUp.service.docFeed.crud.ContentVitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -54,7 +54,7 @@ app.controller('OldPrescriptionController', function($scope, $http, $modal, $roo
         });
 	};
 	
-	$scope.prescribedInvData = [];
+	$scope.prescribedInvList = [];
 	
 	$scope.bringPrescribedInv = function (appointmentID){
 		
@@ -64,14 +64,14 @@ app.controller('OldPrescriptionController', function($scope, $http, $modal, $roo
 
         OldPrescriptionService.getInvPrescription.query({}, dataString).$promise.then(function (result) {
             if (result && result.success) {
-                $scope.prescribedInvData = result;
+                $scope.prescribedInvList = result;
             } else {
 
             }
         });
 	};
 	
-	$scope.prescribedAdviceData = [];
+	$scope.prescribedAdviceList = [];
 	
 	$scope.bringPrescribedAdvice = function(appointmentID){
 		
@@ -79,7 +79,7 @@ app.controller('OldPrescriptionController', function($scope, $http, $modal, $roo
 
         OldPrescriptionService.getAdvicePrescription.query({}, dataString).$promise.then(function (result) {
             if (result && result.success) {
-                $scope.prescribedAdviceData = result;
+                $scope.prescribedAdviceList = result;
             } else {
 
             }
@@ -321,14 +321,14 @@ app.controller('OldPrescriptionController', function($scope, $http, $modal, $roo
             angular.forEach($scope.prescribedVitalData, function(value, key) {
                 $scope.addToPrescription(!value.addedToPrescription, value, 1);
             });
-            angular.forEach($scope.prescribedInvData, function(value, key) {
+            angular.forEach($scope.prescribedInvList, function(value, key) {
                 $scope.addToPrescription(!value.addedToPrescription, value, 8);
             });
 
             angular.forEach($scope.prescribedDrugList, function(value, key) {
                 $scope.addToPrescription(!value.addedToPrescription, value, 7);
             });
-            angular.forEach($scope.prescribedAdviceData, function(value, key) {
+            angular.forEach($scope.prescribedAdviceList, function(value, key) {
                 $scope.addToPrescription(!value.addedToPrescription, value, 9);
             });
 

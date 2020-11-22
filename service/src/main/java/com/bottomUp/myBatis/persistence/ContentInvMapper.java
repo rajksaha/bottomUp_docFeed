@@ -19,6 +19,8 @@ public interface ContentInvMapper {
 
     public ContentInvData getByID(Long ID) throws BottomUpException;
 
+    public ContentInvData getByName(String name) throws BottomUpException;
+
     public List<ContentInvData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     public void delete(Map<String, Object> param) throws BottomUpException;

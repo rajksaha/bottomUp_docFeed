@@ -24,22 +24,10 @@ public class ContentVitalOptionController extends BaseController {
     @Autowired
     private ContentVitalOptionService contentVitalOptionService;
 
-    @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByVitalID/{vitalID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<ContentVitalOptionData> getAll(HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = new HashMap<>();
-
-        return this.contentVitalOptionService.getByParam(params);
-    }
-
-    @RequestMapping(value = {"/getByID/{vitalOptionID}"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ContentVitalOptionData getByID(@PathVariable("vitalOptionID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.contentVitalOptionService.getByID(Long.valueOf(companyID));
+    public List<ContentVitalOptionData> getByVitalID(@PathVariable("vitalID") Long vitalID, HttpServletRequest request) throws BottomUpException {
+        return this.contentVitalOptionService.getByVitalID(vitalID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)

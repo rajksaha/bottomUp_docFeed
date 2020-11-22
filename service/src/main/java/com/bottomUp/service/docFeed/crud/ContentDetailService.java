@@ -3,6 +3,7 @@ package com.bottomUp.service.docFeed.crud;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.common.user.ContentDetailData;
 import com.bottomUp.model.DietData;
+import com.bottomUp.model.DrugHistory;
 import com.bottomUp.myBatis.persistence.ContentDetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,24 @@ public class ContentDetailService {
             contentDetailData.setContentDetailID(dietData.getDietID());
             contentDetailMapper.update(contentDetailData);
         }
+    }
 
+    public Long createByDrugHistory(DrugHistory drugHistory) throws BottomUpException{
+        ContentDetailData contentDetailData = new ContentDetailData();
+        if(drugHistory.getCurrentStatus() == 1){
+            contentDetailData.setEntityType(PrescriptionContentType.CURRENT_DRUG.name());
+        }else{
+            contentDetailData.setEntityType(PrescriptionContentType.OLD_DRUG.name());
+        }
+        contentDetailData.setEntityID(drugHistory.getAppointmentID());
+        contentDetailData.setShortName(drugHistory.getDrugName());
+        if(drugHistory.getDrugHistoryID() == null){
+            contentDetailMapper.create(contentDetailData);
+        }else{
+            contentDetailData.setContentDetailID(drugHistory.getDrugHistoryID());
+            contentDetailMapper.update(contentDetailData);
+        }
+        return contentDetailData.getContentDetailID();
     }
 
     public void create(ContentDetailData data) throws BottomUpException {
@@ -57,7 +75,7 @@ public class ContentDetailService {
         return this .contentDetailMapper.getDistinctShortName(param);
     }
 
-    /*public void delete (Map<String,Object> param) throws BottomUpException {
+    public void delete (Map<String,Object> param) throws BottomUpException {
         this.contentDetailMapper.delete(param);
-    }*/
+    }
 }

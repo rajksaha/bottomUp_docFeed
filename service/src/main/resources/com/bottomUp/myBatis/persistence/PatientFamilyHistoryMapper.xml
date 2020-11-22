@@ -68,19 +68,26 @@
 
 	<select id="getByParam" parameterType="map" resultType="patientFamilyHistory">
 		SELECT
-		`familyHistoryID`,
-		`patientID`,
-		`diseaseID`,
-		`relation`,
-		`present`,
-		`type`,
-		`detail`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `patient_family_history`
+		pfh.`familyHistoryID`,
+		pfh.`patientID`,
+		pfh.`diseaseID`,
+		cd.diseaseName,
+		cr.relationName,
+		pfh.`relation`,
+		pfh.`present`,
+		pfh.`type`,
+		pfh.`detail`,
+		pfh.`updatedBy`,
+		pfh.`updatedOn`,
+		pfh.`createdBy`,
+		pfh.`createdOn`
+		FROM `patient_family_history` pfh
+		JOIN doctor_feed.content_disease cd ON pfh.diseaseID = cd.diseaseID
+		JOIN doctor_feed.content_relation cr ON pfh.relation =cr.relationID
 		WHERE 1 = 1
+		<if test="patientID != null">
+			AND pfh.patientID = #{patientID}
+		</if>
 		<if test="familyHistoryID != null">
 			AND familyHistoryID = #{familyHistoryID}
 		</if>

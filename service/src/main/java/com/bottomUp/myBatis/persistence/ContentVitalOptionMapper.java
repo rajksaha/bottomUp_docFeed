@@ -2,7 +2,6 @@ package com.bottomUp.myBatis.persistence;
 
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentData;
 import com.bottomUp.domain.ContentVitalOptionData;
 
 import java.util.List;
@@ -22,4 +21,6 @@ public interface ContentVitalOptionMapper {
     public List<ContentVitalOptionData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     public void delete(Map<String, Object> param) throws BottomUpException;
+
+    public List<ContentVitalOptionData> getByVitalID(Long ID)throws BottomUpException;
 }

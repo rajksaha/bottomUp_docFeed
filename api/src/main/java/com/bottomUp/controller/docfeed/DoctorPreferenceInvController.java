@@ -50,7 +50,9 @@ public class DoctorPreferenceInvController extends BaseController {
         Map<String, Object> params = new HashMap<>();
         params.put("doctorID", doctorID);
         params.put("appointmentID", appointmentID);
-        params.put("categoryID", categoryID);
+        if(categoryID != Long.valueOf(-1)){
+            params.put("categoryID", categoryID);
+        }
         return this.doctorPreferenceInvService.getByParam(params);
     }
 

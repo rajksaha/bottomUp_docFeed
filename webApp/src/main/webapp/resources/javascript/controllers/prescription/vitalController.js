@@ -1,144 +1,111 @@
-app.controller('PrescribeVitalController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance, VitalService) {
-	
-	
+app.controller('PrescribeVitalController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance,
+													appointmentData, DoctorService, PresSaveService) {
+
+
+    $scope.doctorVitalList = [];
+	$scope.activeTab = "presVital";
 	$scope.vitalData = {};
 	$scope.vitalNameData = {};
 	$scope.prescribedVitalData = [];
+
+
 	$scope.addByName = false;
+
+    $scope.setActiveTab = function (tab) {
+        switch (tab){
+            case 'presVital':
+                $scope.bringDoctorPrefVital();
+                break;
+            case 'setupVital':
+                $scope.vitalData = {};
+                $scope.vitalData.sameAsName=true;
+                break;
+            default:
+                $scope.activeTab = tab;
+        }
+        $scope.activeTab = tab;
+
+    };
 	
 	
     $scope.getVital = function(term) {
-        
-    	var dataString = 'query=5'+ '&name=' + term;
-        
+    	var dataString = {};
+    	dataString.term = term;
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/vital",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/vital",
+            data: dataString
         }).then(function(result) {
         	$scope.vitalNameData = result.data;
         	return limitToFilter($scope.vitalNameData, 10);
         });
-
-        
-       // return $scope.products;
       };
       
-	  $scope.onSelectVital = function(item, model, label){
-		  $scope.vitalNameData.vitalId = item.vitalId;
-		  $scope.vitalData.shortName = item.shortName;
-		  $scope.vitalData.unit = item.unit;
-		  $scope.addByName = true;
-	  };
+	$scope.onSelectVital = function(item, model, label){
+	  $scope.vitalData.shortName = item.shortName;
+	  if(item.shortName == ""){
+          $scope.vitalData.shortName = item.vitalName;
+	  }
+	  $scope.vitalData.unit = item.unit;
+	};
+
+	$scope.populateShortName = function(name){
+		if($scope.vitalData.sameAsName){
+            $scope.vitalData.shortName = name;
+		}
+	};
 	  
 	  
-		$scope.addVitalToDoctorPref = function (){
-			
-			if(validator.validateForm("#vitalSetting","#lblMsg",null)) {
-				
-				$scope.error = false;
-				$scope.succcess = false;
-				if($scope.addByName == false){
-					
-					var dataString = 'query=6'+ '&vitalName=' + $scope.vitalData.vitalName + '&shortName=' + $scope.vitalData.shortName + '&unit=' + $scope.vitalData.unit;
-
-					VitalService.createVitalToDoctorPreference.query({}, dataString).$promise.then(function(result) {
-						if (result && result.success) {
-							$scope.vitalSameAS = false;
-			        		$scope.addToDoctorPreference(result);
-						}else{
-				
-						}
-					});
-					
+	$scope.addVitalToDoctorPref = function (addAnother){
+		if(validator.validateForm("#vitalSetting","#lblMsg",null)) {
+			delete  $scope.vitalData.sameAsName;
+            $scope.vitalData.doctorID = appointmentData.doctorID;
+            var displayOrder = 1;
+            if($scope.doctorVitalList != undefined && $scope.doctorVitalList.length > 0){
+                displayOrder = parseInt($scope.doctorVitalList[$scope.doctorVitalList.length -1].displayOrder) + 1;
+            }
+            $scope.vitalData.displayOrder = displayOrder;
+			DoctorService.createPrefVital.query({}, $scope.vitalData).$promise.then(function(result) {
+				if(addAnother){
+                    $scope.vitalData = {};
+                    $scope.vitalData.sameAsName=true;
 				}else{
-					$scope.vitalSameAS = false;
-					$scope.addToDoctorPreference($scope.vitalNameData.vitalId);
-				}
-				
-				
-				
-			}else{
-				$scope.error = true;
-				$scope.succcess = false;
-			}
-		};
-		
-		$scope.addToDoctorPreference = function (vitalID){
-			
-			$scope.vitalData = {};
-			$scope.vitalNameData = {};
-			 $scope.addByName = false;
-			var vitID = parseInt(vitalID);
-			var displayOrder = 1;
-			if($scope.prescribedVitalData != undefined && $scope.prescribedVitalData.length > 0){
-				displayOrder = parseInt($scope.prescribedVitalData[$scope.prescribedVitalData.length -1].displayOrder) + 1;
-			}
-			
-			var dataString = 'query=7'+ '&vitalID=' + vitID + '&displayOrder=' + displayOrder;
-
-			VitalService.createDoctorVitalSettings.query({}, dataString).$promise.then(function(result) {
-				if (result && result.success) {
-					$scope.bringVitalDetail();
-				}else{
-		
+                    $scope.setActiveTab("presVital");
 				}
 			});
-			
-		};
-		
-		$scope.deleteVitalFromSetting = function (vitalSettingID){
-			
-			var dataString = 'query=8'+ '&vitalSettingID=' + vitalSettingID;
+		}else{
+			$scope.error = true;
+			$scope.succcess = false;
+		}
+	};
 
-			VitalService.deleteDoctorVitalSettings.query({}, dataString).$promise.then(function(result) {
-				if (result && result.success) {
-					$scope.bringVitalDetail();
-				}else{
-		
-				}
-			});
-		};
+	$scope.deleteVitalFromSetting = function (vitalSettingID){
+		DoctorService.deletePrefVital.remove({}, {vitalSettingID:vitalSettingID}).$promise.then(function(result) {
+            $scope.bringDoctorPrefVital();
+		});
+	};
 	
-	$scope.bringVitalDetail = function (){
-		
-		var dataString = "query=0";
-
-		VitalService.getVitalDoctorDetail.query({}, dataString).$promise.then(function(result) {
-			if (result && result.success) {
-				$scope.prescribedVitalData = result;
-			}else{
-	
-			}
+	$scope.bringDoctorPrefVital = function (){
+		DoctorService.getDoctorPrefVital.query({}, {doctorID: appointmentData.doctorID, appointmentID: appointmentData.appointmentID}).$promise.then(function(result) {
+            $scope.doctorVitalList = result;
 		});
 	};
 
     $scope.getVitalOption = function(vital, term) {
-
-        var dataString = 'query=1'+ '&vitalID=' + vital.vitalId + '&term=' + term;
-
+		var searchData = {};
+		searchData.term = term;
+		searchData.entityID = vital.vitalID;
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/vital",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/vitalOption",
+            data: searchData
         }).then(function(result) {
             $scope.vitalOption = result.data;
             return limitToFilter($scope.vitalOption, 10);
         });
-
-
-        // return $scope.products;
-    };
-
-    $scope.onVitalOption = function(item, model, label){
-        $scope.selectedInvID = item.id;
-        $scope.addByName = true;
     };
 	
 	$scope.bringVitalOption = function(vitalData){
-		
 		angular.forEach($scope.prescribedVitalData, function(value, key) {
 			value.optionListON = false;
 			value.optionAdderON = false;
@@ -193,43 +160,12 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 	};
 	
 	$scope.saveVital = function(){
-
-		var prescribedVital = $scope.prescribedVitalData;
-
-		angular.forEach(prescribedVital, function(value, key) {
-			if(parseInt(value.prescribedVitalID) > 0 && value.vitalResult){ // update
-				var dataString = 'query=4'+ '&vitalID=' + value.vitalId + '&vitalResult=' + value.vitalResult ;
-		        
-				VitalService.updateVitalPrescription.query({}, dataString).$promise.then(function (result) {
-					if (result && result.success) {
-						
-					} else {
-		
-					}
-				});
-			}else if(!(parseInt(value.prescribedVitalID) > 0) &&  value.vitalResult){// insert
-				var dataString = 'query=3'+ '&vitalID=' + value.vitalId + '&vitalResult=' + value.vitalResult ;
-		        
-				VitalService.createVitalPrescription.query({}, dataString).$promise.then(function (result) {
-					if (result && result.success) {
-						
-					} else {
-		
-					}
-				});
-			}else if(parseInt(value.prescribedVitalID) > 0 && value.vitalResult == ""){
-				var dataString = 'query=9'+ '&prescribedVitalID=' + value.prescribedVitalID;
-		        
-				VitalService.deleteVitalprescription.query({}, dataString).$promise.then(function (result) {
-					if (result && result.success) {
-						
-					} else {
-		
-					}
-				});
-			}
-		});
-        $modalInstance.close(true);
+		var prescribedVital = {};
+		prescribedVital.appointmentID = appointmentData.appointmentID;
+		prescribedVital.vitalList = $scope.prescribedVitalData;
+        PresSaveService.savePrescribedVital.query({}, prescribedVital).$promise.then(function (result) {
+            $modalInstance.close(true);
+        });
 	};
 
     $scope.cancelVital = function () {
@@ -238,7 +174,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 	
 	
 	(function(){
-		$scope.bringVitalDetail();
+		$scope.bringDoctorPrefVital();
     })()
 
 	

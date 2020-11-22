@@ -23,7 +23,13 @@ public class DoctorVitalSettingService {
     @Autowired
     private DoctorVitalSettingMapper doctorVitalSettingMapper;
 
+    @Autowired
+    private ContentVitalService contentVitalService;
+
     public void create(DoctorVitalSettingData data) throws BottomUpException {
+        if(data.getVitalID() == null){
+            data.setVitalID(contentVitalService.getInsert(data));
+        }
         doctorVitalSettingMapper.create(data);
     }
 
@@ -41,5 +47,9 @@ public class DoctorVitalSettingService {
 
     public void delete (Map<String,Object> param) throws BottomUpException {
         this.doctorVitalSettingMapper.delete(param);
+    }
+
+    public List<DoctorVitalSettingData> getByDoctorParam(Map<String, Object> param) throws BottomUpException{
+        return this.doctorVitalSettingMapper.getByDoctorParam(param);
     }
 }

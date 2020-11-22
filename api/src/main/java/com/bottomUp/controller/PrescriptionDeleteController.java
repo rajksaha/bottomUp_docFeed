@@ -3,6 +3,7 @@ package com.bottomUp.controller;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.service.docFeed.crud.PrescriptionAdviceService;
 import com.bottomUp.service.docFeed.crud.PrescriptionComplainService;
+import com.bottomUp.service.docFeed.crud.PrescriptionInvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,10 +27,13 @@ public class PrescriptionDeleteController extends BaseController{
     @Autowired
     private PrescriptionComplainService prescriptionComplainService;
 
+    @Autowired
+    private PrescriptionInvService prescriptionInvService;
+
     @RequestMapping(value = "/prescribedAdvice/{prescriptionAdviceID}", method = RequestMethod.DELETE)
     public void prescribedAdvice(@PathVariable("prescriptionAdviceID") Integer prescriptionAdviceID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("prescriptionAdviceID", prescriptionAdviceID);
+        param.put("presAdviceID", prescriptionAdviceID);
         this.prescriptionAdviceService.delete(param);
     }
 

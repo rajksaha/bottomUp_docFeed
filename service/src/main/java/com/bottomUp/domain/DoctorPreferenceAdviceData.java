@@ -5,62 +5,61 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorPreferenceAdviceData extends BaseData {
 
-  private long advicePreferenceID;
-  private long doctorID;
-  private long adviceID;
-  private long displayOrder;
-  private long type;
-  private long lang;
+  private Long advicePreferenceID;
+  private Long doctorID;
+  private Long adviceID;
+  private Integer displayOrder;
+  private Integer type;
+  private Integer lang;
   private String advice;
   private Long presAdviceID;
   private Boolean addedInPrescription;
 
-
-  public long getAdvicePreferenceID() {
+  public Long getAdvicePreferenceID() {
     return advicePreferenceID;
   }
 
-  public void setAdvicePreferenceID(long advicePreferenceID) {
+  public void setAdvicePreferenceID(Long advicePreferenceID) {
     this.advicePreferenceID = advicePreferenceID;
   }
 
-  public long getDoctorID() {
+  public Long getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(Long doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getAdviceID() {
+  public Long getAdviceID() {
     return adviceID;
   }
 
-  public void setAdviceID(long adviceID) {
+  public void setAdviceID(Long adviceID) {
     this.adviceID = adviceID;
   }
 
-  public long getDisplayOrder() {
+  public Integer getDisplayOrder() {
     return displayOrder;
   }
 
-  public void setDisplayOrder(long displayOrder) {
+  public void setDisplayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
   }
 
-  public long getType() {
+  public Integer getType() {
     return type;
   }
 
-  public void setType(long type) {
+  public void setType(Integer type) {
     this.type = type;
   }
 
-  public long getLang() {
+  public Integer getLang() {
     return lang;
   }
 
-  public void setLang(long lang) {
+  public void setLang(Integer lang) {
     this.lang = lang;
   }
 

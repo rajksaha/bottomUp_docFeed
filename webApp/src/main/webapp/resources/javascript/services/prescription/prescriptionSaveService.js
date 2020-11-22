@@ -23,7 +23,31 @@ app.service('PresSaveService', function ($resource) {
                 isArray:false
             }
         }),
-        saveInvFromPref : $resource('/api/rest/prescriptionSave/getDoctorPrefAdvice/:appointmentID/:invID', {}, {
+        savePrescribedVital : $resource('/api/rest/prescriptionVital/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        createPrescribedInv : $resource('/api/rest/prescriptionInv/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        createPrescribedAdvice : $resource('/api/rest/prescriptionAdvice/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        updatePrescribedInv : $resource('/api/rest/prescriptionInv/update', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        saveInvFromPref : $resource('/api/rest/prescriptionSave/saveInvFromPref/:appointmentID/:invID', {}, {
             'query':  {
                 method:'POST',
                 isArray: true,

@@ -7,7 +7,7 @@
 	<insert id="create" parameterType="contentVitalOption" useGeneratedKeys="true" keyProperty="vitalOptionID" >
 
 		INSERT INTO `content_vital_option`(
-			`vitalId`,
+			`vitalID`,
 			`optionName`,
 			`updatedBy`,
 			`updatedOn`,
@@ -15,7 +15,7 @@
 			`createdOn`
 		)
 		VALUES(
-			#{vitalId},
+			#{vitalID},
 			#{optionName},
 			#{updatedBy},
 			#{updatedOn},
@@ -29,7 +29,7 @@
 	<update id="update" parameterType="contentVitalOption">
 		UPDATE `content_vital_option`
 		SET
-		`vitalId` = #{vitalId},
+		`vitalID` = #{vitalID},
 		`optionName` = #{optionName},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
@@ -39,7 +39,7 @@
 	<select id="getByID" parameterType="long" resultType="contentVitalOption">
 		SELECT
 			`vitalOptionID`,
-			`vitalId`,
+			`vitalID`,
 			`optionName`,
 			`updatedBy`,
 			`updatedOn`,
@@ -53,7 +53,7 @@
 	<select id="getByParam" parameterType="map" resultType="contentVitalOption">
 		SELECT
 		`vitalOptionID`,
-		`vitalId`,
+		`vitalID`,
 		`optionName`,
 		`updatedBy`,
 		`updatedOn`,
@@ -64,6 +64,9 @@
 		<if test="vitalOptionID != null">
 			AND vitalOptionID = #{vitalOptionID}
 		</if>
+		<if test="vitalID != null">
+			AND vitalID = #{vitalID}
+		</if>
 		<if test="term != null">
 			AND LOWER(optionName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>
@@ -71,6 +74,19 @@
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}
 		</if>
+	</select>
+
+	<select id="getByVitalID" parameterType="map" resultType="contentVitalOption">
+		SELECT
+		`vitalOptionID`,
+		`vitalID`,
+		`optionName`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_vital_option`
+		WHERE vitalID = #{vitalID}
 	</select>
 
     <delete id="delete" parameterType="map">

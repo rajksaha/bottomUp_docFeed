@@ -6,11 +6,11 @@ app.controller('DrugHistoryController', function($scope, $modal, $rootScope, lim
 	
 	
 	$scope.init = function(){
-		$scope.bringCurrentDrugList();
+		$scope.bringPatientDrugList();
 		$scope.bringOldDrugList();
     };
     
-	$scope.bringCurrentDrugList = function (){
+	$scope.bringPatientDrugList = function (){
 		var dataString = {'status' : 1, 'query': 1};
 		
 		DrugHistoryService.getDrugHistory.query({}, dataString).$promise.then(function(result) {
@@ -69,7 +69,7 @@ app.controller('DrugHistoryController', function($scope, $modal, $rootScope, lim
 		DrugHistoryService.saveDrugHistoryList.query({}, data).$promise.then(function(result) {
 			if (result && result.success) {
 				if(status == 1){
-					$scope.bringCurrentDrugList();
+					$scope.bringPatientDrugList();
 				}else{
 					$scope.bringOldDrugList();
 				}
@@ -86,7 +86,7 @@ app.controller('DrugHistoryController', function($scope, $modal, $rootScope, lim
 		DrugHistoryService.deleteDrugHistory.query({}, data).$promise.then(function(result) {
 			if (result && result.success) {
 				if(status == 1){
-					$scope.bringCurrentDrugList();
+					$scope.bringPatientDrugList();
 				}else{
 					$scope.bringOldDrugList();
 				}

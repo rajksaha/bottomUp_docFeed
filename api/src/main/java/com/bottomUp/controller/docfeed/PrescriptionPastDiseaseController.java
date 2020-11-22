@@ -33,13 +33,25 @@ public class PrescriptionPastDiseaseController extends BaseController {
         return this.prescriptionPastDiseaseService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/getByID/{  presPastDiseaseID}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByID/{presPastDiseaseID}"}, method = RequestMethod.GET)
     @ResponseBody
     public   PrescriptionPastDiseaseData getByID(@PathVariable("  presPastDiseaseID") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = this.parseParameter(request);
 
         return this.prescriptionPastDiseaseService.getByID(Long.valueOf(companyID));
+    }
+
+    @RequestMapping(value = {"/add/{pastDiseaseID}/{appointmentID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> add(HttpServletRequest request, @PathVariable Long pastDiseaseID, @PathVariable Long appointmentID) throws BottomUpException {
+        PrescriptionPastDiseaseData data = new PrescriptionPastDiseaseData();
+        data.setAppointmentID(appointmentID);
+        data.setPastDiseaseID(pastDiseaseID);
+        this.prescriptionPastDiseaseService.create(data);
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("presPastDiseaseID", data.getPresPastDiseaseID());
+        return result;
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)

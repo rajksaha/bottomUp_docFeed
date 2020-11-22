@@ -36,6 +36,18 @@ app.service('DoctorService', function ($resource) {
                 method:'GET',
                 params: {doctorID: '@doctorID'}
             }
+        }),
+        createPrefInv : $resource('/api/rest/doctorPreferenceInv/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        createPrefAdvice : $resource('/api/rest/doctorPreferenceAdvice/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
         })
 
     };

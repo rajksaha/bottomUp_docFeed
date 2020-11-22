@@ -126,6 +126,7 @@ public class AutoCompleteController extends BaseController{
     public List<ContentVitalOptionData> vitalOption(@RequestBody SearchData searchData) throws BottomUpException {
         Map<String, Object> param = new HashMap<>();
         param.put("term", searchData.getTerm());
+        param.put("vitalID", searchData.getEntityID());
         return contentVitalOptionService.getByParam(param);
     }
 

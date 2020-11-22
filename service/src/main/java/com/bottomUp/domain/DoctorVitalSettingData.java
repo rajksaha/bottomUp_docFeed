@@ -5,40 +5,96 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorVitalSettingData extends BaseData {
 
-  private long vitalSettingID;
-  private long doctorID;
-  private long vitalID;
-  private long displayOrder;
+  private Long vitalSettingID;
+  private Long doctorID;
+  private Long vitalID;
+  private Integer displayOrder;
 
-  public long getVitalSettingID() {
+  private String vitalName;
+  private String shortName;
+  private String vitalUnit;
+
+  private Long presVitalId;
+  private String vitalResult;
+  private Boolean addedInPrescription;
+
+  public Long getVitalSettingID() {
     return vitalSettingID;
   }
 
-  public void setVitalSettingID(long vitalSettingID) {
+  public void setVitalSettingID(Long vitalSettingID) {
     this.vitalSettingID = vitalSettingID;
   }
 
-  public long getDoctorID() {
+  public Long getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(Long doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getVitalID() {
+  public Long getVitalID() {
     return vitalID;
   }
 
-  public void setVitalID(long vitalID) {
+  public void setVitalID(Long vitalID) {
     this.vitalID = vitalID;
   }
 
-  public long getDisplayOrder() {
+  public Integer getDisplayOrder() {
     return displayOrder;
   }
 
-  public void setDisplayOrder(long displayOrder) {
+  public void setDisplayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
+  }
+
+  public String getVitalName() {
+    return vitalName;
+  }
+
+  public void setVitalName(String vitalName) {
+    this.vitalName = vitalName;
+  }
+
+  public String getShortName() {
+    return shortName;
+  }
+
+  public void setShortName(String shortName) {
+    this.shortName = shortName;
+  }
+
+  public String getVitalUnit() {
+    return vitalUnit;
+  }
+
+  public void setVitalUnit(String vitalUnit) {
+    this.vitalUnit = vitalUnit;
+  }
+
+  public Long getPresVitalId() {
+    return presVitalId;
+  }
+
+  public void setPresVitalId(Long presVitalId) {
+    this.presVitalId = presVitalId;
+  }
+
+  public String getVitalResult() {
+    return vitalResult;
+  }
+
+  public void setVitalResult(String vitalResult) {
+    this.vitalResult = vitalResult;
+  }
+
+  public Boolean getAddedInPrescription() {
+    return addedInPrescription;
+  }
+
+  public void setAddedInPrescription(Boolean addedInPrescription) {
+    this.addedInPrescription = addedInPrescription;
   }
 }

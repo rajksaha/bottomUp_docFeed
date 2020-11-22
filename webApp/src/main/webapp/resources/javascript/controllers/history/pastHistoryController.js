@@ -1,4 +1,5 @@
-app.controller('PastHistoryController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance, $filter, PastHistoryService) {
+app.controller('PastHistoryController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance, $filter,
+                                                 doctorData, appointmentData, PastHistoryService) {
 	
 	$scope.relationList = [];
 
@@ -12,7 +13,7 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 	$scope.historyData = {};
 	$scope.historySetteingData = {};
 	$scope.paientHistoryList = [];
-	$scope.pageName = ""
+	$scope.pageName = "";
 	$scope.typeCode = "";
 	$scope.addByName = false;
 
@@ -25,34 +26,20 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 	/*Family History*/
 
     $scope.bringRelationList = function(){
-
-
-        var dataString = "query=6";
-
-        PastHistoryService.getRelationList.query({}, dataString).$promise.then(function(result) {
-            if (result && result.success) {
-                $scope.relationList = result;
-            }else{
-    
-            }
+        PastHistoryService.getRelationList.query({}, {}).$promise.then(function(result) {
+            $scope.relationList = result;
         });
 
     };
 
     $scope.bringFamilyHistoryData = function(){
-
         $scope.bringRelationList();
         $scope.addMoreButton = true;
-        var dataString = "query=0";
 
-        PastHistoryService.getDiseaseFromFamilyHistory.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.historyList[1].itemList = result
-                if ($scope.historyList[1].itemList.length == 0) {
-                    $scope.addFamilyHistory();
-                }
-            } else {
-
+        PastHistoryService.getDiseaseFromFamilyHistory.query({}, {patientID: appointmentData.patientID}).$promise.then(function (result) {
+            $scope.historyList[1].itemList = result;
+            if ($scope.historyList[1].itemList.length == 0) {
+                $scope.addFamilyHistory();
             }
         });
     };
@@ -66,46 +53,25 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         $scope.addMoreButton = false;
 
         $scope.familyHistoryData = {};
-
-        $scope.familyHistoryData.relation = $scope.relationList[0];
-
+        $scope.familyHistoryData.relation = $scope.relationList[0].relationID;
+        $scope.familyHistoryData.patientID = appointmentData.patientID;
         $scope.familyHistoryData.type = "Consanguinity";
-
         $scope.familyHistoryData.present = "Yes";
-
-        $scope.familyHistoryData.detail = "";
-
         $scope.familyHistoryData.editMode = true;
-
         $scope.historyList[1].itemList.splice(0,0, $scope.familyHistoryData);
     };
 
     $scope.saveFamilyHistory = function(familyHistoryData){
-
-
         if(validator.validateForm("#validateReq","#lblMsg",null)) {
-            var dataString = "";
-            if(familyHistoryData.id){
-
-                dataString = "query=" + 4 + '&diseaseName=' + familyHistoryData.diseaseName + '&relation=' + familyHistoryData.relation.id
-                    + '&present=' + familyHistoryData.present + '&type=' + familyHistoryData.type + '&detail=' + familyHistoryData.detail + '&familyHistoryID=' + familyHistoryData.id;
-
-            }else{
-                dataString = "query=" + 1 + '&diseaseName=' + familyHistoryData.diseaseName + '&relation=' + familyHistoryData.relation.id
-                    + '&present=' + familyHistoryData.present + '&type=' + familyHistoryData.type + '&detail=' + familyHistoryData.detail;
-            }
-
-            PastHistoryService.createDiseaseInPrescription.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.succcess = true;
-                    $scope.error = false;
-                    $scope.message = "Information Updated Successfully";
-                    $scope.bringFamilyHistoryData();
-                } else {
-
-                }
+            delete familyHistoryData.editMode;
+            delete familyHistoryData.addedToPres;
+            delete familyHistoryData.oterEditMode;
+            PastHistoryService.saveFamilyHistory.query({}, familyHistoryData).$promise.then(function (result) {
+                $scope.succcess = true;
+                $scope.error = false;
+                $scope.message = "Information Updated Successfully";
+                $scope.bringFamilyHistoryData();
             });
-
         }else{
             $scope.message = "";
             $scope.succcess = false;
@@ -131,37 +97,19 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
     };
 
     $scope.addToPresFamily = function(data){
-
-
         if(data.addedToPres == 1){
-
-
-            var dataString = "query=" + 3 + "&familyHistoryID=" +  data.id;
-
-            PastHistoryService.deleteDiseaseFromPrescription.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.succcess = true;
-                    $scope.error = false;
-                    $scope.message = "Information Deleted From Prescription";
-                    data.addedToPres = false;
-                } else {
-
-                }
+            PastHistoryService.deleteFamilyHistoryInPres.remove({}, {presFamilyDiseaseID: data.presFamilyDiseaseID}).$promise.then(function (result) {
+                $scope.succcess = true;
+                $scope.error = false;
+                $scope.message = "Information Deleted From Prescription";
+                data.addedToPres = false;
             });
-
         }else{
-
-            var dataString = "query=" + 2 + "&familyHistoryID=" + data.id;
-
-            PastHistoryService.createDiseasePrescription.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.succcess = true;
-                    $scope.error = false;
-                    $scope.message = "Information Added To Prescription";
-                    data.addedToPres = true;
-                } else {
-
-                }
+            PastHistoryService.addFamilyHistoryInPres.query({}, {familyHistoryID:data.familyHistoryID, appointmentID: appointmentData.appointmentID}).$promise.then(function (result) {
+                $scope.succcess = true;
+                $scope.error = false;
+                $scope.message = "Information Added To Prescription";
+                data.addedToPres = true;
             });
         }
 
@@ -171,19 +119,12 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         $scope.bringFamilyHistoryData();
     };
 
-    $scope.deleteFamilyHistory = function(id){
-
-        var dataString = "query=" + 5 + "&familyHistoryID=" + id;
-
-        PastHistoryService.deleteDiseaseAndHistory.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.succcess = true;
-                $scope.error = false;
-                $scope.message = "Information Deleted Successfully";
-                $scope.bringFamilyHistoryData();
-            } else {
-
-            }
+    $scope.deleteFamilyHistory = function(familyHistoryID){
+        PastHistoryService.deleteFamilyHistory.remove({}, {familyHistoryID:familyHistoryID}).$promise.then(function (result) {
+            $scope.succcess = true;
+            $scope.error = false;
+            $scope.message = "Information Deleted Successfully";
+            $scope.bringFamilyHistoryData();
         });
     };
 
@@ -193,30 +134,15 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 	
 	
 	$scope.savePastHistory = function(pastHistoryData){
-		
 		if(validator.validateForm("#validateReq","#lblMsg",null)) {
-			
-			 
-			
-			var dataString = "";
-			if(pastHistoryData.id){
-				
-				dataString = "query=" + 4 + '&diseaseName=' + pastHistoryData.diseaseName + '&isPresent=' + pastHistoryData.isPresent + '&detail=' + pastHistoryData.detail + '&pastHistoryID=' + pastHistoryData.id;
-
-			}else{
-				dataString = "query=" + 1 + '&diseaseName=' + pastHistoryData.diseaseName + '&isPresent=' + pastHistoryData.isPresent + '&detail=' + pastHistoryData.detail;
-			}
-            
-            PastHistoryService.createAndupdatePastPatientDisease.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.succcess = true;
-                    $scope.error = false;
-                    $scope.message = "Information Updated Successfully";
-                    $scope.bringPastHistoryData();
-                    $scope.bringCurrHistoryData();
-                } else {
-
-                }
+            delete pastHistoryData.editMode;
+            delete pastHistoryData.addedToPres;
+            delete pastHistoryData.oterEditMode;
+            PastHistoryService.savePastHistory.query({}, pastHistoryData).$promise.then(function (result) {
+                $scope.succcess = true;
+                $scope.error = false;
+                $scope.message = "Information Updated Successfully";
+                $scope.bringPastHistoryData();
             });
 		}else{
 			$scope.message = "";
@@ -237,37 +163,19 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 	};
 	
 	$scope.addToPresPast = function(data){
-		
-		
 		if(data.addedToPres == 1){
-			
-			
-			var dataString = "query=" + 3 + "&pastHistoryID=" +  data.id;
-            
-            PastHistoryService.deletePastPrescritionDisease.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.succcess = true;
-                    $scope.error = false;
-                    $scope.message = "Information Deleted From Prescription";
-                    data.addedToPres = false;
-                } else {
-
-                }
+            PastHistoryService.deletePastHistoryFromPres.query({}, {patientPastDiseaseID: data.patientPastDiseaseID}).$promise.then(function (result) {
+                $scope.succcess = true;
+                $scope.error = false;
+                $scope.message = "Information Deleted From Prescription";
+                data.addedToPres = false;
             });
-	        
 	    }else{
-			
-			var dataString = "query=" + 2 + "&pastHistoryID=" + data.id;
-	        
-            PastHistoryService.updatePastPrescritionDisease.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.succcess = true;
-                    $scope.error = false;
-                    $scope.message = "Information Added To Prescription";
-                    data.addedToPres = true;
-                } else {
-
-                }
+            PastHistoryService.addPassHistoryInPres.query({}, {patientPastDiseaseID: data.patientPastDiseaseID, appointmentID:appointmentData.appointmentID}).$promise.then(function (result) {
+                $scope.succcess = true;
+                $scope.error = false;
+                $scope.message = "Information Added To Prescription";
+                data.addedToPres = true;
             });
 	    }
 	    
@@ -277,19 +185,12 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 		$scope.bringPastHistoryData();
 	};
 
-	$scope.deletePastHistory = function(id){
-		
-		var dataString = "query=" + 5 + "&pastHistoryID=" + id;
-        
-        PastHistoryService.delAllPastDisease.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.succcess = true;
-                $scope.error = false;
-                $scope.message = "Information Deleted Successfully";
-                $scope.bringPastHistoryData();
-            } else {
-
-            }
+	$scope.deletePastHistory = function(patientPastDiseaseID){
+        PastHistoryService.deletePastDisease.query({}, {patientPastDiseaseID:patientPastDiseaseID}).$promise.then(function (result) {
+            $scope.succcess = true;
+            $scope.error = false;
+            $scope.message = "Information Deleted Successfully";
+            $scope.bringPastHistoryData();
         });
 	};
 
@@ -307,6 +208,8 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 
         $scope.pastHistoryData.detail = "";
 
+        $scope.pastHistoryData.patientID = appointmentData.patientID;
+
         $scope.pastHistoryData.editMode = true;
 
         //$scope.historyList[0].itemList.splice(0, 0, $scope.pastHistoryData);
@@ -315,16 +218,11 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
     };
 
     $scope.bringPastHistoryData = function(){
-
         $scope.addMoreButton = true;
-        var dataString = "query=0";
-
-        PastHistoryService.getPastDisease.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.historyList[0].itemList = [];
+        PastHistoryService.getPastDisease.query({}, {patientID: appointmentData.patientID}).$promise.then(function (result) {
+            $scope.historyList[0].itemList = [];
+            if(result && result.length > 0){
                 $scope.historyList[0].itemList = result;
-            } else {
-
             }
         });
     };
@@ -333,32 +231,10 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 
     /*Drug History*/
 
-    $scope.bringCurrentDrugList = function (){
-        var dataString = {'status' : 1, 'query': 1};
-
-        PastHistoryService.getCurrentDrugList.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.currentDrugList = result;
-            } else {
-
-            }
+    $scope.bringPatientDrugList = function (){
+        PastHistoryService.getCurrentDrugList.query({}, {patientID: appointmentData.patientID}).$promise.then(function (result) {
+            $scope.patientDrugList = result;
         });
-
-    };
-
-    $scope.bringOldDrugList = function (){
-
-
-        var dataString = {'status' : 0,  'query': 1};
-
-        PastHistoryService.getOldDrugList.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.oldDrugList = result;
-            } else {
-
-            }
-        });
-
     };
 
     $scope.addDrug = function(status){
@@ -368,109 +244,59 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 
         data.drugName = "";
         data.editMode = true;
+        data.currentStatus = status;
+        data.patientID = appointmentData.patientID;
         $scope.masterUpdate = false;
 
-        if(status == 1){
-            angular.forEach($scope.currentDrugList, function(value, key) {
+        if($scope.patientDrugList){
+            angular.forEach($scope.patientDrugList, function(value, key) {
                 value.otherEditMode = true;
             });
-
-            $scope.currentDrugList.splice(0,0, data);
         }else{
-            angular.forEach($scope.oldDrugList, function(value, key) {
-                value.otherEditMode = true;
-            });
-
-            $scope.oldDrugList.splice(0,0, data);
+            $scope.patientDrugList=[];
         }
+        $scope.patientDrugList.splice(0,0, data);
     };
 
     $scope.saveDrug = function(data, status) {
-
-        var data = {'drugName': data.drugName, 'status': status, 'query': 2};
-
-        PastHistoryService.updateDrug.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                if(status == 1){
-                    $scope.bringCurrentDrugList();
-                }else{
-                    $scope.bringOldDrugList();
-                }
-            } else {
-
-            }
+        delete data.editMode;
+        delete data.otherEditMode;
+        PastHistoryService.saveDrugHistory.query({}, data).$promise.then(function (result) {
+            $scope.bringPatientDrugList();
         });
     };
 
     $scope.delDrug = function(data, status) {
-
-        var data = {'delId': data.drugHistoryID, 'query': 3};
-
-        PastHistoryService.deleteDrug.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                if(status == 1){
-                    $scope.bringCurrentDrugList();
-                }else{
-                    $scope.bringOldDrugList();
-                }
-            } else {
-
-            }
+        PastHistoryService.deleteDrugHistory.remove({}, {drugHistoryID:data.drugHistoryID}).$promise.then(function (result) {
+            $scope.bringPatientDrugList();
         });
     };
 
     $scope.addDrugToPres = function(data){
-
         if(data.addedToPres == 0){
-
-            var dataStr = {'drugName': data.drugName, 'status': data.currentStatus, 'query': 7};
-
-            PastHistoryService.createDrugPrescription.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    data.contentDetailID = result;
-                    data.addedToPres = true;
-                } else {
-    
-                }
+            PastHistoryService.addDrugPresInPres.query({}, data).$promise.then(function (result) {
+                data.contentDetailID = result;
+                data.addedToPres = true;
             });
-
         }else{
-
-            var dataStr = {'contentDetailID': data.contentDetailID, 'query': 8};
-
-            PastHistoryService.deleteDrugPrescription.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    data.addedToPres = false;
-                } else {
-    
-                }
+            PastHistoryService.deleteDrugPresFromPres.remove({}, {contentDetailID:data.contentDetailID}).$promise.then(function (result) {
+                data.addedToPres = false;
             });
         }
-
     };
 
 
 	$scope.getDisease = function(term) {
     	
-    	var dataString = "query=" + 0 + "&data=" + term;
-        
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/diagnosis",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/disease",
+            data: {'term': term}
         }).then(function(result) {
         	$scope.diagnosisNameData = result.data;
         	return limitToFilter($scope.diagnosisNameData, 10);
         });
     };
-    
-  $scope.onSelectDisease = function(item, model, label){
-  };
-
-
-
-
 
 	$scope.initialiseTab = function () {
 
@@ -486,33 +312,16 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         temp = {name : 'Drug History' , id :item++};
         $scope.historyList.push(temp);
 
-        var dataString = "query=1";
-
-        PastHistoryService.getMenu.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.menuDataList = result;
-                angular.forEach($scope.menuDataList, function (value, key) {
-                    if (value.isPopUp == 1 && value.inPrescription == 2) {
-                        temp = { name: value.menuHeader, id: item++, typeCode: value.defaultName };
-                        $scope.historyList.push(temp);
-                    }
-                });
-            } else {
-
+        angular.forEach(doctorData.menuList, function (value, key) {
+            if (value.isPopUp == 1 && value.inPrescription == 2) {
+                temp = { name: value.menuHeader, id: item++, typeCode: value.defaultName };
+                $scope.historyList.push(temp);
             }
         });
-
-
-
-
-
-        /*temp = {name : 'Family History'};
-        $scope.historyList.push(temp);*/
 
     };
 	
 	$scope.changeTab = function (history) {
-
 		$scope.error = false;
 		$scope.succcess = false;
 
@@ -521,8 +330,8 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 		}else if (history.id == 2){
             $scope.bringFamilyHistoryData();
 		}else if(history.id == 3){
-            $scope.bringCurrentDrugList();
-            $scope.bringOldDrugList();
+            $scope.bringPatientDrugList();
+            $scope.bringPatientDrugList();
 		}else {
             $scope.typeCode = history.typeCode;
 
@@ -552,32 +361,24 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 
         $scope.historySetteingData = {};
 
-        var dataString = "query=0" + '&typeCode=' + $scope.typeCode;;
-
-        PastHistoryService.getDetailsOfDoctorHistory.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.paientHistoryList = result;
-
-                angular.forEach($scope.paientHistoryList, function (value, key) {
-                    if (parseInt(value.savedHistorysID) > 0) {
-                        value.addToPrescription = true;
-                    }
-                });
-            } else {
-
-            }
+        PastHistoryService.getCustomHistoryDetail.query({}, {typeCode:$scope.typeCode}).$promise.then(function (result) {
+            $scope.paientHistoryList = result;
+            angular.forEach($scope.paientHistoryList, function (value, key) {
+                if (parseInt(value.savedHistorysID) > 0) {
+                    value.addToPrescription = true;
+                }
+            });
         });
     };
 
     $scope.getHistory = function(term) {
-
-        var dataString = 'query=5'+ '&name=' + term + '&typeCode=' + $scope.typeCode;
-
+        var searchData = {};
+        searchData.term = term;
+        searchData.entityType = $scope.typeCode;
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/history",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/history",
+            data: searchData
         }).then(function(result) {
             $scope.historyData = result.data;
             return limitToFilter($scope.historyData, 10);
@@ -591,32 +392,22 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
     };
 
     $scope.bringHistoryOption = function(historydata, term){
-
-
-        var dataString = 'query=1'+ '&historyID=' + historydata.historyID + '&term=' + term;;
-
-
+        var searchData = {};
+        searchData.term = term;
+        searchData.entityID= historydata.historyID;
         return $http({
             method: 'POST',
             url: "rest/autoComplete/history",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            data: searchData
         }).then(function(result) {
             $scope.historyOption = result.data;
             return limitToFilter($scope.historyOption, 10);
         });
     };
 
-    $scope.deleteHistoryFromSetting = function (id){
-
-        var dataString = 'query=12'+ '&historySettingID=' + id;
-        
-        PastHistoryService.deleteSettingsOfDocHistory.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.bringHistoryDetail();
-            } else {
-
-            }
+    $scope.deleteHistoryFromSetting = function (historySettingID){
+        PastHistoryService.deleteCustomHistory.query({}, {historySettingID: historySettingID}).$promise.then(function (result) {
+            $scope.bringHistoryDetail();
         });
     };
 
@@ -633,7 +424,6 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         
                     }
                 });
-
             }else{
                 $scope.addToDoctorPreference($scope.historySetteingData.historyID);
             }
@@ -666,85 +456,10 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 
 
     $scope.saveHistory = function(){
+        var prescribedHistory = {};
+        prescribedHistory.historyList = $scope.paientHistoryList;
+        PastHistoryService.saveCustomHistory.query({}, prescribedHistory).$promise.then(function (result) {
 
-        var prescribedHistory = $scope.paientHistoryList;
-
-        angular.forEach(prescribedHistory, function(value, key) {
-            if(parseInt(value.patientHistoryID) > 0 && value.historyResult){//Update
-                var dataString = 'query=11'+ '&historyID=' + value.historyID + '&historyResult=' + value.historyResult ;
-                
-                PastHistoryService.updateHistoryOfPatient.query({}, dataString).$promise.then(function (result) {
-                    if (result && result.success) {
-                        
-                    } else {
-        
-                    }
-                });
-            }else if(!parseInt(value.patientHistoryID) &&  value.historyResult){//ADD
-                var dataString = 'query=10'+ '&historyID=' + value.historyID + '&historyResult=' + value.historyResult ;
-                
-                PastHistoryService.createHistoryOfPatient.query({}, dataString).$promise.then(function (result) {
-                    if (result && result.success) {
-
-                    } else {
-        
-                    }
-                });
-            }else if(parseInt(value.patientHistoryID) > 0 && value.historyResult == ""){//delete
-
-                var dataString = 'query=9'+ '&savedHistorysID=' + value.patientHistoryID;
-                
-                PastHistoryService.deleteHistoryOfPatient.query({}, dataString).$promise.then(function (result) {
-                    if (result && result.success) {
-
-                    } else {
-        
-                    }
-                });
-            }
-        });
-
-        angular.forEach(prescribedHistory, function(value, key) {
-            if(parseInt(value.savedHistorysID) > 0 && value.historyResult && value.addToPrescription){
-                //do noting
-            }else if(parseInt(value.savedHistorysID) > 0 && value.historyResult && !value.addToPrescription){
-
-                var dataString = 'query=4'+ '&savedHistorysID=' + value.savedHistorysID;
-                
-                PastHistoryService.deleteHistoryOfPrescription.query({}, dataString).$promise.then(function (result) {
-                    if (result && result.success) {
-
-                    } else {
-        
-                    }
-                });
-
-            }else if(parseInt(value.savedHistorysID) > 0 && value.historyResult == ""){
-
-
-                var dataString = 'query=4'+ '&savedHistorysID=' + value.savedHistorysID;
-                PastHistoryService.deleteHistoryOfPrescription.query({}, dataString).$promise.then(function (result) {
-                    if (result && result.success) {
-
-                    } else {
-        
-                    }
-                });
-
-            }else if(!(parseInt(value.savedHistorysID) > 0) > 0 && value.historyResult == "" && value.addToPrescription){
-                //do noting
-            }else if(!(parseInt(value.savedHistorysID) > 0) && value.historyResult  && value.addToPrescription){
-
-                var dataString = 'query=3'+ '&historyID=' + value.historyID;
-               
-                PastHistoryService.createPrescriptionHistory.query({}, dataString).$promise.then(function (result) {
-                    if (result && result.success) {
-                        
-                    } else {
-        
-                    }
-                });
-            }
         });
 
         setTimeout(function() {

@@ -111,6 +111,12 @@
 		<if test="entityType != null">
 			AND entityType = #{entityType}
 		</if>
+		<if test="term != null">
+			AND LOWER(shortName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
+		</if>
+		<if test="entityID != null">
+			AND entityID = #{entityID}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}
@@ -122,6 +128,12 @@
 		WHERE 1=1
 		<if test="contentDetailID != null">
 			AND contentDetailID = #{contentDetailID}
+		</if>
+		<if test="entityType != null">
+			AND entityType = #{entityType}
+		</if>
+		<if test="entityID != null">
+			AND entityID = #{entityID}
 		</if>
 	</delete>
 

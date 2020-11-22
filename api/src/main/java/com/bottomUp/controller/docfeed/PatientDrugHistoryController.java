@@ -33,6 +33,14 @@ public class PatientDrugHistoryController extends BaseController {
         return this.patientDrugHistoryService.getByParam(params);
     }
 
+    @RequestMapping(value = {"/getByPatientID/{patientID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<PatientDrugHistoryData> getByPatientID(@PathVariable("patientID") Long patientID, HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("patientID", patientID);
+        return this.patientDrugHistoryService.getByParam(params);
+    }
+
     @RequestMapping(value = {"/getByID/{drugHistoryID}"}, method = RequestMethod.GET)
     @ResponseBody
     public PatientDrugHistoryData getByID(@PathVariable("drugHistoryID") Integer companyID, HttpServletRequest request) throws BottomUpException {

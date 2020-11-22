@@ -59,6 +59,22 @@
 		WHERE adviceID = #{adviceID}
 	</select>
 
+	<select id="getByName" parameterType="string" resultType="contentAdvice">
+		SELECT
+		`adviceID`,
+		`type`,
+		`lang`,
+		`advice`,
+		`pdf`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_advice`
+
+		WHERE advice = #{advice}
+	</select>
+
 	<select id="getByParam" parameterType="map" resultType="contentAdvice">
 		SELECT
 		`adviceID`,

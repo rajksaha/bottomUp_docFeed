@@ -5,163 +5,183 @@
 app.service('PastHistoryService', function ($resource) {
     return {
 
-        getRelationList : $resource('rest/pastHistory/getRelationList', {}, {
+        getRelationList : $resource('/api/rest/contentRelation/getByParam', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true
+            }
+        }),
+        getDiseaseFromFamilyHistory : $resource('/api/rest/patientFamilyHistory/getByPatientID/:patientID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true,
+                params: {patientID: '@patientID'}
+            }
+        }),
+        saveFamilyHistory : $resource('/api/rest/patientFamilyHistory/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        deleteFamilyHistory : $resource('/api/rest/patientFamilyHistory/delete/:familyHistoryID', {}, {
+            'remove':  {
+                method:'DELETE',
+                isArray:false,
+                params: {familyHistoryID: '@familyHistoryID'}
+            }
+        }),
+        addFamilyHistoryInPres : $resource('/api/rest/patientFamilyHistory/addFamilyHistoryInPres/:familyHistoryID/:appointmentID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:false,
+                params: {presFamilyDiseaseID: '@presFamilyDiseaseID', appointmentID: '@appointmentID'}
+            }
+        }),
+        deleteFamilyHistoryInPres : $resource('/api/rest/prescriptionFamilyDisease/delete/:presFamilyDiseaseID', {}, {
+            'remove':  {
+                method:'DELETE',
+                isArray:false,
+                params: {presFamilyDiseaseID: '@presFamilyDiseaseID'}
+            }
+        }),
+
+        //past disease
+
+        getPastDisease : $resource('/api/rest/patientPastDisease/getByPatientID/:patientID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true,
+                params: {patientID: '@patientID'}
+            }
+        }),
+        savePastHistory : $resource('/api/rest/patientPastDisease/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        deletePastDisease : $resource('/api/rest/patientPastDisease/delete/:patientPastDiseaseID', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false,
+                params: {patientPastDiseaseID: '@patientPastDiseaseID'}
+            }
+        }),
+        deletePastHistoryFromPres : $resource('/api/rest/prescriptionPastDisease/delete/:presPastDiseaseID', {}, {
+            'query':  {
+                method:'DELETE',
+                isArray:false,
+                params: {presPastDiseaseID: '@presPastDiseaseID'}
+            }
+        }),
+        addPassHistoryInPres : $resource('/api/rest/prescriptionPastDisease/add/:patientPastDiseaseID/:appointmentID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:false,
+                params: {patientPastDiseaseID: '@patientPastDiseaseID', appointmentID: '@appointmentID'}
+            }
+        }),
+
+        /////////////////// Past history end /////////////////////////////////////////
+
+    /////////////////// Drug history start /////////////////////////////////////////
+
+        getCurrentDrugList : $resource('/api/rest/patientDrugHistory/getByPatientID/:patientID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true,
+                params: {patientID: '@patientID'}
+            }
+        }),
+        saveDrugHistory : $resource('/api/rest/patientDrugHistory/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        deleteDrugHistory : $resource('/api/rest/patientDrugHistory/delete/:drugHistoryID', {}, {
+            'remove':  {
+                method:'DELETE',
+                isArray:false,
+                params: {drugHistoryID: '@drugHistoryID'}
+            }
+        }),
+        addDrugPresInPres : $resource('/api/rest/contentDetail/saveDrugHistory', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        deleteDrugPresFromPres : $resource('/api/rest/contentDetail/delete/:contentDetailID', {}, {
+            'remove':  {
+                method:'DELETE',
+                isArray:false,
+                params: {contentDetailID: '@contentDetailID'}
+            }
+        }),
+
+        /////////////////// Drug history end /////////////////////////////////////////
+
+        getMenu : $resource('/api/rest/pastHistory/getMenu', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
             }
         }),
-        getDiseaseFromFamilyHistory : $resource('rest/pastHistory/getDiseaseFromFamilyHistory', {}, {
+
+
+        getCustomHistoryDetail : $resource('/api/rest/doctorHistorySetting/get/:patientID/:typeCode', {}, {
             'query':  {
                 method:'POST',
-                isArray:true
+                isArray:true,
+                params: {patientID: '@patientID', typeCode: '@typeCode'}
             }
         }),
-        createDiseaseInPrescription : $resource('rest/pastHistory/createDiseaseInPrescription', {}, {
+        deleteCustomHistory : $resource('/api/rest/doctorHistorySetting/deleteSettingsOfDocHistory/:historySettingID', {}, {
             'query':  {
                 method:'POST',
-                isArray:false
+                isArray:false,
+                params: {historySettingID: '@historySettingID'}
             }
         }),
-        deleteDiseaseFromPrescription : $resource('rest/pastHistory/deleteDiseaseFromPrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        createDiseasePrescription : $resource('rest/pastHistory/createDiseasePrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        deleteDiseaseAndHistory : $resource('rest/pastHistory/deleteDiseaseAndHistory', {}, {
+        createHistoryToDocPref : $resource('/api/rest/doctorHistorySetting/createHistoryToDocPref', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createAndupdatePastPatientDisease : $resource('rest/pastHistory/createAndupdatePastPatientDisease', {}, {
+        createSettingsOfDocPreference : $resource('/api/rest/doctorHistorySetting/createSettingsOfDocPreference', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        deletePastPrescritionDisease : $resource('rest/pastHistory/deletePastPrescritionDisease', {}, {
+        saveCustomHistory : $resource('/api/rest/doctorHistorySetting/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        updatePastPrescritionDisease : $resource('rest/pastHistory/updatePastPrescritionDisease', {}, {
+        createHistoryOfPatient : $resource('/api/rest/pastHistory/createHistoryOfPatient', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        delAllPastDisease : $resource('rest/pastHistory/delAllPastDisease', {}, {
+        deleteHistoryOfPatient : $resource('/api/rest/pastHistory/deleteHistoryOfPatient', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        getPastDisease : $resource('rest/pastHistory/getPastDisease', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getCurrentDrugList : $resource('rest/pastHistory/getCurrentDrugList', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getOldDrugList : $resource('rest/pastHistory/getOldDrugList', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        updateDrug : $resource('rest/pastHistory/updateDrug', {}, {
+        deleteHistoryOfPrescription : $resource('/api/rest/pastHistory/deleteHistoryOfPrescription', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        deleteDrug : $resource('rest/pastHistory/deleteDrug', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        createDrugPrescription : $resource('rest/pastHistory/createDrugPrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        deleteDrugPrescription : $resource('rest/pastHistory/deleteDrugPrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        getMenu : $resource('rest/pastHistory/getMenu', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        getDetailsOfDoctorHistory : $resource('rest/pastHistory/getDetailsOfDoctorHistory', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        deleteSettingsOfDocHistory : $resource('rest/pastHistory/deleteSettingsOfDocHistory', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        createHistoryToDocPref : $resource('rest/pastHistory/createHistoryToDocPref', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        createSettingsOfDocPreference : $resource('rest/pastHistory/createSettingsOfDocPreference', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        updateHistoryOfPatient : $resource('rest/pastHistory/updateHistoryOfPatient', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        createHistoryOfPatient : $resource('rest/pastHistory/createHistoryOfPatient', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        deleteHistoryOfPatient : $resource('rest/pastHistory/deleteHistoryOfPatient', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        deleteHistoryOfPrescription : $resource('rest/pastHistory/deleteHistoryOfPrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        createPrescriptionHistory : $resource('rest/pastHistory/createPrescriptionHistory', {}, {
+        createPrescriptionHistory : $resource('/api/rest/pastHistory/createPrescriptionHistory', {}, {
             'query':  {
                 method:'POST',
                 isArray:false

@@ -5,27 +5,43 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionInvData extends BaseData {
 
-  private long presInvID;
-  private long appointmentID;
-  private long invID;
+  private Long presInvID;
+  private Long appointmentID;
+  private Long invID;
   private String invName;
   private String note;
-  private long checked;
+  private Long checked;
 
-  public long getPresInvID() {
+  public Long getPresInvID() {
     return presInvID;
   }
 
-  public void setPresInvID(long presInvID) {
+  public void setPresInvID(Long presInvID) {
     this.presInvID = presInvID;
   }
 
-  public long getInvID() {
+  public Long getAppointmentID() {
+    return appointmentID;
+  }
+
+  public void setAppointmentID(Long appointmentID) {
+    this.appointmentID = appointmentID;
+  }
+
+  public Long getInvID() {
     return invID;
   }
 
-  public void setInvID(long invID) {
+  public void setInvID(Long invID) {
     this.invID = invID;
+  }
+
+  public String getInvName() {
+    return invName;
+  }
+
+  public void setInvName(String invName) {
+    this.invName = invName;
   }
 
   public String getNote() {
@@ -36,27 +52,11 @@ public class PrescriptionInvData extends BaseData {
     this.note = note;
   }
 
-  public long getChecked() {
+  public Long getChecked() {
     return checked;
   }
 
-  public void setChecked(long checked) {
+  public void setChecked(Long checked) {
     this.checked = checked;
-  }
-
-  public long getAppointmentID() {
-    return appointmentID;
-  }
-
-  public void setAppointmentID(long appointmentID) {
-    this.appointmentID = appointmentID;
-  }
-
-  public String getInvName() {
-    return invName;
-  }
-
-  public void setInvName(String invName) {
-    this.invName = invName;
   }
 }

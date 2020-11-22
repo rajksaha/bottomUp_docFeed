@@ -5,24 +5,24 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PatientDrugHistoryData extends BaseData {
 
-  private long drugHistoryID;
-  private long patientID;
+  private Long drugHistoryID;
+  private Long patientID;
   private String drugName;
-  private long currentStatus;
+  private Integer currentStatus;
 
-  public long getDrugHistoryID() {
+  public Long getDrugHistoryID() {
     return drugHistoryID;
   }
 
-  public void setDrugHistoryID(long drugHistoryID) {
+  public void setDrugHistoryID(Long drugHistoryID) {
     this.drugHistoryID = drugHistoryID;
   }
 
-  public long getPatientID() {
+  public Long getPatientID() {
     return patientID;
   }
 
-  public void setPatientID(long patientID) {
+  public void setPatientID(Long patientID) {
     this.patientID = patientID;
   }
 
@@ -34,11 +34,11 @@ public class PatientDrugHistoryData extends BaseData {
     this.drugName = drugName;
   }
 
-  public long getCurrentStatus() {
+  public Integer getCurrentStatus() {
     return currentStatus;
   }
 
-  public void setCurrentStatus(long currentStatus) {
+  public void setCurrentStatus(Integer currentStatus) {
     this.currentStatus = currentStatus;
   }
 }

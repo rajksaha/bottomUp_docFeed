@@ -9,6 +9,12 @@ app.service('PatientService', function ($resource) {
                 method:'GET',
                 params: {patientID: '@patientID'}
             }
+        }),
+        update : $resource('/api/rest/patient/update', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
         })
     };
 });

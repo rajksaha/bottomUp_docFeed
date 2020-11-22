@@ -5,45 +5,45 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionFamilyDiseaseData extends BaseData {
 
-  private long presFamilyDiseaseID;
-  private long appointmentID;
-  private long familyDiseaseID;
-  private long diseaseID;
+  private Long presFamilyDiseaseID;
+  private Long appointmentID;
+  private Long familyDiseaseID;
+  private Long diseaseID;
   private String diseaseName;
-  private long relation;
+  private Integer relation;
   private String present;
   private String type;
   private String detail;
 
-  public long getPresFamilyDiseaseID() {
+  public Long getPresFamilyDiseaseID() {
     return presFamilyDiseaseID;
   }
 
-  public void setPresFamilyDiseaseID(long presFamilyDiseaseID) {
+  public void setPresFamilyDiseaseID(Long presFamilyDiseaseID) {
     this.presFamilyDiseaseID = presFamilyDiseaseID;
   }
 
-  public long getAppointmentID() {
+  public Long getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(long appointmentID) {
+  public void setAppointmentID(Long appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public long getFamilyDiseaseID() {
+  public Long getFamilyDiseaseID() {
     return familyDiseaseID;
   }
 
-  public void setFamilyDiseaseID(long familyDiseaseID) {
+  public void setFamilyDiseaseID(Long familyDiseaseID) {
     this.familyDiseaseID = familyDiseaseID;
   }
 
-  public long getDiseaseID() {
+  public Long getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(long diseaseID) {
+  public void setDiseaseID(Long diseaseID) {
     this.diseaseID = diseaseID;
   }
 
@@ -55,11 +55,11 @@ public class PrescriptionFamilyDiseaseData extends BaseData {
     this.diseaseName = diseaseName;
   }
 
-  public long getRelation() {
+  public Integer getRelation() {
     return relation;
   }
 
-  public void setRelation(long relation) {
+  public void setRelation(Integer relation) {
     this.relation = relation;
   }
 

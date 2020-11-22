@@ -22,4 +22,6 @@ public interface DoctorVitalSettingMapper {
     public List<DoctorVitalSettingData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     public void delete(Map<String, Object> param) throws BottomUpException;
+
+    public List<DoctorVitalSettingData> getByDoctorParam(Map<String, Object> param) throws BottomUpException;
 }

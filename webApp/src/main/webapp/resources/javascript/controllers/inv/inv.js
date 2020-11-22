@@ -1,34 +1,52 @@
-app.controller('PrescribeInvController', function($scope, $http, $modal, $rootScope, limitToFilter, appointmentData, $modalInstance, DoctorService, PrescriptionService, PresSaveService) {
+app.controller('PrescribeInvController', function($scope, $http, $filter, $modal, $rootScope, limitToFilter, appointmentData, $modalInstance, DoctorService, PrescriptionService, PresSaveService) {
 	
 
 	$scope.invNameData = {};
 	$scope.selectedInvID = 0;
 	$scope.invSettingData = [];
-	$scope.prescribedInvData = [];
+	$scope.prescribedInvList = [];
 	$scope.invsttingNameData = {};
 	$scope.invAdderData = {};
 	$scope.addByName = false;
+    $scope.searchAlpha = 'ALL';
+    $scope.doctorPrefInvData = {};
+    $scope.activeTab = 'prefList';
+
+    $scope.searchAlphaList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p","q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "ALL"];
 
     $scope.prescription = function (num) {
         $modalInstance.close(true);
     };
 
+    $scope.setSearchAlpha = function (item) {
+        $scope.searchAlpha = item;
+    };
+
+    $scope.filterByAlphabet = function (item) {
+        if($scope.searchAlpha == 'ALL' || $scope.searchAlpha.toUpperCase() == item.name){
+            return true;
+        }
+        return false;
+    };
+
+    $scope.deleteFromDoctorPref = function (invPreferenceID) {
+        DoctorService.deletePrefInv.remove({invPreferenceID: invPreferenceID}).$promise.then(function (result) {
+            $scope.bringDoctorPreference($scope.selectedInvCategoryID);
+        });
+    };
+
     $scope.getInvName = function(term) {
-        
-    	var dataString = 'query=0'+ '&invName=' + term;
+    	var dataString = {};
+    	dataString.term = term;
         
         return $http({
             method: 'POST',
-            url: "rest/inv/inv",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/inv",
+            data: dataString
         }).then(function(result) {
         	$scope.invNameData = result.data;
         	return limitToFilter($scope.invNameData, 10);
         });
-
-        
-       // return $scope.products;
       };
       
 	  $scope.onSelectInvName = function(item, model, label){
@@ -38,117 +56,73 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 	  
 	
 	$scope.addToDoctorPreference = function (isAnother){
-		
-		$scope.selectedInvID = 0;
-		
-		var displayOrder = 1;
-		if($scope.invSettingData != undefined && $scope.invSettingData.length > 0){
-			displayOrder = parseInt($scope.invSettingData[$scope.invSettingData.length -1].displayOrder) + 1;
-		}
-		
-		var dataString = 'query=2'+ '&invName=' + $scope.invName + '&displayOrder=' + displayOrder;
-
-        PresSaveService.createDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
+        $scope.doctorPrefInvData.doctorID = appointmentData.doctorID;
+        DoctorService.createPrefInv.query({}, $scope.doctorPrefInvData).$promise.then(function(result) {
             if (result && result.success) {
                 if(isAnother){
-                    $scope.invName = "";
+                    $scope.doctorPrefInvData = {};
                 }else {
-                    $scope.docTorINVSetter = false;
-                    $scope.bringINVDetail();
+
+                    $scope.setActiveTab('prefList');
                 }
             }else{
     
             }
         });
-		
 	};
 	
-	$scope.delINVFromSetting = function (invSettingID, index){
-		
-		var dataString = 'query=6'+ '&invSettingID=' + invSettingID;
-
-        PresSaveService.deleteDoctorInV.query({}, $scope.searchData).$promise.then(function(result) {
-            if (result && result.success) {
-                $scope.invSettingData.splice(index,1);
-            }else{
-    
-            }
-        });
-	};
-	
-	$scope.addORDelINV = function (addedToPrescription,inv){
-		inv.addedToPrescription = addedToPrescription;
-		if(addedToPrescription){
-			
-			$scope.addInvToPresciption(inv.name, "");
-			
-	        
+	$scope.addORDelINV = function (addedInPrescription,inv){
+		inv.addedInPrescription = addedInPrescription;
+		if(addedInPrescription){
+			$scope.addByPref(inv.invID);
 		}else{
-			$scope.deleteInvByInvID(inv.id);
+			$scope.delete(inv.invID);
 		}
 	};
 	
-	$scope.addInvToPresciption = function (invName,note){
-		
-		var dataString = 'query=4'+ '&invName=' + invName + '&note=' + note;
-
-        PresSaveService.createInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
-            if (result && result.success) {
-                $scope.bringPrescribedInv();
-            }else{
-    
-            }
+	$scope.addByPref = function (invID){
+        PresSaveService.saveInvFromPref.query({}, {appointmentID:appointmentData.appointmentID, invID: invID}).$promise.then(function(result) {
+            $scope.bringDoctorPreference($scope.selectedInvCategoryID);
         });
 	};
 	
-	$scope.deleteInvFromPresciption = function (id){
-		
-		var dataString = 'query=5'+ '&id=' + id;
-
-        PresSaveService.deleteInvPrescriptionById.query({}, $scope.searchData).$promise.then(function(result) {
-            if (result && result.success) {
-                $scope.bringPrescribedInv();
-        	    $scope.bringINVDetail();
-            }else{
-    
-            }
-        });
-	};
-	
-	$scope.deleteInvByInvID = function (invID){
-		
-		var dataString = 'query=10'+ '&invID=' + invID;
-
-        PresSaveService.deleteInvPrescriptionByInvId.query({}, $scope.searchData).$promise.then(function(result) {
-            if (result && result.success) {
-                $scope.bringPrescribedInv();
-            }else{
-    
-            }
+	$scope.delete = function (presInvID){
+        PrescriptionService.deletePrescribedInv.query({}, {presInvID:presInvID}).$promise.then(function(result) {
+            $scope.bringPrescribedInv();
         });
 	};
 
-    $scope.colorFilter = function (item) {
-        if (item.categoryID == $scope.invCategoryID) {
-            return item;
-        }
-    };
-    $scope.bringDoctorSetting = function (categoryID) {
+    $scope.bringDoctorPreference = function (categoryID) {
         $scope.doctorPrefInvList = [];
         DoctorService.getDoctorPrefInv.query({}, {doctorID: appointmentData.doctorID,
                                                     appointmentID : appointmentData.appointmentID,
                                                     categoryID: categoryID}).$promise.then(function(result) {
             $scope.doctorPrefInvList = result;
+            $scope.alpha = [];
+            angular.forEach($scope.doctorPrefInvList, function(value, key) {
+                var fChar = value.invName.toUpperCase().charAt(0);
+                var temp = $filter('filter')($scope.alpha, {name: fChar}, true)[0];
+                if(temp){
+                    temp.prefList.push(value)
+                }else{
+                    temp = {};
+                    temp.name = fChar;
+                    temp.prefList = [];
+                    temp.prefList.push(value);
+                    $scope.alpha.push(temp);
+                }
+            });
             $scope.numberOfInvAdded = $scope.doctorPrefInvList.length;
         });
     };
 	
 	$scope.bringINVDetail = function (){
         PrescriptionService.getInvDetail.query({}, {}).$promise.then(function (result) {
-            $scope.invCategoryList = result;
-            $scope.invCategoryList.push({ name: "No Category", invCategoryID: 0 });
-            $scope.selectedInvCategoryID = 0;
-            $scope.bringDoctorSetting($scope.selectedInvCategoryID);
+            $scope.invCategorySearchList = result;
+            $scope.invCategorySearchList.push({ name: "No Category", invCategoryID: 0 });
+            $scope.invCategorySearchList.push({ name: "All Category", invCategoryID: -1 });
+            $scope.selectedInvCategoryID = -1;
+            $scope.bringDoctorPreference($scope.selectedInvCategoryID);
         });
 
 
@@ -156,184 +130,68 @@ app.controller('PrescribeInvController', function($scope, $http, $modal, $rootSc
 	
 	$scope.bringPrescribedInv = function (){
         $scope.prescribedInvList = [];
-        // DoctorService.getDoctorPrefInv.query({}, {doctorID: appointmentData.doctorID, appointmentID : appointmentData.appointmentID}).$promise.then(function(result) {
-        //     $scope.doctorPrefInvList = result;
-        //     $scope.numberOfInvAdded = $scope.doctorPrefInvList.length;
-        // });
+        PrescriptionService.getPrescribedInv.query({}, {appointmentID : appointmentData.appointmentID}).$promise.then(function(result) {
+            $scope.prescribedInvList = result;
+        });
 	};
-	
 	
 	$scope.prepareInvAdderData = function(invAdderData){
-		
-		if(!invAdderData.note){
-			invAdderData.note = "";
-		}
-		
-		if(invAdderData.addByTypeHead){
-			$scope.addInvToPresciption(invAdderData.id, invAdderData.note);
-			$scope.bringPrescribedInv();
-		}else{
-			
-			var dataString = 'query=3'+ '&invName=' + invAdderData.name;
-
-            PresSaveService.createDoctorInVSettings.query({}, $scope.searchData).$promise.then(function(result) {
-                if (result && result.success) {
-                    $scope.addInvToPresciption(result, invAdderData.note);
-	        	    $scope.bringPrescribedInv();
-                }else{
-        
-                }
-            });
-	        
-		}
-	};
-
-	$scope.addInvToPrescription = function(){
-		
-		var invAdderData = {};
-		
-		var modalInstance = $modal.open({
-            templateUrl: 'javascript/templates/inv/addInvModal.html',
-            windowClass: 'fade in',
-            controller: 'PrescribeInvController.InvMasterContoller',
-            resolve: {
-            	record: function () {
-                    return {
-                    	invAdderData
-                    };
-                }
-            },
-            backdrop: 'static'
+        PresSaveService.createDoctorInVSettings.query({}, $scope.searchData).$promise.then(function(result) {
+            $scope.addInvToPrescription(result, invAdderData.note);
+            $scope.bringPrescribedInv();
         });
-		modalInstance.result.then(function(result) {
-			$scope.bringPrescribedInv();
-	     });
 	};
+
+	$scope.manualAdd = function () {
+	    var data = {};
+        data.editMode = true;
+        $scope.prescribedInvList.push(data);
+    };
+
+    $scope.manualSave = function (invData) {
+        if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
+            delete invData.editMode;
+            if(invData.presInvID){
+                PresSaveService.updatePrescribedInv.query({}, invData).$promise.then(function(result) {
+                    $scope.bringPrescribedInv();
+                });
+            }else{
+                invData.appointmentID = appointmentData.appointmentID;
+                PresSaveService.createPrescribedInv.query({}, invData).$promise.then(function(result) {
+                    $scope.bringPrescribedInv();
+                });
+            }
+        }else {
+            $scope.error = true;
+        }
+    };
+
+    $scope.manualCancel = function (invData) {
+        invData.editMode = false;
+    };
+
+	$scope.setActiveTab = function (tab) {
+        switch (tab){
+            case 'prefList':
+                $scope.bringDoctorPreference($scope.selectedInvCategoryID);
+                break;
+            case 'addPref':
+                $scope.doctorPrefInvData = {};
+                break;
+            case 'prescribedList':
+                $scope.bringPrescribedInv();
+                break;
+            default:
+                $scope.activeTab = tab;
+        }
+        $scope.activeTab = tab;
+
+    };
+    
 	
-	$scope.editFromPresciption = function  (invAdderData){
-		
-		
-		var modalInstance = $modal.open({
-            templateUrl: 'javascript/templates/inv/addInvModal.html',
-            windowClass: 'fade in',
-			size : 'sm',
-            controller: 'PrescribeInvController.InvMasterContoller',
-            resolve: {
-            	record: function () {
-                    return {
-                    	invAdderData
-                    };
-                }
-            },
-            backdrop: 'static'
-        });
-		modalInstance.result.then(function(result) {
-			$scope.bringPrescribedInv();
-	     });
-		
-	};
-
-
     $scope.inIt = function (){
         $scope.bringINVDetail();
-        $scope.bringPrescribedInv();
     };
 
     $scope.inIt();
-
-	
-});
-
-app.controller('PrescribeInvController.InvMasterContoller', function($scope, $http, $modalInstance, limitToFilter, $filter, record) {
-
-	$scope.invAdderData = {};
-
-	if(record.invAdderData.id){
-		$scope.invAdderData = record.invAdderData;
-	}else{
-		$scope.invAdderData = {};
-		$scope.invAdderData.note = "";
-	}
-
-	$scope.getInvNameForMaster = function(term){
-
-
-		var dataString = 'query=8'+ '&invName=' + term;
-
-        return $http({
-            method: 'POST',
-            url: "rest/autoComplete/inv",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function(result) {
-        	$scope.invsttingNameData = result.data;
-        	return limitToFilter($scope.invsttingNameData, 10);
-        });
-	};
-
-	$scope.onSelectInvNameMaster = function (item, model, label){
-	};
-
-	$scope.save = function(another){
-
-		if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
-
-			var dataString = "";
-			if($scope.invAdderData.id){
-
-				dataString = 'query=9'+ '&invName=' + $scope.invAdderData.invName + '&note=' + $scope.invAdderData.note + '&ID=' + $scope.invAdderData.id;
-			}else{
-				dataString ='query=4'+ '&invName=' + $scope.invAdderData.invName + '&note=' + $scope.invAdderData.note;
-
-			}
-
-            InvService.createAndupdateInvPrescription.query({}, $scope.searchData).$promise.then(function(result) {
-                if (result && result.success) {
-                    if (another) {
-                        $scope.invAdderData = {};
-                        $scope.error = false;
-                        $scope.success = true;
-                        $scope.errorMessage = "Inv added to your prescription, Please add another";
-                    } else {
-                        $modalInstance.close();
-                    }
-                }else{
-        
-                }
-            });
-                
-		}else{
-            $scope.success = false;
-			$scope.error = true;
-		}
-
-
-
-
-	};
-
-	$scope.cancel = function(){
-		$modalInstance.close();
-	};
-
-	$scope.getDisease = function(term) {
-
-    	var dataString = "query=" + 0 + "&data=" + term;
-
-        return $http({
-            method: 'POST',
-            url: "rest/autoComplete/diagnosis",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function(result) {
-        	$scope.diagnosisNameData = result.data;
-        	return limitToFilter($scope.diagnosisNameData, 10);
-        });
-    };
-
-      $scope.onSelectDisease = function(item, model, label){
-    	  $scope.diagnosisData.diseaseName = item.name;
-      };
-
-
 });

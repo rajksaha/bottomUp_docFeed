@@ -4,6 +4,7 @@ package com.bottomUp.myBatis.persistence;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.AppointmentTypeData;
 import com.bottomUp.domain.ContentAdviceData;
+import com.bottomUp.domain.ContentSymptomData;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,8 @@ public interface ContentAdviceMapper {
     public void update(ContentAdviceData data) throws BottomUpException;
 
     public ContentAdviceData getByID(Long ID) throws BottomUpException;
+
+    public ContentAdviceData getByName(String symptomName)throws BottomUpException;
 
     public List<ContentAdviceData> getByParam(Map<String, Object> param) throws BottomUpException;
 

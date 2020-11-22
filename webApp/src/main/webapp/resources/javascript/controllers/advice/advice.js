@@ -1,14 +1,14 @@
-app.controller('PrescribeAdviceController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance, appointmentData, DoctorService, PresSaveService) {
-	
+app.controller('PrescribeAdviceController', function($scope, $http, $modal, $rootScope, limitToFilter, $modalInstance, doctorData, appointmentData, DoctorService, PresSaveService, PrescriptionService) {
 
-	$scope.adviceSettingData = {};
+    $scope.activeTab = 'bngPrefList';
+	$scope.doctorPrefAdviceData = {};
 	$scope.selectedInvID = 0;
 	$scope.advcieSettingData = [];
 	$scope.adviceAdderData = {};
 	$scope.invAdderData = {};
 	$scope.addByName = false;
 	
-	$scope.doctorData = {};
+	$scope.doctorData = doctorData;
 
     $scope.prescription = function () {
         $modalInstance.close(true);
@@ -16,174 +16,145 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
 	
 	$scope.adviceAdderData.lang = 0;
 
-    $scope.getAdvcieName = function(term) {
+    $scope.getAdviceName = function(term) {
         
-    	var dataString = 'query=0'+ '&adviceName=' + term + '&lang=' + $scope.adviceAdderData.lang + '&type=' + $scope.doctorData.category;
-        
+        var searchData = {};
+        searchData.term = term;
+        if($scope.doctorPrefAdviceData.lang){
+            searchData.intLang = $scope.doctorPrefAdviceData.lang;
+		}else{
+            searchData.intLang = $scope.prescribeAdviceData.lang;
+		}
+        searchData.intType = $scope.doctorData.category;
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/advice",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/advice",
+            data: searchData
         }).then(function(result) {
-        	$scope.invNameData = result.data;
-        	return limitToFilter($scope.invNameData, 10);
+        	$scope.adviceNameData = result.data;
+        	return limitToFilter($scope.adviceNameData, 10);
+        });
+      };
+
+    $scope.addToDoctorPreference = function (addAnother){
+        var displayOrder = 1;
+        if($scope.doctorPrefAdviceList != undefined && $scope.doctorPrefAdviceList.length > 0){
+            displayOrder = parseInt($scope.doctorPrefAdviceList[$scope.doctorPrefAdviceList.length -1].displayOrder) + 1;
+        }
+        $scope.doctorPrefAdviceData.displayOrder = displayOrder;
+        $scope.doctorPrefAdviceData.doctorID = appointmentData.doctorID;
+        DoctorService.createPrefAdvice.query({}, $scope.doctorPrefAdviceData).$promise.then(function(result) {
+            if (result && result.success) {
+                if(addAnother){
+                    $scope.doctorPrefAdviceData = {};
+                }else {
+                    if($scope.doctorPrefAdviceData.lang == 1){
+                        $scope.setActiveTab('bngPrefList');
+                    }else{
+                        $scope.setActiveTab('engPrefList');
+                    }
+                }
+            }else{
+
+            }
         });
 
-        
-       // return $scope.products;
-      };
-      
-	  $scope.onSelectAdviceName = function(item, model, label){
-		  $scope.adviceAdderData.advcieID = item.id;
-		  $scope.addByName = true;
-	  };
-	  
-	$scope.prepareDoctorSettingData = function (addAnother){
-		
-		if(!$scope.addByName){
-            var dataString = 'query=2'+ '&adviceName=' + $scope.adviceAdderData.name + '&type=' + $scope.doctorData.category + '&pdf=' + $scope.adviceAdderData.pdf + '&lang=' + $scope.adviceAdderData.lang;
+    };
 
-            PresSaveService.createAdvice.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    if(addAnother){
-                        $scope.adviceAdderData = {};
-                        $scope.adviceAdderData.lang = 0;
-                    }else{
-                        $scope.addToDoctorPreference(result);
-                    }
-                } else {
-                }
-            });
-			
-		}else{
-			
-			$scope.addToDoctorPreference($scope.adviceAdderData.advcieID);
-		}
-	};
-	
-	$scope.addToDoctorPreference = function (adviceID){
-		var displayOrder = 1;
-		if($scope.advcieSettingData != undefined && $scope.advcieSettingData.length > 0){
-			displayOrder = parseInt($scope.advcieSettingData[$scope.advcieSettingData.length -1].displayOrder) + 1;
-		}
-		var dataString = 'query=3'+ '&adviceID=' + parseInt(adviceID) + '&displayOrder=' + displayOrder;
-		
-		PresSaveService.createDoctorPreference.query({}, dataString).$promise.then(function (result) {
-			if (result && result.success) {
-				$scope.bringPrescribedAdvice();	
-			} else {
-			}
-		});
-		
-	};
-	
-	$scope.delAdviceFromSetting = function (adviceSettingID){
-		
-		var dataString = 'query=6'+ '&adviceSettingID=' + adviceSettingID;
-		
-		PresSaveService.delAdviceSettings.query({}, dataString).$promise.then(function (result) {
-			if (result && result.success) {
-				$scope.bringPrescribedAdvice();
-			} else {
-			}
-		});
-	};
-	
-	$scope.deciderAdvice = function (addedInPrescription,advice){
-		
-		advice.addedToPrescription = addedInPrescription;
-		if(addedInPrescription){
-			$scope.addToPres(advice.adviceID);
-		}else{
-			$scope.deleteAdviceFromPrescibtion(advice.adviceID);
-		}
-	};
-	
-	$scope.addToPres = function (adviceID){
-		PresSaveService.saveAdviceFromPref.query({}, {appointmentID: appointmentData.appointmentID, adviceID: adviceID}).$promise.then(function (result) {
-            //$scope.bringPrescribedAdvice();
-		});
-	};
-	
-	$scope.deleteAdviceFromPrescibtion = function (adviceId){
-		
-		var dataString = 'query=5'+ '&adviceID=' + parseInt(adviceId);
-		
-		PresSaveService.delPrescibtionAdvice.query({}, dataString).$promise.then(function (result) {
-            //$scope.bringPrescribedAdvice();
-		});
-	};
+    $scope.deleteFromDoctorPref = function (advicePreferenceID) {
+        DoctorService.deletePrefAdvice.remove({advicePreferenceID: advicePreferenceID}).$promise.then(function (result) {
+        	$scope.bringDoctorPrefAdvice();
+        });
+    };
 
-	$scope.bringPrescribedAdvice = function (){
-		$scope.doctorPrefAdviceList = [];
-		$scope.adviceAdderData.lang = 0;
+    $scope.deciderAdvice = function (addedInPrescription,advice){
+        advice.addedInPrescription = addedInPrescription;
+        if(addedInPrescription){
+            $scope.addToPres(advice.adviceID);
+        }else{
+            $scope.deletePrescribedAdvice(advice.adviceID);
+        }
+    };
+
+    $scope.addToPres = function (adviceID){
+        PresSaveService.saveAdviceFromPref.query({}, {appointmentID: appointmentData.appointmentID, adviceID: adviceID}).$promise.then(function (result) {
+        });
+    };
+
+    $scope.deletePrescribedAdvice = function (prescriptionAdviceID){
+        PrescriptionService.deletePrescribedAdvice.remove({prescriptionAdviceID: prescriptionAdviceID}).$promise.then(function (result) {
+        });
+    };
+
+    $scope.bringDoctorPrefAdvice = function (){
+        $scope.doctorPrefAdviceList = [];
         DoctorService.getDoctorPrefAdvice.query({}, {doctorID: appointmentData.doctorID, appointmentID : appointmentData.appointmentID}).$promise.then(function (result) {
             $scope.doctorPrefAdviceList = result;
-		});
-	};
+        });
+    };
 
-    $scope.addAdvice = function (){
-    		
-    		var prescription = {};
-    		var modalInstance = $modal.open({
-    	        templateUrl: 'javascript/templates/advice/addAdviceModal.html',
-    	        windowClass: 'fade in',
-    	        
-    	        controller: 'PrescribeAdviceController.AddAdvcieToDB',
-    	        resolve: {
-                    prescription: function () {
-                        return prescription;
-                    }
-    	        },
-    	        backdrop: 'static'
-    	    });
-    	    modalInstance.result.then(function(result) {
-    	    	$scope.bringAdviceSettingData($scope.masterDiseaseData.diseaseID);
-    	     });
-    	    
+    $scope.bringPrescribedAdvice = function (){
+        $scope.prescribedAdviceList = [];
+        PrescriptionService.getPrescribedAdvice.query({}, {appointmentID : appointmentData.appointmentID}).$promise.then(function (result) {
+            $scope.prescribedAdviceList = result;
+        });
+    };
+
+    $scope.addToPrescription = function () {
+        if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
+            $scope.prescribeAdviceData.appointmentID = appointmentData.appointmentID;
+            PresSaveService.createPrescribedAdvice.query({}, $scope.prescribeAdviceData).$promise.then(function(result) {
+            	$scope.prescribeAdviceData.advice = null;
+                $scope.bringPrescribedAdvice();
+            });
+        }else {
+            $scope.error = true;
+        }
+    };
+
+    $scope.engFilter = function (item) {
+        if(item.lang == 0){
+            return true;
+        }
+        return false;
+    };
+
+    $scope.bangFilter = function (item) {
+        if(item.lang == 1){
+            return true;
+        }
+        return false;
+    };
+
+    $scope.setActiveTab = function (tab) {
+        switch (tab){
+            case 'bngPrefList':
+                $scope.bringDoctorPrefAdvice();
+                break;
+            case 'engPrefList':
+                $scope.bringDoctorPrefAdvice();
+                break;
+            case 'addPref':
+                $scope.doctorPrefAdviceData = {};
+                $scope.doctorPrefAdviceData.lang = 0;
+                break;
+            case 'prescribedList':
+                $scope.prescribeAdviceData = {};
+                $scope.prescribeAdviceData.lang = 0;
+                $scope.bringPrescribedAdvice();
+                break;
+            default:
+                $scope.activeTab = tab;
+        }
+        $scope.activeTab = tab;
+
     };
 
     $scope.inIt = function (){
-        $scope.bringPrescribedAdvice();
+        $scope.bringDoctorPrefAdvice();
     };
 
     $scope.inIt();
 
-	
-});
-
-app.controller('PrescribeAdviceController.AddAdvcieToDB', function($scope, $modalInstance, data, $window, $location,limitToFilter, AdviceService) {
-	
-	$scope.postData = data;
-	
-	$scope.langSelector = 0;
-
-	$scope.saveNewAdvice = function (){
-			if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
-				var dataString = "query=7" + "&adviceName=" + $scope.name + '&pdf=' + $scope.code + '&lang=' + $scope.langSelector;
-				
-				AdviceService.delDoctorAdvice.query({}, dataString).$promise.then(function (result) {
-					if (result && result.success) {
-						$modalInstance.dismiss('cancel');
-					} else {
-					}
-				});
-		        
-			}else{
-				$scope.error = true;
-			}
-		
-    };
-    
-    
-
-	
-	$scope.cancel = function (){
-		$modalInstance.dismiss('cancel');
-	};
-	
-	
-	
 	
 });

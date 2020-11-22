@@ -23,11 +23,20 @@ public class DoctorPreferenceInvService {
     @Autowired
     private DoctorPreferenceInvMapper doctorPreferenceInvMapper;
 
+    @Autowired
+    private ContentInvService contentInvService;
+
     public void create(DoctorPreferenceInvData data) throws BottomUpException {
+        if(data != null && data.getInvID() == null){
+            data.setInvID(contentInvService.getInsert(data.getInvName()));
+        }
         doctorPreferenceInvMapper.create(data);
     }
 
     public void update(DoctorPreferenceInvData data) throws BottomUpException {
+        if(data != null && data.getInvID() == null){
+            data.setInvID(contentInvService.getInsert(data.getInvName()));
+        }
         doctorPreferenceInvMapper.update(data);
     }
 

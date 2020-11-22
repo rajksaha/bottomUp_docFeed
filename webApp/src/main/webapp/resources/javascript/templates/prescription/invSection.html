@@ -3,8 +3,8 @@
         <div class="form-group">
             <h2 class="item-head link"><a href="" data-ng-click="invModal()"><label class="mainLabel">Investigation</label></a></h2>
         </div>
-        <div data-ng-repeat="invData in prescribedInvData">
-            <a class="link" data-ng-click="deleteInvFromPresciption(invData.id)">
+        <div data-ng-repeat="invData in prescribedInvList">
+            <a class="link" data-ng-click="deleteInv(invData.presInvID, $index)">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
             <span>{{invData.invName}}</span>
@@ -26,8 +26,6 @@
         </div>
 
     </div>
-
-
 </div>
 
 

@@ -23,7 +23,13 @@ public class DoctorPreferenceAdviceService {
     @Autowired
     private DoctorPreferenceAdviceMapper doctorPreferenceAdviceMapper;
 
+    @Autowired
+    private ContentAdviceService contentAdviceService;
+
     public void create(DoctorPreferenceAdviceData data) throws BottomUpException {
+        if(data.getAdviceID() == null){
+            data.setAdviceID(contentAdviceService.getInsert(data.getAdvice()));
+        }
         doctorPreferenceAdviceMapper.create(data);
     }
 

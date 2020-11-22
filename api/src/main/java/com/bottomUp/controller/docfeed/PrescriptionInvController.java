@@ -60,10 +60,10 @@ public class PrescriptionInvController extends BaseController {
         return result;
     }
 
-    @RequestMapping(value = "/delete/{  presInvID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("  presInvID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    @RequestMapping(value = "/delete/{presInvID}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("presInvID") Integer presInvID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("  presInvID", appointmentID);
+        param.put("presInvID", presInvID);
         this.prescriptionInvService.delete(param);
     }
 }

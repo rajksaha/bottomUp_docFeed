@@ -82,8 +82,8 @@
     <delete id="delete" parameterType="map">
 		DELETE  FROM prescription_advice
 		WHERE 1=1
-		<if test="presAdviceIS != null">
-			AND presAdviceIS = #{presAdviceIS}
+		<if test="presAdviceID != null">
+			AND presAdviceID = #{presAdviceID}
 		</if>
 	</delete>
 

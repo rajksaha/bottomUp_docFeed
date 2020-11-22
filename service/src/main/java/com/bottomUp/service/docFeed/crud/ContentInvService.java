@@ -23,6 +23,17 @@ public class ContentInvService {
     @Autowired
     private ContentInvMapper contentInvMapper;
 
+    public Long getInsert(String invName) throws BottomUpException{
+        ContentInvData invData = contentInvMapper.getByName(invName);
+        if(invData == null){
+            invData = new ContentInvData();
+            invData.setName(invName);
+            invData.setCategoryID(0);
+            contentInvMapper.create(invData);
+        }
+        return invData.getInvID();
+    }
+
     public void create(ContentInvData data) throws BottomUpException {
         contentInvMapper.create(data);
     }

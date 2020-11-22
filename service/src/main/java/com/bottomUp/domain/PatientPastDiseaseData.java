@@ -5,41 +5,50 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PatientPastDiseaseData extends BaseData {
 
-  private long patientPastDiseaseID;
-  private long patientID;
-  private long diseaseId;
-  private long isPresent;
+  private Long patientPastDiseaseID;
+  private Long patientID;
+  private Long diseaseID;
+  private String diseaseName;
+  private Integer isPresent;
   private String detail;
 
-  public long getPatientPastDiseaseID() {
+  public Long getPatientPastDiseaseID() {
     return patientPastDiseaseID;
   }
 
-  public void setPatientPastDiseaseID(long patientPastDiseaseID) {
+  public void setPatientPastDiseaseID(Long patientPastDiseaseID) {
     this.patientPastDiseaseID = patientPastDiseaseID;
   }
 
-  public long getPatientID() {
+  public Long getPatientID() {
     return patientID;
   }
 
-  public void setPatientID(long patientID) {
+  public void setPatientID(Long patientID) {
     this.patientID = patientID;
   }
 
-  public long getDiseaseId() {
-    return diseaseId;
+  public Long getDiseaseID() {
+    return diseaseID;
   }
 
-  public void setDiseaseId(long diseaseId) {
-    this.diseaseId = diseaseId;
+  public void setDiseaseID(Long diseaseID) {
+    this.diseaseID = diseaseID;
   }
 
-  public long getIsPresent() {
+  public String getDiseaseName() {
+    return diseaseName;
+  }
+
+  public void setDiseaseName(String diseaseName) {
+    this.diseaseName = diseaseName;
+  }
+
+  public Integer getIsPresent() {
     return isPresent;
   }
 
-  public void setIsPresent(long isPresent) {
+  public void setIsPresent(Integer isPresent) {
     this.isPresent = isPresent;
   }
 

@@ -54,6 +54,20 @@
 		WHERE vitalID = #{vitalID}
 	</select>
 
+	<select id="getByName" parameterType="string" resultType="contentVital">
+		SELECT
+		`vitalID`,
+		`vitalName`,
+		`shortName`,
+		`vitalUnit`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_vital`
+		WHERE vitalName = #{vitalName}
+	</select>
+
 	<select id="getByParam" parameterType="map" resultType="contentVital">
 		SELECT
 		`vitalID`,

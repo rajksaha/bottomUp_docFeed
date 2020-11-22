@@ -2,6 +2,7 @@ package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.ContentAdviceData;
+import com.bottomUp.domain.ContentSymptomData;
 import com.bottomUp.myBatis.persistence.ContentAdviceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,16 @@ public class ContentAdviceService {
 
     @Autowired
     private ContentAdviceMapper contentAdviceMapper;
+
+    public Long getInsert(String adviceName) throws BottomUpException{
+        ContentAdviceData adviceData = contentAdviceMapper.getByName(adviceName);
+        if(adviceData == null){
+            adviceData = new ContentAdviceData();
+            adviceData.setAdvice(adviceName);
+            contentAdviceMapper.create(adviceData);
+        }
+        return adviceData.getAdviceID();
+    }
 
     public void create(ContentAdviceData data) throws BottomUpException {
         this.contentAdviceMapper .create(data);

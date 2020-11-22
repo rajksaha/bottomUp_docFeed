@@ -5,44 +5,44 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorPreferenceInvData extends BaseData {
 
-  private long invPreferenceID;
-  private long doctorID;
-  private long invID;
-  private long displayOrder;
+  private Long invPreferenceID;
+  private Long doctorID;
+  private Long invID;
+  private Long displayOrder;
   private String invName;
   private Long invCategoryID;
   private Long presInvID;
   private Boolean addedInPrescription;
 
-  public long getInvPreferenceID() {
+  public Long getInvPreferenceID() {
     return invPreferenceID;
   }
 
-  public void setInvPreferenceID(long invPreferenceID) {
+  public void setInvPreferenceID(Long invPreferenceID) {
     this.invPreferenceID = invPreferenceID;
   }
 
-  public long getDoctorID() {
+  public Long getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(Long doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getInvID() {
+  public Long getInvID() {
     return invID;
   }
 
-  public void setInvID(long invID) {
+  public void setInvID(Long invID) {
     this.invID = invID;
   }
 
-  public long getDisplayOrder() {
+  public Long getDisplayOrder() {
     return displayOrder;
   }
 
-  public void setDisplayOrder(long displayOrder) {
+  public void setDisplayOrder(Long displayOrder) {
     this.displayOrder = displayOrder;
   }
 

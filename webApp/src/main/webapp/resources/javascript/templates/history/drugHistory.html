@@ -15,7 +15,7 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr  data-ng-repeat="data in oldDrugList" >
+					<tr  data-ng-repeat="data in patientDrugList | filter : {currentStatus : 0 }" >
 						<td >
 							<div class="form-group" data-ng-show="data.editMode">
 								<input type="text" data-ng-model="data.drugName"  class="form-control" placeholder="result" />
@@ -24,7 +24,7 @@
 						</td>
 						<td >
 							<button title="Add to Prescription" class="btn btn-default" data-ng-model="none"   data-ng-show="!data.editMode && !data.otherEditMode" data-ng-click="addDrugToPres(data)">
-								<span class="glyphicon"  data-ng-class="{'glyphicon-unchecked': data.addedToPres == false,'glyphicon-check': data.addedToPres != false}"></span>
+								<span class="glyphicon"  data-ng-class="{'glyphicon-check': data.addedToPres == true,'glyphicon-unchecked': data.addedToPres != true}"></span>
 							</button>
 							<button title="Save" data-ng-show="data.editMode" class="btn btn-primary" data-ng-click="saveDrug(data, 0)">
 								<span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
@@ -53,16 +53,16 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr data-ng-repeat="data in currentDrugList">
+					<tr data-ng-repeat="data in patientDrugList | filter : {currentStatus : 1 }">
 						<td >
 							<div class="form-group" data-ng-show="data.editMode">
 								<input type="text" data-ng-model="data.drugName"  class="form-control" placeholder="result" />
 							</div>
 							<span data-ng-show="!data.editMode">{{data.drugName}}</span>
 						</td>
-						<td id="">
+						<td >
 							<button title="Add to Prescription" class="btn btn-default" data-ng-model="none"   data-ng-show="!data.editMode && !data.otherEditMode" data-ng-click="addDrugToPres(data)">
-								<span class="glyphicon"  data-ng-class="{'glyphicon-unchecked': data.addedToPres == false,'glyphicon-check': data.addedToPres != false}"></span>
+								<span class="glyphicon"  data-ng-class="{'glyphicon-check': data.addedToPres == true,'glyphicon-unchecked': data.addedToPres != true}"></span>
 							</button>
 							<button title="Save" data-ng-show="data.editMode" class="btn btn-primary" data-ng-click="saveDrug(data, 1)">
 								<span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>

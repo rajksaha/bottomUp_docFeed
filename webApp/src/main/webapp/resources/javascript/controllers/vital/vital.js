@@ -80,7 +80,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 
 			VitalService.createDoctorVital.query({}, dataString).$promise.then(function(result) {
 				if (result && result.success) {
-					$scope.bringVitalDetail();
+					$scope.bringDoctorPrefVital();
 				}else{
 		
 				}
@@ -94,14 +94,14 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 
 			VitalService.createDoctorVitalOrder.query({}, dataString).$promise.then(function(result) {
 				if (result && result.success) {
-					$scope.bringVitalDetail();
+					$scope.bringDoctorPrefVital();
 				}else{
 		
 				}
 			});
 		};
 	
-	$scope.bringVitalDetail = function (){
+	$scope.bringDoctorPrefVital = function (){
 		
 		var dataString = "query=0";
 
@@ -211,7 +211,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 	
 	
 	(function(){
-		$scope.bringVitalDetail();
+		$scope.bringDoctorPrefVital();
     })()
 
 	

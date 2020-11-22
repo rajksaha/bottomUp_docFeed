@@ -1,9 +1,7 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentTypeData;
 import com.bottomUp.domain.ContentVitalOptionData;
-import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
 import com.bottomUp.myBatis.persistence.ContentVitalOptionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +31,10 @@ public class ContentVitalOptionService {
 
     public ContentVitalOptionData getByID(Long ID)throws BottomUpException {
         return this.contentVitalOptionMapper.getByID(ID);
+    }
+
+    public List<ContentVitalOptionData> getByVitalID(Long ID)throws BottomUpException {
+        return this.contentVitalOptionMapper.getByVitalID(ID);
     }
 
     public List<ContentVitalOptionData> getByParam(Map<String, Object> param) throws BottomUpException {

@@ -5,44 +5,51 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionAdviceData extends BaseData {
 
-  private long presAdviceID;
-  private long appointmentID;
-  private long adviceID;
-  private long type;
-  private long lang;
+  private Long presAdviceID;
+  private Long appointmentID;
+  private Long adviceID;
+  private Integer type;
+  private Integer lang;
   private String advice;
   private String pdf;
 
-
-  public long getPresAdviceID() {
+  public Long getPresAdviceID() {
     return presAdviceID;
   }
 
-  public void setPresAdviceID(long presAdviceID) {
+  public void setPresAdviceID(Long presAdviceID) {
     this.presAdviceID = presAdviceID;
   }
 
-  public long getAppointmentID() {
+  public Long getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(long appointmentID) {
+  public void setAppointmentID(Long appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public long getType() {
+  public Long getAdviceID() {
+    return adviceID;
+  }
+
+  public void setAdviceID(Long adviceID) {
+    this.adviceID = adviceID;
+  }
+
+  public Integer getType() {
     return type;
   }
 
-  public void setType(long type) {
+  public void setType(Integer type) {
     this.type = type;
   }
 
-  public long getLang() {
+  public Integer getLang() {
     return lang;
   }
 
-  public void setLang(long lang) {
+  public void setLang(Integer lang) {
     this.lang = lang;
   }
 
@@ -60,13 +67,5 @@ public class PrescriptionAdviceData extends BaseData {
 
   public void setPdf(String pdf) {
     this.pdf = pdf;
-  }
-
-  public long getAdviceID() {
-    return adviceID;
-  }
-
-  public void setAdviceID(long adviceID) {
-    this.adviceID = adviceID;
   }
 }

@@ -24,22 +24,13 @@ public class DoctorVitalSettingController extends BaseController {
     @Autowired
     private DoctorVitalSettingService doctorVitalSettingService;
 
-    @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByDoctorVitalInfo/{doctorID}/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<DoctorVitalSettingData> getAll(HttpServletRequest request) throws BottomUpException {
-
+    public  List<DoctorVitalSettingData> getByDoctorID(@PathVariable("doctorID") Long doctorID,@PathVariable("appointmentID") Long appointmentID,  HttpServletRequest request) throws BottomUpException {
         Map<String, Object> params = new HashMap<>();
-
-        return this.doctorVitalSettingService.getByParam(params);
-    }
-
-    @RequestMapping(value = {"/getByID/{vitalSettingID}"}, method = RequestMethod.GET)
-    @ResponseBody
-    public DoctorVitalSettingData getByID(@PathVariable("vitalSettingID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.doctorVitalSettingService.getByID(Long.valueOf(companyID));
+        params.put("doctorID", doctorID);
+        params.put("appointmentID", appointmentID);
+        return this.doctorVitalSettingService.getByDoctorParam(params);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
