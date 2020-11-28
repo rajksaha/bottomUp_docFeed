@@ -4,7 +4,19 @@
 
 app.service('DrugService', function ($resource) {
     return {
-
+        getNewPresDrug : $resource('/api/rest/prescriptionDrug/getNewPresDrug', {}, {
+            'query':  {
+                method:'GET',
+                isArray:false
+            }
+        }),
+        getDrugDefaultSetup : $resource('/api/rest/doctorDrugSetting/getDrugDefaultSetup/:doctorID/:drugID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:false,
+                params: {doctorID: '@doctorID', drugID: '@drugID'}
+            }
+        }),
         getTypeOfDrugDay : $resource('/api/rest/contentDrugType/getByParam', {}, {
             'query':  {
                 method:'GET',
@@ -13,25 +25,25 @@ app.service('DrugService', function ($resource) {
         }),
         getTypeOfDrug : $resource('/api/rest/contentDrugType/getByParam', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:true
             }
         }),
         getTypeOfDrugDayByDose : $resource('/api/rest/drug/getTypeOfDrugDayByDose', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:true
             }
         }),
-        getTypeOfDrugWhen : $resource('/api/rest/drug/getTypeOfDrugWhen', {}, {
+        getTypeOfDrugAdvice : $resource('/api/rest/contentDrugAdvice/getByParam', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:true
             }
         }),
-        getTypeOfDrugAdvice : $resource('/api/rest/drug/getTypeOfDrugAdvice', {}, {
+        getTypeOfDrugWhen : $resource('/api/rest/contentWhenType/getByParam', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:true
             }
         }),
@@ -41,7 +53,7 @@ app.service('DrugService', function ($resource) {
                 isArray:false
             }
         }),
-        createAndUpdateDrugPrescription : $resource('/api/rest/drug/createAndUpdateDrugPrescription', {}, {
+        save : $resource('/api/rest/prescriptionDrug/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
@@ -54,12 +66,6 @@ app.service('DrugService', function ($resource) {
             }
         }),
         updateDrugByName : $resource('/api/rest/drug/updateDrugByName', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        getDoctorDrugById : $resource('/api/rest/drug/getDoctorDrugById', {}, {
             'query':  {
                 method:'POST',
                 isArray:false

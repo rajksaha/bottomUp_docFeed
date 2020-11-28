@@ -5,16 +5,16 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionDrugDoseData extends BaseData {
 
-  private long presDrugID;
+  private Long presDrugID;
   private String dose;
-  private double numOfDay;
-  private long durationtype;
+  private Integer numOfDay;
+  private Integer durationType;
 
-  public long getPresDrugID() {
+  public Long getPresDrugID() {
     return presDrugID;
   }
 
-  public void setPresDrugID(long presDrugID) {
+  public void setPresDrugID(Long presDrugID) {
     this.presDrugID = presDrugID;
   }
 
@@ -26,19 +26,19 @@ public class PrescriptionDrugDoseData extends BaseData {
     this.dose = dose;
   }
 
-  public double getNumOfDay() {
+  public Integer getNumOfDay() {
     return numOfDay;
   }
 
-  public void setNumOfDay(double numOfDay) {
+  public void setNumOfDay(Integer numOfDay) {
     this.numOfDay = numOfDay;
   }
 
-  public long getDurationtype() {
-    return durationtype;
+  public Integer getDurationType() {
+    return durationType;
   }
 
-  public void setDurationtype(long durationtype) {
-    this.durationtype = durationtype;
+  public void setDurationType(Integer durationType) {
+    this.durationType = durationType;
   }
 }

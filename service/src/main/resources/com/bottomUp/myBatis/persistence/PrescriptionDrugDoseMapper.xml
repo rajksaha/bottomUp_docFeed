@@ -57,10 +57,13 @@
 	<select id="getByParam" parameterType="map" resultType="prescriptionDrugDose">
 		SELECT
 		`presDrugID`,
-		`presDrugID`,
 		`dose`,
 		`numOfDay`,
 		`durationType`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
 		FROM `prescription_drug_dose`
 		WHERE 1 = 1
 		<if test="presDrugID != null">

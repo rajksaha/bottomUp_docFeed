@@ -30,19 +30,19 @@ app.service('JsonService', function(){
 	];
 
 	this.timesADay = [
-						{"code" : "1", "name" :'Once Daily'},
-						{"code" : "2", "name" :'12 hourly'},
-						{"code" : "3", "name" :'8 hourly'},
-						{"code" : "4", "name" :'6 hourly'},
-						{"code" : "6", "name" :'4 hourly'},
-						{"code" : "8", "name" :'3 hourly'},
-						{"code" : "12", "name" :'2hourly'},
-						{"code" : "-1", "name" :'Periodic' + ' Dose'},
-						{"code" : "-2", "name" :'Same As'},
-						{"code" : "-3", "name" :'Empty Dose'},
-						{"code" : "-4", "name" :'Once in a Week'},
-						{"code" : "-5", "name" :'Once in a Month'},
-						{"code" : "-6", "name" :'Once in a Year'}
+						{"code" : 1, "name" :'Once Daily'},
+						{"code" : 2, "name" :'12 hourly'},
+						{"code" : 3, "name" :'8 hourly'},
+						{"code" : 4, "name" :'6 hourly'},
+						{"code" : 6, "name" :'4 hourly'},
+						{"code" : 8, "name" :'3 hourly'},
+						{"code" : 12, "name" :'2hourly'},
+						{"code" : -1, "name" :'Periodic' + ' Dose'},
+						{"code" : -2, "name" :'Same As'},
+						{"code" : -3, "name" :'Empty Dose'},
+						{"code" : -4, "name" :'Once in a Week'},
+						{"code" : -5, "name" :'Once in a Month'},
+						{"code" : -6, "name" :'Once in a Year'}
 		              ];
 
 

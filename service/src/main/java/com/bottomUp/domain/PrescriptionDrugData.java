@@ -7,47 +7,79 @@ import java.util.List;
 
 public class PrescriptionDrugData extends BaseData {
 
-  private long presDrugID;
-  private long appointmentID ;
-  private long drugTypeID;
-  private long drugID;
-  private long drugTimeID;
+  private Long presDrugID;
+  private Long appointmentID;
+  private Long doctorID;
+  private Long drugTypeID;
+  private Long drugID;
+  private Integer drugTimeID;
+  private Integer drugWhenID;
+  private Integer drugAdviceID;
   private String drugDoseUnit;
-  private long drugWhenID;
-  private long drugAdviceID;
-  private long presNum;
+  private Integer presNum;
+  private String drugStrength;
+  private String drugTypeInitial;
+  private String drugName;
+  private String drugTypeName;
+  private String drugTimeName;
+  private String drugWhenName;
+  private String drugAdviceName;
 
-  private List<PrescriptionDrugDoseData> doseList;
+  private List<PrescriptionDrugDoseData> periodList;
 
-  public long getPresDrugID() {
+  public Long getPresDrugID() {
     return presDrugID;
   }
 
-  public void setPresDrugID(long presDrugID) {
+  public void setPresDrugID(Long presDrugID) {
     this.presDrugID = presDrugID;
   }
 
-  public long getDrugTypeID() {
+  public Long getAppointmentID() {
+    return appointmentID;
+  }
+
+  public void setAppointmentID(Long appointmentID) {
+    this.appointmentID = appointmentID;
+  }
+
+  public Long getDoctorID() {
+    return doctorID;
+  }
+
+  public void setDoctorID(Long doctorID) {
+    this.doctorID = doctorID;
+  }
+
+  public Long getDrugTypeID() {
     return drugTypeID;
   }
 
-  public void setDrugTypeID(long drugTypeID) {
+  public void setDrugTypeID(Long drugTypeID) {
     this.drugTypeID = drugTypeID;
   }
 
-  public long getDrugID() {
+  public Long getDrugID() {
     return drugID;
   }
 
-  public void setDrugID(long drugID) {
+  public void setDrugID(Long drugID) {
     this.drugID = drugID;
   }
 
-  public long getDrugTimeID() {
+  public String getDrugName() {
+    return drugName;
+  }
+
+  public void setDrugName(String drugName) {
+    this.drugName = drugName;
+  }
+
+  public Integer getDrugTimeID() {
     return drugTimeID;
   }
 
-  public void setDrugTimeID(long drugTimeID) {
+  public void setDrugTimeID(Integer drugTimeID) {
     this.drugTimeID = drugTimeID;
   }
 
@@ -59,43 +91,83 @@ public class PrescriptionDrugData extends BaseData {
     this.drugDoseUnit = drugDoseUnit;
   }
 
-  public long getDrugWhenID() {
+  public Integer getDrugWhenID() {
     return drugWhenID;
   }
 
-  public void setDrugWhenID(long drugWhenID) {
+  public void setDrugWhenID(Integer drugWhenID) {
     this.drugWhenID = drugWhenID;
   }
 
-  public long getDrugAdviceID() {
+  public Integer getDrugAdviceID() {
     return drugAdviceID;
   }
 
-  public void setDrugAdviceID(long drugAdviceID) {
+  public void setDrugAdviceID(Integer drugAdviceID) {
     this.drugAdviceID = drugAdviceID;
   }
 
-  public long getPresNum() {
+  public Integer getPresNum() {
     return presNum;
   }
 
-  public void setPresNum(long presNum) {
+  public void setPresNum(Integer presNum) {
     this.presNum = presNum;
   }
 
-  public List<PrescriptionDrugDoseData> getDoseList() {
-    return doseList;
+  public List<PrescriptionDrugDoseData> getPeriodList() {
+    return periodList;
   }
 
-  public void setDoseList(List<PrescriptionDrugDoseData> doseList) {
-    this.doseList = doseList;
+  public void setPeriodList(List<PrescriptionDrugDoseData> periodList) {
+    this.periodList = periodList;
   }
 
-  public long getAppointmentID() {
-    return appointmentID;
+  public String getDrugTypeName() {
+    return drugTypeName;
   }
 
-  public void setAppointmentID(long appointmentID) {
-    this.appointmentID = appointmentID;
+  public void setDrugTypeName(String drugTypeName) {
+    this.drugTypeName = drugTypeName;
+  }
+
+  public String getDrugTimeName() {
+    return drugTimeName;
+  }
+
+  public void setDrugTimeName(String drugTimeName) {
+    this.drugTimeName = drugTimeName;
+  }
+
+  public String getDrugWhenName() {
+    return drugWhenName;
+  }
+
+  public void setDrugWhenName(String drugWhenName) {
+    this.drugWhenName = drugWhenName;
+  }
+
+  public String getDrugAdviceName() {
+    return drugAdviceName;
+  }
+
+  public void setDrugAdviceName(String drugAdviceName) {
+    this.drugAdviceName = drugAdviceName;
+  }
+
+  public String getDrugStrength() {
+    return drugStrength;
+  }
+
+  public void setDrugStrength(String drugStrength) {
+    this.drugStrength = drugStrength;
+  }
+
+  public String getDrugTypeInitial() {
+    return drugTypeInitial;
+  }
+
+  public void setDrugTypeInitial(String drugTypeInitial) {
+    this.drugTypeInitial = drugTypeInitial;
   }
 }

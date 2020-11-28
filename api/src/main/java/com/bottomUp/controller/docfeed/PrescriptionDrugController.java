@@ -3,6 +3,9 @@ package com.bottomUp.controller.docfeed;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.PrescriptionDrugData;
+import com.bottomUp.service.docFeed.crud.ContentDrugAdviceService;
+import com.bottomUp.service.docFeed.crud.ContentDrugTypeService;
+import com.bottomUp.service.docFeed.crud.ContentWhenTypeService;
 import com.bottomUp.service.docFeed.crud.PrescriptionDrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,22 +27,24 @@ public class PrescriptionDrugController extends BaseController {
     @Autowired
     private PrescriptionDrugService prescriptionDrugService;
 
+
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
     public List<PrescriptionDrugData> getAll(HttpServletRequest request) throws BottomUpException {
-
         Map<String, Object> params = new HashMap<>();
-
         return this.prescriptionDrugService.getByParam(params);
+    }
+
+    @RequestMapping(value = {"/getNewPresDrug"}, method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> getNewPresDrug(HttpServletRequest request) throws BottomUpException {
+        return prescriptionDrugService.getNewPresDrug();
     }
 
     @RequestMapping(value = {"/getByID/{presDrugID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public PrescriptionDrugData getByID(@PathVariable("presDrugID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.prescriptionDrugService.getByID(Long.valueOf(companyID));
+    public PrescriptionDrugData getByID(@PathVariable("presDrugID") Integer presDrugID, HttpServletRequest request) throws BottomUpException {
+        return this.prescriptionDrugService.getByID(Long.valueOf(presDrugID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -47,7 +52,7 @@ public class PrescriptionDrugController extends BaseController {
     public Map<String, Object> save(@RequestBody PrescriptionDrugData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.prescriptionDrugService.create(data);
+        this.prescriptionDrugService.save(data);
         return result;
     }
 

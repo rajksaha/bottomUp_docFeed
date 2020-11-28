@@ -18,18 +18,14 @@
 		)
 		VALUES(
 			#{drugSettingID},
-			#{patientID},
-			#{date},
-			#{time},
-			#{status},
-			#{appointmentType},
+			#{dose},
+			#{numOfDay},
+			#{durationType},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
 			#{createdOn}
 		);
-
-
 	</insert>
 	
 	<update id="update" parameterType="doctorDrugDoseSetting">

@@ -68,26 +68,65 @@
 
 	<select id="getByParam" parameterType="map" resultType="doctorDrugSetting">
 		SELECT
-		`drugSettingID`,
-		`doctorID`,
-		`drugID`,
-		`drugTimeID`,
-		`drugDoseUnit`,
-		`drugWhenID`,
-		`drugAdviceID`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `doctor_drug_setting`
+		DDS.`drugSettingID`,
+		DDS.`doctorID`,
+		DDS.`drugID`,
+		DDS.`drugTimeID`,
+		DDS.`drugDoseUnit`,
+		DDS.`drugWhenID`,
+		DDS.`drugAdviceID`,
+		CD.drugName,
+		CDT.name AS drugTypeName,
+		CDA.bangla AS drugAdviceName,
+		CWT.bangla AS drugWhenName,
+		DDS.`updatedBy`,
+		DDS.`updatedOn`,
+		DDS.`createdBy`,
+		DDS.`createdOn`
+		FROM doctor_feed.`doctor_drug_setting` DDS
+		JOIN doctor_feed.content_drug CD ON DDS.drugID = CD.drugID
+		JOIN doctor_feed.content_drug_type CDT ON CD.typeID = CDT.drugTypeID
+		LEFT JOIN doctor_feed.content_drug_advice CDA ON DDS.drugAdviceID = CDA.drugAdviceID
+		LEFT JOIN doctor_feed.content_when_type CWT ON DDS.drugWhenID = CWT.whenTypeID
 		WHERE 1 = 1
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
+		</if>
+		<if test="drugID != null">
+			AND drugID = #{drugID}
+		</if>
 		<if test="drugSettingID != null">
 			AND drugSettingID = #{drugSettingID}
 		</if>
-		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
-			ORDER BY ${sortColumn} ${sortOrder}
-			LIMIT #{limit} OFFSET #{offset}
+	</select>
+
+	<select id="getDoctorDrugCount" parameterType="map" resultType="int">
+		SELECT COUNT(drugSettingID)
+		FROM `doctor_drug_setting`
+		WHERE 1 = 1
+		<if test="doctorID != null">
+			AND doctorID = #{doctorID}
 		</if>
+		<if test="drugID != null">
+			AND drugID = #{drugID}
+		</if>
+	</select>
+
+	<select id="getByDrugID" parameterType="long" resultType="doctorDrugSetting">
+		SELECT
+			`drugSettingID`,
+			`doctorID`,
+			`drugID`,
+			`drugTimeID`,
+			`drugDoseUnit`,
+			`drugWhenID`,
+			`drugAdviceID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `doctor_drug_setting`
+		WHERE drugID = #{drugID} AND drugID IS NULL
 	</select>
 
     <delete id="delete" parameterType="map">

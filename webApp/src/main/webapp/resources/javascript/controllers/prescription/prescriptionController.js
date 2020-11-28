@@ -34,27 +34,33 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.hideMenu= false;
 
     $scope.bringAppointmentDetail = function (){
-        // PrescriptionService.getPrescriptionInfo.query({}, {appointmentID: $scope.appoinmentData.appointmentID}).$promise.then(function (result) {
-        //     $scope.diagnosisData = result.diagnosis;
-        //     $scope.dietData = result.diet;
-        //     $scope.prescribedDrugList = result.drug;
-        //     $scope.prescribedInvList = result.inv;
-        //     $scope.prescribedComplainList = result.complain;
-        //     $scope.prescribedAdviceList = result.advice;
-        //     $scope.prescribedVitalList = result.vital;
-        //     $scope.refferedDoctorDataList = result.reference;
-        //     $scope.pastDiseaseList = result.pastDisease;
-        //     $scope.familyDiseaseList = result.familyHistory;
-        //     $scope.currentDrugHistoryList = result.currentDrugHistory;
-        //     $scope.oldDrugHistoryList = result.oldDrugHistory;
-        // });
-        // $scope.bringPrescribedHistory($scope.appoinmentData.appointmentID, $scope.appoinmentData.patientID);
-        //
+        PrescriptionService.getPrescriptionInfo.query({}, {appointmentID: $scope.appoinmentData.appointmentID}).$promise.then(function (result) {
+            $scope.diagnosisData = result.diagnosis;
+            $scope.dietData = result.diet;
+            $scope.prescribedDrugList = result.drug;
+            $scope.vm = {
+                list: $scope.prescribedDrugList
+            };
+            $scope.prescribedInvList = result.inv;
+            $scope.prescribedComplainList = result.complain;
+            $scope.prescribedAdviceList = result.advice;
+            $scope.prescribedVitalList = result.vital;
+            $scope.refferedDoctorDataList = result.reference;
+            $scope.pastDiseaseList = result.pastDisease;
+            $scope.familyDiseaseList = result.familyHistory;
+            $scope.currentDrugHistoryList = result.currentDrugHistory;
+            $scope.oldDrugHistoryList = result.oldDrugHistory;
+            if(result.newtVisit &&  result.newtVisit.length > 0){
+                $scope.nextVisitData = result.newtVisit[0];
+            }
+        });
+        $scope.bringPrescribedHistory($scope.appoinmentData.appointmentID, $scope.appoinmentData.patientID);
+
         //$scope.bringPrescribedReferredDoctor($scope.appoinmentData.appointmentID);
-        //
-        // $scope.bringPrescribedComment($scope.appoinmentData.appointmentID);
-        //
-        // $scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
+
+        //$scope.bringPrescribedComment($scope.appoinmentData.appointmentID);
+
+        //$scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
     };
 
     $scope.hoverIn = function(){
@@ -112,6 +118,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             $scope.nextVisitData.dayType = null;
         }
         delete $scope.nextVisitData.needSaveButton;
+        $scope.nextVisitData.appointmentID = $scope.appoinmentData.appointmentID;
         PrescriptionService.saveNextVisit.query({}, $scope.nextVisitData).$promise.then(function(result) {
             $scope.nextVisitData = result.data;
         });
@@ -378,15 +385,6 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.bringPrescribedDrugs = function (appointmentID){
         PrescriptionService.getPrescribedDrug.query({}, {appointmentID:appointmentID}).$promise.then(function (result) {
             $scope.prescribedDrugList = result;
-            angular.forEach($scope.prescribedDrugList, function (value, key) {
-                if (value.drugTimeID == -4) {
-                    value.preiodicList[0].dose = "সপ্তাহে ১ বার";
-                } else if (value.drugTimeID == -5) {
-                    value.preiodicList[0].dose = "মাসে ১ বার";
-                } if (value.drugTimeID == -6) {
-                    value.preiodicList[0].dose = "বছরে ১ বার";
-                }
-            });
             $scope.vm = {
                 list: $scope.prescribedDrugList
             };
@@ -438,8 +436,6 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             $scope.prescribedComplainList = result;
         });
     };
-
-    $scope.nextVisitData = {};
 
     $scope.bringPrescribedNextVisit = function (appointmentID){
         PrescriptionService.getPrescribedNextVisit.query({}, {appointmentID:appointmentID}).$promise.then(function (result) {
@@ -714,6 +710,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             resolve: {
                 drugData: function () {
                     return drugData;
+                },
+                appointmentData: function () {
+                    return $scope.appoinmentData;
                 }
             },
             backdrop: 'static'
@@ -735,8 +734,11 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             windowClass: 'fade in',
             controller: 'PrescriptionController.PrescribeDrugsController',
             resolve: {
-                modalConfig: function () {
+                drugData: function () {
                     return drugData;
+                },
+                appointmentData: function () {
+                    return $scope.appoinmentData;
                 }
             },
             backdrop: 'static'

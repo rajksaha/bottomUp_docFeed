@@ -13,13 +13,17 @@ import java.util.Map;
  */
 public interface DoctorDrugSettingMapper {
 
-    public void create(DoctorDrugSettingData data) throws BottomUpException;
+    void create(DoctorDrugSettingData data) throws BottomUpException;
 
-    public void update(DoctorDrugSettingData data) throws BottomUpException;
+    void update(DoctorDrugSettingData data) throws BottomUpException;
 
-    public DoctorDrugSettingData getByID(Long ID) throws BottomUpException;
+    DoctorDrugSettingData getByID(Long ID) throws BottomUpException;
 
-    public List<DoctorDrugSettingData> getByParam(Map<String, Object> param) throws BottomUpException;
+    List<DoctorDrugSettingData> getByParam(Map<String, Object> param)throws BottomUpException;
 
-    public void delete(Map<String, Object> param) throws BottomUpException;
+    void delete(Map<String, Object> param) throws BottomUpException;
+
+    DoctorDrugSettingData getByDrugID(Long drugID) throws BottomUpException;
+
+    Integer getDoctorDrugCount(Map<String, Object> param);
 }

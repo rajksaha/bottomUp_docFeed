@@ -3,45 +3,54 @@ package com.bottomUp.domain;
 
 import com.bottomUp.domain.common.BaseData;
 
+import java.util.List;
+
 public class DoctorDrugSettingData extends BaseData {
 
-  private long drugSettingID;
-  private long doctorID;
-  private long drugID;
-  private long drugTimeID;
+  private Long drugSettingID;
+  private Long doctorID;
+  private Long drugID;
+  private Integer drugTimeID;
   private String drugDoseUnit;
-  private long drugWhenID;
-  private long drugAdviceID;
+  private Integer drugWhenID;
+  private Integer drugAdviceID;
+  private String drugName;
+  private String drugTypeName;
+  private String drugTimeName;
+  private String drugWhenName;
+  private String drugAdviceName;
 
-  public long getDrugSettingID() {
+  private List<DoctorDrugDoseSettingData> periodList;
+
+  public Long getDrugSettingID() {
     return drugSettingID;
   }
 
-  public void setDrugSettingID(long drugSettingID) {
+  public void setDrugSettingID(Long drugSettingID) {
     this.drugSettingID = drugSettingID;
   }
 
-  public long getDoctorID() {
+  public Long getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(Long doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getDrugID() {
+  public Long getDrugID() {
     return drugID;
   }
 
-  public void setDrugID(long drugID) {
+  public void setDrugID(Long drugID) {
     this.drugID = drugID;
   }
 
-  public long getDrugTimeID() {
+  public Integer getDrugTimeID() {
     return drugTimeID;
   }
 
-  public void setDrugTimeID(long drugTimeID) {
+  public void setDrugTimeID(Integer drugTimeID) {
     this.drugTimeID = drugTimeID;
   }
 
@@ -53,19 +62,67 @@ public class DoctorDrugSettingData extends BaseData {
     this.drugDoseUnit = drugDoseUnit;
   }
 
-  public long getDrugWhenID() {
+  public Integer getDrugWhenID() {
     return drugWhenID;
   }
 
-  public void setDrugWhenID(long drugWhenID) {
+  public void setDrugWhenID(Integer drugWhenID) {
     this.drugWhenID = drugWhenID;
   }
 
-  public long getDrugAdviceID() {
+  public Integer getDrugAdviceID() {
     return drugAdviceID;
   }
 
-  public void setDrugAdviceID(long drugAdviceID) {
+  public void setDrugAdviceID(Integer drugAdviceID) {
     this.drugAdviceID = drugAdviceID;
+  }
+
+  public List<DoctorDrugDoseSettingData> getPeriodList() {
+    return periodList;
+  }
+
+  public void setPeriodList(List<DoctorDrugDoseSettingData> periodList) {
+    this.periodList = periodList;
+  }
+
+  public String getDrugName() {
+    return drugName;
+  }
+
+  public void setDrugName(String drugName) {
+    this.drugName = drugName;
+  }
+
+  public String getDrugTypeName() {
+    return drugTypeName;
+  }
+
+  public void setDrugTypeName(String drugTypeName) {
+    this.drugTypeName = drugTypeName;
+  }
+
+  public String getDrugTimeName() {
+    return drugTimeName;
+  }
+
+  public void setDrugTimeName(String drugTimeName) {
+    this.drugTimeName = drugTimeName;
+  }
+
+  public String getDrugWhenName() {
+    return drugWhenName;
+  }
+
+  public void setDrugWhenName(String drugWhenName) {
+    this.drugWhenName = drugWhenName;
+  }
+
+  public String getDrugAdviceName() {
+    return drugAdviceName;
+  }
+
+  public void setDrugAdviceName(String drugAdviceName) {
+    this.drugAdviceName = drugAdviceName;
   }
 }
