@@ -42,8 +42,11 @@ public class AppointmentService {
         this.appointmentMapper.update(data);
     }
 
-    public void updateStatusByID(Map<String, Object> param) throws BottomUpException {
-        this.appointmentMapper.updateStatusByID(param);
+    public void updateStatusByID(Long appointmentID, Integer appointmentType) throws BottomUpException {
+        AppointmentData appointmentData = new AppointmentData();
+        appointmentData.setAppointmentID(appointmentID);
+        appointmentData.setAppointmentType(appointmentType);
+        this.appointmentMapper.updateStatusByID(appointmentData);
     }
 
     public AppointmentData getByID(Long ID)throws BottomUpException {

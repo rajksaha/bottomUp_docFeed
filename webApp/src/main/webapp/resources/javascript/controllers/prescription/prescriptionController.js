@@ -10,7 +10,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.patientStateList = [];
 
     $scope.refferedAdderData = {};
-
+    $scope.nextVisitData ={};
     $scope.prescribedDrugList = [];
     $scope.prescribedInvList = [];
     $scope.prescribedComplainList = [];
@@ -18,10 +18,13 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.historyList = [];
     $scope.pastDiseaseList = [];
     $scope.familyDiseaseList = [];
+    $scope.referredDoctorDataList = [];
     $scope.drugHistory = [];
     $scope.diagnosisData = {};
     $scope.dayTypeList = JsonService.dayTypeList;
     $scope.numOfDayList = JsonService.numberList;
+
+    $scope.nextVisitDayTypeList = JsonService.nextVisitDayTypeList;
 
 
     $scope.numberOfPrescribedDrugs = 0;
@@ -45,7 +48,11 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             $scope.prescribedComplainList = result.complain;
             $scope.prescribedAdviceList = result.advice;
             $scope.prescribedVitalList = result.vital;
-            $scope.refferedDoctorDataList = result.reference;
+            $scope.referredDoctorDataList = result.reference;
+            if(!result.reference ||  result.reference.length == 0){
+                $scope.referredAdderData = {};
+                $scope.referredAdderData.isEmpty = true;
+            }
             $scope.pastDiseaseList = result.pastDisease;
             $scope.familyDiseaseList = result.familyHistory;
             $scope.currentDrugHistoryList = result.currentDrugHistory;
@@ -76,18 +83,20 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     };
 
     $scope.getComplainString = function (complain) {
-
         var data = complain.symptomName;
-
         if(complain.durationType != null && complain.durationType < 5){
             data = data + " " + complain.durationNum + " " + JsonService.dayTypeList[complain.durationType - 1].engName;
         }
         if(complain.durationType == 7){
             data = data + " " + JsonService.dayTypeList[complain.durationType].engName;
         }
-
         return data;
     };
+
+    $scope.drugDoseString = function (drugData) {
+
+    };
+
     $scope.onFileSelect = function($files){
         $scope.file = $files[0];
         $scope.uploading = true;
@@ -107,15 +116,17 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         });
     };
 
-    $scope.fixNextVisit = function (){
+    $scope.fixNextVisit = function (nextVisitType){
         $scope.nextVisitData.needSaveButton = false;
+        $scope.nextVisitData.nextVisitType = nextVisitType;
 
         if($scope.nextVisitData.nextVisitType == 2){
-            $scope.nextVisitData.date = null;
+            $scope.nextVisitData.visitDate = null;
+            $scope.nextVisitData.stringDate = null;
         }else{
-            $scope.nextVisitData.stringDate = $filter('date')($scope.nextVisitData.date, "yyyy-MM-dd");
+            $scope.nextVisitData.stringDate = $filter('date')($scope.nextVisitData.visitDate, "yyyy-MM-dd");
             $scope.nextVisitData.numOfDay = null;
-            $scope.nextVisitData.dayType = null;
+            $scope.nextVisitData.durationType = null;
         }
         delete $scope.nextVisitData.needSaveButton;
         $scope.nextVisitData.appointmentID = $scope.appoinmentData.appointmentID;
@@ -130,9 +141,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         var dataString = 'query=22'+ '&detail=' + term;
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/prescription",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/prescription",
+            data: dataString
         }).then(function(result) {
             $scope.content = result.data;
             return limitToFilter($scope.content, 10);
@@ -140,58 +150,34 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     };
 
     $scope.getRefDoctor = function(term) {
-        var dataString = 'query=9'+ '&refDocName=' + term;
+        var dataString = {};
+        dataString.term = term;
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/prescription",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/refDoctor",
+            data: dataString
         }).then(function(result) {
             $scope.refDoc = result.data;
             return limitToFilter($scope.refDoc, 10);
         });
     };
 
-    $scope.onSelectRefDocotor = function(item, model, label){
-        $scope.refferedAdderData.doctorAdress = item.doctorAdress;
-        $scope.refferedAdderData.refDocID = item.id;
+    $scope.onSelectRefDoctor = function(item, model, label){
+        $scope.referredAdderData.doctorAddress = item.doctorAddress;
     };
 
-    $scope.saveReffredDoctor = function(refDocData){
-        if (refDocData.refDocID) {
-            $scope.addReffredDoctor(refDocData.refDocID);
-        } else {
-            var dataString = 'query=10' + '&refDocName=' + refDocData.doctorName + '&refDocAdress=' + refDocData.doctorAdress;
-            PrescriptionService.createRefferedDoctor.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.addReffredDoctor(result);
-                } else {
-
-                }
-            });
-        }
-    };
-
-    $scope.addReffredDoctor = function(doctorID){
-
-        var dataString = 'query=11' + '&refDocID=' + parseInt(doctorID);
-
-        PrescriptionService.createReferncePrescription.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.bringPrescribedReferredDoctor($scope.appoinmentData.appointmentID);
-            } else {
-
-            }
+    $scope.saveReferredDoctor = function(refDocData){
+        delete refDocData.isEmpty;
+        refDocData.appointmentID = $scope.appoinmentData.appointmentID;
+        PresSaveService.savePresDoctorRefer.query({}, refDocData).$promise.then(function (result) {
+            $scope.referredDoctorDataList.push(result.data);
+            $scope.referredAdderData = {};
         });
     };
 
-    $scope.deleteReffredDoctor = function(redDocID){
-        PrescriptionService.deleteReferncePrescription.remove({}).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.bringPrescribedReferredDoctor($scope.appoinmentData.appointmentID);
-            } else {
-
-            }
+    $scope.deleteReferredDoctor = function(prescriptionReferenceID){
+        PrescriptionService.deletePresDocRefer.remove({}, {prescriptionReferenceID: prescriptionReferenceID}).$promise.then(function (result) {
+            $scope.bringPrescribedReferredDoctor($scope.appoinmentData.appointmentID);
         });
     };
 
@@ -230,33 +216,19 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         }
     };
 
-    $scope.checkPatientType = function (type, id) {
 
-        if(type == id){
-            return true;
-        }else{
-            return false;
-        }
-    };
-
-
-    $scope.changePatientType = function(patientType){
-        var dataString = "query=3" + "&patientType=" + patientType.id + "&patientID=" + $scope.patientData.patientID;
-        PresSaveService.updatePatientType.query({}, dataString).$promise.then(function (result) {
-            $scope.patientData.type = patientType.id;
+    $scope.changePatientType = function(patientTypeID){
+        $scope.patientData.patientType = patientTypeID;
+        PatientService.updatePatientType.query({}, {patientID:$scope.patientData.patientID, patientTypeID: patientTypeID}).$promise.then(function (result) {
         });
     };
 
     $scope.changePatientState = function (patientState){
-
-        var dataString = "query=6" + "&patientState=" + patientState.id;
-
-        PrescriptionService.updateAppointmentByState.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.appoinmentData.appointmentType = patientState.id;
-            } else {
-
-            }
+        $scope.appoinmentData.appointmentType = patientState.appointmentTypeID;
+        var searchData = {};
+        searchData.appointmentID = $scope.appoinmentData.appointmentID;
+        searchData.appointmentType = patientState.appointmentTypeID;
+        PrescriptionService.updateAppStatus.query({},searchData).$promise.then(function (result) {
         });
     };
 
@@ -400,13 +372,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             var temp = {};
             temp.drugList = newValue.list;
             var dataString = 'jsonString=' + JSON.stringify(temp);
-
             PrescriptionService.updateDrugPrescriptionJson.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    console.log("done" + result);
-                } else {
-
-                }
+                console.log("done" + result);
             });
         }
     }, true);
@@ -443,11 +410,13 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         });
     };
 
-    $scope.refferedDoctorData = {};
-
     $scope.bringPrescribedReferredDoctor = function (appointmentID){
         PrescriptionService.getPrescribedRefDoc.query({}, {appointmentID:appointmentID}).$promise.then(function (result) {
-            $scope.refferedDoctorData = result;
+            $scope.referredDoctorDataList = result;
+            if(!$scope.referredDoctorDataList || $scope.referredDoctorDataList.length == 0){
+                $scope.referredAdderData = {};
+                $scope.referredAdderData.isEmpty = true;
+            }
         });
     };
 
@@ -559,6 +528,24 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
          $scope.printPreview();
          }*/
     };
+    $scope.noteModal = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'resources/javascript/templates/note/noteModal.html',
+            windowClass: 'fade in',
+            controller: 'PrescribeNoteController',
+            size: 'sm',
+            resolve: {
+                appointmentData: function () {
+                    return $scope.appoinmentData;
+                }
+            },
+            backdrop: 'static'
+        });
+        modalInstance.result.then(function(result) {
+            $scope.bringPrescribedInv($scope.appoinmentData.appointmentID);
+        });
+    };
+
     $scope.invModal = function () {
 
         var modalInstance = $modal.open({
@@ -640,7 +627,6 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             $scope.bringPrescribedDrugHistory($scope.appoinmentData.appointmentID);
         });
     };
-
 
     $scope.addComplain = function(){
         var complainData ={};
@@ -757,7 +743,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
 
     $scope.printPreview = function (){
-        if(!$rootScope.defaultPdf){
+        $window.open("http://localhost/doc_feed_php_api/api/reportHelper.php?appointmentID="+ $scope.appoinmentData.appointmentID+"&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16071395666061", '_blank');
+        /*if(!$rootScope.defaultPdf){
             var dataString = "query=20" + '&doctorID=' + $scope.doctorData.doctorID;
 
             PrescriptionService.getContentDetailByDocId.query({}, dataString).$promise.then(function (result) {
@@ -792,20 +779,20 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             });
         }else {
             $scope.openPdf($rootScope.defaultPdf);
-        }
+        }*/
     };
 
     $scope.openPdf = function(pdf){
         var dataString = "query=15";
-
-        PrescriptionService.updateAppoinmentStatusByApointmentNo.query({}, dataString).$promise.then(function (result) {
+        $window.open("http://localhost/doc_feed_php_api/api/reportHelper.php?appointmentID=16&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16071395666061", '_blank');
+        /*PrescriptionService.updateAppoinmentStatusByApointmentNo.query({}, dataString).$promise.then(function (result) {
             if (result && result.success) {
-                $window.open("mpdf/" + pdf + ".php", '_blank');
+                $window.open("http://localhost/doc_feed_php_api/api/reportHelper.php?appointmentID=16&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16071395666061", '_blank');
                 $location.path("/appointment");
             } else {
 
             }
-        });
+        });*/
     };
 
     $scope.performDiagnosis = function () {

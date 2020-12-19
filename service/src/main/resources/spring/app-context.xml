@@ -27,6 +27,13 @@
 		<property name="jndiName" value="java:/comp/env/jdbc/docFeed"/>
 	</bean>
 
+	<!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+		<!--<property name="driverClassName" value="javax.sql.DataSource"/>-->
+		<!--<property name="url" value="jdbc:mysql://bottomupdbserver.cicctmjt3s9o.us-east-2.rds.amazonaws.com:3306/doctor_feed?useUnicode=yes&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;pinGlobalTxToPhysicalConnection=true"/>-->
+		<!--<property name="username" value="rajksaha"/>-->
+		<!--<property name="password" value="5tgb$rfv"/>-->
+	<!--</bean>-->
+
 	<context:component-scan base-package="com.bottomUp.service" />
 
 	<import resource="classpath:spring/app-context-dao.xml" />

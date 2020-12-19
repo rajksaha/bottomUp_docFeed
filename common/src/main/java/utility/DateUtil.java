@@ -7,6 +7,7 @@ import org.apache.commons.lang.time.DateUtils;
 import org.joda.time.*;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -19,6 +20,19 @@ public class DateUtil
     public final static int UPPER_CASE = 1;
     public final static int LOWER_CASE = 2;
     public final static int MIXED_CASE = 3;
+    public static String[] DATE_PARSE_PATTERN = {"MM/dd/yyyy", "MM-dd-yyyy", "MMddyyyy", "HHmmss"};
+    public final DateFormat formatter = new SimpleDateFormat(DATE_PARSE_PATTERN[2]);
+    public final DateFormat timeFormatter = new SimpleDateFormat(DATE_PARSE_PATTERN[3]);
+
+    public Date convertDateFromString(String stringDate){
+        try {
+            DateFormat formatter = new SimpleDateFormat(DATE_PARSE_PATTERN[2]);
+            return formatter.parse(stringDate);
+        }catch (Exception ex){
+
+        }
+        return null;
+    }
     
     public static int daysBetween(Date startDate, Date endDate)
     {

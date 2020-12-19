@@ -4,73 +4,80 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionNextVisitMapper">
 
-	<insert id="create" parameterType="prescriptionNextVisit" useGeneratedKeys="true" keyProperty="appointmentID" >
+	<insert id="create" parameterType="prescriptionNextVisit" useGeneratedKeys="true" keyProperty="presNextVisitID" >
 
 		INSERT INTO `prescription_next_visit`(
+			`appointmentID`,
 			`nextVisitType`,
-			`date`,
+			`visitDate`,
 			`numOfDay`,
-			`dayType`,
+			`durationType`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
 			`createdOn`
 		)
 		VALUES(
+			#{appointmentID},
 			#{nextVisitType},
-			#{date},
+			#{visitDate},
 			#{numOfDay},
-			#{dayType},
+			#{durationType},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
 			#{createdOn}
 		);
-
-
 	</insert>
 	
 	<update id="update" parameterType="prescriptionNextVisit">
 		UPDATE `prescription_next_visit`
 		SET
 		`nextVisitType` = #{nextVisitType},
-		`date` = #{date},
+		`visitDate` = #{visitDate},
 		`numOfDay` = #{numOfDay},
-		`dayType` =#{dayType},
+		`durationType` =#{durationType},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
-		WHERE appointmentID = #{appointmentID}
+		WHERE presNextVisitID = #{presNextVisitID}
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="prescriptionNextVisit">
 		SELECT
+			`presNextVisitID`,
 			`appointmentID`,
 			`nextVisitType`,
-			`date`,
+			`visitDate`,
 			`numOfDay`,
-			`dayType`,
+			`durationType`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
 			`createdOn`
 		FROM `prescription_next_visit`
 
-		WHERE appointmentID = #{appointmentID}
+		WHERE presNextVisitID = #{presNextVisitID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionNextVisit">
 		SELECT
-			`appointmentID`,
-			`nextVisitType`,
-			`date`,
-			`numOfDay`,
-			`dayType`,
-			`updatedBy`,
-			`updatedOn`,
-			`createdBy`,
-			`createdOn`
-		FROM `prescription_next_visit`
+			pnv.`presNextVisitID`,
+			pnv.`appointmentID`,
+			pnv.`nextVisitType`,
+			pnv.`visitDate`,
+			pnv.`numOfDay`,
+			pnv.`durationType`,
+			CDT.bangla AS durationTypeName,
+			pnv.`updatedBy`,
+			pnv.`updatedOn`,
+			pnv.`createdBy`,
+			pnv.`createdOn`
+		FROM `prescription_next_visit` pnv
+		LEFT JOIN doctor_feed.content_duration_type CDT ON pnv.durationType = CDT.durationType
 		WHERE 1 = 1
+		<if test="presNextVisitID != null">
+			AND presNextVisitID = #{presNextVisitID}
+		</if>
 		<if test="appointmentID != null">
 			AND appointmentID = #{appointmentID}
 		</if>

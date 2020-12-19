@@ -23,7 +23,11 @@ public class PrescriptionReferenceService {
     @Autowired
     private PrescriptionReferenceMapper prescriptionReferenceMapper;
 
+    @Autowired
+    private ReferredDoctorService referredDoctorService;
+
     public void create(PrescriptionReferenceData data) throws BottomUpException {
+        data.setReferredDoctorID(referredDoctorService.createByName(data.getDoctorName(), data.getDoctorAddress()));
         prescriptionReferenceMapper.create(data);
     }
 

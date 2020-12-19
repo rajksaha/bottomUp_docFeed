@@ -10,15 +10,19 @@ public class DoctorDrugSettingData extends BaseData {
   private Long drugSettingID;
   private Long doctorID;
   private Long drugID;
-  private Integer drugTimeID;
+  private Integer doseTypeCode;
   private String drugDoseUnit;
   private Integer drugWhenID;
   private Integer drugAdviceID;
+  private String drugStrength;
+  private String drugTypeInitial;
   private String drugName;
   private String drugTypeName;
   private String drugTimeName;
   private String drugWhenName;
   private String drugAdviceName;
+  private String doseTypeBngName;
+  private String doseTypeEngName;
 
   private List<DoctorDrugDoseSettingData> periodList;
 
@@ -46,12 +50,12 @@ public class DoctorDrugSettingData extends BaseData {
     this.drugID = drugID;
   }
 
-  public Integer getDrugTimeID() {
-    return drugTimeID;
+  public Integer getDoseTypeCode() {
+    return doseTypeCode;
   }
 
-  public void setDrugTimeID(Integer drugTimeID) {
-    this.drugTimeID = drugTimeID;
+  public void setDoseTypeCode(Integer doseTypeCode) {
+    this.doseTypeCode = doseTypeCode;
   }
 
   public String getDrugDoseUnit() {
@@ -124,5 +128,37 @@ public class DoctorDrugSettingData extends BaseData {
 
   public void setDrugAdviceName(String drugAdviceName) {
     this.drugAdviceName = drugAdviceName;
+  }
+
+  public String getDrugStrength() {
+    return drugStrength;
+  }
+
+  public void setDrugStrength(String drugStrength) {
+    this.drugStrength = drugStrength;
+  }
+
+  public String getDrugTypeInitial() {
+    return drugTypeInitial;
+  }
+
+  public void setDrugTypeInitial(String drugTypeInitial) {
+    this.drugTypeInitial = drugTypeInitial;
+  }
+
+  public String getDoseTypeBngName() {
+    return doseTypeBngName;
+  }
+
+  public void setDoseTypeBngName(String doseTypeBngName) {
+    this.doseTypeBngName = doseTypeBngName;
+  }
+
+  public String getDoseTypeEngName() {
+    return doseTypeEngName;
+  }
+
+  public void setDoseTypeEngName(String doseTypeEngName) {
+    this.doseTypeEngName = doseTypeEngName;
   }
 }

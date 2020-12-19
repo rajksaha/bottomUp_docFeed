@@ -62,6 +62,9 @@ public class AutoCompleteController extends BaseController{
     @Autowired
     private ContentDetailService contentDetailService;
 
+    @Autowired
+    private ReferredDoctorService referredDoctorService;
+
     @RequestMapping(value = {"/advice"}, method = RequestMethod.POST)
     @ResponseBody
     public List<ContentAdviceData> advice(@RequestBody SearchData searchData) throws BottomUpException {
@@ -163,6 +166,14 @@ public class AutoCompleteController extends BaseController{
         Map<String, Object> param = new HashMap<>();
         param.put("term", searchData.getTerm());
         return patientTypeService.getByParam(param);
+    }
+
+    @RequestMapping(value = {"/refDoctor"}, method = RequestMethod.POST)
+    @ResponseBody
+    public List<ReferredDoctorData> refDoctor(@RequestBody SearchData searchData) throws BottomUpException {
+        Map<String, Object> param = new HashMap<>();
+        param.put("term", searchData.getTerm());
+        return referredDoctorService.getByParam(param);
     }
 
     @RequestMapping(value = {"/dietSearch"}, method = RequestMethod.POST)

@@ -9,7 +9,7 @@
 		INSERT INTO `doctor_drug_setting`(
 			`doctorID`,
 			`drugID`,
-			`drugTimeID`,
+			`doseTypeCode`,
 			`drugDoseUnit`,
 			`drugWhenID`,
 			`drugAdviceID`,
@@ -21,7 +21,7 @@
 		VALUES(
 			#{doctorID},
 			#{drugID},
-			#{drugTimeID},
+			#{doseTypeCode},
 			#{drugDoseUnit},
 			#{drugWhenID},
 			#{drugAdviceID},
@@ -39,7 +39,7 @@
 		SET
 		`doctorID` = #{doctorID},
 		`drugID` = #{drugID},
-		`drugTimeID` = #{drugTimeID},
+		`doseTypeCode` = #{doseTypeCode},
 		`drugDoseUnit` =#{drugDoseUnit},
 		`drugWhenID` = #{drugWhenID},
 		`drugAdviceID` = #{drugAdviceID},
@@ -53,7 +53,7 @@
 			`drugSettingID`,
 			`doctorID`,
 			`drugID`,
-			`drugTimeID`,
+			`doseTypeCode`,
 			`drugDoseUnit`,
 			`drugWhenID`,
 			`drugAdviceID`,
@@ -71,14 +71,18 @@
 		DDS.`drugSettingID`,
 		DDS.`doctorID`,
 		DDS.`drugID`,
-		DDS.`drugTimeID`,
+		DDS.`doseTypeCode`,
 		DDS.`drugDoseUnit`,
 		DDS.`drugWhenID`,
 		DDS.`drugAdviceID`,
 		CD.drugName,
+		CD.strength AS drugStrength,
+		CDT.initial AS drugTypeInitial,
 		CDT.name AS drugTypeName,
 		CDA.bangla AS drugAdviceName,
 		CWT.bangla AS drugWhenName,
+		DT.bangla AS doseTypeBngName,
+		DT.english AS doseTypeEngName,
 		DDS.`updatedBy`,
 		DDS.`updatedOn`,
 		DDS.`createdBy`,
@@ -86,6 +90,7 @@
 		FROM doctor_feed.`doctor_drug_setting` DDS
 		JOIN doctor_feed.content_drug CD ON DDS.drugID = CD.drugID
 		JOIN doctor_feed.content_drug_type CDT ON CD.typeID = CDT.drugTypeID
+		JOIN doctor_feed.content_dose_type DT ON DDS.doseTypeCode = DT.doseCode
 		LEFT JOIN doctor_feed.content_drug_advice CDA ON DDS.drugAdviceID = CDA.drugAdviceID
 		LEFT JOIN doctor_feed.content_when_type CWT ON DDS.drugWhenID = CWT.whenTypeID
 		WHERE 1 = 1
@@ -117,7 +122,7 @@
 			`drugSettingID`,
 			`doctorID`,
 			`drugID`,
-			`drugTimeID`,
+			`doseTypeCode`,
 			`drugDoseUnit`,
 			`drugWhenID`,
 			`drugAdviceID`,

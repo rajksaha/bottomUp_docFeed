@@ -12,7 +12,7 @@ public class PrescriptionDrugData extends BaseData {
   private Long doctorID;
   private Long drugTypeID;
   private Long drugID;
-  private Integer drugTimeID;
+  private Integer doseTypeCode;
   private Integer drugWhenID;
   private Integer drugAdviceID;
   private String drugDoseUnit;
@@ -24,6 +24,8 @@ public class PrescriptionDrugData extends BaseData {
   private String drugTimeName;
   private String drugWhenName;
   private String drugAdviceName;
+  private String doseTypeBngName;
+  private String doseTypeEngName;
 
   private List<PrescriptionDrugDoseData> periodList;
 
@@ -75,12 +77,12 @@ public class PrescriptionDrugData extends BaseData {
     this.drugName = drugName;
   }
 
-  public Integer getDrugTimeID() {
-    return drugTimeID;
+  public Integer getDoseTypeCode() {
+    return doseTypeCode;
   }
 
-  public void setDrugTimeID(Integer drugTimeID) {
-    this.drugTimeID = drugTimeID;
+  public void setDoseTypeCode(Integer doseTypeCode) {
+    this.doseTypeCode = doseTypeCode;
   }
 
   public String getDrugDoseUnit() {
@@ -169,5 +171,21 @@ public class PrescriptionDrugData extends BaseData {
 
   public void setDrugTypeInitial(String drugTypeInitial) {
     this.drugTypeInitial = drugTypeInitial;
+  }
+
+  public String getDoseTypeBngName() {
+    return doseTypeBngName;
+  }
+
+  public void setDoseTypeBngName(String doseTypeBngName) {
+    this.doseTypeBngName = doseTypeBngName;
+  }
+
+  public String getDoseTypeEngName() {
+    return doseTypeEngName;
+  }
+
+  public void setDoseTypeEngName(String doseTypeEngName) {
+    this.doseTypeEngName = doseTypeEngName;
   }
 }

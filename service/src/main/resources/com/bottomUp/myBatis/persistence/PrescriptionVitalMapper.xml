@@ -72,6 +72,9 @@
 		<if test="presVitalID != null">
 			AND presVitalID = #{presVitalID}
 		</if>
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
 			LIMIT #{limit} OFFSET #{offset}

@@ -14,7 +14,7 @@ function insertPrescriptionDrugs($appointmentID, $drugType, $drugID, $drugTime, 
 						`appointMentID`,
 						 `drugTypeID`,
 						 `drugID`, 
-						`drugTimeID`, 
+						`doseTypeCode`,
 						`drugDoseUnit`, 
 						`drugWhenID`, 
 						`drugAdviceID`,
@@ -101,7 +101,7 @@ function addToDoctorSetting($appointmentID ,$doctorID, $diseaseID){
 	
 		$drugType = $row['drugTypeID'];
 		$drugID = $row['drugID'];
-		$drugTime = $row['drugTimeID'];
+		$drugTime = $row['doseTypeCode'];
 		$doseUnit = $row['drugDoseUnit'];
 		$drugWhen = $row['drugWhenID'];
 		$drugAdvice = $row['drugAdviceID'];
@@ -160,7 +160,7 @@ function addToDoctorSetting($appointmentID ,$doctorID, $diseaseID){
 
 function insertSingleDrugsToSetting($doctorID, $diseaseID, $drugID, $drugType, $drugTime, $doseUnit, $drugWhen, $drugAdvice){
 	
-	mysql_query("INSERT INTO `settings_drug`(`doctorID`, `diseaseID`, `drugTypeID`, `drugID`, `drugTimeID`, `drugDoseUnit`, `drugWhenID`, `drugAdviceID`) 
+	mysql_query("INSERT INTO `settings_drug`(`doctorID`, `diseaseID`, `drugTypeID`, `drugID`, `doseTypeCode`, `drugDoseUnit`, `drugWhenID`, `drugAdviceID`)
 			VALUES
 			('$doctorID', '$diseaseID', '$drugType', '$drugID', '$drugTime', '$doseUnit', '$drugWhen', '$drugAdvice')");
 	return mysql_insert_id();
@@ -214,7 +214,7 @@ function insertDoctorDrug($doctorID, $drugID, $drugTime, $doseUnit, $drugWhen, $
 			INSERT INTO `doctor_drug`( 
 				`doctorID`, 
 				`drugID`, 
-				`drugTimeID`, 
+				`doseTypeCode`,
 				`drugDoseUnit`, 
 				`drugWhenID`, 
 				`drugAdviceID`

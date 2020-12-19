@@ -29,6 +29,13 @@ app.service('JsonService', function(){
         {"id" : 7, "banName": "", "engName": ""}
 	];
 
+    this.nextVisitDayTypeList = [
+        {"id" : 1, "banName": "দিন", "engName": "Day(s)"},
+        {"id" : 2, "banName": "সপ্তাহ", "engName": "Weeks(s)"},
+        {"id" : 3, "banName": "মাস", "engName": "Month(s)"},
+        {"id" : 4, "banName": "বছর", "engName": "Year(s)"}
+    ];
+
 	this.timesADay = [
 						{"code" : 1, "name" :'Once Daily'},
 						{"code" : 2, "name" :'12 hourly'},
@@ -37,7 +44,7 @@ app.service('JsonService', function(){
 						{"code" : 6, "name" :'4 hourly'},
 						{"code" : 8, "name" :'3 hourly'},
 						{"code" : 12, "name" :'2hourly'},
-						{"code" : -1, "name" :'Periodic' + ' Dose'},
+						{"code" : -1, "name" :'Periodic Dose'},
 						{"code" : -2, "name" :'Same As'},
 						{"code" : -3, "name" :'Empty Dose'},
 						{"code" : -4, "name" :'Once in a Week'},

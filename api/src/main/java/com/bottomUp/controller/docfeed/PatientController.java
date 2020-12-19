@@ -62,6 +62,15 @@ public class PatientController extends BaseController {
         return result;
     }
 
+    @RequestMapping(value = {"/updatePatientType/{patientID}/{patientTypeID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> updatePatientType(@PathVariable("patientID") Long patientID, @PathVariable("patientTypeID") Integer patientTypeID) throws BottomUpException {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", true);
+        this.patientService.updatePatientType(patientID, patientTypeID);
+        return result;
+    }
+
     @RequestMapping(value = "/delete/{patientID}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("patientID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();

@@ -8,7 +8,7 @@
 
 		INSERT INTO `referred_doctor`(
 			`doctorName`,
-			`doctorAdress`,
+			`doctorAddress`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -16,7 +16,7 @@
 		)
 		VALUES(
 			#{doctorName},
-			#{doctorAdress},
+			#{doctorAddress},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -30,7 +30,7 @@
 		UPDATE `referred_doctor`
 		SET
 		`doctorName` = #{doctorName},
-		`doctorAdress` = #{doctorAdress},
+		`doctorAddress` = #{doctorAddress},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE referredDoctorID = #{referredDoctorID}
@@ -40,7 +40,7 @@
 		SELECT
 			`referredDoctorID`,
 			`doctorName`,
-			`doctorAdress`,
+			`doctorAddress`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -54,7 +54,7 @@
 		SELECT
 		`referredDoctorID`,
 		`doctorName`,
-		`doctorAdress`,
+		`doctorAddress`,
 		`updatedBy`,
 		`updatedOn`,
 		`createdBy`,
@@ -63,6 +63,15 @@
 		WHERE 1 = 1
 		<if test="referredDoctorID != null">
 			AND referredDoctorID = #{referredDoctorID}
+		</if>
+		<if test="doctorName != null">
+			AND doctorName = #{doctorName}
+		</if>
+		<if test="doctorAddress != null">
+			AND doctorAddress = #{doctorAddress}
+		</if>
+		<if test="term != null">
+			AND LOWER(doctorName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

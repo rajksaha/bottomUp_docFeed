@@ -86,7 +86,7 @@ if($query_no== 1){
 	$sql = "UPDATE `drug_prescription` SET  
 				`drugTypeID`='$drugType',
 				`drugID`='$drugID',
-				`drugTimeID`='$drugTime',
+				`doseTypeCode`='$drugTime',
 				`drugDoseUnit`='$doseUnit',
 				`drugWhenID`='$drugWhen',
 				`drugAdviceID`='$drugAdvice' 
@@ -192,7 +192,7 @@ else if($query_no==4){
 	
 	$drugID = $_POST['drugID'];
 	
-	$sql = mysql_query("SELECT `doctorDrugID`, `doctorID`, `drugID`, `drugTimeID`, `drugDoseUnit`, `drugWhenID`, `drugAdviceID` 
+	$sql = mysql_query("SELECT `doctorDrugID`, `doctorID`, `drugID`, `doseTypeCode`, `drugDoseUnit`, `drugWhenID`, `drugAdviceID`
 				FROM `doctor_drug` dd
 				WHERE dd.doctorID = $doctorID AND dd.drugID = $drugID");
 	

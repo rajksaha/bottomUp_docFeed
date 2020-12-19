@@ -55,7 +55,7 @@ function Show_med($appointmentID, $xAxis, $yAxis, $size){
 		$drugName = $row['drugName'];
 		$drugStr = $row['drugStrength'];
 		$drugPrescribeID = $row['id'];
-		$drugTime = $row['drugTimeID'];
+		$drugTime = $row['doseTypeCode'];
 		$drugDoseInitial = $row['drugDoseUnit'];
 		$drugWhen = $row['whenTypePdf'];
 		$drugWhenID = $row['drugWhenID'];

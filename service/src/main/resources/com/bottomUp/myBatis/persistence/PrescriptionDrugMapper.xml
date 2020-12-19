@@ -10,7 +10,7 @@
 			`appointmentID`,
 			`drugTypeID`,
 			`drugID`,
-			`drugTimeID`,
+			`doseTypeCode`,
             `drugDoseUnit`,
             `drugWhenID`,
 			`drugAdviceID`,
@@ -24,7 +24,7 @@
 			#{appointmentID},
 			#{drugTypeID},
 			#{drugID},
-			#{drugTimeID},
+			#{doseTypeCode},
 			#{drugDoseUnit},
 			#{drugWhenID},
 			#{drugAdviceID},
@@ -44,7 +44,7 @@
 		`appointmentID` = #{appointmentID},
 		`drugTypeID` = #{drugTypeID},
 		`drugID` = #{drugID},
-		`drugTimeID` =#{drugTimeID},
+		`doseTypeCode` =#{doseTypeCode},
 		`drugDoseUnit` = #{drugDoseUnit},
 		`drugWhenID` = #{drugWhenID},
 		`drugAdviceID` = #{drugAdviceID},
@@ -60,7 +60,7 @@
 			`appointmentID`,
 			`drugTypeID`,
 			`drugID`,
-			`drugTimeID`,
+			`doseTypeCode`,
             `drugDoseUnit`,
             `drugWhenID`,
 			`drugAdviceID`,
@@ -80,7 +80,7 @@
 		PD.`appointmentID`,
 		PD.`drugTypeID`,
 		PD.`drugID`,
-		PD.`drugTimeID`,
+		PD.`doseTypeCode`,
 		PD.`drugDoseUnit`,
 		PD.`drugWhenID`,
 		PD.`drugAdviceID`,
@@ -91,6 +91,8 @@
 		CDT.name AS drugTypeName,
 		CDA.bangla AS drugAdviceName,
 		CWT.bangla AS drugWhenName,
+		DT.bangla AS doseTypeBngName,
+		DT.english AS doseTypeEngName,
 		PD.`updatedBy`,
 		PD.`updatedOn`,
 		PD.`createdBy`,
@@ -98,6 +100,7 @@
 		FROM doctor_feed.`prescription_drug` PD
 		JOIN doctor_feed.content_drug CD ON PD.drugID = CD.drugID
 		JOIN doctor_feed.content_drug_type CDT ON CD.typeID = CDT.drugTypeID
+		JOIN doctor_feed.content_dose_type DT ON PD.doseTypeCode = DT.doseCode
 		LEFT JOIN doctor_feed.content_drug_advice CDA ON PD.drugAdviceID = CDA.drugAdviceID
 		LEFT JOIN doctor_feed.content_when_type CWT ON PD.drugWhenID = CWT.whenTypeID
 		WHERE 1 = 1

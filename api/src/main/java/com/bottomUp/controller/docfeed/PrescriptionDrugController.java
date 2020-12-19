@@ -35,10 +35,10 @@ public class PrescriptionDrugController extends BaseController {
         return this.prescriptionDrugService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/getNewPresDrug"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getReqContent"}, method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> getNewPresDrug(HttpServletRequest request) throws BottomUpException {
-        return prescriptionDrugService.getNewPresDrug();
+    public Map<String,Object> getReqContent(HttpServletRequest request) throws BottomUpException {
+        return prescriptionDrugService.getReqContent();
     }
 
     @RequestMapping(value = {"/getByID/{presDrugID}"}, method = RequestMethod.GET)

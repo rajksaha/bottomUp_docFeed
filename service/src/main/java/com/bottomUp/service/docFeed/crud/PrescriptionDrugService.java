@@ -35,7 +35,13 @@ public class PrescriptionDrugService {
     private ContentWhenTypeMapper contentWhenTypeMapper;
 
     @Autowired
+    private ContentDoseTypeMapper contentDoseTypeMapper;
+
+    @Autowired
     private ContentDrugAdviceMapper contentDrugAdviceMapper;
+
+    @Autowired
+    private ContentDurationTypeMapper contentDurationTypeMapper;
 
     @Autowired
     private DoctorDrugSettingMapper doctorDrugSettingMapper;
@@ -116,11 +122,13 @@ public class PrescriptionDrugService {
         this.prescriptionDrugMapper.delete(param);
     }
 
-    public Map<String,Object> getNewPresDrug() throws BottomUpException {
+    public Map<String,Object> getReqContent() throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("drugTypeList", contentDrugTypeMapper.getByParam(null));
         param.put("drugWhenTypeList", contentWhenTypeMapper.getByParam(null));
         param.put("drugAdviceTypeList", contentDrugAdviceMapper.getByParam(null));
+        param.put("doseTypeList", contentDoseTypeMapper.getByParam(null));
+        param.put("durationTypeList", contentDurationTypeMapper.getByParam(null));
         return param;
     }
 }

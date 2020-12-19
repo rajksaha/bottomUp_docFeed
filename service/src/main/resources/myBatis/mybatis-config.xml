@@ -7,7 +7,6 @@
 		<setting name="logImpl" value="SLF4J"/>
 		<setting name="lazyLoadingEnabled" value="true"/>
 	</settings>
-
 	<typeAliases>
 
 		<!--com.bottomUp-->
@@ -27,7 +26,7 @@
 		<typeAlias alias="appointment" type="com.bottomUp.domain.AppointmentData"/>
 		<typeAlias alias="appointmentType" type="com.bottomUp.domain.AppointmentTypeData"/>
 		<typeAlias alias="contentAdvice" type="com.bottomUp.domain.ContentAdviceData"/>
-		<typeAlias alias="contentDayType" type="com.bottomUp.domain.ContentDayTypeData"/>
+		<typeAlias alias="contentDurationType" type="com.bottomUp.domain.ContentDurationTypeData"/>
 		<typeAlias alias="contentDisease" type="com.bottomUp.domain.ContentDiseaseData"/>
 
 		<typeAlias alias="contentDoctorCategory" type="com.bottomUp.domain.ContentDoctorCategoryData"/>
@@ -41,6 +40,7 @@
 		<typeAlias alias="contentVital" type="com.bottomUp.domain.ContentVitalData"/>
 		<typeAlias alias="contentVitalOption" type="com.bottomUp.domain.ContentVitalOptionData"/>
 		<typeAlias alias="contentWhenType" type="com.bottomUp.domain.ContentWhenTypeData"/>
+		<typeAlias alias="contentDoseType" type="com.bottomUp.domain.ContentDoseTypeData"/>
 		<typeAlias alias="doctorAdviceDiseaseTemplate" type="com.bottomUp.domain.DoctorAdviceDiseaseTemplateData"/>
 		<typeAlias alias="doctorDataBackup" type="com.bottomUp.domain.DoctorDataBackupData"/>
 		<typeAlias alias="doctorDoseDrugDiseaseTemplate" type="com.bottomUp.domain.DoctorDoseDrugDiseaseTemplateData"/>
@@ -88,15 +88,9 @@
 		<typeAlias alias="appointmentDetail" type="com.bottomUp.model.AppointmentViewData"/>
 		<typeAlias alias="PatientViewData" type="com.bottomUp.model.PatientViewData"/>
 
-
-
-
-
-
-
 	</typeAliases>
+	<plugins>
+		<plugin interceptor="com.bottomUp.myBatis.interceptor.MapperInterceptor"/>
+	</plugins>
 
-    <plugins>
-        <plugin interceptor="com.bottomUp.myBatis.interceptor.MapperInterceptor"/>
-    </plugins>
 </configuration>

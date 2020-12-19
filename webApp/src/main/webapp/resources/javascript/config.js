@@ -374,6 +374,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                             'resources/javascript/controllers/prescription/vitalController.js',
                             'resources/javascript/controllers/history/pastHistoryController.js',
                             'resources/javascript/controllers/advice/advice.js',
+                            'resources/javascript/controllers/note/noteController.js',
                             'resources/javascript/services/jsonService.js' + jsVersion
                         ]
                     });

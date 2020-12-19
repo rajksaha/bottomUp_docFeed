@@ -78,6 +78,7 @@
 			pc.`createdOn`
 		FROM doctor_feed.`prescription_complain` pc
 		JOIN doctor_feed.content_symptom cs ON pc.symptomID = cs.symptomID
+		LEFT JOIN doctor_feed.content_duration_type CDT ON pc.durationType = CDT.durationType
 		WHERE 1 = 1
 		<if test="complainID != null">
 			AND pc.complainID = #{complainID}

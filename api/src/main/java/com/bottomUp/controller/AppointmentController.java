@@ -105,9 +105,7 @@ public class AppointmentController extends BaseController {
     @ResponseBody
     public Map<String, Object> updateStatus(@RequestBody SearchData data) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("appointmentID", data.getAppointmentID());
-        param.put("status", data.getIntStatus());
-        this.appointmentService.updateStatusByID(param);
+        this.appointmentService.updateStatusByID(data.getAppointmentID(), data.getIntStatus());
         param.put("success", true);
         return param;
     }

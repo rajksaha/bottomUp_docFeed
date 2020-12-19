@@ -85,6 +85,7 @@ public class PrescriptionViewService {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("doctorData", viewData);
         result.put("appointmentType", appointmentTypeMapper.getByParam(null));
+
         return result;
     }
 

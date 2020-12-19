@@ -18,14 +18,15 @@ import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by raj on 7/26/2020.
  */
 public class BaseController {
 
-    public static String[] DATE_PARSE_PATTERN = {"MM/dd/yyyy", "MM-dd-yyyy", "MMddyyyy", "HHmmss"};
-    public final DateFormat formatter = new SimpleDateFormat(DATE_PARSE_PATTERN[2]);
+    public static String[] DATE_PARSE_PATTERN = {"MM/dd/yyyy", "MM-dd-yyyy", "MMddyyyy", "HHmmss", "yyyy-MM-DD"};
+    public final DateFormat formatter = new SimpleDateFormat(DATE_PARSE_PATTERN[4]);
     public final DateFormat timeFormatter = new SimpleDateFormat(DATE_PARSE_PATTERN[3]);
 
     public BottomUpUserDetail getUserDetail() {
@@ -151,5 +152,17 @@ public class BaseController {
         baos.writeTo(os);
         os.flush();
         os.close();
+    }
+
+    public Date convertDateFromString(String stringDate){
+        try {
+            if(stringDate != null){
+                DateFormat formatter = new SimpleDateFormat(DATE_PARSE_PATTERN[4]);
+                return formatter.parse(stringDate);
+            }
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 }

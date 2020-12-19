@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentDurationTypeMapper">
+
+	<insert id="create" parameterType="contentDurationType" useGeneratedKeys="true" keyProperty="durationType" >
+
+		INSERT INTO `content_duration_type`(
+			`bangla`,
+			`pdf`,
+			`english`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{bangla},
+			#{pdf},
+			#{english},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentDurationType">
+		UPDATE `content_duration_type`
+		SET
+		`bangla` = #{bangla},
+		`pdf` = #{pdf},
+		`english` = #{english},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+
+		WHERE durationType = #{durationType}
+
+    </update>
+
+	<select id="getByID" parameterType="long" resultType="contentDurationType">
+		SELECT
+			`durationType`,
+			`bangla`,
+			`pdf`,
+			`english`,
+		    `updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+
+		FROM `content_duration_type`
+
+		WHERE durationType = #{durationType}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentDurationType">
+		SELECT
+		`durationType`,
+		`bangla`,
+		`pdf`,
+		`english`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_duration_type`
+		WHERE 1 = 1
+		<if test="durationType != null">
+			AND durationType = #{durationType}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_duration_type
+		WHERE 1=1
+		<if test="durationType!= null">
+			AND durationType = #{durationType}
+		</if>
+	</delete>
+
+
+</mapper>

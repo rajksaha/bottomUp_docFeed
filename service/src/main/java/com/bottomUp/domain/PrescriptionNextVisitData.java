@@ -8,12 +8,21 @@ import java.util.Date;
 
 public class PrescriptionNextVisitData  extends BaseData {
 
+  private Long presNextVisitID;
   private Long appointmentID;
   private Integer nextVisitType;
-  private Date date;
+  private Date visitDate;
   private String stringDate;
   private Integer numOfDay;
-  private Integer dayType;
+  private Integer durationType;
+
+  public Long getPresNextVisitID() {
+    return presNextVisitID;
+  }
+
+  public void setPresNextVisitID(Long presNextVisitID) {
+    this.presNextVisitID = presNextVisitID;
+  }
 
   public Long getAppointmentID() {
     return appointmentID;
@@ -31,12 +40,12 @@ public class PrescriptionNextVisitData  extends BaseData {
     this.nextVisitType = nextVisitType;
   }
 
-  public Date getDate() {
-    return date;
+  public Date getVisitDate() {
+    return visitDate;
   }
 
-  public void setDate(Date date) {
-    this.date = date;
+  public void setVisitDate(Date visitDate) {
+    this.visitDate = visitDate;
   }
 
   public String getStringDate() {
@@ -55,11 +64,11 @@ public class PrescriptionNextVisitData  extends BaseData {
     this.numOfDay = numOfDay;
   }
 
-  public Integer getDayType() {
-    return dayType;
+  public Integer getDurationType() {
+    return durationType;
   }
 
-  public void setDayType(Integer dayType) {
-    this.dayType = dayType;
+  public void setDurationType(Integer durationType) {
+    this.durationType = durationType;
   }
 }

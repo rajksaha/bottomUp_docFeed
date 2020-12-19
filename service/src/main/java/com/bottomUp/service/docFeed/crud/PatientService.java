@@ -34,6 +34,14 @@ public class PatientService {
         patientMapper.update(data);
     }
 
+    public void updatePatientType(Long patientID, Integer patientTypeID) throws BottomUpException {
+        PatientData patientData = new PatientData();
+        patientData.setPatientID(patientID);
+        patientData.setPatientType(patientTypeID);
+        patientMapper.updatePatientType(patientData);
+    }
+
+
     public PatientViewData getByID(Long ID)throws BottomUpException {
         return this.patientMapper.getByID(ID);
     }

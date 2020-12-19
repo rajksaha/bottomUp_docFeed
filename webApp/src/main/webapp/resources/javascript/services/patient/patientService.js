@@ -15,6 +15,13 @@ app.service('PatientService', function ($resource) {
                 method:'POST',
                 isArray:false
             }
+        }),
+        updatePatientType : $resource('/api/rest/patient/updatePatientType/:patientID/:patientTypeID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:false,
+                params: {patientID: '@patientID', patientTypeID: '@patientTypeID'}
+            }
         })
     };
 });

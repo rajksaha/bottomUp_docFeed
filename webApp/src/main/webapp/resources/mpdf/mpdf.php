@@ -32774,7 +32774,7 @@ function checkForPageChange($yaxis, $pageNum){
             $drugName = $row['drugName'];
             $drugStr = $row['drugStrength'];
             $drugPrescribeID = $row['id'];
-            $drugTime = $row['drugTimeID'];
+            $drugTime = $row['doseTypeCode'];
             $drugDoseInitial = $row['drugDoseUnit'];
             $drugWhen = $row['whenTypeName'];
             $drugWhenID = $row['drugWhenID'];

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,25 +21,45 @@ import java.util.Map;
 public class ReferredDoctorService {
 
     @Autowired
-    private ReferredDoctorMapper refferedDoctorMapper;
+    private ReferredDoctorMapper referredDoctorMapper;
+
+    public Long createByName(String docName, String address) throws BottomUpException{
+        ReferredDoctorData refDoc = null;
+        Map<String, Object> param = new HashMap<>();
+        param.put("doctorName", docName);
+        List<ReferredDoctorData> refDocList = referredDoctorMapper.getByParam(param);
+        if(refDocList != null && refDocList.size() > 0){
+            refDoc = refDocList.get(0);
+            if(!refDoc.getDoctorAddress().equals(address)){
+                refDoc.setDoctorAddress(address);
+                referredDoctorMapper.update(refDoc);
+            }
+        }else{
+            refDoc = new ReferredDoctorData();
+            refDoc.setDoctorName(docName);
+            refDoc.setDoctorAddress(address);
+            referredDoctorMapper.create(refDoc);
+        }
+        return refDoc.getReferredDoctorID();
+    }
 
     public void create(ReferredDoctorData data) throws BottomUpException {
-        refferedDoctorMapper.create(data);
+        referredDoctorMapper.create(data);
     }
 
     public void update(ReferredDoctorData data) throws BottomUpException {
-        refferedDoctorMapper.update(data);
+        referredDoctorMapper.update(data);
     }
 
     public ReferredDoctorData getByID(Long ID)throws BottomUpException {
-        return this.refferedDoctorMapper.getByID(ID);
+        return this.referredDoctorMapper.getByID(ID);
     }
 
     public List<ReferredDoctorData> getByParam(Map<String, Object> param) throws BottomUpException {
-        return this.refferedDoctorMapper.getByParam(param);
+        return this.referredDoctorMapper.getByParam(param);
     }
 
     public void delete (Map<String,Object> param) throws BottomUpException {
-        this.refferedDoctorMapper.delete(param);
+        this.referredDoctorMapper.delete(param);
     }
 }

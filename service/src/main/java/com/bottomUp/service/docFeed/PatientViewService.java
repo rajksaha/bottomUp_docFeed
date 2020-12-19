@@ -48,8 +48,6 @@ public class PatientViewService
     @Autowired
     private AppointmentMapper appointmentMapper;
 
-
-
     public PatientData create(PatientViewData patientViewData, Long companyID) throws BottomUpException{
         PatientData patientData = new PatientData();
         try {

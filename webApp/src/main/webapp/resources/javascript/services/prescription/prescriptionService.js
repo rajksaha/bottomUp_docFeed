@@ -45,7 +45,7 @@ app.service('PrescriptionService', function ($resource) {
                 params: {appointmentID: '@appointmentID'}
             }
         }),
-        getPrescribedRefDoc : $resource('/api/rest/prescription/getRefDocByAppointmentId/:appointmentID', {}, {
+        getPrescribedRefDoc : $resource('/api/rest/prescriptionReference/getByAppointmentID/:appointmentID', {}, {
             'query':  {
                 method:'GET',
                 isArray:true,
@@ -173,10 +173,10 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:false
             }
         }),
-        deleteReferncePrescription : $resource('/api/rest/prescription/deleteReferncePrescription', {}, {
+        deletePresDocRefer : $resource('/api/rest/prescriptionReference/delete/:prescriptionReferenceID', {}, {
             'remove':  {
                 method:'DELETE',
-                params: {}
+                params: {prescriptionReferenceID: '@prescriptionReferenceID'}
             }
         }),
         delDrugHistoryById: $resource('/api/rest/patientDrugHistory/delDrugHistoryById/:contentDetailID', {}, {

@@ -27,24 +27,37 @@ public class PrescriptionReferenceController extends BaseController {
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
     public List<  PrescriptionReferenceData> getAll(HttpServletRequest request) throws BottomUpException {
-
         Map<String, Object> params = new HashMap<>();
-
         return this.prescriptionReferenceService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/getByID/{  prescriptionReferenceID}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByAppointmentID/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public   PrescriptionReferenceData getByID(@PathVariable("  prescriptionReferenceID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public List<  PrescriptionReferenceData> getByAppointmentID(@PathVariable("appointmentID") Long appointmentID,
+                                                                HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("appointmentID", appointmentID);
+        return this.prescriptionReferenceService.getByParam(params);
+    }
 
-        Map<String, Object> params = this.parseParameter(request);
-
+    @RequestMapping(value = {"/getByID/{prescriptionReferenceID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public   PrescriptionReferenceData getByID(@PathVariable("prescriptionReferenceID") Integer companyID, HttpServletRequest request) throws BottomUpException {
         return this.prescriptionReferenceService.getByID(Long.valueOf(companyID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody   PrescriptionReferenceData data) throws BottomUpException {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", true);
+        this.prescriptionReferenceService.create(data);
+        return result;
+    }
+
+    @RequestMapping(value = {"/create"}, method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> create(@RequestBody   PrescriptionReferenceData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.prescriptionReferenceService.create(data);
@@ -60,10 +73,10 @@ public class PrescriptionReferenceController extends BaseController {
         return result;
     }
 
-    @RequestMapping(value = "/delete/{  prescriptionReferenceID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("  prescriptionReferenceID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    @RequestMapping(value = "/delete/{prescriptionReferenceID}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("prescriptionReferenceID") Integer prescriptionReferenceID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("  prescriptionReferenceID", appointmentID);
+        param.put("prescriptionReferenceID", prescriptionReferenceID);
         this.prescriptionReferenceService.delete(param);
     }
 }

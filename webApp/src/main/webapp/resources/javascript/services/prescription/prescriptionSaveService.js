@@ -61,25 +61,13 @@ app.service('PresSaveService', function ($resource) {
                 params: {appointmentID: '@appointmentID', adviceID: '@adviceID'}
             }
         }),
-        createRefferedDoctor : $resource('/api/rest/prescription/createRefferedDoctor', {}, {
+        savePresDoctorRefer : $resource('/api/rest/prescriptionReference/create', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createReferncePrescription : $resource('/api/rest/prescription/createReferncePrescription', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        updatePatientType : $resource('/api/rest/prescription/getUpInDelOfPtientDetail', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
-            }
-        }),
-        updateAppointmentByState : $resource('/api/rest/prescription/updateAppointmentByState', {}, {
+        updateAppStatus : $resource('/api/rest/appointment/updateStatus', {}, {
             'query':  {
                 method:'POST',
                 isArray:false

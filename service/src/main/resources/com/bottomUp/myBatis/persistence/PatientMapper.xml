@@ -9,6 +9,7 @@
 		INSERT INTO `patient`(
 			`userID`,
 			`patientCode`,
+			`patientType`,
 			`occupation`,
 			`referredBy`,
 			`hospitalName`,
@@ -25,6 +26,7 @@
 		VALUES(
 			#{userID},
 			#{patientCode},
+			#{patientType},
 			#{occupation},
 			#{referredBy},
 			#{hospitalName},
@@ -60,10 +62,20 @@
 		WHERE patientID = #{patientID}
 	</update>
 
+	<update id="updatePatientType" parameterType="Patient">
+		UPDATE `patient`
+		SET
+		`patientType` = #{patientType},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE patientID = #{patientID}
+	</update>
+
 	<select id="getByID" parameterType="long" resultType="PatientViewData">
 		SELECT
 			p.`patientID`,
 			p.`userID`,
+			p.`patientType`,
 			p.`patientCode`,
 			p.`occupation`,
 			p.`referredBy`,
@@ -95,6 +107,7 @@
 		`patientID`,
 		`userID`,
 		`patientCode`,
+		`patientType`,
 		`occupation`,
 		`referredBy`,
 		`hospitalName`,

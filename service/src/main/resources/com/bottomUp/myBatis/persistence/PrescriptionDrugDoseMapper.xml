@@ -56,15 +56,19 @@
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionDrugDose">
 		SELECT
-		`presDrugID`,
-		`dose`,
-		`numOfDay`,
-		`durationType`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `prescription_drug_dose`
+		PDD.`presDrugID`,
+		PDD.`dose`,
+		PDD.`numOfDay`,
+		PDD.`durationType`,
+		CDT.bangla as bngDurationName,
+		CDT.english as engDurationName,
+		CDT.pdf as pdfDurationName,
+		PDD.`updatedBy`,
+		PDD.`updatedOn`,
+		PDD.`createdBy`,
+		PDD.`createdOn`
+		FROM doctor_feed.`prescription_drug_dose` PDD
+		JOIN doctor_feed.content_duration_type CDT ON PDD.durationType = CDT.durationType
 		WHERE 1 = 1
 		<if test="presDrugID != null">
 			AND presDrugID = #{presDrugID}

@@ -16,7 +16,7 @@ function getPresCribedDrugs($appointmentID){
 	
 	
 	$sql = "SELECT  
-			dp.id, dp.appointMentID, dp.drugTypeID, dp.drugID, dp.drugTimeID, dp.drugDoseUnit, dp.drugAdviceID, dt.initial AS typeInitial, dp.drugWhenID,
+			dp.id, dp.appointMentID, dp.drugTypeID, dp.drugID, dp.doseTypeCode, dp.drugDoseUnit, dp.drugAdviceID, dt.initial AS typeInitial, dp.drugWhenID,
 			d.drugName AS drugName, d.strength AS drugStrength, 
 			dwt.bangla AS whenTypeName, dwt.pdf AS whenTypePdf, dat.bangla AS adviceTypeName, dat.pdf AS adviceTypePdf
 			FROM drug_prescription dp 
@@ -223,7 +223,7 @@ function getPatientOldPrecription($appointmentID, $patientID, $doctorID){
 function getDoctorsDrugSettingByDisease($doctorID, $diseaseID){
 	
 	
-	$result = mysql_query("SELECT sd.`id` , sd.`doctorID` , sd.`diseaseID` , sd.`drugTypeID` , sd.`drugID` , sd.`drugTimeID`  , sd.`drugDoseUnit` , sd.`drugWhenID` , sd.`drugAdviceID` , dt.initial AS typeInitial, d.drugName AS drugName, d.strength AS drugStrength, dwt.bangla AS whenTypeName, dat.bangla AS adviceTypeName
+	$result = mysql_query("SELECT sd.`id` , sd.`doctorID` , sd.`diseaseID` , sd.`drugTypeID` , sd.`drugID` , sd.`doseTypeCode`  , sd.`drugDoseUnit` , sd.`drugWhenID` , sd.`drugAdviceID` , dt.initial AS typeInitial, d.drugName AS drugName, d.strength AS drugStrength, dwt.bangla AS whenTypeName, dat.bangla AS adviceTypeName
 							FROM `settings_drug` sd
 							JOIN drugtype dt ON sd.drugTypeID = dt.id
 							JOIN drug d ON sd.drugID = d.drugID

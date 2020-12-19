@@ -29,7 +29,7 @@ function addDrugsToPrescription ($appointmentID, $result){
 	
 		$requestedID = $row['id'];
 		 
-		$drugPrescribeID  = insertPrescriptionDrugs($appointmentID, $row['drugTypeID'], $row['drugID'], $row['drugTimeID'], $row['drugDoseUnit'], $row['drugWhenID'], $row['drugAdviceID'], $presVar++);
+		$drugPrescribeID  = insertPrescriptionDrugs($appointmentID, $row['drugTypeID'], $row['drugID'], $row['doseTypeCode'], $row['drugDoseUnit'], $row['drugWhenID'], $row['drugAdviceID'], $presVar++);
 		
 		$dose = mysql_query("SELECT `drugSettingID`, `dose`, `numOfDay`, `durationType` FROM `settings_dose_drug` WHERE `drugSettingID` = $requestedID");
 		

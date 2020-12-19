@@ -4,7 +4,7 @@
 
 app.service('DrugService', function ($resource) {
     return {
-        getNewPresDrug : $resource('/api/rest/prescriptionDrug/getNewPresDrug', {}, {
+        getReqContent : $resource('/api/rest/prescriptionDrug/getReqContent', {}, {
             'query':  {
                 method:'GET',
                 isArray:false

@@ -16,8 +16,15 @@
                     <span>{{drugPres.drugTypeInitial}}. {{drugPres.drugName}} - {{drugPres.drugStrength}}</span>
                 </td>
                 <td  style="width: 30%" >
-                    <div data-ng-repeat="drugDose in drugPres.periodList">
-                        <span>{{drugDose.dose}} <span class="pull-right"> {{drugDose.numOfDay}}  {{drugDose.durationType}} </span></span>
+                    <div data-ng-if="drugPres.doseTypeCode > -2" data-ng-repeat="drugDose in drugPres.periodList">
+                        <span>{{drugDose.dose}} {{drugPres.drugDoseUnit}} <span class="pull-right"> {{drugDose.numOfDay}}  {{drugDose.bngDurationName}} </span></span>
+                    </div >
+                    <div data-ng-if="drugPres.doseTypeCode < -1">
+                        <span data-ng-if="drugPres.doseTypeCode == -2">{{drugPres.dose}}</span>
+                        <span data-ng-if="drugPres.doseTypeCode == -3">&nbsp;</span>
+                        <span data-ng-if="drugPres.doseTypeCode == -4">{{drugPres.doseTypeBngName}}</span>
+                        <span data-ng-if="drugPres.doseTypeCode == -5">{{drugPres.doseTypeBngName}}</span>
+                        <span data-ng-if="drugPres.doseTypeCode == -6">{{drugPres.doseTypeBngName}}</span>
                     </div>
                 </td>
                 <td   style="width: 20%">

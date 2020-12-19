@@ -72,11 +72,11 @@ else if($query_no==4){
 	
 	$requestedID = $_POST['requestedID'];
 	
-	$result = mysql_query("SELECT `id`, `appointMentID`, `drugTypeID`, `drugID`, `drugTimeID`, `drugDoseUnit`, `drugWhenID`, `drugAdviceID`, `presNum` FROM `drug_prescription` WHERE `id` = '$requestedID'");
+	$result = mysql_query("SELECT `id`, `appointMentID`, `drugTypeID`, `drugID`, `doseTypeCode`, `drugDoseUnit`, `drugWhenID`, `drugAdviceID`, `presNum` FROM `drug_prescription` WHERE `id` = '$requestedID'");
 	
 	$row = mysql_fetch_assoc($result);
 	
-	$drugPrescribeID = insertPrescriptionDrugs($appointmentID, $row['drugTypeID'], $row['drugID'], $row['drugTimeID'], $row['drugDoseUnit'], $row['drugWhenID'], $row['drugAdviceID'], $row['presNum']);
+	$drugPrescribeID = insertPrescriptionDrugs($appointmentID, $row['drugTypeID'], $row['drugID'], $row['doseTypeCode'], $row['drugDoseUnit'], $row['drugWhenID'], $row['drugAdviceID'], $row['presNum']);
 	
 	$dose = mysql_query("SELECT `drugPrescribeID`, `dose`, `numOfDay`, `durationType` FROM `dose_period` WHERE `drugPrescribeID` = $requestedID");
 	

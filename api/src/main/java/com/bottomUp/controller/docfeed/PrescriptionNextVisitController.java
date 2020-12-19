@@ -4,12 +4,17 @@ import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.  PrescriptionNextVisitData;
 import com.bottomUp.service.docFeed.crud.PrescriptionNextVisitService;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import utility.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +49,8 @@ public class PrescriptionNextVisitController extends BaseController {
     public Map<String, Object> save(@RequestBody   PrescriptionNextVisitData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        if(data.getAppointmentID() == null){
+        data.setVisitDate(this.convertDateFromString(data.getStringDate()));
+        if(data.getPresNextVisitID() == null){
             this.prescriptionNextVisitService.create(data);
         }else {
             this.prescriptionNextVisitService.update(data);

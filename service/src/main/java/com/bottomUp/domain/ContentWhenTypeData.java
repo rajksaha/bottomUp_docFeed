@@ -5,16 +5,16 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentWhenTypeData  extends BaseData {
 
-  private long whenTypeID;
+  private Long whenTypeID;
   private String bangla;
   private String english;
   private String pdf;
 
-  public long getWhenTypeID() {
+  public Long getWhenTypeID() {
     return whenTypeID;
   }
 
-  public void setWhenTypeID(long whenTypeID) {
+  public void setWhenTypeID(Long whenTypeID) {
     this.whenTypeID = whenTypeID;
   }
 

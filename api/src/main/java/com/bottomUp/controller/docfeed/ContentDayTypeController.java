@@ -2,8 +2,8 @@ package com.bottomUp.controller.docfeed;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
-import com.bottomUp.domain.ContentDayTypeData;
-import com.bottomUp.service.docFeed.crud.ContentDayTypeService;
+import com.bottomUp.domain.ContentDurationTypeData;
+import com.bottomUp.service.docFeed.crud.ContentDurationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +22,11 @@ import java.util.Map;
 public class ContentDayTypeController extends BaseController {
 
     @Autowired
-    private ContentDayTypeService contentDayTypeService;
+    private ContentDurationTypeService contentDayTypeService;
 
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<ContentDayTypeData> getAll(HttpServletRequest request) throws BottomUpException {
+    public List<ContentDurationTypeData> getAll(HttpServletRequest request) throws BottomUpException {
 
         //Map<String, Object> params = new HashMap<>();
 
@@ -35,7 +35,7 @@ public class ContentDayTypeController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{dayTypeId}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentDayTypeData getByID(@PathVariable("dayTypeId") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public ContentDurationTypeData getByID(@PathVariable("dayTypeId") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = this.parseParameter(request);
 
@@ -44,7 +44,7 @@ public class ContentDayTypeController extends BaseController {
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> save(@RequestBody ContentDayTypeData data) throws BottomUpException {
+    public Map<String, Object> save(@RequestBody ContentDurationTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.contentDayTypeService.create(data);
@@ -53,7 +53,7 @@ public class ContentDayTypeController extends BaseController {
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> update(@RequestBody ContentDayTypeData data) throws BottomUpException {
+    public Map<String, Object> update(@RequestBody ContentDurationTypeData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.contentDayTypeService.update(data);
