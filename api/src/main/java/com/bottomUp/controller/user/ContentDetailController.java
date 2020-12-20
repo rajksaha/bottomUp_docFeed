@@ -4,7 +4,7 @@ import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.common.user.ContentDetailData;
 import com.bottomUp.model.DrugHistory;
-import com.bottomUp.service.docFeed.crud.ContentDetailService;
+import com.bottomUp.service.docFeed.ContentDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +41,6 @@ public class ContentDetailController extends BaseController{
         return this.contentDetailService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/saveDrugHistory"}, method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> saveDrugHistory(@RequestBody DrugHistory data) throws BottomUpException {
-        Map<String, Object> result = new HashMap<String, Object>();
-        result.put("contentDetailID", this.contentDetailService.createByDrugHistory(data));
-        return result;
-    }
-
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody ContentDetailData data) throws BottomUpException {
@@ -65,12 +57,5 @@ public class ContentDetailController extends BaseController{
         result.put("success", true);
         this.contentDetailService.update(data);
         return result;
-    }
-
-    @RequestMapping(value = "/delete/{contentDetailID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("contentDetailID") Long contentDetailID, HttpServletResponse httpResponse_p) throws BottomUpException {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("contentDetailID",contentDetailID);
-        this.contentDetailService.delete(param);
     }
 }
