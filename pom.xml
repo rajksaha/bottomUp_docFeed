@@ -23,7 +23,6 @@
     <modules>
         <module>service</module>
         <module>api</module>
-        <module>webApp</module>
         <module>common</module>
     </modules>
 
