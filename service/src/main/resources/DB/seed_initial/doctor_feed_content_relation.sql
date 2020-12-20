@@ -1,0 +1,10 @@
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Father', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Mother', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Brother', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Sister', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Grand Father (F)', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Grand Mother (F)', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Grand Father (M)', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Grand Mother (M)', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Children', null, null, null, null);
+INSERT INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Other', null, null, null, null);

@@ -1,0 +1,7 @@
+INSERT INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('দিন ', 'w`b', 'Days', null, null, null, null);
+INSERT INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('সপ্তাহ', 'mc—vn', 'Weeks', null, null, null, null);
+INSERT INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('মাস', 'gvm', 'Months', null, null, null, null);
+INSERT INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('বছর', 'eQi', 'Years', null, null, null, null);
+INSERT INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('চলবে', 'Pj‡e', 'Continue', null, null, null, null);
+INSERT INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('', '', '', null, null, null, null);
+INSERT INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('মাঝে মাঝে', 'gv‡S gv‡S', 'Occasionally ', null, null, null, null);

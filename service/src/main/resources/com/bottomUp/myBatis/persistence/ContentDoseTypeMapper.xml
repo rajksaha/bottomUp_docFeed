@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentDoseTypeMapper">
+
+	<insert id="create" parameterType="contentDoseType" useGeneratedKeys="true" keyProperty="doseTypeID" >
+
+		INSERT INTO `content_dose_type`(
+			`doseCode`,
+			`bangla`,
+			`english`,
+			`pdf`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{doseCode},
+			#{bangla},
+			#{english},
+			#{pdf},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="contentDoseType">
+		UPDATE `content_dose_type`
+		SET
+		`bangla` = #{bangla},
+		`english` = #{english},
+		`pdf` = #{pdf},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE doseTypeID = #{doseTypeID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentDoseType">
+		SELECT
+			`doseTypeID`,
+			`doseCode`,
+			`bangla`,
+			`english`,
+			`pdf`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `content_dose_type`
+
+		WHERE doseTypeID = #{doseTypeID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentDoseType">
+		SELECT
+		`doseTypeID`,
+		`doseCode`,
+		`bangla`,
+		`english`,
+		`pdf`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_dose_type`
+		WHERE 1 = 1
+		<if test="doseCode != null">
+			AND doseCode = #{doseCode}
+		</if>
+		<if test="doseTypeID != null">
+			AND doseTypeID = #{doseTypeID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_dose_type
+		WHERE 1=1
+		<if test="doseTypeID != null">
+			AND doseTypeID = #{doseTypeID}
+		</if>
+	</delete>
+
+
+</mapper>
