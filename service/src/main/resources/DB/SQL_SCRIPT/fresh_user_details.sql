@@ -1,13 +1,3 @@
-TRUNCATE  TABLE bottom_up_module;
-TRUNCATE  TABLE bottom_up_permission;
-TRUNCATE  TABLE bottom_up_company;
-TRUNCATE  TABLE bottom_up_company_module;
-TRUNCATE  TABLE bottom_up_user_group;
-TRUNCATE  TABLE bottom_up_group_permission;
-TRUNCATE  TABLE bottom_up_user_group_assignment;
-TRUNCATE  TABLE bottom_up_user_profile;
-TRUNCATE  TABLE bottom_up_user;
-
 INSERT INTO `bottom_up_user`
 (
   `userName`,

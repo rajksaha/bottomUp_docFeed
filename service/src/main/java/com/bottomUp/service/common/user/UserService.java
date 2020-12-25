@@ -102,7 +102,7 @@ public class UserService {
         userProfileData.setUserID(userData.getUserID());
         this.userProfileMapper.create(userProfileData);
 
-        if(userProfileData.getCompanyAdmin() != null && userProfileData.getCompanyAdmin()){
+        if(userProfileData.getCompanyAdmin() != null && userProfileData.getCompanyAdmin() == 1){
             Map<String, Object> param = new HashMap<String, Object>();
             param.put("shortName", "COMPANY_ADMIN");
             param.put("companyID", companyID);

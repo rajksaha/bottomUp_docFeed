@@ -5,15 +5,15 @@ import com.bottomUp.common.utility.JsonConverter;
 import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.DoctorData;
-import com.bottomUp.domain.common.user.CompanyLevelData;
-import com.bottomUp.domain.common.user.UserData;
-import com.bottomUp.domain.common.user.UserGroupData;
-import com.bottomUp.domain.common.user.UserProfileData;
+import com.bottomUp.domain.common.CompanyData;
+import com.bottomUp.domain.common.user.*;
 import com.bottomUp.service.common.user.UserGroupAssignmentService;
 import com.bottomUp.service.common.user.UserGroupService;
 import com.bottomUp.service.common.user.UserService;
 import com.bottomUp.service.docFeed.crud.DoctorService;
 import com.google.gson.Gson;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -87,11 +87,7 @@ public class UserController extends BaseController {
     public UserProfileData getUserProfile(@PathVariable("userID") Long userID, HttpServletRequest request) throws BottomUpException {
 
         UserProfileData userProfileData = this.userService.getUserProfileByID(userID);
-        if(userProfileData != null && userProfileData.getJsonString() != null){
-            List<CompanyLevelData> resultList = JsonConverter.convertJsonToList(userProfileData.getJsonString(), CompanyLevelData.class);
 
-            userProfileData.setCompanyLevelList(resultList);
-        }
         return userProfileData;
     }
 
@@ -117,29 +113,37 @@ public class UserController extends BaseController {
         return result;
     }
 
-    @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/save"}, method=RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> save(@RequestBody UserProfileData data) throws BottomUpException {
+    public Map<String, Object> save(@RequestBody UserProfileDataTest profileData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        Long companyID = data.getCompanyID();
+        Long companyID = profileData.getCompanyID();
         if(companyID == null){
             companyID = this.getUserDetail().getUserProfilePermissionData().getCompanyID();
         }
         if(this.getUserDetail().getDoctorData() != null){
-            data.setDoctorID(this.getUserDetail().getDoctorData().getDoctorID());
+            profileData.setDoctorID(this.getUserDetail().getDoctorData().getDoctorID());
         }
-        this.userService.createUserProfile(data, companyID);
+        UserProfileData viewData = new UserProfileData();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
+        modelMapper.map(profileData, viewData);
+
+        this.userService.createUserProfile(viewData, companyID);
         return result;
     }
 
-
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> update(@RequestBody UserProfileData data) throws BottomUpException {
+    public Map<String, Object> update(@RequestBody UserProfileDataTest profileData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.userService.updateUserProfile(data);
+        UserProfileData viewData = new UserProfileData();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
+        modelMapper.map(profileData, viewData);
+        this.userService.updateUserProfile(viewData);
         return result;
     }
 

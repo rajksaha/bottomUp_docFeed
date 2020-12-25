@@ -4,6 +4,8 @@ import com.bottomUp.domain.DoctorHistorySettingData;
 import com.bottomUp.domain.DoctorVitalSettingData;
 import com.bottomUp.domain.PrescriptionComplainData;
 import com.bottomUp.domain.PrescriptionVitalData;
+import com.bottomUp.domain.common.user.UserProfileData;
+import com.bottomUp.domain.common.user.UserProfileDataTest;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class SearchData {
 
     private Long appointmentID;
     private Integer intStatus;
+    private UserProfileDataTest userProfile;
 
     private List<PrescriptionComplainData> complainList;
     private List<DoctorVitalSettingData> vitalList;
@@ -121,5 +124,13 @@ public class SearchData {
 
     public void setHistoryList(List<DoctorHistorySettingData> historyList) {
         this.historyList = historyList;
+    }
+
+    public UserProfileDataTest getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfileDataTest userProfile) {
+        this.userProfile = userProfile;
     }
 }
