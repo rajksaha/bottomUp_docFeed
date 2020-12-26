@@ -1,20 +1,16 @@
 package com.bottomUp.controller.user;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.common.utility.JsonConverter;
 import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.controller.BaseController;
-import com.bottomUp.domain.DoctorData;
-import com.bottomUp.domain.common.CompanyData;
-import com.bottomUp.domain.common.user.*;
+import com.bottomUp.domain.common.user.UserData;
+import com.bottomUp.domain.common.user.UserGroupData;
+import com.bottomUp.domain.common.user.UserProfileData;
 import com.bottomUp.service.common.user.UserGroupAssignmentService;
 import com.bottomUp.service.common.user.UserGroupService;
 import com.bottomUp.service.common.user.UserService;
-import com.bottomUp.service.docFeed.crud.DoctorService;
-import com.google.gson.Gson;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -115,7 +111,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value={"/save"}, method=RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> save(@RequestBody UserProfileDataTest profileData) throws BottomUpException {
+    public Map<String, Object> save(@RequestBody UserProfileData profileData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         Long companyID = profileData.getCompanyID();
@@ -125,25 +121,16 @@ public class UserController extends BaseController {
         if(this.getUserDetail().getDoctorData() != null){
             profileData.setDoctorID(this.getUserDetail().getDoctorData().getDoctorID());
         }
-        UserProfileData viewData = new UserProfileData();
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-        modelMapper.map(profileData, viewData);
-
-        this.userService.createUserProfile(viewData, companyID);
+        this.userService.createUserProfile(profileData, companyID);
         return result;
     }
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> update(@RequestBody UserProfileDataTest profileData) throws BottomUpException {
+    public Map<String, Object> update(@RequestBody UserProfileData profileData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        UserProfileData viewData = new UserProfileData();
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-        modelMapper.map(profileData, viewData);
-        this.userService.updateUserProfile(viewData);
+        this.userService.updateUserProfile(profileData);
         return result;
     }
 
@@ -161,16 +148,9 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = {"/updateUserGroupAssignment"}, method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> updateUserGroupAssignment(@RequestBody UserProfileData data) throws BottomUpException {
+    @ResponseBody public Map<String, Object> updateUserGroupAssignment(@RequestBody UserProfileData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        /*if(isDuplicate(categoryDATA)) {
-            result.put("success", false);
-            result.put("message", "Duplicate category name exists");
-            return result;
-        }*/
-        //data.setC`
         this.userGroupAssignmentService.updateUserGroupAssignment(data);
         return result;
     }

@@ -9,8 +9,8 @@
 		INSERT INTO `doctor_feed`.`appointment`(
 			`doctorID`,
 			`patientID`,
-			`date`,
-			`time`,
+			`appDate`,
+			`appTime`,
 			`status`,
 			`appointmentType`,
 			`updatedBy`,
@@ -21,8 +21,8 @@
 		VALUES(
 			#{doctorID},
 			#{patientID},
-			#{date},
-			#{time},
+			#{appDate},
+			#{appTime},
 			#{status},
 			#{appointmentType},
 			#{updatedBy},
@@ -39,8 +39,8 @@
 		SET
 		`doctorID` = #{doctorID},
 		`patientID` = #{patientID},
-		`date` = #{date},
-		`time` =#{time},
+		`appDate` = #{appDate},
+		`appTime` =#{appTime},
 		`status` = #{status},
 		`appointmentType` = #{appointmentType},
 		`updatedBy` = #{updatedBy},
@@ -62,8 +62,8 @@
 			`appointmentID`,
 			`doctorID`,
 			`patientID`,
-			`date`,
-			`time`,
+			`appDate`,
+			`appTime`,
 			`status`,
 			`appointmentType`,
 			`updatedBy`,
@@ -80,8 +80,8 @@
 		`appointmentID`,
 		`doctorID`,
 		`patientID`,
-		`date`,
-		`time`,
+		`appDate`,
+		`appTime`,
 		`status`,
 		`appointmentType`,
 		`updatedBy`,
@@ -99,8 +99,8 @@
 		<if test="doctorID != null">
 			AND doctorID = #{doctorID}
 		</if>
-		<if test="date != null">
-			AND date = #{date}
+		<if test="appDate != null">
+			AND appDate = #{appDate}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
@@ -123,8 +123,8 @@
 			app.`appointmentID`,
 			app.`doctorID`,
 			app.`patientID`,
-			app.`date`,
-			app.`time`,
+			app.`appDate`,
+			app.`appTime`,
 			app.`status`,
 			app.`appointmentType`,
 			app.`updatedBy`,
@@ -153,11 +153,11 @@
 		<if test="doctorID != null">
 			AND app.doctorID = #{doctorID}
 		</if>
-		<if test="date != null">
-			AND app.date = #{date}
+		<if test="appDate != null">
+			AND app.appDate = #{appDate}
 		</if>
 		<if test="startDate != null and endDate !=null">
-			AND app.date IN BETWEEN (DATE(#{startDate}), DATE(#{endDate}))
+			AND app.appDate IN BETWEEN (DATE(#{startDate}), DATE(#{endDate}))
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
@@ -178,8 +178,8 @@
 		<if test="doctorID != null">
 			AND doctorID = #{doctorID}
 		</if>
-		<if test="date != null">
-			AND date = #{date}
+		<if test="appDate != null">
+			AND appDate = #{appDate}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

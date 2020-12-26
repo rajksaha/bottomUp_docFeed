@@ -2,8 +2,6 @@ package com.bottomUp.domain.common.user;
 
 
 import com.bottomUp.domain.common.BaseData;
-
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -33,14 +31,6 @@ public class UserProfileData extends BaseData {
     private String doctorCode;
 
     private List<UserGroupData> userGroupList;
-
-    public String getDoctorCode() {
-        return doctorCode;
-    }
-
-    public void setDoctorCode(String doctorCode) {
-        this.doctorCode = doctorCode;
-    }
 
     public Long getUserProfileID() {
         return userProfileID;
@@ -98,6 +88,14 @@ public class UserProfileData extends BaseData {
         this.emailAddress = emailAddress;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -122,7 +120,11 @@ public class UserProfileData extends BaseData {
         this.contactNo = contactNo;
     }
 
-    public void setDateOfBirth(Timestamp dateOfBirth) {
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -158,15 +160,6 @@ public class UserProfileData extends BaseData {
         this.companyAdmin = companyAdmin;
     }
 
-
-    public List<UserGroupData> getUserGroupList() {
-        return userGroupList;
-    }
-
-    public void setUserGroupList(List<UserGroupData> userGroupList) {
-        this.userGroupList = userGroupList;
-    }
-
     public Integer getIsDoctor() {
         return isDoctor;
     }
@@ -175,21 +168,19 @@ public class UserProfileData extends BaseData {
         this.isDoctor = isDoctor;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public String getDoctorCode() {
+        return doctorCode;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDoctorCode(String doctorCode) {
+        this.doctorCode = doctorCode;
     }
 
-    public String getAddress() {
-        return address;
+    public List<UserGroupData> getUserGroupList() {
+        return userGroupList;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUserGroupList(List<UserGroupData> userGroupList) {
+        this.userGroupList = userGroupList;
     }
-
-
 }

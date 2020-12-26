@@ -11,8 +11,8 @@ public class AppointmentViewData {
     private long appointmentID;
     private long doctorID;
     private long patientID;
-    private Date date;
-    private Time time;
+    private Date appDate;
+    private Time appTime;
     private Integer status;
     private Integer appointmentType;
 
@@ -50,20 +50,20 @@ public class AppointmentViewData {
         this.patientID = patientID;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getAppDate() {
+        return appDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setAppDate(Date appDate) {
+        this.appDate = appDate;
     }
 
-    public Time getTime() {
-        return time;
+    public Time getAppTime() {
+        return appTime;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setAppTime(Time appTime) {
+        this.appTime = appTime;
     }
 
     public Integer getStatus() {

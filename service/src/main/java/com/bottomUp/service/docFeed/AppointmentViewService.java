@@ -43,10 +43,10 @@ public class AppointmentViewService {
         modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
         modelMapper.map(viewData, appointmentData);
         appointmentData.setPatientID(patientData.getPatientID());
-        if(appointmentData.getDate() == null ){
+        if(appointmentData.getAppDate() == null ){
             DateTime now = new DateTime();
-            appointmentData.setDate(now.toDate());
-            appointmentData.setTime(Time.valueOf("" + now.getHourOfDay() + ":" + now.getMinuteOfHour()
+            appointmentData.setAppDate(now.toDate());
+            appointmentData.setAppTime(Time.valueOf("" + now.getHourOfDay() + ":" + now.getMinuteOfHour()
                     + ":" + now.getSecondOfMinute() ));
         }
         appointmentData.setStatus(AppointmentStatusType.NEW.getIntValue());
@@ -60,10 +60,10 @@ public class AppointmentViewService {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
         modelMapper.map(viewData, appointmentData);
-        if(appointmentData.getDate() == null ){
+        if(appointmentData.getAppDate() == null ){
             DateTime now = new DateTime();
-            appointmentData.setDate(now.toDate());
-            appointmentData.setTime(Time.valueOf("" + now.getHourOfDay() + ":" + now.getMinuteOfHour()
+            appointmentData.setAppDate(now.toDate());
+            appointmentData.setAppTime(Time.valueOf("" + now.getHourOfDay() + ":" + now.getMinuteOfHour()
                     + ":" + now.getSecondOfMinute() ));
         }
         appointmentData.setStatus(AppointmentStatusType.NEW.getIntValue());
