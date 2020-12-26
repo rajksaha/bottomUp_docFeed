@@ -46,9 +46,9 @@
         <session-timeout>10080</session-timeout>
     </session-config>
 
-    <!--<listener>
-        <listener-class>com.raydar.common.session.SessionTimeoutSetter</listener-class>
-    </listener>-->
+    <listener>
+        <listener-class>com.bottomUp.session.SessionTimeoutSetter</listener-class>
+    </listener>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

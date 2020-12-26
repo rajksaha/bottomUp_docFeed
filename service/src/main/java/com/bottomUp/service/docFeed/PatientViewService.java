@@ -11,6 +11,7 @@ import com.bottomUp.myBatis.persistence.UserMapper;
 import com.bottomUp.service.common.user.UserService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -48,22 +49,19 @@ public class PatientViewService
     @Autowired
     private AppointmentMapper appointmentMapper;
 
-    public PatientData create(PatientViewData patientViewData, Long companyID) throws BottomUpException{
+    public PatientData
+    create(PatientViewData patientViewData, Long companyID) throws BottomUpException{
         PatientData patientData = new PatientData();
         try {
-            UserData userData = userMapper.getUserByUserName(patientViewData.getContactNo());
-            if(userData != null){
-                throw new BottomUpException("Phone Number Already in use with another Patient");
-            }
             UserProfileData profileData = new UserProfileData();
             ModelMapper modelMapper = new ModelMapper();
             modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
             modelMapper.map(patientViewData, profileData);
-            profileData.setUserName(patientViewData.getContactNo());
             if(patientViewData.getDateOfBirth() == null && patientViewData.getAge() != null){
                 profileData.setDateOfBirth(DateUtil.addDays(new Date(), -(365*patientViewData.getAge())));
             }
-            userData = userService.createUserProfile(profileData, null);
+            profileData.setUserName(createUserName(patientViewData.getFirstName()));
+            UserData userData = userService.createUserProfile(profileData, null);
             modelMapper.map(patientViewData, patientData);
             patientData.setUserID(userData.getUserID());
             patientData.setPatientCode(this.createPatientCode());
@@ -102,6 +100,10 @@ public class PatientViewService
         Long numOfAppToday = appointmentMapper.getCountByParam(param);
         String padded = String.format("%04d", numOfAppToday);
         return "" + dateTime.getYear() + dateTime.getMonthOfYear() + dateTime.getDayOfMonth()+ padded;
+    }
+
+    private String createUserName(String firstName) throws Exception{
+        return "" + firstName.substring(5) + RandomStringUtils.randomAlphanumeric(4).toUpperCase();
     }
     //TODO:getPatient Detail included userProfile
 }

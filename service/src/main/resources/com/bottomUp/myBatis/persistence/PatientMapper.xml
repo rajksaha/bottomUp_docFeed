@@ -9,7 +9,6 @@
 		INSERT INTO `patient`(
 			`userID`,
 			`patientCode`,
-			`patientType`,
 			`occupation`,
 			`referredBy`,
 			`hospitalName`,
@@ -26,7 +25,6 @@
 		VALUES(
 			#{userID},
 			#{patientCode},
-			#{patientType},
 			#{occupation},
 			#{referredBy},
 			#{hospitalName},
@@ -75,7 +73,6 @@
 		SELECT
 			p.`patientID`,
 			p.`userID`,
-			p.`patientType`,
 			p.`patientCode`,
 			p.`occupation`,
 			p.`referredBy`,
@@ -107,7 +104,6 @@
 		`patientID`,
 		`userID`,
 		`patientCode`,
-		`patientType`,
 		`occupation`,
 		`referredBy`,
 		`hospitalName`,
