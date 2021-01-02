@@ -744,7 +744,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
     $scope.printPreview = function (){
         var debug = "";
-        $window.open("http://127.0.0.1/prescription/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID + debug, '_blank');
+        $window.open("http://prescriptionapiapp-env.eba-pkcugqu8.ap-southeast-1.elasticbeanstalk.com/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID + debug, '_blank');
         /*if(!$rootScope.defaultPdf){
             var dataString = "query=20" + '&doctorID=' + $scope.doctorData.doctorID;
 
