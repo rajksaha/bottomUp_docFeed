@@ -5,96 +5,78 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorSettingData extends BaseData {
 
-  private long doctorSettingID;
-  private long doctorID;
-  private long category;
-  private long state;
-  private long patientType;
-  private long patientState;
-  private long prescriptionStyle;
-  private long companyID;
-  private long photoSupport;
-  private long personCodeinitial;
+  private Long doctorSettingID;
+  private Long doctorID;
+  private Integer category;
+  private Integer state;
+  private Integer patientType;
+  private Integer patientState;
+  private Integer prescriptionStyle;
+  private Integer photoSupport;
   private String pdfPage;
 
-  public long getDoctorSettingID() {
+  public Long getDoctorSettingID() {
     return doctorSettingID;
   }
 
-  public void setDoctorSettingID(long doctorSettingID) {
+  public void setDoctorSettingID(Long doctorSettingID) {
     this.doctorSettingID = doctorSettingID;
   }
 
-  public long getDoctorID() {
+  public Long getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(Long doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getCategory() {
+  public Integer getCategory() {
     return category;
   }
 
-  public void setCategory(long category) {
+  public void setCategory(Integer category) {
     this.category = category;
   }
 
-  public long getState() {
+  public Integer getState() {
     return state;
   }
 
-  public void setState(long state) {
+  public void setState(Integer state) {
     this.state = state;
   }
 
-  public long getPatientType() {
+  public Integer getPatientType() {
     return patientType;
   }
 
-  public void setPatientType(long patientType) {
+  public void setPatientType(Integer patientType) {
     this.patientType = patientType;
   }
 
-  public long getPatientState() {
+  public Integer getPatientState() {
     return patientState;
   }
 
-  public void setPatientState(long patientState) {
+  public void setPatientState(Integer patientState) {
     this.patientState = patientState;
   }
 
-  public long getPrescriptionStyle() {
+  public Integer getPrescriptionStyle() {
     return prescriptionStyle;
   }
 
-  public void setPrescriptionStyle(long prescriptionStyle) {
+  public void setPrescriptionStyle(Integer prescriptionStyle) {
     this.prescriptionStyle = prescriptionStyle;
   }
 
-  public long getCompanyID() {
-    return companyID;
-  }
-
-  public void setCompanyID(long companyID) {
-    this.companyID = companyID;
-  }
-
-  public long getPhotoSupport() {
+  public Integer getPhotoSupport() {
     return photoSupport;
   }
 
-  public void setPhotoSupport(long photoSupport) {
+  public void setPhotoSupport(Integer photoSupport) {
     this.photoSupport = photoSupport;
-  }
-
-  public long getPersonCodeinitial() {
-    return personCodeinitial;
-  }
-
-  public void setPersonCodeinitial(long personCodeinitial) {
-    this.personCodeinitial = personCodeinitial;
   }
 
   public String getPdfPage() {

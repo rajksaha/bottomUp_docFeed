@@ -1,6 +1,8 @@
 package com.bottomUp.domain.common.user;
 
 
+import com.bottomUp.domain.DoctorData;
+import com.bottomUp.domain.DoctorSettingData;
 import com.bottomUp.domain.common.BaseData;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +31,8 @@ public class UserProfileData extends BaseData {
     private Integer companyAdmin;
     private Integer isDoctor;
     private String doctorCode;
+    private DoctorData doctorData;
+    private DoctorSettingData docSettingData;
 
     private List<UserGroupData> userGroupList;
 
@@ -182,5 +186,21 @@ public class UserProfileData extends BaseData {
 
     public void setUserGroupList(List<UserGroupData> userGroupList) {
         this.userGroupList = userGroupList;
+    }
+
+    public DoctorData getDoctorData() {
+        return doctorData;
+    }
+
+    public void setDoctorData(DoctorData doctorData) {
+        this.doctorData = doctorData;
+    }
+
+    public DoctorSettingData getDocSettingData() {
+        return docSettingData;
+    }
+
+    public void setDocSettingData(DoctorSettingData docSettingData) {
+        this.docSettingData = docSettingData;
     }
 }

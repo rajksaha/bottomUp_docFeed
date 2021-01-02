@@ -8,6 +8,7 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
     $scope.userGroupList = [];
     $scope.showForm = false;
     $scope.editObj = {};
+    $scope.doctorCategoryList = [];
 
 
 
@@ -139,6 +140,11 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
     };
 
     $scope.edit = function(userProfile){
+        if($scope.doctorCategoryList.length ==0){
+            UserManagementService.getDoctorCategory.query({}, {}).$promise.then(function(result) {
+                $scope.doctorCategoryList = result;
+            });
+        }
         $scope.userProfile = {};
         UserSetupService.getUserProfile.query({}, {userID : userProfile.userID}).$promise.then(function(result) {
             $scope.userProfile = result;
@@ -154,6 +160,11 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
     };
 
     $scope.add = function(){
+        if($scope.doctorCategoryList.length ==0){
+            UserManagementService.getDoctorCategory.query({}, {}).$promise.then(function(result) {
+                $scope.doctorCategoryList = result;
+            });
+        }
         $scope.userProfile = {};
         $scope.userProfile.companyAdmin = 0;
         $scope.userProfile.isDoctor = 0;
@@ -190,6 +201,14 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
             $scope.bringData();
         });
 
+    };
+
+    $scope.setPdfPage = function (preStyle, userProfile) {
+        if(preStyle == 1){
+            userProfile.docSettingData.pdfPage = 'default';
+        }else{
+            userProfile.docSettingData.pdfPage = userProfile.doctorCode;
+        }
     };
 
     $scope.init();

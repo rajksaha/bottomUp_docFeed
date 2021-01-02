@@ -33,15 +33,6 @@ public class ContentDoctorCategoryController extends BaseController {
         return this.contentDoctorCategoryService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/getByID/{categoryId}"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ContentDoctorCategoryData getByID(@PathVariable("categoryId") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.contentDoctorCategoryService.getByID(Long.valueOf(companyID));
-    }
-
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody ContentDoctorCategoryData data) throws BottomUpException {

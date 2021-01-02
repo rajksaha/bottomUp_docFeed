@@ -81,10 +81,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = {"/getUserProfile/userID/{userID}"}, method = RequestMethod.GET)
     @ResponseBody
     public UserProfileData getUserProfile(@PathVariable("userID") Long userID, HttpServletRequest request) throws BottomUpException {
-
-        UserProfileData userProfileData = this.userService.getUserProfileByID(userID);
-
-        return userProfileData;
+        return this.userService.getUserProfileByID(userID);
     }
 
     @RequestMapping(value = {"/updateUserPassword"}, method = RequestMethod.POST)

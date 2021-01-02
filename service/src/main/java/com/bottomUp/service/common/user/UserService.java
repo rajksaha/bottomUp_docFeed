@@ -6,6 +6,8 @@ import com.bottomUp.common.queue.QueueProducer;
 import com.bottomUp.common.utility.EmailType;
 import com.bottomUp.common.utility.PasswordEncryptor;
 import com.bottomUp.domain.DoctorData;
+import com.bottomUp.domain.DoctorDrugSettingData;
+import com.bottomUp.domain.DoctorSettingData;
 import com.bottomUp.domain.common.user.UserData;
 import com.bottomUp.domain.common.user.UserGroupAssignmentData;
 import com.bottomUp.domain.common.user.UserGroupData;
@@ -51,6 +53,9 @@ public class UserService {
     @Autowired
     private DoctorMapper doctorMapper;
 
+    @Autowired
+    private DoctorSettingMapper doctorSettingMapper;
+
 
     public UserData getUserByUserName(String userName) throws BottomUpException {
         return this.userMapper.getUserByUserName(userName);
@@ -77,8 +82,12 @@ public class UserService {
 
     public UserProfileData getUserProfileByID(Long userID) throws BottomUpException {
         UserProfileData userProfileData = this.userProfileMapper.getUserProfileByID(userID);
-
-
+        if(userProfileData.getDoctorID() != null){
+            userProfileData.setIsDoctor(1);
+            DoctorData doctorData = doctorMapper.getByID(userProfileData.getDoctorID());
+            userProfileData.setDoctorCode(doctorData.getDoctorCode());
+            userProfileData.setDocSettingData(doctorSettingMapper.getByDoctorID(userProfileData.getDoctorID()));
+        }
         return userProfileData;
     }
 
@@ -92,13 +101,7 @@ public class UserService {
         userData.setStatus(2);
         userData.setIsBlocked(false);
         this.create(userData);
-        if(userProfileData.getIsDoctor() != null && userProfileData.getIsDoctor() == 1){
-            DoctorData doctorData = new DoctorData();
-            doctorData.setUserID(userData.getUserID());
-            doctorData.setDoctorCode(userProfileData.getDoctorCode());
-            this.doctorMapper.create(doctorData);
-            userProfileData.setDoctorID(doctorData.getDoctorID());
-        }
+        this.createDoctor(userProfileData, userData.getUserID());
         userProfileData.setUserID(userData.getUserID());
         this.userProfileMapper.create(userProfileData);
 
@@ -120,6 +123,7 @@ public class UserService {
 
     public void updateUserProfile(UserProfileData userProfileData) throws BottomUpException {
         this.userProfileMapper.update(userProfileData);
+        this.updateDoctor(userProfileData);
         UserData userData = new UserData();
         userData.setStatus(userProfileData.getStatus());
         userData.setUserID(userProfileData.getUserID());
@@ -214,6 +218,24 @@ public class UserService {
             result.put("message", "This Password reset email has been expired, Please Try again");
         }
         return result;
+    }
+
+    public void createDoctor(UserProfileData userProfileData, Long userID)throws BottomUpException{
+        if(userProfileData.getIsDoctor() != null && userProfileData.getIsDoctor() == 1){
+            DoctorData doctorData = new DoctorData();
+            doctorData.setUserID(userID);
+            doctorData.setDoctorCode(userProfileData.getDoctorCode());
+            this.doctorMapper.create(doctorData);
+            userProfileData.getDocSettingData().setDoctorID(doctorData.getDoctorID());
+            this.doctorSettingMapper.create(userProfileData.getDocSettingData());
+            userProfileData.setDoctorID(doctorData.getDoctorID());
+        }
+    }
+
+    public void updateDoctor(UserProfileData userProfileData)throws BottomUpException{
+        if(userProfileData.getIsDoctor() != null && userProfileData.getIsDoctor() == 1){
+            this.doctorSettingMapper.update(userProfileData.getDocSettingData());
+        }
     }
 
 

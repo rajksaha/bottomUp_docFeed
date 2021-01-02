@@ -7,14 +7,14 @@
 	<insert id="create" parameterType="contentDoctorCategory" useGeneratedKeys="true" keyProperty="categoryID" >
 
 		INSERT INTO `content_doctor_category`(
-			`categortName`,
+			`categoryName`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
 			`createdOn`
 		)
 		VALUES(
-			#{categortName},
+			#{categoryName},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -27,7 +27,7 @@
 	<update id="update" parameterType="contentDoctorCategory">
 		UPDATE `content_doctor_category`
 		SET
-		`categortName` = #{categortName},
+		`categoryName` = #{categoryName},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE categoryID = #{categoryID}
@@ -36,7 +36,7 @@
 	<select id="getByID" parameterType="long" resultType="contentDoctorCategory">
 		SELECT
 		   `categoryID`,
-			`categortName`,
+			`categoryName`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -49,7 +49,7 @@
 	<select id="getByParam" parameterType="map" resultType="contentDoctorCategory">
 		SELECT
 		`categoryID`,
-		`categortName`,
+		`categoryName`,
 		`updatedBy`,
 		`updatedOn`,
 		`createdBy`,

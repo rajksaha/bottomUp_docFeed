@@ -90,10 +90,15 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4" data-ng-if="userProfile.userID == null && userData.permissions['COMPANY_ADMIN']">
+            <div class="col-md-4 col-lg-4" data-ng-if="userData.permissions['COMPANY_ADMIN']">
                 <div class="form-group">
                     <label>Is Doctor</label>
-                    <select data-ng-model="userProfile.isDoctor" class="form-control input-sm">
+                    <select data-ng-model="userProfile.isDoctor" class="form-control input-sm"
+                            data-ng-change="userProfile.docSettingData.category = 1;
+                                            userProfile.docSettingData.patientState = 1;
+                                            userProfile.docSettingData.patientType = 1;
+                                            userProfile.docSettingData.prescriptionStyle = 1;
+                                            userProfile.docSettingData.photoSupport = 0;">
                         <option value="1">--Yes--</option>
                         <option value="0">--No--</option>
                     </select>
@@ -101,15 +106,72 @@
                 </div>
             </div>
 
-            <div class="col-md-4 col-lg-4" data-ng-if="userProfile.userID == null && userProfile.isDoctor == 1">
-                <div class="form-group">
-                    <label>Doctor Code<span class="text-red">*</span></label>
-                    <input type="text" data-ng-model="userProfile.doctorCode" class="form-control input-sm required" maxlength="90" data-ng-disabled="userProfile.userID > 0">
-                    <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+            <div data-ng-if="userProfile.isDoctor == 1">
+                <div class="col-md-4 col-lg-4" >
+                    <div class="form-group">
+                        <label>Doctor Code<span class="text-red">*</span></label>
+                        <input type="text" data-ng-model="userProfile.doctorCode" class="form-control input-sm required" maxlength="90" data-ng-disabled="userProfile.userID > 0">
+                        <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4" >
+                    <div class="form-group">
+                        <label>Doctor Category<span class="text-red">*</span></label>
+                        <select class="form-control" data-ng-model="userProfile.docSettingData.category" data-ng-options="docType.categoryID as docType.categoryName for docType in doctorCategoryList" />
+                        <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label>Patient State</label>
+                        <select data-ng-model="userProfile.docSettingData.patientState" class="form-control input-sm">
+                            <option value="1">--Yes--</option>
+                            <option value="0">--No--</option>
+                        </select>
+                        <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label>Patient Type</label>
+                        <select data-ng-model="userProfile.docSettingData.patientType" class="form-control input-sm">
+                            <option value="1">--Yes--</option>
+                            <option value="0">--No--</option>
+                        </select>
+                        <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label>Photo Support</label>
+                        <select data-ng-model="userProfile.docSettingData.photoSupport" class="form-control input-sm">
+                            <option value="1">--Yes--</option>
+                            <option value="0">--No--</option>
+                        </select>
+                        <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label>Print Setup</label>
+                        <select data-ng-model="userProfile.docSettingData.prescriptionStyle" class="form-control input-sm" data-ng-change="setPdfPage(userProfile.docSettingData.prescriptionStyle, userProfile)">
+                            <option value="1">--Default--</option>
+                            <option value="0">--Customized--</option>
+                        </select>
+                        <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label>PDF Name</label>
+                        <input type="text" data-ng-model="userProfile.docSettingData.pdfPage" class="form-control input-sm required" maxlength="90">
+                        <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                        <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                    </div>
                 </div>
             </div>
         </div>
-
         <div class="row" ng-show="!showForm && companySelected">
             <div class="form-group col-md-5 col-lg-5">
                 <div class="input-group">

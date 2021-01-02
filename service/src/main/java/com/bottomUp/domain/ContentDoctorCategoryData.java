@@ -6,7 +6,7 @@ import com.bottomUp.domain.common.BaseData;
 public class ContentDoctorCategoryData extends BaseData {
 
   private long categoryID;
-  private String categortName;
+  private String categoryName;
 
   public long getCategoryID() {
     return categoryID;
@@ -16,11 +16,11 @@ public class ContentDoctorCategoryData extends BaseData {
     this.categoryID = categoryID;
   }
 
-  public String getCategortName() {
-    return categortName;
+  public String getCategoryName() {
+    return categoryName;
   }
 
-  public void setCategortName(String categortName) {
-    this.categortName = categortName;
+  public void setCategoryName(String categoryName) {
+    this.categoryName = categoryName;
   }
 }

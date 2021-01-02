@@ -43,7 +43,7 @@ app.service('UserManagementService', function ($resource) {
                 isArray:true
             }
         }),
-        updateUserGroupAssignment: $resource('/api/rest/userSetup/updateUserGroupAssignment', {}, {
+        updateUserGroupAssignment: $resource('/api/rest/user/updateUserGroupAssignment', {}, {
             'query': {
                 method: 'POST',
                 isArray:false
@@ -60,6 +60,12 @@ app.service('UserManagementService', function ($resource) {
                 method: 'POST'
             }
         }),
+        getDoctorCategory: $resource('/api/rest/contentDoctorCategory/getByParam', {}, {
+            'query': {
+                method: 'GET',
+                isArray:true
+            }
+        })
 
 
 

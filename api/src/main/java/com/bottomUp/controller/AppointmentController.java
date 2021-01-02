@@ -43,7 +43,7 @@ public class AppointmentController extends BaseController {
     public List<AppointmentViewData> getByParam(HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
-        params.put("date", DateUtil.getDateOnly(new Date()));
+        params.put("appDate", DateUtil.getDateOnly(new Date()));
         params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
         return this.appointmentService.getAppPatientDetail(params);
     }
@@ -53,7 +53,7 @@ public class AppointmentController extends BaseController {
     public DoctorDashboardData getDoctorDashboard(HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
-        params.put("date", DateUtil.getDateOnly(new Date()));
+        params.put("appDate", DateUtil.getDateOnly(new Date()));
         params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
         return this.appointmentViewService.getDoctorDashboard(params);
     }

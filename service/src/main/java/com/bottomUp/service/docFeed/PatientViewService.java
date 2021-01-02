@@ -103,7 +103,7 @@ public class PatientViewService
     }
 
     private String createUserName(String firstName) throws Exception{
-        return "" + firstName.substring(5) + RandomStringUtils.randomAlphanumeric(4).toUpperCase();
+        return "" + firstName.substring(0,5).trim().toLowerCase()  + "_" + RandomStringUtils.randomAlphanumeric(4).toLowerCase();
     }
     //TODO:getPatient Detail included userProfile
 }

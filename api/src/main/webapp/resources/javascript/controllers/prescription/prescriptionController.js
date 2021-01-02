@@ -743,7 +743,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
 
     $scope.printPreview = function (){
-        $window.open("http://localhost/doc_feed_php_api/api/reportHelper.php?appointmentID="+ $scope.appoinmentData.appointmentID+"&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16071395666061", '_blank');
+        var debug = "";
+        $window.open("http://127.0.0.1/prescription/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID + debug, '_blank');
         /*if(!$rootScope.defaultPdf){
             var dataString = "query=20" + '&doctorID=' + $scope.doctorData.doctorID;
 
@@ -801,8 +802,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             $scope.diagnosisData = {};
             $scope.diagnosisData.appointmentID = $scope.appoinmentData.appointmentID;
         }
-        var diagnosisData = {};
-        angular.copy($scope.diagnosisData, diagnosisData);
+        var diagnosisCopyData = {};
+        angular.copy($scope.diagnosisData, diagnosisCopyData);
         var modalInstance = $modal.open({
             templateUrl: 'resources/javascript/templates/diagnosis/diagnosis.html',
             windowClass: 'fade in',
@@ -810,7 +811,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             controller: 'PrescriptionController.PrescribeDiagnosisController',
             resolve: {
                 diagnosisData: function () {
-                    return diagnosisData;
+                    return diagnosisCopyData;
                 }
             },
             backdrop: 'static'
