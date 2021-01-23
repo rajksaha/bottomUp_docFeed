@@ -1,0 +1,10 @@
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Father', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Mother', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Brother', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Sister', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Grand Father (F)', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Grand Mother (F)', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Grand Father (M)', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Grand Mother (M)', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Children', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_relation (relationName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Other', 'system', NOW(), 'system', NOW());

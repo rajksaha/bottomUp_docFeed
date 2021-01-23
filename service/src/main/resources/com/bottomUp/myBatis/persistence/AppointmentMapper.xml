@@ -127,6 +127,7 @@
 			app.`appTime`,
 			app.`status`,
 			app.`appointmentType`,
+			apt.name AS appointmentTypeName,
 			app.`updatedBy`,
 			app.`updatedOn`,
 			app.`createdBy`,
@@ -141,6 +142,7 @@
 		FROM `doctor_feed`.`appointment` app
 		JOIN doctor d ON app.doctorID = d.doctorID
 		JOIN patient p ON app.patientID = p.patientID
+		JOIN `doctor_feed`.appointment_type apt ON app.appointmentType = apt.appointmentTypeID
 		JOIN `doctor_feed`.`bottom_up_user` pu ON p.userID = pu.userID
 		JOIN bottom_up_user_profile pup ON pu.userID = pup.userID
 		WHERE 1 = 1

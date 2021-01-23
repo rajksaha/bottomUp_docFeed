@@ -1,7 +1,9 @@
 package com.bottomUp.service.docFeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.domain.DoctorData;
 import com.bottomUp.domain.DoctorSettingData;
+import com.bottomUp.domain.PresNoteData;
 import com.bottomUp.domain.common.user.ContentDetailData;
 import com.bottomUp.model.DietData;
 import com.bottomUp.model.DoctorViewData;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utility.type.PrescriptionContentType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,12 +74,16 @@ public class PrescriptionViewService {
     @Autowired
     private MenuSettingMapper menuSettingMapper;
 
+    @Autowired
+    private DoctorMapper doctorMapper;
+
 
     public Map<String, Object> getDetailsForPrescription(Long doctorID)throws BottomUpException{
         Map<String, Object> requestMap = new HashMap<String, Object>();
+        DoctorData doctorData = doctorMapper.getByID(doctorID);
         DoctorSettingData doctorSettingData = doctorSettingMapper.getByDoctorID(doctorID);
         DoctorViewData viewData = new DoctorViewData();
-        requestMap.put("doctorType", doctorSettingData.getCategory());
+        requestMap.put("doctorType", doctorData.getCategoryID());
         viewData.setPatientTypeList(patientTypeMapper.getByParam(requestMap));
         viewData.setDoctorID(doctorID);
         viewData.setDoctorSettingData(doctorSettingData);
@@ -121,11 +128,35 @@ public class PrescriptionViewService {
         requestMap.put("entityType", PrescriptionContentType.CURRENT_DRUG);
         result.put("currentDrugHistory", contentDetailMapper.getByParam(requestMap));
         requestMap.put("entityType", PrescriptionContentType.COMMENT);
-        result.put("comment", contentDetailMapper.getByParam(requestMap));
+        result.put("comment", this.getPrescribedNote(appointmentID));
 
         //Clinical Record -- need change
-
-
         return result;
+    }
+
+    public List<PresNoteData> getPrescribedNote(Long appointmentID) throws BottomUpException{
+        List<PresNoteData> presNoteDataList = new ArrayList<>();
+        Map<String, Object> requestMap = new HashMap<String, Object>();
+        requestMap.put("entityID", appointmentID);
+        requestMap.put("entityType", PrescriptionContentType.NOTE);
+        List<ContentDetailData> contentList = contentDetailMapper.getByParam(requestMap);
+        for(ContentDetailData content: contentList){
+            PresNoteData noteData = this.getNoteData(presNoteDataList, content.getShortName());
+            noteData.getNoteList().add(content.getLongDesc());
+        }
+        return presNoteDataList;
+    }
+
+    private PresNoteData getNoteData(List<PresNoteData> presNoteDataList, String header){
+        for (PresNoteData note: presNoteDataList){
+            if(note.getHeader().equals(header)){
+                return note;
+            }
+        }
+        PresNoteData noteData = new PresNoteData();
+        noteData.setHeader(header);
+        noteData.setNoteList(new ArrayList<String>());
+        presNoteDataList.add(noteData);
+        return noteData;
     }
 }

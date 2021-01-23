@@ -1,18 +1,49 @@
 <div class="modal-header modalHead ">
-    <h4 class="modal-title">Notes</h4>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <h2 class="modal-title">Notes</h2>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <button title="Add New Header" style="margin-left: 5px" class="btn btn-success btn-success pull-right" data-ng-click="addNewHeader('')" ><span class="fa fa-plus" aria-hidden="true"></span></button>
+    </div>
 </div>
 <div class="modal-body modalBody"  style="position:relative; z-index:1;">
     <div class="alert alert-danger alert-dismissable" data-ng-show="error">
         <div>{{errorMessage}}</div>
         <div id="lblMsg_modal"></div>
     </div>
+    <div id="validateReq">
+        <figure data-ng-repeat="note in presNoteList">
+            <figcaption>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <input class="form-control required" type="text" placeholder="Header " data-ng-model="note.header" data-ng-change="validateHeaderName(note.header)">
+                    </div>
+                    <div class="col-md-4">
+                        <a title="Add new note" style="margin-left: 5px"
+                                data-ng-click="note.objNoteList.push({text:null})" ><span class="fa fa-plus" aria-hidden="true"></span></a>
+                        <a title="Remove" style="margin-left: 5px" data-ng-if="$index > 0"
+                           data-ng-click="presNoteList.splice($index, 1)" ><span class="fa fa-minus" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+            </figcaption>
+            <ul>
+                <li data-ng-repeat="subNote in note.objNoteList">
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <input class="form-control required" type="text" placeholder="Enter Note" data-ng-model="subNote.text">
+                        </div>
+                        <div class="col-md-2">
+                            <a title="Remove" style="margin-left: 5px" data-ng-if="$index > 0"
+                                    data-ng-click="note.noteList.splice($index, 1)" ><span class="fa fa-minus" aria-hidden="true"></span></a>
+                        </div>
 
-    <div  class="row" id="validateReq">
-
+                    </div>
+                </li>
+            </ul>
+        </figure>
     </div>
-
 </div>
 <div class="modal-footer modalFoot">
     <button class="btn btnLanier btn-success" data-ng-click="save()" ><span class="glyphicons glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save</button>
-    <button class="btn btnLanier btn-danger" data-ng-click="cancel()" ><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Cancel</button>
+    <button class="btn btnLanier btn-danger" data-ng-click="close()" ><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Cancel</button>
 </div>

@@ -11,6 +11,7 @@ public class PrescriptionFamilyDiseaseData extends BaseData {
   private Long diseaseID;
   private String diseaseName;
   private Integer relation;
+  private String relationName;
   private String present;
   private String type;
   private String detail;
@@ -85,5 +86,13 @@ public class PrescriptionFamilyDiseaseData extends BaseData {
 
   public void setDetail(String detail) {
     this.detail = detail;
+  }
+
+  public String getRelationName() {
+    return relationName;
+  }
+
+  public void setRelationName(String relationName) {
+    this.relationName = relationName;
   }
 }

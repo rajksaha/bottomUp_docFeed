@@ -5,29 +5,30 @@ import com.bottomUp.domain.common.BaseData;
 
 public class MenuData extends BaseData {
 
-  private long id;
-  private long menuID;
+  private Long menuID;
+  private Integer categoryID;
+  private String categoryName;
   private String menuURL;
   private String defaultName;
-  private long isPopUp;
+  private Integer isPopUp;
   private String functionName;
-  private long inPrescription;
-  private long displayOrder;
+  private Integer inPrescription;
+  private Integer displayOrder;
 
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public long getMenuID() {
+  public Long getMenuID() {
     return menuID;
   }
 
-  public void setMenuID(long menuID) {
+  public void setMenuID(Long menuID) {
     this.menuID = menuID;
+  }
+
+  public Integer getCategoryID() {
+    return categoryID;
+  }
+
+  public void setCategoryID(Integer categoryID) {
+    this.categoryID = categoryID;
   }
 
   public String getMenuURL() {
@@ -46,11 +47,11 @@ public class MenuData extends BaseData {
     this.defaultName = defaultName;
   }
 
-  public long getIsPopUp() {
+  public Integer getIsPopUp() {
     return isPopUp;
   }
 
-  public void setIsPopUp(long isPopUp) {
+  public void setIsPopUp(Integer isPopUp) {
     this.isPopUp = isPopUp;
   }
 
@@ -62,19 +63,27 @@ public class MenuData extends BaseData {
     this.functionName = functionName;
   }
 
-  public long getInPrescription() {
+  public Integer getInPrescription() {
     return inPrescription;
   }
 
-  public void setInPrescription(long inPrescription) {
+  public void setInPrescription(Integer inPrescription) {
     this.inPrescription = inPrescription;
   }
 
-  public long getDisplayOrder() {
+  public Integer getDisplayOrder() {
     return displayOrder;
   }
 
-  public void setDisplayOrder(long displayOrder) {
+  public void setDisplayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
+  }
+
+  public String getCategoryName() {
+    return categoryName;
+  }
+
+  public void setCategoryName(String categoryName) {
+    this.categoryName = categoryName;
   }
 }

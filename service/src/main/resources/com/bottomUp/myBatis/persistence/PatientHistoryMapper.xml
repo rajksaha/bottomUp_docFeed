@@ -76,13 +76,18 @@
 	</select>
 
     <delete id="delete" parameterType="map">
-		DELETE  FROM patient_history
+		DELETE  ph
+		FROM patient_history ph
+		JOIN history h ON ph.historyID = h.historyID
 		WHERE 1=1
 		<if test="patientHistoryID != null">
-			AND patientHistoryID = #{patientHistoryID}
+			AND ph.patientHistoryID = #{patientHistoryID}
 		</if>
 		<if test="patientID != null">
-			AND patientID = #{patientID}
+			AND ph.patientID = #{patientID}
+		</if>
+		<if test="typeCode != null">
+			AND h.typeCode = #{typeCode}
 		</if>
 	</delete>
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,20 +27,26 @@ public class MenuSettingController extends BaseController {
 
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<MenuSettingData> getAll(HttpServletRequest request) throws BottomUpException {
-
+    public List<MenuSettingData> getByParam(HttpServletRequest request) throws BottomUpException {
         Map<String, Object> params = new HashMap<>();
-
         return this.menuSettingService.getByParam(params);
+    }
+
+    @RequestMapping(value = {"/getAll"}, method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getAll(HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = this.parseParameter(request);
+        if(this.getUserDetail().getUserProfilePermissionData().getPermissions().get("COMPANY_ADMIN") && params.get("doctorID") == null){
+            return this.buildResultForGrid( new ArrayList<MenuSettingData>(), 0, params);
+        }
+        List<MenuSettingData> dataList = this.menuSettingService.getByParam(params);
+        return this.buildResultForGrid(dataList, dataList.size(), params);
     }
 
     @RequestMapping(value = {"/getByID/{menuSettingID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public MenuSettingData getByID(@PathVariable("menuSettingID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.menuSettingService.getByID(Long.valueOf(companyID));
+    public MenuSettingData getByID(@PathVariable("menuSettingID") Integer menuSettingID, HttpServletRequest request) throws BottomUpException {
+        return this.menuSettingService.getByID(Long.valueOf(menuSettingID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -47,6 +54,9 @@ public class MenuSettingController extends BaseController {
     public Map<String, Object> save(@RequestBody MenuSettingData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
+        if(data.getDoctorID() == null){
+            data.setDoctorID(this.getUserDetail().getDoctorData().getDoctorID());
+        }
         this.menuSettingService.create(data);
         return result;
     }
@@ -56,14 +66,17 @@ public class MenuSettingController extends BaseController {
     public Map<String, Object> update(@RequestBody MenuSettingData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
+        if(data.getDoctorID() == null){
+            data.setDoctorID(this.getUserDetail().getDoctorData().getDoctorID());
+        }
         this.menuSettingService.update(data);
         return result;
     }
 
     @RequestMapping(value = "/delete/{menuSettingID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("menuSettingID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("menuSettingID") Integer menuSettingID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("menuSettingID", appointmentID);
+        param.put("menuSettingID", menuSettingID);
         this.menuSettingService.delete(param);
     }
 }

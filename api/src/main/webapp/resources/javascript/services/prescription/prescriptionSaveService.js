@@ -67,6 +67,12 @@ app.service('PresSaveService', function ($resource) {
                 isArray:false
             }
         }),
+        savePresNote : $resource('/api/rest/prescriptionSave/savePresNote', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
         updateAppStatus : $resource('/api/rest/appointment/updateStatus', {}, {
             'query':  {
                 method:'POST',

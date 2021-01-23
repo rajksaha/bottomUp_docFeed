@@ -62,7 +62,6 @@ public class UserService {
     }
 
     public void updatePassword(UserData userData) throws BottomUpException {
-
         PasswordEncryptor encryptor = new PasswordEncryptor();
         userData.setPassword(encryptor.encrypt(userData.getPassword()));
         this.userMapper.updatePassword(userData);
@@ -83,10 +82,16 @@ public class UserService {
     public UserProfileData getUserProfileByID(Long userID) throws BottomUpException {
         UserProfileData userProfileData = this.userProfileMapper.getUserProfileByID(userID);
         if(userProfileData.getDoctorID() != null){
-            userProfileData.setIsDoctor(1);
-            DoctorData doctorData = doctorMapper.getByID(userProfileData.getDoctorID());
-            userProfileData.setDoctorCode(doctorData.getDoctorCode());
-            userProfileData.setDocSettingData(doctorSettingMapper.getByDoctorID(userProfileData.getDoctorID()));
+            Map<String, Object> param = new HashMap<String, Object>();
+            param.put("userID", userID);
+            List<DoctorData> doctorDataList = doctorMapper.getByParam(param);
+            if(doctorDataList != null && doctorDataList.size() > 0){
+                userProfileData.setDoctorData(doctorDataList.get(0));
+                userProfileData.setDocSettingData(doctorSettingMapper.getByDoctorID(userProfileData.getDoctorID()));
+                userProfileData.setIsDoctor(1);
+            }else{
+                userProfileData.setIsDoctor(2);
+            }
         }
         return userProfileData;
     }
@@ -117,7 +122,6 @@ public class UserService {
                 userGroupAssignmentMapper.create(groupAssignmentData);
             }
         }
-
         return userData;
     }
 
@@ -222,9 +226,8 @@ public class UserService {
 
     public void createDoctor(UserProfileData userProfileData, Long userID)throws BottomUpException{
         if(userProfileData.getIsDoctor() != null && userProfileData.getIsDoctor() == 1){
-            DoctorData doctorData = new DoctorData();
+            DoctorData doctorData = userProfileData.getDoctorData();
             doctorData.setUserID(userID);
-            doctorData.setDoctorCode(userProfileData.getDoctorCode());
             this.doctorMapper.create(doctorData);
             userProfileData.getDocSettingData().setDoctorID(doctorData.getDoctorID());
             this.doctorSettingMapper.create(userProfileData.getDocSettingData());
@@ -234,9 +237,8 @@ public class UserService {
 
     public void updateDoctor(UserProfileData userProfileData)throws BottomUpException{
         if(userProfileData.getIsDoctor() != null && userProfileData.getIsDoctor() == 1){
+            this.doctorMapper.update(userProfileData.getDoctorData());
             this.doctorSettingMapper.update(userProfileData.getDocSettingData());
         }
     }
-
-
 }

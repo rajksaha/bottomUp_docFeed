@@ -48,7 +48,7 @@ public class PatientHistoryController extends BaseController {
     public Map<String, Object> saveCustomHistory(@RequestBody SearchData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.patientHistoryService.saveCustomHistory(data.getHistoryList(), data.getEntityID(), data.getAppointmentID());
+        this.patientHistoryService.saveCustomHistory(data);
         return result;
     }
 

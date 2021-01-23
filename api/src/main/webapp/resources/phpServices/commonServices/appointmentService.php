@@ -18,7 +18,7 @@ function getAppointmentByDateRange($doctorId, $filteredDate, $endDate){
 			left join patient_type pt on pt.id=pd.`type`
 			left join diagnosis d on d.appointMentID=app.appointmentID
 			left join disease ds on d.diseaseID = ds.id		
-	WHERE doc.doctorID = $doctorId AND app.date >= '$filteredDate'  AND app.date <= '$endDate'  group by app.patientCode order by app.appointmentID DESC";
+	WHERE doc.doctorID = $doctorId AND app.date >= '$filteredDate'  AND app.date <= '$endDate'  group by app.patientCode displayOrder by app.appointmentID DESC";
 	
 	$result=mysql_query($sql);	
 	$data = array();
@@ -46,7 +46,7 @@ function getAppointment($doctorId, $date){
 	JOIN `doctor` doc ON doc.doctorCode = app.doctorCode
 	JOIN appointment_type at ON at.id= app.appointmentType
 	LEFT JOIN patient p ON app.patientCode = p.patientCode
-	WHERE doc.doctorID = $doctorId AND app.date='$date' order by app.appointmentID DESC";
+	WHERE doc.doctorID = $doctorId AND app.date='$date' displayOrder by app.appointmentID DESC";
 	$result=mysql_query($sql);
 	
 	$data = array();
@@ -79,7 +79,7 @@ function getNextDateAppointment($doctorId, $filteredDate){
 		LEFT JOIN next_visit n on n.appointmentID = app.appointmentID  	
 		WHERE  doc.doctorID = $doctorId   and app.appointmentType >0     AND n.date >= '$filteredDate' 
 		group by  app.patientCode
-		order by p.name 
+		displayOrder by p.name
 	";	
 	$result=mysql_query($sql);	
 	$data = array();
@@ -106,7 +106,7 @@ function PatientAddd($doctorId, $date){
 	left join patient_type pt on pt.id=pd.`type`
 	left join diagnosis d on d.appointMentID=app.appointmentID
 	left join disease ds on d.diseaseID = ds.id	
-	WHERE doc.doctorID = $doctorId AND app.patientCode=$date order by app.appointmentID DESC";
+	WHERE doc.doctorID = $doctorId AND app.patientCode=$date displayOrder by app.appointmentID DESC";
 
 	$result=mysql_query($sql);
 
@@ -131,7 +131,7 @@ function getPatientByDisease($doctorId, $disease_search_str){
 			LEFT JOIN disease ds on ds.id=d.diseaseID
 			WHERE doc.doctorID = $doctorId  and  ds.name like '%$disease_search_str%'  and app.appointmentType >0   
 			group by  app.patientCode
-			order by p.name
+			displayOrder by p.name
 	";	
 	//echo $sql;die;
 	$result=mysql_query($sql);	
@@ -162,7 +162,7 @@ function getPatientByDrugs($doctorId, $drug_search_str){
 			LEFT JOIN disease ds on ds.id=di.diseaseID		
 			WHERE doc.doctorID = $doctorId  and  dg.drugName like '%$drug_search_str%'  and app.appointmentType >0   
 			group by  app.patientCode
-			order by p.name
+			displayOrder by p.name
 	";
 	//echo $sql;die;
 
@@ -197,7 +197,7 @@ function getAppointmentByDisease($doctorId, $disease_search_str){
 		left join disease ds on d.diseaseID = ds.id
 		WHERE doc.doctorID = $doctorId  and  ds.name like '%$disease_search_str%'
 		group by app.patientCode
-		order by app.appointmentID DESC
+		displayOrder by app.appointmentID DESC
 	";
 	
 	
@@ -231,7 +231,7 @@ function getAppointmentByDrugs($doctorId, $drug_search_str){
 			left join disease ds on di.diseaseID = ds.id		
 			WHERE  doc.doctorID = $doctorId AND   dg.drugName like '%$drug_search_str%'
 			group by app.patientCode
-			order by app.appointmentID DESC";
+			displayOrder by app.appointmentID DESC";
 
 	$result=mysql_query($sql);
 	$data = array();
@@ -258,7 +258,7 @@ function getAppointmentByPatientType($doctorId, $type_search_str){
 			left join disease ds on d.diseaseID = ds.id
 			WHERE  doc.doctorID = $doctorId  AND  typeName like '%$type_search_str%'   and app.appointmentType >0  
 			group by  app.patientCode
-			order by p.name
+			displayOrder by p.name
 		";
 	//echo $sql;die;
 	$result=mysql_query($sql);
@@ -287,7 +287,7 @@ function getAllPatient($doctorId){
 			left join disease ds on d.diseaseID = ds.id		
 			WHERE  doc.doctorID = $doctorId   and app.appointmentType = 0   
 			group by  app.patientCode
-			order by p.name ";
+			displayOrder by p.name ";
 	//echo $sql;die;
 	$result=mysql_query($sql);
 	$data = array();

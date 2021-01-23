@@ -49,7 +49,7 @@
                 <div class="panelChild">
                     <div class="" data-ng-repeat="appointmentData in appointmentList" >
                         <div class="panelChild-body form-group" data-ng-show="appointmentData.status == 0"  >
-                            <span class="textSpc" data-ng-click="letsPrescribe(appointmentData)" >{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}} | {{appointmentData.appTime}} - {{appointmentData.appointmentType}}</span>
+                            <span class="textSpc" data-ng-click="letsPrescribe(appointmentData)" >{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}} | {{appointmentData.appTime}} - {{appointmentData.appointmentTypeName}}</span>
 
 
                             <span class="textSpc pull-right" data-ng-if="hasAccess('DELETE_APPOINTMENT')">

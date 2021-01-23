@@ -72,6 +72,9 @@
         <if test="typeCode != null">
             AND typeCode = #{typeCode}
         </if>
+		<if test="name != null">
+			AND name = #{name}
+		</if>
 		<if test="term != null">
 			AND LOWER(name) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>

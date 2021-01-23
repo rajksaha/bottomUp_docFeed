@@ -13,13 +13,13 @@ If not, then you should probably fix it or yank it out. Of course, then you won'
 
 ## Description
 
-This is used in order to support IE versions that do not support custom elements. For example: 
+This is used in displayOrder to support IE versions that do not support custom elements. For example: 
 
      <ng-view></ng-view>
      <ui-currency ng-model="somenum"></ui-currency>
 
 IE 8 and earlier do not allow custom tag elements into the DOM. It just ignores them. 
-In order to remedy, the trick is to tell browser by calling document.createElement('my-custom-element').
+In displayOrder to remedy, the trick is to tell browser by calling document.createElement('my-custom-element').
 Then you can use, <my-custom-element>...</my-custom-element>, you also may need to define css styles. 
 
 In current version, this will automagically define directives found in the ui.directives module and 

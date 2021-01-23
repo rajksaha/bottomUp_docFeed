@@ -138,9 +138,9 @@ app.service('PastHistoryService', function ($resource) {
                 params: {doctorID: '@doctorID', patientID: '@patientID', appointmentID: '@appointmentID', typeCode: '@typeCode'}
             }
         }),
-        deleteCustomHistory : $resource('/api/rest/doctorHistorySetting/deleteSettingsOfDocHistory/:historySettingID', {}, {
+        deleteCustomHistory : $resource('/api/rest/doctorHistorySetting/delete/:historySettingID', {}, {
             'query':  {
-                method:'POST',
+                method:'DELETE',
                 isArray:false,
                 params: {historySettingID: '@historySettingID'}
             }

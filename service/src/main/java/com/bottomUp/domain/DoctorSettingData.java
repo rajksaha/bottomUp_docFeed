@@ -7,7 +7,7 @@ public class DoctorSettingData extends BaseData {
 
   private Long doctorSettingID;
   private Long doctorID;
-  private Integer category;
+  private Integer hospitalID;
   private Integer state;
   private Integer patientType;
   private Integer patientState;
@@ -31,12 +31,12 @@ public class DoctorSettingData extends BaseData {
     this.doctorID = doctorID;
   }
 
-  public Integer getCategory() {
-    return category;
+  public Integer getHospitalID() {
+    return hospitalID;
   }
 
-  public void setCategory(Integer category) {
-    this.category = category;
+  public void setHospitalID(Integer hospitalID) {
+    this.hospitalID = hospitalID;
   }
 
   public Integer getState() {

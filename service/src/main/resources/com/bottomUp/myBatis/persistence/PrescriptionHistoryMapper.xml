@@ -91,13 +91,19 @@
 	</select>
 
     <delete id="delete" parameterType="map">
-		DELETE  FROM prescription_history
+		DELETE  pres
+		FROM prescription_history pres
+		JOIN patient_history ph ON ph.patientHistoryID = pres.patientHistoryID
+		JOIN history h ON ph.historyID = h.historyID
 		WHERE 1=1
 		<if test="presHistoryID != null">
-			AND presHistoryID = #{presHistoryID}
+			AND pres.presHistoryID = #{presHistoryID}
 		</if>
 		<if test="appointmentID != null">
-			AND   appointmentID = #{appointmentID}
+			AND  pres.appointmentID = #{appointmentID}
+		</if>
+		<if test="typeCode != null">
+			AND h.typeCode = #{typeCode}
 		</if>
 	</delete>
 

@@ -5,40 +5,40 @@ import com.bottomUp.domain.common.BaseData;
 
 public class MenuSettingData extends BaseData {
 
-  private long id;
-  private long doctorID;
-  private long menuID;
+  private Long menuSettingID;
+  private Long doctorID;
+  private Integer menuID;
   private String menuHeader;
-  private long order;
+  private Integer displayOrder;
   private String menuURL;
   private String defaultName;
-  private long isPopUp;
+  private Integer isPopUp;
   private String functionName;
   private String functionCode;
-  private long inPrescription;
-  private long displayOrder;
+  private Integer inPrescription;
+  private Integer categoryID;
 
-  public long getId() {
-    return id;
+  public Long getMenuSettingID() {
+    return menuSettingID;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setMenuSettingID(Long menuSettingID) {
+    this.menuSettingID = menuSettingID;
   }
 
-  public long getDoctorID() {
+  public Long getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(Long doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getMenuID() {
+  public Integer getMenuID() {
     return menuID;
   }
 
-  public void setMenuID(long menuID) {
+  public void setMenuID(Integer menuID) {
     this.menuID = menuID;
   }
 
@@ -50,12 +50,12 @@ public class MenuSettingData extends BaseData {
     this.menuHeader = menuHeader;
   }
 
-  public long getOrder() {
-    return order;
+  public Integer getDisplayOrder() {
+    return displayOrder;
   }
 
-  public void setOrder(long order) {
-    this.order = order;
+  public void setDisplayOrder(Integer displayOrder) {
+    this.displayOrder = displayOrder;
   }
 
   public String getMenuURL() {
@@ -74,11 +74,11 @@ public class MenuSettingData extends BaseData {
     this.defaultName = defaultName;
   }
 
-  public long getIsPopUp() {
+  public Integer getIsPopUp() {
     return isPopUp;
   }
 
-  public void setIsPopUp(long isPopUp) {
+  public void setIsPopUp(Integer isPopUp) {
     this.isPopUp = isPopUp;
   }
 
@@ -90,27 +90,27 @@ public class MenuSettingData extends BaseData {
     this.functionName = functionName;
   }
 
-  public long getInPrescription() {
-    return inPrescription;
-  }
-
-  public void setInPrescription(long inPrescription) {
-    this.inPrescription = inPrescription;
-  }
-
-  public long getDisplayOrder() {
-    return displayOrder;
-  }
-
-  public void setDisplayOrder(long displayOrder) {
-    this.displayOrder = displayOrder;
-  }
-
   public String getFunctionCode() {
     return functionCode;
   }
 
   public void setFunctionCode(String functionCode) {
     this.functionCode = functionCode;
+  }
+
+  public Integer getInPrescription() {
+    return inPrescription;
+  }
+
+  public void setInPrescription(Integer inPrescription) {
+    this.inPrescription = inPrescription;
+  }
+
+  public Integer getCategoryID() {
+    return categoryID;
+  }
+
+  public void setCategoryID(Integer categoryID) {
+    this.categoryID = categoryID;
   }
 }

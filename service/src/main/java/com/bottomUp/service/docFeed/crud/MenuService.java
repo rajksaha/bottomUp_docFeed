@@ -24,6 +24,9 @@ public class MenuService {
     private MenuMapper menuMapper;
 
     public void create(MenuData data) throws BottomUpException {
+        if(data.getFunctionName().equals("HISTORY")){
+            data.setMenuURL("#/history?historyType=" + data.getDefaultName());
+        }
         menuMapper.create(data);
     }
 

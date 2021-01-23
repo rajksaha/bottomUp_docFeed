@@ -1,0 +1,108 @@
+<script type="text/ng-template" id="action_template">
+    <a href="" data-ng-click="edit(item)"><i class="fa fa-edit"></i> </a>
+    <a href="" class=""
+       echo-confirmation="delete(item)"
+       confirmation-message="Are you sure to remove?"
+       confirmation-title="Confirmation"
+       item="item">
+        <span class="fa fa-trash"></span> </a>
+</script>
+
+<div class="panel panel-default mt-15">
+    <div class="panel-heading clearfix">
+        <div class="row">
+            <div class="col-md-6 col-lg-6"  >
+                <select data-ng-if="userData.permissions['COMPANY_ADMIN']" class="form-control"
+                        data-ng-model="selectedDocID"
+                        data-ng-options="doctor.doctorID as doctor.firstName for doctor in doctorList"
+                        data-ng-change="loadMenu(selectedDocID)">
+                <option value="">--Select Doctor--</option>
+                </select>
+                <h4>Assigned Menu</h4>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <button class="pull-right btn btn-sm btn-success" ng-show="!showForm" title="Add Module" data-ng-click="add()"><span class="glyphicon glyphicon-plus"></span></button>
+                <button class="pull-right btn btn-sm btn-warning" ng-show="showForm" title="Back To List" data-ng-click="backToList()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-danger alert-dismissable" data-ng-show="hasError">
+            {{message}}
+        </div>
+        <div class="alert alert-success alert-dismissable" data-ng-show="hasSuccess">
+            {{message}}
+        </div>
+
+        <div class="row" id="validationRequired" ng-show="showForm">
+            <div class="col-md-6 col-lg-6" >
+            <div class="form-group">
+                <label>Menu<span class="text-red">*</span></label>
+                <select class="form-control required" data-ng-model="menuSetup.menuID" data-ng-options="menu.menuID as menu.defaultName for menu in menuList" data-ng-change="menuSetup.menuHeader = menu.defaultName">
+                    <option value="" >--Select--</option>
+                </select>
+                <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6" >
+            <div class="form-group">
+                <label>Menu Name<span class="text-red">*</span></label>
+                <input type="text" data-ng-model="menuSetup.menuHeader" class="form-control input-sm required" maxlength="90">
+                <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="form-group">
+                <label>Display Order<span class="text-red">*</span></label>
+                <select data-ng-model="menuSetup.displayOrder" class="form-control input-sm required">
+                    <option value="">--Select--</option>
+                    <option value="1">--1--</option>
+                    <option value="2">--2--</option>
+                    <option value="3">--3--</option>
+                    <option value="4">--4--</option>
+                    <option value="5">--5--</option>
+                    <option value="6">--6--</option>
+                    <option value="7">--7--</option>
+                    <option value="8">--8--</option>
+                    <option value="9">--9--</option>
+                    <option value="10">--10--</option>
+                </select>
+            </div>
+        </div>
+        </div>
+
+        <div class="row" ng-show="!showForm">
+            <div class="form-group col-md-5 col-lg-5">
+                <div class="input-group">
+                    <input type="text" class="form-control" enter-event="search()" ng-model="searchParam.menuName" />
+                    <span class="input-group-addon">Menu Name</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <button class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i></button>
+            </div>
+
+            <div class="col-md-12 col-lg-12">
+                <ad-table-ajax table-classes="table table-bordered table-hover bfpb-table"
+                               page-sizes="[10, 15, 20]"
+                               page-loader="methods.pageLoader"
+                               pagination-btn-group-classes="pagination pagination-sm"
+                               items-not-found-message="No Menu is assigned"
+                               state="{sortKey: 'displayOrder', sortDirection: 'ASC'}"
+                               column-definition="columnDefinition"
+                               ajax-config="dataSourceConfig">
+                </ad-table-ajax>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel-footer" ng-show="showForm">
+        <div class="text-right">
+            <button class="btn btn-sm btn-warning" data-ng-click="reset()"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+            <button class="btn btn-sm btn-success" data-ng-click="save(menuSetup)" data-ng-hide="menuSetup.menuSettingID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            <button class="btn btn-sm btn-success" data-ng-click="update(menuSetup)" data-ng-show="menuSetup.menuSettingID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Update</button>
+            <button class="btn btn-sm btn-danger" data-ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+        </div>
+    </div>
+</div>

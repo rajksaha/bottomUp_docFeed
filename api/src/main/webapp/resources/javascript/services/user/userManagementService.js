@@ -65,6 +65,12 @@ app.service('UserManagementService', function ($resource) {
                 method: 'GET',
                 isArray:true
             }
+        }),
+        getCompanyDoctor : $resource('/api/rest/doctor/getByParam', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true
+            }
         })
 
 

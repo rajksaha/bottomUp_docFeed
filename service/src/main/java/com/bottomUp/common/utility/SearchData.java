@@ -1,9 +1,6 @@
 package com.bottomUp.common.utility;
 
-import com.bottomUp.domain.DoctorHistorySettingData;
-import com.bottomUp.domain.DoctorVitalSettingData;
-import com.bottomUp.domain.PrescriptionComplainData;
-import com.bottomUp.domain.PrescriptionVitalData;
+import com.bottomUp.domain.*;
 import com.bottomUp.domain.common.user.UserProfileData;
 import com.bottomUp.domain.common.user.UserProfileDataTest;
 
@@ -29,6 +26,7 @@ public class SearchData {
     private List<PrescriptionComplainData> complainList;
     private List<DoctorVitalSettingData> vitalList;
     private List<DoctorHistorySettingData> historyList;
+    private List<PresNoteData> presNoteList;
 
     public Long getAppointmentID() {
         return appointmentID;
@@ -132,5 +130,13 @@ public class SearchData {
 
     public void setUserProfile(UserProfileDataTest userProfile) {
         this.userProfile = userProfile;
+    }
+
+    public List<PresNoteData> getPresNoteList() {
+        return presNoteList;
+    }
+
+    public void setPresNoteList(List<PresNoteData> presNoteList) {
+        this.presNoteList = presNoteList;
     }
 }

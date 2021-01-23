@@ -194,15 +194,6 @@ public class PrescriptionController extends BaseController{
         return prescriptionPastDiseaseService.getByParam(requestMap);
     }
 
-    @RequestMapping(value = {"/getPrescribedComment/{appointmentID}"}, method = RequestMethod.GET)
-    @ResponseBody
-    public List<ContentDetailData> getCommentInfo(@PathVariable("appointmentID") Long appointmentID, HttpServletRequest request) throws BottomUpException {
-        Map<String, Object> requestMap = new HashMap<String, Object>();
-        requestMap.put("entityType", PrescriptionContentType.COMMENT);
-        requestMap.put("entityID", appointmentID);
-        return contentDetailService.getByParam(requestMap);
-    }
-
     @RequestMapping(value = {"/getClinicalInfo/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
     public List<ContentDetailData> getClinicalInfo(@PathVariable("appointmentID") Long appointmentID, HttpServletRequest request) throws BottomUpException {
@@ -217,6 +208,12 @@ public class PrescriptionController extends BaseController{
         Map<String, Object> requestMap = new HashMap<String, Object>();
         requestMap.put("appointmentID", appointmentID);
         return prescriptionVitalService.getByParam(requestMap);
+    }
+
+    @RequestMapping(value = {"/getPrescribedComment/{appointmentID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<PresNoteData> getPrescribedNote(@PathVariable("appointmentID") Long appointmentID, HttpServletRequest request) throws BottomUpException {
+        return prescriptionViewService.getPrescribedNote(appointmentID);
     }
 
 

@@ -5,25 +5,26 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorData extends BaseData {
 
-  private long userID;
-  private long doctorID;
+  private Long userID;
+  private Long doctorID;
   private String doctorCode;
-  private long hospitalID;
+  private Integer categoryID;
+  private String firstName;
 
 
-  public long getUserID() {
+  public Long getUserID() {
     return userID;
   }
 
-  public void setUserID(long userID) {
+  public void setUserID(Long userID) {
     this.userID = userID;
   }
 
-  public long getDoctorID() {
+  public Long getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(Long doctorID) {
     this.doctorID = doctorID;
   }
 
@@ -35,11 +36,19 @@ public class DoctorData extends BaseData {
     this.doctorCode = doctorCode;
   }
 
-  public long getHospitalID() {
-    return hospitalID;
+  public Integer getCategoryID() {
+    return categoryID;
   }
 
-  public void setHospitalID(long hospitalID) {
-    this.hospitalID = hospitalID;
+  public void setCategoryID(Integer categoryID) {
+    this.categoryID = categoryID;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 }

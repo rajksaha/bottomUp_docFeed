@@ -1,6 +1,8 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.common.utility.SearchData;
+import com.bottomUp.domain.PresNoteData;
 import com.bottomUp.domain.common.user.ContentDetailData;
 import com.bottomUp.model.DietData;
 import com.bottomUp.model.DrugHistory;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utility.type.PrescriptionContentType;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +40,24 @@ public class ContentDetailService {
             contentDetailMapper.update(contentDetailData);
         }
     }
+
+    public void saveNote(SearchData searchData) throws BottomUpException{
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("entityType", PrescriptionContentType.NOTE.toString());
+        param.put("entityID", searchData.getAppointmentID());
+        contentDetailMapper.delete(param);
+        for(PresNoteData note: searchData.getPresNoteList()){
+            for (String text : note.getNoteList()){
+                ContentDetailData detailData = new ContentDetailData();
+                detailData.setEntityType(PrescriptionContentType.NOTE.toString());
+                detailData.setEntityID(searchData.getAppointmentID());
+                detailData.setShortName(note.getHeader());
+                detailData.setLongDesc(text);
+                contentDetailMapper.create(detailData);
+            }
+        }
+    }
+
 
     public Long createByDrugHistory(DrugHistory drugHistory) throws BottomUpException{
         ContentDetailData contentDetailData = new ContentDetailData();

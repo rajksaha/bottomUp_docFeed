@@ -26,13 +26,13 @@ if($query_no== 0){
 	
 }else if($query_no==1){
 	$sql = "SELECT 
-				ms.menuHeader, ms.order, m.menuURL, ds.category, m.inPrescription, m.defaultName, m.isPopUp, m.functionName
+				ms.menuHeader, ms.displayOrder, m.menuURL, ds.category, m.inPrescription, m.defaultName, m.isPopUp, m.functionName
 			FROM `menusettings` ms
 			JOIN doctor doc ON ms.doctorID = doc.doctorID
 			JOIN  doctorsettings ds ON ds.doctorID = doc.doctorID
 			JOIN menu m ON ms.menuID = m.menuID
 			WHERE doc.doctorID = $doctorID
-			ORDER BY ms.order ASC";
+			ORDER BY ms.displayOrder ASC";
 	$result=mysql_query($sql);
 	
 	$data = array();

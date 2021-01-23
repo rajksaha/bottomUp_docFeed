@@ -4,7 +4,7 @@
 
         <div data-ng-if="pastDiseaseList.length > 0">
             <h2 class="item-head"><label>Past Illness</label></h2>
-            <div data-ng-repeat="data in pastDiseaseList | filter : {isPresent :  0}" >
+            <div data-ng-repeat="data in pastDiseaseList" >
                 <a class="link" data-ng-click="deletePastHistory(data.id)">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
@@ -12,9 +12,9 @@
             </div>
         </div>
 
-        <div data-ng-if="pastDiseaseList.length > 0">
+        <div data-ng-if="coMorList.length > 0">
             <h2 class="item-head"><label>Co Morbidities</label></h2>
-            <div data-ng-repeat="data in pastDiseaseList  | filter : {isPresent : 1 }" >
+            <div data-ng-repeat="data in coMorList" >
                 <a class="link" data-ng-click="deletePastHistory(data.id)">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>

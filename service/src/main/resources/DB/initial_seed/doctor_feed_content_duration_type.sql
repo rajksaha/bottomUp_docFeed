@@ -1,0 +1,7 @@
+INSERT IGNORE  INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('দিন ', 'w`b', 'Days', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('সপ্তাহ', 'mc—vn', 'Weeks', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('মাস', 'gvm', 'Months', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('বছর', 'eQi', 'Years', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('চলবে', 'Pj‡e', 'Continue', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('', '', '', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.content_duration_type (bangla, pdf, english, updatedBy, updatedOn, createdBy, createdOn) VALUES ('মাঝে মাঝে', 'gv‡S gv‡S', 'Occasionally ', 'system', NOW(), 'system', NOW());

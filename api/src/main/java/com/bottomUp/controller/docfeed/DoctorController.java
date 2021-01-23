@@ -27,9 +27,10 @@ public class DoctorController extends BaseController {
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
     public List<DoctorData> getAll(HttpServletRequest request) throws BottomUpException {
-
         Map<String, Object> params = new HashMap<>();
-
+        if(this.getUserDetail().getUserProfilePermissionData().getPermissions().get("COMPANY_ADMIN")){
+            params.put("companyID", this.getUserDetail().getCompanyData().getCompanyID());
+        }
         return this.doctorService.getByParam(params);
     }
 

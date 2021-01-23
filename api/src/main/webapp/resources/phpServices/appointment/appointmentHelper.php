@@ -212,7 +212,7 @@ else if($query_no==77){
 }
 else if($query_no==68){
 	$queryString=$_POST['data'];
-	$sql ="SELECT Distinct `patientCode` FROM `appointment` WHERE patientCode LIKE '%" . $queryString . "%' order by patientCode ASC LIMIT 10 ";
+	$sql ="SELECT Distinct `patientCode` FROM `appointment` WHERE patientCode LIKE '%" . $queryString . "%' displayOrder by patientCode ASC LIMIT 10 ";
 	$result=mysql_query($sql);
 	//echo $sql;
 	$data = array();

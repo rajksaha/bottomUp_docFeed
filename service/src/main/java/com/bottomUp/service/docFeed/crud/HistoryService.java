@@ -35,6 +35,7 @@ public class HistoryService {
         }else {
             historyData = new HistoryData();
             historyData.setName(historyName);
+            historyData.setShortName(historyName);
             historyData.setTypeCode(typeCode);
             historyMapper.create(historyData);
         }

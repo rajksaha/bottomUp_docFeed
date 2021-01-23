@@ -1,6 +1,7 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.domain.DoctorHistorySettingData;
 import com.bottomUp.domain.PatientHistoryData;
 import com.bottomUp.domain.PrescriptionHistoryData;
@@ -28,23 +29,25 @@ public class PatientHistoryService {
     @Autowired
     private PrescriptionHistoryMapper prescriptionHistoryMapper;
 
-    public void saveCustomHistory(List<DoctorHistorySettingData> historyList, Long patientID, Long appointmentID) throws BottomUpException{
+    public void saveCustomHistory(SearchData data) throws BottomUpException{
         Map<String, Object> param = new HashMap<>();
-        param.put("patientID", patientID);
+        param.put("patientID", data.getEntityID());
+        param.put("typeCode", data.getEntityType());
         patientHistoryMapper.delete(param);
-        param.put("appointmentID", appointmentID);
+        param.put("appointmentID", data.getAppointmentID());
+        param.put("typeCode", data.getEntityType());
         prescriptionHistoryMapper.delete(param);
 
-        for(DoctorHistorySettingData history : historyList){
+        for(DoctorHistorySettingData history : data.getHistoryList()){
             if(history.getHistoryResult() != null && history.getHistoryResult().trim().length() > 0){
                 PatientHistoryData historyData = new PatientHistoryData();
-                historyData.setPatientID(patientID);
+                historyData.setPatientID(data.getEntityID());
                 historyData.setHistoryResult(history.getHistoryResult());
                 historyData.setHistoryID(history.getHistoryID());
                 patientHistoryMapper.create(historyData);
                 if (history.getAddedInPrescription()){
                     PrescriptionHistoryData presHisData = new PrescriptionHistoryData();
-                    presHisData.setAppointmentID(appointmentID);
+                    presHisData.setAppointmentID(data.getAppointmentID());
                     presHisData.setPatientHistoryID(historyData.getPatientHistoryID());
                     prescriptionHistoryMapper.create(presHisData);
                 }

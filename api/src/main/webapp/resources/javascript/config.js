@@ -194,6 +194,70 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
         }
     };
 
+    var createMenu = {
+        name  : 'root.createMenu',
+        url   : '/createMenu',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/content/createMenu.html',
+                controller : 'MenuController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/content/menuController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/content/menuService.js' + jsVersion,
+                            'resources/javascript/services/user/userManagementService.js' + jsVersion,
+                        ]
+                    });
+            }]
+        }
+    };
+
+    var menuSetup = {
+        name  : 'root.menuSetup',
+        url   : '/menuSetup',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/content/menuSetup.html',
+                controller : 'ContentMenuSetupController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/content/menuSetupController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/content/menuService.js' + jsVersion,
+                            'resources/javascript/services/user/userManagementService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
 
     var module = {
         name  : 'root.module',
@@ -443,33 +507,6 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
         }
     };
 
-    var familyHisory = {
-        name : 'root.familyHisory',
-        url : '/familyHisory',
-        views : {
-            'container@' : {
-                templateUrl : 'resources/javascript/templates/history/familyHistory.html',
-                controller : 'FamilyHisoryController'
-            }
-        },
-        resolve : {
-            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load(
-                    {
-                        name: 'doctorPlatform',
-                        files: ['resources/javascript/services/jsonService.js' + jsVersion]
-                    });
-            }],
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                // you can lazy load files for an existing module
-                return $ocLazyLoad.load(
-                    {
-                        name: 'doctorPlatform',
-                        files: ['resources/javascript/controllers/history/familyHisoryController.js' ]
-                    });
-            }]
-        }
-    };
 
     var pastHistory = {
         name : 'root.pastHistory',
@@ -926,7 +963,8 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
         .state(prescription)
         .state(drugs)
         .state(inv)
-        .state(familyHisory)
+        .state(menuSetup)
+        .state(createMenu)
         .state(pastHistory)
         .state(genInfo)
         .state(vital)

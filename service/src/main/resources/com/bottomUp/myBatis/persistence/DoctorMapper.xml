@@ -9,7 +9,7 @@
 		INSERT INTO `doctor_feed`.`doctor`(
 			`userID`,
 			`doctorCode`,
-			`hospitalID`,
+			categoryID,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -18,7 +18,7 @@
 		VALUES(
 			#{userID},
 			#{doctorCode},
-			#{hospitalID},
+			#{categoryID},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -33,7 +33,7 @@
 		SET
 		`userID` = #{userID},
 		`doctorCode` = #{doctorCode},
-		`hospitalID` = #{hospitalID},
+		categoryID = #{categoryID},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE doctorID = #{doctorID}
@@ -44,7 +44,7 @@
 			`doctorID`,
 			`userID`,
 			`doctorCode`,
-			`hospitalID`,
+			categoryID,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -56,21 +56,30 @@
 
 	<select id="getByParam" parameterType="map" resultType="Doctor">
 		SELECT
-		`doctorID`,
-		`userID`,
-		`doctorCode`,
-		`hospitalID`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `doctor_feed`.`doctor`
+		d.`doctorID`,
+		bup.firstName,
+		d.`userID`,
+		d.`doctorCode`,
+		d.categoryID,
+		d.`updatedBy`,
+		d.`updatedOn`,
+		d.`createdBy`,
+		d.`createdOn`
+		FROM `doctor_feed`.`doctor` d
+		JOIN doctor_feed.bottom_up_user buu ON buu.userID = d.userID
+		JOIN doctor_feed.bottom_up_user_profile bup ON bup.userID = buu.userID
 		WHERE 1 = 1
 		<if test="doctorID != null">
-			AND doctorID = #{doctorID}
+			AND d.doctorID = #{doctorID}
+		</if>
+		<if test="companyID != null">
+			AND buu.companyID = #{companyID}
+		</if>
+		<if test="status != null">
+			AND buu.status = #{status}
 		</if>
 		<if test="userID != null">
-			AND userID = #{userID}
+			AND d.userID = #{userID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

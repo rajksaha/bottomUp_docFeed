@@ -15,6 +15,7 @@ public class AppointmentViewData {
     private Time appTime;
     private Integer status;
     private Integer appointmentType;
+    private String appointmentTypeName;
 
     private Integer numOfMalePatient;
     private Integer numOfFemalePatient;
@@ -96,5 +97,13 @@ public class AppointmentViewData {
 
     public void setDoctor(DoctorViewData doctor) {
         this.doctor = doctor;
+    }
+
+    public String getAppointmentTypeName() {
+        return appointmentTypeName;
+    }
+
+    public void setAppointmentTypeName(String appointmentTypeName) {
+        this.appointmentTypeName = appointmentTypeName;
     }
 }

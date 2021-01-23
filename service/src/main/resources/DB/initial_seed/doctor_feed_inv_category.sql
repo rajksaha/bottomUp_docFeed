@@ -1,0 +1,2 @@
+INSERT IGNORE  INTO doctor_feed.inv_category (invCategoryID, name, updatedBy, updatedOn, createdBy, createdOn) VALUES (1, 'Heart', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.inv_category (invCategoryID, name, updatedBy, updatedOn, createdBy, createdOn) VALUES (2, 'Kidney', 'system', NOW(), 'system', NOW());

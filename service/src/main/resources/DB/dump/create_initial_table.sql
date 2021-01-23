@@ -462,7 +462,7 @@ CREATE TABLE doctor_setting
 (
     doctorSettingID INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     doctorID BIGINT(20) NOT NULL,
-    category INT(11) NOT NULL,
+    hospitalID INT(11) NOT NULL,
     state TINYINT(1) NOT NULL,
     patientType INT(11) NOT NULL,
     patientState INT(11) NOT NULL,
@@ -566,7 +566,7 @@ CREATE TABLE menu_setting
     doctorID INT(11) NOT NULL,
     menuID INT(11) NOT NULL,
     menuHeader VARCHAR(45) NOT NULL,
-    `order` INT(11) NOT NULL,
+    `displayOrder` INT(11) NOT NULL,
     updatedBy VARCHAR(100),
     updatedOn TIMESTAMP,
     createdBy VARCHAR(100),

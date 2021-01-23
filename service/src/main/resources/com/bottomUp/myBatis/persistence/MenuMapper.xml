@@ -4,26 +4,32 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.MenuMapper">
 
-	<insert id="create" parameterType="Menu" useGeneratedKeys="true" keyProperty="id" >
+	<insert id="create" parameterType="Menu" useGeneratedKeys="true" keyProperty="menuID" >
 
 		INSERT INTO `menu`(
-			`menuID`,
+			`categoryID`,
 			`menuURL`,
 			`defaultName`,
 			`isPopUp`,
 			`functionName`,
 			`inPrescription`,
-			`displayOrder`,
+			`updatedOn`,
+			`updatedBy`,
+			`createdOn`,
+			`createdBy`
 
 		)
 		VALUES(
-			#menuID},
+			#{categoryID},
 			#{menuURL},
 			#{defaultName},
 			#{isPopUp},
 			#{functionName},
 			#{inPrescription},
-			#{displayOrder},
+			#{updatedOn},
+			#{updatedBy},
+			#{createdOn},
+			#{createdBy}
 
 		);
 
@@ -33,45 +39,52 @@
 	<update id="update" parameterType="Menu">
 		UPDATE `menu`
 		SET
-		`menuID` = #{menuID},
+		`categoryID` = #{categoryID},
 		`menuURL` = #{menuURL},
 		`defaultName` = #{defaultName},
-		`isPopUp` =#{isPopUp},
+		`isPopUp`=#{isPopUp},
 		`functionName` = #{functionName},
 		`inPrescription` = #{inPrescription},
-		`displayOrder` = #{displayOrder},
-		WHERE id = #{id}
+		`updatedOn` = #{updatedOn},
+		`updatedBy` = #{updatedBy}
+		WHERE menuID = #{menuID}
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="Menu">
 		SELECT
-			`id`,
+			`categoryID`,
 			`menuID`,
 			`menuURL`,
 			`defaultName`,
 			`isPopUp`,
 			`functionName`,
-			`inPrescription`,
-			`displayOrder`,
+			`inPrescription`
 		FROM `menu`
 
-		WHERE id = #{id}
+		WHERE menuID = #{menuID}
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="Menu">
 		SELECT
-		`id`,
-		`menuID`,
-		`menuURL`,
-		`defaultName`,
-		`isPopUp`,
-		`functionName`,
-		`inPrescription`,
-		`displayOrder`,
-		FROM `menu`
+			m.`categoryID`,
+			CDE.categoryName,
+			m.`menuID`,
+			m.`menuURL`,
+			m.`defaultName`,
+			m.`isPopUp`,
+			m.`functionName`,
+			m.`inPrescription`
+		FROM `menu` m
+		JOIN doctor_feed.content_doctor_category CDE ON CDE.categoryID = m.categoryID
 		WHERE 1 = 1
-		<if test="id != null">
-			AND id = #{id}
+		<if test="menuID != null">
+			AND m.menuID = #{menuID}
+		</if>
+		<if test="categoryID != null">
+			AND m.categoryID = #{categoryID}
+		</if>
+		<if test="term != null">
+			AND LOWER(defaultName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
@@ -83,7 +96,7 @@
 		DELETE  FROM menu
 		WHERE 1=1
 		<if test="id != null">
-			AND id = #{id}
+			AND menuID = #{menuID}
 		</if>
 	</delete>
 

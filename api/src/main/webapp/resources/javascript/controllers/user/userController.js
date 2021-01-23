@@ -9,6 +9,7 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
     $scope.showForm = false;
     $scope.editObj = {};
     $scope.doctorCategoryList = [];
+    $scope.doctorList = [];
 
 
 
@@ -159,6 +160,28 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
         $scope.hideMessage();
     };
 
+    $scope.manageDoctor = function (userProfile) {
+
+        if(userProfile.isDoctor == 1){
+            userProfile.doctorData = {};
+            userProfile.doctorData.categoryID = 1;
+            userProfile.docSettingData = {};
+            userProfile.docSettingData.patientState = 1;
+            userProfile.docSettingData.patientType = 1;
+            userProfile.docSettingData.prescriptionStyle = 1;
+            userProfile.docSettingData.photoSupport = 0;
+        }else if(userProfile.isDoctor == 2){
+            if($scope.doctorList.length == 0){
+                UserManagementService.getCompanyDoctor.query({}, {}).$promise.then(function(result) {
+                    $scope.doctorList = result;
+                });
+            }
+        }else{
+            userProfile.doctorData = null;
+            userProfile.docSettingData = null;
+        }
+    };
+
     $scope.add = function(){
         if($scope.doctorCategoryList.length ==0){
             UserManagementService.getDoctorCategory.query({}, {}).$promise.then(function(result) {
@@ -232,9 +255,7 @@ app.controller('UserGroupAssignmentController', function($scope, $modalInstance,
 
     var searchData = {};
     searchData.userID = $scope.userProfile.userID;
-    //searchData.companyID = $scope.userProfile.companyID;
     UserManagementService.getUserGroup.query({}, searchData ).$promise.then(function(result) {
-        //$scope.userProfile.userGroupList = [];
         $scope.userProfile.userGroupList = result;
     });
 

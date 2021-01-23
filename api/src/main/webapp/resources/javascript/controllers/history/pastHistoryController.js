@@ -12,7 +12,7 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 	
 	$scope.historyData = {};
 	$scope.historySettingData = {};
-	$scope.paientHistoryList = [];
+	$scope.patientHistoryList = [];
 	$scope.pageName = "";
 	$scope.typeCode = "";
 	$scope.addByName = false;
@@ -338,41 +338,22 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
             $scope.bringPatientDrugList();
 		}else {
             $scope.typeCode = history.typeCode;
-
-            		var num = 0;
-		
-		if($scope.typeCode == "OBS"){
-			num = 1;
-		}else if ($scope.typeCode == "GYNAE") {
-			num = 2;
-		}else if ($scope.typeCode == "SUB-FERTILITY") {
-			num = 3;
-		}else if ($scope.typeCode == "IMMUNIZATION") {
-			num = 4;
-		}else if ($scope.typeCode == "OTHERS") {
-			num = 5;
-		}else if ($scope.typeCode == "LAPAROSCOPY") {
-			num = 6;
-		}else if ($scope.typeCode == "HOSPITAL") {
-			num = 7;
-		}
-            $scope.pageName = $scope.pageNameList[num];
+            $scope.pageName = history.name;
             $scope.bringHistoryDetail();
         }
     };
 
     $scope.bringHistoryDetail = function (){
-
         $scope.historySettingData = {};
-
         PastHistoryService.getCustomHistoryDetail.query({}, {doctorID:appointmentData.doctorID,
             patientID:appointmentData.patientID, appointmentID:appointmentData.appointmentID, typeCode:$scope.typeCode}).$promise.then(function (result) {
-            $scope.paientHistoryList = result;
-            angular.forEach($scope.paientHistoryList, function (value, key) {
+            $scope.patientHistoryList = result;
+            angular.forEach($scope.patientHistoryList, function (value, key) {
                 if (parseInt(value.savedHistorysID) > 0) {
                     value.addToPrescription = true;
                 }
             });
+            $scope.docHistorySetting = false;
         });
     };
 
@@ -414,9 +395,12 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
 
         if(validator.validateForm("#historySetting","#lblMsg",null)) {
             var displayOrder = 1;
-            if($scope.paientHistoryList != undefined && $scope.paientHistoryList.length > 0){
-                displayOrder = parseInt($scope.paientHistoryList[$scope.paientHistoryList.length -1].displayOrder) + 1;
+            if($scope.patientHistoryList != undefined && $scope.patientHistoryList.length > 0){
+                displayOrder = parseInt($scope.patientHistoryList[$scope.patientHistoryList.length -1].displayOrder) + 1;
             }
+            $scope.historySettingData.typeCode = $scope.typeCode;
+            $scope.historySettingData.doctorID = doctorData.doctorID;
+            $scope.historySettingData.displayOrder = displayOrder;
             PastHistoryService.createHistoryToDocPref.query({}, $scope.historySettingData).$promise.then(function (result) {
                 $scope.historySettingData = {};
                 if(!addAnother){
@@ -434,7 +418,8 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         var prescribedHistory = {};
         prescribedHistory.entityID = appointmentData.patientID;
         prescribedHistory.appointmentID = appointmentData.appointmentID;
-        prescribedHistory.historyList = $scope.paientHistoryList;
+        prescribedHistory.historyList = $scope.patientHistoryList;
+        prescribedHistory.entityType = $scope.typeCode;
         PastHistoryService.saveCustomHistory.query({}, prescribedHistory).$promise.then(function (result) {
             $scope.succcess = true;
             $scope.error = false;

@@ -40,9 +40,9 @@
                         <div data-ng-if="hasAccess('REF_DOCTOR')">
                             <h2 class="item-head">
                                 <label>Referred Doctor :</label>
-                                <a  class="fa fa-floppy-o pull-right link" aria-hidden="true" title="Save" data-ng-show="referredAdderData.doctorAddress && referredAdderData.doctorName" data-ng-click="saveReferredDoctor(referredAdderData)"></a>
-                                <a  class="fa fa-plus pull-right link" aria-hidden="true" title="Add More" data-ng-show="referredDoctorDataList.length > 0 && !referredAdderData.isEmpty" data-ng-click="referredAdderData.isEmpty = true"></a>
-                                <a  class="fa fa-minus pull-right link" aria-hidden="true" title="Add More" data-ng-show="referredDoctorDataList.length > 0 && referredAdderData.isEmpty" data-ng-click="referredAdderData.isEmpty = false"></a>
+                                <a class="fa fa-floppy-o pull-right link" aria-hidden="true" title="Save" data-ng-show="referredAdderData.doctorAddress && referredAdderData.doctorName" data-ng-click="saveReferredDoctor(referredAdderData); referredAdderData = {};"></a>
+                                <a class="fa fa-plus pull-right link" aria-hidden="true" title="Add More" data-ng-show="referredDoctorDataList.length > 0 && !referredAdderData.isEmpty" data-ng-click="referredAdderData.isEmpty = true"></a>
+                                <a class="fa fa-ban pull-right link" aria-hidden="true" title="Cancel" data-ng-show="referredDoctorDataList.length > 0 && referredAdderData.isEmpty" data-ng-click="referredAdderData = {};referredAdderData.isEmpty = false"></a>
                             </h2>
                             <div class="input-group input-group-sm" data-ng-if="referredAdderData.isEmpty">
                                 <input type="text" data-ng-model="referredAdderData.doctorName" typeahead="refDoc.doctorName for refDoc in getRefDoctor($viewValue)"  class="form-control" placeholder="Search Doctor" typeahead-on-select='onSelectRefDoctor($item, $model, $label)' />

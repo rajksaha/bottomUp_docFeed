@@ -22,7 +22,7 @@ while ($row = mysql_fetch_array($result)){
 	$menuId = $row['menuID'];
 	$name = $row['defaultName'];
 	$displayOrder = $row['displayOrder'];
-	mysql_query("INSERT INTO `menusettings`( `doctorID`, `menuID`, `menuHeader`, `order`) VALUES ($doctorID,$menuId,'$name',$displayOrder)");
+	mysql_query("INSERT INTO `menusettings`( `doctorID`, `menuID`, `menuHeader`, `displayOrder`) VALUES ($doctorID,$menuId,'$name',$displayOrder)");
 }
 
 echo "done";

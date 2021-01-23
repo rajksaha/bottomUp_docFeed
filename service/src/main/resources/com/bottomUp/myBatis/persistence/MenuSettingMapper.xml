@@ -10,15 +10,21 @@
 			`doctorID`,
 			`menuID`,
 			`menuHeader`,
-			`order`,
-
+			`displayOrder`,
+			`updatedOn`,
+			`updatedBy`,
+			`createdOn`,
+			`createdBy`
 		)
 		VALUES(
 			#{doctorID},
 			#{menuID},
 			#{menuHeader},
-			#{order},
-
+			#{displayOrder},
+			#{updatedOn},
+			#{updatedBy},
+			#{createdOn},
+			#{createdBy}
 		);
 
 
@@ -30,7 +36,9 @@
 		`doctorID` = #{doctorID},
 		`menuID` = #{menuID},
 		`menuHeader` = #{menuHeader},
-		`order` =#{order},
+		`displayOrder` =#{displayOrder},
+		`updatedOn` = #{updatedOn},
+		`updatedBy` = #{updatedBy}
 		WHERE menuSettingID = #{menuSettingID}
 	</update>
 
@@ -40,8 +48,8 @@
 			`doctorID`,
 			`menuID`,
 			`menuHeader`,
-			`order`
-
+			`displayOrder`,
+			updatedOn, updatedBy, `createdOn`, `createdBy
 		FROM `menu_setting`
 
 		WHERE menuSettingID = #{menuSettingID}
@@ -53,13 +61,13 @@
 			ms.`doctorID`,
 			ms.`menuID`,
 			ms.`menuHeader`,
-			ms.`order`,
+			ms.`displayOrder`,
 			m.menuURL,
 			m.defaultName,
 			m.isPopUp,
 			m.functionName,
 			m.inPrescription,
-			m.displayOrder
+			m.categoryID
 		FROM `menu_setting` ms
 		JOIN menu m ON ms.menuID = m.menuID
 		WHERE 1 = 1

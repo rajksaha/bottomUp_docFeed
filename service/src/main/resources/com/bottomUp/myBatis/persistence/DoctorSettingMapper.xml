@@ -8,7 +8,7 @@
 
 		INSERT INTO `doctor_setting`(
 			`doctorID`,
-			`category`,
+			`hospitalID`,
 			`state`,
 			`patientType`,
 			`patientState`,
@@ -22,7 +22,7 @@
 		)
 		VALUES(
 			#{doctorID},
-			#{category},
+			#{hospitalID},
 			#{state},
 			#{patientType},
 			#{patientState},
@@ -42,7 +42,7 @@
 		UPDATE `doctor_setting`
 		SET
 		`doctorID` = #{doctorID},
-		`category` = #{category},
+		`hospitalID` = #{hospitalID},
 		`state` = #{state},
 		`patientType` =#{patientType},
 		`patientState` = #{patientState},
@@ -58,7 +58,7 @@
 		SELECT
 			`doctorSettingID`,
 			`doctorID`,
-			`category`,
+			`hospitalID`,
 			`state`,
 			`patientType`,
 			`patientState`,
@@ -78,7 +78,7 @@
 		SELECT
 			`doctorSettingID`,
 			`doctorID`,
-			`category`,
+			`hospitalID`,
 			`state`,
 			`patientType`,
 			`patientState`,
@@ -98,7 +98,7 @@
 		SELECT
 		`doctorSettingID`,
 		`doctorID`,
-		`category`,
+		`hospitalID`,
 		`state`,
 		`patientType`,
 		`patientState`,

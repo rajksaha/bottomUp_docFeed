@@ -1,0 +1,6 @@
+INSERT IGNORE  INTO doctor_feed.patient_type (doctorType, typeName, updatedBy, updatedOn, createdBy, createdOn) VALUES (8, 'OBS 	', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.patient_type (doctorType, typeName, updatedBy, updatedOn, createdBy, createdOn) VALUES (8, 'GYNAE', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.patient_type (doctorType, typeName, updatedBy, updatedOn, createdBy, createdOn) VALUES (8, 'INFERTILITY', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.patient_type (doctorType, typeName, updatedBy, updatedOn, createdBy, createdOn) VALUES (1, 'Heart', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.patient_type (doctorType, typeName, updatedBy, updatedOn, createdBy, createdOn) VALUES (1, 'Liver', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.patient_type (doctorType, typeName, updatedBy, updatedOn, createdBy, createdOn) VALUES (1, 'Kidney', 'system', NOW(), 'system', NOW());

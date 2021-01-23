@@ -14,7 +14,7 @@ $query_no=  $_POST['query'];
 
 
 if($query_no== 0){	
-	$sql = mysql_query("select id,name from disease order by name asc");
+	$sql = mysql_query("select id,name from disease displayOrder by name asc");
 	$data = array();
 	while ($row=mysql_fetch_array($sql)){
 		array_push($data,$row);

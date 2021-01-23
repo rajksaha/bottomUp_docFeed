@@ -1,0 +1,5 @@
+INSERT IGNORE  INTO doctor_feed.appointment_type (name, shortName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('New Patient', 'New Patient', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.appointment_type (name, shortName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Old Patient', 'Old Patient', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.appointment_type (name, shortName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Free', 'Free', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.appointment_type (name, shortName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Relative', 'Relative', 'system', NOW(), 'system', NOW());
+INSERT IGNORE  INTO doctor_feed.appointment_type (name, shortName, updatedBy, updatedOn, createdBy, createdOn) VALUES ('Report', 'Report', 'system', NOW(), 'system', NOW());

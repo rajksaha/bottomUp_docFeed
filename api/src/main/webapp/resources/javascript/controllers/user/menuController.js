@@ -19,16 +19,14 @@ app.controller('MenuController', function($scope, $state, $rootScope, $http, $ti
     };
 
     $scope.init = function (){
+        ApprovalLevelService.getAll.query({}, {} ).$promise.then(function(result) {
+            $scope.approvalLevelList = result;
 
-            ApprovalLevelService.getAll.query({}, {} ).$promise.then(function(result) {
-                $scope.approvalLevelList = result;
-
-                $scope.initMenu($location.path());
-            });
+            $scope.initMenu($location.path());
+        });
     };
 
     $scope.getApprovalLevelName = function(level){
-
         var temp = null;
         for(var i= 0;i<$scope.approvalLevelList.length;i++){
             if($scope.approvalLevelList[i].sortOrder == level){
@@ -36,7 +34,6 @@ app.controller('MenuController', function($scope, $state, $rootScope, $http, $ti
                 break;
             }
         }
-
         return temp;
     };
 

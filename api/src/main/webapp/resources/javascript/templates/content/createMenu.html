@@ -1,0 +1,104 @@
+<script type="text/ng-template" id="action_template">
+    <a href="" data-ng-click="edit(item)"><i class="fa fa-edit"></i> </a>
+    <a href="" class=""
+       echo-confirmation="delete(item)"
+       confirmation-message="Are you sure to remove?"
+       confirmation-title="Confirmation"
+       item="item">
+        <span class="fa fa-trash"></span> </a>
+</script>
+
+<script type="text/ng-template" id="popUp_template">
+    {{item.isPopUp == 1 ? 'Yes' : 'No'}}
+</script>
+
+<script type="text/ng-template" id="header_template">
+    {{item.isPopUp == 1 ? 'No' : 'Yes'}}
+</script>
+
+<div class="panel panel-default mt-15">
+    <div class="panel-heading clearfix">
+        <strong>Menu List</strong>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success" ng-show="!showForm" title="Add Menu" data-ng-click="add()"><span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-sm btn-warning" ng-show="showForm" title="Back To List" data-ng-click="backToList()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-danger alert-dismissable" data-ng-show="hasError">
+            {{message}}
+        </div>
+        <div class="alert alert-success alert-dismissable" data-ng-show="hasSuccess">
+            {{message}}
+        </div>
+
+        <div class="row" id="validationRequired" ng-show="showForm">
+            <div class="col-md-6 col-lg-6" >
+                <div class="form-group">
+                    <label>Menu Name<span class="text-red">*</span></label>
+                    <input type="text" data-ng-model="menu.defaultName" class="form-control input-sm required" maxlength="90">
+                    <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6" >
+                <div class="form-group">
+                    <label>Menu Type<span class="text-red">*</span></label>
+                    <select data-ng-model="menu.functionName" class="form-control input-sm">
+                        <option value="NONE">--None--</option>
+                        <option value="HISTORY">--History--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6" data-ng-if="menu.functionName == 'HISTORY'">
+                <div class="form-group">
+                    <label>Pop-Up<span class="text-red">*</span></label>
+                    <select data-ng-model="menu.isPopUp" class="form-control input-sm">
+                        <option value="0">--NO--</option>
+                        <option value="1">--YES--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6" data-ng-if="userData.permissions['COMPANY_ADMIN']">
+                <div class="form-group">
+                    <label>Doctor Category<span class="text-red">*</span></label>
+                    <select class="form-control" data-ng-model="menu.categoryID" data-ng-options="docType.categoryID as docType.categoryName for docType in doctorCategoryList" />
+                    <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="!showForm">
+            <div class="form-group col-md-5 col-lg-5">
+                <div class="input-group">
+                    <input type="text" class="form-control" enter-event="search()" ng-model="searchParam.defaultName" />
+                    <span class="input-group-addon">Menu Name</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <button class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i></button>
+            </div>
+
+            <div class="col-md-12 col-lg-12">
+                <ad-table-ajax table-classes="table table-bordered table-hover bfpb-table"
+                               page-sizes="[10, 15, 20]"
+                               page-loader="methods.pageLoader"
+                               pagination-btn-group-classes="pagination pagination-sm"
+                               items-not-found-message="No menu found"
+                               state="{sortKey: 'defaultName', sortDirection: 'ASC'}"
+                               column-definition="columnDefinition"
+                               ajax-config="dataSourceConfig">
+                </ad-table-ajax>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel-footer" ng-show="showForm">
+        <div class="text-right">
+            <button class="btn btn-sm btn-warning" data-ng-click="reset()"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+            <button class="btn btn-sm btn-success" data-ng-click="save(menu)" data-ng-hide="menu.menuID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            <button class="btn btn-sm btn-success" data-ng-click="update(menu)" data-ng-show="menu.menuID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Update</button>
+            <button class="btn btn-sm btn-danger" data-ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+        </div>
+    </div>
+</div>
