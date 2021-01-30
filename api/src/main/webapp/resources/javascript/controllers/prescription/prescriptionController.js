@@ -463,10 +463,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.print = function (){
         $scope.printPreview();
         /*if($scope.diagnosisData.diseaseID){
-
-
          var dataString = "query=13" + '&diseaseID=' + $scope.diagnosisData.diseaseID + '&doctorID=' + $scope.doctorData.doctorID;
-
          $http({
          method: 'POST',
          url: "phpServices/prescription/prescriptionHelperService.php",
@@ -602,7 +599,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             backdrop: 'static'
         });
         modalInstance.result.then(function(result) {
-            //TODO: MAKE SURE EVERTHING IS POPULATE CORRECTLY
+            //TODO: MAKE SURE EVERYTHING IS POPULATE CORRECTLY
             $scope.bringPrescribedHistory($scope.appoinmentData.appointmentID, $scope.appoinmentData.patientID);
             $scope.bringPrescribedPastHistory($scope.appoinmentData.appointmentID);
             $scope.bringPrescribedFamilyHistory($scope.appoinmentData.appointmentID);
@@ -725,60 +722,13 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
 
     $scope.printPreview = function (){
-        //var debug = "&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16120090075871";
-        //$window.open("http://localhost/prescription/api/prescription.php?appointmentID=" + $scope.appoinmentData.appointmentID + debug, '_blank');
         var debug = "";
         $window.open("http://prescriptionapiapp-env.eba-pkcugqu8.ap-southeast-1.elasticbeanstalk.com/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID + debug, '_blank');
-        //$window.open("http://prescriptionapiapp-env.eba-pkcugqu8.ap-southeast-1.elasticbeanstalk.com/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID, '_blank');
-        /*if(!$rootScope.defaultPdf){
-            var dataString = "query=20" + '&doctorID=' + $scope.doctorData.doctorID;
-
-            PrescriptionService.getContentDetailByDocId.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    if(result && result.length > 1){
-                        var modalInstance = $modal.open({
-                            templateUrl: 'resources/javascript/templates/prescription/pdfSelection.html',
-                            windowClass: 'fade in',
-                            controller: 'PrescriptionController.PdfSelectionController',
-                            resolve: {
-                                modalConfig: function () {
-                                    return result;
-                                }
-                            },
-                            backdrop: 'static'
-                        });
-                        modalInstance.result.then(function(modalResult) {
-                            $rootScope.defaultPdf = modalResult.code;
-                            $scope.openPdf(modalResult.code);
-                        });
-
-                    }else if(result && result.length == 1) {
-                        $rootScope.defaultPdf = result[0].code;
-                        $scope.openPdf(result[0].code);
-                    }else{
-                        $rootScope.defaultPdf = "default";
-                        $scope.openPdf("default");
-                    }
-                } else {
-
-                }
-            });
-        }else {
-            $scope.openPdf($rootScope.defaultPdf);
-        }*/
     };
 
     $scope.openPdf = function(pdf){
         var dataString = "query=15";
         $window.open("http://localhost/doc_feed_php_api/api/reportHelper.php?appointmentID=16&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16071395666061", '_blank');
-        /*PrescriptionService.updateAppoinmentStatusByApointmentNo.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $window.open("http://localhost/doc_feed_php_api/api/reportHelper.php?appointmentID=16&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16071395666061", '_blank');
-                $location.path("/appointment");
-            } else {
-
-            }
-        });*/
     };
 
     $scope.performDiagnosis = function () {
