@@ -15,6 +15,7 @@ public class PatientViewData extends BaseData {
     private long userID;
     private String patientCode;
     private Integer patientType;
+    private String patientTypeName;
     private String occupation;
     private String referredBy;
     private String hospitalName;
@@ -207,5 +208,13 @@ public class PatientViewData extends BaseData {
 
     public void setPatientType(Integer patientType) {
         this.patientType = patientType;
+    }
+
+    public String getPatientTypeName() {
+        return patientTypeName;
+    }
+
+    public void setPatientTypeName(String patientTypeName) {
+        this.patientTypeName = patientTypeName;
     }
 }

@@ -29,7 +29,7 @@ public class PatientTypeController extends BaseController {
     public List<PatientTypeData> getAll(HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
-
+        params.put("doctorType", this.getUserDetail().getDoctorData().getCategoryID());
         return this.patientTypeService.getByParam(params);
     }
 
@@ -48,6 +48,7 @@ public class PatientTypeController extends BaseController {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.patientTypeService.create(data);
+        result.put("patientTypeID", data.getPatientTypeID());
         return result;
     }
 

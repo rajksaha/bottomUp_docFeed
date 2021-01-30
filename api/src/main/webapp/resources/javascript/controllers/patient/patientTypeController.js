@@ -1,7 +1,7 @@
-app.controller('PatientTypeController', function($scope, $http, $modalInstance, limitToFilter, $filter, record, PatientTypeService) {
-    $scope.patientTypeList = record.data.patientTypeList;
+app.controller('PatientTypeController', function($scope, $http, $modalInstance, limitToFilter, $filter, record, FollowUpSetupService) {
+    $scope.patientTypeList = record.patientTypeList;
     $scope.globalAdd = true;
-    $scope.doctorTypeId = record.data.doctorTypeId;
+    $scope.doctorTypeID = record.doctorTypeID;
 
     if(!$scope.patientTypeList || $scope.patientTypeList.length == 0){
         var emptyData = {};
@@ -13,39 +13,30 @@ app.controller('PatientTypeController', function($scope, $http, $modalInstance, 
     $scope.itemSave = function (patientType) {
         if(!patientType.typeName){
             $scope.error = true;
-            $scope.errorMessage = "Please write a name";
+            $scope.errorMessage = "Name is mandatory";
             return false;
         }
-        var query = 1;
-        if(patientType.id){
-            query = 2;
-        }
-        var dataString = "query="+ query + '&doctorType=' + $scope.doctorTypeId + "&name=" + patientType.typeName + "&id=" + patientType.id;
-        
-        PatientTypeService.createAndupdatePatientType.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
+        var patientTypeData = {};
+        patientTypeData.typeName = patientType.typeName;
+        patientTypeData.doctorType = $scope.doctorTypeID;
+        if(patientType.patientTypeID){
+            patientTypeData.patientTypeID = patientType.patientTypeID;
+            FollowUpSetupService.updatePatientType.query({}, patientTypeData).$promise.then(function (result) {
                 patientType.editMode = false;
-                if (!patientType.id) {
-                    patientType.id = result;
-                }
-                $scope.globalAdd = true;
-                $scope.error = false;
-            } else {
-
-            }
-        });
+            });
+        }else{
+            FollowUpSetupService.createPatientType.query({}, patientTypeData).$promise.then(function (result) {
+                patientType.patientTypeID = result.patientTypeID;
+                patientType.editMode = false;
+            });
+        }
+        $scope.globalAdd = true;
+        $scope.error = false;
     };
 
-    $scope.deletePatientType = function (patientTypeId, index) {
-
-        var dataString = "query="+ 3  +"&id=" + patientTypeId;
-        
-        PatientTypeService.delPatientType.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.patientTypeList.splice(index, 1);
-            } else {
-
-            }
+    $scope.deletePatientType = function (patientTypeID, index) {
+        FollowUpSetupService.deletePatientType.remove({}, {patientTypeID:patientTypeID}).$promise.then(function (result) {
+            $scope.patientTypeList.splice(index, 1);
         });
     };
 

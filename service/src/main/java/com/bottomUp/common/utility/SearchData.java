@@ -1,6 +1,7 @@
 package com.bottomUp.common.utility;
 
 import com.bottomUp.domain.*;
+import com.bottomUp.domain.common.FollowUpDetail;
 import com.bottomUp.domain.common.user.UserProfileData;
 import com.bottomUp.domain.common.user.UserProfileDataTest;
 
@@ -27,6 +28,8 @@ public class SearchData {
     private List<DoctorVitalSettingData> vitalList;
     private List<DoctorHistorySettingData> historyList;
     private List<PresNoteData> presNoteList;
+    private List<DoctorFollowUpSettingData> followUpSettingList;
+    private List<FollowUpDetail> followUpDetailList;
 
     public Long getAppointmentID() {
         return appointmentID;
@@ -138,5 +141,21 @@ public class SearchData {
 
     public void setPresNoteList(List<PresNoteData> presNoteList) {
         this.presNoteList = presNoteList;
+    }
+
+    public List<DoctorFollowUpSettingData> getFollowUpSettingList() {
+        return followUpSettingList;
+    }
+
+    public void setFollowUpSettingList(List<DoctorFollowUpSettingData> followUpSettingList) {
+        this.followUpSettingList = followUpSettingList;
+    }
+
+    public List<FollowUpDetail> getFollowUpDetailList() {
+        return followUpDetailList;
+    }
+
+    public void setFollowUpDetailList(List<FollowUpDetail> followUpDetailList) {
+        this.followUpDetailList = followUpDetailList;
     }
 }

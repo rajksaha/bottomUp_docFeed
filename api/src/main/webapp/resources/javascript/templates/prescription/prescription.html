@@ -72,7 +72,7 @@
                             </h2>
                             <div data-ng-repeat="patientType in doctorData.patientTypeList">
                                 <div class="checkbox-s">
-                                    <input id="p2-{{patientType.patientTypeID}}" type="checkbox" name="pp2_1" data-ng-model="patientData.patientType" data-ng-checked="patientData.patientType == patientType.patientTypeID" data-ng-click="changePatientType(patientType.patientTypeID)">
+                                    <input id="p2-{{patientType.patientTypeID}}" type="checkbox" name="pp2_1" data-ng-model="patientData.patientType" data-ng-checked="patientData.patientType == patientType.patientTypeID" data-ng-change="changePatientType(patientType.patientTypeID)">
                                     <label for="p2-{{patientType.patientTypeID}}">{{patientType.typeName}}</label>
                                 </div>
                             </div>

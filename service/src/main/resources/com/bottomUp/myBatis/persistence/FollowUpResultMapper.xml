@@ -7,20 +7,20 @@
 	<insert id="create" parameterType="followUpResult" useGeneratedKeys="true" keyProperty="resultID" >
 
 		INSERT INTO `follow_up_result`(
-			`appID`,
-			`followUpID`,
-			`data`,
+			`appointmentID`,
+			`jsonData`,
 			`entryDate`,
+			`patientTypeID`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
 			`createdOn`
 		)
 		VALUES(
-			#{appID},
-			#{followUpID},
-			#{data},
+			#{appointmentID},
+			#{jsonData},
 			#{entryDate},
+			#{patientTypeID},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -33,22 +33,23 @@
 	<update id="update" parameterType="followUpResult">
 		UPDATE `follow_up_result`
 		SET
-		`appID` = #{appID},
-		`followUpID` = #{followUpID},
-		`data` = #{data},
+		`appointmentID` = #{appointmentID},
+		`jsonData` = #{jsonData},
 		`entryDate` =#{entryDate},
+		`patientTypeID` =#{patientTypeID},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE resultID = #{resultID}
 	</update>
 
+
 	<select id="getByID" parameterType="long" resultType="followUpResult">
 		SELECT
 			`resultID`,
-			`appID`,
-			`followUpID`,
-			`data`,
+			`appointmentID`,
+			`jsonData`,
 			`entryDate`,
+			`patientTypeID`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -60,19 +61,31 @@
 
 	<select id="getByParam" parameterType="map" resultType="followUpResult">
 		SELECT
-		`resultID`,
-		`appID`,
-		`followUpID`,
-		`data`,
-		`entryDate`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `follow_up_result`
+			fur.`resultID`,
+			fur.`appointmentID`,
+			fur.`jsonData`,
+			fur.`entryDate`,
+			fur.`patientTypeID`,
+			<if test="appointmentID != null">
+				cd.contentDetailID AS contentDetailID,
+				CASE WHEN cd.contentDetailID IS NULL THEN 0 ELSE 1 END AS addedInPres,
+			</if>
+			fur.`updatedBy`,
+			fur.`updatedOn`,
+			fur.`createdBy`,
+			fur.`createdOn`
+		FROM `follow_up_result` fur
+		JOIN doctor_feed.appointment ap ON ap.appointmentID = fur.appointmentID
+		<if test="appointmentID != null">
+			LEFT JOIN doctor_feed.content_detail cd ON cd.entityType = 'FOLLOW_UP'
+			AND cd.entityID = #{appointmentID} AND CAST(cd.shortName AS DATE) = fur.entryDate
+		</if>
 		WHERE 1 = 1
 		<if test="resultID != null">
 			AND resultID = #{resultID}
+		</if>
+		<if test="patientID != null">
+			AND ap.patientID = #{patientID}
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

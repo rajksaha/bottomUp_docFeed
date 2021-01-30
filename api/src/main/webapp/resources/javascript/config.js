@@ -705,7 +705,10 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                 return $ocLazyLoad.load(
                     {
                         name: 'doctorPlatform',
-                        files: ['resources/javascript/services/jsonService.js' + jsVersion]
+                        files: [
+                            'resources/javascript/services/jsonService.js' + jsVersion,
+                            'resources/javascript/services/followUpSetup/followUpSetupService.js' + jsVersion
+                        ]
                     });
             }],
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -768,6 +771,14 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                     {
                         name: 'doctorPlatform',
                         files: ['resources/javascript/controllers/followUpChart/followUpChartController.js' ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/services/followUpChart/followUpChartService.js' + jsVersion,
+                            'resources/javascript/services/followUpSetup/followUpSetupService.js' + jsVersion]
                     });
             }]
         }

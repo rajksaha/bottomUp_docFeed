@@ -116,6 +116,8 @@
 		<result property="patient.dateOfBirth" column="dateOfBirth"/>
 		<result property="patient.sex" column="sex"/>
 		<result property="patient.occupation" column="occupation"/>
+		<result property="patient.patientType" column="patientTypeID"/>
+		<result property="patient.patientTypeName" column="patientTypeName"/>
 	</resultMap>
 
 	<select id="getAppPatientDetail" parameterType="map" resultType="appointmentDetail" resultMap="patientMap">
@@ -132,6 +134,8 @@
 			app.`updatedOn`,
 			app.`createdBy`,
 			app.`createdOn`,
+			p.patientType AS patientTypeID,
+			pt.typeName AS patientTypeName,
 			pup.firstName AS firstName,
 			pup.lastName AS lastName,
 			pup.address AS address,
@@ -141,10 +145,11 @@
 			p.occupation AS occupation
 		FROM `doctor_feed`.`appointment` app
 		JOIN doctor d ON app.doctorID = d.doctorID
-		JOIN patient p ON app.patientID = p.patientID
+		JOIN `doctor_feed`.patient p ON app.patientID = p.patientID
 		JOIN `doctor_feed`.appointment_type apt ON app.appointmentType = apt.appointmentTypeID
 		JOIN `doctor_feed`.`bottom_up_user` pu ON p.userID = pu.userID
 		JOIN bottom_up_user_profile pup ON pu.userID = pup.userID
+		LEFT JOIN doctor_feed.patient_type pt ON p.patientType = pt.patientTypeID
 		WHERE 1 = 1
 		<if test="appointmentID != null">
 			AND app.appointmentID = #{appointmentID}

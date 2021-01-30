@@ -1,6 +1,7 @@
 package com.bottomUp.controller.docfeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.DoctorFollowUpSettingData;
 import com.bottomUp.service.docFeed.crud.DoctorFollowUpSettingService;
@@ -27,22 +28,31 @@ public class DoctorFollowUpSettingController extends BaseController {
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
     public List<DoctorFollowUpSettingData> getAll(HttpServletRequest request) throws BottomUpException {
-
         Map<String, Object> params = new HashMap<>();
-
+        if(this.getUserDetail().getDoctorData() != null){
+            params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
+        }
         return this.doctorFollowUpSettingService.getByParam(params);
     }
 
     @RequestMapping(value = {"/getByID/{followUpSettingID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DoctorFollowUpSettingData getByID(@PathVariable("followUpSettingID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.doctorFollowUpSettingService.getByID(Long.valueOf(companyID));
+    public DoctorFollowUpSettingData getByID(@PathVariable("followUpSettingID") Long followUpSettingID, HttpServletRequest request) throws BottomUpException {
+        return this.doctorFollowUpSettingService.getByID(followUpSettingID);
     }
 
-    @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/getByPatientType/{doctorID}/{patientTypeID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<DoctorFollowUpSettingData> getByPatientType(@PathVariable("doctorID") Long doctorID,
+                                                            @PathVariable("patientTypeID") Long patientTypeID,
+                                                            HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("doctorID", doctorID);
+        params.put("patientTypeID", patientTypeID);
+        return this.doctorFollowUpSettingService.getByParam(params);
+    }
+
+    @RequestMapping(value = {"/create"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody DoctorFollowUpSettingData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
@@ -60,10 +70,16 @@ public class DoctorFollowUpSettingController extends BaseController {
         return result;
     }
 
+    @RequestMapping(value = {"/updateDisplayOrder"}, method = RequestMethod.POST)
+    @ResponseBody
+    public void updateDisplayOrder(@RequestBody SearchData data) throws BottomUpException {
+        this.doctorFollowUpSettingService.updateDisplayOrder(data.getFollowUpSettingList());
+    }
+
     @RequestMapping(value = "/delete/{followUpSettingID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("followUpSettingID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("followUpSettingID") Long followUpSettingID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("followUpSettingID", appointmentID);
+        param.put("followUpSettingID", followUpSettingID);
         this.doctorFollowUpSettingService.delete(param);
     }
 }

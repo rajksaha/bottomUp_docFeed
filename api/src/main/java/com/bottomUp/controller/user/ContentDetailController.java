@@ -5,9 +5,11 @@ import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.common.user.ContentDetailData;
 import com.bottomUp.model.DrugHistory;
 import com.bottomUp.service.docFeed.crud.ContentDetailService;
+import org.apache.poi.ss.usermodel.ConditionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import utility.type.PrescriptionContentType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

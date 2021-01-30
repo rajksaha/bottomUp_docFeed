@@ -5,40 +5,58 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorFollowUpSettingData extends BaseData {
 
-  private long followUpSettingID;
-  private long doctorID;
-  private long invID;
-  private long patientTypeID;
+  private Long followUpSettingID;
+  private Long doctorID;
+  private Long invID;
+  private Long patientTypeID;
+  private Integer displayOrder;
+  private String invName;
 
-  public long getFollowUpSettingID() {
+  public Long getFollowUpSettingID() {
     return followUpSettingID;
   }
 
-  public void setFollowUpSettingID(long followUpSettingID) {
+  public void setFollowUpSettingID(Long followUpSettingID) {
     this.followUpSettingID = followUpSettingID;
   }
 
-  public long getDoctorID() {
+  public Long getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(Long doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getInvID() {
+  public Long getInvID() {
     return invID;
   }
 
-  public void setInvID(long invID) {
+  public void setInvID(Long invID) {
     this.invID = invID;
   }
 
-  public long getPatientTypeID() {
+  public Long getPatientTypeID() {
     return patientTypeID;
   }
 
-  public void setPatientTypeID(long patientTypeID) {
+  public void setPatientTypeID(Long patientTypeID) {
     this.patientTypeID = patientTypeID;
+  }
+
+  public String getInvName() {
+    return invName;
+  }
+
+  public void setInvName(String invName) {
+    this.invName = invName;
+  }
+
+  public Integer getDisplayOrder() {
+    return displayOrder;
+  }
+
+  public void setDisplayOrder(Integer displayOrder) {
+    this.displayOrder = displayOrder;
   }
 }

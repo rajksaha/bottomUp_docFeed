@@ -23,12 +23,20 @@ public class DoctorFollowUpSettingService {
     @Autowired
     private DoctorFollowUpSettingMapper doctorFollowUpSettingMapper;
 
+    @Autowired
+    private ContentInvService contentInvService;
+
     public void create(DoctorFollowUpSettingData data) throws BottomUpException {
+        data.setInvID(contentInvService.getInsert(data.getInvName()));
         doctorFollowUpSettingMapper.create(data);
     }
 
     public void update(DoctorFollowUpSettingData data) throws BottomUpException {
         doctorFollowUpSettingMapper.update(data);
+    }
+
+    public void updateDisplayOrder(List<DoctorFollowUpSettingData> followUpList) throws BottomUpException{
+        doctorFollowUpSettingMapper.updateDisplayOrder(followUpList);
     }
 
     public DoctorFollowUpSettingData getByID(Long ID)throws BottomUpException {

@@ -1,6 +1,5 @@
-app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, FollowUpSetupService) {
-	
-	
+app.controller('FollowUpSetupController', function($scope, $http, $modal, $filter, $rootScope, limitToFilter, $location,
+                                                   FollowUpSetupService) {
 
 	$scope.invNameData = [];
 	$scope.invData = {};
@@ -9,21 +8,25 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
 	$scope.recentStart = 0;
 	$scope.recentEnd = 0;
 	$scope.patientAppoinmentList = [];
-	$scope.patientTypeId = null;
+	$scope.patientTypeID = null;
     $scope.followUpInvName = "";
     $scope.doctorTypeId = null;
 	
 	$scope.typeHeadSelected = false;
+
+    $scope.vm = {
+        list: []
+    };
 	
     $scope.getInvName = function(term) {
         
-    	var dataString = 'query=0'+ '&invName=' + term;
+    	var dataString = {};
+    	dataString.term = term;
         
         return $http({
             method: 'POST',
-            url: "rest/autoComplete/invCategory",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: "/api/rest/autoComplete/inv",
+            data: dataString
         }).then(function(result) {
         	$scope.invNameData = result.data;
         	return limitToFilter($scope.invNameData, 10);
@@ -34,15 +37,8 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
       };
 
     $scope.getPatientType = function () {
-
-        var dataString = "query=6" + "&doctorType=" + $scope.doctorTypeId;
-
-        FollowUpSetupService.getPatientType.query({}, dataString).$promise.then(function(result) {
-            if (result && result.success) {
-                $scope.patientTypeList = result;
-            }else{
-    
-            }
+        FollowUpSetupService.getPatientType.query({}, {}).$promise.then(function(result) {
+            $scope.patientTypeList = result;
         });
     };
       
@@ -51,112 +47,94 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $rootS
           $scope.followUpInvName = item.name;
 		  $scope.typeHeadSelected = true;
 	  };
-	
 
 	  $scope.addInvToFollowUp = function(followUpInvName){
 
-          $scope.followUpInvName = "";
-          $("#fInvName").val("");
-          var dataString = 'query=11'+ '&invName=' + followUpInvName + "&patientTypeId=" + $scope.patientTypeId;;
-            
-            FollowUpSetupService.createInvToFollowUpSet.query({}, dataString).$promise.then(function(result) {
-                if (result && result.success) {
-                    $scope.bringFollowUpChart($scope.patientTypeId);
-                }else{
-        
-                }
+	      if(followUpInvName == ""){
+            alert("Please Key-in Inv Name to proceed");
+            return false;
+          }
+          var dataString = {};
+          dataString.invName = followUpInvName;
+          dataString.patientTypeID = $scope.patientTypeID;
+          dataString.doctorID = $rootScope.userData.profileData.doctorData.doctorID;
+            FollowUpSetupService.create.query({}, dataString).$promise.then(function(result) {
+                $scope.followUpInvName = "";
+                $scope.bringFollowUpChart($scope.patientTypeID);
             });
 	  };
 	  
-	  $scope.delete = function(id){
-		  
-		  var dataString = 'query=13'+ '&id=' + id;
-            
-            FollowUpSetupService.deleteInvToFollowUpSet.query({}, dataString).$promise.then(function(result) {
-                if (result && result.success) {
-                    $scope.bringFollowUpChart($scope.patientTypeId);
-                }else{
-        
-                }
+	  $scope.delete = function(followUpSettingID){
+            FollowUpSetupService.delete.remove({}, {followUpSettingID:followUpSettingID}).$promise.then(function(result) {
+                $scope.bringFollowUpChart($scope.patientTypeID);
             });
 	  };
 
-	  $scope.bringFollowUpChart = function (patientTypeId) {
-
+	  $scope.bringFollowUpChart = function (patientTypeID) {
           $scope.followUpInvName = "";
+          $scope.patientTypeID = patientTypeID;
 
-          $scope.patientTypeId = patientTypeId;
-          var dataString = 'query=12' + "&patientTypeId=" + patientTypeId;
+          FollowUpSetupService.getFollowUpChart.query({}, {doctorID:$rootScope.userData.profileData.doctorData.doctorID,
+              patientTypeID: patientTypeID}).$promise.then(function (result) {
+              $scope.followUpList = result;
 
-          FollowUpSetupService.getFollowUpChart.query({}, dataString).$promise.then(function (result) {
-              if (result && result.success) {
-                  $$scope.followUpList = result;
-              } else {
-
-              }
+              $scope.vm = {
+                  list: $scope.followUpList
+              };
           });
       };
-	  
-	  
-	$scope.inIt = function (){
 
-        var dataString = "query=5";
-        $http({
-            method: 'POST',
-            url: "phpServices/patient/patientTypeService.php",
-            data: dataString,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (result) {
-            $scope.doctorTypeId = result;
+    $scope.$watch('vm', function(newValue, oldValue) {
+        if (oldValue && oldValue.list && oldValue.list.length > 0 && newValue !== oldValue) {
 
-            var dataString = "query=4" + "&doctorType=" + $scope.doctorTypeId;
-
-            FollowUpSetupService.getPatientWithDoctor.query({}, dataString).$promise.then(function (result) {
-                if (result && result.success) {
-                    $scope.patientTypeList = result;
-                } else {
-  
-                }
+            var dOrder = 1;
+            angular.forEach(newValue.list, function (value, key) {
+                value.displayOrder = dOrder++;
             });
-        });
+            var searchData = {};
+            searchData.followUpSettingList = $scope.filterByDifference(oldValue.list, newValue.list);
+            $scope.followUpList = newValue.list;
 
-        FollowUpSetupService.getDoectorFromSettings.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.doctorTypeId = result;
+            if(searchData.followUpSettingList && searchData.followUpSettingList.length > 0){
+                FollowUpSetupService.updateDisplayOrder.query({}, searchData).$promise.then(function (result) {});
+            }
+        }
+    }, true);
 
-                var dataString = "query=4" + "&doctorType=" + $scope.doctorTypeId;
-
-                FollowUpSetupService.getPatientWithDoctor.query({}, dataString).$promise.then(function (result) {
-                    if (result && result.success) {
-                        $scope.patientTypeList = result;
-                    } else {
-
-                    }
-                });
-            } else {
-
+    $scope.filterByDifference = function (array1, array2) {
+        var array3 = [];
+        angular.forEach(array1, function(value1, key1) {
+            var item = $filter('filter')(array2, {followUpSettingID: value1.followUpSettingID}, true)[0];
+            if(item && item.displayOrder != value1.displayOrder){
+                var data ={};
+                data.followUpSettingID = item.followUpSettingID;
+                data.displayOrder = item.displayOrder;
+                array3.push(data);
             }
         });
 
-
+        return array3;
+    };
+	  
+	  
+	$scope.inIt = function (){
+        $scope.getPatientType();
 	};
 
     $scope.managePatientType = function () {
         var data = {};
         data.patientTypeList = angular.copy($scope.patientTypeList);
-        data.doctorTypeId = $scope.doctorTypeId;
+        data.doctorTypeID = $rootScope.userData.profileData.doctorData.categoryID;
         var patientTypeData = {};
         var modalInstance = $modal.open({
-            templateUrl: 'javascript/templates/patient/patientType.html',
+            templateUrl: 'resources/javascript/templates/patient/patientType.html',
             windowClass: 'fade in',
             size: 'sm',
             controller: 'PatientTypeController',
             resolve: {
-                record: function () {
-                    return {
-                        data
-                    };
-                }
+                    record: function () {
+                        return data;
+                    }
             },
             backdrop: 'static'
         });

@@ -64,6 +64,18 @@ public class AppointmentController extends BaseController {
         return this.appointmentService.getByID(this.getUserDetail().getAppointmentID());
     }
 
+    @RequestMapping(value = {"/getCurrAppDetail"}, method = RequestMethod.GET)
+    @ResponseBody
+    public AppointmentViewData getCurrentAppDetail(HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("appointmentID", this.getUserDetail().getAppointmentID());
+        List<AppointmentViewData> dataList = this.appointmentService.getAppPatientDetail(params);
+        if(dataList != null && dataList.size() > 0){
+            return dataList.get(0);
+        }
+        return null;
+    }
+
     @RequestMapping(value = {"/getByID/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
     public AppointmentData getByID(@PathVariable("appointmentID") Integer companyID, HttpServletRequest request) throws BottomUpException {

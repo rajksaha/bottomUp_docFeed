@@ -77,6 +77,9 @@ public class PrescriptionViewService {
     @Autowired
     private DoctorMapper doctorMapper;
 
+    @Autowired
+    private FollowUpResultMapper followUpResultMapper;
+
 
     public Map<String, Object> getDetailsForPrescription(Long doctorID)throws BottomUpException{
         Map<String, Object> requestMap = new HashMap<String, Object>();
@@ -129,8 +132,6 @@ public class PrescriptionViewService {
         result.put("currentDrugHistory", contentDetailMapper.getByParam(requestMap));
         requestMap.put("entityType", PrescriptionContentType.COMMENT);
         result.put("comment", this.getPrescribedNote(appointmentID));
-
-        //Clinical Record -- need change
         return result;
     }
 

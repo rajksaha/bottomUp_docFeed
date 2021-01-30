@@ -2,47 +2,63 @@ package com.bottomUp.domain;
 
 
 import com.bottomUp.domain.common.BaseData;
+import com.bottomUp.domain.common.FollowUpDetail;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
+
 
 public class FollowUpResultData extends BaseData {
 
-  private long resultID;
-  private long appID;
-  private long followupID;
-  private String data;
-  private java.sql.Date entryDate;
+  private Long resultID;
+  private Long appointmentID;
+  private Integer patientTypeID;
+  private String jsonData;
+  private Integer addedInPres;
+  private Date entryDate;
+  private String entryDateString;
+  private Long contentDetailID;
 
-  public long getResultID() {
+  private List<FollowUpDetail> followUpDetailList;
+
+  public Long getResultID() {
     return resultID;
   }
 
-  public void setResultID(long resultID) {
+  public void setResultID(Long resultID) {
     this.resultID = resultID;
   }
 
-  public long getAppID() {
-    return appID;
+  public Long getAppointmentID() {
+    return appointmentID;
   }
 
-  public void setAppID(long appID) {
-    this.appID = appID;
+  public void setAppointmentID(Long appointmentID) {
+    this.appointmentID = appointmentID;
   }
 
-  public long getFollowupID() {
-    return followupID;
+  public Integer getPatientTypeID() {
+    return patientTypeID;
   }
 
-  public void setFollowupID(long followupID) {
-    this.followupID = followupID;
+  public void setPatientTypeID(Integer patientTypeID) {
+    this.patientTypeID = patientTypeID;
   }
 
-  public String getData() {
-    return data;
+  public String getJsonData() {
+    return jsonData;
   }
 
-  public void setData(String data) {
-    this.data = data;
+  public void setJsonData(String jsonData) {
+    this.jsonData = jsonData;
+  }
+
+  public Integer getAddedInPres() {
+    return addedInPres;
+  }
+
+  public void setAddedInPres(Integer addedInPres) {
+    this.addedInPres = addedInPres;
   }
 
   public Date getEntryDate() {
@@ -51,5 +67,29 @@ public class FollowUpResultData extends BaseData {
 
   public void setEntryDate(Date entryDate) {
     this.entryDate = entryDate;
+  }
+
+  public List<FollowUpDetail> getFollowUpDetailList() {
+    return followUpDetailList;
+  }
+
+  public void setFollowUpDetailList(List<FollowUpDetail> followUpDetailList) {
+    this.followUpDetailList = followUpDetailList;
+  }
+
+  public String getEntryDateString() {
+    return entryDateString;
+  }
+
+  public void setEntryDateString(String entryDateString) {
+    this.entryDateString = entryDateString;
+  }
+
+  public Long getContentDetailID() {
+    return contentDetailID;
+  }
+
+  public void setContentDetailID(Long contentDetailID) {
+    this.contentDetailID = contentDetailID;
   }
 }

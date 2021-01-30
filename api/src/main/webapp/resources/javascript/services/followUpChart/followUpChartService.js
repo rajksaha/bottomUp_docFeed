@@ -5,47 +5,34 @@
 app.service('FollowUpChartService', function ($resource) {
     return {
 
-        getListFromFollowUPResult : $resource('rest/followUpChart/getListFromFollowUPResult', {}, {
+        getAppointmentDetail : $resource('/api/rest/appointment/getCurrAppDetail', {}, {
             'query':  {
-                method:'POST',
-                isArray:true
+                method:'GET',
+                isArray:false
             }
         }),
-
-        getFollowUpChartList : $resource('rest/followUpChart/getFollowUpChartList', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        addToContentDetail : $resource('rest/followUpChart/addToContentDetail', {}, {
+        create : $resource('/api/rest/followUpResult/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createFollowUpResult : $resource('rest/followUpChart/createFollowUpResult', {}, {
+        update : $resource('/api/rest/followUpResult/update', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        getDoctorFollowUpSettingsList : $resource('rest/followUpChart/getDoctorFollowUpSettingsList', {}, {
-            'query':  {
-                method:'POST',
-                isArray:true
-            }
-        }),
-        delAndcreateFollowUpResult : $resource('rest/followUpChart/delAndcreateFollowUpResult', {}, {
+        addFollowUpToPres : $resource('/api/rest/followUpResult/addFollowUpToPres', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        getPatientDetailSetDoctorFollowUp : $resource('rest/followUpChart/getPatientDetailSetDoctorFollowUp', {}, {
-            'query':  {
-                method:'POST',
-                isArray:false
+        deleteFollowUpFromPres : $resource('/api/rest/contentDetail/delete/:contentDetailID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {contentDetailID: '@contentDetailID'}
             }
         })
     };

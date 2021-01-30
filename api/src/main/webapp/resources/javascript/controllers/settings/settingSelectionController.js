@@ -1,4 +1,4 @@
-app.controller('SettingSelectionController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter, SettingSelectionService) {
+app.controller('SettingSelectionController', function($scope, $http, $modal, $rootScope, limitToFilter, $location, $filter) {
 	$scope.changePage = function (page) {
 		$scope.selectedPage = page;
 		if(page == 1){
@@ -24,24 +24,23 @@ app.controller('SettingSelectionController', function($scope, $http, $modal, $ro
     $scope.bringDoctorInfo = function (){
         var dataString = "query=2";
 
-        SettingSelectionService.getAccessAppUser.query({}, $scope.searchData).$promise.then(function(result) {
+        /*SettingSelectionService.getAccessAppUser.query({}, $scope.searchData).$promise.then(function(result) {
             if (result && result.success) {
                 $scope.userAccessInfo = result;
                 $rootScope.userAccessInfo = $scope.userAccessInfo;
             }else{
                 $location.path("/login");
             }
-        });
+        });*/
     };
 
 
     $scope.hasAccess = function(accessKey){
-        if($scope.userAccessInfo){
-            if($scope.userAccessInfo.userType == 'DOCTOR'){return true;}
-            var temp = $filter('filter')($scope.userAccessInfo.accessList, {accessCode: accessKey}, true)[0];
-            return temp == null ? false : true;
-        }
 
+        if($rootScope.userData.permissions['DOCTOR'] || $rootScope.userData.permissions[accessKey]){
+            return true;
+        }
+        return false;
     };
 
     $scope.hasAccessMenu = function(main){

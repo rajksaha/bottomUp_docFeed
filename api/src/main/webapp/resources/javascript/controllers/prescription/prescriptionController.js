@@ -68,7 +68,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         });
         $scope.bringPrescribedHistory($scope.appoinmentData.appointmentID, $scope.appoinmentData.patientID);
 
-        //$scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
+        $scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
     };
 
     $scope.hoverIn = function(){
@@ -243,22 +243,11 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
     $scope.clinicalRecordList = [];
     $scope.bringClinicalRecord = function (appointmentID) {
-        var dataString = "query=12" + '&appointmentID=' + appointmentID + '&contentType=' + 'CLINICAL_RECORD';
-        PrescriptionService.getRecordOfClinical.query({}, dataString).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.clinicalRecordList = result;
-                angular.forEach($scope.clinicalRecordList, function (value, key) {
-                    var dataString = "query=13" + '&appointmentID=' + appointmentID + '&contentType=' + 'CLINICAL_RECORD' + '&code=' + value.code;
-                    PrescriptionService.getDetailOfClinical.query({}, dataString).$promise.then(function (result) {
-                        if (result && result.success) {
-                            value.followUpList = data;
-                        } else {
-                        }
-                    });
-                });
-            } else {
-
-            }
+        PrescriptionService.getRecordOfClinical.query({}, {appointmentID:appointmentID}).$promise.then(function (result) {
+            $scope.clinicalRecordList = result;
+            angular.forEach($scope.clinicalRecordList, function(value, key) {
+                value.followUpDetailList = angular.fromJson(value.longDesc);
+            });
         });
     };
 
@@ -318,11 +307,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         //var dataString = "query=19" + '&contentDetailID=' + data.contentDetailID;
 
         PrescriptionService.delClinicalHistoryById.remove({contentDetailID: data.contentDetailID}).$promise.then(function (result) {
-            if (result && result.success) {
-                $scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
-            } else {
-
-            }
+            $scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
         });
 
     };
@@ -617,6 +602,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
             backdrop: 'static'
         });
         modalInstance.result.then(function(result) {
+            //TODO: MAKE SURE EVERTHING IS POPULATE CORRECTLY
             $scope.bringPrescribedHistory($scope.appoinmentData.appointmentID, $scope.appoinmentData.patientID);
             $scope.bringPrescribedPastHistory($scope.appoinmentData.appointmentID);
             $scope.bringPrescribedFamilyHistory($scope.appoinmentData.appointmentID);
@@ -739,9 +725,11 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
 
     $scope.printPreview = function (){
-        //var debug = "&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16108261188561";
+        //var debug = "&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16120090075871";
         //$window.open("http://localhost/prescription/api/prescription.php?appointmentID=" + $scope.appoinmentData.appointmentID + debug, '_blank');
-        $window.open("http://prescriptionapiapp-env.eba-pkcugqu8.ap-southeast-1.elasticbeanstalk.com/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID, '_blank');
+        var debug = "";
+        $window.open("http://prescriptionapiapp-env.eba-pkcugqu8.ap-southeast-1.elasticbeanstalk.com/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID + debug, '_blank');
+        //$window.open("http://prescriptionapiapp-env.eba-pkcugqu8.ap-southeast-1.elasticbeanstalk.com/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID, '_blank');
         /*if(!$rootScope.defaultPdf){
             var dataString = "query=20" + '&doctorID=' + $scope.doctorData.doctorID;
 

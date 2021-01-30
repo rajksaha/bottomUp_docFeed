@@ -58,7 +58,6 @@ public class ContentDetailService {
         }
     }
 
-
     public Long createByDrugHistory(DrugHistory drugHistory) throws BottomUpException{
         ContentDetailData contentDetailData = new ContentDetailData();
         if(drugHistory.getCurrentStatus() == 1){
@@ -75,6 +74,12 @@ public class ContentDetailService {
             contentDetailMapper.update(contentDetailData);
         }
         return contentDetailData.getContentDetailID();
+    }
+
+    public Long addFollowUpToPres(ContentDetailData detailData) throws BottomUpException{
+        detailData.setEntityType(PrescriptionContentType.FOLLOW_UP.name());
+        contentDetailMapper.create(detailData);
+        return detailData.getContentDetailID();
     }
 
     public void create(ContentDetailData data) throws BottomUpException {

@@ -134,10 +134,11 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:false
             }
         }),
-        getRecordOfClinical : $resource('/api/rest/prescription/getRecordOfClinical', {}, {
+        getRecordOfClinical : $resource('/api/rest/prescription/getRecordOfClinical/:appointmentID', {}, {
             'query':  {
-                method:'POST',
-                isArray:true
+                method:'GET',
+                isArray:true,
+                params: {appointmentID: '@appointmentID'}
             }
         }),
         getDetailOfClinical : $resource('/api/rest/prescription/getDetailOfClinical', {}, {
@@ -185,7 +186,7 @@ app.service('PrescriptionService', function ($resource) {
                 params  : {contentDetailID: '@contentDetailID'}
             }
         }),
-        delClinicalHistoryById : $resource('/api/rest/prescription/delClinicalHistoryById/:contentDetailID', {}, {
+        delClinicalHistoryById : $resource('/api/rest/contentDetail/delete/:contentDetailID', {}, {
             'remove':  {
                 method:'DELETE',
                 params: {contentDetailID: '@contentDetailID'}
@@ -237,6 +238,12 @@ app.service('PrescriptionService', function ($resource) {
             'remove':  {
                 method:'DELETE',
                 params: {drugPrescribeID: '@drugPrescribeID'}
+            }
+        }),
+        deleteFollowUpFromPres : $resource('/api/rest/contentDetail/delete/:contentDetailID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {contentDetailID: '@contentDetailID'}
             }
         })
     };

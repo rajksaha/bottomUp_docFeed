@@ -9,7 +9,8 @@
 		INSERT INTO `doctor_follow_up_setting`(
 			`doctorID`,
 			`invID`,
-			`patientTypeId`,
+			`patientTypeID`,
+			`displayOrder`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -17,8 +18,9 @@
 		)
 		VALUES(
 			#{doctorID},
-			#invID},
-			#{patientTypeId},
+			#{invID},
+			#{patientTypeID},
+			#{displayOrder},
 			#{updatedBy},
 			#{updatedOn},
 			#{createdBy},
@@ -33,10 +35,17 @@
 		SET
 		`doctorID` = #{doctorID},
 		`invID` = #{invID},
-		`patientTypeId` = #{patientTypeId},
+		`patientTypeID` = #{patientTypeID},
+		`displayOrder` = #{displayOrder},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
 		WHERE followUpSettingID = #{followUpSettingID}
+	</update>
+
+	<update id="updateDisplayOrder" parameterType="java.util.List">
+		<foreach collection="list" item="followUp" index="index" separator=";">
+			update doctor_follow_up_setting set displayOrder = #{followUp.displayOrder} where followUpSettingID = #{followUp.followUpSettingID}
+		</foreach>
 	</update>
 
 	<select id="getByID" parameterType="long" resultType="doctorFollowUpSetting">
@@ -44,7 +53,8 @@
 			`followUpSettingID`,
 			`doctorID`,
 			`invID`,
-			`patientTypeId`,
+			`patientTypeID`,
+			`displayOrder`,
 			`updatedBy`,
 			`updatedOn`,
 			`createdBy`,
@@ -56,18 +66,30 @@
 
 	<select id="getByParam" parameterType="map" resultType="doctorFollowUpSetting">
 		SELECT
-		`followUpSettingID`,
-		`doctorID`,
-		`invID`,
-		`patientTypeId`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `doctor_follow_up_setting`
+		df.`followUpSettingID`,
+		df.`doctorID`,
+		df.`invID`,
+		df.`displayOrder`,
+		ci.name AS invName,
+		df.`patientTypeID`,
+		df.`updatedBy`,
+		df.`updatedOn`,
+		df.`createdBy`,
+		df.`createdOn`
+		FROM doctor_feed.`doctor_follow_up_setting` df
+		JOIN doctor_feed.content_inv ci ON ci.invID = df.invID
 		WHERE 1 = 1
 		<if test="followUpSettingID != null">
-			AND followUpSettingID = #{followUpSettingID}
+			AND df.followUpSettingID = #{followUpSettingID}
+		</if>
+		<if test="patientTypeID != null">
+			AND df.patientTypeID = #{patientTypeID}
+		</if>
+		<if test="doctorID != null">
+			AND df.doctorID = #{doctorID}
+		</if>
+		<if test="orderBy != null">
+			ORDER BY ${orderBy} ASC
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

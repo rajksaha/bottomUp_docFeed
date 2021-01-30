@@ -1,0 +1,45 @@
+<div class="col-md-6" >
+	<table class="table table-condensed table-bordered" >
+		<tr>
+			<th>
+				Patient Type
+				<button class="btn btn-primary" data-ng-click="managePatientType()"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></button>
+			</th>
+			<th> Select</th>
+		</tr>
+		<tr>
+			<th>
+				<select  class="form-control" data-ng-model="patientTypeID" data-ng-options="patientType.patientTypeID as patientType.typeName for patientType in patientTypeList" data-ng-change="bringFollowUpChart(patientTypeID)">
+					<option value="">--Select--</option>
+				</select>
+			</th>
+			<th> &nbsp;</th>
+		</tr>
+		<tr data-ng-if="patientTypeID">
+			<th> Inv Name </th>
+			<th> Action</th>
+		</tr>
+		<tr data-ng-if="patientTypeID">
+			<td>
+				<input type="text" id="fInvName" data-ng-model="followUpInvName" typeahead="invNameData.name for invNameData in getInvName($viewValue)"  class="form-control" placeholder="Add Inv to Follow up Setings" typeahead-on-select='onSelectInvName($item, $model, $label)'/>
+			</td>
+			<td>
+				<button class="btn btn-primary" data-ng-click="addInvToFollowUp(followUpInvName)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+			</td>
+		</tr>
+	</table>
+	<div sv-root sv-part="followUpList">
+		<div data-ng-if="patientTypeID" data-ng-repeat="inv in followUpList | orderBy: 'displayOrder'" sv-element>
+			<div class="row" data-ng-mouseenter="deletePrefIcon=true" data-ng-mouseleave="deletePrefIcon=false">
+				<div class="col-sm-10 col-md-10 col-lg-10" >
+					<label>{{inv.invName}}</label>
+				</div>
+				<div class="col-sm-2 col-md-2 col-lg-2">
+			<span data-ng-show="deletePrefIcon" class="glyphicons glyphicon glyphicon-remove" aria-hidden="true"
+				  data-ng-click="delete(inv.followUpSettingID)"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

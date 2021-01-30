@@ -17,6 +17,8 @@ public interface DoctorFollowUpSettingMapper {
 
     public void update(DoctorFollowUpSettingData data) throws BottomUpException;
 
+    public void updateDisplayOrder(List<DoctorFollowUpSettingData> followUpList) throws BottomUpException;
+
     public DoctorFollowUpSettingData getByID(Long ID) throws BottomUpException;
 
     public List<DoctorFollowUpSettingData> getByParam(Map<String, Object> param) throws BottomUpException;

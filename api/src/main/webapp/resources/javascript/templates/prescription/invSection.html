@@ -16,12 +16,12 @@
             <a data-ng-if="!patientData.type" title="Please Select Patient Type To Visit That Page"  href="#" onclick="return false;"><label class="mainLabel">Clinical Record</label></a>
         </h2>
         <div data-ng-repeat="clinical in clinicalRecordList">
-            <span>{{clinical.code | date : 'dd/MM/yyyy'}}</span>
-            <div data-ng-repeat="followUp in clinical.followUpList">
-                <a class="link" data-ng-click="removeClinicalHistory(followUp)">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </a>
-                <span>{{followUp.detail}}</span>
+            <a class="link" data-ng-click="removeClinicalHistory(clinical)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+            <span>{{clinical.shortName | date : 'dd/MM/yyyy'}}</span>
+            <div data-ng-repeat="followUp in clinical.followUpDetailList">
+                <span data-ng-if="followUp.result">{{followUp.followUpInvName}} - {{followUp.result}}</span>
             </div>
         </div>
     </div>
