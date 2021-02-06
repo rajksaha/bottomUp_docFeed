@@ -1,13 +1,15 @@
-<h2 class="item-head">
-    <a href="javascript:"><label >Advice</label></a>
+<h2 class="item-head link">
+    <label class="mainLabel">Advice</label>
+    <a data-ng-if="prescribedAdviceList.length > 0" class="link" data-ng-click="addBulk('ADVICE')">
+        <span class="fa fa-plus" aria-hidden="true"></span>
+    </a>
 </h2>
 <div class="row">
-    <div class="col-sm-6 col-md-6 col-lg-6" data-ng-repeat="adiviceData in prescribedAdviceData">
-        <button class="btn btn-default" data-ng-model="none"   data-ng-click="addToPrescription(!adiviceData.addedToPrescription, adiviceData, 9)">
-            <span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': adiviceData.addedToPrescription == true,'glyphicon-unchecked': !adiviceData.addedToPrescription  || data.addedToPrescription == false}"></span>
-        </button>
-        <span>{{adiviceData.advice}}</span>
-
+    <div class="col-sm-12 col-md-12 col-lg-12" data-ng-repeat="adviceData in prescribedAdviceList" style="height:50px;">
+        <a class="link" data-ng-click="addSingle('ADVICE', adviceData.presAdviceID)">
+            <span class="fa fa-plus" aria-hidden="true"></span>
+        </a>
+        <span>{{adviceData.advice}}</span>
     </div>
 </div>
 

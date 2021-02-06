@@ -1,32 +1,33 @@
 <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6">
-        <h2 class="item-head">
-            <a href="javascript:"><label >Investigation</label></a>
-        </h2>
-        <div data-ng-repeat="invData in prescribedInvData">
-            <button class="btn btn-default" data-ng-model="none"   data-ng-click="addToPrescription(!invData.addedToPrescription, invData, 8)">
-                <span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': invData.addedToPrescription == true,'glyphicon-unchecked': invData.addedToPrescription != true}"></span>
-            </button>
+        <div class="form-group">
+            <h2 class="item-head link">
+                <label class="mainLabel">Investigation</label>
+                <a data-ng-if="prescribedInvList.length > 0" class="link" data-ng-click="addBulk('INV')">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+            </h2>
+        </div>
+        <div data-ng-repeat="invData in prescribedInvList">
+            <a class="link" data-ng-click="addSingle('INV', invData.presInvID)">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+            </a>
             <span>{{invData.invName}}</span>
         </div>
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
-        <div class="" data-ng-repeat="history in historyList">
-            <div data-ng-if="history.prescribedHistoryList.length > 0">
-                <h2 class="item-head">
-                    <a href="javascript:"><label >{{history.headerName}}</label></a>
-                </h2>
-                <div data-ng-repeat="data in history.prescribedHistoryList" >
-                    <button class="btn btn-default" data-ng-model="none"   data-ng-click="addToPrescription(!data.addedToPrescription, data, 2)">
-                        <span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': data.addedToPrescription == true,'glyphicon-unchecked': !data.addedToPrescription   || data.addedToPrescription == false}"></span>
-                    </button>
-                    <span>{{data.historyName}}: {{data.historyResult}}</span>
-                </div>
+        <h2 class="item-head link">
+            <a href="#/followUpChart">
+                <label class="mainLabel">Clinical Record</label>
+            </a>
+        </h2>
+        <div data-ng-repeat="clinical in clinicalRecordList">
+            <span>{{clinical.shortName | date : 'dd/MM/yyyy'}}</span>
+            <div data-ng-repeat="followUp in clinical.followUpDetailList">
+                <span data-ng-if="followUp.result">{{followUp.followUpInvName}} - {{followUp.result}}</span>
             </div>
         </div>
     </div>
-
-
 </div>
 
 

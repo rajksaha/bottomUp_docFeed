@@ -28,8 +28,39 @@
 			#{createdBy},
 			#{createdOn}
 		);
+	</insert>
 
+	<insert id="selectInsert" parameterType="map">
 
+		INSERT INTO `prescription_complain`(
+			`appointmentID`,
+			`symptomID`,
+			`durationNum`,
+			`durationType`,
+			`detail`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+			)
+		SELECT
+			#{newAppointmentID},
+			pc.`symptomID`,
+			pc.`durationNum`,
+			pc.`durationType`,
+			pc.`detail`,
+			#{userName},
+			NOW(),
+			#{userName},
+			NOW()
+		FROM prescription_complain pc
+		WHERE 1=1
+		<if test="appointmentID != null">
+			AND pc.appointmentID = #{appointmentID}
+		</if>
+		<if test="complainID != null">
+			AND pc.complainID = #{complainID}
+		</if>
 	</insert>
 	
 	<update id="update" parameterType="prescriptionComplain">

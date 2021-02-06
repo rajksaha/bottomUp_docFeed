@@ -8,7 +8,6 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.patientTypeList =[];
     $scope.appoinmentData ={};
     $scope.patientStateList = [];
-
     $scope.refferedAdderData = {};
     $scope.nextVisitData ={};
     $scope.prescribedDrugList = [];
@@ -24,10 +23,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     $scope.diagnosisData = {};
     $scope.dayTypeList = JsonService.dayTypeList;
     $scope.numOfDayList = JsonService.numberList;
-
     $scope.nextVisitDayTypeList = JsonService.nextVisitDayTypeList;
-
-
     $scope.numberOfPrescribedDrugs = 0;
     $scope.numberOfInvAdded = 0;
     $scope.menuState = true;
@@ -303,13 +299,9 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     };
 
     $scope.removeClinicalHistory = function (data){
-
-        //var dataString = "query=19" + '&contentDetailID=' + data.contentDetailID;
-
         PrescriptionService.delClinicalHistoryById.remove({contentDetailID: data.contentDetailID}).$promise.then(function (result) {
             $scope.bringClinicalRecord($scope.appoinmentData.appointmentID);
         });
-
     };
 
     $scope.deleteInv = function (presInvID, index){
@@ -319,11 +311,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     };
 
     $scope.updateCommentText = function (commentText){
-
         var dataString = "query=17" + '&comment=' + commentText;
-
         PresSaveService.updateComment.query({}, dataString).$promise.then(function (result) {
-
         });
     };
 

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionDrugDoseMapper">
 
-	<insert id="create" parameterType="prescriptionDrugDose" useGeneratedKeys="true" keyProperty="presDrugID" >
+	<insert id="create" parameterType="prescriptionDrugDose" >
 
 		INSERT INTO `prescription_drug_dose`(
 			`presDrugID`,
@@ -26,8 +26,34 @@
 			#{createdBy},
 			#{createdOn}
 		);
+	</insert>
 
+	<insert id="selectInsert" parameterType="map">
 
+		INSERT INTO `prescription_drug_dose`(
+			`presDrugID`,
+			`dose`,
+			`numOfDay`,
+			`durationType`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		SELECT
+			#{newPresDrugID},
+			pc.`dose`,
+			pc.`numOfDay`,
+			pc.`durationType`,
+			#{userName},
+			NOW(),
+			#{userName},
+			NOW()
+		FROM prescription_drug_dose pc
+		WHERE 1=1
+		<if test="presDrugID != null">
+			AND pc.presDrugID = #{presDrugID}
+		</if>
 	</insert>
 	
 	<update id="update" parameterType="prescriptionDrugDose">
@@ -44,7 +70,6 @@
 
 	<select id="getByID" parameterType="long" resultType="prescriptionDrugDose">
 		SELECT
-			`presDrugID`,
 			`presDrugID`,
 			`dose`,
 			`numOfDay`,

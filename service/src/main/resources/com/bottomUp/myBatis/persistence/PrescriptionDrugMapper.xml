@@ -34,10 +34,48 @@
 			#{createdBy},
 			#{createdOn}
 		);
-
-
 	</insert>
-	
+
+	<insert id="selectInsert" parameterType="map" useGeneratedKeys="true" keyProperty="presDrugID" >
+
+		INSERT INTO `prescription_drug`(
+			`appointmentID`,
+			`drugTypeID`,
+			`drugID`,
+			`doseTypeCode`,
+			`drugDoseUnit`,
+			`drugWhenID`,
+			`drugAdviceID`,
+			`presNum`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		SELECT
+			#{newAppointmentID},
+			pc.`drugTypeID`,
+			pc.`drugID`,
+			pc.`doseTypeCode`,
+			pc.`drugDoseUnit`,
+			pc.`drugWhenID`,
+			pc.`drugAdviceID`,
+			pc.`presNum`,
+			#{userName},
+			NOW(),
+			#{userName},
+			NOW()
+		FROM prescription_drug pc
+		WHERE 1=1
+		<if test="appointmentID != null">
+			AND pc.appointmentID = #{appointmentID}
+		</if>
+		<if test="presDrugID != null">
+			AND pc.presDrugID = #{presDrugID}
+		</if>
+	</insert>
+
+
 	<update id="update" parameterType="prescriptionDrug">
 		UPDATE `prescription_drug`
 		SET
@@ -72,6 +110,31 @@
 		FROM `prescription_drug`
 
 		WHERE presDrugID = #{presDrugID}
+	</select>
+
+	<select id="getSimpleByParam" parameterType="map" resultType="prescriptionDrug">
+		SELECT
+		`presDrugID`,
+		`appointmentID`,
+		`drugTypeID`,
+		`drugID`,
+		`doseTypeCode`,
+		`drugDoseUnit`,
+		`drugWhenID`,
+		`drugAdviceID`,
+		`presNum`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `prescription_drug`
+		WHERE 1 = 1
+		<if test="presDrugID != null">
+			AND presDrugID = #{presDrugID}
+		</if>
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
 	</select>
 
 	<select id="getByParam" parameterType="map" resultType="prescriptionDrug">

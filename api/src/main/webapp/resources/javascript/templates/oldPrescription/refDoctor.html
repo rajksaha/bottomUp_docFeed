@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <h2 class="item-head link">
+            <label class="mainLabel">Clinical Note</label>
+        </h2>
+        <figure data-ng-repeat="note in presNoteList">
+            <figcaption>
+                <label data-ng-if="note.header != 'No Header'">{{note.header}}</label>
+            </figcaption>
+            <ul>
+                <li data-ng-repeat="subNote in note.noteList">
+                    <label>{{subNote}}</label>
+                    <!--<a class="link" data-ng-click="addSingle('COMMENT', subNote.contentDetailID)">
+                        <span class="fa fa-plus" aria-hidden="true"></span>
+                    </a>-->
+                </li>
+            </ul>
+        </figure>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <h2 class="item-head">
+            <label data-ng-show="nextVisitData.nextVisitType != 2">Next Visit in {{nextVisitData.visitDate | date:'d.M.yy'}} </label>
+            <label data-ng-show="nextVisitData.nextVisitType == 2">Next Visit After: {{nextVisitData.numOfDay}} {{nextVisitData.durationTypeName}} </label>
+        </h2>
+    </div>
+</div>
+
+

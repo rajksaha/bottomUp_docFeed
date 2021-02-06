@@ -1,31 +1,89 @@
 <div class="row">
 
     <div class="col-sm-6 col-md-6 col-lg-6">
-        <!--<h2 class="item-head">
-            <a href="javascript:"><label >Clinical Note</label></a>
-        </h2>
-        <button class="btn btn-default pull-right" data-ng-model="none"   data-ng-click="addCommentToPrescription()">
-            <span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': commentData.addedToPrescription == true,'glyphicon-unchecked': !commentData.addedToPrescription  || commentData.addedToPrescription == false}"></span>
-        </button>
-        <span><textarea rows="8" style="width: 100%" data-ng-model="commentData.detail">{{commentData.detail}}</textarea></span>-->
 
-        <h2 class="item-head">
-            Clinical Note
-            <span class="glyphicon  glyphicon pull-right"  data-ng-click="addCommentToPrescription()" data-ng-class="{'glyphicon-check': commentData.addedToPrescription == true,'glyphicon-unchecked': !commentData.addedToPrescription  || commentData.addedToPrescription == false}"></span>
-        </h2>
-        <span><textarea rows="3" style="width: 100%" data-ng-model="commentData.detail">{{commentData.detail}}</textarea></span>
-    </div>
-
-    <div class="col-sm-6 col-md-6 col-lg-6">
-        <h2 class="item-head">
-            FollowUp Result
-        </h2>
-        <div data-ng-repeat="followUp in followUpDataList">
-            <span>{{followUp.detail}}</span>
+        <div data-ng-if="pastDiseaseList.length > 0">
+            <h2 class="item-head">
+                <label>Past Illness</label>
+                <a class="link" data-ng-click="addBulk('PAST_HISTORY')">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+            </h2>
+            <div data-ng-repeat="data in pastDiseaseList" >
+                <a class="link" data-ng-click="addSingle('PAST_HISTORY', data.presPastDiseaseID)">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+                <span>{{data.diseaseName}}</span>
+            </div>
         </div>
 
+        <div data-ng-if="coMorList.length > 0">
+            <h2 class="item-head">
+                <label>Co Morbidities</label>
+                <a class="link" data-ng-click="addBulk('PAST_HISTORY')">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+            </h2>
+            <div data-ng-repeat="data in coMorList" >
+                <a class="link" data-ng-click="addSingle('PAST_HISTORY', data.presPastDiseaseID)">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+                <span>{{data.diseaseName}}</span>
+            </div>
+        </div>
+
+        <div data-ng-if="familyDiseaseList.length > 0">
+            <h2 class="item-head">
+                <label>Family History</label>
+                <a class="link" data-ng-click="addBulk('FAMILY_HISTORY')">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+            </h2>
+            <div data-ng-repeat="data in familyDiseaseList" >
+                <a class="link" data-ng-click="addSingle('FAMILY_HISTORY', data.presFamilyDiseaseID)">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+                <span>{{data.diseaseName}}</span> - <span>{{data.relationName}}</span>
+            </div>
+        </div>
+
+        <div data-ng-if="currentDrugHistoryList.length > 0">
+            <h2 class="item-head"><label>Current Drug History</label></h2>
+            <div data-ng-repeat="data in currentDrugHistoryList">
+                <a class="link" data-ng-click="addSingle('CURR_DRUG', data.contentDetailID)">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+                <span>{{data.shortName}}</span>
+            </div>
+        </div>
+
+        <div data-ng-if="oldDrugHistoryList.length > 0">
+            <h2 class="item-head"><label>Old Drug History</label></h2>
+            <div data-ng-repeat="data in oldDrugHistoryList">
+                <a class="link" data-ng-click="addSingle('OLD_DRUG', data.contentDetailID)">
+                    <span class="fa fa-plus" aria-hidden="true"></span>
+                </a>
+                <span>{{data.shortName}}</span>
+            </div>
+        </div>
+
+
+
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="" data-ng-repeat="history in historyList">
+            <div data-ng-if="history.prescribedHistoryList.length > 0">
+                <h2 class="item-head">
+                    <label>{{history.headerName}}</label>
+                </h2>
+                <div data-ng-repeat="data in history.prescribedHistoryList" >
+                    <a class="link" data-ng-click="addSingle('HISTORY', data.presHistoryID)">
+                        <span class="fa fa-plus" aria-hidden="true"></span>
+                    </a>
+                    <span>{{data.historyName}}: {{data.historyResult}}</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

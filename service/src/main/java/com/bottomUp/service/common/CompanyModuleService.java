@@ -6,6 +6,7 @@ import com.bottomUp.myBatis.persistence.CompanyModuleMapper;
 import com.bottomUp.service.CompanyDefaultSetupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -15,20 +16,19 @@ import java.util.Map;
  */
 
 @Service
+@Transactional(rollbackFor = BottomUpException.class)
 public class CompanyModuleService {
 
-    @Autowired
-    private CompanyDefaultSetupService companyDefaultSetupService;
+    /*@Autowired
+    private CompanyDefaultSetupService companyDefaultSetupService;*/
 
     @Autowired
     private CompanyModuleMapper companyModuleMapper;
 
     public void create(CompanyModuleData data) throws BottomUpException {
         this.companyModuleMapper.create(data);
-        companyDefaultSetupService.createDefaultPermissionAndGroupForModule(data);
+        //companyDefaultSetupService.createDefaultPermissionAndGroupForModule(data);
     }
-
-
 
     public void update(CompanyModuleData data) throws BottomUpException {
         this.companyModuleMapper.update(data);

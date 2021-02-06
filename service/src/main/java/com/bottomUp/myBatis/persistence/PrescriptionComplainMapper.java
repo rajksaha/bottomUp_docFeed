@@ -15,6 +15,8 @@ public interface PrescriptionComplainMapper {
 
     public void create(PrescriptionComplainData data) throws BottomUpException;
 
+    public void selectInsert(Map<String, Object> param) throws BottomUpException;
+
     public void update(PrescriptionComplainData data) throws BottomUpException;
 
     public PrescriptionComplainData getByID(Long ID) throws BottomUpException;

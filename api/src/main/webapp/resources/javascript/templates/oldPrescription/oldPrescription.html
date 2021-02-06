@@ -1,12 +1,12 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 alert alert-info">
 	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 		
-		<h4 >Old Presriptions</h4>
+		<h4 >Old Prescription</h4>
 	</div>
-	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-		<h4 >{{patientData.name}}-{{prescriptionViewDate | date:'d.M.yy'}}</h4>
+	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		<h4 >{{appointmentData.patient.firstName}}- Prescription of{{prescriptionViewDate | date:'d.M.yy'}}</h4>
 	</div>
-	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+	<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 		<span class="pull-right">
 			<a style="padding-left:12px;" class="btn btn-info" href="#/prescription"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"> Back</span></a>
 		</span>
@@ -25,13 +25,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr data-ng-repeat="data in oldAppoinmentList">
+				<tr data-ng-repeat="data in oldAppointmentList">
 					<td>
-						<button class="btn btn-default" data-ng-model="none"   data-ng-click="masterAddToPrescription(!data.addedToPrescription, data)">
-							<span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': data.addedToPrescription == true,'glyphicon-unchecked': data.addedToPrescription != true}"></span>
-						</button>
+						<a class="link" data-ng-click="masterAddToPrescription()">
+							<span class="fa fa-plus" aria-hidden="true"></span>
+						</a>
 					</td>
-					<td><span class="textSpc link" data-ng-class="{'selected' : prescriptionViewDate == data.date}" data-ng-click="viewPrescription(data)">{{data.date | date:'d-M-yyyy'}}</span></td>
+					<td><span class="textSpc link" data-ng-class="{'selected' : prescriptionViewDate == data.appDate}" data-ng-click="viewPrescription(data)">{{data.appDate | date:'d-M-yyyy'}}</span></td>
 				</tr>
 			</tbody>
 		</table>
@@ -42,28 +42,29 @@
 
 		<div class="row">
 			<div class="verticalLine col-sm-6 col-md-6 col-lg-6">
-				<div ng-include="'javascript/templates/oldPrescription/complainAndVital.html'"></div>
-				<div ng-include="'javascript/templates/oldPrescription/invSection.html'"></div>
-				<div ng-include="'javascript/templates/oldPrescription/history.html'"></div>
+				<div ng-include="'resources/javascript/templates/oldPrescription/complainAndVital.html'"></div>
+				<div ng-include="'resources/javascript/templates/oldPrescription/invSection.html'"></div>
+				<div ng-include="'resources/javascript/templates/oldPrescription/history.html'"></div>
+				<div ng-include="'resources/javascript/templates/oldPrescription/refDoctor.html'"></div>
 			</div>
 			<div class="verticalLine col-sm-6 col-md-11 col-lg-6" >
 				<div class="form-group">
 
 					<div class="well well-sm" style="border-left: 5px solid #3ac0ff;">
-						<button class="btn btn-default" data-ng-model="none"   data-ng-click="addDietToPrescription()" data-ng-if="dietData.dietName">
-							<span class="glyphicon  glyphicon "  data-ng-class="{'glyphicon-check': dietData.addedToPrescription == true,'glyphicon-unchecked': !dietData.addedToPrescription  || dietData.addedToPrescription == false}"></span>
-						</button>
+						<a data-ng-if="dietData" class="link" data-ng-click="addSingle('DIET', dietData.dietID)">
+							<span class="fa fa-plus" aria-hidden="true"></span>
+						</a>
 						<span > <b>Diet:</b> {{dietData.dietName}}</span>
 					</div>
 					<div class="well well-sm" style="border-left: 5px solid #3ac0ff;">
-						<button class="btn btn-default" data-ng-model="none"   data-ng-click="addDiagnosisToPrescription()" data-ng-if="diagnosisData.diseaseName">
-							<span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': diagnosisData.addedToPrescription == true,'glyphicon-unchecked': !diagnosisData.addedToPrescription  || data.addedToPrescription == false}"></span>
-						</button>
+						<a data-ng-if="diagnosisData" class="link" data-ng-click="addBulk('DIAGNOSIS')">
+							<span class="fa fa-plus" aria-hidden="true"></span>
+						</a>
 						<span > <b>Diagnosis:</b> {{diagnosisData.diseaseName}}</span>
 					</div>
 				</div>
-				<div ng-include="'javascript/templates/oldPrescription/drugInfo.html'"></div>
-				<div ng-include="'javascript/templates/oldPrescription/advice.html'"></div>
+				<div ng-include="'resources/javascript/templates/oldPrescription/drugInfo.html'"></div>
+				<div ng-include="'resources/javascript/templates/oldPrescription/advice.html'"></div>
 			</div>
 		</div>
 	</div>

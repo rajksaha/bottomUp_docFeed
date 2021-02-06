@@ -42,4 +42,8 @@ public class PrescriptionDrugDoseService {
     public void delete (Map<String,Object> param) throws BottomUpException {
         this.prescriptionDrugDoseMapper.delete(param);
     }
+
+    public void selectInsert(Map<String, Object> param) throws BottomUpException{
+        this.prescriptionDrugDoseMapper.selectInsert(param);
+    }
 }

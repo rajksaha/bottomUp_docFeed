@@ -1,12 +1,15 @@
 <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6">
         <h2 class="item-head">
-            <a href="javascript:"><label >Chief Complaints</label></a>
+            <label >Chief Complaints</label>
+            <a data-ng-if="prescribedComplainList.length > 0" class="link" data-ng-click="addBulk('COMPLAIN')">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+            </a>
         </h2>
-        <div data-ng-repeat="complain in prescribedComplainData">
-            <button class="btn btn-default" data-ng-model="none"   data-ng-click="addToPrescription(!complain.addedToPrescription, complain, 10)">
-                <span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': complain.addedToPrescription == true,'glyphicon-unchecked': complain.addedToPrescription != true}"></span>
-            </button>
+        <div data-ng-repeat="complain in prescribedComplainList">
+            <a class="link" data-ng-click="addSingle('COMPLAIN', complain.complainID)">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+            </a>
             <span>{{getComplainString(complain)}}</span>
         </div>
     </div>
@@ -14,11 +17,8 @@
         <h2 class="item-head">
             <a href="javascript:"><label >On Examination</label></a>
         </h2>
-        <div data-ng-repeat="vitalData in prescribedVitalData">
-            <button class="btn btn-default" data-ng-model="none"   data-ng-click="addToPrescription(!vitalData.addedToPrescription, vitalData, 1)">
-                <span class="glyphicon  glyphicon"  data-ng-class="{'glyphicon-check': vitalData.addedToPrescription == true,'glyphicon-unchecked': !vitalData.addedToPrescription   || vitalData.addedToPrescription == false}"></span>
-            </button>
-            <span>{{vitalData.vitalDisplayName}} : {{vitalData.vitalResult}}</span>
+        <div data-ng-repeat="vitalData in prescribedVitalList">
+            <span>{{vitalData.vitalName}} : {{vitalData.vitalResult}}</span>
         </div>
 
     </div>

@@ -131,4 +131,22 @@ public class PrescriptionDrugService {
         param.put("durationTypeList", contentDurationTypeMapper.getByParam(null));
         return param;
     }
+
+    public void selectInsert(Map<String, Object> params) throws BottomUpException {
+        List<PrescriptionDrugData> oldDataList = prescriptionDrugMapper.getSimpleByParam(params);
+        Map<String, Object> innerMap = new HashMap<String, Object>();
+        innerMap.put("userName", params.get("userName"));
+        for (PrescriptionDrugData oldDrug : oldDataList) {
+            PrescriptionDrugData newDrug = new PrescriptionDrugData();
+            ModelMapper modelMapper = new ModelMapper();
+            modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
+            modelMapper.map(oldDrug, newDrug);
+            newDrug.setPresDrugID(null);
+            newDrug.setAppointmentID(Long.valueOf(params.get("newAppointmentID").toString()));
+            prescriptionDrugMapper.create(newDrug);
+            innerMap.put("presDrugID", oldDrug.getPresDrugID());
+            innerMap.put("newPresDrugID", newDrug.getPresDrugID());
+            prescriptionDrugDoseMapper.selectInsert(innerMap);
+        }
+    }
 }

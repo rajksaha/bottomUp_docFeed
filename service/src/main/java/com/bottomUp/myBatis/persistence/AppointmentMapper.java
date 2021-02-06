@@ -4,6 +4,7 @@ package com.bottomUp.myBatis.persistence;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.AppointmentData;
 import com.bottomUp.model.AppointmentViewData;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
 /**
  * Created by raj on 09/08/2020.
  */
+@Repository
 public interface AppointmentMapper {
 
     void create(AppointmentData data) throws BottomUpException;

@@ -4,6 +4,13 @@
 
 app.service('PrescriptionService', function ($resource) {
     return {
+        getDoctorMenu : $resource('/api/rest/menuSetting/getByDoctorID/:doctorID', {}, {
+            'query':  {
+                method:'GET',
+                isArray: true,
+                params: {doctorID: '@doctorID'}
+            }
+        }),
         getPrescriptionInfo : $resource('/api/rest/prescription/getPrescriptionInfo/:appointmentID', {}, {
             'query':  {
                 method:'GET',

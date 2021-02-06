@@ -27,6 +27,35 @@
 
 
 	</insert>
+
+	<insert id="selectInsert" parameterType="map">
+
+		INSERT INTO `prescription_diagnosis`(
+			`appointmentID`,
+			`diseaseID`,
+			`note`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		SELECT
+			#{newAppointmentID},
+			pc.`diseaseID`,
+			pc.`note`,
+			#{userName},
+			NOW(),
+			#{userName},
+			NOW()
+		FROM prescription_diagnosis pc
+		WHERE 1=1
+		<if test="appointmentID != null">
+			AND pc.appointmentID = #{appointmentID}
+		</if>
+		<if test="diagnosisID != null">
+			AND pc.diagnosisID = #{diagnosisID}
+		</if>
+	</insert>
 	
 	<update id="update" parameterType="prescriptionDiagnosis">
 		UPDATE `prescription_diagnosis`

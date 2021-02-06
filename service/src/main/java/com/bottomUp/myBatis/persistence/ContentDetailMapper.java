@@ -17,6 +17,8 @@ public interface ContentDetailMapper {
 
     public void create(ContentDetailData data) throws BottomUpException;
 
+    public void selectInsert(Map<String, Object> param) throws BottomUpException;
+
     public void update(ContentDetailData data) throws BottomUpException;
 
     public ContentDetailData getByID(Long userProfileID) throws BottomUpException;

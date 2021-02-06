@@ -49,6 +49,14 @@ public class MenuSettingController extends BaseController {
         return this.menuSettingService.getByID(Long.valueOf(menuSettingID));
     }
 
+    @RequestMapping(value = {"/getByDoctorID/{doctorID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<MenuSettingData> getByDoctorID(@PathVariable("doctorID") Long doctorID, HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("doctorID", doctorID);
+        return this.menuSettingService.getByParam(params);
+    }
+
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody MenuSettingData data) throws BottomUpException {

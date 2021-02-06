@@ -35,6 +35,46 @@
 
 
 	</insert>
+
+	<insert id="selectInsert" parameterType="map">
+
+		INSERT INTO `content_detail`(
+		`entityType`,
+		`entityID`,
+		`shortName`,
+		`longDesc`,
+		`content`,
+		`url`,
+		`fileFormat`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		)
+		SELECT
+		`entityType`,
+		#{newAppointmentID},
+		`shortName`,
+		`longDesc`,
+		`content`,
+		`url`,
+		`fileFormat`,
+		#{userName},
+		NOW(),
+		#{userName},
+		NOW()
+		FROM content_detail pc
+		WHERE 1=1
+		<if test="entityType != null">
+			AND pc.entityType = #{entityType}
+		</if>
+		<if test="appointmentID != null">
+			AND pc.entityID = #{appointmentID}
+		</if>
+		<if test="contentDetailID != null">
+			AND pc.contentDetailID = #{contentDetailID}
+		</if>
+	</insert>
 	
 	<update id="update" parameterType="contentDetail">
 		UPDATE `content_detail`

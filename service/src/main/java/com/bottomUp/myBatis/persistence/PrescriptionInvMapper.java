@@ -15,6 +15,8 @@ public interface PrescriptionInvMapper {
 
     public void create(PrescriptionInvData data) throws BottomUpException;
 
+    public void selectInsert(Map<String, Object> param) throws BottomUpException;
+
     public void update(PrescriptionInvData data) throws BottomUpException;
 
     public PrescriptionInvData getByID(Long ID) throws BottomUpException;

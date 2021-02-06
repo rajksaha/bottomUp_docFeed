@@ -15,11 +15,15 @@ public interface PrescriptionDrugMapper {
 
     public void create(PrescriptionDrugData data) throws BottomUpException;
 
+    public void selectInsert(Map<String, Object> param) throws BottomUpException;
+
     public void update(PrescriptionDrugData data) throws BottomUpException;
 
     public PrescriptionDrugData getByID(Long ID) throws BottomUpException;
 
     public List<PrescriptionDrugData> getByParam(Map<String, Object> param) throws BottomUpException;
+
+    public List<PrescriptionDrugData> getSimpleByParam(Map<String, Object> param) throws BottomUpException;
 
     public void delete(Map<String, Object> param) throws BottomUpException;
 }
