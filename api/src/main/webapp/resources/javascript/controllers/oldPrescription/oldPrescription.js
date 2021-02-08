@@ -133,6 +133,15 @@ app.controller('OldPrescriptionController', function($scope, $http, $modal, $fil
         });
     };
 
+    $scope.copyComment = function(header, text){
+        var contentDetailData = {};
+        contentDetailData.shortName = header;
+        contentDetailData.longDesc = text;
+        contentDetailData.entityType = "";
+        contentDetailData.entityID = $scope.appointmentData.appointmentID;
+        OldPrescriptionService.copyComment.query({}, contentDetailData).$promise.then(function (result) {});
+    };
+
 	$scope.inIt = function (){
 		$scope.bringAppDetail();
 	};

@@ -1,6 +1,7 @@
 package com.bottomUp.service.docFeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.domain.PrescriptionDiagnosisData;
 import com.bottomUp.myBatis.persistence.*;
 import com.bottomUp.service.docFeed.crud.PrescriptionAdviceService;
 import com.bottomUp.service.docFeed.crud.PrescriptionComplainService;
@@ -89,8 +90,11 @@ public class OldPrescriptionService {
                 prescriptionAdviceMapper.selectInsert(params);
                 break;
             case DIAGNOSIS:
-                params.put(copyByAppointment ? "appointmentID" : DIAGNOSIS.getIdName(),requestedID);
-                prescriptionDiagnosisMapper.selectInsert(params);
+                PrescriptionDiagnosisData diagnosisData = prescriptionDiagnosisMapper.getByAppointmentID(newAppointmentID);
+                if(diagnosisData == null){
+                    params.put(copyByAppointment ? "appointmentID" : DIAGNOSIS.getIdName(),requestedID);
+                    prescriptionDiagnosisMapper.selectInsert(params);
+                }
                 break;
             case DIET:
                 params.put(copyByAppointment ? "appointmentID" : DIET.getIdName(),requestedID);

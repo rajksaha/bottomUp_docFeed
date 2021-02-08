@@ -10,9 +10,9 @@
             <ul>
                 <li data-ng-repeat="subNote in note.noteList">
                     <label>{{subNote}}</label>
-                    <!--<a class="link" data-ng-click="addSingle('COMMENT', subNote.contentDetailID)">
+                    <a class="link" data-ng-click="copyComment(note.header, subNote)">
                         <span class="fa fa-plus" aria-hidden="true"></span>
-                    </a>-->
+                    </a>
                 </li>
             </ul>
         </figure>

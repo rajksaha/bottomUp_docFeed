@@ -38,6 +38,12 @@ app.service('OldPrescriptionService', function ($resource) {
                 isArray:true,
                 params: {oldAppointmentID: '@oldAppointmentID', newAppointmentID: '@newAppointmentID'}
             }
+        }),
+        copyComment : $resource('/api/rest/contentDetail/save', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
         })
     };
 });
