@@ -25,34 +25,26 @@
 			</thead>
 			<tbody>
 			<tr data-ng-repeat="data in oldReportList">
-				<td><span class="textSpc link" data-ng-class="{'selected' : prescriptionViewDate == data.reportDate}" data-ng-click="getInvReports(data.reportDate)">{{data.reportDate | date:'d-M-yyyy'}}</span></td>
+				<td><span class="textSpc link" data-ng-class="{'selected' : prescriptionViewDate == data.reportDate}" data-ng-click="getInvReports(data.reportDate, data.reportList)">{{data.reportDate | date:'d-M-yyyy'}}</span></td>
 			</tr>
 			</tbody>
 		</table>
 	</div>
 
 
-	<div class='col-sm-10 col-md-10 col-lg-10' data-ng-show="showPrescriptionView">
+	<div class='col-sm-10 col-md-10 col-lg-10' >
 
 		<div class="row">
-			<div class="verticalLine ">
+			<div class="verticalLine">
 				<div data-ng-repeat="report in invReportList">
-					<div class="alert alert-success col-sm-2 col-md-2 col-lg-2" style="background-color: #efffb2; text-align:center; margin-right: 10px" data-ng-click="showLastUploadedPhoto(report)">
+					<div class="alert alert-success col-sm-2 col-md-2 col-lg-2" style="background-color: #efffb2; text-align:center; margin-right: 10px" data-ng-click="displayAttachment(report)">
 						<i class="fa fa-files-o fa-2x"></i>
-						<label data-ng-class="{'selected' : imageLink == report.reportLocation}" >{{report.fileName}}</label>
+						<label  data-ng-class="{'selected' : imageLink == report.contentUrl}" >{{sliceFileName(report)}}</label>
 					</div>
 				</div>
 				<div class="col-md-12"></div>
-				<div class="alert alert-success col-sm-8 col-md-8 col-lg-8" style="background-color: #efffb2; text-align:center; margin-right: 10px" data-ng-click="showLastUploadedPhoto(report)">
-					<div data-ng-show="imageView">
-						<img ng-src="{{imageLink}}" width="100%">
-					</div>
-
-					<div data-ng-show="pdfView">
-						<object data="{{imageLink}}" type="application/pdf" width="100%" height="600px">
-							<p>Alternative text - include a link <a href="myfile.pdf">to the PDF!</a></p>
-						</object>
-					</div>
+				<div data-ng-show="showPrescriptionView && imageView" class="alert alert-success col-sm-8 col-md-8 col-lg-8" style="background-color: #efffb2; text-align:center; margin-right: 10px" data-ng-click="showLastUploadedPhoto(report)">
+					<img ng-src="{{imageLink}}" width="100%">
 				</div>
 			</div>
 		</div>

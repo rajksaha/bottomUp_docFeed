@@ -30,8 +30,6 @@
 			#{createdBy},
 			#{createdOn}
 		);
-
-
 	</insert>
 	
 	<update id="update" parameterType="Appointment">

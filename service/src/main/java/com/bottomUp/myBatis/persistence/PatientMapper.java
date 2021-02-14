@@ -20,6 +20,8 @@ public interface PatientMapper {
 
     public void updatePatientType(PatientData data) throws BottomUpException;
 
+    public void updatePatientImg(PatientData data) throws BottomUpException;
+
     public PatientViewData getByID(Long ID) throws BottomUpException;
 
     public List<PatientData> getByParam(Map<String, Object> param) throws BottomUpException;

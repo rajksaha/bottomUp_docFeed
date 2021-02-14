@@ -117,6 +117,7 @@
 <script src="<c:url value="/resources/javascript/directives/ktrConfirmation.js"/>"></script>
 <script src="<c:url value="/resources/javascript/directives/ktrOtaConfirmation.js"/>"></script>
 <script src="<c:url value="/resources/javascript/directives/imageRepaint.js"/>"></script>
+<script src="<c:url value="/resources/javascript/directives/webcam.js"/>"></script>
 
 <!-- filters -->
 <script src="<c:url value="/resources/javascript/filters/common.js"/>"></script>

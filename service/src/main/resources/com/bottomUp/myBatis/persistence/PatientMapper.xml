@@ -69,6 +69,15 @@
 		WHERE patientID = #{patientID}
 	</update>
 
+	<update id="updatePatientImg" parameterType="Patient">
+		UPDATE `patient`
+		SET
+		`imageURL` = #{imageURL},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE patientID = #{patientID}
+	</update>
+
 	<select id="getByID" parameterType="long" resultType="PatientViewData">
 		SELECT
 			p.`patientID`,

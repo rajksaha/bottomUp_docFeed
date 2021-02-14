@@ -87,6 +87,7 @@
 
 		<typeAlias alias="appointmentDetail" type="com.bottomUp.model.AppointmentViewData"/>
 		<typeAlias alias="PatientViewData" type="com.bottomUp.model.PatientViewData"/>
+		<typeAlias alias="Attachment" type="com.bottomUp.model.AttachmentData"/>
 
 	</typeAliases>
 	<plugins>

@@ -258,3 +258,10 @@
 	li {
 		list-style-type: none;
 	}
+
+	.short_chars{
+		font-family: monospace;
+		width: 20ch;
+		overflow: hidden;
+		white-space: nowrap;
+	}

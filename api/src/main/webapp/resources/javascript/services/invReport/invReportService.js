@@ -5,24 +5,31 @@
 app.service('InvReportService', function ($resource) {
     return {
 
-        getPatientInfo : $resource('rest/invReport/getPatientInfo', {}, {
+        getAppointmentDetail : $resource('/api/rest/appointment/getCurrAppDetail', {}, {
             'query':  {
-                method:'POST',
+                method:'GET',
                 isArray:false
             }
         }),
-        getInvReportDate : $resource('rest/invReport/getInvReportDate', {}, {
+        getDateInvReport : $resource('/api/rest/invReport/getDateInvReport/:patientID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true,
+                params: {patientID: '@patientID'}
+            }
+        }),
+        getInvReportDate : $resource('/api/rest/invReport/getInvReportDate', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
             }
         }),
-        getInvReportDateLocation : $resource('rest/invReport/getInvReportDateLocation', {}, {
+        getInvReportDateLocation : $resource('/api/rest/invReport/getInvReportDateLocation', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
             }
-        }),
+        })
     };
 });
 

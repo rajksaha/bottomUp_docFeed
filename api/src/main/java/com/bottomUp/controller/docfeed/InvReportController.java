@@ -3,6 +3,8 @@ package com.bottomUp.controller.docfeed;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.InvReportData;
+import com.bottomUp.domain.InvReportDateData;
+import com.bottomUp.service.common.AttachmentService;
 import com.bottomUp.service.docFeed.crud.InvReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ public class InvReportController extends BaseController {
     @Autowired
     private InvReportService invReportService;
 
+    @Autowired
+    private AttachmentService attachmentService;
+
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
     public List<InvReportData> getAll(HttpServletRequest request) throws BottomUpException {
@@ -31,6 +36,12 @@ public class InvReportController extends BaseController {
         Map<String, Object> params = new HashMap<>();
 
         return this.invReportService.getByParam(params);
+    }
+
+    @RequestMapping(value = {"/getDateInvReport/{patientID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<InvReportDateData> getInvReportByDate(@PathVariable("patientID") Long patientID, HttpServletRequest request) throws BottomUpException {
+        return this.attachmentService.getInvReportDetail(patientID);
     }
 
     @RequestMapping(value = {"/getByID/{id}"}, method = RequestMethod.GET)

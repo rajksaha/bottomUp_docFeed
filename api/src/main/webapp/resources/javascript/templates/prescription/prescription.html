@@ -30,13 +30,17 @@
             <div class="bs-divider">Prescription</div>
                 <div class="row well well-lg pres-main-div">
                     <div class="col-sm-2 col-md-2 col-lg-2" data-ng-if="hasAccess('PATIENT_PHOTO')">
-                        <div class="image-upload" >
-                            <label for="picture">
-                                <img alt="patImg" data-ng-if="patientData.patientImage != null" src="{{patientData.patientImage}}" height="120px" width="120px">
-                                <img alt="patImg" data-ng-if="patientData.patientImage == null" src="resources/images/no-photo.gif" height="120px" width="120px">
+                        <!--<div class="image-upload" >
+                            <label for="picture" data-ng-click="photoModal()">
+                                <img alt="patImg" data-ng-if="patientData.imageUrl != null" src="{{patientData.imageUrl}}" height="120px" width="120px">
+                                <img alt="patImg" data-ng-if="patientData.imageUrl == null" src="resources/images/no-photo.gif" height="120px" width="120px">
                             </label>
                             <input type="file" id="picture" class="form-control" name="picture"  data-ng-file-select="onFileSelect($files)" data-ng-click="resetInputFile()"/>
-                        </div>
+                        </div>-->
+                        <label  data-ng-click="photoModal()">
+                            <img alt="patImg" data-ng-if="patientData.imageURL != null" src="{{patientData.imageURL}}" height="120px" width="120px">
+                            <img alt="patImg" data-ng-if="patientData.imageURL == null" src="resources/images/no-photo.gif" height="120px" width="120px">
+                        </label>
                         <div data-ng-if="hasAccess('REF_DOCTOR')">
                             <h2 class="item-head">
                                 <label>Referred Doctor :</label>

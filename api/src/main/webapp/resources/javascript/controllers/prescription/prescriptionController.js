@@ -703,6 +703,24 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
     };
 
+    $scope.photoModal = function () {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'resources/javascript/templates/patient/imageModal.html',
+            windowClass: 'fade in',
+            controller: 'AttachmentController',
+            resolve: {
+                patientData: function () {
+                    return $scope.patientData;
+                }
+            },
+            backdrop: 'static'
+        });
+        modalInstance.result.then(function(result) {
+            $scope.bringPatientInfo();
+        });
+    };
+
     $scope.deletePrescribedDrug = function(drugPrescribeID){
         PrescriptionService.deletePrescribedDrug.remove({drugPrescribeID: drugPrescribeID}).$promise.then(function (result) {
             $scope.bringPrescribedDrugs($scope.appoinmentData.appointmentID);

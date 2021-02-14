@@ -34,6 +34,7 @@ public class PatientViewData extends BaseData {
     private String contactNo;
     private String emailAddress;
     private String address;
+    private String imageURL;
 
     public Integer getCurrentAge() {
         if(this.dateOfBirth != null){
@@ -216,5 +217,13 @@ public class PatientViewData extends BaseData {
 
     public void setPatientTypeName(String patientTypeName) {
         this.patientTypeName = patientTypeName;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }

@@ -1,0 +1,35 @@
+<div class="modal-header modalHead">
+    <h4 class="modal-title">PatientPhoto</h4>
+</div>
+<div class="modal-body modalBody"  style="position:relative; z-index:1;">
+    <div class="alert alert-danger alert-dismissable" data-ng-show="error">
+        <div>{{errorMessage}}</div>
+        <div id="lblMsg_modal"></div>
+    </div>
+
+    <input class="btn btnLanier btn-warning" type=button value="Upload A Photo" data-ng-click="imageUpload = true; takePhoto = false;">
+    <input class="btn btnLanier btn-warning" type=button value="Take A Photo" data-ng-click="configure()">
+    <hr>
+    <div data-ng-show="!imageUpload && !takePhoto && imageURL" >
+        <img alt="patImg"  src="{{imageURL}}" height="240px" width="320px">
+    </div>
+    <div data-ng-show="takePhoto">
+        <div data-ng-show="photoBooth" id="my_camera"></div>
+        <div id="results"></div>
+        <hr>
+        <input data-ng-show="clearPhotoButton" class="btn btnLanier btn-primary" type=button value="Take a new One" data-ng-click="configure();">
+        <input data-ng-show="takePhoto && !clearPhotoButton" data-ng-show="takePhotoButton" class="btn btnLanier btn-primary" type=button value="Take Photo" data-ng-click="makeSnapshot()">
+    </div>
+    <div data-ng-show="imageUpload" class="image-upload" >
+        <label for="picture" data-ng-click="photoModal()">
+            <img alt="patImg" data-ng-if="imageUrl != null" src="{{imageURL}}" height="240px" width="320px">
+            <img alt="patImg" data-ng-if="imageUrl == null" src="resources/images/no-photo.gif" height="120px" width="120px">
+        </label>
+        <input type="file" id="picture" class="form-control" name="picture"  data-ng-file-select="onFileSelect($files)" data-ng-click="resetInputFile()"/>
+    </div>
+
+</div>
+<div class="modal-footer modalFoot">
+    <button class="btn btnLanier btn-success" data-ng-click="saveAttachment()" ><span class="glyphicons glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save</button>
+    <button class="btn btnLanier btn-danger" data-ng-click="closeModal()" ><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Cancel</button>
+</div>

@@ -2,34 +2,15 @@ package com.bottomUp.domain;
 
 
 import com.bottomUp.domain.common.BaseData;
+import com.bottomUp.model.AttachmentData;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 public class InvReportDateData extends BaseData {
 
-  private long invReportDateID;
-  private long patientID;
-  private java.sql.Date reportDate;
-  private String reportLocation;
-  private String filename;
-  private String ext;
-
-
-  public long getInvReportDateID() {
-    return invReportDateID;
-  }
-
-  public void setInvReportDateID(long invReportDateID) {
-    this.invReportDateID = invReportDateID;
-  }
-
-  public long getPatientID() {
-    return patientID;
-  }
-
-  public void setPatientID(long patientID) {
-    this.patientID = patientID;
-  }
+  private Date reportDate;
+  private List<AttachmentData> reportList;
 
   public Date getReportDate() {
     return reportDate;
@@ -39,27 +20,11 @@ public class InvReportDateData extends BaseData {
     this.reportDate = reportDate;
   }
 
-  public String getReportLocation() {
-    return reportLocation;
+  public List<AttachmentData> getReportList() {
+    return reportList;
   }
 
-  public void setReportLocation(String reportLocation) {
-    this.reportLocation = reportLocation;
-  }
-
-  public String getFilename() {
-    return filename;
-  }
-
-  public void setFilename(String filename) {
-    this.filename = filename;
-  }
-
-  public String getExt() {
-    return ext;
-  }
-
-  public void setExt(String ext) {
-    this.ext = ext;
+  public void setReportList(List<AttachmentData> reportList) {
+    this.reportList = reportList;
   }
 }

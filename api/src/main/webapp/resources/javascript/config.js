@@ -439,6 +439,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                             'resources/javascript/controllers/history/pastHistoryController.js',
                             'resources/javascript/controllers/advice/advice.js',
                             'resources/javascript/controllers/note/noteController.js',
+                            'resources/javascript/controllers/attachment/attachmentController.js',
                             'resources/javascript/services/jsonService.js' + jsVersion
                         ]
                     });
@@ -452,6 +453,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                             'resources/javascript/services/doctor/doctorService.js' + jsVersion,
                             'resources/javascript/services/history/pastHistoryService.js' + jsVersion,
                             'resources/javascript/services/prescription/drugService.js' + jsVersion,
+                            'resources/javascript/services/attachment/attachmentService.js' + jsVersion,
                             'resources/javascript/services/patient/patientService.js' + jsVersion]
                     });
             }]
@@ -760,6 +762,17 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                     {
                         name: 'doctorPlatform',
                         files: ['resources/javascript/controllers/invReport/invReportController.js' ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/jsonService.js' + jsVersion,
+                            'resources/javascript/services/invReport/invReportService.js' + jsVersion,
+                            'resources/javascript/services/attachment/attachmentService.js' + jsVersion
+                        ]
                     });
             }]
         }
