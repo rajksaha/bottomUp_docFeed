@@ -378,6 +378,12 @@
             <version>1.11.953</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-secretsmanager</artifactId>
+            <version>1.11.954</version>
+        </dependency>
+
 
     </dependencies>
 

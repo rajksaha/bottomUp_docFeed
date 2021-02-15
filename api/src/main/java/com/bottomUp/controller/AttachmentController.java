@@ -80,8 +80,9 @@ public class AttachmentController {
             // if its a valid image then write it into the system
             if (status) {
                 //TODO if image file then put in image folder otherwise filefolder
-                String imgUrl = "temp" + File.separator + sessionID + File.separator + fileID + "." + extension;
+                String imgUrl = url + fileID + "." + extension;
 
+                imgUrl = imgUrl.replace("/", "");
                 imgUrl = imgUrl.replace("\\", "/");
                 description = StringUtils.trimToEmpty(description);
                 AttachmentData attachment = new AttachmentData();

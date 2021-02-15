@@ -100,12 +100,13 @@ public class BottomUpFileUtils {
     public static File retrieveFile(String filePath) throws IllegalArgumentException {
         File file = null;
         try {
-            String url = getContentRootForImages();
+            /*String url = getContentRootForImages();
             if (!url.endsWith(File.separator)) {
                 url += File.separator;
             }
-            String fullFilePath = url + filePath;
-            File tmpFile = new File(fullFilePath);
+            String fullFilePath = url + filePath;*/
+
+            File tmpFile = new File(filePath);
             if (tmpFile.exists()) {
                 file = tmpFile;
             } else {

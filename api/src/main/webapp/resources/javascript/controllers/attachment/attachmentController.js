@@ -58,7 +58,7 @@ app.controller('AttachmentController', function($scope,$rootScope, $http, $timeo
     };
 
     $scope.onFileSelect = function($files){
-        //$scope.hideMessage();
+        $scope.hideErrorMessage();
         $scope.file = $files[0];
         var extension = $scope.file.name.split('.').pop().toLowerCase();
 
@@ -89,7 +89,7 @@ app.controller('AttachmentController', function($scope,$rootScope, $http, $timeo
         }).then(function(response) {
             $scope.attachment = response.data.attachment;
             /*if($scope.imageUpload){
-                $scope.imageURL = $scope.attachment.contentUrl;
+                $scope.imageURL = "http://file://" + $scope.attachment.contentUrl + "?timestamp=" + new Date().getTime();
                 $scope.imageUpload = false;
             }*/
             $scope.uploading = false;
@@ -103,6 +103,11 @@ app.controller('AttachmentController', function($scope,$rootScope, $http, $timeo
     $scope.showErrorMessage = function (message) {
         $scope.error = true;
         $scope.errorMessage = message;
+    };
+
+    $scope.hideErrorMessage = function (message) {
+        $scope.error = false;
+        $scope.errorMessage = "";
     };
 
     $scope.closeModal = function(){

@@ -42,18 +42,20 @@ app.controller('invReportController', function($scope, $http, $modal, $rootScope
 
     $scope.displayAttachment = function (report) {
         var lastFile = report;
-        if(lastFile.fileType == 'pdf'){
+        if(lastFile.fileType == 'jpg' || lastFile.fileType == 'png' || lastFile.fileType == 'jpeg'){
+            $scope.imageView = true;
+            $scope.pdfView = false;
+            $scope.imageLink = lastFile.contentUrl;
+
+        }else{
             $scope.imageView = false;
             $scope.pdfView = true;
             $scope.imageLink = lastFile.contentUrl;
             $window.open(lastFile.contentUrl, '_blank');
-        }else{
-            $scope.imageView = true;
-            $scope.pdfView = false;
-            $scope.imageLink = lastFile.contentUrl;
         }
         $scope.showPrescriptionView = true;
     };
+
 
 
     $scope.addInvReport = function(){
@@ -63,7 +65,7 @@ app.controller('invReportController', function($scope, $http, $modal, $rootScope
             controller: 'invReportController.AddReportController',
             resolve: {
                 patientID: function () {
-                    return $scope.appoinmentData.patientID;
+                    return $scope.appointmentData.patientID;
                 }
             },
             backdrop: 'static'
@@ -91,8 +93,18 @@ app.controller('invReportController.AddReportController', function($scope, $moda
     $scope.error = false;
     $scope.errorMessage = "";
 
+    $scope.showErrorMessage = function (message) {
+        $scope.error = true;
+        $scope.errorMessage = message;
+    };
+
+    $scope.hideErrorMessage = function (message) {
+        $scope.error = false;
+        $scope.errorMessage = "";
+    };
+
     $scope.onFileSelect = function($files){
-        //$scope.hideMessage();
+        $scope.hideErrorMessage();
         $scope.file = $files[0];
         var extension = $scope.file.name.split('.').pop().toLowerCase();
 
@@ -110,7 +122,7 @@ app.controller('invReportController.AddReportController', function($scope, $moda
         var model = {
             extension:extension,
             entityType :"INV_REPORT",
-            entityId : patientID,
+            entityID : patientID,
             description: ''
         };
 

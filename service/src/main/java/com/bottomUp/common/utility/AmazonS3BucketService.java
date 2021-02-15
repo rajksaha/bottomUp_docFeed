@@ -7,13 +7,21 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
+import com.amazonaws.services.secretsmanager.AWSSecretsManager;
+import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.model.AttachmentData;
+import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by raj on 2/13/2021.
@@ -22,17 +30,21 @@ public class AmazonS3BucketService {
 
     private AmazonS3 amazonS3;
     private final String endpointUrl = "https://s3.cloudLocation.amazonaws.com";
-    private final String accessKey = "AKIAJR2GDIZQMRWAMBOQ";
-    private final String secretKey = "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";
     private final String bucketName = "docfeedimagebucket";
 
     public AmazonS3BucketService() {
-        AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
-        this.amazonS3 = AmazonS3ClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(Regions.AP_SOUTHEAST_1)
-                .build();
+        String secret, decodedBinarySecret;
+        try {
+            AWSCredentials credentials = new BasicAWSCredentials(System.getenv("AWS_ACCESS_KEY_ID"),
+                    System.getenv("AWS_SECRET_ACCESS_KEY"));
+            this.amazonS3 = AmazonS3ClientBuilder
+                    .standard()
+                    .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                    .withRegion(Regions.AP_SOUTHEAST_1)
+                    .build();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
 
     }
 
@@ -41,7 +53,6 @@ public class AmazonS3BucketService {
         try {
             File file = convertMultipartFileToFile(multipartFile);
             String fileName = multipartFile.getOriginalFilename();
-            fileURL = endpointUrl + "/" + this.bucketName + "/" + fileName;
             uploadFileToBucket(fileName, file);
             file.delete();
         } catch (Exception e) {

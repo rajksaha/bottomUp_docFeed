@@ -21,11 +21,10 @@
         <input data-ng-show="takePhoto && !clearPhotoButton" data-ng-show="takePhotoButton" class="btn btnLanier btn-primary" type=button value="Take Photo" data-ng-click="makeSnapshot()">
     </div>
     <div data-ng-show="imageUpload" class="image-upload" >
-        <label for="picture" data-ng-click="photoModal()">
-            <img alt="patImg" data-ng-if="imageUrl != null" src="{{imageURL}}" height="240px" width="320px">
-            <img alt="patImg" data-ng-if="imageUrl == null" src="resources/images/no-photo.gif" height="120px" width="120px">
-        </label>
-        <input type="file" id="picture" class="form-control" name="picture"  data-ng-file-select="onFileSelect($files)" data-ng-click="resetInputFile()"/>
+        <div>
+            <label>Image: <span class="red" >*</span></label>
+            <input type="file" id="picture" class="form-control" name="picture"  data-ng-file-select="onFileSelect($files)" data-ng-click="resetInputFile()"/>
+        </div>
     </div>
 
 </div>
