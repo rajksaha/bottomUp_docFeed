@@ -213,7 +213,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
         searchData.intType = $scope.drugData.drugTypeID;
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/drug",
+            url: "/rest/autoComplete/drug",
             data: searchData
         }).then(function(result) {
             $scope.drugNameList = result.data;

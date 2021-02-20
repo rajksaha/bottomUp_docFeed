@@ -5,61 +5,61 @@
 app.service('AppointmentService', function ($resource) {
     return {
 
-        getByParam : $resource('/api/rest/appointment/getByParam', {}, {
+        getByParam : $resource('/rest/appointment/getByParam', {}, {
             'query':  {
                 method:'GET',
                 isArray:true
             }
         }),
-        getDoctorData : $resource('/api/rest/appointment/getDoctorData', {}, {
+        getDoctorData : $resource('/rest/appointment/getDoctorData', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
             }
         }),
-        getDoctorDashboard : $resource('/api/rest/appointment/getDoctorDashboard', {}, {
+        getDoctorDashboard : $resource('/rest/appointment/getDoctorDashboard', {}, {
             'query':  {
                 method:'GET',
                 isArray:false
             }
         }),
-        visitPatient : $resource('/api/rest/appointment/visitPatient', {}, {
+        visitPatient : $resource('/rest/appointment/visitPatient', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createAppointment : $resource('/api/rest/appointment/createAppointment', {}, {
+        createAppointment : $resource('/rest/appointment/createAppointment', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createAppForNewPatient : $resource('/api/rest/appointment/createAppForNewPatient', {}, {
+        createAppForNewPatient : $resource('/rest/appointment/createAppForNewPatient', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createFollowUpApp : $resource('/api/rest/appointment/createFollowUpApp', {}, {
+        createFollowUpApp : $resource('/rest/appointment/createFollowUpApp', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        deleteAppointment : $resource('/api/rest/appointment/deleteAppointment', {}, {
+        deleteAppointment : $resource('/rest/appointment/deleteAppointment', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        updateAppointment : $resource('/api/rest/appointment/updateAppointment', {}, {
+        updateAppointment : $resource('/rest/appointment/updateAppointment', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        patientSearch : $resource('/api/rest/autoComplete/patientSearch', {}, {
+        patientSearch : $resource('/rest/autoComplete/patientSearch', {}, {
             'query':  {
                 method:'POST',
                 isArray:true

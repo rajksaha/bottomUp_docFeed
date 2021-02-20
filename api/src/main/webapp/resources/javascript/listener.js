@@ -90,7 +90,7 @@ app.run(function($rootScope, $http, $location, Base64Service,ApplicationService)
 
         // This only handle the success
         // Error handling happen in config.js
-        $apiURL = "/api/rest/login/authenticate";
+        $apiURL = "/rest/login/authenticate";
         $http.post($apiURL).success(function(response) {
 
             if (callback && typeof(callback) === "function") {

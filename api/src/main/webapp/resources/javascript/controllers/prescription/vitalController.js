@@ -33,7 +33,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
     	dataString.term = term;
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/vital",
+            url: "/rest/autoComplete/vital",
             data: dataString
         }).then(function(result) {
         	$scope.vitalNameData = result.data;
@@ -97,7 +97,7 @@ app.controller('PrescribeVitalController', function($scope, $http, $modal, $root
 		searchData.entityID = vital.vitalID;
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/vitalOption",
+            url: "/rest/autoComplete/vitalOption",
             data: searchData
         }).then(function(result) {
             $scope.vitalOption = result.data;

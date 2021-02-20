@@ -41,7 +41,7 @@ app.controller('PrescribeInvController', function($scope, $http, $filter, $modal
         
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/inv",
+            url: "/rest/autoComplete/inv",
             data: dataString
         }).then(function(result) {
         	$scope.invNameData = result.data;

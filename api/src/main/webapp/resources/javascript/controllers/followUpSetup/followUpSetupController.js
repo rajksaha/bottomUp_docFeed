@@ -25,7 +25,7 @@ app.controller('FollowUpSetupController', function($scope, $http, $modal, $filte
         
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/inv",
+            url: "/rest/autoComplete/inv",
             data: dataString
         }).then(function(result) {
         	$scope.invNameData = result.data;

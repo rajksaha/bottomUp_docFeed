@@ -5,31 +5,31 @@
 app.service('FollowUpChartService', function ($resource) {
     return {
 
-        getAppointmentDetail : $resource('/api/rest/appointment/getCurrAppDetail', {}, {
+        getAppointmentDetail : $resource('/rest/appointment/getCurrAppDetail', {}, {
             'query':  {
                 method:'GET',
                 isArray:false
             }
         }),
-        create : $resource('/api/rest/followUpResult/save', {}, {
+        create : $resource('/rest/followUpResult/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        update : $resource('/api/rest/followUpResult/update', {}, {
+        update : $resource('/rest/followUpResult/update', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        addFollowUpToPres : $resource('/api/rest/followUpResult/addFollowUpToPres', {}, {
+        addFollowUpToPres : $resource('/rest/followUpResult/addFollowUpToPres', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        deleteFollowUpFromPres : $resource('/api/rest/contentDetail/delete/:contentDetailID', {}, {
+        deleteFollowUpFromPres : $resource('/rest/contentDetail/delete/:contentDetailID', {}, {
             'remove':  {
                 method:'DELETE',
                 params: {contentDetailID: '@contentDetailID'}

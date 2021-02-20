@@ -35,7 +35,9 @@ app.controller('AttachmentController', function($scope,$rootScope, $http, $timeo
     };
 
     $scope.clearPhoto = function () {
-        document.getElementById('results').innerHTML = '';
+        if(document.getElementById('results')){
+            document.getElementById('results').innerHTML = '';
+        }
         $scope.clearPhotoButton = false;
     };
 
@@ -53,7 +55,7 @@ app.controller('AttachmentController', function($scope,$rootScope, $http, $timeo
             });
             Webcam.attach( '#my_camera' );
             $scope.takePhotoButton = true;
-        }, 100); // 5000 ms execution
+        }, 1000); // 5000 ms execution
 
     };
 
@@ -82,7 +84,7 @@ app.controller('AttachmentController', function($scope,$rootScope, $http, $timeo
 
         $scope.uploading = true;
         $upload.upload({
-            url : '/api/rest/attachment/upload',
+            url : '/rest/attachment/upload',
             method: 'POST',
             data :model,
             file: $scope.file

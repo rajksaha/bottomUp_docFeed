@@ -7,13 +7,13 @@ app.controller('LoginController', function($scope, $rootScope, $filter, $state, 
 	$scope.error = false;
 	$scope.errorMessage = "";
 	$scope.slideImages = [];	
-	var data1 = {"contentURL":'/api/resources/images/slides/slide1.jpg'};
-	var data2 = {"contentURL":'/api/resources/images/slides/slide2.jpg'};
-	var data3 = {"contentURL":'/api/resources/images/slides/slide3.jpg'};
-	var data4 = {"contentURL":'/api/resources/images/slides/slide4.jpg'};
-	var data5 = {"contentURL":'/api/resources/images/slides/slide5.jpg'};
-	var data6 = {"contentURL":'/api/resources/images/slides/slide6.jpg'};
-	var data7 = {"contentURL":'/api/resources/images/slides/slide7.jpg'};
+	var data1 = {"contentURL":'resources/images/slides/slide1.jpg'};
+	var data2 = {"contentURL":'resources/images/slides/slide2.jpg'};
+	var data3 = {"contentURL":'resources/images/slides/slide3.jpg'};
+	var data4 = {"contentURL":'resources/images/slides/slide4.jpg'};
+	var data5 = {"contentURL":'resources/images/slides/slide5.jpg'};
+	var data6 = {"contentURL":'resources/images/slides/slide6.jpg'};
+	var data7 = {"contentURL":'resources/images/slides/slide7.jpg'};
 	//$scope.slideImages = {"contentURL":'images/slides/slide1.jpg',"contentURL":'images/slides/slide1.jpg',"contentURL":'images/slides/slide1.jpg',"contentURL":'images/slides/slide1.jpg',"contentURL":'images/slides/slide1.jpg'};
 	
 	$scope.slideImages.push(data1);

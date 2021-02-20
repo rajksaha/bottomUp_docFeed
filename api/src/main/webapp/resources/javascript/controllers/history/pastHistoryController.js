@@ -294,7 +294,7 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
     	
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/disease",
+            url: "/rest/autoComplete/disease",
             data: {'term': term}
         }).then(function(result) {
         	$scope.diagnosisNameData = result.data;
@@ -363,7 +363,7 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         searchData.entityType = $scope.typeCode;
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/history",
+            url: "/rest/autoComplete/history",
             data: searchData
         }).then(function(result) {
             $scope.historyData = result.data;
@@ -377,7 +377,7 @@ app.controller('PastHistoryController', function($scope, $http, $modal, $rootSco
         searchData.entityID= historydata.historyID;
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/historyOption",
+            url: "/rest/autoComplete/historyOption",
             data: searchData
         }).then(function(result) {
             $scope.historyOption = result.data;

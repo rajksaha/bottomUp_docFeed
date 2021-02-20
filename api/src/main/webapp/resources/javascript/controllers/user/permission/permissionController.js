@@ -138,7 +138,7 @@ app.controller('PermissionController', function($scope, $rootScope, $state, $htt
     };
     $scope.setDefinition(false);
     $scope.dataSourceConfig = {
-        url: '/api/rest/permission/getAll',
+        url: '/rest/permission/getAll',
         method: "GET",
         params: {},
         paginationConfig: {

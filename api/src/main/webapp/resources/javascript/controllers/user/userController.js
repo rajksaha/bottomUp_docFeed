@@ -53,7 +53,7 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
     $scope.bringData = function(){
 
         $scope.dataSourceConfig = {
-            url: '/api/rest/user/getAll',
+            url: '/rest/user/getAll',
             method: "GET",
             params: {},
             paginationConfig: {
@@ -67,7 +67,7 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
     //datasource configuration
 
     $scope.dataSourceConfig = {
-        url: '/api/rest/user/getAll',
+        url: '/rest/user/getAll',
         method: "GET",
         params: {},
         paginationConfig: {

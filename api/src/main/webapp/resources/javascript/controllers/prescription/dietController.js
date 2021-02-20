@@ -23,7 +23,7 @@ app.controller('PrescriptionController.PrescribeDietController', function($scope
 
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/dietSearch",
+            url: "/rest/autoComplete/dietSearch",
             data: dataString
         }).then(function(result) {
             $scope.dietNameData = result.data;

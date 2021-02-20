@@ -28,7 +28,7 @@ app.controller('PrescriptionController.PrescribeDiagnosisController', function($
 
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/disease",
+            url: "/rest/autoComplete/disease",
             data: dataString
         }).then(function(result) {
             $scope.diagnosisNameData = result.data;

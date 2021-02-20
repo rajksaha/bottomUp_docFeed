@@ -45,7 +45,7 @@ app.controller('UserGroupController', function($scope, $rootScope, $state, $http
 
     //datasource configuration
     $scope.dataSourceConfig = {
-        url: '/api/rest/userGroup/getAll',
+        url: '/rest/userGroup/getAll',
         method: "GET",
         params: {},
         paginationConfig: {

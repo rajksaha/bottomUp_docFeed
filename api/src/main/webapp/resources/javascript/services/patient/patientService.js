@@ -4,19 +4,19 @@
 
 app.service('PatientService', function ($resource) {
     return {
-        getPatientDetail : $resource('/api/rest/patient/getByID/:patientID', {}, {
+        getPatientDetail : $resource('/rest/patient/getByID/:patientID', {}, {
             'query':  {
                 method:'GET',
                 params: {patientID: '@patientID'}
             }
         }),
-        update : $resource('/api/rest/patient/update', {}, {
+        update : $resource('/rest/patient/update', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        updatePatientType : $resource('/api/rest/patient/updatePatientType/:patientID/:patientTypeID', {}, {
+        updatePatientType : $resource('/rest/patient/updatePatientType/:patientID/:patientTypeID', {}, {
             'query':  {
                 method:'GET',
                 isArray:false,

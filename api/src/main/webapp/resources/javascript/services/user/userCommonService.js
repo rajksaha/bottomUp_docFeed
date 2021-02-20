@@ -5,26 +5,26 @@
 app.service('UserCommonService', function ($resource) {
     return {
         // Module
-        getAllModule : $resource('/api/rest/module/getAllModule', {}, {
+        getAllModule : $resource('/rest/module/getAllModule', {}, {
             'query':  {
                 method:'GET',
                 isArray:true
             }
         }),
 
-        saveModule: $resource('/api/rest/module/save', {}, {
+        saveModule: $resource('/rest/module/save', {}, {
             'query': {
                 method: 'POST'
             }
         }),
 
-        updateModule : $resource('/api/rest/module/update', {}, {
+        updateModule : $resource('/rest/module/update', {}, {
             'query': {
                 method  : 'POST'
             }
         }),
 
-        deleteModule: $resource('/api/rest/module/delete/:moduleID', {}, {
+        deleteModule: $resource('/rest/module/delete/:moduleID', {}, {
             'remove': {
                 method: 'DELETE',
                 params  : {moduleID: '@moduleID'}
@@ -32,19 +32,19 @@ app.service('UserCommonService', function ($resource) {
         }),
 
         //Company
-        getAllCompany : $resource('/api/rest/company/getAllCompany', {}, {
+        getAllCompany : $resource('/rest/company/getAllCompany', {}, {
             'query':  {
                 method:'GET',
                 isArray:true
             }
         }),
-        saveCompany: $resource('/api/rest/company/save', {}, {
+        saveCompany: $resource('/rest/company/save', {}, {
             'query': {
                 method: 'POST'
             }
         }),
 
-        updateCompany : $resource('/api/rest/company/update', {}, {
+        updateCompany : $resource('/rest/company/update', {}, {
             'query': {
                 method  : 'POST'
             }
@@ -52,26 +52,26 @@ app.service('UserCommonService', function ($resource) {
 
         //permission
 
-        savePermission: $resource('/api/rest/permission/save', {}, {
+        savePermission: $resource('/rest/permission/save', {}, {
             'query': {
                 method: 'POST'
             }
         }),
 
-        updatePermission : $resource('/api/rest/permission/update', {}, {
+        updatePermission : $resource('/rest/permission/update', {}, {
             'query': {
                 method  : 'POST'
             }
         }),
 
-        deletePermission: $resource('/api/rest/permission/delete/:moduleID', {}, {
+        deletePermission: $resource('/rest/permission/delete/:moduleID', {}, {
             'remove': {
                 method: 'DELETE',
                 params  : {moduleID: '@moduleID'}
             }
         }),
 
-        deleteCompany: $resource('/api/rest/company/delete/:companyID', {}, {
+        deleteCompany: $resource('/rest/company/delete/:companyID', {}, {
             'remove': {
                 method: 'DELETE',
                 params  : {companyID: '@companyID'}
@@ -79,25 +79,25 @@ app.service('UserCommonService', function ($resource) {
         }),
 
         //Company Module
-        getAllCompanyModule : $resource('/api/rest/companyModule/getAllCompanyModule', {}, {
+        getAllCompanyModule : $resource('/rest/companyModule/getAllCompanyModule', {}, {
             'query':  {
                 method:'GET',
                 isArray:true
             }
         }),
-        saveCompanyModule: $resource('/api/rest/companyModule/save', {}, {
+        saveCompanyModule: $resource('/rest/companyModule/save', {}, {
             'query': {
                 method: 'POST'
             }
         }),
 
-        updateCompanyModule : $resource('/api/rest/companyModule/update', {}, {
+        updateCompanyModule : $resource('/rest/companyModule/update', {}, {
             'query': {
                 method  : 'POST'
             }
         }),
 
-        deleteCompanyModule: $resource('/api/rest/companyModule/delete/:companyModuleID', {}, {
+        deleteCompanyModule: $resource('/rest/companyModule/delete/:companyModuleID', {}, {
             'remove': {
                 method: 'DELETE',
                 params  : {companyModuleID: '@companyModuleID'}

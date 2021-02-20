@@ -33,7 +33,7 @@ app.controller('MenuController', function($scope, $rootScope, $state, $http, $ti
 
     //datasource configuration
     $scope.dataSourceConfig = {
-        url: '/api/rest/menu/getAll',
+        url: '/rest/menu/getAll',
         method: "GET",
         params: {},
         paginationConfig: {

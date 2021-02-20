@@ -5,87 +5,87 @@
 app.service('PresSaveService', function ($resource) {
     return {
 
-        saveDiagnosis : $resource('/api/rest/prescriptionSave/saveDiagnosis', {}, {
+        saveDiagnosis : $resource('/rest/prescriptionSave/saveDiagnosis', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        saveComplain : $resource('/api/rest/prescriptionSave/saveComplain', {}, {
+        saveComplain : $resource('/rest/prescriptionSave/saveComplain', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        saveDiet : $resource('/api/rest/prescriptionSave/saveDiet', {}, {
+        saveDiet : $resource('/rest/prescriptionSave/saveDiet', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        savePrescribedVital : $resource('/api/rest/prescriptionVital/save', {}, {
+        savePrescribedVital : $resource('/rest/prescriptionVital/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createPrescribedInv : $resource('/api/rest/prescriptionInv/save', {}, {
+        createPrescribedInv : $resource('/rest/prescriptionInv/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        createPrescribedAdvice : $resource('/api/rest/prescriptionAdvice/save', {}, {
+        createPrescribedAdvice : $resource('/rest/prescriptionAdvice/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        updatePrescribedInv : $resource('/api/rest/prescriptionInv/update', {}, {
+        updatePrescribedInv : $resource('/rest/prescriptionInv/update', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        saveInvFromPref : $resource('/api/rest/prescriptionSave/saveInvFromPref/:appointmentID/:invID', {}, {
+        saveInvFromPref : $resource('/rest/prescriptionSave/saveInvFromPref/:appointmentID/:invID', {}, {
             'query':  {
                 method:'POST',
                 isArray: true,
                 params: {appointmentID: '@appointmentID', invID: '@invID'}
             }
         }),
-        saveAdviceFromPref : $resource('/api/rest/prescriptionSave/saveAdviceFromPref/:appointmentID/:adviceID', {}, {
+        saveAdviceFromPref : $resource('/rest/prescriptionSave/saveAdviceFromPref/:appointmentID/:adviceID', {}, {
             'query':  {
                 method:'POST',
                 isArray: true,
                 params: {appointmentID: '@appointmentID', adviceID: '@adviceID'}
             }
         }),
-        savePresDoctorRefer : $resource('/api/rest/prescriptionReference/create', {}, {
+        savePresDoctorRefer : $resource('/rest/prescriptionReference/create', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        savePresNote : $resource('/api/rest/prescriptionSave/savePresNote', {}, {
+        savePresNote : $resource('/rest/prescriptionSave/savePresNote', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        updateAppStatus : $resource('/api/rest/appointment/updateStatus', {}, {
+        updateAppStatus : $resource('/rest/appointment/updateStatus', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        updateDrugPrescriptionJson : $resource('/api/rest/prescription/updateDrugPrescriptionJson', {}, {
+        updateDrugPrescriptionJson : $resource('/rest/prescription/updateDrugPrescriptionJson', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
             }
         }),
-        updateAppoinmentStatusByApointmentNo : $resource('/api/rest/prescription/updateAppoinmentStatusByApointmentNo', {}, {
+        updateAppoinmentStatusByApointmentNo : $resource('/rest/prescription/updateAppoinmentStatusByApointmentNo', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
@@ -97,7 +97,7 @@ app.service('PresSaveService', function ($resource) {
                 isArray:false
             }
         }),
-        updateComment : $resource('/api/rest/prescription/getUpInDelContentDetailByComment', {}, {
+        updateComment : $resource('/rest/prescription/getUpInDelContentDetailByComment', {}, {
             'query':  {
                 method:'POST',
                 isArray:false

@@ -6,7 +6,7 @@ app.service('AuthenticationService', function($http, $q) {
     this.logout = function() {
         var d = $q.defer();
 
-        $http.get('/api/rest/logout').success(function() {
+        $http.get('/rest/logout').success(function() {
             d.resolve();
         });
         return d.promise;

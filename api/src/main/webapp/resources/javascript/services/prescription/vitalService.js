@@ -4,19 +4,19 @@
 
 app.service('VitalService', function ($resource) {
     return {
-        getVitalDoctorDetail : $resource('/api/rest/doctorVitalSetting/getByDoctorVitalInfo/{d}', {}, {
+        getVitalDoctorDetail : $resource('/rest/doctorVitalSetting/getByDoctorVitalInfo/{d}', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
             }
         }),
-        addToPreference : $resource('/api/rest/doctorVitalSetting/save', {}, {
+        addToPreference : $resource('/rest/doctorVitalSetting/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        savePrescribedVital : $resource('/api/rest/prescriptionVital/save/{appointmentID}', {}, {
+        savePrescribedVital : $resource('/rest/prescriptionVital/save/{appointmentID}', {}, {
             'query':  {
                 method:'POST',
                 isArray:false,
@@ -25,37 +25,37 @@ app.service('VitalService', function ($resource) {
         }),
 
         /////////////////////////////////`
-        createDoctorVitalSettings : $resource('/api/rest/vital/createDoctorVitalSettings', {}, {
+        createDoctorVitalSettings : $resource('/rest/vital/createDoctorVitalSettings', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        deleteDoctorVitalSettings : $resource('/api/rest/vital/deleteDoctorVitalSettings/:vitalSettingID', {}, {
+        deleteDoctorVitalSettings : $resource('/rest/vital/deleteDoctorVitalSettings/:vitalSettingID', {}, {
             'remove':  {
                 method:'DELETE',
                 params: {vitalSettingID: '@vitalSettingID'}
             }
         }),
-        getVitalOptionList : $resource('/api/rest/vital/getVitalOptionList', {}, {
+        getVitalOptionList : $resource('/rest/vital/getVitalOptionList', {}, {
             'query':  {
                 method:'POST',
                 isArray:true
             }
         }),
-        createVitalOption : $resource('/api/rest/vital/createVitalOption', {}, {
+        createVitalOption : $resource('/rest/vital/createVitalOption', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        updateVitalPrescription : $resource('/api/rest/vital/updateVitalPrescription', {}, {
+        updateVitalPrescription : $resource('/rest/vital/updateVitalPrescription', {}, {
             'query':  {
                 method:'POST',
                 isArray:false
             }
         }),
-        deleteVitalprescription : $resource('/api/rest/vital/deleteVitalprescription/:prescribedVitalID', {}, {
+        deleteVitalprescription : $resource('/rest/vital/deleteVitalprescription/:prescribedVitalID', {}, {
             'remove':  {
                 method:'DELETE',
                 params: {prescribedVitalID: '@prescribedVitalID'}

@@ -128,7 +128,7 @@ app.controller('invReportController.AddReportController', function($scope, $moda
 
         $scope.uploading = true;
         $upload.upload({
-            url : '/api/rest/attachment/upload',
+            url : '/rest/attachment/upload',
             method: 'POST',
             data :model,
             file: $scope.file

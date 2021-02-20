@@ -35,7 +35,7 @@ app.controller('CompanyModuleController', function($scope, $rootScope, $state, $
 
     //datasource configuration
     $scope.dataSourceConfig = {
-        url: '/api/rest/companyModule/getAll',
+        url: '/rest/companyModule/getAll',
         method: "GET",
         params: {},
         paginationConfig: {

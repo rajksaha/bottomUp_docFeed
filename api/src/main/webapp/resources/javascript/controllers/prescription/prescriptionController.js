@@ -138,7 +138,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         var dataString = 'query=22'+ '&detail=' + term;
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/prescription",
+            url: "/rest/autoComplete/prescription",
             data: dataString
         }).then(function(result) {
             $scope.content = result.data;
@@ -151,7 +151,7 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         dataString.term = term;
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/refDoctor",
+            url: "/rest/autoComplete/refDoctor",
             data: dataString
         }).then(function(result) {
             $scope.refDoc = result.data;

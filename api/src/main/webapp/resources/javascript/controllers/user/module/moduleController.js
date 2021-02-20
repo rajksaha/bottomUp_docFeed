@@ -32,7 +32,7 @@ app.controller('ModuleController', function($scope, $rootScope, $state, $http, $
 
     //datasource configuration
     $scope.dataSourceConfig = {
-        url: '/api/rest/module/getAll',
+        url: '/rest/module/getAll',
         method: "GET",
         params: {},
         paginationConfig: {

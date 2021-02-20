@@ -72,7 +72,7 @@ app.controller('PrescriptionController.PrescribeComplainController', function($s
 
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/complain",
+            url: "/rest/autoComplete/complain",
             data: JSON.stringify(data),
             headers: {'Content-Type': 'application/json'}
         }).then(function(result) {

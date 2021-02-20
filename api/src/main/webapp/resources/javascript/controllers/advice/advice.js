@@ -28,7 +28,7 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
         searchData.intType = $scope.doctorData.category;
         return $http({
             method: 'POST',
-            url: "/api/rest/autoComplete/advice",
+            url: "/rest/autoComplete/advice",
             data: searchData
         }).then(function(result) {
         	$scope.adviceNameData = result.data;

@@ -5,41 +5,41 @@
 app.service('OldPrescriptionService', function ($resource) {
     return {
 
-        getAppointmentDetail : $resource('/api/rest/appointment/getCurrAppDetail', {}, {
+        getAppointmentDetail : $resource('/rest/appointment/getCurrAppDetail', {}, {
             'query':  {
                 method:'GET',
                 isArray:false
             }
         }),
-        getAppointment : $resource('/api/rest/oldPres/getAppHistory/:patientID/:doctorID', {}, {
+        getAppointment : $resource('/rest/oldPres/getAppHistory/:patientID/:doctorID', {}, {
             'query':  {
                 method:'GET',
                 isArray:true,
                 params: {patientID: '@patientID', doctorID: '@doctorID'}
             }
         }),
-        addItemToPres : $resource('/api/rest/oldPres/addItemToPres/:itemCode/:itemID/:newAppointmentID', {}, {
+        addItemToPres : $resource('/rest/oldPres/addItemToPres/:itemCode/:itemID/:newAppointmentID', {}, {
             'query':  {
                 method:'GET',
                 isArray:true,
                 params: {itemCode: '@itemCode', itemID: '@itemID', newAppointmentID: '@newAppointmentID'}
             }
         }),
-        addBulkToPres : $resource('/api/rest/oldPres/addBulkToPres/:itemCode/:oldAppointmentID/:newAppointmentID', {}, {
+        addBulkToPres : $resource('/rest/oldPres/addBulkToPres/:itemCode/:oldAppointmentID/:newAppointmentID', {}, {
             'query':  {
                 method:'GET',
                 isArray:true,
                 params: {itemCode: '@itemCode', oldAppointmentID: '@oldAppointmentID', newAppointmentID: '@newAppointmentID'}
             }
         }),
-        copyPrescription : $resource('/api/rest/oldPres/copyPrescription/:oldAppointmentID/:newAppointmentID', {}, {
+        copyPrescription : $resource('/rest/oldPres/copyPrescription/:oldAppointmentID/:newAppointmentID', {}, {
             'query':  {
                 method:'GET',
                 isArray:true,
                 params: {oldAppointmentID: '@oldAppointmentID', newAppointmentID: '@newAppointmentID'}
             }
         }),
-        copyComment : $resource('/api/rest/contentDetail/save', {}, {
+        copyComment : $resource('/rest/contentDetail/save', {}, {
             'query':  {
                 method:'POST',
                 isArray:false

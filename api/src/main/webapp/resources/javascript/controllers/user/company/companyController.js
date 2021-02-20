@@ -32,7 +32,7 @@ app.controller('CompanyController', function($scope, $rootScope, $state, $http, 
 
     //datasource configuration
     $scope.dataSourceConfig = {
-        url: '/api/rest/company/getAll',
+        url: '/rest/company/getAll',
         method: "GET",
         params: {},
         paginationConfig: {

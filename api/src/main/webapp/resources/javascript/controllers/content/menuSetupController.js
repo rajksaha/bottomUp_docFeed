@@ -34,7 +34,7 @@ app.controller('ContentMenuSetupController', function($scope, $rootScope, $filte
 
     //datasource configuration
     $scope.dataSourceConfig = {
-        url: '/api/rest/menuSetting/getAll',
+        url: '/rest/menuSetting/getAll',
         method: "GET",
         params: {},
         paginationConfig: {
