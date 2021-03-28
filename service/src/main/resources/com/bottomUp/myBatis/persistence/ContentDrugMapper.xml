@@ -78,28 +78,65 @@
 		WHERE drugName = #{drugName}
 	</select>
 
-	<select id="getByParam" parameterType="map" resultType="contentDrug">
-		SELECT
-		`drugID`,
-		`typeID`,
-		`genericID`,
-		`companyID`,
-		`drugName`,
-		`strength`,
-		`updatedBy`,
-		`updatedOn`,
-		`createdBy`,
-		`createdOn`
-		FROM `content_drug`
+	<select id="getCountByParam" parameterType="string" resultType="int">
+		SELECT COUNT(CD.drugID)
+		FROM `content_drug` CD
+		LEFT JOIN doctor_feed.content_drug_generic DG ON CD.genericID = DG.genericID
 		WHERE 1 = 1
 		<if test="drugID != null">
 			AND drugID = #{drugID}
 		</if>
 		<if test="typeID != null">
-			AND typeID = #{typeID}
+			AND CD.typeID = #{typeID}
+		</if>
+		<if test="companyID != null">
+			AND companyID = #{companyID}
+		</if>
+		<if test="drugName != null">
+			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{drugName}))
+		</if>
+		<if test="genericName != null">
+			AND LOWER(DG.genericDrugName) LIKE LOWER(CONCAT('%',#{genericName}))
+		</if>
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentDrug">
+		SELECT
+		CD.`drugID`,
+		CD.`typeID`,
+		DT.name AS drugTypeName,
+		CD.`genericID`,
+		DG.genericDrugName,
+		CD.`companyID`,
+		DC.companyName,
+		CD.`drugName`,
+		CD.`strength`,
+		CD.`updatedBy`,
+		CD.`updatedOn`,
+		CD.`createdBy`,
+		CD.`createdOn`
+		FROM `content_drug` CD
+		JOIN doctor_feed.content_drug_type DT ON CD.typeID = DT.drugTypeID
+		JOIN doctor_feed.content_drug_company DC ON CD.companyID = DC.drugCompanyID
+		LEFT JOIN doctor_feed.content_drug_generic DG ON CD.genericID = DG.genericID
+		WHERE 1 = 1
+		<if test="drugID != null">
+			AND drugID = #{drugID}
+		</if>
+		<if test="companyID != null">
+			AND companyID = #{companyID}
+		</if>
+		<if test="typeID != null">
+			AND CD.typeID = #{typeID}
 		</if>
 		<if test="term != null">
-			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
+			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{term}))
+		</if>
+		<if test="drugName != null">
+			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{drugName}))
+		</if>
+		<if test="genericName != null">
+			AND LOWER(DG.genericDrugName) LIKE LOWER(CONCAT('%',#{genericName}))
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

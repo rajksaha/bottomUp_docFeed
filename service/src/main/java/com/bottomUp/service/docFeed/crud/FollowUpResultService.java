@@ -1,8 +1,6 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentTypeData;
-import com.bottomUp.domain.DoctorDrugSettingData;
 import com.bottomUp.domain.DoctorFollowUpSettingData;
 import com.bottomUp.domain.FollowUpResultData;
 import com.bottomUp.domain.common.FollowUpDetail;

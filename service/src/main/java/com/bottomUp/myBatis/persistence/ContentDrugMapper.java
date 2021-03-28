@@ -23,5 +23,7 @@ public interface ContentDrugMapper {
 
     public List<ContentDrugData> getByParam(Map<String, Object> param) throws BottomUpException;
 
+    public Integer getCountByParam(Map<String, Object> param) throws BottomUpException;
+
     public void delete(Map<String, Object> param) throws BottomUpException;
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.ContentDrugGenericMapper">
+
+	<insert id="create" parameterType="contentDrugGeneric" useGeneratedKeys="true" keyProperty="genericID" >
+
+		INSERT INTO `content_drug_generic`(
+			`genericDrugName`,
+			`typeID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{genericDrugName},
+			#{typeID},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+	</insert>
+	
+	<update id="update" parameterType="contentDrugGeneric">
+		UPDATE `content_drug_generic`
+		SET
+		`genericDrugName` = #{genericDrugName},
+		`typeID` = #{typeID},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE genericID = #{genericID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="contentDrugGeneric">
+		SELECT
+			`genericID`,
+		    `genericDrugName`,
+			`typeID`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `content_drug_generic`
+		WHERE  genericID = #{genericID}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="contentDrugGeneric">
+		SELECT
+		`genericID`,
+		`genericDrugName`,
+		`typeID`,
+		`updatedBy`,
+		`updatedOn`,
+		`createdBy`,
+		`createdOn`
+		FROM `content_drug_generic`
+		WHERE  genericDrugName = #{genericDrugName}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="contentDrugGeneric">
+		SELECT
+		CD.`genericID`,
+		CD.`genericDrugName`,
+		CD.`typeID`,
+		DT.name AS drugTypeName,
+		CD.`updatedBy`,
+		CD.`updatedOn`,
+		CD.`createdBy`,
+		CD.`createdOn`
+		FROM `content_drug_generic` CD
+		JOIN doctor_feed.content_drug_type DT ON CD.typeID = DT.drugTypeID
+		WHERE 1 = 1
+		<if test="genericID != null">
+			AND genericID = #{genericID}
+		</if>
+		<if test="term != null">
+			AND LOWER(genericDrugName) LIKE LOWER(CONCAT('%',#{term}))
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM content_drug_generic
+		WHERE 1=1
+		<if test="genericID != null">
+			AND genericID = #{genericID}
+		</if>
+	</delete>
+</mapper>

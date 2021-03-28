@@ -6,8 +6,6 @@ import com.bottomUp.common.queue.QueueProducer;
 import com.bottomUp.common.utility.EmailType;
 import com.bottomUp.common.utility.PasswordEncryptor;
 import com.bottomUp.domain.DoctorData;
-import com.bottomUp.domain.DoctorDrugSettingData;
-import com.bottomUp.domain.DoctorSettingData;
 import com.bottomUp.domain.common.user.UserData;
 import com.bottomUp.domain.common.user.UserGroupAssignmentData;
 import com.bottomUp.domain.common.user.UserGroupData;

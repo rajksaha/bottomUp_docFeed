@@ -33,6 +33,7 @@
 		<typeAlias alias="contentDrugAdvice" type="com.bottomUp.domain.ContentDrugAdviceData"/>
 		<typeAlias alias="contentDrugCompany" type="com.bottomUp.domain.ContentDrugCompanyData"/>
 		<typeAlias alias="contentDrug" type="com.bottomUp.domain.ContentDrugData"/>
+		<typeAlias alias="contentDrugGeneric" type="com.bottomUp.domain.ContentDrugGenericData"/>
 		<typeAlias alias="contentDrugType" type="com.bottomUp.domain.ContentDrugTypeData"/>
 		<typeAlias alias="contentInv" type="com.bottomUp.domain.ContentInvData"/>
 		<typeAlias alias="contentRelation" type="com.bottomUp.domain.ContentRelationData"/>
@@ -45,8 +46,7 @@
 		<typeAlias alias="doctorDataBackup" type="com.bottomUp.domain.DoctorDataBackupData"/>
 		<typeAlias alias="doctorDoseDrugDiseaseTemplate" type="com.bottomUp.domain.DoctorDoseDrugDiseaseTemplateData"/>
 		<typeAlias alias="doctorDrugDiseaseTemplate" type="com.bottomUp.domain.DoctorDrugDiseaseTemplateData"/>
-		<typeAlias alias="doctorDrugDoseSetting" type="com.bottomUp.domain.DoctorDrugDoseSettingData"/>
-		<typeAlias alias="doctorDrugSetting" type="com.bottomUp.domain.DoctorDrugSettingData"/>
+		<typeAlias alias="doctorDrugDoseSetting" type="com.bottomUp.domain.DoseData"/>
 		<typeAlias alias="doctorFollowUpSetting" type="com.bottomUp.domain.DoctorFollowUpSettingData"/>
 		<typeAlias alias="doctorHistorySetting" type="com.bottomUp.domain.DoctorHistorySettingData"/>
 		<typeAlias alias="doctorInvDiseaseTemplate" type="com.bottomUp.domain.DoctorInvDiseaseTemplateData"/>
@@ -84,10 +84,15 @@
 		<typeAlias alias="prescriptionReference" type="com.bottomUp.domain.PrescriptionReferenceData"/>
 		<typeAlias alias="prescriptionVital" type="com.bottomUp.domain.PrescriptionVitalData"/>
 		<typeAlias alias="referredDoctor" type="com.bottomUp.domain.ReferredDoctorData"/>
+		<typeAlias alias="DrugDefaultSetup" type="com.bottomUp.domain.DrugDefaultSetupData"/>
 
 		<typeAlias alias="appointmentDetail" type="com.bottomUp.model.AppointmentViewData"/>
 		<typeAlias alias="PatientViewData" type="com.bottomUp.model.PatientViewData"/>
 		<typeAlias alias="Attachment" type="com.bottomUp.model.AttachmentData"/>
+
+
+
+
 
 	</typeAliases>
 	<plugins>

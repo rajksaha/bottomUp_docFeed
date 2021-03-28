@@ -2,7 +2,7 @@ package com.bottomUp.controller.docfeed;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
-import com.bottomUp.domain.DoctorDrugDoseSettingData;
+import com.bottomUp.domain.DoseData;
 import com.bottomUp.service.docFeed.crud.DoctorDrugDoseSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class DoctorDrugDoseSettingController extends BaseController {
 
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<DoctorDrugDoseSettingData> getAll(HttpServletRequest request) throws BottomUpException {
+    public List<DoseData> getAll(HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = new HashMap<>();
 
@@ -35,7 +35,7 @@ public class DoctorDrugDoseSettingController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{drugDoseSettingID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DoctorDrugDoseSettingData getByID(@PathVariable("drugDoseSettingID") Integer companyID, HttpServletRequest request) throws BottomUpException {
+    public DoseData getByID(@PathVariable("drugDoseSettingID") Integer companyID, HttpServletRequest request) throws BottomUpException {
 
         Map<String, Object> params = this.parseParameter(request);
 
@@ -44,7 +44,7 @@ public class DoctorDrugDoseSettingController extends BaseController {
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> save(@RequestBody DoctorDrugDoseSettingData data) throws BottomUpException {
+    public Map<String, Object> save(@RequestBody DoseData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.doctorDrugDoseSettingService.create(data);
@@ -53,7 +53,7 @@ public class DoctorDrugDoseSettingController extends BaseController {
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> update(@RequestBody DoctorDrugDoseSettingData data) throws BottomUpException {
+    public Map<String, Object> update(@RequestBody DoseData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         this.doctorDrugDoseSettingService.update(data);

@@ -383,6 +383,101 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
         }
     };
 
+    var drugSetup = {
+        name  : 'root.drugSetup',
+        url   : '/drugSetup',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/drugs/drugSetup.html',
+                controller : 'DrugSetupController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/drugs/drugSetupController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/drugs/drugSetupService.js' + jsVersion,
+                            'resources/javascript/services/prescription/drugService.js' + jsVersion,
+                            'resources/javascript/services/jsonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+    var genericSetup = {
+        name  : 'root.genericSetup',
+        url   : '/genericSetup',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/drugs/drugGeneric.html',
+                controller : 'DrugGenericController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/drugs/drugGenericController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/drugs/drugSetupService.js' + jsVersion,
+                            'resources/javascript/services/prescription/drugService.js' + jsVersion,
+                            'resources/javascript/services/jsonService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+    var contentGeneric = {
+        name  : 'root.contentGeneric',
+        url   : '/contentGeneric',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/drugs/contentGeneric.html',
+                controller : 'ContentGenericController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/controllers/drugs/contentGenericController.js' + jsVersion
+                        ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/drugs/contentGenericService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
 
     var appointment = {
         name : 'root.appointment',
@@ -1019,6 +1114,9 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
         .state(researchHome)
         .state(followUpSetup)
         .state(invCategory)
+        .state(contentGeneric)
+        .state(genericSetup)
+        .state(drugSetup)
         .state(appointment);
 
 

@@ -4,43 +4,47 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentDrugData extends BaseData {
 
-  private long drugID;
-  private long typeID;
-  private long genericID;
-  private long companyID;
+  private Long drugID;
+  private Integer typeID;
+  private Long genericID;
+  private Long companyID;
   private String drugName;
   private String strength;
 
+  private String drugTypeName;
+  private String genericDrugName;
+  private String companyName;
 
-  public long getDrugID() {
+
+  public Long getDrugID() {
     return drugID;
   }
 
-  public void setDrugID(long drugID) {
+  public void setDrugID(Long drugID) {
     this.drugID = drugID;
   }
 
-  public long getTypeID() {
+  public Integer getTypeID() {
     return typeID;
   }
 
-  public void setTypeID(long typeID) {
+  public void setTypeID(Integer typeID) {
     this.typeID = typeID;
   }
 
-  public long getGenericID() {
+  public Long getGenericID() {
     return genericID;
   }
 
-  public void setGenericID(long genericID) {
+  public void setGenericID(Long genericID) {
     this.genericID = genericID;
   }
 
-  public long getCompanyID() {
+  public Long getCompanyID() {
     return companyID;
   }
 
-  public void setCompanyID(long companyID) {
+  public void setCompanyID(Long companyID) {
     this.companyID = companyID;
   }
 
@@ -58,5 +62,29 @@ public class ContentDrugData extends BaseData {
 
   public void setStrength(String strength) {
     this.strength = strength;
+  }
+
+  public String getDrugTypeName() {
+    return drugTypeName;
+  }
+
+  public void setDrugTypeName(String drugTypeName) {
+    this.drugTypeName = drugTypeName;
+  }
+
+  public String getGenericDrugName() {
+    return genericDrugName;
+  }
+
+  public void setGenericDrugName(String genericDrugName) {
+    this.genericDrugName = genericDrugName;
+  }
+
+  public String getCompanyName() {
+    return companyName;
+  }
+
+  public void setCompanyName(String companyName) {
+    this.companyName = companyName;
   }
 }

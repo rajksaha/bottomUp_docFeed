@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,17 +73,12 @@ public class PrescriptionDrugService {
         setupParam.put("doctorID", drugData.getDoctorID());
         setupParam.put("doctorID", drugData.getDrugID());
         if(doctorDrugSettingMapper.getDoctorDrugCount(setupParam) == 0){
-            DoctorDrugSettingData doctorDrugSettingData = new DoctorDrugSettingData();
+            DrugDefaultSetupData drugDefaultSetupData = new DrugDefaultSetupData();
             ModelMapper modelMapper = new ModelMapper();
             modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-            modelMapper.map(drugData, doctorDrugSettingData);
-            doctorDrugSettingMapper.create(doctorDrugSettingData);
-            for (PrescriptionDrugDoseData period: drugData.getPeriodList()){
-                DoctorDrugDoseSettingData doseSettingData = new DoctorDrugDoseSettingData();
-                modelMapper.map(period, doseSettingData);
-                doseSettingData.setDrugSettingID(doctorDrugSettingData.getDrugSettingID());
-                doctorDrugDoseSettingMapper.create(doseSettingData);
-            }
+            modelMapper.map(drugData, drugDefaultSetupData);
+            doctorDrugSettingMapper.create(drugDefaultSetupData);
+
         }
     }
 

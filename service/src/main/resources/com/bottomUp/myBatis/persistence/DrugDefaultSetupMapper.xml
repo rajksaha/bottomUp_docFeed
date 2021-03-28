@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.DrugDefaultSetupMapper">
+
+	<insert id="create" parameterType="DrugDefaultSetup" useGeneratedKeys="true" keyProperty="drugSettingID" >
+
+		INSERT INTO `drug_default_setup`(
+			`drugID`,
+			`doctorID`,
+			`doseTypeCode`,
+			`drugTypeID`,
+            `drugDoseUnit`,
+            `drugWhenID`,
+			`drugAdviceID`,
+			`doseString`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		)
+		VALUES(
+			#{drugID},
+			#{doctorID},
+			#{doseTypeCode},
+			#{drugTypeID},
+			#{drugDoseUnit},
+			#{drugWhenID},
+			#{drugAdviceID},
+			#{doseString},
+			#{updatedBy},
+			#{updatedOn},
+			#{createdBy},
+			#{createdOn}
+		);
+	</insert>
+
+	<update id="update" parameterType="DrugDefaultSetup">
+		UPDATE `drug_default_setup`
+		SET
+		`drugID` = #{drugID},
+		`doctorID` = #{doctorID},
+		`doseTypeCode` =#{doseTypeCode},
+		`drugDoseUnit` = #{drugDoseUnit},
+		`drugWhenID` = #{drugWhenID},
+		`drugAdviceID` = #{drugAdviceID},
+		`doseString` = #{doseString},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE drugSettingID = #{drugSettingID}
+	</update>
+
+	<select id="getByID" parameterType="long" resultType="DrugDefaultSetup">
+		SELECT
+			`drugSettingID`,
+			`drugID`,
+			`doctorID`,
+			`doseTypeCode`,
+			`drugTypeID`,
+            `drugDoseUnit`,
+            `drugWhenID`,
+			`drugAdviceID`,
+			`doseString`,
+			`updatedBy`,
+			`updatedOn`,
+			`createdBy`,
+			`createdOn`
+		FROM `drug_default_setup`
+
+		WHERE drugSettingID = #{drugSettingID}
+	</select>
+
+	<select id="getSingleByParam" parameterType="map" resultType="DrugDefaultSetup">
+		SELECT
+		PD.`drugSettingID`,
+		PD.`drugID`,
+		PD.`doctorID`,
+		PD.`drugTypeID`,
+		PD.`doseTypeCode`,
+		PD.`drugDoseUnit`,
+		PD.`drugWhenID`,
+		PD.`drugAdviceID`,
+		PD.`doseString`,
+		CD.genericDrugName AS drugName,
+		CDT.initial AS drugTypeInitial,
+		CDT.name AS drugTypeName,
+		CDA.bangla AS drugAdviceName,
+		CWT.bangla AS drugWhenName,
+		DT.bangla AS doseTypeBngName,
+		DT.english AS doseTypeEngName,
+		PD.`updatedBy`,
+		PD.`updatedOn`,
+		PD.`createdBy`,
+		PD.`createdOn`
+		FROM doctor_feed.drug_default_setup PD
+		JOIN doctor_feed.content_drug_generic CD ON PD.drugID = CD.genericID
+		JOIN doctor_feed.content_drug_type CDT ON CD.typeID = CDT.drugTypeID
+		JOIN doctor_feed.content_dose_type DT ON PD.doseTypeCode = DT.doseCode
+		LEFT JOIN doctor_feed.content_drug_advice CDA ON PD.drugAdviceID = CDA.drugAdviceID
+		LEFT JOIN doctor_feed.content_when_type CWT ON PD.drugWhenID = CWT.whenTypeID
+		WHERE PD.drugID = #{drugID}
+		<if test="doctorID != null">
+			AND (PD.doctorID = #{doctorID} OR PD.doctorID IS NULL)
+		</if>
+		<if test="doctorID == null">
+			AND PD.doctorID IS NULL
+		</if>
+
+		ORDER BY PD.doctorID DESC LIMIT 1
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="DrugDefaultSetup">
+		SELECT
+		PD.`drugSettingID`,
+		PD.`drugID`,
+		PD.`doctorID`,
+		PD.`drugTypeID`,
+		PD.`doseTypeCode`,
+		PD.`drugDoseUnit`,
+		PD.`drugWhenID`,
+		PD.`drugAdviceID`,
+		PD.`doseString`,
+		CD.genericDrugName AS drugName,
+		CDT.initial AS drugTypeInitial,
+		CDT.name AS drugTypeName,
+		CDA.bangla AS drugAdviceName,
+		CWT.bangla AS drugWhenName,
+		DT.bangla AS doseTypeBngName,
+		DT.english AS doseTypeEngName,
+		PD.`updatedBy`,
+		PD.`updatedOn`,
+		PD.`createdBy`,
+		PD.`createdOn`
+		FROM doctor_feed.drug_default_setup PD
+		JOIN doctor_feed.content_drug_generic CD ON PD.drugID = CD.genericID
+		JOIN doctor_feed.content_drug_type CDT ON CD.typeID = CDT.drugTypeID
+		JOIN doctor_feed.content_dose_type DT ON PD.doseTypeCode = DT.doseCode
+		LEFT JOIN doctor_feed.content_drug_advice CDA ON PD.drugAdviceID = CDA.drugAdviceID
+		LEFT JOIN doctor_feed.content_when_type CWT ON PD.drugWhenID = CWT.whenTypeID
+		WHERE 1 = 1
+		<if test="drugSettingID != null">
+			AND PD.drugSettingID = #{drugSettingID}
+		</if>
+		<if test="drugID != null">
+			AND PD.drugID = #{drugID}
+		</if>
+		<if test="doctorID != null">
+			AND PD.doctorID = #{doctorID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM drug_default_setup
+		WHERE 1=1
+		<if test="drugSettingID != null">
+			AND drugSettingID = #{drugSettingID}
+		</if>
+	</delete>
+
+
+</mapper>

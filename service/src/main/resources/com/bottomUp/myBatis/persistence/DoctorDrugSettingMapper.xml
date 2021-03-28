@@ -4,7 +4,7 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.DoctorDrugSettingMapper">
 
-	<insert id="create" parameterType="doctorDrugSetting" useGeneratedKeys="true" keyProperty="drugSettingID" >
+	<insert id="create" parameterType="DrugDefaultSetup" useGeneratedKeys="true" keyProperty="drugSettingID" >
 
 		INSERT INTO `doctor_drug_setting`(
 			`doctorID`,
@@ -34,7 +34,7 @@
 
 	</insert>
 	
-	<update id="update" parameterType="doctorDrugSetting">
+	<update id="update" parameterType="DrugDefaultSetup">
 		UPDATE `doctor_drug_setting`
 		SET
 		`doctorID` = #{doctorID},
@@ -48,7 +48,7 @@
 		WHERE drugSettingID = #{drugSettingID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="doctorDrugSetting">
+	<select id="getByID" parameterType="long" resultType="DrugDefaultSetup">
 		SELECT
 			`drugSettingID`,
 			`doctorID`,
@@ -66,7 +66,37 @@
 		WHERE drugSettingID = #{drugSettingID}
 	</select>
 
-	<select id="getByParam" parameterType="map" resultType="doctorDrugSetting">
+	<select id="getByDoctorAndDrug" parameterType="map" resultType="DrugDefaultSetup">
+		SELECT
+		DDS.`drugSettingID`,
+		DDS.`doctorID`,
+		DDS.`drugID`,
+		DDS.`doseTypeCode`,
+		DDS.`drugDoseUnit`,
+		DDS.`drugWhenID`,
+		DDS.`drugAdviceID`,
+		CD.drugName,
+		CD.strength AS drugStrength,
+		CDT.initial AS drugTypeInitial,
+		CDT.name AS drugTypeName,
+		CDA.bangla AS drugAdviceName,
+		CWT.bangla AS drugWhenName,
+		DT.bangla AS doseTypeBngName,
+		DT.english AS doseTypeEngName,
+		DDS.`updatedBy`,
+		DDS.`updatedOn`,
+		DDS.`createdBy`,
+		DDS.`createdOn`
+		FROM doctor_feed.`doctor_drug_setting` DDS
+		JOIN doctor_feed.content_drug CD ON DDS.drugID = CD.drugID
+		JOIN doctor_feed.content_drug_type CDT ON CD.typeID = CDT.drugTypeID
+		JOIN doctor_feed.content_dose_type DT ON DDS.doseTypeCode = DT.doseCode
+		LEFT JOIN doctor_feed.content_drug_advice CDA ON DDS.drugAdviceID = CDA.drugAdviceID
+		LEFT JOIN doctor_feed.content_when_type CWT ON DDS.drugWhenID = CWT.whenTypeID
+		WHERE DDS.doctorID = #{doctorID} AND DDS.drugID = #{drugID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="DrugDefaultSetup">
 		SELECT
 		DDS.`drugSettingID`,
 		DDS.`doctorID`,
@@ -117,7 +147,7 @@
 		</if>
 	</select>
 
-	<select id="getByDrugID" parameterType="long" resultType="doctorDrugSetting">
+	<select id="getByDrugID" parameterType="long" resultType="DrugDefaultSetup">
 		SELECT
 			`drugSettingID`,
 			`doctorID`,

@@ -3,32 +3,14 @@ package com.bottomUp.domain;
 
 import com.bottomUp.domain.common.BaseData;
 
-public class DoctorDrugDoseSettingData  extends BaseData {
+public class DoseData extends BaseData {
 
-  private Long drugDoseSettingID;
-  private Long drugSettingID;
   private String dose;
   private Integer numOfDay;
   private Integer durationType;
   private String bngDurationName;
   private String engDurationName;
   private String pdfDurationName;
-
-  public Long getDrugDoseSettingID() {
-    return drugDoseSettingID;
-  }
-
-  public void setDrugDoseSettingID(Long drugDoseSettingID) {
-    this.drugDoseSettingID = drugDoseSettingID;
-  }
-
-  public Long getDrugSettingID() {
-    return drugSettingID;
-  }
-
-  public void setDrugSettingID(Long drugSettingID) {
-    this.drugSettingID = drugSettingID;
-  }
 
   public String getDose() {
     return dose;

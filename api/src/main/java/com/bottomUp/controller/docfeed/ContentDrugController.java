@@ -24,22 +24,25 @@ public class ContentDrugController extends BaseController {
     @Autowired
     private ContentDrugService contentDrugService;
 
+    @RequestMapping(value = {"/getAll"}, method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getAll(HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = this.parseParameter(request);
+        List<ContentDrugData> dataList = this.contentDrugService.getByParam(params);
+        return this.buildResultForGrid(dataList, contentDrugService.getCountByParam(params), params);
+    }
+
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<ContentDrugData> getAll(HttpServletRequest request) throws BottomUpException {
-
+    public List<ContentDrugData> getByParam(HttpServletRequest request) throws BottomUpException {
         Map<String, Object> params = new HashMap<>();
-
         return this.contentDrugService.getByParam(params);
     }
 
     @RequestMapping(value = {"/getByID/{drugID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentDrugData getByID(@PathVariable("drugID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.contentDrugService.getByID(Long.valueOf(companyID));
+    public ContentDrugData getByID(@PathVariable("drugID") Integer drugID, HttpServletRequest request) throws BottomUpException {
+        return this.contentDrugService.getByID(Long.valueOf(drugID));
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,9 +64,9 @@ public class ContentDrugController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{drugID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("drugID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("drugID") Integer drugID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("drugID", appointmentID);
+        param.put("drugID", drugID);
         this.contentDrugService.delete(param);
     }
 }

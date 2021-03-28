@@ -1,9 +1,7 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentTypeData;
-import com.bottomUp.domain.DoctorDrugDoseSettingData;
-import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
+import com.bottomUp.domain.DoseData;
 import com.bottomUp.myBatis.persistence.DoctorDrugDoseSettingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,19 +21,19 @@ public class DoctorDrugDoseSettingService {
     @Autowired
     private DoctorDrugDoseSettingMapper doctorDrugDoseSettingMapper;
 
-    public void create(DoctorDrugDoseSettingData data) throws BottomUpException {
+    public void create(DoseData data) throws BottomUpException {
         doctorDrugDoseSettingMapper.create(data);
     }
 
-    public void update(DoctorDrugDoseSettingData data) throws BottomUpException {
+    public void update(DoseData data) throws BottomUpException {
         doctorDrugDoseSettingMapper.update(data);
     }
 
-    public DoctorDrugDoseSettingData getByID(Long ID)throws BottomUpException {
+    public DoseData getByID(Long ID)throws BottomUpException {
         return this.doctorDrugDoseSettingMapper.getByID(ID);
     }
 
-    public List<DoctorDrugDoseSettingData> getByParam(Map<String, Object> param) throws BottomUpException {
+    public List<DoseData> getByParam(Map<String, Object> param) throws BottomUpException {
         return this.doctorDrugDoseSettingMapper.getByParam(param);
     }
 

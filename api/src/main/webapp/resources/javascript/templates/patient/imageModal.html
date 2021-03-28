@@ -13,8 +13,8 @@
     <div data-ng-show="!imageUpload && !takePhoto && imageURL" >
         <img alt="patImg"  src="{{imageURL}}" height="240px" width="320px">
     </div>
-    <div data-ng-show="takePhoto">
-        <div data-ng-show="photoBooth" id="my_camera"></div>
+    <div >
+        <div id="my_camera"></div>
         <div id="results"></div>
         <hr>
         <input data-ng-show="clearPhotoButton" class="btn btnLanier btn-primary" type=button value="Take a new One" data-ng-click="configure();">

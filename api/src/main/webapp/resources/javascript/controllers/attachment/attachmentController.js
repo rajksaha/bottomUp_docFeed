@@ -42,9 +42,6 @@ app.controller('AttachmentController', function($scope,$rootScope, $http, $timeo
     };
 
     $scope.configure = function () {
-        $scope.imageUpload = false;
-        $scope.takePhoto = true;
-        $scope.photoBooth = true;
         $scope.clearPhoto();
         $timeout(function() {
             Webcam.set({

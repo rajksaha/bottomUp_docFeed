@@ -674,7 +674,6 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         modalInstance.result.then(function(result) {
             $scope.bringPrescribedDrugs($scope.appoinmentData.appointmentID);
         });
-
     };
 
     $scope.editDrugsFromPresciption = function(drugDataDB){

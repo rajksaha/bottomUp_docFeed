@@ -1,0 +1,120 @@
+<script type="text/ng-template" id="action_template">
+    <a href="" data-ng-click="edit(item)"><i class="fa fa-edit"></i></a>
+    <a href="" data-ng-click="setup(item)"><i class="fa fa-cog"></i></a>
+    <a href="" data-ng-click="delete(item)">
+        <span class="fa fa-trash"></span></a>
+</script>
+
+<div class="panel panel-default mt-15">
+    <div class="panel-heading clearfix">
+        <strong>Drug List</strong>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success" ng-show="!showForm" title="Add Drug" data-ng-click="add()"><span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-sm btn-warning" ng-show="showForm" title="Back To List" data-ng-click="backToList()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-danger alert-dismissable" data-ng-show="hasError">
+            {{message}}
+        </div>
+        <div class="alert alert-success alert-dismissable" data-ng-show="hasSuccess">
+            {{message}}
+        </div>
+
+        <div class="row" id="validationRequired" ng-show="showForm">
+            <div class="col-md-6 col-lg-6" >
+                <div class="form-group">
+                    <label>Company Drug Name<span class="text-red">*</span></label>
+                    <input type="text" data-ng-model="drugSetup.drugName" class="form-control input-sm required" maxlength="90">
+                    <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6" >
+                <div class="form-group">
+                    <label>Generic Name</label>
+                    <input type="text" data-ng-model="drugSetup.genericDrugName"
+                           typeahead="drugNameList.genericDrugName for drugNameList in getGenericDrug($viewValue)"
+                           class="form-control"
+                   />
+                    <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6" >
+                <div class="form-group">
+                    <label>Strength</label>
+                    <input type="text" data-ng-model="drugSetup.strength" class="form-control input-sm" maxlength="90">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6" >
+                <div class="form-group">
+                    <label>Drug Type<span class="text-red">*</span></label>
+                    <select class="form-control required" data-ng-model="drugSetup.typeID"
+                            data-ng-options="drugType.drugTypeID as drugType.name for drugType in drugTypeList">
+                        <option value="">--Drug Type--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6" >
+                <div class="form-group">
+                    <label>Company<span class="text-red">*</span></label>
+                    <select class="form-control required" data-ng-model="drugSetup.companyID"
+                            data-ng-options="company.drugCompanyID as company.companyName for company in drugCompanyList">
+                        <option value="">--Company--</option>
+                    </select>
+                    <div class="validationErrMsg small text-danger mt-5 hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="!showForm">
+            <div class="form-group col-md-3 col-lg-3">
+                <div class="input-group">
+                    <input type="text" placeholder="Company Drug Name" class="form-control" data-ng-change="search()" ng-model="searchParam.drugName" />
+                </div>
+            </div>
+            <div class="form-group col-md-3 col-lg-3">
+                <div class="input-group">
+                    <input type="text" placeholder="Generic Name" class="form-control" data-ng-change="search()" ng-model="searchParam.genericName" />
+                </div>
+            </div>
+            <div class="form-group col-md-3 col-lg-3">
+                <div class="input-group">
+                    <select class="form-control required" data-ng-model="searchParam.typeID" data-ng-change="search()"
+                            data-ng-options="drugType.drugTypeID as drugType.name for drugType in drugTypeList">
+                        <option value="">--Drug Type--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3 col-lg-3">
+                <div class="input-group">
+                    <select class="form-control required" data-ng-model="searchParam.companyID" data-ng-change="search()"
+                            data-ng-options="company.drugCompanyID as company.companyName for company in drugCompanyList">
+                        <option value="">--Company--</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-12">
+                <ad-table-ajax table-classes="table table-bordered table-hover bfpb-table"
+                               page-sizes="[10, 15, 20]"
+                               page-loader="methods.pageLoader"
+                               pagination-btn-group-classes="pagination pagination-sm"
+                               items-not-found-message="No Company Module found"
+                               state="{sortKey: 'drugName', sortDirection: 'ASC'}"
+                               column-definition="columnDefinition"
+                               ajax-config="dataSourceConfig">
+                </ad-table-ajax>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel-footer" ng-show="showForm">
+        <div class="text-right">
+            <button class="btn btn-sm btn-warning" data-ng-click="reset()"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+            <button class="btn btn-sm btn-success" data-ng-click="save(drugSetup)" data-ng-hide="drugSetup.drugID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            <button class="btn btn-sm btn-success" data-ng-click="update(drugSetup)" data-ng-show="drugSetup.drugID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Update</button>
+            <button class="btn btn-sm btn-danger" data-ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+        </div>
+    </div>
+</div>
