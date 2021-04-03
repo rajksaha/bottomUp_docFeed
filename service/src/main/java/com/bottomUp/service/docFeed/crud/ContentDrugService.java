@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,14 @@ public class ContentDrugService {
     public void update(ContentDrugData data) throws BottomUpException {
         this.getGenericID(data);
         contentDrugMapper.update(data);
+    }
+
+    public void updateGeneric(Long drugID, Long genericID, String userName) throws BottomUpException{
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("drugID", drugID);
+        params.put("genericID", genericID);
+        params.put("updatedBy", userName);
+        this.contentDrugMapper.updateGeneric(params);
     }
 
     private void getGenericID(ContentDrugData data) throws BottomUpException{

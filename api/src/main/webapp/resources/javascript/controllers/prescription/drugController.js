@@ -15,6 +15,9 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
     $scope.addByName = false;
     $scope.doseList = [];
 
+    $scope.drugByCompany = true;
+    $scope.drugCompanyList = [];
+
     $scope.drugNameList = {};
 
     $scope.cancelDrug = function (){
@@ -57,22 +60,6 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
         $scope.drugData.periodList = [];
         $scope.drugData.periodList.push($scope.createEmptyDose());
         $scope.inItDrugsType($scope.drugData.periodList);
-    };
-
-    $scope.onSelectDrugName = function(item, model, label){
-        $scope.drugData.drugID = item.drugID;
-        $scope.drugData.drugName = item.drugName;
-        $scope.drugData.drugStrength = item.strength;
-        DrugService.getDrugDefaultSetup.query({}, {doctorID: appointmentData.doctorID, drugID: item.drugID}).$promise.then(function (result) {
-            $scope.doctorDrugData = result;
-            if($scope.doctorDrugData && $scope.doctorDrugData.periodList){
-                $scope.drugData.doseTypeCode = result.doseTypeCode;
-                $scope.drugData.drugWhenID = result.drugWhenID;
-                $scope.drugData.drugAdviceID = result.drugAdviceID;
-                $scope.drugData.periodList = result.periodList;
-                $scope.inItDrugsType($scope.drugData.periodList);
-            }
-        });
     };
 
     $scope.createEmptyDose = function () {
@@ -218,6 +205,44 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
         }).then(function(result) {
             $scope.drugNameList = result.data;
             return limitToFilter($scope.drugNameList, 10);
+        });
+    };
+
+    $scope.onSelectDrugName = function(drugID, drugName, strength, genericID){
+        $scope.drugData.drugID = drugID;
+        $scope.drugData.drugName = drugName;
+        $scope.drugData.drugStrength = strength;
+        DrugService.getDrugDefaultSetup.query({}, {drugID: item.drugID, genericID: genericID}).$promise.then(function (result) {
+            $scope.doctorDrugData = result;
+            if($scope.doctorDrugData && $scope.doctorDrugData.periodList){
+                $scope.drugData.hasDefaultSetup = 1;
+                $scope.drugData.doseTypeCode = result.doseTypeCode;
+                $scope.drugData.drugWhenID = result.drugWhenID;
+                $scope.drugData.drugAdviceID = result.drugAdviceID;
+                $scope.drugData.periodList = result.periodList;
+                $scope.inItDrugsType($scope.drugData.periodList);
+            }
+        });
+    };
+
+    $scope.getDrugGenericName = function(term) {
+        var searchData = {};
+        searchData.term = term;
+        searchData.intType = $scope.drugData.drugTypeID;
+        return $http({
+            method: 'POST',
+            url: "/rest/autoComplete/genericDrug",
+            data: searchData
+        }).then(function(result) {
+            $scope.genericNameList = result.data;
+            return limitToFilter($scope.genericNameList, 10);
+        });
+    };
+
+    $scope.onSelectGenericName = function(item, model, label){
+        $scope.drugData.genericID = item.genericID;
+        DrugService.getCompDrugList.query({}, {genericID: item.genericID}).$promise.then(function (result) {
+            $scope.drugCompanyList = result;
         });
     };
 

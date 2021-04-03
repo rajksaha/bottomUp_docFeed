@@ -44,9 +44,7 @@
 		<typeAlias alias="contentDoseType" type="com.bottomUp.domain.ContentDoseTypeData"/>
 		<typeAlias alias="doctorAdviceDiseaseTemplate" type="com.bottomUp.domain.DoctorAdviceDiseaseTemplateData"/>
 		<typeAlias alias="doctorDataBackup" type="com.bottomUp.domain.DoctorDataBackupData"/>
-		<typeAlias alias="doctorDoseDrugDiseaseTemplate" type="com.bottomUp.domain.DoctorDoseDrugDiseaseTemplateData"/>
 		<typeAlias alias="doctorDrugDiseaseTemplate" type="com.bottomUp.domain.DoctorDrugDiseaseTemplateData"/>
-		<typeAlias alias="doctorDrugDoseSetting" type="com.bottomUp.domain.DoseData"/>
 		<typeAlias alias="doctorFollowUpSetting" type="com.bottomUp.domain.DoctorFollowUpSettingData"/>
 		<typeAlias alias="doctorHistorySetting" type="com.bottomUp.domain.DoctorHistorySettingData"/>
 		<typeAlias alias="doctorInvDiseaseTemplate" type="com.bottomUp.domain.DoctorInvDiseaseTemplateData"/>
@@ -74,7 +72,6 @@
 		<typeAlias alias="prescriptionAdvice" type="com.bottomUp.domain.PrescriptionAdviceData"/>
 		<typeAlias alias="prescriptionComplain" type="com.bottomUp.domain.PrescriptionComplainData"/>
 		<typeAlias alias="prescriptionDiagnosis" type="com.bottomUp.domain.PrescriptionDiagnosisData"/>
-		<typeAlias alias="prescriptionDrugDose" type="com.bottomUp.domain.PrescriptionDrugDoseData"/>
 		<typeAlias alias="prescriptionDrug" type="com.bottomUp.domain.PrescriptionDrugData"/>
 		<typeAlias alias="prescriptionFamilyDisease" type="com.bottomUp.domain.PrescriptionFamilyDiseaseData"/>
 		<typeAlias alias="prescriptionHistory" type="com.bottomUp.domain.PrescriptionHistoryData"/>

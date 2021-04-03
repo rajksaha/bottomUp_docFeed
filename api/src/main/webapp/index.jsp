@@ -14,6 +14,8 @@
     <link href="<c:url value="/resources/vendors/font-awesome/css/font-awesome.min.css"/>" type="text/css" rel="stylesheet">
     <link href="<c:url value="/resources/lib/css/jquery-ui-1.11.0/jquery-ui.min.css"/>" type="text/css" rel="stylesheet"/>
 
+    <link href="<c:url value="/resources/css/application.css"/>" type="text/css" rel="stylesheet"/>
+
 
     <!-- ng-table -->
     <link href="<c:url value="/resources/lib/css/ng-table.min.css"/>" type="text/css" rel="stylesheet"/>
@@ -71,7 +73,7 @@
 
 <!-- <script type="text/javascript" src="<c:url value="/resources/lib/javascript/angular-file-upload/angular-file-upload-shim.min.js"/>"> -->
 
-
+<script src="<c:url value="/resources/lib/javascript/layout.js"/>"></script>
 <!-- Angular -->
 <script src="<c:url value="/resources/lib/javascript/angular-1.2.23/angular.js"/>"></script>
 

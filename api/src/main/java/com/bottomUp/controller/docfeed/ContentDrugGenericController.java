@@ -2,9 +2,11 @@ package com.bottomUp.controller.docfeed;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
+import com.bottomUp.domain.ContentDrugData;
 import com.bottomUp.domain.ContentDrugGenericData;
 import com.bottomUp.domain.common.CompanyData;
 import com.bottomUp.service.docFeed.crud.ContentDrugGenericService;
+import com.bottomUp.service.docFeed.crud.ContentDrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,9 @@ public class ContentDrugGenericController extends BaseController {
 
     @Autowired
     private ContentDrugGenericService contentDrugGenericService;
+
+    @Autowired
+    private ContentDrugService contentDrugService;
 
 
     @RequestMapping(value = {"/getAll"}, method = RequestMethod.GET)
@@ -45,6 +50,22 @@ public class ContentDrugGenericController extends BaseController {
     @ResponseBody
     public ContentDrugGenericData getByID(@PathVariable("genericID") Integer genericID, HttpServletRequest request) throws BottomUpException {
         return this.contentDrugGenericService.getByID(Long.valueOf(genericID));
+    }
+
+    @RequestMapping(value = {"/getCompDrug/{genericID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<ContentDrugData> getCompDrug(@PathVariable("genericID") Long genericID, HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("genericID", genericID);
+        return this.contentDrugService.getByParam(param);
+    }
+
+    @RequestMapping(value = {"/updateGeneric/{drugID}/{genericID}"}, method = RequestMethod.PUT)
+    @ResponseBody
+    public void updateGeneric(@PathVariable("drugID") Long drugID,
+                                               @PathVariable("genericID") Long genericID,
+                                               HttpServletRequest request) throws BottomUpException {
+        this.contentDrugService.updateGeneric(drugID, genericID == 0 ? null: genericID, this.getUserDetail().getUsername());
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)

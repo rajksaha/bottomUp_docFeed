@@ -1,5 +1,18 @@
 <div class="modal-header modalHead ">
-	<h4 class="modal-title">Add Drugs</h4>
+	<div class="row">
+		<div class="col-xs-6 col-sm-6">
+			<h4 class="modal-title">Add Drugs</h4>
+		</div>
+		<div class="col-xs-6 col-sm-6">
+			<label class="switch pull-right">
+				<input type="checkbox" id="togBtn"  data-ng-click="drugByCompany=!drugByCompany">
+				<div class="slider round">
+					<span class="off">Company</span>
+					<span class="on">Generic</span>
+				</div>
+			</label>
+		</div>
+	</div>
 </div>
 <div class="modal-body modalBody"  style="position:relative; z-index:1;">
 	<div class="alert alert-danger alert-dismissable" data-ng-show="error">
@@ -9,8 +22,8 @@
 
 	<div  class="row step4Width" id="validateReq">
 
-		<div class="form-group col-xs-12 col-sm-12">
-			<div class="form-group col-xs-4 col-sm-4">
+		<div>
+			<div class="form-group col-xs-3 col-sm-3">
 				<label>Type </label>
 				<select  class="form-control" data-ng-model="drugData.drugTypeID"
 						 data-ng-change="timeChanger(3)"
@@ -18,11 +31,25 @@
 			</div>
 			<div class="form-group col-xs-6 col-sm-6" id="drugName">
 				<label>Drug Name <span class="red" >*</span></label>
-				<input type="text" errmsg="Please Enter Drug Name" data-ng-model="drugData.drugName" typeahead="drugNameList.drugName for drugNameList in getDrugName($viewValue)"  class="form-control required" placeholder="Add Drugs" typeahead-on-select='onSelectDrugName($item, $model, $label)'/>
+
+				<input data-ng-show="drugByCompany" type="text" data-ng-model="drugData.drugName"
+					   class="form-control required search-box" placeholder="Add Drugs by Company name"
+					   typeahead="drugNameList.drugName for drugNameList in getDrugName($viewValue)"
+					   typeahead-on-select='onSelectDrugName($item.drugID, $item.drugName, $item.strength, $item.genericID)'>
+					<button data-ng-click="clearCompanyName()" data-ng-show="drugData.drugName" class="close-icon"/>
+				</input>
+
+
+				<input data-ng-show="!drugByCompany" type="text" data-ng-model="drugData.genericDrugName"
+					   class="form-control required" placeholder="Add Drugs by Generic"
+					   typeahead="genericNameList.genericDrugName for genericNameList in getDrugGenericName($viewValue)"
+					   typeahead-on-select='onSelectGenericName($item, $model, $label)'>
+					<button data-ng-click="clearGenericName()" data-ng-show="drugData.genericDrugName" class="close-icon"/>
+				</input>
 			</div>
-			<div class="form-group col-xs-2 col-sm-2">
-				<label>Dose Initial</label>
-				<span data-ng-model="drugData.doseUnitInitial" data-ng-show="!drugData.drugType.optionalUnitInitial">{{drugData.drugType.unitInitial || "No intial"}}</span>
+			<div class="form-group col-xs-3 col-sm-3">
+				<label>Dose Ini.</label>
+				<span data-ng-model="drugData.doseUnitInitial" data-ng-show="!drugData.drugType.optionalUnitInitial">{{drugData.drugType.unitInitial}}</span>
 				<div data-ng-show="drugData.drugType.optionalUnitInitial" >
 					<input type="checkbox" data-ng-model="drugData.doseUnitInitial" data-ng-checked="!drugData.optionalInitial" ng-click="drugData.optionalInitial = !drugData.optionalInitial">
 					{{drugData.drugType.unitInitial}}
@@ -33,8 +60,17 @@
 			</div>
 		</div>
 
-
-		<div class="form-group col-xs-12 col-sm-12" >
+		<div data-ng-show="!drugByCompany && drugData.genericID">
+			<div class="form-group col-xs-4 col-sm-4">
+				<label>Select Company Name <span class="red" >*</span></label>
+			</div>
+			<div class="form-group col-xs-8 col-sm-8">
+				<select  class="form-control pull-left" data-ng-model="drugData.drugID"
+						data-ng-change="onSelectDrugName(drugComp.drugID, drugComp.drugName, drugComp.strength, drugComp.genericID)"
+						data-ng-options="drugComp.drugID as drugComp.drugName for drugComp in drugCompanyList" />
+			</div>
+		</div>
+		<div>
 			<div class="form-group col-xs-6 col-sm-6">
 				<label>Times a day</label>
 				<select  class="form-control" data-ng-model="drugData.doseTypeCode" data-ng-options="doseType.doseCode as doseType.english for doseType in doseTypeList" data-ng-change="timeChanger(3)" />
@@ -57,13 +93,17 @@
 			<div data-ng-repeat="periodData in drugData.periodList" class="row">
 				<div class="form-group col-xs-6">
 					<label>Interval Wise Dose</label><br>
-					<button data-ng-show="drugData.doseTypeCode != -2" data-ng-click="doseChanger( .5, periodData.doseDataList)" >+</button>
+					<button data-ng-show="drugData.doseTypeCode != -2"
+							class="close-plus-icon"
+							data-ng-click="doseChanger( .5, periodData.doseDataList)" ></button>
 					<span data-ng-repeat="drugDose in periodData.doseDataList">
-	                 			<span data-ng-show="$index != 0 && $index % 3 == 0"><br></span>
-	                 			<input data-ng-show="drugData.doseTypeCode != -2" type="text" size="2" data-ng-model="drugDose.value">
-	                 			<input class="form-control required" data-ng-show="drugData.doseTypeCode == -2" type="text"  data-ng-model="drugDose.value 	">
-							</span>
-					<button data-ng-show="drugData.doseTypeCode != -2" data-ng-click="doseChanger( -.5, periodData.doseDataList)" >-</button>
+						<span data-ng-show="$index != 0 && $index % 3 == 0"><br></span>
+						<input data-ng-show="drugData.doseTypeCode != -2" type="text" size="2" data-ng-model="drugDose.value">
+						<input class="form-control required" data-ng-show="drugData.doseTypeCode == -2" type="text"  data-ng-model="drugDose.value 	">
+					</span>
+					<button data-ng-show="drugData.doseTypeCode != -2"
+							data-ng-click="doseChanger( -.5, periodData.doseDataList)"
+							class="close-minus-icon"></button>
 				</div>
 
 				<div class="form-group col-xs-3">

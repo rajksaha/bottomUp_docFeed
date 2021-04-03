@@ -12,6 +12,7 @@ public class PrescriptionDrugData extends BaseData {
   private Long doctorID;
   private Long drugTypeID;
   private Long drugID;
+  private Long genericID;
   private Integer doseTypeCode;
   private Integer drugWhenID;
   private Integer drugAdviceID;
@@ -26,8 +27,10 @@ public class PrescriptionDrugData extends BaseData {
   private String drugAdviceName;
   private String doseTypeBngName;
   private String doseTypeEngName;
+  private Integer hasDefaultSetup;
+  private String doseString;
 
-  private List<PrescriptionDrugDoseData> periodList;
+  private List<DoseData> periodList;
 
   public Long getPresDrugID() {
     return presDrugID;
@@ -117,14 +120,6 @@ public class PrescriptionDrugData extends BaseData {
     this.presNum = presNum;
   }
 
-  public List<PrescriptionDrugDoseData> getPeriodList() {
-    return periodList;
-  }
-
-  public void setPeriodList(List<PrescriptionDrugDoseData> periodList) {
-    this.periodList = periodList;
-  }
-
   public String getDrugTypeName() {
     return drugTypeName;
   }
@@ -187,5 +182,37 @@ public class PrescriptionDrugData extends BaseData {
 
   public void setDoseTypeEngName(String doseTypeEngName) {
     this.doseTypeEngName = doseTypeEngName;
+  }
+
+  public Integer getHasDefaultSetup() {
+    return hasDefaultSetup;
+  }
+
+  public void setHasDefaultSetup(Integer hasDefaultSetup) {
+    this.hasDefaultSetup = hasDefaultSetup;
+  }
+
+  public Long getGenericID() {
+    return genericID;
+  }
+
+  public void setGenericID(Long genericID) {
+    this.genericID = genericID;
+  }
+
+  public String getDoseString() {
+    return doseString;
+  }
+
+  public void setDoseString(String doseString) {
+    this.doseString = doseString;
+  }
+
+  public List<DoseData> getPeriodList() {
+    return periodList;
+  }
+
+  public void setPeriodList(List<DoseData> periodList) {
+    this.periodList = periodList;
   }
 }

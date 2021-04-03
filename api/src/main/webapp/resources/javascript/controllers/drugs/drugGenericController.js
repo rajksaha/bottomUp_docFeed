@@ -34,7 +34,7 @@ app.controller('DrugGenericController', function($scope, $rootScope, $state, $ht
     $scope.columnDefinition = [
         {columnHeaderDisplayName: 'Generic Name', displayProperty: 'genericDrugName', sortKey: 'genericDrugName'},
         {columnHeaderDisplayName: 'Type Name', displayProperty: 'drugTypeName', sortKey: 'typeID'},
-        {columnHeaderDisplayName: 'Action', templateUrl: 'action_template', width: '5em'}
+        {columnHeaderDisplayName: 'Action', templateUrl: 'action_template', width: '15em'}
     ];
 
     //datasource configuration
@@ -151,6 +151,77 @@ app.controller('DrugGenericController', function($scope, $rootScope, $state, $ht
         modalInstance.result.then(function(result) {
         });
     };
+
+    $scope.compDrug = function (drugSetup) {
+        var drugData = drugSetup;
+        var modalInstance = $modal.open({
+            templateUrl: 'resources/javascript/templates/drugs/compDrugModal.html',
+            windowClass: 'fade in',
+            controller: 'DrugGenericController.CompanyDrugAssignmentController',
+            resolve: {
+                drugData: function () {
+                    return drugData;
+                }
+            },
+            backdrop: 'static'
+        });
+        modalInstance.result.then(function(result) {
+        });
+    };
+});
+
+app.controller('DrugGenericController.CompanyDrugAssignmentController', function($scope, $http, $filter, $modalInstance,
+                                                                            limitToFilter, JsonService,
+                                                                            drugData, DrugService, DrugSetupService){
+
+    $scope.compDrugList = [];
+    $scope.compAddDrug = {};
+
+    $scope.getCompDrugList = function () {
+        DrugSetupService.getCompDrugList.query({}, {genericID: drugData.genericID}).$promise.then(function (result) {
+            $scope.compDrugList = result;
+        });
+    };
+
+    $scope.updateGenericInfo = function (compDrugInfo) {
+        DrugSetupService.updateGenericInfo.query({}, {drugID: compDrugInfo.drugID,
+            genericID: drugData.genericID}).$promise.then(function (result) {
+            $scope.compDrugList.push(compDrugInfo);
+            $scope.compAddDrug = {};
+        });
+    };
+
+    $scope.removeGeneric = function (drugID, index) {
+        DrugSetupService.updateGenericInfo.query({}, {drugID: drugID,
+            genericID: 0}).$promise.then(function (result) {
+            $scope.compDrugList.splice(index, 1);
+        });
+    };
+
+    $scope.getDrugName = function(term) {
+        var searchData = {};
+        searchData.term = term;
+        searchData.intType = drugData.drugTypeID;
+        return $http({
+            method: 'POST',
+            url: "/rest/autoComplete/drug",
+            data: searchData
+        }).then(function(result) {
+            $scope.drugNameList = result.data;
+            return limitToFilter($scope.drugNameList, 10);
+        });
+    };
+
+    $scope.onSelectDrugName = function (item, model, label) {
+        $scope.compAddDrug = item;
+    };
+
+    $scope.cancel = function (){
+        $modalInstance.close();
+    };
+
+    $scope.getCompDrugList();
+
 });
 
 app.controller('DrugGenericController.DrugDefaultSetupController', function($scope, $http, $filter, $modalInstance,

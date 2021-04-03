@@ -1,114 +1,104 @@
-
-
-<div class="alert alert-danger alert-dismissable" data-ng-show="hasError">
-    {{message}}
-</div>
-<div class="alert alert-success alert-dismissable" data-ng-show="hasSuccess">
-    {{message}}
-</div>
-
-<div class="post single style-1">
-    <h2>Welcome {{userData.profileData.firstName}}</h2>
-</div>
-
-
 <div class="row">
-    <div  data-ng-if="userData.permissions['SUPER_ADMIN']" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="addNewAppointment()">
-        <div class="item-box" data-ng-click="changeState('root.module')">
-            <i class="fa fa-cogs"></i>
-            <span>Management</span>
+    <div class="col-md-2 col-lg-2">
+        <div class="echo_side_menu_bar" data-ng-if="userData.permissions['SUPER_ADMIN']">
+            <div class="echo_list">
+                <div class="echo_infos">
+                    <i class="fa fa-cogs"></i>
+                    <span>Bottom Up</span>
+                    <i class="fa fa-chevron-down echo_arrow"></i>
+                </div>
+                <div class="echo_list_drop">
+                    <ul>
+                        <li>
+                            <a href="" data-ng-click="changeState('root.module')" class="list-group-item"></i> Module </a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="changeState('root.company')" class="list-group-item"></i> Company </a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="changeState('root.companyModule')" class="list-group-item"></i> Company Module </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="echo_side_menu_bar" >
+            <div class="echo_list">
+                <div class="echo_infos">
+                    <i class="fa fa-users"></i>
+                    <span>User</span>
+                    <i class="fa fa-chevron-down echo_arrow"></i>
+                </div>
+                <div class="echo_list_drop">
+                    <ul>
+                        <li data-ng-if="userData.permissions['SUPER_ADMIN'] || userData.permissions['COMPANY_ADMIN']|| userData.permissions['DOCTOR']">
+                            <a href="" data-ng-click="changeState('root.user')" class="list-group-item"></i> User </a>
+                        </li>
+                        <li data-ng-if="userData.permissions['SUPER_ADMIN'] || userData.permissions['COMPANY_ADMIN']|| userData.permissions['DOCTOR']">
+                            <a href="" data-ng-click="changeState('root.userGroup')" class="list-group-item"></i> User Group</a>
+                        </li>
+                        <li data-ng-if="userData.permissions['SUPER_ADMIN'] || userData.permissions['COMPANY_ADMIN']|| userData.permissions['DOCTOR']">
+                            <a href="" data-ng-click="changeState('root.permission')" class="list-group-item" ></i> Permission</a>
+                        </li>
+                        <li data-ng-if="userData.permissions['SUPER_ADMIN'] || userData.permissions['COMPANY_ADMIN']|| userData.permissions['DOCTOR']">
+                            <a href="" data-ng-click="changeState('root.groupPermission')" class="list-group-item"></i> Group Permission</a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="changePassword()" class="list-group-item"> Change Password</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="echo_side_menu_bar" data-ng-if="userData.permissions['COMPANY_ADMIN']|| userData.permissions['DOCTOR']">
+            <div class="echo_list">
+                <div class="echo_infos">
+                    <i class="fa fa-cubes"></i>
+                    <span>Content </span>
+                    <i class="fa fa-chevron-down echo_arrow"></i>
+                </div>
+                <div class="echo_list_drop">
+                    <ul>
+                        <li>
+                            <a href="" data-ng-click="changeState('root.createMenu')" class="list-group-item"></i> Doctor's Menu </a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="changeState('root.genericSetup')" class="list-group-item"></i> Generic Drug </a>
+                        </li>
+                        <li>
+                            <a href="" data-ng-click="changeState('root.drugSetup')" class="list-group-item"></i> Company Drug  </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="echo_side_menu_bar" data-ng-if="userData.permissions['COMPANY_ADMIN']|| userData.permissions['DOCTOR']" >
+            <div class="echo_list">
+                <div class="echo_infos">
+                    <i class="fa fa-tachometer"></i>
+                    <span>Assignment</span>
+                    <i class="fa fa-chevron-down echo_arrow"></i>
+                </div>
+                <div class="echo_list_drop">
+                    <ul>
+                        <li>
+                            <a href="" data-ng-click="changeState('root.menuSetup')" class="list-group-item"></i> Menu Assignment </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div data-ng-if="userData.permissions['SUPER_ADMIN']" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(2)">
-        <div class="item-box" data-ng-click="companyManagement = !companyManagement">
-            <i class="fa fa-cogs"></i>
-            <span >Company Management</span>
-        </div>
-        <div data-ng-show="companyManagement">
-            <ul>
-                <li>
-                    <a href="" data-ng-click="changeState('root.company')" class="list-group-item"></i> Company </a>
-                </li>
-                <li>
-                    <a href="" data-ng-click="changeState('root.companyModule')" class="list-group-item"></i> Company Module </a>
-                </li>
-            </ul>
-        </div>
+    <div class="col-md-10 col-lg-10">
     </div>
-    <div data-ng-if="userData.permissions['SUPER_ADMIN'] || userData.permissions['COMPANY_ADMIN']|| userData.permissions['DOCTOR']" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(3)">
-        <div class="item-box" data-ng-click="userManagement = !userManagement">
-            <i class="fa fa-users"></i>
-            <span>User Management</span>
-        </div>
-        <div class="echo_list_drop" data-ng-show="userManagement">
-            <ul>
-                <li>
-                    <a href="" data-ng-click="changeState('root.user')" class="list-group-item"></i> User </a>
-                </li>
-                <li>
-                    <a href="" data-ng-click="changeState('root.userGroup')" class="list-group-item"></i> User Group</a>
-                </li>
-                <li>
-                    <a href="" data-ng-click="changeState('root.permission')" class="list-group-item" ></i> Permission</a>
-                </li>
-                <li>
-                    <a href="" data-ng-click="changeState('root.groupPermission')" class="list-group-item"></i> Group Permission</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(4)">
-        <div class="item-box" data-ng-click="content = !content">
-            <i class="fa fa-users"></i>
-            <span>Content</span>
-        </div>
-        <div class="echo_list_drop" data-ng-show="content">
-            <ul>
-                <li>
-                    <a href="" data-ng-click="changeState('root.createMenu')" class="list-group-item"></i> Doctor Menu </a>
-                </li>
-                <li>
-                    <a href="" data-ng-click="changeState('root.genericSetup')" class="list-group-item"></i> Generic Drug </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(5)">
-        <div class="item-box" data-ng-click="setup = !setup">
-            <i class="fa fa-users"></i>
-            <span>Setup/Assignment</span>
-        </div>
-        <div class="echo_list_drop" data-ng-show="setup">
-            <ul>
-                <li>
-                    <a href="" data-ng-click="changeState('root.menuSetup')" class="list-group-item"></i> Menu Assignment </a>
-                </li>
-                <li>
-                    <a href="" data-ng-click="changeState('root.drugSetup')" class="list-group-item"></i> Drug Setup </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(6)">
-        <div class="item-box" data-ng-click="profile = !profile">
-            <i class="fa fa-users"></i>
-            <span>Profile</span>
-        </div>
-        <div class="echo_list_drop" data-ng-show="profile">
-            <ul>
-                <li>
-                    <a href="" data-ng-click="changeState('root.user')" class="list-group-item"></i> User Profile</a>
-                </li>
-                <li>
-                    <a href="" data-ng-click="changePassword()" class="list-group-item"> Change Password</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-
-
 </div>
+
+
+
+
+
+
+
+
+
+

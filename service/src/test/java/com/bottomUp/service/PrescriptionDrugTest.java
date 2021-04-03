@@ -4,7 +4,6 @@ import com.bottomUp.BaseTest;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.PrescriptionDrugData;
 import com.bottomUp.service.docFeed.OldPrescriptionService;
-import com.bottomUp.service.docFeed.crud.PrescriptionDrugDoseService;
 import com.bottomUp.service.docFeed.crud.PrescriptionDrugService;
 import org.junit.Ignore;
 import org.junit.Test;

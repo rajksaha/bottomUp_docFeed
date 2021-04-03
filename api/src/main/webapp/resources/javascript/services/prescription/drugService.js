@@ -10,11 +10,11 @@ app.service('DrugService', function ($resource) {
                 isArray:false
             }
         }),
-        getDrugDefaultSetup : $resource('/rest/doctorDrugSetting/getDrugDefaultSetup/:doctorID/:drugID', {}, {
+        getDrugDefaultSetup : $resource('/rest/drugDefSetup/getDrugDefaultSetup/:drugID/:genericID', {}, {
             'query':  {
                 method:'GET',
                 isArray:false,
-                params: {doctorID: '@doctorID', drugID: '@drugID'}
+                params: {drugID: '@drugID', genericID: '@genericID'}
             }
         }),
         getTypeOfDrugDay : $resource('/rest/contentDrugType/getByParam', {}, {
@@ -82,6 +82,13 @@ app.service('DrugService', function ($resource) {
                 method:'POST',
                 params: {drugType: '@drugType', drugName: '@drugName', drugStr: '@drugStr', drugTime: '@drugTime', doseUnit: '@doseUnit', drugWhen: '@drugWhen', drugAdvice: '@drugAdvice'}
             }
-        })
+        }),
+        getCompDrugList : $resource('/rest/contentDrugGeneric/getCompDrug/:genericID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true,
+                params: {genericID: '@genericID'}
+            }
+        }),
     };
 });

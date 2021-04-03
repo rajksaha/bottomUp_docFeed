@@ -205,6 +205,7 @@ public class AutoCompleteController extends BaseController{
     public List<ContentDrugGenericData> genericDrug(@RequestBody SearchData searchData) throws BottomUpException {
         Map<String, Object> param = new HashMap<>();
         param.put("term", searchData.getTerm());
+        param.put("typeID", searchData.getIntType());
         return contentDrugGenericService.getByParam(param);
     }
 }

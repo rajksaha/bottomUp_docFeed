@@ -97,7 +97,7 @@ app.controller('DrugSetupController', function($scope, $rootScope, $state, $http
 
     $scope.delete = function(drugSetup){
 
-        DrugSetupService.deletedrugSetup.remove({drugSetupID : drugSetup.drugSetupID} ).$promise.then(function(result) {
+        DrugSetupService.delete.remove({drugID : drugSetup.drugID} ).$promise.then(function(result) {
             $scope.refreshList();
             $scope.showSuccessMessage("Information deleted successfully");
         });

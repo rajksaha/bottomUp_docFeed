@@ -14,6 +14,7 @@
             `drugDoseUnit`,
             `drugWhenID`,
 			`drugAdviceID`,
+			`doseString`,
 			`presNum`,
 			`updatedBy`,
 			`updatedOn`,
@@ -28,6 +29,7 @@
 			#{drugDoseUnit},
 			#{drugWhenID},
 			#{drugAdviceID},
+			#{doseString},
 			#{presNum},
 			#{updatedBy},
 			#{updatedOn},
@@ -46,6 +48,7 @@
 			`drugDoseUnit`,
 			`drugWhenID`,
 			`drugAdviceID`,
+			`doseString`,
 			`presNum`,
 			`updatedBy`,
 			`updatedOn`,
@@ -60,6 +63,7 @@
 			pc.`drugDoseUnit`,
 			pc.`drugWhenID`,
 			pc.`drugAdviceID`,
+			pc.`doseString`,
 			pc.`presNum`,
 			#{userName},
 			NOW(),
@@ -86,6 +90,7 @@
 		`drugDoseUnit` = #{drugDoseUnit},
 		`drugWhenID` = #{drugWhenID},
 		`drugAdviceID` = #{drugAdviceID},
+		`doseString` = #{doseString},
 		`presNum` = #{presNum},
 		`updatedBy` = #{updatedBy},
 		`updatedOn` = #{updatedOn}
@@ -102,6 +107,7 @@
             `drugDoseUnit`,
             `drugWhenID`,
 			`drugAdviceID`,
+			`doseString`,
 			`presNum`,
 			`updatedBy`,
 			`updatedOn`,
@@ -122,6 +128,7 @@
 		`drugDoseUnit`,
 		`drugWhenID`,
 		`drugAdviceID`,
+		`doseString`,
 		`presNum`,
 		`updatedBy`,
 		`updatedOn`,
@@ -147,6 +154,7 @@
 		PD.`drugDoseUnit`,
 		PD.`drugWhenID`,
 		PD.`drugAdviceID`,
+		PD.`doseString`,
 		PD.`presNum`,
 		CD.drugName,
 		CD.strength AS drugStrength,
@@ -186,6 +194,5 @@
 			AND presDrugID = #{presDrugID}
 		</if>
 	</delete>
-
 
 </mapper>

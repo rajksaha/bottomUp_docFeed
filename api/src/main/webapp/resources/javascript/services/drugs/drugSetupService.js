@@ -102,6 +102,20 @@ app.service('DrugSetupService', function ($resource) {
                 method:'DELETE',
                 params: {genericID: '@genericID'}
             }
+        }),
+        getCompDrugList : $resource('/rest/contentDrugGeneric/getCompDrug/:genericID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true,
+                params: {genericID: '@genericID'}
+            }
+        }),
+        updateGenericInfo : $resource('/rest/contentDrugGeneric/updateGeneric/:drugID/:genericID', {}, {
+            'query':  {
+                method:'PUT',
+                isArray:false,
+                params: {drugID: '@drugID', genericID: '@genericID'}
+            }
         })
 
     };

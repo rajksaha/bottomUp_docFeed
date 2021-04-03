@@ -1,0 +1,63 @@
+<div class="modal-header modalHead ">
+	<h4 class="modal-title">Company Drug List for {{drugData.genericDrugName}}</h4>
+</div>
+<div class="modal-body modalBody"  style="position:relative; z-index:1;">
+	<div class="alert alert-danger alert-dismissable" data-ng-show="error">
+		<div>{{errorMessage}}</div>
+		<div id="lblMsg_modal"></div>
+	</div>
+
+	<table class="table table-condensed table-bordered">
+		<thead class="">
+		<tr >
+			<th width="80%"><strong>Company Drug Name</strong></th>
+			<th width="20%"><strong>Action</strong></th>
+		</tr>
+		</thead>
+		<tbody >
+			<tr>
+				<td>
+					<input type="text" data-ng-disabled="compAddDrug.drugID" data-ng-model="compAddDrug.drugName" typeahead="drugNameList.drugName for drugNameList in getDrugName($viewValue)"
+						   class="form-control required" placeholder="Add Drugs"
+						   typeahead-on-select='onSelectDrugName($item, $model, $label)'/>
+				</td>
+				<td>
+					<button data-ng-show="compAddDrug.drugID" data-ng-click="updateGenericInfo(compAddDrug)" class="btn btn-success pull-right">
+						<i class="fa fa-plus" ></i>
+					</button>
+
+					<button data-ng-show="compAddDrug.drugID" data-ng-click="compAddDrug = null" class="btn btn-warning pull-right">
+						<i class="fa fa-remove" ></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="table table-condensed table-bordered">
+		<thead class="">
+		<tr >
+			<th width="60%"><strong>Company Drug Name</strong></th>
+			<th width="30%"><strong>Company Name</strong></th>
+			<th width="10%"><strong>Action</strong></th>
+		</tr>
+		</thead>
+		<tbody >
+			<tr class="" data-ng-repeat="compDrug in compDrugList">
+				<td >
+					<span>{{compDrug.drugName}}</span>
+				</td>
+				<td >
+					<span >{{compDrug.companyName}}</span>
+				</td>
+				<td >
+					<i title="Delete" class="fa fa-trash" data-ng-click="removeGeneric(compDrug.drugID, $index)"></i>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+<div class="modal-footer modalFoot">
+	<button class="btn btnLanier btn-danger" data-ng-click="cancel()" ><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Cancel</button>
+</div>

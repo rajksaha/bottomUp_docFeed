@@ -26,7 +26,7 @@ import static utility.type.PresContentDetailType.*;
 public class OldPrescriptionService {
 
     @Autowired
-    private PrescriptionDrugService prescriptionDrugService;
+    private PrescriptionDrugMapper prescriptionDrugMapper;
 
     @Autowired
     private PrescriptionComplainMapper prescriptionComplainMapper;
@@ -75,7 +75,7 @@ public class OldPrescriptionService {
         switch (itemType){
             case DRUG:
                 params.put(copyByAppointment ? "appointmentID" : DRUG.getIdName(),requestedID);
-                prescriptionDrugService.selectInsert(params);
+                prescriptionDrugMapper.selectInsert(params);
                 break;
             case COMPLAIN:
                 params.put(copyByAppointment ? "appointmentID" : COMPLAIN.getIdName(),requestedID);

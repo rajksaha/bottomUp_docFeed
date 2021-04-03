@@ -45,6 +45,15 @@
 		WHERE drugID = #{drugID}
 	</update>
 
+	<update id="updateGeneric" parameterType="map">
+		UPDATE `content_drug`
+		SET
+		`genericID` = #{genericID},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = NOW()
+		WHERE drugID = #{drugID}
+	</update>
+
 	<select id="getByID" parameterType="long" resultType="contentDrug">
 		SELECT
 			`drugID`,
@@ -93,10 +102,10 @@
 			AND companyID = #{companyID}
 		</if>
 		<if test="drugName != null">
-			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{drugName}))
+			AND LOWER(drugName) LIKE LOWER(CONCAT(#{drugName}, '%'))
 		</if>
 		<if test="genericName != null">
-			AND LOWER(DG.genericDrugName) LIKE LOWER(CONCAT('%',#{genericName}))
+			AND LOWER(DG.genericDrugName) LIKE LOWER(CONCAT(#{genericName}, '%'))
 		</if>
 	</select>
 
@@ -126,17 +135,20 @@
 		<if test="companyID != null">
 			AND companyID = #{companyID}
 		</if>
+		<if test="genericID != null">
+			AND CD.genericID = #{genericID}
+		</if>
 		<if test="typeID != null">
 			AND CD.typeID = #{typeID}
 		</if>
 		<if test="term != null">
-			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{term}))
+			AND LOWER(drugName) LIKE LOWER(CONCAT(#{term},'%'))
 		</if>
 		<if test="drugName != null">
-			AND LOWER(drugName) LIKE LOWER(CONCAT('%',#{drugName}))
+			AND LOWER(drugName) LIKE LOWER(CONCAT(#{drugName}, '%'))
 		</if>
 		<if test="genericName != null">
-			AND LOWER(DG.genericDrugName) LIKE LOWER(CONCAT('%',#{genericName}))
+			AND LOWER(DG.genericDrugName) LIKE LOWER(CONCAT(#{genericName}, '%'))
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

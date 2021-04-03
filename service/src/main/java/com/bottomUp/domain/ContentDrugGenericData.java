@@ -2,6 +2,8 @@ package com.bottomUp.domain;
 
 import com.bottomUp.domain.common.BaseData;
 
+import java.util.List;
+
 /**
  * Created by raj on 3/27/2021.
  */
@@ -11,6 +13,8 @@ public class ContentDrugGenericData extends BaseData {
     private String genericDrugName;
     private Integer typeID;
     private String drugTypeName;
+
+    private List<ContentDrugData> compDrugList;
 
     public Long getGenericID() {
         return genericID;
@@ -34,5 +38,21 @@ public class ContentDrugGenericData extends BaseData {
 
     public void setTypeID(Integer typeID) {
         this.typeID = typeID;
+    }
+
+    public String getDrugTypeName() {
+        return drugTypeName;
+    }
+
+    public void setDrugTypeName(String drugTypeName) {
+        this.drugTypeName = drugTypeName;
+    }
+
+    public List<ContentDrugData> getCompDrugList() {
+        return compDrugList;
+    }
+
+    public void setCompDrugList(List<ContentDrugData> compDrugList) {
+        this.compDrugList = compDrugList;
     }
 }

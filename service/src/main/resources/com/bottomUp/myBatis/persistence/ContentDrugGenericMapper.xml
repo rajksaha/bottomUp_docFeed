@@ -73,11 +73,14 @@
 		FROM `content_drug_generic` CD
 		JOIN doctor_feed.content_drug_type DT ON CD.typeID = DT.drugTypeID
 		WHERE 1 = 1
+		<if test="typeID != null">
+			AND typeID = #{typeID}
+		</if>
 		<if test="genericID != null">
 			AND genericID = #{genericID}
 		</if>
 		<if test="term != null">
-			AND LOWER(genericDrugName) LIKE LOWER(CONCAT('%',#{term}))
+			AND LOWER(genericDrugName) LIKE LOWER(CONCAT(#{term}, '%'))
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}
