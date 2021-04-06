@@ -43,7 +43,10 @@ public class PrescriptionDrugService {
     @Autowired
     private DoctorDrugSettingMapper doctorDrugSettingMapper;
 
-    public void save(PrescriptionDrugData drugData) throws BottomUpException {
+    @Autowired
+    private DrugDefaultSetupMapper drugDefaultSetupMapper;
+
+    public void save(PrescriptionDrugData drugData, Long doctorID) throws BottomUpException {
         //TODO:Drug Name
         if(drugData.getPeriodList() != null){
             drugData.setDoseString(JsonConverter.convertListToJson(drugData.getPeriodList(), false));
@@ -60,11 +63,11 @@ public class PrescriptionDrugService {
             ModelMapper modelMapper = new ModelMapper();
             modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
             modelMapper.map(drugData, drugDefaultSetupData);
-
+            drugDefaultSetupData.setDoctorID(doctorID);
             if(drugData.getGenericID() != null){
-                //TODO://create in def setup
+                drugDefaultSetupMapper.create(drugDefaultSetupData);
             }else{
-                //TODO://create in doctor
+                doctorDrugSettingMapper.create(drugDefaultSetupData);
             }
         }
     }

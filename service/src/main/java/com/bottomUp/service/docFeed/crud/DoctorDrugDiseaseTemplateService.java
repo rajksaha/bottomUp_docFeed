@@ -1,10 +1,7 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentTypeData;
 import com.bottomUp.domain.DoctorDrugDiseaseTemplateData;
-import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
-import com.bottomUp.myBatis.persistence.DoctorDoseDrugDiseaseTemplateMapper;
 import com.bottomUp.myBatis.persistence.DoctorDrugDiseaseTemplateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

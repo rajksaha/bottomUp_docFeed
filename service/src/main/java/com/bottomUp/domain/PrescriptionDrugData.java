@@ -13,6 +13,7 @@ public class PrescriptionDrugData extends BaseData {
   private Long drugTypeID;
   private Long drugID;
   private Long genericID;
+  private String genericDrugName;
   private Integer doseTypeCode;
   private Integer drugWhenID;
   private Integer drugAdviceID;
@@ -214,5 +215,13 @@ public class PrescriptionDrugData extends BaseData {
 
   public void setPeriodList(List<DoseData> periodList) {
     this.periodList = periodList;
+  }
+
+  public String getGenericDrugName() {
+    return genericDrugName;
+  }
+
+  public void setGenericDrugName(String genericDrugName) {
+    this.genericDrugName = genericDrugName;
   }
 }

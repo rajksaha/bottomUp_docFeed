@@ -15,6 +15,19 @@ public class ContentDrugData extends BaseData {
   private String genericDrugName;
   private String companyName;
 
+  private String displayDrugName;
+  private String disDrugCompName;
+
+  public String getDisplayDrugName() {
+    if(this.drugName != null && this.strength != null && this.strength.trim().length() > 0){
+      return this.drugName + " - " + this.strength;
+    }
+    return this.drugName;
+  }
+
+  public String getDisDrugCompName() {
+    return getDisplayDrugName() + " [" + this.companyName + "]";
+  }
 
   public Long getDrugID() {
     return drugID;

@@ -89,6 +89,6 @@ app.service('DrugService', function ($resource) {
                 isArray:true,
                 params: {genericID: '@genericID'}
             }
-        }),
+        })
     };
 });

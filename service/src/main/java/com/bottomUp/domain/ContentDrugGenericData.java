@@ -13,6 +13,16 @@ public class ContentDrugGenericData extends BaseData {
     private String genericDrugName;
     private Integer typeID;
     private String drugTypeName;
+    private String strength;
+
+    private String displayDrugName;
+
+    public String getDisplayDrugName() {
+        if(this.genericDrugName != null && this.strength != null){
+            return this.genericDrugName + " - " + this.strength;
+        }
+        return this.genericDrugName;
+    }
 
     private List<ContentDrugData> compDrugList;
 
@@ -54,5 +64,13 @@ public class ContentDrugGenericData extends BaseData {
 
     public void setCompDrugList(List<ContentDrugData> compDrugList) {
         this.compDrugList = compDrugList;
+    }
+
+    public String getStrength() {
+        return strength;
+    }
+
+    public void setStrength(String strength) {
+        this.strength = strength;
     }
 }

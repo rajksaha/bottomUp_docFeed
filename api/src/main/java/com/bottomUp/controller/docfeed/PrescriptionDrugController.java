@@ -52,7 +52,7 @@ public class PrescriptionDrugController extends BaseController {
     public Map<String, Object> save(@RequestBody PrescriptionDrugData data) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        this.prescriptionDrugService.save(data);
+        this.prescriptionDrugService.save(data, this.getUserDetail().getDoctorData().getDoctorID());
         return result;
     }
 

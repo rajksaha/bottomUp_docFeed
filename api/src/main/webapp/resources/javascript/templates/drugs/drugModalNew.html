@@ -34,7 +34,8 @@
 
 				<input data-ng-show="drugByCompany" type="text" data-ng-model="drugData.drugName"
 					   class="form-control required search-box" placeholder="Add Drugs by Company name"
-					   typeahead="drugNameList.drugName for drugNameList in getDrugName($viewValue)"
+					   data-ng-disabled="drugData.drugID"
+					   typeahead="drugNameList.displayDrugName for drugNameList in getDrugName($viewValue)"
 					   typeahead-on-select='onSelectDrugName($item.drugID, $item.drugName, $item.strength, $item.genericID)'>
 					<button data-ng-click="clearCompanyName()" data-ng-show="drugData.drugName" class="close-icon"/>
 				</input>
@@ -42,7 +43,8 @@
 
 				<input data-ng-show="!drugByCompany" type="text" data-ng-model="drugData.genericDrugName"
 					   class="form-control required" placeholder="Add Drugs by Generic"
-					   typeahead="genericNameList.genericDrugName for genericNameList in getDrugGenericName($viewValue)"
+					   data-ng-disabled="drugData.genericID"
+					   typeahead="genericNameList.displayDrugName for genericNameList in getDrugGenericName($viewValue)"
 					   typeahead-on-select='onSelectGenericName($item, $model, $label)'>
 					<button data-ng-click="clearGenericName()" data-ng-show="drugData.genericDrugName" class="close-icon"/>
 				</input>
@@ -66,8 +68,8 @@
 			</div>
 			<div class="form-group col-xs-8 col-sm-8">
 				<select  class="form-control pull-left" data-ng-model="drugData.drugID"
-						data-ng-change="onSelectDrugName(drugComp.drugID, drugComp.drugName, drugComp.strength, drugComp.genericID)"
-						data-ng-options="drugComp.drugID as drugComp.drugName for drugComp in drugCompanyList" />
+						data-ng-change="selectCompanyDrugByID(drugData.drugID)"
+						data-ng-options="drugComp.drugID as drugComp.disDrugCompName for drugComp in drugCompanyList" />
 			</div>
 		</div>
 		<div>

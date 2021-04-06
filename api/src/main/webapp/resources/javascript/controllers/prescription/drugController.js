@@ -212,7 +212,9 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
         $scope.drugData.drugID = drugID;
         $scope.drugData.drugName = drugName;
         $scope.drugData.drugStrength = strength;
-        DrugService.getDrugDefaultSetup.query({}, {drugID: item.drugID, genericID: genericID}).$promise.then(function (result) {
+        $scope.drugData.genericID = genericID;
+        $scope.drugData.hasDefaultSetup = 0;
+        DrugService.getDrugDefaultSetup.query({}, {drugID: drugID, genericID: genericID ? genericID : 0}).$promise.then(function (result) {
             $scope.doctorDrugData = result;
             if($scope.doctorDrugData && $scope.doctorDrugData.periodList){
                 $scope.drugData.hasDefaultSetup = 1;
@@ -223,6 +225,14 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
                 $scope.inItDrugsType($scope.drugData.periodList);
             }
         });
+    };
+
+    $scope.selectCompanyDrug = function (compDrug) {
+        $scope.onSelectDrugName(compDrug.drugID, compDrug.drugName, compDrug.strength, compDrug.genericID);
+    };
+
+    $scope.selectCompanyDrugByID = function (drugID) {
+        $scope.selectCompanyDrug($filter('filter')($scope.drugCompanyList, {drugID: drugID}, true)[0]);
     };
 
     $scope.getDrugGenericName = function(term) {
@@ -243,7 +253,28 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
         $scope.drugData.genericID = item.genericID;
         DrugService.getCompDrugList.query({}, {genericID: item.genericID}).$promise.then(function (result) {
             $scope.drugCompanyList = result;
+            if($scope.drugCompanyList != null && $scope.drugCompanyList.length > 0){
+                $scope.drugData.drugID = $scope.drugCompanyList[0].drugID;
+                $scope.selectCompanyDrug($scope.drugCompanyList[0]);
+            }
         });
+    };
+
+    $scope.clearCompanyName = function () {
+        $scope.drugData.drugID = null;
+        $scope.drugData.drugName = null;
+        $scope.drugData.drugStrength = null;
+        $scope.drugData.hasDefaultSetup = 0;
+        $scope.drugData.genericID = null;
+    };
+
+    $scope.clearGenericName = function () {
+        $scope.drugData.genericDrugName = null;
+        $scope.drugData.drugID = null;
+        $scope.drugData.drugName = null;
+        $scope.drugData.drugStrength = null;
+        $scope.drugData.hasDefaultSetup = 0;
+        $scope.drugData.genericID = null;
     };
 
     //maybe not needed anymore
