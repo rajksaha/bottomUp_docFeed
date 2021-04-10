@@ -1,7 +1,7 @@
-ALTER TABLE doctor_feed.appointment ADD updatedBy VARCHAR(100) NULL;
-ALTER TABLE doctor_feed.appointment ADD updatedOn TIMESTAMP NULL;
-ALTER TABLE doctor_feed.appointment ADD createdBy VARCHAR(100) NULL;
-ALTER TABLE doctor_feed.appointment ADD createdOn TIMESTAMP NULL;
+ALTER TABLE doctor_feed.medical_certificate ADD updatedBy VARCHAR(100) NULL;
+ALTER TABLE doctor_feed.medical_certificate ADD updatedOn TIMESTAMP NULL;
+ALTER TABLE doctor_feed.medical_certificate ADD createdBy VARCHAR(100) NULL;
+ALTER TABLE doctor_feed.medical_certificate ADD createdOn TIMESTAMP NULL;
 
 ALTER TABLE doctor_feed.menu_setting ADD updatedBy VARCHAR(100) NULL;
 ALTER TABLE doctor_feed.menu_setting ADD updatedOn TIMESTAMP NULL;

@@ -2,8 +2,10 @@ package com.bottomUp.controller;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.common.utility.SearchData;
+import com.bottomUp.domain.MedicalCertificateData;
 import com.bottomUp.domain.PrescriptionDiagnosisData;
 import com.bottomUp.model.DietData;
+import com.bottomUp.service.docFeed.MedicalCertificateService;
 import com.bottomUp.service.docFeed.crud.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,9 @@ public class PrescriptionSaveController extends BaseController{
 
     @Autowired
     private ContentDetailService contentDetailService;
+
+    @Autowired
+    private MedicalCertificateService medicalCertificateService;
 
     @RequestMapping(value = {"/saveDiagnosis"}, method = RequestMethod.POST)
     @ResponseBody
@@ -68,5 +73,18 @@ public class PrescriptionSaveController extends BaseController{
     @ResponseBody
     public void savePresNote(HttpServletRequest request, @RequestBody SearchData searchData) throws BottomUpException {
         this.contentDetailService.saveNote(searchData);
+    }
+
+    @RequestMapping(value = {"/createMedicalCert"}, method = RequestMethod.POST)
+    @ResponseBody
+    public MedicalCertificateData saveMedicalCertificate(HttpServletRequest request, @RequestBody MedicalCertificateData certificateData) throws BottomUpException {
+        this.medicalCertificateService.create(certificateData);
+        return certificateData;
+    }
+
+    @RequestMapping(value = {"/updateMedicalCert"}, method = RequestMethod.POST)
+    @ResponseBody
+    public void updateMedicalCertificate(HttpServletRequest request, @RequestBody MedicalCertificateData certificateData) throws BottomUpException {
+        this.medicalCertificateService.update(certificateData);
     }
 }

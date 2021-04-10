@@ -527,6 +527,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
                             'resources/javascript/controllers/prescription/complainController.js',
                             'resources/javascript/controllers/prescription/diagnosisController.js',
                             'resources/javascript/controllers/prescription/dietController.js',
+                            'resources/javascript/controllers/prescription/medicalCertController.js',
                             'resources/javascript/controllers/prescription/drugController.js',
                             'resources/javascript/controllers/prescription/pdfSelectionController.js',
                             'resources/javascript/controllers/prescription/prescriptionSettingController.js',

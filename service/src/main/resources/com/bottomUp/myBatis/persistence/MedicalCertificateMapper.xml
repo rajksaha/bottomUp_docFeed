@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.MedicalCertificateMapper">
+
+	<insert id="create" parameterType="medicalCert" useGeneratedKeys="true" keyProperty="medicalCertID" >
+
+		INSERT INTO `medical_certificate`
+		(
+			`appointmentID`,
+			`startDate`,
+			`endDate`,
+			`addComment`,
+			`updatedOn`,
+			`updatedBy`,
+			`createdOn`,
+			`createdBy`
+		)
+		VALUES
+		(
+			#{appointmentID},
+			#{startDate},
+			#{endDate},
+			#{addComment},
+			#{updatedOn},
+			#{updatedBy},
+			#{createdOn},
+			#{createdBy}
+		)
+
+	</insert>
+	
+	<update id="update" parameterType="medicalCert">
+		UPDATE medical_certificate SET
+			appointmentID = #{appointmentID},
+			startDate = #{startDate},
+			endDate = #{endDate},
+			addComment = #{addComment},
+			`updatedOn` = #{updatedOn},
+			`updatedBy` = #{updatedBy}
+		WHERE medicalCertID = #{medicalCertID}
+	</update>
+
+	<select id="getByAppointmentID" parameterType="long" resultType="medicalCert">
+		SELECT medicalCertID, appointmentID, startDate, endDate, addComment, updatedBy, `createdOn`, `createdBy`
+		FROM medical_certificate
+		WHERE appointmentID = #{appointmentID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="medicalCert">
+		SELECT medicalCertID, appointmentID, startDate, endDate, addComment, updatedBy, `createdOn`, `createdBy`
+		FROM medical_certificate
+		WHERE 1 = 1
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
+			ORDER BY ${sortColumn} ${sortOrder}
+			LIMIT #{limit} OFFSET #{offset}
+		</if>
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM medical_certificate WHERE companyID = #{companyID}
+	</delete>
+
+
+</mapper>

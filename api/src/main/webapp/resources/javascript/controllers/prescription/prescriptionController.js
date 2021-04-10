@@ -447,51 +447,8 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
         });
     };
 
-
-
     $scope.print = function (){
         $scope.printPreview();
-        /*if($scope.diagnosisData.diseaseID){
-         var dataString = "query=13" + '&diseaseID=' + $scope.diagnosisData.diseaseID + '&doctorID=' + $scope.doctorData.doctorID;
-         $http({
-         method: 'POST',
-         url: "phpServices/prescription/prescriptionHelperService.php",
-         data: dataString,
-         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-         }).success(function (result) {
-         if(parseInt(result) == -1){
-
-         var prescriptionSettingData = {};
-         prescriptionSettingData.diseaseID = $scope.diagnosisData.diseaseID;
-         prescriptionSettingData.diseaseName = $scope.diagnosisData.diseaseName;
-         prescriptionSettingData.doctorID = $scope.doctorData.doctorID;
-
-         var modalInstance = $modal.open({
-         templateUrl: 'javascript/templates/prescription/prescriptionSetting.html',
-         windowClass: 'fade in',
-         controller: 'PrescriptionController.PrescriptionSettingController',
-         resolve: {
-         data: function () {
-         return {
-         prescriptionSettingData
-         };
-         }
-         },
-         backdrop: 'static'
-         });
-         modalInstance.result.then(function(result) {
-         $scope.printPreview();
-         });
-
-
-         }else{
-         $scope.printPreview();
-         }
-         });
-
-         }else{
-         $scope.printPreview();
-         }*/
     };
     $scope.noteModal = function () {
         var noteData = {};
@@ -703,7 +660,6 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
     };
 
     $scope.photoModal = function () {
-
         var modalInstance = $modal.open({
             templateUrl: 'resources/javascript/templates/patient/imageModal.html',
             windowClass: 'fade in',
@@ -729,12 +685,12 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
     $scope.printPreview = function (){
         var debug = "";
-        $window.open("http://prescriptionapiapp-env.eba-pkcugqu8.ap-southeast-1.elasticbeanstalk.com/api/prescription.php?appointmentID="+ $scope.appoinmentData.appointmentID + debug, '_blank');
+        $window.open("http://localhost/prescription/api/prescription.php?appointmentID=" + $scope.appoinmentData.appointmentID, '_blank');
     };
 
     $scope.openPdf = function(pdf){
         var dataString = "query=15";
-        $window.open("http://localhost/doc_feed_php_api/api/reportHelper.php?appointmentID=16&XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=16071395666061", '_blank');
+        $window.open("http://localhost/prescription/api/prescription.php?appointmentID=" + $scope.appoinmentData.appointmentID, '_blank');
     };
 
     $scope.performDiagnosis = function () {
@@ -793,6 +749,21 @@ app.controller('PrescriptionController', function($scope, $http, $modal, $rootSc
 
     $scope.cancelPatientInfo = function(){
         $scope.patientInfoEdit = false;
+    };
+
+    $scope.performMedicalCert = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'resources/javascript/templates/certificate/medical.html',
+            windowClass: 'fade in',
+            size: 'sm',
+            controller: 'PrescriptionController.MedicalCertController',
+            resolve: {
+                appointmentID: function () {
+                    return $scope.appoinmentData.appointmentID;
+                }
+            },
+            backdrop: 'static'
+        });
     };
 
     $scope.inIt = function (){

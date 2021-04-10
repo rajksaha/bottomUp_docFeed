@@ -21,8 +21,6 @@ app.controller('HeaderController', function($scope, $rootScope,$state, $location
         $state.go('root.appointment');
     };
     $scope.changePassword = function(userData){
-
-
         var modalInstance = $modal.open({
             templateUrl: 'resources/javascript/templates/user/changePasswordModal.html',
             controller: 'ChangePasswordModal',
@@ -45,7 +43,6 @@ app.controller('HeaderController', function($scope, $rootScope,$state, $location
 
 
     $scope.home = function () {
-
         $location.path('/home');
         $scope.$emit('event:clearStatus');
     };

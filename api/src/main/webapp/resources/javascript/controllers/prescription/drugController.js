@@ -167,6 +167,7 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
         }
         delete presDrugData.drugType;
         delete presDrugData.optionalInitial;
+        delete presDrugData.preodicValue;
         $scope.stringDoseMaker(presDrugData.periodList);
         presDrugData.appointmentID = appointmentData.appointmentID;
         presDrugData.doctorID = appointmentData.doctorID;
@@ -182,6 +183,9 @@ app.controller('PrescriptionController.PrescribeDrugsController', function($scop
 
     $scope.stringDoseMaker = function (periodList){
         angular.forEach(periodList, function(period, key) {
+            var selType = $filter('filter')($scope.durationTypeList, {durationType: period.durationType}, true)[0];
+            period.bngDurationName = selType.bangla;
+            period.engDurationName = selType.english;
             if(period.doseDataList && period.doseDataList.length > 0){
                 period.dose = period.doseDataList.reduce(function (a, b) {return (a.value || a) + "-" + b.value})
             }else{

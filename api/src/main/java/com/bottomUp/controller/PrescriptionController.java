@@ -3,6 +3,7 @@ package com.bottomUp.controller;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.*;
 import com.bottomUp.domain.common.user.ContentDetailData;
+import com.bottomUp.service.docFeed.MedicalCertificateService;
 import com.bottomUp.service.docFeed.PrescriptionViewService;
 import com.bottomUp.service.docFeed.crud.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,9 @@ public class PrescriptionController extends BaseController{
 
     @Autowired
     private PrescriptionVitalService prescriptionVitalService;
+
+    @Autowired
+    private MedicalCertificateService medicalCertificateService;
 
 
     @RequestMapping(value = {"/getDoctorDetail/{doctorID}"}, method = RequestMethod.GET)
@@ -216,6 +220,12 @@ public class PrescriptionController extends BaseController{
     @ResponseBody
     public List<PresNoteData> getPrescribedNote(@PathVariable("appointmentID") Long appointmentID, HttpServletRequest request) throws BottomUpException {
         return prescriptionViewService.getPrescribedNote(appointmentID);
+    }
+
+    @RequestMapping(value = {"/getMedicalReport/{appointmentID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public MedicalCertificateData getMedicalReport(@PathVariable("appointmentID") Long appointmentID, HttpServletRequest request) throws BottomUpException {
+        return medicalCertificateService.getByAppointmentID(appointmentID);
     }
 
 

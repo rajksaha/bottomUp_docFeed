@@ -1,0 +1,34 @@
+<div class="modal-header modalHead ">
+	<h4 class="modal-title">Medical Certificate</h4>
+</div>
+<div class="modal-body modalBody"  style="position:relative; z-index:1;">
+	<div class="alert alert-danger alert-dismissable" data-ng-show="error">
+        <div>{{errorMessage}}</div>
+        <div id="lblMsg_modal"></div>
+    </div>
+	<div  class="row step4Width" id="validateReq">
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
+			<label>Form:</label>
+			<input type="text"  class="form-control form-control-date input-sm" data-ng-model="medicalCertData.startDate"
+				   maxlength="100"
+				   datepicker-popup="dd/MM/yyyy" close-text="Close" is_open="dt1" ng-focus="dt1 = true"
+				   ng-click="dt1 = true" >
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group">
+			<label>End:</label>
+			<input type="text"  class="form-control form-control-date input-sm" data-ng-model="medicalCertData.endDate"
+				   maxlength="100"
+				   datepicker-popup="dd/MM/yyyy" close-text="Close" is_open="dt2" ng-focus="dt2 = true"
+				   ng-click="dt2 = true" >
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+			<label>Additional Comment:</label>
+			<textarea  maxlength="1000" class="form-control" data-ng-model="medicalCertData.addComment" style="width: 100%"; />
+		</div>
+	</div>
+</div>
+<div class="modal-footer modalFoot">
+	<button data-ng-show="medicalCertData.medicalCertID > 0" class="btn btnLanier btn-warning" data-ng-click="printMedicalCert()" ><span class="fa fa-print" aria-hidden="true"></span> Print</button>
+	<button class="btn btnLanier btn-success" data-ng-click="save()" ><span class="glyphicons glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save</button>
+	<button class="btn btnLanier btn-danger" data-ng-click="cancel()" ><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Cancel</button>
+</div>

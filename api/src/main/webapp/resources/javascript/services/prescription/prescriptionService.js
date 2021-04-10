@@ -252,6 +252,12 @@ app.service('PrescriptionService', function ($resource) {
                 method:'DELETE',
                 params: {contentDetailID: '@contentDetailID'}
             }
+        }),
+        getMedicalReport : $resource('/rest/prescription/getMedicalReport/:appointmentID', {}, {
+            'query':  {
+                method:'GET',
+                params: {appointmentID: '@appointmentID'}
+            }
         })
     };
 });

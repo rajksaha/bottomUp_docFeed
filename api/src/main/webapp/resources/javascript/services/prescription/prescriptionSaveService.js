@@ -102,6 +102,18 @@ app.service('PresSaveService', function ($resource) {
                 method:'POST',
                 isArray:false
             }
+        }),
+        createMedCert : $resource('/rest/prescriptionSave/createMedicalCert', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
+        updateMedCert : $resource('/rest/prescriptionSave/updateMedicalCert', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
         })
     };
 });
