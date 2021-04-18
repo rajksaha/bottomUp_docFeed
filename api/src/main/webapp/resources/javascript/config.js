@@ -1058,6 +1058,40 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
     };
 
 
+
+    var groupAdvice = {
+        name : 'root.groupAdvice',
+        url : '/groupAdvice',
+        views : {
+            'container@' : {
+                templateUrl : 'resources/javascript/templates/advice/groupAdvice.html',
+                controller : 'GroupAdviceController'
+            }
+        },
+        resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: ['resources/javascript/controllers/advice/groupAdviceController.js' ]
+                    });
+            }],
+            loadMyService: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                        name: 'doctorPlatform',
+                        files: [
+                            'resources/javascript/services/jsonService.js' + jsVersion,
+                            'resources/javascript/services/advice/groupAdviceService.js' + jsVersion,
+                            'resources/javascript/services/attachment/attachmentService.js' + jsVersion
+                        ]
+                    });
+            }]
+        }
+    };
+
+
     var invCategory = {
         name : 'root.invCategory',
         url : '/invCategory',
@@ -1118,6 +1152,7 @@ app.config(function( $stateProvider, $urlRouterProvider, $compileProvider, $cont
         .state(contentGeneric)
         .state(genericSetup)
         .state(drugSetup)
+        .state(groupAdvice)
         .state(appointment);
 
 

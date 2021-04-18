@@ -58,6 +58,11 @@ public class ContentDetailService {
         }
     }
 
+    public void addAdvTemplateInPres(ContentDetailData contentDetailData) throws BottomUpException{
+        contentDetailData.setEntityType(PrescriptionContentType.GROUP_ADVICE.name());
+        this.contentDetailMapper.create(contentDetailData);
+    }
+
     public Long createByDrugHistory(DrugHistory drugHistory) throws BottomUpException{
         ContentDetailData contentDetailData = new ContentDetailData();
         if(drugHistory.getCurrentStatus() == 1){

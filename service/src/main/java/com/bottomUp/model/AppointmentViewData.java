@@ -1,5 +1,7 @@
 package com.bottomUp.model;
 
+import utility.DateUtil;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -26,6 +28,18 @@ public class AppointmentViewData {
 
     private PatientViewData patient;
     private DoctorViewData doctor;
+
+    private Date lastVisitDate;
+
+    private String lastVisitDiff;
+
+    public String getLastVisitDiff() {
+        if(appDate != null && lastVisitDate != null){
+            String temp = " [ " + DateUtil.daysBetween(lastVisitDate, appDate) + " days ago ]";
+            return temp;
+        }
+        return lastVisitDiff;
+    }
 
     public long getAppointmentID() {
         return appointmentID;
@@ -105,5 +119,13 @@ public class AppointmentViewData {
 
     public void setAppointmentTypeName(String appointmentTypeName) {
         this.appointmentTypeName = appointmentTypeName;
+    }
+
+    public Date getLastVisitDate() {
+        return lastVisitDate;
+    }
+
+    public void setLastVisitDate(Date lastVisitDate) {
+        this.lastVisitDate = lastVisitDate;
     }
 }

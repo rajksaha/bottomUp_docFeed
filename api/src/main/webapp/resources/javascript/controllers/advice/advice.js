@@ -100,6 +100,32 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
         });
     };
 
+    $scope.bringPrescribedAdviceTemp = function (){
+        $scope.attachmentList = [];
+        PrescriptionService.getPresAdvTemp.query({}, {appointmentID : appointmentData.appointmentID, doctorID: appointmentData.doctorID}).$promise.then(function(result) {
+            $scope.attachmentList = result;
+        });
+    };
+
+    $scope.toggleAdviceTemplate = function (attachment){
+        if(attachment.addedInPres == 0){
+            var content = {};
+            content.entityID = appointmentData.appointmentID;
+            content.content = attachment.contentUrl;
+            content.longDesc = attachment.description;
+            PresSaveService.addPresAdvTemp.query({}, content).$promise.then(function(result) {
+                attachment.contentDetailID = result.contentDetailID;
+                attachment.addedInPres = 1;
+            });
+        }else{
+            PrescriptionService.deletePresAdvTemp.remove({}, {contentDetailID : attachment.contentDetailID}).$promise.then(function(result) {
+                attachment.contentDetailID = null;
+                attachment.addedInPres = 0;
+            });
+        }
+
+    };
+
     $scope.addToPrescription = function () {
         if(validator.validateForm("#validateReq","#lblMsg_modal",null)) {
             $scope.prescribeAdviceData.appointmentID = appointmentData.appointmentID;
@@ -142,6 +168,11 @@ app.controller('PrescribeAdviceController', function($scope, $http, $modal, $roo
                 $scope.prescribeAdviceData = {};
                 $scope.prescribeAdviceData.lang = 0;
                 $scope.bringPrescribedAdvice();
+                break;
+            case 'adviceTemplate':
+                $scope.prescribeAdviceData = {};
+                $scope.prescribeAdviceData.lang = 0;
+                $scope.bringPrescribedAdviceTemp();
                 break;
             default:
                 $scope.activeTab = tab;

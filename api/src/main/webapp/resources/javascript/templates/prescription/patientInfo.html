@@ -1,5 +1,5 @@
 <div class="col-sm-4 col-md-2 col-lg-4 form-group">
-    <label >Name: <span >{{patientData.firstName}}</span></label>
+    <label class="link" data-ng-click="editPatientInfo()">Name: <span  >{{patientData.firstName}}</span></label>
 </div>
 <div class="col-sm-2 col-md-2 col-lg-2 form-group">
     <label >Age: {{patientData.currentAge}} yrs, </label>
@@ -8,14 +8,32 @@
 <div class="col-sm-2 col-md-2 col-lg-2 form-group">
     <label  >Address: {{patientData.address}}</label>
 </div>
-<div class="col-sm-2 col-md-2 col-lg-2 form-group">
-    <label >Referred by: {{patientData.referredBy}}</label>
+<div class="col-sm-4 col-md-4 col-lg-4" style="margin-top: -7px">
+    <div class="pull-right rightBtns" >
+        <a class="btn btn-link  presIcon" title="History" href="javascript:(false)" data-ng-click="menuPopUp('history')">
+            <i class="fa fa-history fa-lg"></i>
+        </a>
+        <a class="btn btn-link  presIcon" title="old Prescription" class="" href="#/oldPrescription">
+            <i class="fa fa-folder-open fa-lg"></i>
+        </a>
+        <a class="btn btn-link  presIcon" title="Inv History" class="" href="#/invReport">
+            <i class="fa fa-stethoscope fa-lg"></i>
+        </a>
+        <a class="btn btn-link  presIcon" title="Follow-up Chart" data-ng-if="patientData.patientType" href="#/followUpChart">
+            <i class="fa fa-heartbeat fa-lg"></i>
+        </a>
+        <a class="btn btn-link  presIcon" data-ng-if="!patientData.patientType" title="Please Select Patient Type To Visit That Page" href="#" onclick="return false;">
+            <i class="fa fa-heartbeat fa-lg"></i>
+        </a>
+        <a class="btn btn-link  presIcon" title="Medical Certificate" class="" href="javascript:(0)"
+           data-ng-click="performMedicalCert()">
+            <i class="fa fa-file-pdf-o fa-lg"></i>
+        </a>
+        <a class="btn btn-link  presIcon" title="Print" class="" href="javascript:(0)" data-ng-click="print()">
+            <i class="fa fa-print fa-lg"></i>
+        </a>
+    </div>
+
 </div>
-<div class="col-sm-2 col-md-2 col-lg-2 form-group">
-    <label >Occupation: {{patientData.occupation}}</label>
-</div>
-<!---->
-<div data-ng-if="hasAccess('EDIT_PATIENT_INFO')" id="source-button" data-ng-show="hoverState">
-    <a href="javascript:" class="btn btn-circular btn-default" data-ng-click="editPatientInfo()"><i class="fa fa-pencil"></i></a>
-</div>
+
 

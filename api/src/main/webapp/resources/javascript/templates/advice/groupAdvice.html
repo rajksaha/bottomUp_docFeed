@@ -1,0 +1,42 @@
+<div class="panel panel-default mt-15">
+    <div class="panel-heading clearfix">
+        <strong>Advice Template List</strong>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success" ng-show="!showForm" title="Add Advice Template" data-ng-click="add()"><span class="glyphicon glyphicon-plus"></span></button>
+        </div>
+    </div>
+    <div class="panel-body" style="background-color: silver">
+        <div class="alert alert-danger alert-dismissable" data-ng-show="hasError">
+            {{message}}
+        </div>
+        <div class="alert alert-success alert-dismissable" data-ng-show="hasSuccess">
+            {{message}}
+        </div>
+
+        <div class="row" style="min-height: 450px">
+            <div class="col-sm-4 col-md-4 col-lg-4" data-ng-repeat="attach in attachmentList">
+                <div class="card card-link">
+                    <div class="card-image">
+                        <img data-ng-src="{{attach.contentUrl}}" style="height: 250px">
+                    </div>
+                    <div class="card-extra card-content">
+                        <span ><i class="fa fa-ellipsis-v "></i> {{attach.description}}</span>
+                        <span class="pull-right">
+                            <i class="fa fa-trash" data-ng-click="delete(attach.attachmentID, attach.contentUrl)"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel-footer" data-ng-show="showForm">
+        <div class="text-right">
+            <button class="btn btn-sm btn-warning" data-ng-click="reset()"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+            <button class="btn btn-sm btn-success" data-ng-click="save(adviceTemplate)" data-ng-hide="adviceTemplate.adviceTemplateID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            <button class="btn btn-sm btn-success" data-ng-click="update(adviceTemplate)" data-ng-show="adviceTemplate.adviceTemplateID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Update</button>
+            <button class="btn btn-sm btn-danger" data-ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+        </div>
+    </div>
+</div>

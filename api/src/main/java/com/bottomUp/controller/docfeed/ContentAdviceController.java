@@ -3,6 +3,8 @@ package com.bottomUp.controller.docfeed;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.ContentAdviceData;
+import com.bottomUp.model.AttachmentData;
+import com.bottomUp.service.common.AttachmentService;
 import com.bottomUp.service.docFeed.crud.ContentAdviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,13 +26,20 @@ public class ContentAdviceController extends BaseController {
     @Autowired
     private ContentAdviceService contentAdviceService;
 
+    @Autowired
+    private AttachmentService attachmentService;
+
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
     public List<ContentAdviceData> getAll(HttpServletRequest request) throws BottomUpException {
-
         Map<String, Object> params = new HashMap<>();
-
         return this.contentAdviceService.getByParam(params);
+    }
+
+    @RequestMapping(value = {"/getGroupAdvice"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<AttachmentData> getGroupAdvice(HttpServletRequest request) throws BottomUpException {
+        return this.attachmentService.getDoctorGroupAdvice(this.getUserDetail().getDoctorData().getDoctorID());
     }
 
     @RequestMapping(value = {"/getByID/{adviceId}"}, method = RequestMethod.GET)

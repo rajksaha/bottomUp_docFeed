@@ -140,6 +140,9 @@
 			pup.contactNo AS contactNo,
 			pup.dateOfBirth AS dateOfBirth,
 			pup.sex AS sex,
+			<if test="lastVisit != null">
+				app2.appDate AS lastVisitDate,
+			</if>
 			p.occupation AS occupation
 		FROM `doctor_feed`.`appointment` app
 		JOIN doctor d ON app.doctorID = d.doctorID
@@ -147,6 +150,16 @@
 		JOIN `doctor_feed`.appointment_type apt ON app.appointmentType = apt.appointmentTypeID
 		JOIN `doctor_feed`.`bottom_up_user` pu ON p.userID = pu.userID
 		JOIN bottom_up_user_profile pup ON pu.userID = pup.userID
+		<if test="lastVisit != null">
+			LEFT JOIN  `doctor_feed`.`appointment` app2 on app2.appointmentID = (SELECT app3.appointmentID
+			FROM `doctor_feed`.`appointment` app3
+			WHERE app3.patientID = app.patientID
+			AND app3.doctorID = app.doctorID
+			AND app3.appDate <![CDATA[ < ]]> DATE_FORMAT(#{appDate},'%Y-%m-%d')
+			AND app.appointmentType != 0
+			ORDER BY app3.appDate DESC
+			LIMIT 1)
+		</if>
 		LEFT JOIN doctor_feed.patient_type pt ON p.patientType = pt.patientTypeID
 		WHERE 1 = 1
 		<if test="appointmentID != null">

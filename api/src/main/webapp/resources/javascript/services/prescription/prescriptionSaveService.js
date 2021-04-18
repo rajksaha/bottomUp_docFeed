@@ -73,6 +73,12 @@ app.service('PresSaveService', function ($resource) {
                 isArray:false
             }
         }),
+        addPresAdvTemp : $resource('/rest/prescriptionSave/addPresAdvTemp', {}, {
+            'query':  {
+                method:'POST',
+                isArray:false
+            }
+        }),
         updateAppStatus : $resource('/rest/appointment/updateStatus', {}, {
             'query':  {
                 method:'POST',

@@ -4,6 +4,7 @@ import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.common.utility.SearchData;
 import com.bottomUp.domain.MedicalCertificateData;
 import com.bottomUp.domain.PrescriptionDiagnosisData;
+import com.bottomUp.domain.common.user.ContentDetailData;
 import com.bottomUp.model.DietData;
 import com.bottomUp.service.docFeed.MedicalCertificateService;
 import com.bottomUp.service.docFeed.crud.*;
@@ -73,6 +74,13 @@ public class PrescriptionSaveController extends BaseController{
     @ResponseBody
     public void savePresNote(HttpServletRequest request, @RequestBody SearchData searchData) throws BottomUpException {
         this.contentDetailService.saveNote(searchData);
+    }
+
+    @RequestMapping(value = {"/addPresAdvTemp"}, method = RequestMethod.POST)
+    @ResponseBody
+    public ContentDetailData addPresAdvTemp(HttpServletRequest request, @RequestBody ContentDetailData contentDetailData) throws BottomUpException {
+        this.contentDetailService.addAdvTemplateInPres(contentDetailData);
+        return contentDetailData;
     }
 
     @RequestMapping(value = {"/createMedicalCert"}, method = RequestMethod.POST)

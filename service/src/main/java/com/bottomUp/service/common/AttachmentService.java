@@ -50,6 +50,14 @@ public class AttachmentService {
         return reportList;
     }
 
+    public List<AttachmentData> getDoctorGroupAdvice(Long doctorID) throws BottomUpException{
+        Map<String, Object> params = new HashMap<>();
+        params.put("entityType", "GROUP_ADVICE");
+        params.put("entityID", doctorID);
+        return attachmentMapper.getAll(params);
+    }
+
+
     public void create(AttachmentData attachment) throws BottomUpException {
         this.attachmentMapper.create(attachment);
     }
@@ -64,6 +72,10 @@ public class AttachmentService {
 
     public List<AttachmentData> getAll(Map<String, Object> params) throws BottomUpException {
         return this.attachmentMapper.getAll(params);
+    }
+
+    public List<AttachmentData> getPrescribedAttachment(Map<String, Object> params) throws BottomUpException{
+        return this.attachmentMapper.getPrescribedAttachment(params);
     }
 
     public void update(AttachmentData attachment)  throws BottomUpException {

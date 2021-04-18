@@ -3,6 +3,8 @@ package com.bottomUp.controller;
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.*;
 import com.bottomUp.domain.common.user.ContentDetailData;
+import com.bottomUp.model.AttachmentData;
+import com.bottomUp.service.common.AttachmentService;
 import com.bottomUp.service.docFeed.MedicalCertificateService;
 import com.bottomUp.service.docFeed.PrescriptionViewService;
 import com.bottomUp.service.docFeed.crud.*;
@@ -64,6 +66,9 @@ public class PrescriptionController extends BaseController{
 
     @Autowired
     private MedicalCertificateService medicalCertificateService;
+
+    @Autowired
+    private AttachmentService attachmentService;
 
 
     @RequestMapping(value = {"/getDoctorDetail/{doctorID}"}, method = RequestMethod.GET)
@@ -226,6 +231,18 @@ public class PrescriptionController extends BaseController{
     @ResponseBody
     public MedicalCertificateData getMedicalReport(@PathVariable("appointmentID") Long appointmentID, HttpServletRequest request) throws BottomUpException {
         return medicalCertificateService.getByAppointmentID(appointmentID);
+    }
+
+    @RequestMapping(value = {"/getPresAdvTemp/{appointmentID}/{doctorID}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<AttachmentData> getPresAdvTemp(@PathVariable("appointmentID") Long appointmentID,
+                                               @PathVariable("doctorID") Long doctorID,
+                                               HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> requestMap = new HashMap<String, Object>();
+        requestMap.put("appointmentID", appointmentID);
+        requestMap.put("doctorID", doctorID);
+        requestMap.put("entityType", "GROUP_ADVICE");
+        return this.attachmentService.getPrescribedAttachment(requestMap);
     }
 
 

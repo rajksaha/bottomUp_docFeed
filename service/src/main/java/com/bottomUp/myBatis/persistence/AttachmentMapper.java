@@ -22,5 +22,7 @@ public interface AttachmentMapper {
 
     List<AttachmentData> getAll(Map<String, Object> params) throws BottomUpException;
 
+    List<AttachmentData> getPrescribedAttachment(Map<String, Object> params) throws BottomUpException;
+
     void update(AttachmentData attachment) throws BottomUpException;
 }

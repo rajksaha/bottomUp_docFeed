@@ -121,6 +121,8 @@ app.controller('AppointmentController', function($scope, $state, $modal, $rootSc
                 $scope.numberOfAppointment = $scope.appointmentList.length;
             }
         });
+
+
     };
     
     $scope.addNewAppointment = function () {

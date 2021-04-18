@@ -141,6 +141,13 @@ public class AttachmentController {
         return attachment;
     }
 
+    @RequestMapping(value = {"saveGroupAdvice"}, method = RequestMethod.POST)
+    @ResponseBody
+    public AttachmentData saveGroupAdvice(@RequestBody AttachmentData attachment) throws BottomUpException {
+        this.saveToStorage(attachment);
+        return attachment;
+    }
+
     private AttachmentData saveToStorage(AttachmentData attachment)throws BottomUpException{
         if (StringUtils.isNotBlank(attachment.getContentUrl())) {
             try {
@@ -150,25 +157,25 @@ public class AttachmentController {
 
             }catch (Exception ex){
                 System.out.println("ERROR:"  + ex.getMessage());
+                return null;
             }
         }
-
         return attachment;
     }
 
-    @RequestMapping(value = {"delete/{attachmentID}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"delete"}, method = RequestMethod.POST)
     @ResponseBody
-    public Boolean update(@PathVariable("attachmentID") Long attachmentID) throws BottomUpException {
-        if (attachmentID != null && attachmentID > 0) {
-            AttachmentData attachment = this.attachmentService.getByID(attachmentID);
-            String contentPath = BottomUpFileUtils.getContentRootForImages();
-            String filePath = contentPath + attachment.getContentUrl();
-            File file = new File(filePath);
-            FileUtils.deleteQuietly(file); // Delete file
-            this.attachmentService.delete(attachmentID);
-
+    public Boolean update(@RequestBody AttachmentData attachment) throws BottomUpException {
+        try{
+            if (attachment.getAttachmentID() != null && attachment.getAttachmentID() > 0) {
+                AmazonS3BucketService amazonS3BucketService = new AmazonS3BucketService();
+                amazonS3BucketService.deleteFileFromBucket(attachment.getShortName());
+                this.attachmentService.delete(attachment.getAttachmentID());
+            }
+        }catch (Exception ex){
+            return false;
         }
-        return true;
+        return false;
     }
 
     @RequestMapping(value = "/verify/{attachmentID}", method = RequestMethod.GET)

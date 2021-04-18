@@ -6,43 +6,6 @@
                     <div ng-include="'resources/javascript/templates/prescription/patientInfo.html'"></div>
                 </div>
             </div>
-            <ul class="nav nav-pills pull-right">
-                <li data-ng-if="hasAccess('HISTORY')">
-                    <a title="History" href="javascript:(false)" class="btn btn-inverted btn-bold btn-primary" data-ng-click="menuPopUp('history')">
-                        <i class="fa fa-history fa-lg"></i>
-                    </a>
-                </li>
-                <li data-ng-if="hasAccess('OLD_PRESCRIPTION')">
-                    <a title="old Prescription" class="btn btn-inverted btn-bold btn-primary" href="#/oldPrescription">
-                        <i class="fa fa-folder-open fa-lg"></i>
-                    </a>
-                </li>
-                <li data-ng-if="hasAccess('HISTORY')">
-                    <a title="Inv History" class="btn btn-inverted btn-bold btn-primary" href="#/invReport">
-                        <i class="fa fa-stethoscope fa-lg"></i>
-                    </a>
-                </li>
-                <li data-ng-if="hasAccess('FOLLOW_UP_CHART')">
-                    <a title="Follow-up Chart" data-ng-if="patientData.patientType" class="btn btn-inverted btn-bold btn-primary" href="#/followUpChart">
-                        <i class="fa fa-heartbeat fa-lg"></i>
-                    </a>
-                    <a data-ng-if="!patientData.patientType" title="Please Select Patient Type To Visit That Page" class="btn btn-inverted btn-bold btn-primary" href="#" onclick="return false;">
-                        <i class="fa fa-heartbeat fa-lg"></i>
-                    </a>
-                </li>
-                <li>
-                    <a title="Medical Certificate" class="btn btn-inverted btn-bold btn-primary" href="javascript:(0)"
-                       data-ng-click="performMedicalCert()">
-                        <i class="fa fa-file-pdf-o fa-lg"></i>
-                    </a>
-                </li>
-                <li data-ng-if="hasAccess('PRINT')">
-                    <a title="Print" class="btn btn-inverted btn-bold btn-primary" href="javascript:(0)" data-ng-click="print()">
-                        <i class="fa fa-print fa-lg"></i>
-                    </a>
-                </li>
-            </ul>
-            <div class="bs-divider">Prescription</div>
 
             <div class="well well-lg pres-main-div">
                     <div class="col-sm-2 col-md-2 col-lg-2" data-ng-if="hasAccess('PATIENT_PHOTO')">
@@ -102,12 +65,13 @@
                                 <div data-ng-if="hasAccess('REF_DOCTOR')" ng-include="'resources/javascript/templates/prescription/refDoctor.html'"></div>
                             </div>
                             <div class="verticalLine col-sm-6 col-md-6 col-lg-6">
-                                <div data-ng-if="hasAccess('DIET')" class="well well-sm" style="border-left: 5px solid #3ac0ff;">
-                                    <a href="javascript:" data-ng-click="performDiet()" ><label class="mainLabel">Diet : </label></a><span > {{dietData.dietName}}</span>
-                                </div>
-                                <div data-ng-if="hasAccess('DIAGNOSIS')" class="well well-sm" style="border-left: 5px solid #3ac0ff;">
-                                    <a href="javascript:" data-ng-click="performDiagnosis()" ><label class="mainLabel">Diagnosis : </label></a><span > {{diagnosisData.diseaseName}}</span>
-                                </div>
+                                <h2 class="item-head link" data-ng-if="hasAccess('DIET')" data-ng-click="performDiet()">
+                                    <a href="javascript:"  ><label class="mainLabel">Diet : </label></a><span > {{dietData.dietName}}</span>
+                                </h2>
+
+                                <h2 class="item-head link" data-ng-if="hasAccess('DIAGNOSIS')" data-ng-click="performDiagnosis()">
+                                    <a href="javascript:"  ><label class="mainLabel">Diagnosis : </label></a><span > {{diagnosisData.diseaseName}}</span>
+                                </h2>
                                 <div data-ng-if="hasAccess('PRES_DRUGS')" ng-include="'resources/javascript/templates/prescription/drugInfo.html'"></div>
                                 <div data-ng-if="hasAccess('PRES_ADVICE')" ng-include="'resources/javascript/templates/prescription/advice.html'"></div>
                             </div>

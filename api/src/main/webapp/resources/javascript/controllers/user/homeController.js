@@ -7,6 +7,7 @@ app.controller('HomeController', function($scope, $state, $rootScope, $modal, $h
     $scope.changeState = function (url, claimType, actionState){
         $state.go(url);
     };
+    angular.element('body').toggleClass('sidebar-active').find('#body-sidebar-left').toggleClass('active');
 
     $scope.changePassword = function(){
 

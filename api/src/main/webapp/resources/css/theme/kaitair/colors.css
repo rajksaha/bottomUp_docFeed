@@ -68,8 +68,21 @@ body {
 }
 
 /*-------------- Header ------------- */
+
 .hLogout, .hLogout > i{
 	color: #D75553;
+}
+.hLogout, .hLogout > i:hover {
+	color: #fafafa;
+}
+.presIcon{
+	border-left: 1px solid #555555 !important;
+}
+.presIcon, .presIcon > i{
+	color: #D75553;
+}
+.presIcon, .presIcon > i:hover {
+	color: #cf9f28;
 }
 .hPropertyName{
 	color: #437BAF;

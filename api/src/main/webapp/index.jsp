@@ -50,6 +50,7 @@
 </head>
 
 <body>
+<div ng-include="'resources/javascript/templates/menu/menu.html'"></div>
 <div class="main">
     <div ui-view="header"></div>
     <div ui-view="status"></div>
@@ -134,7 +135,6 @@
 <script src="<c:url value="/resources/lib/adapt-strap/adapt-strap.js"/>"></script>
 <script src="<c:url value="/resources/lib/adapt-strap/adapt-strap.tpl.js"/>"></script>
 
-
-
+<script type="text/javascript" src="<c:url value="resources/javascript/controllers/user/menuController.js"/>"></script>
 </body>
 </html>

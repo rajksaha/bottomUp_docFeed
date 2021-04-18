@@ -47,6 +47,11 @@ app.controller('HeaderController', function($scope, $rootScope,$state, $location
         $scope.$emit('event:clearStatus');
     };
 
+    $scope.showMenu = function () {
+        //angular.element('#sidebar-left').toggleClass('active');
+        angular.element('body').toggleClass('sidebar-active').find('#body-sidebar-left').toggleClass('active');
+    };
+
 
     $rootScope.$on('event:logout', function() {
         $scope.logout();

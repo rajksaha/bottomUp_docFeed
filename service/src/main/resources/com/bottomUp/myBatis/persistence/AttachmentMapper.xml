@@ -99,4 +99,27 @@
         WHERE entityID = #{entityID} AND entityType = #{entityType}
     </select>
 
+    <select id="getPrescribedAttachment" parameterType="map" resultType="Attachment">
+        SELECT
+        CA.attachmentID ,
+        CA.entityType ,
+        CA.entityID ,
+        CA.description ,
+        CA.shortName,
+        CA.contentUrl ,
+        CA.fileType ,
+        CA.sortOrder ,
+        CA.entityDate,
+        CA.STATUS,
+        CA.`updatedOn`,
+        CA.`updatedBy`,
+        CA.`createdOn`,
+        CA.`createdBy`,
+        CD.contentDetailID,
+        CASE WHEN CD.contentDetailID IS NULL THEN 0 ELSE 1 END AS addedInPres
+        FROM content_attachment CA
+        LEFT JOIN content_detail CD ON CD.entityType = #{entityType} AND CD.entityID = #{appointmentID} AND CD.content = CA.contentUrl
+        WHERE CA.entityType = #{entityType} AND CA.entityID = #{doctorID}
+    </select>
+
 </mapper>

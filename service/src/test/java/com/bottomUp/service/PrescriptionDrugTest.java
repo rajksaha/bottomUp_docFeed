@@ -2,6 +2,7 @@ package com.bottomUp.service;
 
 import com.bottomUp.BaseTest;
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.common.utility.AmazonS3BucketService;
 import com.bottomUp.domain.PrescriptionDrugData;
 import com.bottomUp.service.docFeed.OldPrescriptionService;
 import com.bottomUp.service.docFeed.crud.PrescriptionDrugService;
@@ -23,13 +24,12 @@ public class PrescriptionDrugTest extends BaseTest{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PrescriptionDrugTest.class);
 
-    private OldPrescriptionService oldPrescriptionService = (OldPrescriptionService) applicationContext.getBean("oldPrescriptionService");
+    private AmazonS3BucketService s3BucketService = new AmazonS3BucketService();
 
 
-    @Ignore
     @Test
     public void selectInsert() throws BottomUpException {
-        oldPrescriptionService.copyPrescription(Long.valueOf(5), Long.valueOf(21));
-
+        s3BucketService.deleteFileFromBucket("GROUP_ADVICE\\1\\8513024b-75dc-409e-9b32-5698de9ffac5.jpeg");
+        System.out.println("check");
     }
 }

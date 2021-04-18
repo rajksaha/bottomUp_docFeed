@@ -49,7 +49,7 @@
                 <div class="panelChild">
                     <div class="" data-ng-repeat="appointmentData in appointmentList" >
                         <div class="panelChild-body form-group" data-ng-show="appointmentData.status == 0"  >
-                            <span class="textSpc" data-ng-click="letsPrescribe(appointmentData)" >{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}} | {{appointmentData.appTime}} - {{appointmentData.appointmentTypeName}}</span>
+                            <span class="textSpc" data-ng-click="letsPrescribe(appointmentData)" >{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}} | {{appointmentData.appTime}} - {{appointmentData.appointmentTypeName}} {{appointmentData.lastVisitDiff}} </span>
 
 
                             <span class="textSpc pull-right" data-ng-if="hasAccess('DELETE_APPOINTMENT')">
@@ -66,7 +66,7 @@
                               confirmation-message="Want to re-visit this patient?"
                               confirmation-title="Confirmation"
                               item="appointmentData">
-                            <span class="textSpc">{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}}</span>
+                            <span class="textSpc">{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}} {{appointmentData.lastVisitDiff}}</span>
                             <span class="textSpc pull-right">
 										<button class="btn btn-info pull-right" style="margin-top: -8px">
 										    <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>

@@ -20,6 +20,8 @@ public class AttachmentData extends BaseData {
     private String sortOrder;
     private Date entityDate;
     private Integer status;
+    private Long contentDetailID;
+    private Integer addedInPres;
 
     public Long getAttachmentID() {
         return attachmentID;
@@ -107,5 +109,21 @@ public class AttachmentData extends BaseData {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getAddedInPres() {
+        return addedInPres;
+    }
+
+    public void setAddedInPres(Integer addedInPres) {
+        this.addedInPres = addedInPres;
+    }
+
+    public Long getContentDetailID() {
+        return contentDetailID;
+    }
+
+    public void setContentDetailID(Long contentDetailID) {
+        this.contentDetailID = contentDetailID;
     }
 }

@@ -18,6 +18,7 @@
         <li data-ng-class="{'active': activeTab == 'engPrefList'}"><a href="javascript:" data-ng-click="setActiveTab('engPrefList')" aria-expanded="{{activeTab == 'engPrefList' ? true : false}}">English Preference List</a></li>
         <li data-ng-class="{'active': activeTab == 'addPref'}" ><a href="javascript:" data-ng-click="setActiveTab('addPref')" aria-expanded="{{activeTab == 'addPref' ? true : false}}">Add to Preference</a></li>
         <li data-ng-class="{'active': activeTab == 'prescribedList'}" ><a href="javascript:" data-ng-click="setActiveTab('prescribedList')" aria-expanded="{{activeTab == 'prescribedList' ? true : false}}">Prescribed List</a></li>
+        <li data-ng-class="{'active': activeTab == 'adviceTemplate'}" ><a href="javascript:" data-ng-click="setActiveTab('adviceTemplate')" aria-expanded="{{activeTab == 'adviceTemplate' ? true : false}}"> Advice Template</a></li>
     </ul>
 
     <div id="myTabContent" class="tab-content" style="min-height: 500px">
@@ -94,6 +95,33 @@
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
                 <span>{{adviceData.advice}}</span>
+            </div>
+        </div>
+
+        <div class="tab-pane fade"  data-ng-class="{'active in': activeTab == 'adviceTemplate'}">
+            <hr>
+            <div class="row" style="min-height: 450px">
+                <div class="col-sm-4 col-md-4 col-lg-4" data-ng-repeat="attach in attachmentList">
+                    <div class="card card-link">
+                        <div class="card-image">
+                            <img data-ng-src="{{attach.contentUrl}}" style="height: 250px">
+                        </div>
+                        <div class="card-content">
+                            <a class="card-header">{{attach.description}} </a>
+                        </div>
+                        <div class="card-extra card-content">
+                            <span class="pull-right">
+                            <div class="checkbox-s">
+                                <input id="c1-{{attach.attachmentID}}" type="checkbox" name="c_{{attach.attachmentID}}"
+                                       data-ng-model="attach.checkBox" data-ng-change="toggleAdviceTemplate(attach)"
+                                       data-ng-checked="attach.addedInPres == 1"
+                                >
+                                <label for="c1-{{attach.attachmentID}}"> Add {{attach.addedInPre}} </label>
+                            </div>
+                        </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -45,6 +45,16 @@ public class AppointmentController extends BaseController {
         Map<String, Object> params = new HashMap<>();
         params.put("appDate", DateUtil.getDateOnly(new Date()));
         params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
+        params.put("lastVisit", true);
+        return this.appointmentService.getAppPatientDetail(params);
+    }
+
+    @RequestMapping(value = {"/getByLastVisit"}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<AppointmentViewData> getByLastVisit(HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("appDate", DateUtil.getDateOnly(new Date()));
+        params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
         return this.appointmentService.getAppPatientDetail(params);
     }
 

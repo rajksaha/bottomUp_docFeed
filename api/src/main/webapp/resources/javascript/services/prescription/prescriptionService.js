@@ -172,6 +172,13 @@ app.service('PrescriptionService', function ($resource) {
                 isArray:true
             }
         }),
+        getPresAdvTemp : $resource('/rest/prescription/getPresAdvTemp/:appointmentID/:doctorID', {}, {
+            'query':  {
+                method:'GET',
+                isArray:true,
+                params: {appointmentID: '@appointmentID', doctorID: '@doctorID'}
+            }
+        }),
 
 
         //Delete zone
@@ -248,6 +255,12 @@ app.service('PrescriptionService', function ($resource) {
             }
         }),
         deleteFollowUpFromPres : $resource('/rest/contentDetail/delete/:contentDetailID', {}, {
+            'remove':  {
+                method:'DELETE',
+                params: {contentDetailID: '@contentDetailID'}
+            }
+        }),
+        deletePresAdvTemp : $resource('/rest/contentDetail/delete/:contentDetailID', {}, {
             'remove':  {
                 method:'DELETE',
                 params: {contentDetailID: '@contentDetailID'}

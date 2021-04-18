@@ -2,7 +2,7 @@
 <nav class="navbar navbar-ktr navbar-fixed-top" role="navigation" >	
 	<div class="nav-container">
 		<a class="main-menu-link pull-left"
-		   href="javascript:(0)" >
+		   href="javascript:(0)" data-ng-click="showMenu()">
 			<span class="pull-left icon-bar">
 				<i></i>
 				<i></i>
@@ -15,7 +15,6 @@
 		
 		<div class="pull-right rightBtns" >
 			<span class="btn btn-link  hLogout" >Date {{dateString | date:'dd-MMM-yy'}}</span>
-			<button title="Home" type="button" class="btn btn-link  hLogout" data-ng-if="userData.permissions['SUPER_ADMIN'] || userData.permissions['COMPANY_ADMIN']|| userData.permissions['DOCTOR']" data-ng-click="goUserHome()" ><i class="fa fa-home"></i></button>
 			<button title="Appointment" type="button" class="btn btn-link  hLogout" data-ng-if="userData.permissions['DOCTOR']" data-ng-click="toggoleButton()" ><i class="fa fa-list-ul"></i></button>
 			<button title="Logout" type="button" class="btn btn-link  hLogout" data-ng-click="logout()" > <i class="fa fa-sign-out"></i></button>
 		</div>
