@@ -8,7 +8,57 @@ app.controller('AppointmentController', function($scope, $state, $modal, $rootSc
  	$scope.patientName = "";
  	$scope.addAppointMentData = {};
     $scope.appointmentSearch = "";
- 	
+
+    $scope.reloadList = false;
+    $scope.refreshList = function () {
+        $scope.reloadList = !$scope.reloadList;
+        $scope.dataSourceConfig.params.refresh = $scope.reloadList;
+    };
+
+    $scope.searchParam = {};
+    $scope.search = function() {
+        $scope.dataSourceConfig.params = angular.copy($scope.searchParam);
+    };
+
+    // column definition
+    $scope.columnDefinition = [
+        {columnHeaderDisplayName: 'Name', templateUrl: "name_template", sortKey: 'patient.firstName'},
+        {columnHeaderDisplayName: 'Age', templateUrl: "age_template", sortKey: 'pup.dateOfBirth'},
+        {columnHeaderDisplayName: 'Address', displayProperty: 'patient.address', sortKey: 'patient.address'},
+        {columnHeaderDisplayName: 'Time', templateUrl: "time_template", sortKey: 'appTime'},
+        {columnHeaderDisplayName: 'Visit Type', displayProperty: 'appointmentTypeName', sortKey: 'appointmentType'},
+        {columnHeaderDisplayName: 'Last Visit', displayProperty: 'lastVisitDiff'},
+        {columnHeaderDisplayName: 'Status', templateUrl: "status_template", width: '3em'},
+        {columnHeaderDisplayName: 'Action', templateUrl: 'action_template', width: '5em'}
+    ];
+
+    $scope.bringAppointment = function(){
+
+        $scope.dataSourceConfig = {
+            url: '/rest/appointment/getAppointmentGrid',
+            method: "GET",
+            params: {},
+            paginationConfig: {
+                response: {
+                    totalItems: 'count',
+                    itemsLocation: 'list'
+                }
+            }
+        };
+    };
+
+    $scope.dataSourceConfig = {
+        url: '/rest/appointment/getAppointmentGrid',
+        method: "GET",
+        params: {},
+        paginationConfig: {
+            response: {
+                totalItems: 'count',
+                itemsLocation: 'list'
+            }
+        }
+    };
+
 
  	$scope.changePage = function (page) {
          if(page == 3){
@@ -109,21 +159,6 @@ app.controller('AppointmentController', function($scope, $state, $modal, $rootSc
             return !~text.indexOf(val);
         }).hide();
     };
-
-    $scope.bringAppointment = function (){
-    	
-    	$scope.followUpSearch = false;
-    	$scope.patientName = "";
-    	$scope.addByName = false;
-        AppointmentService.getByParam.query({}, {}).$promise.then(function(result) {
-            if(result.length > 0){
-                $scope.appointmentList = result;
-                $scope.numberOfAppointment = $scope.appointmentList.length;
-            }
-        });
-
-
-    };
     
     $scope.addNewAppointment = function () {
     	var modalInstance = $modal.open({
@@ -200,7 +235,6 @@ app.controller('AppointmentController', function($scope, $state, $modal, $rootSc
 
 	
 	(function(){
-    	$scope.bringAppointment();
         $scope.initiateDashboard();
     })()
 

@@ -97,7 +97,7 @@ public class PatientViewService
         DateTime dateTime = new DateTime();
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("date", dateTime);
-        Long numOfAppToday = appointmentMapper.getCountByParam(param);
+        Integer numOfAppToday = appointmentMapper.getCountByParam(param);
         String padded = String.format("%04d", numOfAppToday);
         return "" + dateTime.getYear() + dateTime.getMonthOfYear() + dateTime.getDayOfMonth()+ padded;
     }

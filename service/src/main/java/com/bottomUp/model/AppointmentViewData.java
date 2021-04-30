@@ -35,7 +35,7 @@ public class AppointmentViewData {
 
     public String getLastVisitDiff() {
         if(appDate != null && lastVisitDate != null){
-            String temp = " [ " + DateUtil.daysBetween(lastVisitDate, appDate) + " days ago ]";
+            String temp = "" + DateUtil.daysBetween(lastVisitDate, appDate) + " days ago";
             return temp;
         }
         return lastVisitDiff;

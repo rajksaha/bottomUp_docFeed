@@ -21,13 +21,15 @@ public interface AppointmentMapper {
 
     void updateStatusByID(AppointmentData data) throws BottomUpException;
 
+    void updateAppTypeByID(AppointmentData data) throws BottomUpException;
+
     AppointmentData getByID(Long ID) throws BottomUpException;
 
     List<AppointmentData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     List<AppointmentViewData> getAppPatientDetail(Map<String, Object> param) throws BottomUpException;
 
-    Long getCountByParam(Map<String, Object> param) throws BottomUpException;
+    Integer getCountByParam(Map<String, Object> param) throws BottomUpException;
 
     void delete(Map<String, Object> param) throws BottomUpException;
 }

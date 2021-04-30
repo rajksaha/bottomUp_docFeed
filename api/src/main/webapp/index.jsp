@@ -56,7 +56,6 @@
     <div ui-view="status"></div>
     <div ui-view="menu" class="container-menu"></div>
     <div ui-view="container" class="page container-main"></div>
-    <div ui-view="footer" class="footer"></div>
 </div>
 
 <!-- Based on http://developer.yahoo.com/blogs/ydn/high-performance-sites-rule-6-move-scripts-bottom-7200.html -->

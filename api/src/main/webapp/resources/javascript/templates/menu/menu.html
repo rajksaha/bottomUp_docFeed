@@ -96,6 +96,42 @@
                     </div>
                 </div>
             </div>
+            <div class="echo_side_menu_bar" data-ng-if="userData.permissions['DOC_RESEARCH']|| userData.permissions['DOC_GEN_SETTINGS']" >
+                <div class="echo_list">
+                    <div class="echo_infos">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Research</span>
+                        <i class="fa fa-chevron-down echo_arrow"></i>
+                    </div>
+                    <div class="echo_list_drop">
+                        <ul>
+                            <li>
+                                <a href="" data-ng-click="changeState('root.researchHome')" class="list-group-item">
+                                    Research
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="echo_side_menu_bar" data-ng-if="userData.permissions['DOC_GEN_SETTINGS']" >
+                <div class="echo_list">
+                    <div class="echo_infos">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Setup</span>
+                        <i class="fa fa-chevron-down echo_arrow"></i>
+                    </div>
+                    <div class="echo_list_drop">
+                        <ul>
+                            <li>
+                                <a href="" data-ng-click="changeState('root.settingSelection')" class="list-group-item">
+                                    Old Setup
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </ul>
     </div>
 </div>

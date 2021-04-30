@@ -32,6 +32,19 @@ public class AppointmentController extends BaseController {
     @Autowired
     private AppointmentViewService appointmentViewService;
 
+    @RequestMapping(value = {"/getAppointmentGrid"}, method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getAll(HttpServletRequest request) throws BottomUpException {
+        Map<String, Object> params = this.parseParameter(request);
+        params.put("appDate", DateUtil.getDateOnly(new Date()));
+        params.put("doctorID", this.getUserDetail().getDoctorData().getDoctorID());
+        params.put("lastVisit", true);
+
+        List<AppointmentViewData> dataList = this.appointmentService.getAppPatientDetail(params);
+        Integer count = this.appointmentService.getCountByParam(params);
+        return this.buildResultForGrid(dataList, count, params);
+    }
+
     @RequestMapping(value = {"/visitPatient"}, method = RequestMethod.POST)
     @ResponseBody
     public void visitPatient(HttpServletRequest request, @RequestBody SearchData searchData) throws BottomUpException {

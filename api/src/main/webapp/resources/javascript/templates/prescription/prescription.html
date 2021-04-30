@@ -8,12 +8,12 @@
             </div>
 
             <div class="well well-lg pres-main-div">
-                    <div class="col-sm-2 col-md-2 col-lg-2" data-ng-if="hasAccess('PATIENT_PHOTO')">
+                    <div class="col-sm-2 col-md-2 col-lg-2" data-ng-if="hasAccess('PRES_PATIENT_PHOTO')">
                         <label  data-ng-click="photoModal()">
                             <img alt="patImg" data-ng-if="patientData.imageURL != null" src="{{patientData.imageURL}}" height="120px" width="120px">
                             <img alt="patImg" data-ng-if="patientData.imageURL == null" src="resources/images/no-photo.gif" height="120px" width="120px">
                         </label>
-                        <div data-ng-if="hasAccess('REF_DOCTOR')">
+                        <div data-ng-if="hasAccess('PRES_REF_DOCTOR')">
                             <h2 class="item-head">
                                 <label>Referred Doctor :</label>
                                 <a class="fa fa-floppy-o pull-right link" aria-hidden="true" title="Save" data-ng-show="referredAdderData.doctorAddress && referredAdderData.doctorName" data-ng-click="saveReferredDoctor(referredAdderData); referredAdderData = {};"></a>
@@ -30,17 +30,20 @@
                             </div>
                         </div>
 
-					   <div data-ng-if="hasAccess('VISIT_TYPE')">
+					   <div data-ng-if="hasAccess('PRES_VISIT_TYPE')">
                            <h2 class="item-head"><a href="javascript:"><label class="mainLabel">Visit Type</label></a></h2>
                            <div data-ng-repeat="patientState in patientStateList">
                                <div class="radio-s">
-                                   <input id="r1-{{patientState.id}}" type="radio" name="r1_1"  data-ng-model="appointmentData.appointmentType" data-ng-checked="appointmentData.appointmentType == patientState.appointmentTypeID" data-ng-change="changePatientState(patientState)">
-                                   <label for="r1-{{patientState.id}}">{{patientState.name}}</label>
+                                   <input id="r1-{{patientState.appointmentTypeID}}" type="radio" name="r1_1"
+                                          data-ng-model="appointmentData.appointmentType"
+                                          ng-value="{{appointmentData.appointmentType == patientState.appointmentTypeID}}"
+                                          data-ng-change="changePatientState(patientState)">
+                                   <label for="r1-{{patientState.appointmentTypeID}}">{{patientState.name}}</label>
                                </div>
                            </div>
                        </div>
 
-                        <div data-ng-if="hasAccess('PATIENT_TYPE')">
+                        <div data-ng-if="hasAccess('PRES_PATIENT_TYPE')">
                             <h2 class="item-head">
                                 <a href="javascript:">
                                     <label class="mainLabel">Patient Type </label>
@@ -59,17 +62,17 @@
                     <div class="col-sm-10 col-md-10 col-lg-10 verticalLine">
                         <div class="row">
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                <div ng-include="'resources/javascript/templates/prescription/complainAndVital.html'"></div>
-                                <div ng-include="'resources/javascript/templates/prescription/history.html'"></div>
-                                <div data-ng-if="hasAccess('INVESTIGATION')" ng-include="'resources/javascript/templates/prescription/invSection.html'"></div>
-                                <div data-ng-if="hasAccess('REF_DOCTOR')" ng-include="'resources/javascript/templates/prescription/refDoctor.html'"></div>
+                                <div  ng-include="'resources/javascript/templates/prescription/complainAndVital.html'"></div>
+                                <div data-ng-if="hasAccess('PRES_INVESTIGATION')" ng-include="'resources/javascript/templates/prescription/history.html'"></div>
+                                <div data-ng-if="hasAccess('PRES_INVESTIGATION')" ng-include="'resources/javascript/templates/prescription/invSection.html'"></div>
+                                <div data-ng-if="hasAccess('PRES_NEXT_VISIT')" ng-include="'resources/javascript/templates/prescription/refDoctor.html'"></div>
                             </div>
                             <div class="verticalLine col-sm-6 col-md-6 col-lg-6">
-                                <h2 class="item-head link" data-ng-if="hasAccess('DIET')" data-ng-click="performDiet()">
+                                <h2 class="item-head link" data-ng-if="hasAccess('PRES_DIET')" data-ng-click="performDiet()">
                                     <a href="javascript:"  ><label class="mainLabel">Diet : </label></a><span > {{dietData.dietName}}</span>
                                 </h2>
 
-                                <h2 class="item-head link" data-ng-if="hasAccess('DIAGNOSIS')" data-ng-click="performDiagnosis()">
+                                <h2 class="item-head link" data-ng-if="hasAccess('PRES_DIAGNOSIS')" data-ng-click="performDiagnosis()">
                                     <a href="javascript:"  ><label class="mainLabel">Diagnosis : </label></a><span > {{diagnosisData.diseaseName}}</span>
                                 </h2>
                                 <div data-ng-if="hasAccess('PRES_DRUGS')" ng-include="'resources/javascript/templates/prescription/drugInfo.html'"></div>

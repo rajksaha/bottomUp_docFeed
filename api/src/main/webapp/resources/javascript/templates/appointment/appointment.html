@@ -1,89 +1,91 @@
-<hr>
-<div >
-    <div  data-ng-if="hasAccess('CREATE_NEW_APP')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="addNewAppointment()">
-        <div class="item-box">
-            <i class="fa fa-user-plus fa-3x"></i>
-            <label>New Patient</label>
-        </div>
-    </div>
-    <div data-ng-if="hasAccess('CREATE_FOLLOW_APP')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="addFollowUpAppointment()">
-        <div class="item-box">
-            <i class="fa fa-user fa-3x"></i>
-            <label>Follow up Patient</label>
-        </div>
-    </div>
-    <div data-ng-if="hasAccess('8')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(3)">
-        <div class="item-box">
-            <i class="fa fa-user-md fa-3x"></i>
-            <label>Research</label>
-        </div>
-    </div>
-    <div data-ng-if="hasAccess('2')" class="col-sm-3 col-md-3 col-lg-3 link" data-ng-click="changePage(4)">
-        <div class="item-box">
-            <i class="fa fa-cogs fa-3x"></i>
-            <label>Setting</label>
-        </div>
-    </div>
-	
-	
-</div>
-<hr>
-<div class="panel col-md-12 appointment" data-ng-if="hasAccess('16')">
-    <div class="col-md-8 panel panel-primary mainPanelColor panel1" style="padding-top: 12px;padding-bottom: 12px">
-        <div  style="padding-top: 25px;">
-            <div class="col-xs-12  col-lg-14" >
-                <div class="panelHead">
-                    <div class="alert alert-info col-lg-12" data-ng-if="hasAccess('SEARCH_APPOINTMENT')">
-                        <span class="col-lg-3">Today's Patients List</span>
-                        <span class="col-lg-7">
-                            <input type="text" maxlength="240" id="searcheString" class="form-control  required" placeholder="Search Patient" ng-keydown="searchAppointment()" />
-                        </span>
-                        <span class="pull-right col-lg-2">Total:{{numberOfAppointment}}</span>
+<script type="text/ng-template" id="age_template">
+    {{item.patient.currentAge}} yrs
+</script>
+
+<script type="text/ng-template" id="status_template">
+    <i class="fa fa-lg" data-ng-class="{'fa-hourglass-half' : item.status == 0,'fa-hourglass' : item.status != 0}"></i>
+</script>
+
+<script type="text/ng-template" id="time_template">
+    {{item.appTime | date:'HH:mma'}}
+</script>
+
+<script type="text/ng-template" id="name_template">
+    {{item.patient.firstName}}
+    <i class="fa fa-lg pull-right" data-ng-class="{'fa-male' : item.patient.sex == 'MALE','fa-female' : item.patient.sex != 'MALE'}">
+    </i>
+</script>
+
+<script type="text/ng-template" id="action_template">
+    <a href="" data-ng-click="letsPrescribe(item)"><i class="fa fa-user-md fa-lg"></i> </a>
+    <a href="" data-ng-click="removeFromAppointment(item.appointmentID)"><i class="fa fa-times fa-lg"></i> </a>
+</script>
+
+<div class="col-md-12 col-sm-12" style="margin-top: 10px">
+    <div class="bs-component">
+        <div class="card">
+            <div class="card-content" style="background-color: #ddd">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="label" style="font-size: 25px;font-style: oblique;color: darkslategray;">Appointment</label>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Patient Name" data-ng-change="search()" data-ng-model="searchParam.likeFirstName" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <select class="form-control required" data-ng-model="searchParam.appointmentType" data-ng-change="search()">
+                            <option value="">-- Visit Type --</option>
+                            <option value="0">New Patient</option>
+                            <option value="1">Old Patient</option>
+                            <option value="2">Free</option>
+                            <option value="3">Relative</option>
+                            <option value="4">Report</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <select class="form-control required" data-ng-change="search()" data-ng-model="searchParam.status">
+                            <option value="">-- App Status --</option>
+                            <option value="1">Pending</option>
+                            <option value="2">Visited</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4" >
+                        <a data-ng-if="hasAccess('CREATE_NEW_APP')" class="btn btn-inverted btn-success pull-right"
+                           href="javascript:(false)" data-ng-click="addNewAppointment()">
+                            <i class="fa fa-user-plus fa-lg"> New Appointment</i>
+                        </a>
+                        <a data-ng-if="hasAccess('CREATE_FOLLOW_APP')" class="btn btn-inverted btn-warning pull-right"
+                           href="javascript:(false)" data-ng-click="addFollowUpAppointment()" style="margin-right: 10px">
+                            <i class="fa fa-user-circle fa-lg"> Follow-up</i>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div>
-            <div class="col-xs-12 col-lg-12" style="height: 422px; overflow-y: auto;"  >
-                <div class="panelChild">
-                    <div class="" data-ng-repeat="appointmentData in appointmentList" >
-                        <div class="panelChild-body form-group" data-ng-show="appointmentData.status == 0"  >
-                            <span class="textSpc" data-ng-click="letsPrescribe(appointmentData)" >{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}} | {{appointmentData.appTime}} - {{appointmentData.appointmentTypeName}} {{appointmentData.lastVisitDiff}} </span>
-
-
-                            <span class="textSpc pull-right" data-ng-if="hasAccess('DELETE_APPOINTMENT')">
-										<button class="btn btn-danger pull-right" style="margin-top: -8px"
-                                                ktr-confirmation="removeFromAppointment(appointmentData.appointmentID)"
-                                                confirmation-message="Are you sure to remove?"
-                                                confirmation-title="Confirmation">
-										    <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
-										</button>
-                            </span>
-                        </div>
-                        <div  class="panelVisited-body form-group" data-ng-show="appointmentData.status == 1"
-                              ktr-confirmation="letsPrescribe(item)"
-                              confirmation-message="Want to re-visit this patient?"
-                              confirmation-title="Confirmation"
-                              item="appointmentData">
-                            <span class="textSpc">{{$index + 1}} | {{appointmentData.patient.firstName}} | {{appointmentData.patient.currentAge}} yrs  | {{appointmentData.patient.address}} {{appointmentData.lastVisitDiff}}</span>
-                            <span class="textSpc pull-right">
-										<button class="btn btn-info pull-right" style="margin-top: -8px">
-										    <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-										</button>
-                            </span>
+            <div class="card-content" style="background-color: #ddd">
+                <div class="col-md-9 panel panel1" style="padding-top: 12px;padding-bottom: 12px; min-height:450px">
+                    <ad-table-ajax table-classes="table table-bordered table-hover"
+                                   page-sizes="[10, 15, 20]"
+                                   page-loader="methods.pageLoader"
+                                   pagination-btn-group-classes="pagination pagination-sm"
+                                   items-not-found-message="No Appointment found"
+                                   state="{sortKey: 'appTime', sortDirection: 'ASC'}"
+                                   column-definition="columnDefinition"
+                                   ajax-config="dataSourceConfig">
+                    </ad-table-ajax>
+                </div>
+                <div class="col-md-3 panel panel1"
+                     style="padding-left:0;padding-right:0;padding-top: 12px;padding-bottom: 12px; height: 450px;" data-ng-if="hasAccess('VIEW_APP_LIST')" >
+                    <div>
+                        <div class="col-xs-12 col-lg-12" >
+                            <div id="chartContainer1" style="height: 200px; width: 100%;"></div>
+                            <br>
+                            <div id="chartContainer2" style="height: 200px; width: 100%;"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 panel panel-primary mainPanelColor panel1" style="padding-left:0;padding-right:0;padding-top: 12px;padding-bottom: 12px; height: 560px;" data-ng-if="hasAccess('18')" >
-        <div>
-            <div class="col-xs-12 col-lg-12" >
-                <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
-                <br>
-                <div id="chartContainer2" style="height: 200px; width: 100%;"></div>
             </div>
         </div>
     </div>

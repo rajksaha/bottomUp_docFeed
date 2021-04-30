@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-6 col-md-6 col-lg-6" data-ng-if="hasAccess('CHIEF_COMPLAIN')">
+    <div class="col-sm-6 col-md-6 col-lg-6" data-ng-if="hasAccess('PRES_COMPLAIN')">
         <h2 class="item-head">
             <a href="javascript:" data-ng-click="addComplain()"><label class="mainLabel">Chief Complaints</label></a>
         </h2>
@@ -13,7 +13,7 @@
             <span>{{getComplainString(complain)}}</span>
         </div>
     </div>
-    <div class="col-sm-6 col-md-6 col-lg-6" data-ng-if="hasAccess('ON_EXAMINATION')">
+    <div class="col-sm-6 col-md-6 col-lg-6" data-ng-if="hasAccess('PRES_VITAL')">
         <h2 class="item-head">
             <a href="javascript:" data-ng-click="addVital()"><label class="mainLabel">On Examination</label></a>
         </h2>

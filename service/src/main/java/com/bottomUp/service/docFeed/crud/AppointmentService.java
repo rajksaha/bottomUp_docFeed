@@ -42,7 +42,7 @@ public class AppointmentService {
         AppointmentData appointmentData = new AppointmentData();
         appointmentData.setAppointmentID(appointmentID);
         appointmentData.setAppointmentType(appointmentType);
-        this.appointmentMapper.updateStatusByID(appointmentData);
+        this.appointmentMapper.updateAppTypeByID(appointmentData);
     }
 
     public AppointmentData getByID(Long ID)throws BottomUpException {
@@ -51,6 +51,10 @@ public class AppointmentService {
 
     public List<AppointmentData> getByParam(Map<String, Object> param) throws BottomUpException {
         return this.appointmentMapper.getByParam(param);
+    }
+
+    public Integer getCountByParam(Map<String, Object> param) throws BottomUpException{
+        return this.appointmentMapper.getCountByParam(param);
     }
 
     public List<AppointmentViewData> getAppPatientDetail(Map<String, Object> param) throws BottomUpException{

@@ -1,5 +1,6 @@
 <div class="col-sm-4 col-md-2 col-lg-4 form-group">
-    <label class="link" data-ng-click="editPatientInfo()">Name: <span  >{{patientData.firstName}}</span></label>
+    <label data-ng-if="hasAccess('PRES_HISTORY')" class="link" data-ng-click="editPatientInfo()">Name: <span  >{{patientData.firstName}}</span></label>
+    <label data-ng-if="!hasAccess('PRES_HISTORY')" class="link">Name: <span  >{{patientData.firstName}}</span></label>
 </div>
 <div class="col-sm-2 col-md-2 col-lg-2 form-group">
     <label >Age: {{patientData.currentAge}} yrs, </label>
@@ -10,26 +11,26 @@
 </div>
 <div class="col-sm-4 col-md-4 col-lg-4" style="margin-top: -7px">
     <div class="pull-right rightBtns" >
-        <a class="btn btn-link  presIcon" title="History" href="javascript:(false)" data-ng-click="menuPopUp('history')">
+        <a data-ng-if="hasAccess('PRES_HISTORY')" class="btn btn-link  presIcon" title="History" href="javascript:(false)" data-ng-click="menuPopUp('history')">
             <i class="fa fa-history fa-lg"></i>
         </a>
-        <a class="btn btn-link  presIcon" title="old Prescription" class="" href="#/oldPrescription">
+        <a data-ng-if="hasAccess('PRES_OLD_PRESCRIPTION')" class="btn btn-link  presIcon" title="old Prescription" href="#/oldPrescription">
             <i class="fa fa-folder-open fa-lg"></i>
         </a>
-        <a class="btn btn-link  presIcon" title="Inv History" class="" href="#/invReport">
+        <a data-ng-if="hasAccess('PRES_INV_REPORT')" class="btn btn-link  presIcon" title="Inv History" href="#/invReport">
             <i class="fa fa-stethoscope fa-lg"></i>
         </a>
-        <a class="btn btn-link  presIcon" title="Follow-up Chart" data-ng-if="patientData.patientType" href="#/followUpChart">
+        <a data-ng-if="hasAccess('PRES_FOLLOW_UP_CHART')" class="btn btn-link  presIcon" title="Follow-up Chart" data-ng-if="patientData.patientType" href="#/followUpChart">
             <i class="fa fa-heartbeat fa-lg"></i>
         </a>
-        <a class="btn btn-link  presIcon" data-ng-if="!patientData.patientType" title="Please Select Patient Type To Visit That Page" href="#" onclick="return false;">
+        <a data-ng-if="hasAccess('PRES_FOLLOW_UP_CHART')" class="btn btn-link  presIcon" data-ng-if="!patientData.patientType" title="Please Select Patient Type To Visit That Page" href="#" onclick="return false;">
             <i class="fa fa-heartbeat fa-lg"></i>
         </a>
-        <a class="btn btn-link  presIcon" title="Medical Certificate" class="" href="javascript:(0)"
+        <a data-ng-if="hasAccess('PRES_MEDICAL_CERT')" class="btn btn-link  presIcon" title="Medical Certificate"  href="javascript:(0)"
            data-ng-click="performMedicalCert()">
             <i class="fa fa-file-pdf-o fa-lg"></i>
         </a>
-        <a class="btn btn-link  presIcon" title="Print" class="" href="javascript:(0)" data-ng-click="print()">
+        <a data-ng-if="hasAccess('PRESCRIPTION_PRINT')" class="btn btn-link  presIcon" title="Print"  href="javascript:(0)" data-ng-click="print()">
             <i class="fa fa-print fa-lg"></i>
         </a>
     </div>

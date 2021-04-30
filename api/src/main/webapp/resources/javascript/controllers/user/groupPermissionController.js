@@ -68,6 +68,12 @@ app.controller('GroupPermissionController', function($scope, $rootScope, $state,
         $scope.showForm = true;
     };
 
+    $scope.checkALL = function () {
+        angular.forEach($scope.groupPermissionList, function(value, key) {
+            value.isAssigned = true;
+        });
+    };
+
     $scope.bringGroup = function(companyID){
 
         if(!companyID){

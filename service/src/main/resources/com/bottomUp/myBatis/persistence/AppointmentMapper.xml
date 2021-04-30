@@ -55,6 +55,15 @@
 		WHERE appointmentID = #{appointmentID}
 	</update>
 
+	<update id="updateAppTypeByID" parameterType="Appointment">
+		UPDATE `doctor_feed`.`appointment`
+		SET
+		`status` = #{status},
+		`updatedBy` = #{updatedBy},
+		`updatedOn` = #{updatedOn}
+		WHERE appointmentID = #{appointmentID}
+	</update>
+
 	<select id="getByID" parameterType="long" resultType="Appointment">
 		SELECT
 			`appointmentID`,
@@ -174,6 +183,15 @@
 		<if test="appDate != null">
 			AND app.appDate = #{appDate}
 		</if>
+		<if test="appointmentType != null">
+			AND app.appointmentType = #{appointmentType}
+		</if>
+		<if test="status != null">
+			AND app.status = #{status}
+		</if>
+		<if test="likeFirstName != null">
+			AND LOWER(pup.firstName) LIKE LOWER(CONCAT(#{likeFirstName},'%'))
+		</if>
 		<if test="startDate != null and endDate !=null">
 			AND app.appDate IN BETWEEN (DATE(#{startDate}), DATE(#{endDate}))
 		</if>
@@ -183,25 +201,32 @@
 		</if>
 	</select>
 
-	<select id="getCountByParam" parameterType="map" resultType="Long">
+	<select id="getCountByParam" parameterType="map" resultType="int">
 		SELECT COUNT(*)
-		FROM `doctor_feed`.`appointment`
+		FROM `doctor_feed`.`appointment` app
+		JOIN `doctor_feed`.patient p ON app.patientID = p.patientID
+		JOIN bottom_up_user_profile pup ON p.userID = pup.userID
 		WHERE 1 = 1
 		<if test="appointmentID != null">
-			AND appointmentID = #{appointmentID}
+			AND app.appointmentID = #{appointmentID}
 		</if>
 		<if test="patientID != null">
-			AND patientID = #{patientID}
+			AND app.patientID = #{patientID}
 		</if>
 		<if test="doctorID != null">
-			AND doctorID = #{doctorID}
+			AND app.doctorID = #{doctorID}
 		</if>
 		<if test="appDate != null">
-			AND appDate = #{appDate}
+			AND app.appDate = #{appDate}
 		</if>
-		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
-			ORDER BY ${sortColumn} ${sortOrder}
-			LIMIT #{limit} OFFSET #{offset}
+		<if test="appointmentType != null">
+			AND app.appointmentType = #{appointmentType}
+		</if>
+		<if test="status != null">
+			AND app.status = #{status}
+		</if>
+		<if test="likeFirstName != null">
+			AND LOWER(pup.firstName) LIKE LOWER(CONCAT(#{likeFirstName},'%'))
 		</if>
 	</select>
 	<delete id="delete" parameterType="map">
