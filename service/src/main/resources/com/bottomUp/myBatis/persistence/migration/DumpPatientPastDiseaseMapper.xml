@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpPatientPastDisease" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_patient_past_disease`(
+			`patientID`,
+			`diseaseID`,
+			`isPresent`,
+			`detail`
+
+		)
+		VALUES(
+			#{patientID},
+			#{diseaseID},
+			#{isPresent},
+			#{detail}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpPatientPastDisease">
+		UPDATE `dump_patient_past_disease`
+		SET
+		`patientID` = #{patientID},
+		`diseaseID` = #{diseaseID},
+		`isPresent` = #{isPresent},
+		`detail` = #{detail}
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpPatientPastDisease">
+		SELECT
+		     `id`,
+			`patientID`,
+			`diseaseID`,
+			`isPresent`,
+			`detail`
+			FROM `dump_patient_past_disease`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpPatientPastDisease">
+		SELECT
+		   `id`,
+			`patientID`,
+			`diseaseID`,
+			`isPresent`,
+			`detail`
+		FROM `dump_patient_past_disease`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpPatientPastDisease">
+		SELECT
+		`id`,
+		`type`,
+		`lang`,
+		`advice`,
+		`pdf`
+		FROM `dump_patient_past_disease`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_patient_past_disease
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>

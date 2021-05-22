@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpSettingsInv" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_settings_inv`(
+			`doctorID`,
+			`diseaseID`,
+			`invID`,
+			`note`,
+			`checked`
+
+		)
+		VALUES(
+			#{doctorID},
+			#{diseaseID},
+			#{invID},
+			#{note},
+			#{checked}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpSettingsInv">
+		UPDATE `dump_settings_inv`
+		SET
+		`doctorID` = #{doctorID},
+		`diseaseID` = #{diseaseID},
+		`invID` = #{invID},
+		`note` = #{note},
+		`checked` = #{checked}
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpSettingsInv">
+		SELECT
+		     `id`,
+			`doctorID`,
+			`diseaseID`,
+			`invID`,
+			`note`,
+			`checked`
+			FROM `dump_settings_inv`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpSettingsInv">
+		SELECT
+		     `id`,
+		    `doctorID`,
+			`diseaseID`,
+			`invID`,
+			`note`,
+			`checked`
+		FROM `dump_settings_inv`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpSettingsInv">
+		SELECT
+		`id`,
+		`doctorID`,
+		`diseaseID`,
+		`invID`,
+		`note`,
+		`checked`
+		FROM `dump_settings_inv`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_settings_inv
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>

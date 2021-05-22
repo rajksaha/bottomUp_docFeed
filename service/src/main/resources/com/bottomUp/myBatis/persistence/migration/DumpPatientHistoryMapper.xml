@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpPatientHistory" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_patient_history`(
+			`patientID`,
+			`historyID`,
+			`historyResult`
+
+
+		)
+		VALUES(
+			#{patientID},
+			#{historyID},
+			#{historyResult}
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpPatientHistory">
+		UPDATE `dump_patient_history`
+		SET
+		`patientID` = #{patientID},
+		`historyID` = #{historyID},
+		`historyResult` = #{historyResult}
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpPatientHistory">
+		SELECT
+		     `id`,
+			`patientID`,
+			`historyID`,
+			`historyResult`
+
+			FROM `dump_patient_history`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpPatientHistory">
+		SELECT
+		    `id`,
+		    `patientID`,
+			`historyID`,
+			`historyResult`
+
+		FROM `dump_patient_history`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpPatientHistory">
+		SELECT
+		`id`,
+		`patientID`,
+		`historyID`,
+		`historyResult`
+
+		FROM `dump_patient_history`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_patient_history
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>

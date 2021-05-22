@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpDrugHistory" useGeneratedKeys="true" keyProperty="drugHistoryID" >
+
+		INSERT INTO `dump_drug_history`(
+			`patientID`,
+			`drugName`,
+			`currentStatus`
+
+
+		)
+		VALUES(
+			#{patientID},
+			#{drugName},
+			#{currentStatus}
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpDrugHistory">
+		UPDATE `dump_drug_history`
+		SET
+		`patientID` = #{patientID},
+		`drugName` = #{drugName},
+		`currentStatus` = #{currentStatus}
+
+		WHERE drugHistoryID = #{drugHistoryID}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpDrugHistory">
+		SELECT
+		    `drugHistoryID`,
+			`patientID`,
+			`drugName`,
+			`currentStatus`
+
+			FROM `dump_drug_history`
+
+		WHERE drugHistoryID = #{drugHistoryID}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpDrugHistory">
+		SELECT
+		    `drugHistoryID`,
+			`patientID`,
+			`drugName`,
+			`currentStatus`
+		FROM `dump_drug_history`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpDrugHistory">
+		SELECT
+		`drugHistoryID`,
+		`patientID`,
+		`drugName`,
+		`currentStatus`
+		FROM `dump_drug_history`
+
+		WHERE 1 = 1
+		<if test="drugHistoryID != null">
+			AND drugHistoryID = #{drugHistoryID}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_drug_history
+		WHERE 1=1
+		<if test="drugHistoryID != null">
+			AND drugHistoryID = #{drugHistoryID}
+		</if>
+	</delete>
+
+
+</mapper>

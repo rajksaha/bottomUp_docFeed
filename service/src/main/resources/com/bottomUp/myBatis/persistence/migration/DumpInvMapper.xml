@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpInv" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_inv`(
+			`categoryID`,
+			`name`
+
+		)
+		VALUES(
+			#{categoryID},
+			#{name}
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpInv">
+		UPDATE `dump_inv`
+		SET
+		`categoryID` = #{categoryID},
+		`name` = #{name}
+
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpInv">
+		SELECT
+		     `id`,
+			`categoryID`,
+			`name`
+			FROM `dump_inv`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpInv">
+		SELECT
+		     `id`,
+			`categoryID`,
+			`name`
+		FROM `dump_inv`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpInv">
+		SELECT
+		`id`,
+		`id`,
+		`categoryID`,
+		`name`
+		FROM `dump_inv`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_inv
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpDiagnosis" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_diagnosis`(
+			`appointMentID`,
+			`diseaseID`,
+			`note`
+
+
+		)
+		VALUES(
+			#{appointMentID},
+			#{diseaseID},
+			#{advice}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpDiagnosis">
+		UPDATE `dump_diagnosis`
+		SET
+		`appointMentID` = #{appointMentID},
+		`diseaseID` = #{diseaseID},
+		`note` = #{note}
+
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpDiagnosis">
+		SELECT
+		     `id`,
+			`appointMentID`,
+			`diseaseID`,
+			`note`
+			FROM `dump_diagnosis`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpDiagnosis">
+		SELECT
+		`id`,
+		`appointMentID`,
+		`diseaseID`,
+		`note`
+		FROM `dump_diagnosis`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpDiagnosis">
+		SELECT
+		`id`,
+		`appointMentID`,
+		`diseaseID`,
+		`note`
+		FROM `dump_diagnosis`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+		<if test="appointMentID != null">
+			AND appointMentID = #{appointMentID}
+		</if>
+
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_diagnosis
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+		<if test="appointMentID != null">
+			AND appointMentID = #{appointMentID}
+		</if>
+
+	</delete>
+
+
+</mapper>

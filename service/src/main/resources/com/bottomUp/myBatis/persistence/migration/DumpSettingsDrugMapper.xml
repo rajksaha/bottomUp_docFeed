@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpSettingsDrug" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_settings_drug`(
+			`doctorID`,
+			`diseaseID`,
+			`drugTypeID`,
+			`drugID`,
+			`drugtimeID`,
+			`drugDoseUNit`,
+			`drugWhenID`,
+			`drugAdviceID`
+
+		)
+		VALUES(
+			#{doctorID},
+			#{diseaseID},
+			#{drugTypeID},
+			#{drugID},
+			#{drugtimeID},
+			#{drugDoseUNit},
+			#{drugWhenID},
+			#{drugAdviceID}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpSettingsDrug">
+		UPDATE `dump_settings_drug`
+		SET
+		`doctorID` = #{doctorID},
+		`diseaseID` = #{diseaseID},
+		`drugTypeID` = #{drugTypeID},
+		`drugID` = #{drugID},
+		`drugtimeID` = #{drugtimeID},
+		`drugDoseUNit` = #{drugDoseUNit},
+		`drugWhenID` = #{drugWhenID},
+		`drugAdviceID` = #{drugAdviceID},
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpSettingsDrug">
+		SELECT
+		     `id`,
+			`doctorID`,
+			`diseaseID`,
+			`drugTypeID`,
+			`drugID`,
+			`drugtimeID`,
+			`drugDoseUNit`,
+			`drugWhenID`,
+			`drugAdviceID`
+
+			FROM `dump_settings_drug`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpSettingsDrug">
+		SELECT
+		    `id`,
+		    `doctorID`,
+			`diseaseID`,
+			`drugTypeID`,
+			`drugID`,
+			`drugtimeID`,
+			`drugDoseUNit`,
+			`drugWhenID`,
+			`drugAdviceID`
+
+		FROM `dump_settings_drug`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpSettingsDrug">
+		SELECT
+		`id`,
+		`doctorID`,
+		`diseaseID`,
+		`drugTypeID`,
+		`drugID`,
+		`drugtimeID`,
+		`drugDoseUNit`,
+		`drugWhenID`,
+		`drugAdviceID`
+
+		FROM `dump_settings_drug`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_settings_drug
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>

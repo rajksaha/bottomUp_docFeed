@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpSymptom" useGeneratedKeys="true" keyProperty="symptomID" >
+
+		INSERT INTO `dump_symptom`(
+			`name`
+
+
+		)
+		VALUES(
+			#{name}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpSymptom">
+		UPDATE `dump_symptom`
+		SET
+		`name` = #{name}
+
+		WHERE symptomID = #{symptomID}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpSymptom">
+		SELECT
+		     `symptomID`,
+			`name`
+			FROM `dump_symptom`
+
+		WHERE symptomID = #{symptomID}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpSymptom">
+		SELECT
+		`symptomID`,
+		`name`
+		FROM `dump_symptom`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpSymptom">
+		SELECT
+		`symptomID`,
+		`name`
+		FROM `dump_symptom`
+
+		WHERE 1 = 1
+		<if test="symptomID != null">
+			AND symptomID = #{symptomID}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_symptom
+		WHERE 1=1
+		<if test="symptomID != null">
+			AND symptomID = #{symptomID}
+		</if>
+	</delete>
+
+
+</mapper>

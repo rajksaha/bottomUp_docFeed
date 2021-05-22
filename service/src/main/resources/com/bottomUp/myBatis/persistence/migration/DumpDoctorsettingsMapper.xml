@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpDoctorsettings" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_doctorsettings`(
+			`doctorID`,
+			`category`,
+			`state`,
+			`patientType`,
+			`patientState`,
+			`prescriptionStyle`,
+			`hospitalID`,
+			`photoSupport`,
+			`personCodeInitial`,
+			`pdfPage`
+
+		)
+		VALUES(
+			#{doctorID},
+			#{category},
+			#{state},
+			#{patientType},
+			#{patientState},
+			#{prescriptionStyle},
+			#{hospitalID},
+			#{photoSupport},
+			#{personCodeInitial},
+			#{pdf}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpDoctorsettings">
+		UPDATE `dump_doctorsettings`
+		SET
+		`doctorID` = #{doctorID},
+		`category` = #{category},
+		`state` = #{state},
+		`patientType` = #{patientType},
+		`patientState` = #{patientState},
+		`prescriptionStyle` = #{prescriptionStyle},
+		`hospitalID` = #{hospitalID},
+		`photoSupport` = #{photoSupport},
+		`personCodeInitial` = #{personCodeInitial},
+		`pdfPage` = #{pdfPage}
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpDoctorsettings">
+		SELECT
+		     `id`,
+			`doctorID`,
+			`category`,
+			`state`,
+			`patientType`,
+			`patientState`,
+			`prescriptionStyle`,
+			`hospitalID`,
+			`photoSupport`,
+			`personCodeInitial`,
+			`pdfPage`
+			FROM `dump_doctorsettings`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpDoctorsettings">
+		SELECT
+		    `id`,
+		    `doctorID`,
+			`category`,
+			`state`,
+			`patientType`,
+			`patientState`,
+			`prescriptionStyle`,
+			`hospitalID`,
+			`photoSupport`,
+			`personCodeInitial`,
+			`pdfPage`
+		FROM `dump_doctorsettings`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpDoctorsettings">
+		SELECT
+		`id`,
+		`doctorID`,
+		`category`,
+		`state`,
+		`patientType`,
+		`patientState`,
+		`prescriptionStyle`,
+		`hospitalID`,
+		`photoSupport`,
+		`personCodeInitial`,
+		`pdfPage`
+		FROM `dump_doctorsettings`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_doctorsettings
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>
