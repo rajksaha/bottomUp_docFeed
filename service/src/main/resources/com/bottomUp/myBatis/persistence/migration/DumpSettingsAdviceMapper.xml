@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpSettingsAdvice" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_settings_advice`(
+			`doctorID`,
+			`diseaseID`,
+			`adviceID`
+
+		)
+		VALUES(
+			#{doctorID},
+			#{diseaseID},
+			#{adviceID}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpSettingsAdvice">
+		UPDATE `dump_settings_advice`
+		SET
+		`doctorID` = #{doctorID},
+		`diseaseID` = #{diseaseID},
+		`adviceID` = #{adviceID}
+
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpSettingsAdvice">
+		SELECT
+		     `id`,
+			`doctorID`,
+			`diseaseID`,
+			`adviceID`
+			FROM `dump_settings_advice`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpSettingsAdvice">
+		SELECT
+		    `id`,
+		    `doctorID`,
+			`diseaseID`,
+			`adviceID`
+		FROM `dump_settings_advice`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpSettingsAdvice">
+		SELECT
+		`id`,
+		`doctorID`,
+		`diseaseID`,
+		`adviceID`
+		FROM `dump_settings_advice`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_settings_advice
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>

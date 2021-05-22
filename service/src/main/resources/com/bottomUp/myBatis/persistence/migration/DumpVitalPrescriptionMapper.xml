@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpVitalPrescription" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_vital_prescription`(
+			`appointMentID`,
+			`vitalID`,
+			`vitalResult`
+
+		)
+		VALUES(
+			#{appointMentID},
+			#{vitalID},
+			#{vitalResult}
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpVitalPrescription">
+		UPDATE `dump_vital_prescription`
+		SET
+		`appointMentID` = #{appointMentID},
+		`vitalID` = #{vitalID},
+		`vitalResult` = #{vitalResult}
+
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpVitalPrescription">
+		SELECT
+		    `appointMentID`,
+			`appointMentID`,
+			`vitalID`,
+			`vitalResult`
+			FROM `dump_vital_prescription`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpVitalPrescription">
+		SELECT
+		    `id`,
+		    `appointMentID`,
+			`vitalID`,
+			`vitalResult`
+		FROM `dump_vital_prescription`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpVitalPrescription">
+		SELECT
+		`id`,
+		`appointMentID`,
+		`vitalID`,
+		`vitalResult`
+		FROM `dump_vital_prescription`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+		<if test="appointMentID != null">
+			AND appointMentID = #{appointMentID}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_vital_prescription
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+		<if test="appointMentID != null">
+			AND appointMentID = #{appointMentID}
+		</if>
+	</delete>
+
+
+</mapper>

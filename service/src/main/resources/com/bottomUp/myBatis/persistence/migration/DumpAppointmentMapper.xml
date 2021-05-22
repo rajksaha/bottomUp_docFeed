@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpAppointment" useGeneratedKeys="true" keyProperty="appointmentID" >
+
+		INSERT INTO `dump_appointment`(
+			`doctorCode`,
+			`patientCode`,
+			`date`,
+			`time`,
+			`status`,
+			`appointmentType`
+
+		)
+		VALUES(
+			#{doctorCode},
+			#{patientCode},
+			#{date},
+			#{time},
+			#{status},
+			#{appointmentType}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpAppointment">
+		UPDATE `dump_appointment`
+		SET
+
+		`doctorCode` = #{doctorCode},
+		`patientCode` = #{patientCode},
+		`date` = #{date},
+		`time` = #{time},
+		`status` = #{status},
+		`appointmentType` = #{appointmentType},
+		WHERE appointmentID = #{appointmentID}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpAppointment">
+		SELECT
+		     `appointmentID`,
+			`doctorCode`,
+			`patientCode`,
+			`date`,
+			`time`,
+			`status`,
+			`appointmentType`,
+			FROM `dump_appointment`
+
+		WHERE appointmentID = #{appointmentID}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpAppointment">
+		SELECT
+		 `appointmentID`,
+			`doctorCode`,
+			`patientCode`,
+			`date`,
+			`time`,
+			`status`,
+			`appointmentType`,
+		FROM `dump_appointment`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpAppointment">
+		SELECT
+		`appointmentID`,
+		`doctorCode`,
+		`patientCode`,
+		`date`,
+		`time`,
+		`status`,
+		`appointmentType`,
+		FROM `dump_appointment`
+
+		WHERE 1 = 1
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_appointment
+		WHERE 1=1
+		<if test="appointmentID != null">
+			AND appointmentID = #{appointmentID}
+		</if>
+	</delete>
+
+
+</mapper>

@@ -1,6 +1,8 @@
 package com.sample;
 
 
+import org.apache.xpath.operations.String;
+
 public class Appointment_Type {
 
   private long appointmenttypeid;

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpPatient" useGeneratedKeys="true" keyProperty="patientID" >
+
+		INSERT INTO `dump_patient`(
+			`patientCode`,
+			`name`,
+			`age`,
+			`sex`,
+			`address`,
+			`phone`,
+			`occupation`,
+			`referredBy`,
+			`date`,
+			`hospitalName`,
+			`bedNum`,
+			`wardNum`,
+			`headOfUnit`
+
+
+		)
+		VALUES(
+			#{patientCode},
+			#{name},
+			#{age},
+			#{sex},
+			#{address},
+			#{phone},
+			#{occupation},
+			#{referredBy},
+			#{date},
+			#{hospitalName},
+			#{bedNum},
+			#{wardNum},
+			#{headOfUnit}
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpPatient">
+		UPDATE `dump_patient`
+		SET
+		`patientCode` = #{patientCode},
+		`name` = #{name},
+		`age` = #{age},
+		`sex` = #{sex},
+		`address` = #{address},
+		`phone` = #{phone},
+		`occupation` = #{occupation},
+		`referredBy` = #{referredBy},
+		`date` = #{date},
+		`hospitalName` = #{hospitalName},
+		`bedNum` = #{bedNum},
+		`wardNum` = #{wardNum},
+		`headOfUnit` = #{headOfUnit}
+		WHERE patientID = #{patientID}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpPatient">
+		SELECT
+		    `patientID`,
+			`patientCode`,
+			`name`,
+			`age`,
+			`sex`,
+			`address`,
+			`phone`,
+			`occupation`,
+			`referredBy`,
+			`date`,
+			`hospitalName`,
+			`bedNum`,
+			`wardNum`,
+			`headOfUnit`
+			FROM `dump_patient`
+
+		WHERE patientID = #{patientID}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpPatient">
+		SELECT
+		    `patientID`,
+			`patientCode`,
+			`name`,
+			`age`,
+			`sex`,
+			`address`,
+			`phone`,
+			`occupation`,
+			`referredBy`,
+			`date`,
+			`hospitalName`,
+			`bedNum`,
+			`wardNum`,
+			`headOfUnit`
+		FROM `dump_patient`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpPatient">
+		SELECT
+		`patientID`,
+		`patientCode`,
+		`name`,
+		`age`,
+		`sex`,
+		`address`,
+		`phone`,
+		`occupation`,
+		`referredBy`,
+		`date`,
+		`hospitalName`,
+		`bedNum`,
+		`wardNum`,
+		`headOfUnit`
+		FROM `dump_patient`
+
+		WHERE 1 = 1
+		<if test="patientID != null">
+			AND patientID = #{patientID}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_patient
+		WHERE 1=1
+		<if test="patientID != null">
+			AND patientID = #{patientID}
+		</if>
+	</delete>
+
+
+</mapper>

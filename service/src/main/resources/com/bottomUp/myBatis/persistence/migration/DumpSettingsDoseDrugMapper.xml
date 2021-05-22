@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpSettingsDoseDrug" useGeneratedKeys="true" keyProperty="drugSettingID" >
+
+		INSERT INTO `dump_settings_dose_drug`(
+			`dose`,
+			`numOfDay`,
+			`durationType`
+
+
+		)
+		VALUES(
+			#{dose},
+			#{numOfDay},
+			#{durationType}
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpSettingsDoseDrug">
+		UPDATE `dump_settings_dose_drug`
+		SET
+		`dose` = #{dose},
+		`numOfDay` = #{numOfDay},
+		`durationType` = #{durationType}
+
+		WHERE drugSettingID = #{drugSettingID}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpSettingsDoseDrug">
+		SELECT
+		     `drugSettingID`,
+			`dose`,
+			`numOfDay`,
+			`durationType`
+			FROM `dump_settings_dose_drug`
+
+		WHERE drugSettingID = #{drugSettingID}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpSettingsDoseDrug">
+		SELECT
+		    `drugSettingID`,
+			`dose`,
+			`numOfDay`,
+			`durationType`
+		FROM `dump_settings_dose_drug`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpSettingsDoseDrug">
+		SELECT
+		`drugSettingID`,
+		`dose`,
+		`numOfDay`,
+		`durationType`
+		FROM `dump_settings_dose_drug`
+
+		WHERE 1 = 1
+		<if test="drugSettingID != null">
+			AND drugSettingID = #{drugSettingID}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_settings_dose_drug
+		WHERE 1=1
+		<if test="drugSettingID != null">
+			AND drugSettingID = #{drugSettingID}
+		</if>
+	</delete>
+
+
+</mapper>

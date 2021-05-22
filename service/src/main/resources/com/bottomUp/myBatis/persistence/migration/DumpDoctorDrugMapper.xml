@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpDoctorDrug" useGeneratedKeys="true" keyProperty="doctorDrugID" >
+
+		INSERT INTO `dump_doctor_drug`(
+			`doctorID`,
+			`drugID`,
+			`drugTimeID`,
+			`drugDoseUnit`,
+			`drugWhenID`,
+			`drugAdviceID`
+
+		)
+		VALUES(
+			#{doctorID},
+			#{drugID},
+			#{drugTimeID},
+			#{drugDoseUnit},
+			#{drugWhenID},
+			#{drugAdviceID}
+
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpDoctorDrug">
+		UPDATE `dump_doctor_drug`
+		SET
+		`doctorID` = #{doctorID},
+		`drugID` = #{drugID},
+		`drugTimeID` = #{drugTimeID},
+		`drugDoseUnit` = #{drugDoseUnit},
+		`drugWhenID` = #{drugWhenID},
+		`drugAdviceID` = #{drugAdviceID}
+		WHERE doctorDrugID = #{doctorDrugID}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpDoctorDrug">
+		SELECT
+		    `doctorDrugID`,
+		    `doctorID`,
+			`drugID`,
+			`drugTimeID`,
+			`drugDoseUnit`,
+			`drugWhenID`,
+			`drugAdviceID`
+
+			FROM `dump_doctor_drug`
+
+		WHERE doctorDrugID = #{doctorDrugID}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpDoctorDrug">
+		SELECT
+		    `doctorDrugID`,
+		    `doctorID`,
+			`drugID`,
+			`drugTimeID`,
+			`drugDoseUnit`,
+			`drugWhenID`,
+			`drugAdviceID`
+
+		FROM `dump_doctor_drug`
+		WHERE doctorDrugID = #{doctorDrugID}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpDoctorDrug">
+		SELECT
+		`doctorDrugID`,
+		`doctorID`,
+		`drugID`,
+		`drugTimeID`,
+		`drugDoseUnit`,
+		`drugWhenID`,
+		`drugAdviceID`
+		FROM `dump_doctor_drug`
+
+		WHERE 1 = 1
+		<if test="doctorDrugID != null">
+			AND doctorDrugID = #{doctorDrugID}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_doctor_drug
+		WHERE 1=1
+		<if test="doctorDrugID != null">
+			AND doctorDrugID = #{doctorDrugID}
+		</if>
+	</delete>
+
+
+</mapper>

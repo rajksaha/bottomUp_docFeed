@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpPatientFollowUp" useGeneratedKeys="true" keyProperty="patientFollowUpID" >
+
+		INSERT INTO `dump_patient_follow_up`(
+			`patientID`,
+			`doctorID`,
+			`invID`
+
+
+		)
+		VALUES(
+			#{patientID},
+			#{doctorID},
+			#{invID}
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpPatientFollowUp">
+		UPDATE `dump_patient_follow_up`
+		SET
+		`patientID` = #{patientID},
+		`doctorID` = #{doctorID},
+		`invID` = #{invID}
+
+		WHERE patientFollowUpID = #{patientFollowUpID}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpPatientFollowUp">
+		SELECT
+		     `patientFollowUpID`,
+			`patientID`,
+			`doctorID`,
+			`invID`
+
+
+			FROM `dump_patient_follow_up`
+
+		WHERE patientFollowUpID = #{patientFollowUpID}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpPatientFollowUp">
+		SELECT
+		    `patientFollowUpID`,
+			`patientID`,
+			`doctorID`,
+			`invID`
+		FROM `dump_patient_follow_up`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpPatientFollowUp">
+		SELECT
+		`patientFollowUpID`,
+		`patientID`,
+		`doctorID`,
+		`invID`
+		FROM `dump_patient_follow_up`
+
+		WHERE 1 = 1
+		<if test="patientFollowUpID != null">
+			AND patientFollowUpID = #{patientFollowUpID}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_patient_follow_up
+		WHERE 1=1
+		<if test="patientFollowUpID != null">
+			AND patientFollowUpID = #{patientFollowUpID}
+		</if>
+	</delete>
+
+
+</mapper>

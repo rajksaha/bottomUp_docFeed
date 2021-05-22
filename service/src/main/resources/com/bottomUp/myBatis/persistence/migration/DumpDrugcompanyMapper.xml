@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpDrugcompany" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_drugcompany`(
+			`name`,
+			`folder`
+
+		)
+		VALUES(
+			#{name},
+			#{folder}
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpDrugcompany">
+		UPDATE `dump_drugcompany`
+		SET
+		`name` = #{name},
+		`folder` = #{folder}
+
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpDrugcompany">
+		SELECT
+		     `id`,
+			`name`,
+			`folder`
+			FROM `dump_drugcompany`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpDrugcompany">
+		SELECT
+		    `id`,
+			`name`,
+			`folder`
+		FROM `dump_drugcompany`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpDrugcompany">
+		SELECT
+		`id`,
+		`name`,
+		`folder`
+		FROM `dump_drugcompany`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_drugcompany
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>

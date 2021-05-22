@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+
+	<insert id="create" parameterType="dumpHistoryOption" useGeneratedKeys="true" keyProperty="id" >
+
+		INSERT INTO `dump_history_option`(
+			`historyID`,
+			`optionName`
+
+
+		)
+		VALUES(
+			#{historyID},
+			#{optionName}
+
+
+		);
+
+
+	</insert>
+	
+	<update id="update" parameterType="dumpHistoryOption">
+		UPDATE `dump_history_option`
+		SET
+		`historyID` = #{historyID},
+		`optionName` = #{optionName}
+
+		WHERE id = #{id}
+	</update>
+
+	<select id="getByID" parameterType="int" resultType="dumpHistoryOption">
+		SELECT
+		     `id`,
+			`historyID`,
+			`optionName`
+			FROM `dump_history_option`
+
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByName" parameterType="string" resultType="dumpHistoryOption">
+		SELECT
+		     `id`,
+		     `historyID`,
+			`optionName`
+		FROM `dump_history_option`
+		WHERE advice = #{advice}
+	</select>
+
+	<select id="getByParam" parameterType="map" resultType="dumpHistoryOption">
+		SELECT
+		`id`,
+		`historyID`,
+		`optionName`
+		FROM `dump_history_option`
+
+		WHERE 1 = 1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+
+
+	</select>
+
+    <delete id="delete" parameterType="map">
+		DELETE  FROM dump_history_option
+		WHERE 1=1
+		<if test="id != null">
+			AND id = #{id}
+		</if>
+	</delete>
+
+
+</mapper>

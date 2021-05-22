@@ -92,6 +92,74 @@
 
 
 
+
+
+
+
+
+		<typeAlias alias="dumpAdvice" type="com.bottomUp.domain.migration.DumpAdvice"/>
+		<typeAlias alias="dumpAppointment" type="com.bottomUp.domain.migration.DumpAppointment"/>
+		<typeAlias alias="dumpComplain" type="com.bottomUp.domain.migration.DumpComplain"/>
+		<typeAlias alias="dumpContentdetail" type="com.bottomUp.domain.migration.DumpContentdetail"/>
+		<typeAlias alias="dumpDiagnosis" type="com.bottomUp.domain.migration.DumpDiagnosis"/>
+		<typeAlias alias="dumpDisease" type="com.bottomUp.domain.migration.DumpDisease"/>
+		<typeAlias alias="dumpDoctorAdviceSettings" type="com.bottomUp.domain.migration.DumpDoctorAdviceSettings"/>
+		<typeAlias alias="dumpDoctorDrug" type="com.bottomUp.domain.migration.DumpDoctorDrug"/>
+		<typeAlias alias="dumpDoctorDrugDose" type="com.bottomUp.domain.migration.DumpDoctorDrugDose"/>
+		<typeAlias alias="dumpDoctorFollowupSetteing" type="com.bottomUp.domain.migration.DumpDoctorFollowupSetteing"/>
+		<typeAlias alias="dumpDoctorHistorySettings" type="com.bottomUp.domain.migration.DumpDoctorHistorySettings"/>
+		<typeAlias alias="dumpDoctorInvSetteing" type="com.bottomUp.domain.migration.DumpDoctorInvSetteing"/>
+		<typeAlias alias="dumpDoctorVitalSettings" type="com.bottomUp.domain.migration.DumpDoctorVitalSettings"/>
+		<typeAlias alias="dumpDoctorsettings" type="com.bottomUp.domain.migration.DumpDoctorsettings"/>
+
+
+		<typeAlias alias="dumpDosePeriod" type="com.bottomUp.domain.migration.DumpDosePeriod"/>
+		<typeAlias alias="dumpDrug" type="com.bottomUp.domain.migration.DumpDrug"/>
+		<typeAlias alias="dumpDrugHistory" type="com.bottomUp.domain.migration.DumpDrugHistory"/>
+		<typeAlias alias="dumpDrugPrescription" type="com.bottomUp.domain.migration.DumpDrugPrescription"/>
+		<typeAlias alias="dumpDrugadvicetype" type="com.bottomUp.domain.migration.DumpDrugadvicetype"/>
+		<typeAlias alias="dumpDrugcompany" type="com.bottomUp.domain.migration.DumpDrugcompany"/>
+		<typeAlias alias="dumpFollowUpResult" type="com.bottomUp.domain.migration.DumpFollowUpResult"/>
+		<typeAlias alias="dumpHistory" type="com.bottomUp.domain.migration.DumpHistory"/>
+		<typeAlias alias="dumpHistoryOption" type="com.bottomUp.domain.migration.DumpHistoryOption"/>
+		<typeAlias alias="dumpHistoryPrescription" type="com.bottomUp.domain.migration.DumpHistoryPrescription"/>
+		<typeAlias alias="dumpInv" type="com.bottomUp.domain.migration.DumpInv"/>
+		<typeAlias alias="dumpInvPrescription" type="com.bottomUp.domain.migration.DumpInvPrescription"/>
+		<typeAlias alias="dumpInvReport" type="com.bottomUp.domain.migration.DumpInvReport"/>
+
+		<typeAlias alias="dumpInvReportDate" type="com.bottomUp.domain.migration.DumpInvReportDate"/>
+		<typeAlias alias="dumpNextVisit" type="com.bottomUp.domain.migration.DumpNextVisit"/>
+		<typeAlias alias="dumpPatient" type="com.bottomUp.domain.migration.DumpPatient"/>
+		<typeAlias alias="dumpPatientDetail" type="com.bottomUp.domain.migration.DumpPatientDetail"/>
+		<typeAlias alias="dumpPatientFamilyHistory" type="com.bottomUp.domain.migration.DumpPatientFamilyHistory"/>
+		<typeAlias alias="dumpPatientFollowUP" type="com.bottomUp.domain.migration.DumpPatientFollowUP"/>
+		<typeAlias alias="dumpPatientHistory" type="com.bottomUp.domain.migration.DumpPatientHistory"/>
+		<typeAlias alias="dumpPatientPastDisease" type="com.bottomUp.domain.migration.DumpPatientPastDisease"/>
+		<typeAlias alias="dumpPatientType" type="com.bottomUp.domain.migration.DumpPatientType"/>
+		<typeAlias alias="dumpPrescriptionAdvice" type="com.bottomUp.domain.migration.DumpPrescriptionAdvice"/>
+		<typeAlias alias="dumpPrescriptionFamilyDisease" type="com.bottomUp.domain.migration.DumpPrescriptionFamilyDisease"/>
+		<typeAlias alias="dumpPrescriptionPastDisease" type="com.bottomUp.domain.migration.DumpPrescriptionPastDisease"/>
+		<typeAlias alias="dumpPrescriptionReference" type="com.bottomUp.domain.migration.DumpPrescriptionReference"/>
+		<typeAlias alias="dumpRefferedDoctor" type="com.bottomUp.domain.migration.DumpRefferedDoctor"/>
+		<typeAlias alias="dumpSettingsAdvice" type="com.bottomUp.domain.migration.DumpSettingsAdvice"/>
+
+		<typeAlias alias="dumpSettingsDoseDrug" type="com.bottomUp.domain.migration.DumpSettingsDoseDrug"/>
+		<typeAlias alias="dumpSettingsDrug" type="com.bottomUp.domain.migration.DumpSettingsDrug"/>
+		<typeAlias alias="dumpSettingsInv" type="com.bottomUp.domain.migration.DumpSettingsInv"/>
+		<typeAlias alias="dumpSymptom" type="com.bottomUp.domain.migration.DumpSymptom"/>
+		<typeAlias alias="dumpVital" type="com.bottomUp.domain.migration.DumpVital"/>
+		<typeAlias alias="dumpVitalOption" type="com.bottomUp.domain.migration.DumpVitalOption"/>
+		<typeAlias alias="dumpVitalPrescription" type="com.bottomUp.domain.migration.DumpVitalPrescription"/>
+
+
+
+
+
+
+
+
+
+
 	</typeAliases>
 	<plugins>
 		<plugin interceptor="com.bottomUp.myBatis.interceptor.MapperInterceptor"/>
