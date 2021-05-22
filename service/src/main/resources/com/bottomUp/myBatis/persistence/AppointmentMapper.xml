@@ -100,6 +100,9 @@
 		<if test="appointmentID != null">
 			AND appointmentID = #{appointmentID}
 		</if>
+		<if test="notAppointmentID != null">
+			AND appointmentID != #{notAppointmentID}
+		</if>
 		<if test="patientID != null">
 			AND patientID = #{patientID}
 		</if>
@@ -108,6 +111,9 @@
 		</if>
 		<if test="appDate != null">
 			AND appDate = #{appDate}
+		</if>
+		<if test="sortColumn == null">
+			ORDER BY appDate DESC
 		</if>
 		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
 			ORDER BY ${sortColumn} ${sortOrder}

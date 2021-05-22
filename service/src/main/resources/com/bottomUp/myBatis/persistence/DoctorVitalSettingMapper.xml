@@ -108,9 +108,8 @@
 		<if test="term != null">
 			AND LOWER(vitalName) LIKE LOWER(CONCAT('%',#{term},'%')) LIMIT 20
 		</if>
-		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
-			ORDER BY ${sortColumn} ${sortOrder}
-			LIMIT #{limit} OFFSET #{offset}
+		<if test="term == null">
+			ORDER BY dvs.displayOrder ASC
 		</if>
 	</select>
 

@@ -20,10 +20,10 @@
         <a data-ng-if="hasAccess('PRES_INV_REPORT')" class="btn btn-link  presIcon" title="Inv History" href="#/invReport">
             <i class="fa fa-stethoscope fa-lg"></i>
         </a>
-        <a data-ng-if="hasAccess('PRES_FOLLOW_UP_CHART')" class="btn btn-link  presIcon" title="Follow-up Chart" data-ng-if="patientData.patientType" href="#/followUpChart">
+        <a data-ng-if="hasAccess('PRES_FOLLOW_UP_CHART') && patientData.patientType" class="btn btn-link  presIcon" title="Follow-up Chart" href="#/followUpChart">
             <i class="fa fa-heartbeat fa-lg"></i>
         </a>
-        <a data-ng-if="hasAccess('PRES_FOLLOW_UP_CHART')" class="btn btn-link  presIcon" data-ng-if="!patientData.patientType" title="Please Select Patient Type To Visit That Page" href="#" onclick="return false;">
+        <a data-ng-if="hasAccess('PRES_FOLLOW_UP_CHART') && !patientData.patientType" class="btn btn-link  presIcon" title="Please Select Patient Type To Visit That Page" href="#" onclick="return false;">
             <i class="fa fa-heartbeat fa-lg"></i>
         </a>
         <a data-ng-if="hasAccess('PRES_MEDICAL_CERT')" class="btn btn-link  presIcon" title="Medical Certificate"  href="javascript:(0)"

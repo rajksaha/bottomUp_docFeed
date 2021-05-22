@@ -87,10 +87,7 @@
 		<if test="patientID != null">
 			AND ap.patientID = #{patientID}
 		</if>
-		<if test="offset != null and limit != null and sortColumn != null and sortOrder != null">
-			ORDER BY ${sortColumn} ${sortOrder}
-			LIMIT #{limit} OFFSET #{offset}
-		</if>
+		ORDER BY fur.`entryDate` DESC
 	</select>
 
     <delete id="delete" parameterType="map">

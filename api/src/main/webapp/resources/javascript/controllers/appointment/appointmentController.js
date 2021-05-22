@@ -168,7 +168,7 @@ app.controller('AppointmentController', function($scope, $state, $modal, $rootSc
             backdrop: 'static'
         });
         modalInstance.result.then(function(result) {
-        	$scope.bringAppointment();
+            $scope.refreshList();
             $scope.initiateDashboard();
          });
     };
@@ -181,7 +181,7 @@ app.controller('AppointmentController', function($scope, $state, $modal, $rootSc
             backdrop: 'static'
         });
         modalInstance.result.then(function(result) {
-            $scope.bringAppointment();
+            $scope.refreshList();
             $scope.initiateDashboard();
         });
     };

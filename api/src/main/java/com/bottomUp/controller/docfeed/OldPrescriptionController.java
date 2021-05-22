@@ -1,6 +1,7 @@
 package com.bottomUp.controller.docfeed;
 
 import com.bottomUp.common.exception.BottomUpException;
+import com.bottomUp.controller.BaseController;
 import com.bottomUp.domain.AppointmentData;
 import com.bottomUp.domain.PatientData;
 import com.bottomUp.service.docFeed.OldPrescriptionService;
@@ -22,7 +23,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/oldPres")
-public class OldPrescriptionController {
+public class OldPrescriptionController extends BaseController{
 
     @Autowired
     private AppointmentService appointmentService;
@@ -38,7 +39,8 @@ public class OldPrescriptionController {
         Map<String, Object> params = new HashMap<>();
         params.put("patientID", patientID);
         params.put("doctorID", doctorID);
-        //params.put("appointmentID", )
+        params.put("notAppointmentID", this.getUserDetail().getAppointmentID());
+        params.put("orderByAppDate", true);
         return this.appointmentService.getByParam(params);
     }
 
