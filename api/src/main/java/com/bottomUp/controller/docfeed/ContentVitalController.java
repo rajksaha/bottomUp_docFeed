@@ -36,11 +36,8 @@ public class ContentVitalController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{vitalID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentVitalData getByID(@PathVariable("vitalID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.contentVitalService.getByID(Long.valueOf(companyID));
+    public ContentVitalData getByID(@PathVariable("vitalID") String vitalID, HttpServletRequest request) throws BottomUpException {
+        return this.contentVitalService.getByID(vitalID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -62,7 +59,7 @@ public class ContentVitalController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{vitalID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("vitalID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("vitalID") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("vitalID", appointmentID);
         this.contentVitalService.delete(param);

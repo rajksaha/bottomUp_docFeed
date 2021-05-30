@@ -35,16 +35,13 @@ public class PrescriptionPastDiseaseController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{presPastDiseaseID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public   PrescriptionPastDiseaseData getByID(@PathVariable("  presPastDiseaseID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.prescriptionPastDiseaseService.getByID(Long.valueOf(companyID));
+    public   PrescriptionPastDiseaseData getByID(@PathVariable("presPastDiseaseID") String presPastDiseaseID, HttpServletRequest request) throws BottomUpException {
+        return this.prescriptionPastDiseaseService.getByID(presPastDiseaseID);
     }
 
     @RequestMapping(value = {"/add/{pastDiseaseID}/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> add(HttpServletRequest request, @PathVariable Long pastDiseaseID, @PathVariable Long appointmentID) throws BottomUpException {
+    public Map<String, Object> add(HttpServletRequest request, @PathVariable String pastDiseaseID, @PathVariable String appointmentID) throws BottomUpException {
         PrescriptionPastDiseaseData data = new PrescriptionPastDiseaseData();
         data.setAppointmentID(appointmentID);
         data.setPastDiseaseID(pastDiseaseID);
@@ -73,7 +70,7 @@ public class PrescriptionPastDiseaseController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{  presPastDiseaseID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("  presPastDiseaseID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("  presPastDiseaseID") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("  presPastDiseaseID", appointmentID);
         this.prescriptionPastDiseaseService.delete(param);

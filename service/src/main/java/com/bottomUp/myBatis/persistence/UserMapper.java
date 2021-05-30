@@ -23,7 +23,7 @@ public interface UserMapper {
 
     public UserData getUserByUserName(String userName) throws BottomUpException;
 
-    public List<GroupPermissionData> getUserPermissionByUserID(Long userID) throws BottomUpException;
+    public List<GroupPermissionData> getUserPermissionByUserID(String userID) throws BottomUpException;
 
     public List<UserData> getUserByParam(Map<String, Object> param)throws BottomUpException;
 

@@ -50,7 +50,7 @@ public class AttachmentService {
         return reportList;
     }
 
-    public List<AttachmentData> getDoctorGroupAdvice(Long doctorID) throws BottomUpException{
+    public List<AttachmentData> getDoctorGroupAdvice(String doctorID) throws BottomUpException{
         Map<String, Object> params = new HashMap<>();
         params.put("entityType", "GROUP_ADVICE");
         params.put("entityID", doctorID);
@@ -62,11 +62,11 @@ public class AttachmentService {
         this.attachmentMapper.create(attachment);
     }
 
-    public void delete(Long attachmentId) throws BottomUpException {
+    public void delete(String attachmentId) throws BottomUpException {
         this.attachmentMapper.delete(attachmentId);
     }
 
-    public AttachmentData getByID(Long attachmentId) throws BottomUpException {
+    public AttachmentData getByID(String attachmentId) throws BottomUpException {
         return this.attachmentMapper.getByID(attachmentId);
     }
 

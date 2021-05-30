@@ -11,7 +11,7 @@ import java.util.Date;
 public class MedicalCertificateData  extends BaseData{
 
     private BigInteger medicalCertID;
-    private Long appointmentID;
+    private String appointmentID;
     private Date startDate;
     private Date endDate;
     private String addComment;
@@ -24,11 +24,11 @@ public class MedicalCertificateData  extends BaseData{
         this.medicalCertID = medicalCertID;
     }
 
-    public Long getAppointmentID() {
+    public String getAppointmentID() {
         return appointmentID;
     }
 
-    public void setAppointmentID(Long appointmentID) {
+    public void setAppointmentID(String appointmentID) {
         this.appointmentID = appointmentID;
     }
 

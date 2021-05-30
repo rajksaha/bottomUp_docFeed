@@ -23,7 +23,7 @@ public class ReferredDoctorService {
     @Autowired
     private ReferredDoctorMapper referredDoctorMapper;
 
-    public Long createByName(String docName, String address) throws BottomUpException{
+    public String createByName(String docName, String address) throws BottomUpException{
         ReferredDoctorData refDoc = null;
         Map<String, Object> param = new HashMap<>();
         param.put("doctorName", docName);
@@ -51,7 +51,7 @@ public class ReferredDoctorService {
         referredDoctorMapper.update(data);
     }
 
-    public ReferredDoctorData getByID(Long ID)throws BottomUpException {
+    public ReferredDoctorData getByID(String ID)throws BottomUpException {
         return this.referredDoctorMapper.getByID(ID);
     }
 

@@ -39,7 +39,7 @@ public class DoctorFollowUpSettingService {
         doctorFollowUpSettingMapper.updateDisplayOrder(followUpList);
     }
 
-    public DoctorFollowUpSettingData getByID(Long ID)throws BottomUpException {
+    public DoctorFollowUpSettingData getByID(String ID)throws BottomUpException {
         return this.doctorFollowUpSettingMapper.getByID(ID);
     }
 

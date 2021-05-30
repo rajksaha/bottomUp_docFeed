@@ -5,16 +5,16 @@ import com.bottomUp.domain.common.BaseData;
 
 public class AppointmentTypeData extends BaseData{
 
-  private long appointmentTypeID;
+  private String appointmentTypeID;
   private String name;
   private String shortName;
 
 
-  public long getAppointmentTypeID() {
+  public String getAppointmentTypeID() {
     return appointmentTypeID;
   }
 
-  public void setAppointmentTypeID(long appointmentTypeID) {
+  public void setAppointmentTypeID(String appointmentTypeID) {
     this.appointmentTypeID = appointmentTypeID;
   }
 

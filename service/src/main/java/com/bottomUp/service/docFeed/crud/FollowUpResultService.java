@@ -32,14 +32,14 @@ public class FollowUpResultService {
     @Autowired
     private DoctorFollowUpSettingMapper doctorFollowUpSettingMapper;
 
-    public FollowUpResultViewData generateFollowUpView(Long doctorID, Long patientID, Integer patientTypeID, Long appointmentID)throws BottomUpException{
+    public FollowUpResultViewData generateFollowUpView(String doctorID, String patientID, String patientTypeID, String appointmentID)throws BottomUpException{
         FollowUpResultViewData viewData = new FollowUpResultViewData();
         Map<String, Object> params = new HashMap<>();
         params.put("doctorID", doctorID);
         params.put("patientTypeID", patientTypeID);
         viewData.setDocFollowUpList(doctorFollowUpSettingMapper.getByParam(params));
-        Map<Long, Integer> displayOrder = new HashMap<>();
-        Map<Long, Boolean> headerMap = new HashMap<>();
+        Map<String, Integer> displayOrder = new HashMap<>();
+        Map<String, Boolean> headerMap = new HashMap<>();
         for(DoctorFollowUpSettingData data : viewData.getDocFollowUpList()){
             displayOrder.put(data.getFollowUpSettingID(), data.getDisplayOrder());
             headerMap.put(data.getFollowUpSettingID(), true);
@@ -48,7 +48,7 @@ public class FollowUpResultService {
         params.put("appointmentID", appointmentID);
         viewData.setPatientFollowUpList(this.getByParam(params));
         for(FollowUpResultData result : viewData.getPatientFollowUpList()){
-            Map<Long, Boolean> tempHeaderMap = new HashMap<>();
+            Map<String, Boolean> tempHeaderMap = new HashMap<>();
             List<FollowUpDetail> processedList = new ArrayList<>();
             tempHeaderMap.putAll(headerMap);
             for(FollowUpDetail detail: result.getFollowUpDetailList()){
@@ -60,8 +60,8 @@ public class FollowUpResultService {
                 }
             }
             if(tempHeaderMap.size() > 0){
-                for (Map.Entry<Long, Boolean> entry : tempHeaderMap.entrySet()) {
-                    Long followUpID = Long.valueOf(entry.getKey().toString());
+                for (Map.Entry<String, Boolean> entry : tempHeaderMap.entrySet()) {
+                    String followUpID = entry.getKey();
                     FollowUpDetail detail = new FollowUpDetail();
                     detail.setFollowUpID(followUpID);
                     detail.setDisplayOrder(displayOrder.get(followUpID));
@@ -86,7 +86,7 @@ public class FollowUpResultService {
         followUpResultMapper.update(data);
     }
 
-    public FollowUpResultData getByID(Long ID)throws BottomUpException {
+    public FollowUpResultData getByID(String ID)throws BottomUpException {
         FollowUpResultData followUpResultData = this.followUpResultMapper.getByID(ID);
         followUpResultData.setFollowUpDetailList(JsonConverter.convertJsonToList(followUpResultData.getJsonData(),FollowUpDetail.class));
         return followUpResultData;

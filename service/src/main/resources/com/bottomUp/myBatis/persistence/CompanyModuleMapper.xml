@@ -4,10 +4,16 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.CompanyModuleMapper">
 
-	<insert id="create" parameterType="CompanyModule" useGeneratedKeys="true" keyProperty="companyModuleID" >
 
+
+	<insert id="create" parameterType="CompanyModule" >
+
+		<selectKey keyProperty="companyModuleID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `bottom_up_company_module`
 		(
+			`companyModuleID`,
 			`companyID`,
 			`shortName`,
 			`moduleID`,
@@ -18,6 +24,7 @@
 		)
 		VALUES
 		(
+			#{companyModuleID},
 			#{companyID},
 			#{shortName},
 			#{moduleID},
@@ -40,7 +47,7 @@
 		WHERE companyModuleID = #{companyModuleID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="CompanyModule">
+	<select id="getByID" parameterType="string" resultType="CompanyModule">
 		SELECT ecm.companyModuleID, ecm.companyID, ecm.shortName, ecm.moduleID, ecm.updatedOn, ecm.updatedBy, ecm.`createdOn`, ecm.`createdBy`, ec.companyName AS companyName, em.moduleName AS moduleName
 		FROM bottom_up_company_module ecm
 		JOIN bottom_up_company ec ON ecm.companyID = ec.companyID
@@ -67,7 +74,10 @@
 	</select>
 
     <delete id="delete" parameterType="map">
-		DELETE  FROM bottom_up_module WHERE moduleID = #{moduleID}
+		DELETE  FROM bottom_up_company_module WHERE 1 = 1
+		<if test="companyModuleID != null">
+			AND companyModuleID = #{companyModuleID}
+		</if>
 	</delete>
 
 

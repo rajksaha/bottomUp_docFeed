@@ -17,7 +17,7 @@ public interface CompanyModuleMapper {
 
     public void update(CompanyModuleData data) throws BottomUpException;
 
-    public CompanyModuleData getByID(Integer ID) throws BottomUpException;
+    public CompanyModuleData getByID(String ID) throws BottomUpException;
 
     public List<CompanyModuleData> getByParam(Map<String, Object> param) throws BottomUpException;
 

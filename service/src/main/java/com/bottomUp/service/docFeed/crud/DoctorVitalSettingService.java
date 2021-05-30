@@ -37,7 +37,7 @@ public class DoctorVitalSettingService {
         doctorVitalSettingMapper.update(data);
     }
 
-    public DoctorVitalSettingData getByID(Long ID)throws BottomUpException {
+    public DoctorVitalSettingData getByID(String ID)throws BottomUpException {
         return this.doctorVitalSettingMapper.getByID(ID);
     }
 

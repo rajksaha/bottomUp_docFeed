@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpAdviceMapper">
+<mapper namespace="com.bottomUp.myBatis.persistence.migration.DumpDoctorFollowupSetteingMapper">
 
-	<insert id="create" parameterType="dumpDoctorFollowupSertting" useGeneratedKeys="true" keyProperty="followUpSerttingID" >
+	<insert id="create" parameterType="dumpDoctorFollowupSetteing" useGeneratedKeys="true" keyProperty="followUpSerttingID" >
 
 		INSERT INTO `dump_doctor_followup_setteing`(
 			`doctorID`,
@@ -23,7 +23,7 @@
 
 	</insert>
 	
-	<update id="update" parameterType="dumpDoctorFollowupSertting">
+	<update id="update" parameterType="dumpDoctorFollowupSetteing">
 		UPDATE `dump_doctor_followup_setteing`
 		SET
 		`doctorID` = #{doctorID},
@@ -33,7 +33,7 @@
 		WHERE followUpSerttingID = #{followUpSerttingID}
 	</update>
 
-	<select id="getByID" parameterType="int" resultType="dumpDoctorFollowupSertting">
+	<select id="getByID" parameterType="int" resultType="dumpDoctorFollowupSetteing">
 		SELECT
 		    `followUpSerttingID`,
 			`doctorID`,
@@ -44,7 +44,7 @@
 		WHERE followUpSerttingID = #{followUpSerttingID}
 	</select>
 
-	<select id="getByName" parameterType="string" resultType="dumpDoctorFollowupSertting">
+	<select id="getByName" parameterType="string" resultType="dumpDoctorFollowupSetteing">
 		SELECT
 		    `followUpSerttingID`,
 			`doctorID`,
@@ -54,7 +54,7 @@
 		WHERE advice = #{advice}
 	</select>
 
-	<select id="getByParam" parameterType="map" resultType="dumpDoctorFollowupSertting">
+	<select id="getByParam" parameterType="map" resultType="dumpDoctorFollowupSetteing">
 		SELECT
 		`followUpSerttingID`,
 		`doctorID`,

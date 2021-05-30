@@ -17,7 +17,7 @@ public interface InvReportMapper {
 
     public void update(InvReportData data) throws BottomUpException;
 
-    public InvReportData getByID(Long ID) throws BottomUpException;
+    public InvReportData getByID(String ID) throws BottomUpException;
 
     public List<InvReportData> getByParam(Map<String, Object> param) throws BottomUpException;
 

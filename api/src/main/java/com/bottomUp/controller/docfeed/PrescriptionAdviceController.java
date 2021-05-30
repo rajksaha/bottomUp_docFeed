@@ -33,13 +33,10 @@ public class PrescriptionAdviceController extends BaseController {
         return this.prescriptionAdviceService.getByParam(params);
     }
 
-    @RequestMapping(value = {"/getByID/{prescriptionAdviceIS}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByID/{prescriptionAdviceID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public PrescriptionAdviceData getByID(@PathVariable("prescriptionAdviceIS") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.prescriptionAdviceService.getByID(Long.valueOf(companyID));
+    public PrescriptionAdviceData getByID(@PathVariable("prescriptionAdviceID") String prescriptionAdviceID, HttpServletRequest request) throws BottomUpException {
+        return this.prescriptionAdviceService.getByID(prescriptionAdviceID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,7 +58,7 @@ public class PrescriptionAdviceController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{prescriptionAdviceID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("prescriptionAdviceID") Integer prescriptionAdviceID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("prescriptionAdviceID") String prescriptionAdviceID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("presAdviceID", prescriptionAdviceID);
         this.prescriptionAdviceService.delete(param);

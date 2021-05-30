@@ -5,34 +5,34 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PatientPastDiseaseData extends BaseData {
 
-  private Long patientPastDiseaseID;
-  private Long patientID;
-  private Long diseaseID;
+  private String patientPastDiseaseID;
+  private String patientID;
+  private String diseaseID;
   private String diseaseName;
   private Integer isPresent;
   private String detail;
 
-  public Long getPatientPastDiseaseID() {
+  public String getPatientPastDiseaseID() {
     return patientPastDiseaseID;
   }
 
-  public void setPatientPastDiseaseID(Long patientPastDiseaseID) {
+  public void setPatientPastDiseaseID(String patientPastDiseaseID) {
     this.patientPastDiseaseID = patientPastDiseaseID;
   }
 
-  public Long getPatientID() {
+  public String getPatientID() {
     return patientID;
   }
 
-  public void setPatientID(Long patientID) {
+  public void setPatientID(String patientID) {
     this.patientID = patientID;
   }
 
-  public Long getDiseaseID() {
+  public String getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(Long diseaseID) {
+  public void setDiseaseID(String diseaseID) {
     this.diseaseID = diseaseID;
   }
 

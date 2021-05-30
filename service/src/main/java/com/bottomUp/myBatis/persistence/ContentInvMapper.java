@@ -17,7 +17,7 @@ public interface ContentInvMapper {
 
     public void update(ContentInvData data) throws BottomUpException;
 
-    public ContentInvData getByID(Long ID) throws BottomUpException;
+    public ContentInvData getByID(String ID) throws BottomUpException;
 
     public ContentInvData getByName(String name) throws BottomUpException;
 

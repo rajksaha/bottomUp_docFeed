@@ -14,7 +14,7 @@ public class DumpPatientDetail {
     private Integer type;
     private Integer tri;
     private Integer triStatus;
-    private DateTime edb;
+    private Float edb;
 
     public Integer getId() {
         return id;
@@ -56,11 +56,11 @@ public class DumpPatientDetail {
         this.triStatus = triStatus;
     }
 
-    public DateTime getEdb() {
+    public Float getEdb() {
         return edb;
     }
 
-    public void setEdb(DateTime edb) {
+    public void setEdb(Float edb) {
         this.edb = edb;
     }
 }

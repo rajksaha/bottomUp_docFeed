@@ -6,10 +6,13 @@
 
 
 
-	<insert id="create" parameterType="UserGroupAssignment"  useGeneratedKeys="true" keyProperty="userGroupAssignmentID">
-
+	<insert id="create" parameterType="UserGroupAssignment">
+		<selectKey keyProperty="userGroupAssignmentID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `bottom_up_user_group_assignment`
 		(
+			`userGroupAssignmentID`,
 			`userID`,
 			`userGroupID`,
 			`status`,
@@ -20,6 +23,7 @@
 		)
 		VALUES
 		(
+			#{userGroupAssignmentID},
 			#{userID},
 			#{userGroupID},
 			#{status},
@@ -45,7 +49,7 @@
 
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="UserGroupAssignment">
+	<select id="getByID" parameterType="string" resultType="UserGroupAssignment">
 
 		SELECT
 			`userGroupAssignmentID`,
@@ -90,7 +94,7 @@
 
 	</select>
 
-	<delete id="deleteByUserID" parameterType="long">
+	<delete id="deleteByUserID" parameterType="string">
 		DELETE FROM bottom_up_user_group_assignment WHERE userID = #{userID}
 	</delete>
 

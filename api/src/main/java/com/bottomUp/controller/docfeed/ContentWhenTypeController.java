@@ -35,11 +35,8 @@ public class ContentWhenTypeController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{whenTypeID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentWhenTypeData getByID(@PathVariable("whenTypeID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.contentWhenTypeService.getByID(Long.valueOf(companyID));
+    public ContentWhenTypeData getByID(@PathVariable("whenTypeID") String whenTypeID, HttpServletRequest request) throws BottomUpException {
+        return this.contentWhenTypeService.getByID(whenTypeID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,9 +58,9 @@ public class ContentWhenTypeController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{whenTypeID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("whenTypeID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("whenTypeID") String whenTypeID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("whenTypeID", appointmentID);
+        param.put("whenTypeID", whenTypeID);
         this.contentWhenTypeService.delete(param);
     }
 }

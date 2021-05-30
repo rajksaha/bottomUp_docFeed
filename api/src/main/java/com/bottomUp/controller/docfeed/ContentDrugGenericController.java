@@ -48,13 +48,13 @@ public class ContentDrugGenericController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{genericID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentDrugGenericData getByID(@PathVariable("genericID") Integer genericID, HttpServletRequest request) throws BottomUpException {
-        return this.contentDrugGenericService.getByID(Long.valueOf(genericID));
+    public ContentDrugGenericData getByID(@PathVariable("genericID") String genericID, HttpServletRequest request) throws BottomUpException {
+        return this.contentDrugGenericService.getByID(genericID);
     }
 
     @RequestMapping(value = {"/getCompDrug/{genericID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<ContentDrugData> getCompDrug(@PathVariable("genericID") Long genericID, HttpServletRequest request) throws BottomUpException {
+    public List<ContentDrugData> getCompDrug(@PathVariable("genericID") String genericID, HttpServletRequest request) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("genericID", genericID);
         return this.contentDrugService.getByParam(param);
@@ -62,10 +62,10 @@ public class ContentDrugGenericController extends BaseController {
 
     @RequestMapping(value = {"/updateGeneric/{drugID}/{genericID}"}, method = RequestMethod.PUT)
     @ResponseBody
-    public void updateGeneric(@PathVariable("drugID") Long drugID,
-                                               @PathVariable("genericID") Long genericID,
+    public void updateGeneric(@PathVariable("drugID") String drugID,
+                                               @PathVariable("genericID") String genericID,
                                                HttpServletRequest request) throws BottomUpException {
-        this.contentDrugService.updateGeneric(drugID, genericID == 0 ? null: genericID, this.getUserDetail().getUsername());
+        this.contentDrugService.updateGeneric(drugID, genericID.equals("0")? null: genericID, this.getUserDetail().getUsername());
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -87,7 +87,7 @@ public class ContentDrugGenericController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{genericID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("genericID") Integer genericID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("genericID") String genericID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("genericID", genericID);
         this.contentDrugGenericService.delete(param);

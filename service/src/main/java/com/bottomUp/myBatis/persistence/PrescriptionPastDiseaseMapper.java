@@ -19,7 +19,7 @@ public interface PrescriptionPastDiseaseMapper {
 
     public void update(PrescriptionPastDiseaseData data) throws BottomUpException;
 
-    public PrescriptionPastDiseaseData getByID(Long ID) throws BottomUpException;
+    public PrescriptionPastDiseaseData getByID(String ID) throws BottomUpException;
 
     public List<PrescriptionPastDiseaseData> getByParam(Map<String, Object> param) throws BottomUpException;
 

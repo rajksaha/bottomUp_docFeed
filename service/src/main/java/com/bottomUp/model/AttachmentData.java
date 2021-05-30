@@ -9,9 +9,9 @@ import java.util.Date;
  */
 public class AttachmentData extends BaseData {
 
-    private Long attachmentID;
+    private String attachmentID;
     private String entityType;
-    private Integer entityID;
+    private String entityID;
     private String description;
     private String shortName;
     private String contentUrl;
@@ -23,11 +23,11 @@ public class AttachmentData extends BaseData {
     private Long contentDetailID;
     private Integer addedInPres;
 
-    public Long getAttachmentID() {
+    public String getAttachmentID() {
         return attachmentID;
     }
 
-    public void setAttachmentID(Long attachmentID) {
+    public void setAttachmentID(String attachmentID) {
         this.attachmentID = attachmentID;
     }
 
@@ -39,11 +39,11 @@ public class AttachmentData extends BaseData {
         this.entityType = entityType;
     }
 
-    public Integer getEntityID() {
+    public String getEntityID() {
         return entityID;
     }
 
-    public void setEntityID(Integer entityID) {
+    public void setEntityID(String entityID) {
         this.entityID = entityID;
     }
 

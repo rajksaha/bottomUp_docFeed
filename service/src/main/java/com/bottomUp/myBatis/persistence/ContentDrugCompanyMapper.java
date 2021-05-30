@@ -17,7 +17,7 @@ public interface ContentDrugCompanyMapper {
 
     public void update(ContentDrugCompanyData data) throws BottomUpException;
 
-    public ContentDrugCompanyData getByID(Long ID) throws BottomUpException;
+    public ContentDrugCompanyData getByID(String ID) throws BottomUpException;
 
     public List<ContentDrugCompanyData> getByParam(Map<String, Object> param) throws BottomUpException;
 

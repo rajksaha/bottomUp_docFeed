@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,19 +43,17 @@ public class UserGroupController extends BaseController {
 
     @RequestMapping(value = {"/getGroupByCompanyID/companyID/{companyID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<UserGroupData> getGroupByCompanyID(@PathVariable("companyID") Long companyID, HttpServletRequest request) throws BottomUpException{
+    public List<UserGroupData> getGroupByCompanyID(@PathVariable("companyID") String companyID, HttpServletRequest request) throws BottomUpException{
 
         Map<String, Object> params = new HashMap<String, Object>();
-        if(companyID == 0){
+        if(companyID.equalsIgnoreCase("null")){
             companyID = this.getUserDetail().getUserProfilePermissionData().getCompanyID();
         }
         params.put("companyID", companyID);
         if(this.getUserDetail().getDoctorData() != null){
             params.put("isUserDefined", 1);
         }
-        List<UserGroupData> dataList = this.userGroupService.getByParam(params);
-
-        return dataList;
+        return this.userGroupService.getByParam(params);
     }
 
     @RequestMapping(value = {"/getAllUserGroup"}, method = RequestMethod.GET)
@@ -90,10 +89,10 @@ public class UserGroupController extends BaseController {
         return result;
     }
 
-    /*@RequestMapping(value = "/delete/{companyID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("companyID") Integer companyID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    @RequestMapping(value = "/delete/{userGroupID}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("userGroupID") String userGroupID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("companyID",companyID);
+        param.put("userGroupID",userGroupID);
         this.userGroupService.delete(param);
-    }*/
+    }
 }

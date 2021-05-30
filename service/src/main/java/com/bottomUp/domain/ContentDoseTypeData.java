@@ -5,17 +5,17 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentDoseTypeData extends BaseData {
 
-  private Long doseTypeID;
+  private String doseTypeID;
   private Integer doseCode;
   private String bangla;
   private String english;
   private String pdf;
 
-  public Long getDoseTypeID() {
+  public String getDoseTypeID() {
     return doseTypeID;
   }
 
-  public void setDoseTypeID(Long doseTypeID) {
+  public void setDoseTypeID(String doseTypeID) {
     this.doseTypeID = doseTypeID;
   }
 

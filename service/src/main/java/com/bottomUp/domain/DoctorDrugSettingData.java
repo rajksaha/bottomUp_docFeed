@@ -7,13 +7,13 @@ import java.util.List;
 
 public class DoctorDrugSettingData extends BaseData {
 
-  private Long drugSettingID;
-  private Long doctorID;
-  private Long drugID;
+  private String drugSettingID;
+  private String doctorID;
+  private String drugID;
   private Integer doseTypeCode;
   private String drugDoseUnit;
-  private Integer drugWhenID;
-  private Integer drugAdviceID;
+  private String drugWhenID;
+  private String drugAdviceID;
   private String doseString;
   private String drugStrength;
   private String drugTypeInitial;
@@ -27,27 +27,27 @@ public class DoctorDrugSettingData extends BaseData {
 
   private List<DoseData> periodList;
 
-  public Long getDrugSettingID() {
+  public String getDrugSettingID() {
     return drugSettingID;
   }
 
-  public void setDrugSettingID(Long drugSettingID) {
+  public void setDrugSettingID(String drugSettingID) {
     this.drugSettingID = drugSettingID;
   }
 
-  public Long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(Long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public Long getDrugID() {
+  public String getDrugID() {
     return drugID;
   }
 
-  public void setDrugID(Long drugID) {
+  public void setDrugID(String drugID) {
     this.drugID = drugID;
   }
 
@@ -67,28 +67,44 @@ public class DoctorDrugSettingData extends BaseData {
     this.drugDoseUnit = drugDoseUnit;
   }
 
-  public Integer getDrugWhenID() {
+  public String getDrugWhenID() {
     return drugWhenID;
   }
 
-  public void setDrugWhenID(Integer drugWhenID) {
+  public void setDrugWhenID(String drugWhenID) {
     this.drugWhenID = drugWhenID;
   }
 
-  public Integer getDrugAdviceID() {
+  public String getDrugAdviceID() {
     return drugAdviceID;
   }
 
-  public void setDrugAdviceID(Integer drugAdviceID) {
+  public void setDrugAdviceID(String drugAdviceID) {
     this.drugAdviceID = drugAdviceID;
   }
 
-  public List<DoseData> getPeriodList() {
-    return periodList;
+  public String getDoseString() {
+    return doseString;
   }
 
-  public void setPeriodList(List<DoseData> periodList) {
-    this.periodList = periodList;
+  public void setDoseString(String doseString) {
+    this.doseString = doseString;
+  }
+
+  public String getDrugStrength() {
+    return drugStrength;
+  }
+
+  public void setDrugStrength(String drugStrength) {
+    this.drugStrength = drugStrength;
+  }
+
+  public String getDrugTypeInitial() {
+    return drugTypeInitial;
+  }
+
+  public void setDrugTypeInitial(String drugTypeInitial) {
+    this.drugTypeInitial = drugTypeInitial;
   }
 
   public String getDrugName() {
@@ -131,22 +147,6 @@ public class DoctorDrugSettingData extends BaseData {
     this.drugAdviceName = drugAdviceName;
   }
 
-  public String getDrugStrength() {
-    return drugStrength;
-  }
-
-  public void setDrugStrength(String drugStrength) {
-    this.drugStrength = drugStrength;
-  }
-
-  public String getDrugTypeInitial() {
-    return drugTypeInitial;
-  }
-
-  public void setDrugTypeInitial(String drugTypeInitial) {
-    this.drugTypeInitial = drugTypeInitial;
-  }
-
   public String getDoseTypeBngName() {
     return doseTypeBngName;
   }
@@ -163,11 +163,11 @@ public class DoctorDrugSettingData extends BaseData {
     this.doseTypeEngName = doseTypeEngName;
   }
 
-  public String getDoseString() {
-    return doseString;
+  public List<DoseData> getPeriodList() {
+    return periodList;
   }
 
-  public void setDoseString(String doseString) {
-    this.doseString = doseString;
+  public void setPeriodList(List<DoseData> periodList) {
+    this.periodList = periodList;
   }
 }

@@ -38,7 +38,7 @@ public class DoctorDrugSettingService {
         doctorDrugSettingMapper.update(data);
     }
 
-    public DrugDefaultSetupData getByID(Long ID)throws BottomUpException {
+    public DrugDefaultSetupData getByID(String ID)throws BottomUpException {
         return this.doctorDrugSettingMapper.getByID(ID);
     }
 

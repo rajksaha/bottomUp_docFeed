@@ -12,7 +12,7 @@
     <div class="panel-heading clearfix">
         <div class="row">
             <div class="col-md-6 col-lg-6"  >
-                <select data-ng-if="userData.userID == 1" class="form-control required" data-ng-model="searchParam.companyID" data-ng-options="company.companyID as company.companyName for company in companyList" data-ng-change="search()">
+                <select data-ng-if="userData.userID == 'SUPER_ADMIN'" class="form-control required" data-ng-model="searchParam.companyID" data-ng-options="company.companyID as company.companyName for company in companyList" data-ng-change="search()">
                     <option value="">--Company--</option>
                 </select>
                 <h4>User Management</h4>
@@ -191,8 +191,8 @@
     <div class="panel-footer" ng-show="showForm">
         <div class="text-right">
             <button class="btn btn-sm btn-warning" data-ng-click="reset()"><span class="glyphicon glyphicon-remove"></span> Reset</button>
-            <button class="btn btn-sm btn-success" data-ng-click="save(userProfile)" data-ng-hide="userProfile.userProfileID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
-            <button class="btn btn-sm btn-success" data-ng-click="update(userProfile)" data-ng-show="userProfile.userProfileID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Update</button>
+            <button class="btn btn-sm btn-success" data-ng-click="save(userProfile)" data-ng-show="!userProfile.userProfileID"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            <button class="btn btn-sm btn-success" data-ng-click="update(userProfile)" data-ng-show="userProfile.userProfileID"><span class="glyphicon glyphicon-floppy-disk"></span> Update</button>
             <button class="btn btn-sm btn-danger" data-ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
         </div>
     </div>

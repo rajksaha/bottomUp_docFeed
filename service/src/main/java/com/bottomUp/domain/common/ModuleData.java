@@ -5,15 +5,15 @@ package com.bottomUp.domain.common;
  */
 public class ModuleData extends BaseData {
 
-    private Long moduleID;
+    private String moduleID;
     private String moduleCode;
     private String moduleName;
 
-    public Long getModuleID() {
+    public String getModuleID() {
         return moduleID;
     }
 
-    public void setModuleID(Long moduleID) {
+    public void setModuleID(String moduleID) {
         this.moduleID = moduleID;
     }
 

@@ -13,13 +13,13 @@ public class DumpPatient {
     private Integer patientID;
     private String patientCode;
     private String name;
-    private Decimal age;
+    private Float age;
     private String sex;
     private String address;
     private String phone;
     private String occupation;
     private String referredBy;
-    private DateTime date;
+    private Date date;
     private String hospitalName;
     private String bedNum;
     private String wardNum;
@@ -49,11 +49,11 @@ public class DumpPatient {
         this.name = name;
     }
 
-    public Decimal getAge() {
+    public Float getAge() {
         return age;
     }
 
-    public void setAge(Decimal age) {
+    public void setAge(Float age) {
         this.age = age;
     }
 
@@ -97,11 +97,11 @@ public class DumpPatient {
         this.referredBy = referredBy;
     }
 
-    public DateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(DateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -16,7 +16,7 @@ public interface ModuleMapper {
 
     public void update(ModuleData data) throws BottomUpException;
 
-    public ModuleData getByID(Integer ID) throws BottomUpException;
+    public ModuleData getByID(String ID) throws BottomUpException;
 
     public List<ModuleData> getByParam(Map<String, Object> param) throws BottomUpException;
 

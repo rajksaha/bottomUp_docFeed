@@ -17,9 +17,9 @@ public interface ContentWhenTypeMapper {
 
     public void update(ContentWhenTypeData  data) throws BottomUpException;
 
-    public ContentWhenTypeData  getByID(Long ID) throws BottomUpException;
+    public ContentWhenTypeData  getByID(String ID) throws BottomUpException;
 
-    public List<ContentWhenTypeData > getByParam(Map<String, Object> param) throws BottomUpException;
+    public List<ContentWhenTypeData> getByParam(Map<String, Object> param) throws BottomUpException;
 
     public void delete(Map<String, Object> param) throws BottomUpException;
 }

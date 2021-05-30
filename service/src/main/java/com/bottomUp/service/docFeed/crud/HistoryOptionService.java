@@ -31,7 +31,7 @@ public class HistoryOptionService {
         historyOptionMapper.update(data);
     }
 
-    public HistoryOptionData  getByID(Long ID)throws BottomUpException {
+    public HistoryOptionData  getByID(String ID)throws BottomUpException {
         return this.historyOptionMapper.getByID(ID);
     }
 

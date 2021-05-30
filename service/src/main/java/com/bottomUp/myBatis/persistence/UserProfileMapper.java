@@ -17,7 +17,7 @@ public interface UserProfileMapper {
 
     public void update(UserProfileData userProfileData) throws BottomUpException;
 
-    public UserProfileData getUserProfileByID(Long userID) throws BottomUpException;
+    public UserProfileData getUserProfileByID(String userID) throws BottomUpException;
 
     public List<UserProfileData> getUserProfileByParam(Map<String, Object> param) throws BottomUpException;
 

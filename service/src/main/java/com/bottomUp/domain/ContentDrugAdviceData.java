@@ -5,25 +5,25 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentDrugAdviceData extends BaseData {
 
-  private Long drugAdviceID;
-  private Long doctorType;
+  private String drugAdviceID;
+  private String doctorType;
   private String bangla;
   private String english;
   private String pdf;
 
-  public Long getDrugAdviceID() {
+  public String getDrugAdviceID() {
     return drugAdviceID;
   }
 
-  public void setDrugAdviceID(Long drugAdviceID) {
+  public void setDrugAdviceID(String drugAdviceID) {
     this.drugAdviceID = drugAdviceID;
   }
 
-  public Long getDoctorType() {
+  public String getDoctorType() {
     return doctorType;
   }
 
-  public void setDoctorType(Long doctorType) {
+  public void setDoctorType(String doctorType) {
     this.doctorType = doctorType;
   }
 

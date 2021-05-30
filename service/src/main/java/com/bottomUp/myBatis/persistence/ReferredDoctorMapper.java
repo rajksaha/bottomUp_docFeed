@@ -17,7 +17,7 @@ public interface ReferredDoctorMapper {
 
     public void update(ReferredDoctorData data) throws BottomUpException;
 
-    public ReferredDoctorData getByID(Long ID) throws BottomUpException;
+    public ReferredDoctorData getByID(String ID) throws BottomUpException;
 
     public List<ReferredDoctorData> getByParam(Map<String, Object> param) throws BottomUpException;
 

@@ -6,10 +6,14 @@
 
 
 
-	<insert id="create" parameterType="UserGroupPermission"  useGeneratedKeys="true" keyProperty="groupPermissionID">
+	<insert id="create" parameterType="UserGroupPermission">
 
+		<selectKey keyProperty="groupPermissionID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `bottom_up_group_permission`
 		(
+			`groupPermissionID`,
 			`userGroupID`,
 			`permissionID`,
 			`statusValue`,
@@ -20,6 +24,7 @@
 		)
 		VALUES
 		(
+			#{groupPermissionID},
 			#{userGroupID},
 			#{permissionID},
 			#{statusValue},
@@ -44,7 +49,7 @@
 		WHERE `groupPermissionID` = #{groupPermissionID};
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="UserGroupPermission">
+	<select id="getByID" parameterType="string" resultType="UserGroupPermission">
 
 		SELECT
 			`userGroupID`,
@@ -83,7 +88,7 @@
 
 	</select>
 
-	<delete id="deletePermissionByGroup" parameterType="long">
+	<delete id="deletePermissionByGroup" parameterType="string">
 			DELETE FROM bottom_up_group_permission WHERE userGroupID = #{userGroupID}
 	</delete>
 

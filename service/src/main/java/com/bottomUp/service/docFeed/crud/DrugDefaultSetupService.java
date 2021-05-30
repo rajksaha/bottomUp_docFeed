@@ -103,7 +103,7 @@ public class DrugDefaultSetupService {
         }
     }
 
-    public DrugDefaultSetupData getDrugDefaultSetup(Long doctorID, Long drugID, Long genericID)throws BottomUpException {
+    public DrugDefaultSetupData getDrugDefaultSetup(String doctorID, String drugID, String genericID)throws BottomUpException {
         DrugDefaultSetupData setup = null;
         Map<String, Object> params = new HashMap<String, Object>();
         if(doctorID != null && drugID != null){
@@ -123,7 +123,7 @@ public class DrugDefaultSetupService {
         return setup;
     }
 
-    public DrugDefaultSetupData getGenericDefaultSetup(Long doctorID, Long genericID)throws BottomUpException {
+    public DrugDefaultSetupData getGenericDefaultSetup(String doctorID, String genericID)throws BottomUpException {
         DrugDefaultSetupData setup = null;
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("doctorID", doctorID);
@@ -136,7 +136,7 @@ public class DrugDefaultSetupService {
         return setup;
     }
 
-    public DrugDefaultSetupData getByID(Long ID)throws BottomUpException {
+    public DrugDefaultSetupData getByID(String ID)throws BottomUpException {
         return drugDefaultSetupMapper.getByID(ID);
     }
 

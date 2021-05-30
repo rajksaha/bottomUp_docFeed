@@ -6,7 +6,12 @@
 
 	<insert id="create" parameterType="contentInv" useGeneratedKeys="true" keyProperty="invID" >
 
+		<selectKey keyProperty="invID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
+
 		INSERT INTO `content_inv`(
+			`invID`,
 			`categoryID`,
 			`name`,
 			`updatedBy`,
@@ -15,6 +20,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{invID},
 			#{categoryID},
 			#{name},
 			#{updatedBy},
@@ -36,7 +42,7 @@
 		WHERE invID = #{invID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentInv">
+	<select id="getByID" parameterType="string" resultType="contentInv">
 		SELECT
 		    `invID`,
 			`categoryID`,

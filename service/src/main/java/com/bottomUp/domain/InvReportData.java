@@ -5,24 +5,24 @@ import com.bottomUp.domain.common.BaseData;
 
 public class InvReportData extends BaseData {
 
-  private long id;
-  private long invPrescribeID;
+  private String id;
+  private String invPrescribeID;
   private String result;
-  private long status;
+  private Integer status;
 
-  public long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
-  public long getInvPrescribeID() {
+  public String getInvPrescribeID() {
     return invPrescribeID;
   }
 
-  public void setInvPrescribeID(long invPrescribeID) {
+  public void setInvPrescribeID(String invPrescribeID) {
     this.invPrescribeID = invPrescribeID;
   }
 
@@ -34,11 +34,11 @@ public class InvReportData extends BaseData {
     this.result = result;
   }
 
-  public long getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(long status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 }

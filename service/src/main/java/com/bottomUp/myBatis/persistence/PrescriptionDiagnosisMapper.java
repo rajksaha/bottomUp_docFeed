@@ -19,9 +19,9 @@ public interface PrescriptionDiagnosisMapper {
 
     public void update(PrescriptionDiagnosisData data) throws BottomUpException;
 
-    public PrescriptionDiagnosisData getByID(Long ID) throws BottomUpException;
+    public PrescriptionDiagnosisData getByID(String ID) throws BottomUpException;
 
-    public PrescriptionDiagnosisData getByAppointmentID(Long getByAppointmentID) throws BottomUpException;
+    public PrescriptionDiagnosisData getByAppointmentID(String getByAppointmentID) throws BottomUpException;
 
     public List<PrescriptionDiagnosisData> getByParam(Map<String, Object> param) throws BottomUpException;
 

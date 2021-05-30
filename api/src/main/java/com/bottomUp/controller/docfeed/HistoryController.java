@@ -35,11 +35,8 @@ public class HistoryController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{historyID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public HistoryData getByID(@PathVariable("historyID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.historyService.getByID(Long.valueOf(companyID));
+    public HistoryData getByID(@PathVariable("historyID") String historyID, HttpServletRequest request) throws BottomUpException {
+        return this.historyService.getByID(historyID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,7 +58,7 @@ public class HistoryController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{historyID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("historyID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("historyID") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("historyID", appointmentID);
         this.historyService.delete(param);

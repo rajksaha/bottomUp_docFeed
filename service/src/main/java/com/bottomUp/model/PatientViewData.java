@@ -11,8 +11,8 @@ import java.util.Date;
  */
 public class PatientViewData extends BaseData {
 
-    private long patientID;
-    private long userID;
+    private String patientID;
+    private String userID;
     private String patientCode;
     private Integer patientType;
     private String patientTypeName;
@@ -22,14 +22,14 @@ public class PatientViewData extends BaseData {
     private String bedNum;
     private String wardNum;
     private String headOfUnit;
-    private long userProfileID;
+    private String userProfileID;
     private Integer age;
     private Integer currentAge;
     private Date dateOfBirth;
     private String userName;
     private String firstName;
     private String lastName;
-    private Long companyID;
+    private String companyID;
     private String sex;
     private String contactNo;
     private String emailAddress;
@@ -43,28 +43,20 @@ public class PatientViewData extends BaseData {
         return null;
     }
 
-    public long getPatientID() {
+    public String getPatientID() {
         return patientID;
     }
 
-    public void setPatientID(long patientID) {
+    public void setPatientID(String patientID) {
         this.patientID = patientID;
     }
 
-    public long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
-    }
-
-    public long getUserProfileID() {
-        return userProfileID;
-    }
-
-    public void setUserProfileID(long userProfileID) {
-        this.userProfileID = userProfileID;
     }
 
     public String getPatientCode() {
@@ -73,6 +65,22 @@ public class PatientViewData extends BaseData {
 
     public void setPatientCode(String patientCode) {
         this.patientCode = patientCode;
+    }
+
+    public Integer getPatientType() {
+        return patientType;
+    }
+
+    public void setPatientType(Integer patientType) {
+        this.patientType = patientType;
+    }
+
+    public String getPatientTypeName() {
+        return patientTypeName;
+    }
+
+    public void setPatientTypeName(String patientTypeName) {
+        this.patientTypeName = patientTypeName;
     }
 
     public String getOccupation() {
@@ -123,6 +131,30 @@ public class PatientViewData extends BaseData {
         this.headOfUnit = headOfUnit;
     }
 
+    public String getUserProfileID() {
+        return userProfileID;
+    }
+
+    public void setUserProfileID(String userProfileID) {
+        this.userProfileID = userProfileID;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -147,11 +179,11 @@ public class PatientViewData extends BaseData {
         this.lastName = lastName;
     }
 
-    public Long getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Long companyID) {
+    public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
 
@@ -179,44 +211,12 @@ public class PatientViewData extends BaseData {
         this.emailAddress = emailAddress;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Integer getPatientType() {
-        return patientType;
-    }
-
-    public void setPatientType(Integer patientType) {
-        this.patientType = patientType;
-    }
-
-    public String getPatientTypeName() {
-        return patientTypeName;
-    }
-
-    public void setPatientTypeName(String patientTypeName) {
-        this.patientTypeName = patientTypeName;
     }
 
     public String getImageURL() {

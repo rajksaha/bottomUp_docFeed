@@ -5,19 +5,18 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentDrugTypeData extends BaseData {
 
-  private Long drugTypeID;
+  private String drugTypeID;
   private String name;
   private String initial;
   private String unit;
   private String unitInitial;
   private String optionalUnitInitial;
 
-
-  public Long getDrugTypeID() {
+  public String getDrugTypeID() {
     return drugTypeID;
   }
 
-  public void setDrugTypeID(Long drugTypeID) {
+  public void setDrugTypeID(String drugTypeID) {
     this.drugTypeID = drugTypeID;
   }
 

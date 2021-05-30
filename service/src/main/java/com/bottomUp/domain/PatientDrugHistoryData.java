@@ -5,24 +5,24 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PatientDrugHistoryData extends BaseData {
 
-  private Long drugHistoryID;
-  private Long patientID;
+  private String drugHistoryID;
+  private String patientID;
   private String drugName;
   private Integer currentStatus;
 
-  public Long getDrugHistoryID() {
+  public String getDrugHistoryID() {
     return drugHistoryID;
   }
 
-  public void setDrugHistoryID(Long drugHistoryID) {
+  public void setDrugHistoryID(String drugHistoryID) {
     this.drugHistoryID = drugHistoryID;
   }
 
-  public Long getPatientID() {
+  public String getPatientID() {
     return patientID;
   }
 
-  public void setPatientID(Long patientID) {
+  public void setPatientID(String patientID) {
     this.patientID = patientID;
   }
 

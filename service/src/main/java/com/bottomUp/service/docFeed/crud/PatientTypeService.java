@@ -31,7 +31,7 @@ public class PatientTypeService {
         patientTypeMapper.update(data);
     }
 
-    public PatientTypeData getByID(Long ID)throws BottomUpException {
+    public PatientTypeData getByID(String ID)throws BottomUpException {
         return this.patientTypeMapper.getByID(ID);
     }
 

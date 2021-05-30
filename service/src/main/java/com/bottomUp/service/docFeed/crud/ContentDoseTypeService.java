@@ -29,7 +29,7 @@ public class ContentDoseTypeService {
         contentDoseTypeMapper.update(data);
     }
 
-    public ContentDoseTypeData getByID(Long ID)throws BottomUpException {
+    public ContentDoseTypeData getByID(String ID)throws BottomUpException {
         return this.contentDoseTypeMapper.getByID(ID);
     }
 

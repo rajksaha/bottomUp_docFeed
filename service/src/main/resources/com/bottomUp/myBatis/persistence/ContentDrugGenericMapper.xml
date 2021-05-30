@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentDrugGenericMapper">
 
-	<insert id="create" parameterType="contentDrugGeneric" useGeneratedKeys="true" keyProperty="genericID" >
+	<insert id="create" parameterType="contentDrugGeneric">
+
+		<selectKey keyProperty="genericID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_drug_generic`(
+			`genericID`,
 			`genericDrugName`,
 			`typeID`,
 			`updatedBy`,
@@ -15,6 +20,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{genericID},
 			#{genericDrugName},
 			#{typeID},
 			#{updatedBy},
@@ -34,7 +40,7 @@
 		WHERE genericID = #{genericID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentDrugGeneric">
+	<select id="getByID" parameterType="string" resultType="contentDrugGeneric">
 		SELECT
 			`genericID`,
 		    `genericDrugName`,

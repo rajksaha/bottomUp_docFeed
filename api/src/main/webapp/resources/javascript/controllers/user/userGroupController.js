@@ -91,9 +91,9 @@ app.controller('UserGroupController', function($scope, $rootScope, $state, $http
         }
     };
 
-    $scope.delete = function(companyModule){
+    $scope.delete = function(userGroup){
 
-        UserCommonService.deleteCompanyModule.remove({companyModuleID : companyModule.companyModuleID} ).$promise.then(function(result) {
+        UserManagementService.deleteUserGroup.remove({userGroupID : userGroup.userGroupID} ).$promise.then(function(result) {
             $scope.refreshList();
             $scope.showSuccessMessage("Information deleted successfully");
         });

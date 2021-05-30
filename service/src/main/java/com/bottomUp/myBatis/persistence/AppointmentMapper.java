@@ -23,7 +23,7 @@ public interface AppointmentMapper {
 
     void updateAppTypeByID(AppointmentData data) throws BottomUpException;
 
-    AppointmentData getByID(Long ID) throws BottomUpException;
+    AppointmentData getByID(String ID) throws BottomUpException;
 
     List<AppointmentData> getByParam(Map<String, Object> param) throws BottomUpException;
 

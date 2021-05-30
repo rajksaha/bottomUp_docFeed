@@ -28,7 +28,7 @@ public class UserGroupAssignmentService {
         this.userGroupAssignmentMapper.update(data);
     }
 
-    public void deleteByUserID(Long userID) throws BottomUpException {
+    public void deleteByUserID(String userID) throws BottomUpException {
         this.userGroupAssignmentMapper.deleteByUserID(userID);
     }
 
@@ -45,7 +45,7 @@ public class UserGroupAssignmentService {
         this.deleteByUserID(userProfileData.getUserID());
 
         for(UserGroupData group : userProfileData.getUserGroupList()){
-            if(group.getIsAssigned() != null && group.getIsAssigned()){
+            if(group.getAssigned() != null && group.getAssigned()){
                 UserGroupAssignmentData assignmentData = new UserGroupAssignmentData();
                 assignmentData.setUserGroupID(group.getUserGroupID());
                 assignmentData.setUserID(userProfileData.getUserID());

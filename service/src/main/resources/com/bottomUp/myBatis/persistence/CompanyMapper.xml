@@ -4,10 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.CompanyMapper">
 
-	<insert id="create" parameterType="Company" useGeneratedKeys="true" keyProperty="companyID" >
+	<insert id="create" parameterType="Company">
 
+		<selectKey keyProperty="companyID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `bottom_up_company`
 		(
+			`companyID`,
 			`companyCode`,
 			`companyName`,
 			`updatedOn`,
@@ -17,6 +21,7 @@
 		)
 		VALUES
 		(
+			#{companyID},
 			#{companyCode},
 			#{companyName},
 			#{updatedOn},
@@ -36,7 +41,7 @@
 		WHERE companyID = #{companyID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="Company">
+	<select id="getByID" parameterType="string" resultType="Company">
 		SELECT companyID, companyCode, companyName, updatedOn, updatedBy, `createdOn`, `createdBy`
 		FROM bottom_up_company
 		WHERE companyID = #{companyID}

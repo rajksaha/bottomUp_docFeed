@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentDoctorCategoryMapper">
 
-	<insert id="create" parameterType="contentDoctorCategory" useGeneratedKeys="true" keyProperty="categoryID" >
+	<insert id="create" parameterType="contentDoctorCategory">
+
+		<selectKey keyProperty="categoryID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_doctor_category`(
+			`categoryID`,
 			`categoryName`,
 			`updatedBy`,
 			`updatedOn`,
@@ -14,6 +19,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{categoryID},
 			#{categoryName},
 			#{updatedBy},
 			#{updatedOn},
@@ -33,7 +39,7 @@
 		WHERE categoryID = #{categoryID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentDoctorCategory">
+	<select id="getByID" parameterType="string" resultType="contentDoctorCategory">
 		SELECT
 		   `categoryID`,
 			`categoryName`,

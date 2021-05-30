@@ -10,36 +10,20 @@ import java.util.Map;
 public class UserProfilePermissionData implements Serializable{
 
 
-    private Long userID;
+    private String userID;
     private String userName;
-    private Long companyID;
+    private String companyID;
     private Integer status;
     private List<GroupPermissionData> groupPermissionDataList;
     private Map<String, Boolean> permissions;
     private UserProfileData profileData;
 
-    public Long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
-    }
-
-    public Map<String, Boolean> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Map<String, Boolean> permissions) {
-        this.permissions = permissions;
-    }
-
-    public List<GroupPermissionData> getGroupPermissionDataList() {
-        return groupPermissionDataList;
-    }
-
-    public void setGroupPermissionDataList(List<GroupPermissionData> groupPermissionDataList) {
-        this.groupPermissionDataList = groupPermissionDataList;
     }
 
     public String getUserName() {
@@ -50,11 +34,11 @@ public class UserProfilePermissionData implements Serializable{
         this.userName = userName;
     }
 
-    public Long getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Long companyID) {
+    public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
 
@@ -64,6 +48,22 @@ public class UserProfilePermissionData implements Serializable{
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public List<GroupPermissionData> getGroupPermissionDataList() {
+        return groupPermissionDataList;
+    }
+
+    public void setGroupPermissionDataList(List<GroupPermissionData> groupPermissionDataList) {
+        this.groupPermissionDataList = groupPermissionDataList;
+    }
+
+    public Map<String, Boolean> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Map<String, Boolean> permissions) {
+        this.permissions = permissions;
     }
 
     public UserProfileData getProfileData() {

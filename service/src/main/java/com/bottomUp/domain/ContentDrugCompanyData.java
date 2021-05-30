@@ -5,16 +5,15 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentDrugCompanyData extends BaseData {
 
-  private long drugCompanyID;
+  private String drugCompanyID;
   private String companyName;
   private String folder;
 
-
-  public long getDrugCompanyID() {
+  public String getDrugCompanyID() {
     return drugCompanyID;
   }
 
-  public void setDrugCompanyID(long drugCompanyID) {
+  public void setDrugCompanyID(String drugCompanyID) {
     this.drugCompanyID = drugCompanyID;
   }
 

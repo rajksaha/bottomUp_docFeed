@@ -5,9 +5,9 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PatientData extends BaseData {
 
-  private long patientID;
-  private long userID;
-  private long userProfileID;
+  private String patientID;
+  private String userID;
+  private String userProfileID;
   private Integer patientType;
   private String patientCode;
   private String occupation;
@@ -20,25 +20,41 @@ public class PatientData extends BaseData {
   private String userName;
   private String firstName;
   private String lastName;
-  private Long companyID;
+  private String companyID;
   private String sex;
   private String contactNo;
   private String emailAddress;
 
-  public long getPatientID() {
+  public String getPatientID() {
     return patientID;
   }
 
-  public void setPatientID(long patientID) {
+  public void setPatientID(String patientID) {
     this.patientID = patientID;
   }
 
-  public long getUserID() {
+  public String getUserID() {
     return userID;
   }
 
-  public void setUserID(long userID) {
+  public void setUserID(String userID) {
     this.userID = userID;
+  }
+
+  public String getUserProfileID() {
+    return userProfileID;
+  }
+
+  public void setUserProfileID(String userProfileID) {
+    this.userProfileID = userProfileID;
+  }
+
+  public Integer getPatientType() {
+    return patientType;
+  }
+
+  public void setPatientType(Integer patientType) {
+    this.patientType = patientType;
   }
 
   public String getPatientCode() {
@@ -97,6 +113,14 @@ public class PatientData extends BaseData {
     this.headOfUnit = headOfUnit;
   }
 
+  public String getImageURL() {
+    return imageURL;
+  }
+
+  public void setImageURL(String imageURL) {
+    this.imageURL = imageURL;
+  }
+
   public String getUserName() {
     return userName;
   }
@@ -121,11 +145,11 @@ public class PatientData extends BaseData {
     this.lastName = lastName;
   }
 
-  public Long getCompanyID() {
+  public String getCompanyID() {
     return companyID;
   }
 
-  public void setCompanyID(Long companyID) {
+  public void setCompanyID(String companyID) {
     this.companyID = companyID;
   }
 
@@ -151,29 +175,5 @@ public class PatientData extends BaseData {
 
   public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
-  }
-
-  public long getUserProfileID() {
-    return userProfileID;
-  }
-
-  public void setUserProfileID(long userProfileID) {
-    this.userProfileID = userProfileID;
-  }
-
-  public Integer getPatientType() {
-    return patientType;
-  }
-
-  public void setPatientType(Integer patientType) {
-    this.patientType = patientType;
-  }
-
-  public String getImageURL() {
-    return imageURL;
-  }
-
-  public void setImageURL(String imageURL) {
-    this.imageURL = imageURL;
   }
 }

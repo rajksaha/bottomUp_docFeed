@@ -5,34 +5,34 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionVitalData extends BaseData {
 
-  private Long presVitalID;
-  private Long appointmentID;
-  private Long vitalID;
+  private String presVitalID;
+  private String appointmentID;
+  private String vitalID;
   private String vitalResult;
   private String vitalName;
   private String vitalUnit;
 
-  public Long getPresVitalID() {
+  public String getPresVitalID() {
     return presVitalID;
   }
 
-  public void setPresVitalID(Long presVitalID) {
+  public void setPresVitalID(String presVitalID) {
     this.presVitalID = presVitalID;
   }
 
-  public Long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(Long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public Long getVitalID() {
+  public String getVitalID() {
     return vitalID;
   }
 
-  public void setVitalID(Long vitalID) {
+  public void setVitalID(String vitalID) {
     this.vitalID = vitalID;
   }
 

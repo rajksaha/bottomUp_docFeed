@@ -80,7 +80,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = {"/getUserProfile/userID/{userID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public UserProfileData getUserProfile(@PathVariable("userID") Long userID, HttpServletRequest request) throws BottomUpException {
+    public UserProfileData getUserProfile(@PathVariable("userID") String userID, HttpServletRequest request) throws BottomUpException {
         return this.userService.getUserProfileByID(userID);
     }
 
@@ -111,7 +111,7 @@ public class UserController extends BaseController {
     public Map<String, Object> save(@RequestBody UserProfileData profileData) throws BottomUpException {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        Long companyID = profileData.getCompanyID();
+        String companyID = profileData.getCompanyID();
         if(companyID == null){
             companyID = this.getUserDetail().getUserProfilePermissionData().getCompanyID();
         }

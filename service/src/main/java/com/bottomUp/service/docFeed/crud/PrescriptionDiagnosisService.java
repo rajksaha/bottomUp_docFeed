@@ -41,7 +41,7 @@ public class PrescriptionDiagnosisService {
         prescriptionDiagnosisMapper.update(data);
     }
 
-    public PrescriptionDiagnosisData getByID(Long ID)throws BottomUpException {
+    public PrescriptionDiagnosisData getByID(String ID)throws BottomUpException {
         return this.prescriptionDiagnosisMapper.getByID(ID);
     }
 

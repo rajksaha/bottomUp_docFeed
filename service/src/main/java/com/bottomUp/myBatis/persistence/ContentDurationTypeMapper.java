@@ -16,7 +16,7 @@ public interface ContentDurationTypeMapper {
 
     public void update(ContentDurationTypeData data) throws BottomUpException;
 
-    public ContentDurationTypeData getByID(Long ID) throws BottomUpException;
+    public ContentDurationTypeData getByID(String ID) throws BottomUpException;
 
     public List<ContentDurationTypeData> getByParam(Map<String, Object> param) throws BottomUpException;
 

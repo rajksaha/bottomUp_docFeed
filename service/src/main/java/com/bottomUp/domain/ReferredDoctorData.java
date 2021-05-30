@@ -5,15 +5,15 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ReferredDoctorData extends BaseData {
 
-  private long referredDoctorID;
+  private String referredDoctorID;
   private String doctorName;
   private String doctorAddress;
 
-  public long getReferredDoctorID() {
+  public String getReferredDoctorID() {
     return referredDoctorID;
   }
 
-  public void setReferredDoctorID(long referredDoctorID) {
+  public void setReferredDoctorID(String referredDoctorID) {
     this.referredDoctorID = referredDoctorID;
   }
 

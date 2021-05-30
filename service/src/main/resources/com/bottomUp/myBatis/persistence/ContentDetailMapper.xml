@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentDetailMapper">
 
-	<insert id="create" parameterType="contentDetail" useGeneratedKeys="true" keyProperty="contentDetailID" >
+	<insert id="create" parameterType="contentDetail">
+
+		<selectKey keyProperty="contentDetailID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_detail`(
+			`contentDetailID`,
 			`entityType`,
 			`entityID`,
 			`shortName`,
@@ -20,6 +25,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{contentDetailID},
 			#{entityType},
 			#{entityID},
 			#{shortName},
@@ -91,7 +97,7 @@
 		WHERE contentDetailID = #{contentDetailID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentDetail">
+	<select id="getByID" parameterType="string" resultType="contentDetail">
 		SELECT
 		    `contentDetailID`,
 			`entityType`,

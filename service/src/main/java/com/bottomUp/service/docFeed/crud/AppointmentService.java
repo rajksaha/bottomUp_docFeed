@@ -38,14 +38,14 @@ public class AppointmentService {
         this.appointmentMapper.update(data);
     }
 
-    public void updateStatusByID(Long appointmentID, Integer appointmentType) throws BottomUpException {
+    public void updateStatusByID(String appointmentID, Integer appointmentType) throws BottomUpException {
         AppointmentData appointmentData = new AppointmentData();
         appointmentData.setAppointmentID(appointmentID);
         appointmentData.setAppointmentType(appointmentType);
         this.appointmentMapper.updateAppTypeByID(appointmentData);
     }
 
-    public AppointmentData getByID(Long ID)throws BottomUpException {
+    public AppointmentData getByID(String ID)throws BottomUpException {
         return this.appointmentMapper.getByID(ID);
     }
 

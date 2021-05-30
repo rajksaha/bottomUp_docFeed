@@ -4,10 +4,15 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.AttachmentMapper">
 
-    <insert id="create" parameterType="Attachment"  useGeneratedKeys="true" keyProperty="attachmentID" >
+    <insert id="create" parameterType="Attachment" >
+
+        <selectKey keyProperty="attachmentID" resultType="String" order="BEFORE">
+            select UUID()
+        </selectKey>
 
         INSERT INTO `doctor_feed`.content_attachment
         (
+            attachmentID,
             entityType ,
             entityID ,
             description ,
@@ -24,6 +29,7 @@
         )
         VALUES
         (
+            #{attachmentID},
             #{entityType},
             #{entityID},
             #{description},
@@ -56,11 +62,11 @@
             WHERE attachmentID = #{attachmentID}
     </update>
 
-    <delete id="delete" parameterType="long">
+    <delete id="delete" parameterType="string">
         DELETE FROM content_attachment WHERE attachmentID = #{attachmentID}
     </delete>
 
-    <select id="getByID" parameterType="long" resultType="Attachment">
+    <select id="getByID" parameterType="string" resultType="Attachment">
         SELECT
             attachmentID ,
             entityType ,

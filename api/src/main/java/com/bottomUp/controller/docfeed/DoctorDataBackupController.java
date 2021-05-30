@@ -35,11 +35,8 @@ public class DoctorDataBackupController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{doctorID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DoctorDataBackupData getByID(@PathVariable("doctorID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.doctorDataBackupService.getByID(Long.valueOf(companyID));
+    public DoctorDataBackupData getByID(@PathVariable("doctorID") String doctorID, HttpServletRequest request) throws BottomUpException {
+        return this.doctorDataBackupService.getByID(doctorID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)

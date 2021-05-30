@@ -4,14 +4,14 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentRelationData  extends BaseData {
 
-  private long relationID;
+  private String relationID;
   private String relationName;
 
-  public long getRelationID() {
+  public String getRelationID() {
     return relationID;
   }
 
-  public void setRelationID(long relationID) {
+  public void setRelationID(String relationID) {
     this.relationID = relationID;
   }
 

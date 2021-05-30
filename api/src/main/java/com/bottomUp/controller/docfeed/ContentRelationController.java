@@ -35,11 +35,8 @@ public class ContentRelationController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{relationID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentRelationData getByID(@PathVariable("relationID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.contentRelationService.getByID(Long.valueOf(companyID));
+    public ContentRelationData getByID(@PathVariable("relationID") String relationID, HttpServletRequest request) throws BottomUpException {
+        return this.contentRelationService.getByID(relationID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,7 +58,7 @@ public class ContentRelationController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{relationID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("relationID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("relationID") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("relationID", appointmentID);
         this.contentRelationService.delete(param);

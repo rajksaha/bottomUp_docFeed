@@ -29,7 +29,7 @@ public class ContentVitalOptionService {
         contentVitalOptionMapper.update(data);
     }
 
-    public ContentVitalOptionData getByID(Long ID)throws BottomUpException {
+    public ContentVitalOptionData getByID(String ID)throws BottomUpException {
         return this.contentVitalOptionMapper.getByID(ID);
     }
 

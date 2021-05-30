@@ -17,7 +17,7 @@ public interface MenuMapper {
 
     public void update(MenuData data) throws BottomUpException;
 
-    public MenuData getByID(Long ID) throws BottomUpException;
+    public MenuData getByID(String ID) throws BottomUpException;
 
     public List<MenuData> getByParam(Map<String, Object> param) throws BottomUpException;
 

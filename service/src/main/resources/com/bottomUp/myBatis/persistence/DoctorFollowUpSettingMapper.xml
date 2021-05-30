@@ -4,9 +4,13 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.DoctorFollowUpSettingMapper">
 
-	<insert id="create" parameterType="doctorFollowUpSetting" useGeneratedKeys="true" keyProperty="followUpSettingID" >
+	<insert id="create" parameterType="doctorFollowUpSetting">
 
+		<selectKey keyProperty="followUpSettingID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `doctor_follow_up_setting`(
+			`followUpSettingID`,
 			`doctorID`,
 			`invID`,
 			`patientTypeID`,
@@ -17,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{followUpSettingID},
 			#{doctorID},
 			#{invID},
 			#{patientTypeID},
@@ -48,7 +53,7 @@
 		</foreach>
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="doctorFollowUpSetting">
+	<select id="getByID" parameterType="string" resultType="doctorFollowUpSetting">
 		SELECT
 			`followUpSettingID`,
 			`doctorID`,

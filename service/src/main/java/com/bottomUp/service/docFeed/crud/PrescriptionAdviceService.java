@@ -26,7 +26,7 @@ public class PrescriptionAdviceService {
     @Autowired
     private ContentAdviceService contentAdviceService;
 
-    public void create(Long appointmentID, Long adviceID) throws BottomUpException {
+    public void create(String appointmentID, String adviceID) throws BottomUpException {
         PrescriptionAdviceData prescriptionAdviceData = new PrescriptionAdviceData();
         prescriptionAdviceData.setAppointmentID(appointmentID);
         prescriptionAdviceData.setAdviceID(adviceID);
@@ -35,7 +35,7 @@ public class PrescriptionAdviceService {
 
     public void create(PrescriptionAdviceData data) throws BottomUpException {
         if(data != null && data.getAdviceID() == null){
-            data.setAdviceID(contentAdviceService.getInsert(data.getAdvice()));
+            //data.setAdviceID(contentAdviceService.getInsert(data.getAdvice()));
         }
         prescriptionAdviceMapper.create(data);
     }
@@ -44,7 +44,7 @@ public class PrescriptionAdviceService {
         prescriptionAdviceMapper.update(data);
     }
 
-    public PrescriptionAdviceData getByID(Long ID)throws BottomUpException {
+    public PrescriptionAdviceData getByID(String ID)throws BottomUpException {
         return this.prescriptionAdviceMapper.getByID(ID);
     }
 

@@ -16,7 +16,7 @@ public interface AppointmentTypeMapper {
 
     public void update(AppointmentTypeData data) throws BottomUpException;
 
-    public AppointmentTypeData getByID(Long ID) throws BottomUpException;
+    public AppointmentTypeData getByID(String ID) throws BottomUpException;
 
     public List<AppointmentTypeData> getByParam(Map<String, Object> param) throws BottomUpException;
 

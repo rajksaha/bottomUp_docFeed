@@ -77,7 +77,7 @@ app.controller('GroupPermissionController', function($scope, $rootScope, $state,
     $scope.bringGroup = function(companyID){
 
         if(!companyID){
-            companyID = 0;
+            companyID = "null";
         }
         UserManagementService.getGroupByCompanyID.query({},{companyID : companyID}).$promise.then(function(result) {
             $scope.groupPermissionList = result;
@@ -109,14 +109,14 @@ app.controller('GroupPermissionController', function($scope, $rootScope, $state,
 
     $scope.init = function(){
 
-        if($scope.userGroupList == null && $rootScope.userData.userID == 1){
+        if($scope.userGroupList == null && $rootScope.userData.userID == 'SUPER_ADMIN'){
             $scope.companySelected = false;
             UserCommonService.getAllCompany.query({}, {}).$promise.then(function(result) {
                 $scope.companyList = result;
             });
-        }else if($rootScope.userData.userID != 1){
+        }else if($rootScope.userData.userID != 'SUPER_ADMIN'){
             $scope.searchParam = {};
-            UserManagementService.getGroupByCompanyID.query({}, {companyID : 0} ).$promise.then(function(result) {
+            UserManagementService.getGroupByCompanyID.query({}, {companyID : "null"} ).$promise.then(function(result) {
              $scope.userGroupList = result;
              });
         }

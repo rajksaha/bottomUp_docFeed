@@ -4,9 +4,12 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionVitalMapper">
 
-	<insert id="create" parameterType="prescriptionVital" useGeneratedKeys="true" keyProperty="presVitalID" >
-
+	<insert id="create" parameterType="prescriptionVital">
+		<selectKey keyProperty="presVitalID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `prescription_vital`(
+			`presVitalID`,
 			`appointmentID`,
 			`vitalID`,
 			`vitalResult`,
@@ -16,6 +19,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{presVitalID},
 			#{appointmentID},
 			#{vitalID},
 			#{vitalResult},
@@ -39,7 +43,7 @@
 		WHERE presVitalID = #{presVitalID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="prescriptionVital">
+	<select id="getByID" parameterType="string" resultType="prescriptionVital">
 		SELECT
 			`presVitalID`,
 			`appointmentID`,

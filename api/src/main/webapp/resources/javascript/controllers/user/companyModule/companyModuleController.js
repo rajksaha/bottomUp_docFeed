@@ -81,7 +81,7 @@ app.controller('CompanyModuleController', function($scope, $rootScope, $state, $
 
     $scope.delete = function(companyModule){
 
-        UserCommonService.deleteCompanyModule.remove({companyModuleID : companyModule.companyModuleID} ).$promise.then(function(result) {
+        UserCommonService.deleteCompanyModule.remove({companyModuleID : companyModule.companyModuleID}).$promise.then(function(result) {
             $scope.refreshList();
             $scope.showSuccessMessage("Information deleted successfully");
         });

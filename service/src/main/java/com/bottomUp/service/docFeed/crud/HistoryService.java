@@ -24,7 +24,7 @@ public class HistoryService {
     @Autowired
     private HistoryMapper historyMapper;
 
-    public Long getInsert(String historyName, String typeCode)throws BottomUpException{
+    public String getInsert(String historyName, String typeCode)throws BottomUpException{
         Map<String, Object> params = new HashMap<>();
         params.put("name", historyName);
         params.put("typeCode", typeCode);
@@ -51,7 +51,7 @@ public class HistoryService {
         historyMapper.update(data);
     }
 
-    public HistoryData getByID(Long ID)throws BottomUpException {
+    public HistoryData getByID(String ID)throws BottomUpException {
         return this.historyMapper.getByID(ID);
     }
 

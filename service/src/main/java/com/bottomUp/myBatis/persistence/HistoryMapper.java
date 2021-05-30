@@ -17,7 +17,7 @@ public interface HistoryMapper {
 
     public void update(HistoryData data) throws BottomUpException;
 
-    public HistoryData getByID(Long ID) throws BottomUpException;
+    public HistoryData getByID(String ID) throws BottomUpException;
 
     public List<HistoryData> getByParam(Map<String, Object> param) throws BottomUpException;
 

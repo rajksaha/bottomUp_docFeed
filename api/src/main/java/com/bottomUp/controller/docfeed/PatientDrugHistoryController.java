@@ -35,7 +35,7 @@ public class PatientDrugHistoryController extends BaseController {
 
     @RequestMapping(value = {"/getByPatientID/{patientID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<PatientDrugHistoryData> getByPatientID(@PathVariable("patientID") Long patientID, HttpServletRequest request) throws BottomUpException {
+    public List<PatientDrugHistoryData> getByPatientID(@PathVariable("patientID") String patientID, HttpServletRequest request) throws BottomUpException {
         Map<String, Object> params = new HashMap<>();
         params.put("patientID", patientID);
         return this.patientDrugHistoryService.getByParam(params);
@@ -43,11 +43,8 @@ public class PatientDrugHistoryController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{drugHistoryID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public PatientDrugHistoryData getByID(@PathVariable("drugHistoryID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.patientDrugHistoryService.getByID(Long.valueOf(companyID));
+    public PatientDrugHistoryData getByID(@PathVariable("drugHistoryID") String drugHistoryID, HttpServletRequest request) throws BottomUpException {
+        return this.patientDrugHistoryService.getByID(drugHistoryID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -69,7 +66,7 @@ public class PatientDrugHistoryController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{drugHistoryID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("drugHistoryID") Integer drugHistoryID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("drugHistoryID") String drugHistoryID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("drugHistoryID", drugHistoryID);
         this.patientDrugHistoryService.delete(param);

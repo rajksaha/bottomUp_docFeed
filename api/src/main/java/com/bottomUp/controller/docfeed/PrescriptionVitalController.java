@@ -35,7 +35,7 @@ public class PrescriptionVitalController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{presVitalID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("presVitalID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("presVitalID") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("  presVitalID", appointmentID);
         this.prescriptionVitalService.delete(param);

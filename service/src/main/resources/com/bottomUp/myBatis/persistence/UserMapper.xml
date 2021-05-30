@@ -5,10 +5,13 @@
 <mapper namespace="com.bottomUp.myBatis.persistence.UserMapper">
 
 
-	<insert id="create" parameterType="User" useGeneratedKeys="true" keyProperty="userID">
-
+	<insert id="create" parameterType="User">
+		<selectKey keyProperty="userID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `bottom_up_user`
 		(
+			`userID`,
 			`userName`,
 			`password`,
 			`status`,
@@ -23,6 +26,7 @@
 		)
 		VALUES
 		(
+			#{userID},
 			#{userName},
 			#{password},
 			#{status},
@@ -103,7 +107,7 @@
 
 	</select>
 
-	<select id="getUserByUserByID" parameterType="long" resultType="User">
+	<select id="getUserByUserByID" parameterType="string" resultType="User">
 		SELECT
 		`userID`,
 		`userName`,
@@ -152,7 +156,7 @@
 
 	</select>
 
-	<select id="getUserPermissionByUserID" parameterType="long" resultType="UserGroupPermission">
+	<select id="getUserPermissionByUserID" parameterType="string" resultType="UserGroupPermission">
 		SELECT
 			p.functionCode
 		FROM bottom_up_user u

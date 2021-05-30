@@ -55,7 +55,7 @@ app.controller('LoginController', function($scope, $rootScope, $filter, $state, 
         $state.go('forgetPassword');
     };
 
-    if($rootScope.userData && $rootScope.userData.userID && $rootScope.userData.userID > 0){
+    if($rootScope.userData && $rootScope.userData.userID){
         $state.go('root.appointment');
     }
 }); 

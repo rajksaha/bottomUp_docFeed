@@ -17,7 +17,7 @@ public interface UserGroupAssignmentMapper {
 
     public void update(UserGroupAssignmentData data) throws BottomUpException;
 
-    public void deleteByUserID(Long userID) throws BottomUpException;
+    public void deleteByUserID(String userID) throws BottomUpException;
 
     public UserGroupAssignmentData getByID(Integer userProfileID) throws BottomUpException;
 

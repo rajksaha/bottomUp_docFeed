@@ -5,16 +5,16 @@ package com.bottomUp.model;
  */
 public class DrugHistory {
 
-    private Long drugHistoryID;
+    private String drugHistoryID;
     private String drugName;
-    private Long appointmentID;
+    private String appointmentID;
     private Integer currentStatus;
 
-    public Long getDrugHistoryID() {
+    public String getDrugHistoryID() {
         return drugHistoryID;
     }
 
-    public void setDrugHistoryID(Long drugHistoryID) {
+    public void setDrugHistoryID(String drugHistoryID) {
         this.drugHistoryID = drugHistoryID;
     }
 
@@ -26,11 +26,11 @@ public class DrugHistory {
         this.drugName = drugName;
     }
 
-    public Long getAppointmentID() {
+    public String getAppointmentID() {
         return appointmentID;
     }
 
-    public void setAppointmentID(Long appointmentID) {
+    public void setAppointmentID(String appointmentID) {
         this.appointmentID = appointmentID;
     }
 

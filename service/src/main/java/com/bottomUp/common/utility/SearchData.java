@@ -12,15 +12,15 @@ import java.util.List;
  */
 public class SearchData {
 
-    private Long entityID;
+    private String entityID;
     private String entityType;
     private String JsonString;
-    private Long userID;
+    private String userID;
     private String term;
     private Integer intLang;
     private Integer intType;
 
-    private Long appointmentID;
+    private String appointmentID;
     private Integer intStatus;
     private UserProfileDataTest userProfile;
 
@@ -31,27 +31,11 @@ public class SearchData {
     private List<DoctorFollowUpSettingData> followUpSettingList;
     private List<FollowUpDetail> followUpDetailList;
 
-    public Long getAppointmentID() {
-        return appointmentID;
-    }
-
-    public Integer getIntStatus() {
-        return intStatus;
-    }
-
-    public void setIntStatus(Integer intStatus) {
-        this.intStatus = intStatus;
-    }
-
-    public void setAppointmentID(Long appointmentID) {
-        this.appointmentID = appointmentID;
-    }
-
-    public Long getEntityID() {
+    public String getEntityID() {
         return entityID;
     }
 
-    public void setEntityID(Long entityID) {
+    public void setEntityID(String entityID) {
         this.entityID = entityID;
     }
 
@@ -71,11 +55,11 @@ public class SearchData {
         JsonString = jsonString;
     }
 
-    public Long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -103,6 +87,30 @@ public class SearchData {
         this.intType = intType;
     }
 
+    public String getAppointmentID() {
+        return appointmentID;
+    }
+
+    public void setAppointmentID(String appointmentID) {
+        this.appointmentID = appointmentID;
+    }
+
+    public Integer getIntStatus() {
+        return intStatus;
+    }
+
+    public void setIntStatus(Integer intStatus) {
+        this.intStatus = intStatus;
+    }
+
+    public UserProfileDataTest getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfileDataTest userProfile) {
+        this.userProfile = userProfile;
+    }
+
     public List<PrescriptionComplainData> getComplainList() {
         return complainList;
     }
@@ -125,14 +133,6 @@ public class SearchData {
 
     public void setHistoryList(List<DoctorHistorySettingData> historyList) {
         this.historyList = historyList;
-    }
-
-    public UserProfileDataTest getUserProfile() {
-        return userProfile;
-    }
-
-    public void setUserProfile(UserProfileDataTest userProfile) {
-        this.userProfile = userProfile;
     }
 
     public List<PresNoteData> getPresNoteList() {

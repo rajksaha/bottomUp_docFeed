@@ -35,11 +35,8 @@ public class ContentDrugCompanyController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{drugCompanyID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentDrugCompanyData getByID(@PathVariable("drugCompanyID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.contentDrugCompanyService.getByID(Long.valueOf(companyID));
+    public ContentDrugCompanyData getByID(@PathVariable("drugCompanyID") String drugCompanyID, HttpServletRequest request) throws BottomUpException {
+        return this.contentDrugCompanyService.getByID(drugCompanyID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,7 +58,7 @@ public class ContentDrugCompanyController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{drugCompanyID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("drugCompanyID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("drugCompanyID") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("drugCompanyID", appointmentID);
         this.contentDrugCompanyService.delete(param);

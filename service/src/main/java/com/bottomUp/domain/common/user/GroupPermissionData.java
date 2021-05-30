@@ -5,24 +5,23 @@ package com.bottomUp.domain.common.user;
  */
 public class GroupPermissionData extends PermissionData {
 
-    private Long groupPermissionID;
-    private Long userGroupID;
-    private Long permissionID;
+    private String groupPermissionID;
+    private String userGroupID;
     private Integer statusValue;
 
-    public Long getGroupPermissionID() {
+    public String getGroupPermissionID() {
         return groupPermissionID;
     }
 
-    public void setGroupPermissionID(Long groupPermissionID) {
+    public void setGroupPermissionID(String groupPermissionID) {
         this.groupPermissionID = groupPermissionID;
     }
 
-    public Long getUserGroupID() {
+    public String getUserGroupID() {
         return userGroupID;
     }
 
-    public void setUserGroupID(Long userGroupID) {
+    public void setUserGroupID(String userGroupID) {
         this.userGroupID = userGroupID;
     }
 

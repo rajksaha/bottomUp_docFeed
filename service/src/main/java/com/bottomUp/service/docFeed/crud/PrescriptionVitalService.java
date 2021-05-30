@@ -28,7 +28,7 @@ public class PrescriptionVitalService {
     @Autowired
     private PrescriptionVitalMapper prescriptionVitalMapper;
 
-    public void save(List<DoctorVitalSettingData> vitalDataList, Long appointmentID) throws BottomUpException{
+    public void save(List<DoctorVitalSettingData> vitalDataList, String appointmentID) throws BottomUpException{
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("appointmentID", appointmentID);
         prescriptionVitalMapper.delete(param);
@@ -54,7 +54,7 @@ public class PrescriptionVitalService {
         prescriptionVitalMapper.update(data);
     }
 
-    public PrescriptionVitalData getByID(Long ID)throws BottomUpException {
+    public PrescriptionVitalData getByID(String ID)throws BottomUpException {
         return this.prescriptionVitalMapper.getByID(ID);
     }
 

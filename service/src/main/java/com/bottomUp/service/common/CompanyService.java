@@ -36,7 +36,7 @@ public class CompanyService {
         companyMapper.update(data);
     }
 
-    public CompanyData getByID(Long ID)throws BottomUpException {
+    public CompanyData getByID(String ID)throws BottomUpException {
         return this.companyMapper.getByID(ID);
     }
 

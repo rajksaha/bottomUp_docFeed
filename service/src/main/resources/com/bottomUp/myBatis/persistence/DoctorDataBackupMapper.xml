@@ -4,7 +4,12 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.DoctorDataBackupMapper">
 
-	<insert id="create" parameterType="doctorDataBackup" useGeneratedKeys="true" keyProperty="doctorID" >
+	<insert id="create" parameterType="doctorDataBackup">
+
+
+		<selectKey keyProperty="doctorID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `doctor_data_backup`(
 			`lastBackupDate`,
@@ -33,7 +38,7 @@
 		WHERE doctorID = #{doctorID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="doctorDataBackup">
+	<select id="getByID" parameterType="string" resultType="doctorDataBackup">
 		SELECT
 			`doctorID`,
 			`lastBackupDate`,

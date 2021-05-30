@@ -30,14 +30,14 @@ public class PrescriptionDeleteController extends BaseController{
 
 
     @RequestMapping(value = "/prescribedAdvice/{prescriptionAdviceID}", method = RequestMethod.DELETE)
-    public void prescribedAdvice(@PathVariable("prescriptionAdviceID") Integer prescriptionAdviceID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void prescribedAdvice(@PathVariable("prescriptionAdviceID") String prescriptionAdviceID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("presAdviceID", prescriptionAdviceID);
         this.prescriptionAdviceService.delete(param);
     }
 
     @RequestMapping(value = "/prescribedComplain/{complainID}", method = RequestMethod.DELETE)
-    public void prescribedComplain(@PathVariable("complainID") Integer complainID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void prescribedComplain(@PathVariable("complainID") String complainID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("complainID", complainID);
         this.prescriptionComplainService.delete(param);

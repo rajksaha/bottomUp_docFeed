@@ -5,42 +5,42 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorInvDiseaseTemplateData extends BaseData {
 
-  private long templateID;
-  private long doctorID;
-  private long diseaseID;
-  private long invID;
+  private String templateID;
+  private String doctorID;
+  private String diseaseID;
+  private String invID;
   private String note;
-  private long checked;
+  private Integer checked;
 
-  public long getTemplateID() {
+  public String getTemplateID() {
     return templateID;
   }
 
-  public void setTemplateID(long templateID) {
+  public void setTemplateID(String templateID) {
     this.templateID = templateID;
   }
 
-  public long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getDiseaseID() {
+  public String getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(long diseaseID) {
+  public void setDiseaseID(String diseaseID) {
     this.diseaseID = diseaseID;
   }
 
-  public long getInvID() {
+  public String getInvID() {
     return invID;
   }
 
-  public void setInvID(long invID) {
+  public void setInvID(String invID) {
     this.invID = invID;
   }
 
@@ -52,11 +52,11 @@ public class DoctorInvDiseaseTemplateData extends BaseData {
     this.note = note;
   }
 
-  public long getChecked() {
+  public Integer getChecked() {
     return checked;
   }
 
-  public void setChecked(long checked) {
+  public void setChecked(Integer checked) {
     this.checked = checked;
   }
 }

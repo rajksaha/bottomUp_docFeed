@@ -24,7 +24,7 @@ public class ContentSymptomService {
     @Autowired
     private ContentSymptomMapper contentSymptomMapper;
 
-    public Long createByName(String symptomName) throws BottomUpException{
+    public String createByName(String symptomName) throws BottomUpException{
         ContentSymptomData symptomData = contentSymptomMapper.getByName(symptomName);
         if(symptomData == null){
             symptomData = new ContentSymptomData();
@@ -42,7 +42,7 @@ public class ContentSymptomService {
         contentSymptomMapper.update(data);
     }
 
-    public ContentSymptomData getByID(Long ID)throws BottomUpException {
+    public ContentSymptomData getByID(String ID)throws BottomUpException {
         return this.contentSymptomMapper.getByID(ID);
     }
 

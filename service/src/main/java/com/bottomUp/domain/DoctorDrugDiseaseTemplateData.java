@@ -5,61 +5,61 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorDrugDiseaseTemplateData extends BaseData {
 
-  private long templateID;
-  private long doctorID;
-  private long diseaseID;
-  private long drugTypeID;
-  private long drugID;
-  private long drugTimeID;
+  private String templateID;
+  private String doctorID;
+  private String diseaseID;
+  private String drugTypeID;
+  private String drugID;
+  private String drugTimeID;
   private String drugDoseUnit;
-  private long drugWhenID;
-  private long drugAdviceID;
+  private String drugWhenID;
+  private String drugAdviceID;
 
-  public long getTemplateID() {
+  public String getTemplateID() {
     return templateID;
   }
 
-  public void setTemplateID(long templateID) {
+  public void setTemplateID(String templateID) {
     this.templateID = templateID;
   }
 
-  public long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getDiseaseID() {
+  public String getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(long diseaseID) {
+  public void setDiseaseID(String diseaseID) {
     this.diseaseID = diseaseID;
   }
 
-  public long getDrugTypeID() {
+  public String getDrugTypeID() {
     return drugTypeID;
   }
 
-  public void setDrugTypeID(long drugTypeID) {
+  public void setDrugTypeID(String drugTypeID) {
     this.drugTypeID = drugTypeID;
   }
 
-  public long getDrugID() {
+  public String getDrugID() {
     return drugID;
   }
 
-  public void setDrugID(long drugID) {
+  public void setDrugID(String drugID) {
     this.drugID = drugID;
   }
 
-  public long getDrugTimeID() {
+  public String getDrugTimeID() {
     return drugTimeID;
   }
 
-  public void setDrugTimeID(long drugTimeID) {
+  public void setDrugTimeID(String drugTimeID) {
     this.drugTimeID = drugTimeID;
   }
 
@@ -71,19 +71,19 @@ public class DoctorDrugDiseaseTemplateData extends BaseData {
     this.drugDoseUnit = drugDoseUnit;
   }
 
-  public long getDrugWhenID() {
+  public String getDrugWhenID() {
     return drugWhenID;
   }
 
-  public void setDrugWhenID(long drugWhenID) {
+  public void setDrugWhenID(String drugWhenID) {
     this.drugWhenID = drugWhenID;
   }
 
-  public long getDrugAdviceID() {
+  public String getDrugAdviceID() {
     return drugAdviceID;
   }
 
-  public void setDrugAdviceID(long drugAdviceID) {
+  public void setDrugAdviceID(String drugAdviceID) {
     this.drugAdviceID = drugAdviceID;
   }
 }

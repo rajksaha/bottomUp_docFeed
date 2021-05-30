@@ -17,7 +17,7 @@ public interface DoctorDrugSettingMapper {
 
     void update(DrugDefaultSetupData data) throws BottomUpException;
 
-    DrugDefaultSetupData getByID(Long ID) throws BottomUpException;
+    DrugDefaultSetupData getByID(String ID) throws BottomUpException;
 
     DrugDefaultSetupData getByDoctorAndDrug(Map<String, Object> param) throws BottomUpException;
 

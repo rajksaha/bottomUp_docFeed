@@ -27,7 +27,7 @@ public class ModuleService {
         moduleMapper.update(data);
     }
 
-    public ModuleData getByID(Integer ID)throws BottomUpException {
+    public ModuleData getByID(String ID)throws BottomUpException {
         return this.moduleMapper.getByID(ID);
     }
 

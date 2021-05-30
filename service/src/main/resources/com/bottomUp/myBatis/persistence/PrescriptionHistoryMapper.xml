@@ -4,9 +4,13 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.PrescriptionHistoryMapper">
 
-	<insert id="create" parameterType="prescriptionHistory" useGeneratedKeys="true" keyProperty="presHistoryID" >
+	<insert id="create" parameterType="prescriptionHistory">
 
+		<selectKey keyProperty="presHistoryID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `prescription_history`(
+			`presHistoryID`,
 			`appointmentID`,
 			`patientHistoryID`,
 			`updatedBy`,
@@ -15,6 +19,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{presHistoryID},
 			#{appointmentID},
 			#{patientHistoryID},
 			#{updatedBy},
@@ -63,7 +68,7 @@
 		WHERE presHistoryID = #{presHistoryID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="prescriptionHistory">
+	<select id="getByID" parameterType="string" resultType="prescriptionHistory">
 		SELECT
 		ph.`presHistoryID`,
 		ph.`appointmentID`,

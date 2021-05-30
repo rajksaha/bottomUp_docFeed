@@ -12,9 +12,7 @@ import com.bottomUp.service.common.CompanyService;
 import com.bottomUp.service.common.user.UserPermissionService;
 import com.bottomUp.service.common.user.UserService;
 import com.bottomUp.service.docFeed.crud.DoctorService;
-import com.sun.media.jfxmedia.logging.Logger;
 import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,8 +21,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class BottomUpUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
@@ -55,7 +55,7 @@ public class BottomUpUserDetailsService implements org.springframework.security.
         try {
             userData = userService.getUserByUserName(username);
 
-            if (userData == null || userData.getUserID() == null || userData.getUserID().equals(0)) {
+            if (userData == null || userData.getUserID() == null || userData.getUserID().equals("")) {
                 throw new BadCredentialsException("Invalid username entered");
             }
 
@@ -63,13 +63,13 @@ public class BottomUpUserDetailsService implements org.springframework.security.
                 throw new BadCredentialsException("Your account is deactivated. Please contact with administrator");
             }
 
-            if (BooleanUtils.toBoolean(userData.getIsBlocked())) {
+            if (BooleanUtils.toBoolean(userData.getBlocked())) {
                 throw new BadCredentialsException("Your account has been blocked. Please contact with administrator");
             }
 
             List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
 
-            if (userData.getCompanyID() == null && userData.getUserID() == 1) {
+            if (userData.getCompanyID() == null && userData.getUserID().equalsIgnoreCase("SUPER_ADMIN")) {
                 grantedAuths.add(new SimpleGrantedAuthority("SUPER_ADMIN"));
             } else {
 
@@ -98,7 +98,7 @@ public class BottomUpUserDetailsService implements org.springframework.security.
             UserProfileData data = this.userService.getUserProfileByID(userData.getUserID());
             userProfilePermissionData.setProfileData(data);
 
-            if (userData.getCompanyID() != null && userData.getUserID() != 1) {
+            if (userData.getCompanyID() != null && !userData.getUserID().equalsIgnoreCase("SUPER_ADMIN")) {
                 Map<String, Object> param = new HashMap<>();
                 param.put("companyID", userData.getCompanyID());
                 CompanyData companyData = companyService.getByID(userData.getCompanyID());

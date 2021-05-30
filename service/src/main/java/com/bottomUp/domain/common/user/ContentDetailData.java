@@ -8,8 +8,8 @@ import com.bottomUp.domain.common.BaseData;
  */
 public class ContentDetailData extends BaseData {
 
-    private Long contentDetailID;
-    private Long entityID;
+    private String contentDetailID;
+    private String entityID;
     private String entityType;
     private String shortName;
     private String longDesc;
@@ -17,19 +17,19 @@ public class ContentDetailData extends BaseData {
     private String url;
     private String fileFormat;
 
-    public Long getContentDetailID() {
+    public String getContentDetailID() {
         return contentDetailID;
     }
 
-    public void setContentDetailID(Long contentDetailID) {
+    public void setContentDetailID(String contentDetailID) {
         this.contentDetailID = contentDetailID;
     }
 
-    public Long getEntityID() {
+    public String getEntityID() {
         return entityID;
     }
 
-    public void setEntityID(Long entityID) {
+    public void setEntityID(String entityID) {
         this.entityID = entityID;
     }
 
@@ -80,5 +80,4 @@ public class ContentDetailData extends BaseData {
     public void setFileFormat(String fileFormat) {
         this.fileFormat = fileFormat;
     }
-
 }

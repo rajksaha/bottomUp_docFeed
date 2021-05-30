@@ -31,7 +31,7 @@ public class ContentWhenTypeService {
         contentWhenTypeMapper.update(data);
     }
 
-    public ContentWhenTypeData getByID(Long ID)throws BottomUpException {
+    public ContentWhenTypeData getByID(String ID)throws BottomUpException {
         return this.contentWhenTypeMapper.getByID(ID);
     }
 

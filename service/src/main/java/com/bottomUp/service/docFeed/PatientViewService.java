@@ -50,7 +50,7 @@ public class PatientViewService
     private AppointmentMapper appointmentMapper;
 
     public PatientData
-    create(PatientViewData patientViewData, Long companyID) throws BottomUpException{
+    create(PatientViewData patientViewData, String companyID) throws BottomUpException{
         PatientData patientData = new PatientData();
         try {
             UserProfileData profileData = new UserProfileData();

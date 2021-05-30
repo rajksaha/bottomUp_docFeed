@@ -4,9 +4,13 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.PatientPastDiseaseMapper">
 
-	<insert id="create" parameterType="patientPastDisease" useGeneratedKeys="true" keyProperty="patientPastDiseaseID" >
+	<insert id="create" parameterType="patientPastDisease">
 
+		<selectKey keyProperty="patientPastDiseaseID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `patient_past_disease`(
+			`patientPastDiseaseID`,
 			`patientID`,
 			`diseaseID`,
 			`isPresent`,
@@ -17,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{patientPastDiseaseID},
 			#{patientID},
 			#{diseaseID},
 			#{isPresent},
@@ -42,7 +47,7 @@
 		WHERE patientPastDiseaseID = #{patientPastDiseaseID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="patientPastDisease">
+	<select id="getByID" parameterType="string" resultType="patientPastDisease">
 		SELECT
 			`patientPastDiseaseID`,
 			`patientID`,

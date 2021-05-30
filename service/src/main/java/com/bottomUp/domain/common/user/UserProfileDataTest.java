@@ -10,19 +10,19 @@ import java.util.List;
  */
 public class UserProfileDataTest extends BaseData{
 
-    private Long userProfileID;
+    private String userProfileID;
     private String userName;
-    private Long userID;
+    private String userID;
     private String firstName;
     private String lastName;
     private String employeeCode;
     private String emailAddress;
     private String address;
     private Integer status;
-    private Long companyID;
+    private String companyID;
     private String contactNo;
     private Date dateOfBirth;
-    private Long doctorID;
+    private String doctorID;
     private String sex;
     private String JsonString;
     private Integer companyAdmin;
@@ -33,11 +33,11 @@ public class UserProfileDataTest extends BaseData{
     private List<UserGroupAssignmentData> groupAssignmentList;
     private List<UserGroupData> userGroupList;
 
-    public Long getUserProfileID() {
+    public String getUserProfileID() {
         return userProfileID;
     }
 
-    public void setUserProfileID(Long userProfileID) {
+    public void setUserProfileID(String userProfileID) {
         this.userProfileID = userProfileID;
     }
 
@@ -49,11 +49,11 @@ public class UserProfileDataTest extends BaseData{
         this.userName = userName;
     }
 
-    public Long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -105,11 +105,11 @@ public class UserProfileDataTest extends BaseData{
         this.status = status;
     }
 
-    public Long getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Long companyID) {
+    public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
 
@@ -129,11 +129,11 @@ public class UserProfileDataTest extends BaseData{
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Long getDoctorID() {
+    public String getDoctorID() {
         return doctorID;
     }
 
-    public void setDoctorID(Long doctorID) {
+    public void setDoctorID(String doctorID) {
         this.doctorID = doctorID;
     }
 

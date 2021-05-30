@@ -50,7 +50,7 @@ public class PrescriptionComplainService {
         prescriptionComplainMapper.update(data);
     }
 
-    public PrescriptionComplainData getByID(Long ID)throws BottomUpException {
+    public PrescriptionComplainData getByID(String ID)throws BottomUpException {
         return this.prescriptionComplainMapper.getByID(ID);
     }
 

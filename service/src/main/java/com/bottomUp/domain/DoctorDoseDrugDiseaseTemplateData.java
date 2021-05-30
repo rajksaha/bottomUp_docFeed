@@ -5,16 +5,16 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorDoseDrugDiseaseTemplateData extends BaseData {
 
-  private long templateID;
+  private String templateID;
   private String dose;
-  private long numOfDay;
-  private long durationType;
+  private Integer numOfDay;
+  private Integer durationType;
 
-  public long getTemplateID() {
+  public String getTemplateID() {
     return templateID;
   }
 
-  public void setTemplateID(long templateID) {
+  public void setTemplateID(String templateID) {
     this.templateID = templateID;
   }
 
@@ -26,19 +26,19 @@ public class DoctorDoseDrugDiseaseTemplateData extends BaseData {
     this.dose = dose;
   }
 
-  public long getNumOfDay() {
+  public Integer getNumOfDay() {
     return numOfDay;
   }
 
-  public void setNumOfDay(long numOfDay) {
+  public void setNumOfDay(Integer numOfDay) {
     this.numOfDay = numOfDay;
   }
 
-  public long getDurationType() {
+  public Integer getDurationType() {
     return durationType;
   }
 
-  public void setDurationType(long durationType) {
+  public void setDurationType(Integer durationType) {
     this.durationType = durationType;
   }
 }

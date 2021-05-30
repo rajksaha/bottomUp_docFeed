@@ -26,7 +26,7 @@ public class GroupPermissionService {
         this.groupPermissionMapper.update(data);
     }
 
-    public GroupPermissionData getByID(Integer ID) throws BottomUpException {
+    public GroupPermissionData getByID(String ID) throws BottomUpException {
         return this.groupPermissionMapper.getByID(ID);
     }
 

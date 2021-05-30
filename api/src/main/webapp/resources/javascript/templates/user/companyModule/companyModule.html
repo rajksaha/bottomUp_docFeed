@@ -1,11 +1,6 @@
 <script type="text/ng-template" id="action_template">
     <a href="" data-ng-click="edit(item)"><i class="fa fa-edit"></i></a>
-    <a href="" class=""
-       echo-confirmation="delete(item)"
-       confirmation-message="Are you sure to remove?"
-       confirmation-title="Confirmation"
-       item="item">
-        <span class="fa fa-trash"></span></a>
+    <a href="" data-ng-click="delete(item)"><i class="fa fa-trash"></i></a>
 </script>
 
 <div class="panel panel-default mt-15">
@@ -83,8 +78,8 @@
     <div class="panel-footer" ng-show="showForm">
         <div class="text-right">
             <button class="btn btn-sm btn-warning" data-ng-click="reset()"><span class="glyphicon glyphicon-remove"></span> Reset</button>
-            <button class="btn btn-sm btn-success" data-ng-click="save(companyModule)" data-ng-hide="companyModule.companyModuleID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
-            <button class="btn btn-sm btn-success" data-ng-click="update(companyModule)" data-ng-show="companyModule.companyModuleID > 0"><span class="glyphicon glyphicon-floppy-disk"></span> Update</button>
+            <button class="btn btn-sm btn-success" data-ng-click="save(companyModule)" data-ng-show="!companyModule.companyModuleID"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            <button class="btn btn-sm btn-success" data-ng-click="update(companyModule)" data-ng-show="companyModule.companyModuleID"><span class="glyphicon glyphicon-floppy-disk"></span> Update</button>
             <button class="btn btn-sm btn-danger" data-ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
         </div>
     </div>

@@ -4,9 +4,13 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.MenuSettingMapper">
 
-	<insert id="create" parameterType="menuSetting" useGeneratedKeys="true" keyProperty="menuSettingID" >
+	<insert id="create" parameterType="menuSetting">
 
+		<selectKey keyProperty="menuSettingID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `menu_setting`(
+			`menuSettingID`,
 			`doctorID`,
 			`menuID`,
 			`menuHeader`,
@@ -17,6 +21,7 @@
 			`createdBy`
 		)
 		VALUES(
+			#{menuSettingID},
 			#{doctorID},
 			#{menuID},
 			#{menuHeader},
@@ -42,7 +47,7 @@
 		WHERE menuSettingID = #{menuSettingID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="menuSetting">
+	<select id="getByID" parameterType="string" resultType="menuSetting">
 		SELECT
 			`menuSettingID`,
 			`doctorID`,

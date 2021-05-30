@@ -65,7 +65,7 @@ public class CompanyModuleController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{companyModuleID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("companyModuleID") Integer companyModuleID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("companyModuleID") String companyModuleID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("companyModuleID",companyModuleID);
         this.companyModuleService.delete(param);

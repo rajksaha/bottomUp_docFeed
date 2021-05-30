@@ -17,7 +17,7 @@ public interface InvCategoryMapper {
 
     public void update(InvCategoryData data) throws BottomUpException;
 
-    public InvCategoryData getByID(Long ID) throws BottomUpException;
+    public InvCategoryData getByID(String ID) throws BottomUpException;
 
     public List<InvCategoryData> getByParam(Map<String, Object> param) throws BottomUpException;
 

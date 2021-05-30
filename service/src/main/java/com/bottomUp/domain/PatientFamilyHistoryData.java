@@ -5,9 +5,9 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PatientFamilyHistoryData extends BaseData {
 
-  private Long familyHistoryID;
-  private Long patientID;
-  private Long diseaseID;
+  private String familyHistoryID;
+  private String patientID;
+  private String diseaseID;
   private String diseaseName;
   private Integer relation;
   private String relationName;
@@ -15,28 +15,36 @@ public class PatientFamilyHistoryData extends BaseData {
   private String type;
   private String detail;
 
-  public Long getFamilyHistoryID() {
+  public String getFamilyHistoryID() {
     return familyHistoryID;
   }
 
-  public void setFamilyHistoryID(Long familyHistoryID) {
+  public void setFamilyHistoryID(String familyHistoryID) {
     this.familyHistoryID = familyHistoryID;
   }
 
-  public Long getPatientID() {
+  public String getPatientID() {
     return patientID;
   }
 
-  public void setPatientID(Long patientID) {
+  public void setPatientID(String patientID) {
     this.patientID = patientID;
   }
 
-  public Long getDiseaseID() {
+  public String getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(Long diseaseID) {
+  public void setDiseaseID(String diseaseID) {
     this.diseaseID = diseaseID;
+  }
+
+  public String getDiseaseName() {
+    return diseaseName;
+  }
+
+  public void setDiseaseName(String diseaseName) {
+    this.diseaseName = diseaseName;
   }
 
   public Integer getRelation() {
@@ -45,6 +53,14 @@ public class PatientFamilyHistoryData extends BaseData {
 
   public void setRelation(Integer relation) {
     this.relation = relation;
+  }
+
+  public String getRelationName() {
+    return relationName;
+  }
+
+  public void setRelationName(String relationName) {
+    this.relationName = relationName;
   }
 
   public String getPresent() {
@@ -69,21 +85,5 @@ public class PatientFamilyHistoryData extends BaseData {
 
   public void setDetail(String detail) {
     this.detail = detail;
-  }
-
-  public String getDiseaseName() {
-    return diseaseName;
-  }
-
-  public void setDiseaseName(String diseaseName) {
-    this.diseaseName = diseaseName;
-  }
-
-  public String getRelationName() {
-    return relationName;
-  }
-
-  public void setRelationName(String relationName) {
-    this.relationName = relationName;
   }
 }

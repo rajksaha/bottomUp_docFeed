@@ -5,14 +5,14 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentDiseaseData extends BaseData {
 
-  private long diseaseID;
+  private String diseaseID;
   private String diseaseName;
 
-  public long getDiseaseID() {
+  public String getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(long diseaseID) {
+  public void setDiseaseID(String diseaseID) {
     this.diseaseID = diseaseID;
   }
 

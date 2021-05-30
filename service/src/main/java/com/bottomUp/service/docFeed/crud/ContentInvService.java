@@ -23,12 +23,12 @@ public class ContentInvService {
     @Autowired
     private ContentInvMapper contentInvMapper;
 
-    public Long getInsert(String invName) throws BottomUpException{
+    public String getInsert(String invName) throws BottomUpException{
         ContentInvData invData = contentInvMapper.getByName(invName);
         if(invData == null){
             invData = new ContentInvData();
             invData.setName(invName);
-            invData.setCategoryID(0);
+            invData.setCategoryID(null);
             contentInvMapper.create(invData);
         }
         return invData.getInvID();
@@ -42,7 +42,7 @@ public class ContentInvService {
         contentInvMapper.update(data);
     }
 
-    public ContentInvData getByID(Long ID)throws BottomUpException {
+    public ContentInvData getByID(String ID)throws BottomUpException {
         return this.contentInvMapper.getByID(ID);
     }
 

@@ -41,16 +41,16 @@ public class FollowUpResultController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{resultID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public FollowUpResultData getByID(@PathVariable("resultID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-        return this.followUpResultService.getByID(Long.valueOf(companyID));
+    public FollowUpResultData getByID(@PathVariable("resultID") String resultID, HttpServletRequest request) throws BottomUpException {
+        return this.followUpResultService.getByID(resultID);
     }
 
     @RequestMapping(value = {"/getFollowUpView/{doctorID}/{patientID}/{patientTypeID}/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public FollowUpResultViewData getFollowUpView(@PathVariable("doctorID") Long doctorID,
-                                                  @PathVariable("patientID") Long patientID,
-                                                  @PathVariable("patientTypeID") Integer patientTypeID,
-                                                  @PathVariable("appointmentID") Long appointmentID,
+    public FollowUpResultViewData getFollowUpView(@PathVariable("doctorID") String doctorID,
+                                                  @PathVariable("patientID") String patientID,
+                                                  @PathVariable("patientTypeID") String patientTypeID,
+                                                  @PathVariable("appointmentID") String appointmentID,
                                                   HttpServletRequest request) throws BottomUpException {
         return this.followUpResultService.generateFollowUpView(doctorID, patientID, patientTypeID, appointmentID);
     }
@@ -75,12 +75,12 @@ public class FollowUpResultController extends BaseController {
 
     @RequestMapping(value = {"/addFollowUpToPres"}, method = RequestMethod.POST)
     @ResponseBody
-    public Long updateAddedInPres(@RequestBody ContentDetailData data) throws BottomUpException {
+    public String updateAddedInPres(@RequestBody ContentDetailData data) throws BottomUpException {
         return this.contentDetailService.addFollowUpToPres(data);
     }
 
     @RequestMapping(value = "/delete/{resultID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("resultID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("resultID") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("resultID", appointmentID);
         this.followUpResultService.delete(param);

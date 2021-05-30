@@ -33,20 +33,20 @@ public class CompanyDefaultSetupService {
     }
 
     public void createDefaultPermissionAndGroupForModule(CompanyModuleData moduleData) throws BottomUpException{
-        if(moduleData.getCompanyModuleID() == 1){
+        if(moduleData.getCompanyModuleID().equals("TODO")){
             this.createPermissionForCompany(moduleData.getCompanyID(), moduleData.getCompanyModuleID(), "DOCTOR", "DOCTOR");
             this.createPermissionForCompany(moduleData.getCompanyID(), moduleData.getCompanyModuleID(), "DOCTOR_STAFF", "DOCTOR_STAFF");
         }
     }
 
-    private void createPermissionForCompany(Long companyID, Long companyModuleID, String code, String name)throws BottomUpException {
+    private void createPermissionForCompany(String companyID, String companyModuleID, String code, String name)throws BottomUpException {
         PermissionData permissionData = this.createPermission(companyID, companyModuleID, code, name);
         UserGroupData userGroupData = this.createUserGroup(companyID, companyModuleID, code,  name);
         this.createGroupPermission(permissionData.getPermissionID(), userGroupData.getUserGroupID());
     }
 
 
-    private PermissionData createPermission(Long companyID, Long companyModuleID, String functionCode, String shortName)throws BottomUpException{
+    private PermissionData createPermission(String companyID, String companyModuleID, String functionCode, String shortName)throws BottomUpException{
         PermissionData permissionData = new PermissionData();
         permissionData.setFunctionCode(functionCode);
         permissionData.setShortName(shortName);
@@ -55,7 +55,7 @@ public class CompanyDefaultSetupService {
         return permissionData;
     }
 
-    private UserGroupData createUserGroup(Long companyID, Long companyModuleID, String shortName, String longDesk)throws BottomUpException{
+    private UserGroupData createUserGroup(String companyID, String companyModuleID, String shortName, String longDesk)throws BottomUpException{
         UserGroupData userGroupData = new UserGroupData();
         userGroupData.setCompanyID(companyID);
         userGroupData.setCompanyModuleID(companyModuleID);
@@ -65,7 +65,7 @@ public class CompanyDefaultSetupService {
         return userGroupData;
     }
 
-    private GroupPermissionData createGroupPermission(Long permissionID, Long userGroupID) throws BottomUpException{
+    private GroupPermissionData createGroupPermission(String permissionID, String userGroupID) throws BottomUpException{
         GroupPermissionData groupPermissionData = new GroupPermissionData();
         groupPermissionData.setPermissionID(permissionID);
         groupPermissionData.setUserGroupID(userGroupID);

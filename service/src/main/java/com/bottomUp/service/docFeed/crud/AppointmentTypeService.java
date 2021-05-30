@@ -29,7 +29,7 @@ public class AppointmentTypeService {
         this.appointmentTypeMapper.update(data);
     }
 
-    public AppointmentTypeData getByID(Long ID)throws BottomUpException {
+    public AppointmentTypeData getByID(String ID)throws BottomUpException {
         return this.appointmentTypeMapper.getByID(ID);
     }
 

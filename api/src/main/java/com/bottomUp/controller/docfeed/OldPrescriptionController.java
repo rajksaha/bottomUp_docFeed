@@ -47,8 +47,8 @@ public class OldPrescriptionController extends BaseController{
     @RequestMapping(value = {"/addItemToPres/{itemCode}/{itemID}/{newAppointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
     public void addItemToPrescription(@PathVariable("itemCode") String itemCode,
-                                        @PathVariable("itemID") Long itemID,
-                                        @PathVariable("newAppointmentID") Long newAppointmentID,
+                                        @PathVariable("itemID") String itemID,
+                                        @PathVariable("newAppointmentID") String newAppointmentID,
                                         HttpServletRequest request) throws BottomUpException {
         this.oldPrescriptionService.copyByItem(itemCode, itemID, newAppointmentID);
 
@@ -57,8 +57,8 @@ public class OldPrescriptionController extends BaseController{
     @RequestMapping(value = {"/addBulkToPres/{itemCode}/{oldAppointmentID}/{newAppointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
     public void addBulkToPrescription(@PathVariable("itemCode") String itemCode,
-                                      @PathVariable("oldAppointmentID") Long oldAppointmentID,
-                                      @PathVariable("newAppointmentID") Long newAppointmentID,
+                                      @PathVariable("oldAppointmentID") String oldAppointmentID,
+                                      @PathVariable("newAppointmentID") String newAppointmentID,
                                       HttpServletRequest request) throws BottomUpException {
 
         this.oldPrescriptionService.copyItemsByAppointmentID(itemCode, oldAppointmentID, newAppointmentID);
@@ -67,8 +67,8 @@ public class OldPrescriptionController extends BaseController{
 
     @RequestMapping(value = {"/copyPrescription/{oldAppointmentID}/{newAppointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public void copyPrescription(@PathVariable("oldAppointmentID") Long oldAppointmentID,
-                                 @PathVariable("newAppointmentID") Long newAppointmentID,
+    public void copyPrescription(@PathVariable("oldAppointmentID") String oldAppointmentID,
+                                 @PathVariable("newAppointmentID") String newAppointmentID,
                                  HttpServletRequest request) throws BottomUpException {
         this.oldPrescriptionService.copyPrescription(oldAppointmentID, newAppointmentID);
     }

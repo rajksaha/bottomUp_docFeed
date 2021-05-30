@@ -1,9 +1,7 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentTypeData;
 import com.bottomUp.domain.PrescriptionReferenceData;
-import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
 import com.bottomUp.myBatis.persistence.PrescriptionReferenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +33,7 @@ public class PrescriptionReferenceService {
         prescriptionReferenceMapper.update(data);
     }
 
-    public PrescriptionReferenceData getByID(Long ID)throws BottomUpException {
+    public PrescriptionReferenceData getByID(String ID)throws BottomUpException {
         return this.prescriptionReferenceMapper.getByID(ID);
     }
 

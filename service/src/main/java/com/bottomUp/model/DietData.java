@@ -5,15 +5,15 @@ package com.bottomUp.model;
  */
 public class DietData {
 
-    private Long dietID;
+    private String dietID;
     private String dietName;
-    private Long appointmentID;
+    private String appointmentID;
 
-    public Long getDietID() {
+    public String getDietID() {
         return dietID;
     }
 
-    public void setDietID(Long dietID) {
+    public void setDietID(String dietID) {
         this.dietID = dietID;
     }
 
@@ -25,11 +25,11 @@ public class DietData {
         this.dietName = dietName;
     }
 
-    public Long getAppointmentID() {
+    public String getAppointmentID() {
         return appointmentID;
     }
 
-    public void setAppointmentID(Long appointmentID) {
+    public void setAppointmentID(String appointmentID) {
         this.appointmentID = appointmentID;
     }
 }

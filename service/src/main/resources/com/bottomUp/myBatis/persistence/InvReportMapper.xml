@@ -30,7 +30,7 @@
 		WHERE id = #{id}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="invReport">
+	<select id="getByID" parameterType="string" resultType="invReport">
 		SELECT
 			`id`,
 			`invPrescribeID`,

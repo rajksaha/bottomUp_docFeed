@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by raj on 09/08/2020.
@@ -22,7 +23,7 @@ public class ContentAdviceService {
     @Autowired
     private ContentAdviceMapper contentAdviceMapper;
 
-    public Long getInsert(String adviceName) throws BottomUpException{
+    public String getInsert(String adviceName) throws BottomUpException{
         ContentAdviceData adviceData = contentAdviceMapper.getByName(adviceName);
         if(adviceData == null){
             adviceData = new ContentAdviceData();
@@ -33,22 +34,22 @@ public class ContentAdviceService {
     }
 
     public void create(ContentAdviceData data) throws BottomUpException {
-        this.contentAdviceMapper .create(data);
+        this.contentAdviceMapper.create(data);
     }
 
     public void update(ContentAdviceData data) throws BottomUpException {
          this.contentAdviceMapper.update(data);
     }
 
-    public ContentAdviceData getByID(Long ID)throws BottomUpException {
-        return this.contentAdviceMapper .getByID(ID);
+    public ContentAdviceData getByID(String ID)throws BottomUpException {
+        return this.contentAdviceMapper.getByID(ID);
     }
 
     public List<ContentAdviceData> getByParam(Map<String, Object> param) throws BottomUpException {
-        return this.contentAdviceMapper .getByParam(param);
+        return this.contentAdviceMapper.getByParam(param);
     }
 
     public void delete (Map<String,Object> param) throws BottomUpException {
-        this.contentAdviceMapper .delete(param);
+        this.contentAdviceMapper.delete(param);
     }
 }

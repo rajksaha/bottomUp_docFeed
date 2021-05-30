@@ -44,7 +44,7 @@ public class DoctorViewService
 
 
 
-    public DoctorViewData create(DoctorViewData doctorViewData, Long companyID) throws BottomUpException{
+    public DoctorViewData create(DoctorViewData doctorViewData, String companyID) throws BottomUpException{
         DoctorData doctorData = new DoctorData();
         try {
             UserData userData = userMapper.getUserByUserName(doctorViewData.getDoctorCode());

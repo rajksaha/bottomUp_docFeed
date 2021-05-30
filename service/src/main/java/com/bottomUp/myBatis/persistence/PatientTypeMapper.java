@@ -17,7 +17,7 @@ public interface PatientTypeMapper {
 
     public void update(PatientTypeData data) throws BottomUpException;
 
-    public PatientTypeData getByID(Long ID) throws BottomUpException;
+    public PatientTypeData getByID(String ID) throws BottomUpException;
 
     public List<PatientTypeData> getByParam(Map<String, Object> param) throws BottomUpException;
 

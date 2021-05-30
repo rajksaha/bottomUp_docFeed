@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.DoctorHistorySettingMapper">
 
-	<insert id="create" parameterType="doctorHistorySetting" useGeneratedKeys="true" keyProperty="historySettingID" >
+	<insert id="create" parameterType="doctorHistorySetting">
+
+		<selectKey keyProperty="historySettingID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `doctor_history_setting`(
+			`historySettingID`,
 			`doctorID`,
 			`historyID`,
 			`displayOrder`,
@@ -16,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{historySettingID},
 			#{doctorID},
 			#{historyID},
 			#{displayOrder},
@@ -39,7 +45,7 @@
 		WHERE historySettingID = #{historySettingID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="doctorHistorySetting">
+	<select id="getByID" parameterType="string" resultType="doctorHistorySetting">
 		SELECT
 			`historySettingID`,
 			`doctorID`,

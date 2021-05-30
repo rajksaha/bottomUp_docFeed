@@ -3,18 +3,19 @@ package com.bottomUp.domain;
 
 import com.bottomUp.domain.common.BaseData;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class DoctorDataBackupData extends BaseData {
 
-  private long doctorID;
-  private java.sql.Date lastBackupDate;
+  private String doctorID;
+  private Date lastBackupDate;
 
-  public long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 

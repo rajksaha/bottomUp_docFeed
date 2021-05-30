@@ -1,10 +1,8 @@
 package com.bottomUp.service.docFeed.crud;
 
 import com.bottomUp.common.exception.BottomUpException;
-import com.bottomUp.domain.AppointmentTypeData;
 import com.bottomUp.domain.ContentDrugData;
 import com.bottomUp.domain.ContentDrugGenericData;
-import com.bottomUp.myBatis.persistence.AppointmentTypeMapper;
 import com.bottomUp.myBatis.persistence.ContentDrugGenericMapper;
 import com.bottomUp.myBatis.persistence.ContentDrugMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +37,7 @@ public class ContentDrugService {
         contentDrugMapper.update(data);
     }
 
-    public void updateGeneric(Long drugID, Long genericID, String userName) throws BottomUpException{
+    public void updateGeneric(String drugID, String genericID, String userName) throws BottomUpException{
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("drugID", drugID);
         params.put("genericID", genericID);
@@ -62,7 +60,7 @@ public class ContentDrugService {
         }
     }
 
-    public ContentDrugData getByID(Long ID)throws BottomUpException {
+    public ContentDrugData getByID(String ID)throws BottomUpException {
         return this.contentDrugMapper.getByID(ID);
     }
 

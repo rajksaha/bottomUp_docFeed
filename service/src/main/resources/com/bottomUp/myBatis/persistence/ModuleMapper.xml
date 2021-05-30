@@ -4,10 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ModuleMapper">
 
-	<insert id="create" parameterType="Module" useGeneratedKeys="true" keyProperty="moduleID" >
+	<insert id="create" parameterType="Module">
 
+		<selectKey keyProperty="moduleID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `bottom_up_module`
 		(
+		`moduleID`,
 		`moduleCode`,
 		`moduleName`,
 		`updatedOn`,
@@ -17,6 +21,7 @@
 		)
 		VALUES
 		(
+		#{moduleID},
 		#{moduleCode},
 		#{moduleName},
 		#{updatedOn},
@@ -36,7 +41,7 @@
 		WHERE moduleID = #{moduleID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="Module">
+	<select id="getByID" parameterType="string" resultType="Module">
 		SELECT moduleID, moduleCode, moduleName, updatedOn, updatedBy, `createdOn`, `createdBy`
 		FROM bottom_up_module
 		WHERE moduleID = #{moduleID}

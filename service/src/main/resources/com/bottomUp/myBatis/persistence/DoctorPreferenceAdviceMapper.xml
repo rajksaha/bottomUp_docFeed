@@ -4,9 +4,13 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.DoctorPreferenceAdviceMapper">
 
-	<insert id="create" parameterType="doctorPreferenceAdvice" useGeneratedKeys="true" keyProperty="advicePreferenceID" >
+	<insert id="create" parameterType="doctorPreferenceAdvice">
 
+		<selectKey keyProperty="advicePreferenceID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `doctor_preference_advice`(
+			`advicePreferenceID`,
 			`doctorID`,
 			`adviceID`,
 			`displayOrder`,
@@ -16,6 +20,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{advicePreferenceID},
 			#{doctorID},
 			#{adviceID},
 			#{displayOrder},
@@ -39,7 +44,7 @@
 		WHERE advicePreferenceID = #{advicePreferenceID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="doctorPreferenceAdvice">
+	<select id="getByID" parameterType="string" resultType="doctorPreferenceAdvice">
 		SELECT
 			`advicePreferenceID`,
 			`doctorID`,

@@ -31,7 +31,7 @@ public class PatientDrugHistoryService {
         patientDrugHistoryMapper.update(data);
     }
 
-    public PatientDrugHistoryData getByID(Long ID)throws BottomUpException {
+    public PatientDrugHistoryData getByID(String ID)throws BottomUpException {
         return this.patientDrugHistoryMapper.getByID(ID);
     }
 

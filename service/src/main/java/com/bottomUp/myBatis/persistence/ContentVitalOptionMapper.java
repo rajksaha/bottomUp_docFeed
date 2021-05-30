@@ -16,7 +16,7 @@ public interface ContentVitalOptionMapper {
 
     public void update(ContentVitalOptionData data) throws BottomUpException;
 
-    public ContentVitalOptionData  getByID(Long ID) throws BottomUpException;
+    public ContentVitalOptionData  getByID(String ID) throws BottomUpException;
 
     public List<ContentVitalOptionData> getByParam(Map<String, Object> param) throws BottomUpException;
 

@@ -5,14 +5,14 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentDoctorCategoryData extends BaseData {
 
-  private long categoryID;
+  private String categoryID;
   private String categoryName;
 
-  public long getCategoryID() {
+  public String getCategoryID() {
     return categoryID;
   }
 
-  public void setCategoryID(long categoryID) {
+  public void setCategoryID(String categoryID) {
     this.categoryID = categoryID;
   }
 

@@ -17,7 +17,7 @@ public interface DoctorPreferenceAdviceMapper {
 
     public void update(DoctorPreferenceAdviceData data) throws BottomUpException;
 
-    public DoctorPreferenceAdviceData getByID(Long ID) throws BottomUpException;
+    public DoctorPreferenceAdviceData getByID(String ID) throws BottomUpException;
 
     public List<DoctorPreferenceAdviceData> getByParam(Map<String, Object> param) throws BottomUpException;
 

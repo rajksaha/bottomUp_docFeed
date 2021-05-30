@@ -5,34 +5,34 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionInvData extends BaseData {
 
-  private Long presInvID;
-  private Long appointmentID;
-  private Long invID;
+  private String presInvID;
+  private String appointmentID;
+  private String invID;
   private String invName;
   private String note;
-  private Long checked;
+  private Integer checked;
 
-  public Long getPresInvID() {
+  public String getPresInvID() {
     return presInvID;
   }
 
-  public void setPresInvID(Long presInvID) {
+  public void setPresInvID(String presInvID) {
     this.presInvID = presInvID;
   }
 
-  public Long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(Long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public Long getInvID() {
+  public String getInvID() {
     return invID;
   }
 
-  public void setInvID(Long invID) {
+  public void setInvID(String invID) {
     this.invID = invID;
   }
 
@@ -52,11 +52,11 @@ public class PrescriptionInvData extends BaseData {
     this.note = note;
   }
 
-  public Long getChecked() {
+  public Integer getChecked() {
     return checked;
   }
 
-  public void setChecked(Long checked) {
+  public void setChecked(Integer checked) {
     this.checked = checked;
   }
 }

@@ -10,30 +10,30 @@ import java.util.List;
 
 public class FollowUpResultData extends BaseData {
 
-  private Long resultID;
-  private Long appointmentID;
+  private String resultID;
+  private String appointmentID;
   private Integer patientTypeID;
   private String jsonData;
   private Integer addedInPres;
   private Date entryDate;
   private String entryDateString;
-  private Long contentDetailID;
+  private String contentDetailID;
 
   private List<FollowUpDetail> followUpDetailList;
 
-  public Long getResultID() {
+  public String getResultID() {
     return resultID;
   }
 
-  public void setResultID(Long resultID) {
+  public void setResultID(String resultID) {
     this.resultID = resultID;
   }
 
-  public Long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(Long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 
@@ -69,14 +69,6 @@ public class FollowUpResultData extends BaseData {
     this.entryDate = entryDate;
   }
 
-  public List<FollowUpDetail> getFollowUpDetailList() {
-    return followUpDetailList;
-  }
-
-  public void setFollowUpDetailList(List<FollowUpDetail> followUpDetailList) {
-    this.followUpDetailList = followUpDetailList;
-  }
-
   public String getEntryDateString() {
     return entryDateString;
   }
@@ -85,11 +77,19 @@ public class FollowUpResultData extends BaseData {
     this.entryDateString = entryDateString;
   }
 
-  public Long getContentDetailID() {
+  public String getContentDetailID() {
     return contentDetailID;
   }
 
-  public void setContentDetailID(Long contentDetailID) {
+  public void setContentDetailID(String contentDetailID) {
     this.contentDetailID = contentDetailID;
+  }
+
+  public List<FollowUpDetail> getFollowUpDetailList() {
+    return followUpDetailList;
+  }
+
+  public void setFollowUpDetailList(List<FollowUpDetail> followUpDetailList) {
+    this.followUpDetailList = followUpDetailList;
   }
 }

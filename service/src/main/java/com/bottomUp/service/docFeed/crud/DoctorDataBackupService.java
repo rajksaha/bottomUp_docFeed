@@ -31,7 +31,7 @@ public class DoctorDataBackupService {
         doctorDataBackupMapper.update(data);
     }
 
-    public DoctorDataBackupData getByID(Long ID)throws BottomUpException {
+    public DoctorDataBackupData getByID(String ID)throws BottomUpException {
         return this.doctorDataBackupMapper.getByID(ID);
     }
 

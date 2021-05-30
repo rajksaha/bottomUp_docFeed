@@ -5,7 +5,7 @@ import com.bottomUp.domain.common.BaseData;
 
 public class MenuData extends BaseData {
 
-  private Long menuID;
+  private String menuID;
   private Integer categoryID;
   private String categoryName;
   private String menuURL;
@@ -15,11 +15,11 @@ public class MenuData extends BaseData {
   private Integer inPrescription;
   private Integer displayOrder;
 
-  public Long getMenuID() {
+  public String getMenuID() {
     return menuID;
   }
 
-  public void setMenuID(Long menuID) {
+  public void setMenuID(String menuID) {
     this.menuID = menuID;
   }
 

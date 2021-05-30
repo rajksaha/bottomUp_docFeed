@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentDurationTypeMapper">
 
-	<insert id="create" parameterType="contentDurationType" useGeneratedKeys="true" keyProperty="durationType" >
+	<insert id="create" parameterType="contentDurationType">
+
+		<selectKey keyProperty="durationType" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_duration_type`(
+			`durationType`,
 			`bangla`,
 			`pdf`,
 			`english`,
@@ -16,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{durationType},
 			#{bangla},
 			#{pdf},
 			#{english},
@@ -41,7 +47,7 @@
 
     </update>
 
-	<select id="getByID" parameterType="long" resultType="contentDurationType">
+	<select id="getByID" parameterType="string" resultType="contentDurationType">
 		SELECT
 			`durationType`,
 			`bangla`,

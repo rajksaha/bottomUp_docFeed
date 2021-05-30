@@ -2,6 +2,7 @@ package com.bottomUp.service.migration;
 
 import com.bottomUp.common.exception.BottomUpException;
 import com.bottomUp.domain.migration.DumpPatientFamilyHistory;
+import com.bottomUp.myBatis.persistence.migration.DumpPatientFamilyHistoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,30 +19,30 @@ import java.util.Map;
 public class DumpPatientFamilyHistoryService {
 
     @Autowired
-    private DumpPatientFamilyHistoryService dumpPatientFamilyHistoryService;
+    private DumpPatientFamilyHistoryMapper dumpPatientFamilyHistoryMapper;
 
 
     public void create(DumpPatientFamilyHistory data) throws BottomUpException {
-        dumpPatientFamilyHistoryService.create(data);
+        dumpPatientFamilyHistoryMapper.create(data);
     }
 
     public void update(DumpPatientFamilyHistory data) throws BottomUpException {
-        dumpPatientFamilyHistoryService.update(data);
+        dumpPatientFamilyHistoryMapper.update(data);
     }
 
     public DumpPatientFamilyHistory getByID(Long ID)throws BottomUpException {
-        return this.dumpPatientFamilyHistoryService.getByID(ID);
+        return this.dumpPatientFamilyHistoryMapper.getByID(ID);
     }
 
     public DumpPatientFamilyHistory getByName(String name)throws BottomUpException {
-        return this.dumpPatientFamilyHistoryService.getByName(name);
+        return this.dumpPatientFamilyHistoryMapper.getByName(name);
     }
 
     public List<DumpPatientFamilyHistory> getByParam(Map<String, Object> param) throws BottomUpException {
-        return this.dumpPatientFamilyHistoryService.getByParam(param);
+        return this.dumpPatientFamilyHistoryMapper.getByParam(param);
     }
 
     public void delete (Map<String,Object> param) throws BottomUpException {
-        this.dumpPatientFamilyHistoryService.delete(param);
+        this.dumpPatientFamilyHistoryMapper.delete(param);
     }
 }

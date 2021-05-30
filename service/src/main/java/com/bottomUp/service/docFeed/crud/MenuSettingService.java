@@ -29,7 +29,7 @@ public class MenuSettingService {
         menuSettingMapper.update(data);
     }
 
-    public MenuSettingData getByID(Long ID)throws BottomUpException {
+    public MenuSettingData getByID(String ID)throws BottomUpException {
         return this.menuSettingMapper.getByID(ID);
     }
 

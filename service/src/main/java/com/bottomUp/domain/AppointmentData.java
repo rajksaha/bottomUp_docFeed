@@ -9,35 +9,35 @@ import java.util.Date;
 
 public class AppointmentData extends BaseData {
 
-  private long appointmentID;
-  private long doctorID;
-  private long patientID;
+  private String appointmentID;
+  private String doctorID;
+  private String patientID;
   private Date appDate;
   private Time appTime;
   private Integer status;
   private Integer appointmentType;
 
-  public long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getPatientID() {
+  public String getPatientID() {
     return patientID;
   }
 
-  public void setPatientID(long patientID) {
+  public void setPatientID(String patientID) {
     this.patientID = patientID;
   }
 

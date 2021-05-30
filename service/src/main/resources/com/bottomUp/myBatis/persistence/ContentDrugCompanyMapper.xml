@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentDrugCompanyMapper">
 
-	<insert id="create" parameterType="contentDrugCompany" useGeneratedKeys="true" keyProperty="drugCompanyID" >
+	<insert id="create" parameterType="contentDrugCompany">
+
+		<selectKey keyProperty="drugCompanyID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_drug_company`(
+			`drugCompanyID`,
 			`companyName`,
 			`folder`,
 			`updatedBy`,
@@ -15,6 +20,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{drugCompanyID},
 			#{companyName},
 			#{folder},
 			#{updatedBy},
@@ -36,7 +42,7 @@
 		WHERE drugCompanyID = #{drugCompanyID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentDrugCompany">
+	<select id="getByID" parameterType="string" resultType="contentDrugCompany">
 		SELECT
 		   `drugCompanyID`,
 			`companyName`,

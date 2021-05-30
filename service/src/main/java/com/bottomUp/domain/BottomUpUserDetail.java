@@ -24,7 +24,7 @@ public class BottomUpUserDetail extends User {
 
     private PatientData patientData;
 
-    private Long appointmentID;
+    private String appointmentID;
 
     public UserProfilePermissionData getUserProfilePermissionData() {
         return userProfilePermissionData;
@@ -42,11 +42,11 @@ public class BottomUpUserDetail extends User {
         this.companyData = companyData;
     }
 
-    public Long getAppointmentID() {
+    public String getAppointmentID() {
         return appointmentID;
     }
 
-    public void setAppointmentID(Long appointmentID) {
+    public void setAppointmentID(String appointmentID) {
         this.appointmentID = appointmentID;
     }
 

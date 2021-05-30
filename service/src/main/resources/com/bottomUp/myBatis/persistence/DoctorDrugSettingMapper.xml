@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.DoctorDrugSettingMapper">
 
-	<insert id="create" parameterType="DrugDefaultSetup" useGeneratedKeys="true" keyProperty="drugSettingID" >
+	<insert id="create" parameterType="DrugDefaultSetup" >
+
+		<selectKey keyProperty="drugSettingID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `doctor_drug_setting`(
+			`drugSettingID`,
 			`doctorID`,
 			`drugID`,
 			`doseTypeCode`,
@@ -20,6 +25,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{drugSettingID},
 			#{doctorID},
 			#{drugID},
 			#{doseTypeCode},
@@ -51,7 +57,7 @@
 		WHERE drugSettingID = #{drugSettingID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="DrugDefaultSetup">
+	<select id="getByID" parameterType="string" resultType="DrugDefaultSetup">
 		SELECT
 			`drugSettingID`,
 			`doctorID`,
@@ -153,7 +159,7 @@
 		</if>
 	</select>
 
-	<select id="getByDrugID" parameterType="long" resultType="DrugDefaultSetup">
+	<select id="getByDrugID" parameterType="string" resultType="DrugDefaultSetup">
 		SELECT
 			`drugSettingID`,
 			`doctorID`,

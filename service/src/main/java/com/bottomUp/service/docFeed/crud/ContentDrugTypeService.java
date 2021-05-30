@@ -31,7 +31,7 @@ public class ContentDrugTypeService {
         contentDrugTypeMapper.update(data);
     }
 
-    public ContentDrugTypeData getByID(Long ID)throws BottomUpException {
+    public ContentDrugTypeData getByID(String ID)throws BottomUpException {
         return this.contentDrugTypeMapper.getByID(ID);
     }
 

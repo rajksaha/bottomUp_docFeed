@@ -31,7 +31,7 @@ public class PatientFollowUpService {
         patientFollowUpMapper.update(data);
     }
 
-    public PatientFollowUpData getByID(Long ID)throws BottomUpException {
+    public PatientFollowUpData getByID(String ID)throws BottomUpException {
         return this.patientFollowUpMapper.getByID(ID);
     }
 

@@ -32,11 +32,11 @@ public class DoctorService {
         this.doctorMapper.update(data);
     }
 
-    public DoctorData getByID(Long ID)throws BottomUpException {
+    public DoctorData getByID(String ID)throws BottomUpException {
         return this.doctorMapper.getByID(ID);
     }
 
-    public DoctorData getByUser(Long userID)throws BottomUpException {
+    public DoctorData getByUser(String userID)throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("userID", userID);
         List<DoctorData> doctorDataList = this.doctorMapper.getByParam(param);

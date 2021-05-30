@@ -212,7 +212,7 @@ app.controller('DrugSetupController.DrugDefaultSetupController', function($scope
             $scope.doseTypeList = result.doseTypeList;
 
             DrugSetupService.getDrugDefaultSetup.query({}, {drugID:drugData.drugID,
-                genericID:drugData.genericID == null ? 0 : drugData.genericID}).$promise.then(function (result) {
+                genericID:drugData.genericID == null ? "0" : drugData.genericID}).$promise.then(function (result) {
                 if(result && result.drugSettingID){
                     $scope.editPrep(result, drugData);
                 }else{

@@ -34,7 +34,7 @@ public class MenuService {
         menuMapper.update(data);
     }
 
-    public MenuData getByID(Long ID)throws BottomUpException {
+    public MenuData getByID(String ID)throws BottomUpException {
         return this.menuMapper.getByID(ID);
     }
 

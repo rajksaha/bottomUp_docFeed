@@ -35,11 +35,8 @@ public class AppointmentTypeController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{appointmentTypeID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public AppointmentTypeData getByID(@PathVariable("appointmentTypeID") Integer appointmentTypeID, HttpServletRequest request) throws BottomUpException {
-
-       // Map<String, Object> params = this.parseParameter(request);
-
-        return this.appointmentTypeService.getByID(Long.valueOf(appointmentTypeID));
+    public AppointmentTypeData getByID(@PathVariable("appointmentTypeID") String appointmentTypeID, HttpServletRequest request) throws BottomUpException {
+        return this.appointmentTypeService.getByID(appointmentTypeID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)

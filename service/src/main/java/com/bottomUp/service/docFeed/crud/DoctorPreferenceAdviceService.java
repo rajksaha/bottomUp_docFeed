@@ -28,7 +28,7 @@ public class DoctorPreferenceAdviceService {
 
     public void create(DoctorPreferenceAdviceData data) throws BottomUpException {
         if(data.getAdviceID() == null){
-            data.setAdviceID(contentAdviceService.getInsert(data.getAdvice()));
+            //data.setAdviceID(contentAdviceService.getInsert(data.getAdvice()));
         }
         doctorPreferenceAdviceMapper.create(data);
     }
@@ -37,7 +37,7 @@ public class DoctorPreferenceAdviceService {
         doctorPreferenceAdviceMapper.update(data);
     }
 
-    public DoctorPreferenceAdviceData  getByID(Long ID)throws BottomUpException {
+    public DoctorPreferenceAdviceData  getByID(String ID)throws BottomUpException {
         return this.doctorPreferenceAdviceMapper.getByID(ID);
     }
 

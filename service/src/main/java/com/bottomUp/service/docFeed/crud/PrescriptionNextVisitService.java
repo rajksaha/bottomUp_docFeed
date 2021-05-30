@@ -31,7 +31,7 @@ public class PrescriptionNextVisitService {
         prescriptionNextVisitMapper.update(data);
     }
 
-    public PrescriptionNextVisitData getByID(Long ID)throws BottomUpException {
+    public PrescriptionNextVisitData getByID(String ID)throws BottomUpException {
         return this.prescriptionNextVisitMapper.getByID(ID);
     }
 

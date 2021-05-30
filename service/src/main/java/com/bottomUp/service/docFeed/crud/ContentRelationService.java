@@ -31,7 +31,7 @@ public class ContentRelationService {
         contentRelationMapper.update(data);
     }
 
-    public ContentRelationData getByID(Long ID)throws BottomUpException {
+    public ContentRelationData getByID(String ID)throws BottomUpException {
         return this.contentRelationMapper.getByID(ID);
     }
 

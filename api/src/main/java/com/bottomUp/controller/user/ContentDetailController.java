@@ -70,7 +70,7 @@ public class ContentDetailController extends BaseController{
     }
 
     @RequestMapping(value = "/delete/{contentDetailID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("contentDetailID") Long contentDetailID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("contentDetailID") String contentDetailID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("contentDetailID",contentDetailID);
         this.contentDetailService.delete(param);

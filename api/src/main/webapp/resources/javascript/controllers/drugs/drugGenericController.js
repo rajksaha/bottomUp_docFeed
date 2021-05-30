@@ -193,7 +193,7 @@ app.controller('DrugGenericController.CompanyDrugAssignmentController', function
 
     $scope.removeGeneric = function (drugID, index) {
         DrugSetupService.updateGenericInfo.query({}, {drugID: drugID,
-            genericID: 0}).$promise.then(function (result) {
+            genericID: "0"}).$promise.then(function (result) {
             $scope.compDrugList.splice(index, 1);
         });
     };

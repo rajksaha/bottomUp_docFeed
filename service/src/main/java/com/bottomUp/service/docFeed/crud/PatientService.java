@@ -34,14 +34,14 @@ public class PatientService {
         patientMapper.update(data);
     }
 
-    public void updatePatientType(Long patientID, Integer patientTypeID) throws BottomUpException {
+    public void updatePatientType(String patientID, Integer patientTypeID) throws BottomUpException {
         PatientData patientData = new PatientData();
         patientData.setPatientID(patientID);
         patientData.setPatientType(patientTypeID);
         patientMapper.updatePatientType(patientData);
     }
 
-    public void updatePatientImage(Long patientID, String contentUrl) throws BottomUpException {
+    public void updatePatientImage(String patientID, String contentUrl) throws BottomUpException {
         PatientData patientData = new PatientData();
         patientData.setPatientID(patientID);
         patientData.setImageURL(contentUrl);
@@ -49,7 +49,7 @@ public class PatientService {
     }
 
 
-    public PatientViewData getByID(Long ID)throws BottomUpException {
+    public PatientViewData getByID(String ID)throws BottomUpException {
         return this.patientMapper.getByID(ID);
     }
 

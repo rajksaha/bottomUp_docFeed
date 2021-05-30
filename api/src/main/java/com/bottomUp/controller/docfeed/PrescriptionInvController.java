@@ -35,11 +35,8 @@ public class PrescriptionInvController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{  presInvID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public  PrescriptionInvData getByID(@PathVariable("  presInvID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.prescriptionInvService.getByID(Long.valueOf(companyID));
+    public  PrescriptionInvData getByID(@PathVariable("presInvID") String presInvID, HttpServletRequest request) throws BottomUpException {
+        return this.prescriptionInvService.getByID(presInvID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,7 +58,7 @@ public class PrescriptionInvController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{presInvID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("presInvID") Integer presInvID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("presInvID") String presInvID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("presInvID", presInvID);
         this.prescriptionInvService.delete(param);

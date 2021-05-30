@@ -52,21 +52,21 @@ public class OldPrescriptionService {
     @Autowired
     private PrescriptionFamilyDiseaseMapper prescriptionFamilyDiseaseMapper;
 
-    public void copyByItem(String itemCode, Long itemID, Long newAppointmentID) throws BottomUpException{
+    public void copyByItem(String itemCode, String itemID, String newAppointmentID) throws BottomUpException{
         this.copy(itemCode, newAppointmentID, false, itemID);
     }
 
-    public void copyItemsByAppointmentID(String itemCode, Long oldAppointmentID, Long newAppointmentID) throws BottomUpException{
+    public void copyItemsByAppointmentID(String itemCode, String oldAppointmentID, String newAppointmentID) throws BottomUpException{
         this.copy(itemCode, newAppointmentID, true, oldAppointmentID);
     }
 
-    public void copyPrescription (Long oldAppointmentID, Long newAppointmentID) throws BottomUpException{
+    public void copyPrescription (String oldAppointmentID, String newAppointmentID) throws BottomUpException{
         for (PresContentDetailType itemCode : PresContentDetailType.values()) {
             this.copyItemsByAppointmentID(itemCode.getShortName(), newAppointmentID, oldAppointmentID);
         }
     }
 
-    private void copy(String itemCode, Long newAppointmentID, Boolean copyByAppointment, Long requestedID)throws
+    private void copy(String itemCode, String newAppointmentID, Boolean copyByAppointment, String requestedID)throws
             BottomUpException{
 
         Map<String, Object> params = new HashMap<String, Object>();

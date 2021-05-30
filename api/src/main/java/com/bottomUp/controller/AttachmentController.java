@@ -46,7 +46,7 @@ public class AttachmentController {
     public void uploadImage(@RequestParam("file") MultipartFile multipart,
                             @RequestParam("extension") String extension,
                             @RequestParam("entityType") String entityType,
-                            @RequestParam("entityID") Integer entityID,
+                            @RequestParam("entityID") String entityID,
                             @RequestParam("description") String description,
                             HttpServletRequest request,
                             HttpServletResponse response) throws IOException {
@@ -137,7 +137,7 @@ public class AttachmentController {
     @ResponseBody
     public AttachmentData savePatientImage(@RequestBody AttachmentData attachment) throws BottomUpException {
         this.saveToStorage(attachment);
-        this.patientService.updatePatientImage(Long.valueOf(attachment.getEntityID()), attachment.getContentUrl());
+        this.patientService.updatePatientImage(attachment.getEntityID(), attachment.getContentUrl());
         return attachment;
     }
 
@@ -167,7 +167,7 @@ public class AttachmentController {
     @ResponseBody
     public Boolean update(@RequestBody AttachmentData attachment) throws BottomUpException {
         try{
-            if (attachment.getAttachmentID() != null && attachment.getAttachmentID() > 0) {
+            if (attachment.getAttachmentID() != null && attachment.getAttachmentID().length() > 0) {
                 AmazonS3BucketService amazonS3BucketService = new AmazonS3BucketService();
                 amazonS3BucketService.deleteFileFromBucket(attachment.getShortName());
                 this.attachmentService.delete(attachment.getAttachmentID());
@@ -180,7 +180,7 @@ public class AttachmentController {
 
     @RequestMapping(value = "/verify/{attachmentID}", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> verify(@PathVariable("attachmentID") Long attachmentID) throws BottomUpException, IOException {
+    public Map<String,Object> verify(@PathVariable("attachmentID") String attachmentID) throws BottomUpException, IOException {
         Map<String,Object> result = new HashMap<String, Object>();
         result.put("fileExist",false);
 
@@ -196,7 +196,7 @@ public class AttachmentController {
 
     @RequestMapping(value = "/download/{attachmentId}", method = RequestMethod.GET)
     @ResponseBody
-    public void getFile(@PathVariable("attachmentId") Long attachmentId, HttpServletRequest request, HttpServletResponse response) throws BottomUpException, IOException {
+    public void getFile(@PathVariable("attachmentId") String attachmentId, HttpServletRequest request, HttpServletResponse response) throws BottomUpException, IOException {
         AttachmentData attachment = this.attachmentService.getByID(attachmentId);
         String contentPath = BottomUpFileUtils.getContentRootForImages();
         String filePath = contentPath + attachment.getContentUrl();

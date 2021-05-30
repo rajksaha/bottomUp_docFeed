@@ -5,23 +5,23 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentInvData extends BaseData {
 
-  private long invID;
-  private long categoryID;
+  private String invID;
+  private String categoryID;
   private String name;
 
-  public long getInvID() {
+  public String getInvID() {
     return invID;
   }
 
-  public void setInvID(long invID) {
+  public void setInvID(String invID) {
     this.invID = invID;
   }
 
-  public long getCategoryID() {
+  public String getCategoryID() {
     return categoryID;
   }
 
-  public void setCategoryID(long categoryID) {
+  public void setCategoryID(String categoryID) {
     this.categoryID = categoryID;
   }
 

@@ -5,10 +5,10 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionFamilyDiseaseData extends BaseData {
 
-  private Long presFamilyDiseaseID;
-  private Long appointmentID;
-  private Long familyDiseaseID;
-  private Long diseaseID;
+  private String presFamilyDiseaseID;
+  private String appointmentID;
+  private String familyDiseaseID;
+  private String diseaseID;
   private String diseaseName;
   private Integer relation;
   private String relationName;
@@ -16,35 +16,35 @@ public class PrescriptionFamilyDiseaseData extends BaseData {
   private String type;
   private String detail;
 
-  public Long getPresFamilyDiseaseID() {
+  public String getPresFamilyDiseaseID() {
     return presFamilyDiseaseID;
   }
 
-  public void setPresFamilyDiseaseID(Long presFamilyDiseaseID) {
+  public void setPresFamilyDiseaseID(String presFamilyDiseaseID) {
     this.presFamilyDiseaseID = presFamilyDiseaseID;
   }
 
-  public Long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(Long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public Long getFamilyDiseaseID() {
+  public String getFamilyDiseaseID() {
     return familyDiseaseID;
   }
 
-  public void setFamilyDiseaseID(Long familyDiseaseID) {
+  public void setFamilyDiseaseID(String familyDiseaseID) {
     this.familyDiseaseID = familyDiseaseID;
   }
 
-  public Long getDiseaseID() {
+  public String getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(Long diseaseID) {
+  public void setDiseaseID(String diseaseID) {
     this.diseaseID = diseaseID;
   }
 
@@ -62,6 +62,14 @@ public class PrescriptionFamilyDiseaseData extends BaseData {
 
   public void setRelation(Integer relation) {
     this.relation = relation;
+  }
+
+  public String getRelationName() {
+    return relationName;
+  }
+
+  public void setRelationName(String relationName) {
+    this.relationName = relationName;
   }
 
   public String getPresent() {
@@ -86,13 +94,5 @@ public class PrescriptionFamilyDiseaseData extends BaseData {
 
   public void setDetail(String detail) {
     this.detail = detail;
-  }
-
-  public String getRelationName() {
-    return relationName;
-  }
-
-  public void setRelationName(String relationName) {
-    this.relationName = relationName;
   }
 }

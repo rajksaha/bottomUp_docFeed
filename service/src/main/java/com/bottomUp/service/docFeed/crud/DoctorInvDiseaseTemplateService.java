@@ -31,7 +31,7 @@ public class DoctorInvDiseaseTemplateService {
         doctorInvDiseaseTemplateMapper.update(data);
     }
 
-    public DoctorInvDiseaseTemplateData getByID(Long ID)throws BottomUpException {
+    public DoctorInvDiseaseTemplateData getByID(String ID)throws BottomUpException {
         return this.doctorInvDiseaseTemplateMapper.getByID(ID);
     }
 

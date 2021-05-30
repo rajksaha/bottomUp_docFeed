@@ -6,16 +6,16 @@ package com.bottomUp.domain.common;
  */
 public class CompanyData extends BaseData {
 
-    private Long companyID;
+    private String companyID;
     private String companyCode;
     private String companyName;
 
 
-    public Long getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Long companyID) {
+    public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
 

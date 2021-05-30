@@ -31,7 +31,7 @@ public class PrescriptionFamilyDiseaseService {
         prescriptionFamilyDiseaseMapper.update(data);
     }
 
-    public PrescriptionFamilyDiseaseData getByID(Long ID)throws BottomUpException {
+    public PrescriptionFamilyDiseaseData getByID(String ID)throws BottomUpException {
         return this.prescriptionFamilyDiseaseMapper.getByID(ID);
     }
 

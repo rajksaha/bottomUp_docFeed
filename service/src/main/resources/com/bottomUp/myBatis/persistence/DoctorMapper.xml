@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.DoctorMapper">
 
-	<insert id="create" parameterType="Doctor" useGeneratedKeys="true" keyProperty="doctorID" >
+	<insert id="create" parameterType="Doctor">
+
+		<selectKey keyProperty="doctorID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `doctor_feed`.`doctor`(
+			`doctorID`,
 			`userID`,
 			`doctorCode`,
 			categoryID,
@@ -16,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{doctorID},
 			#{userID},
 			#{doctorCode},
 			#{categoryID},
@@ -39,7 +45,7 @@
 		WHERE doctorID = #{doctorID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="Doctor">
+	<select id="getByID" parameterType="string" resultType="Doctor">
 		SELECT
 			`doctorID`,
 			`userID`,

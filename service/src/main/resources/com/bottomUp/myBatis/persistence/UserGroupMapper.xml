@@ -6,10 +6,13 @@
 
 
 
-	<insert id="create" parameterType="UserGroup"  useGeneratedKeys="true" keyProperty="userGroupID">
-
+	<insert id="create" parameterType="UserGroup">
+		<selectKey keyProperty="userGroupID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `bottom_up_user_group`
 		(
+			`userGroupID`,
 			`shortName`,
 			`longDesc`,
 			`companyID`,
@@ -22,6 +25,7 @@
 		)
 		VALUES
 		(
+			#{userGroupID},
 			#{shortName},
 			#{longDesc},
 			#{companyID},
@@ -50,7 +54,7 @@
 		WHERE `userGroupID` = #{userGroupID};
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="UserGroup">
+	<select id="getByID" parameterType="string" resultType="UserGroup">
 
 		SELECT
 			eug.`userGroupID`,
@@ -212,6 +216,14 @@
 			LIMIT #{limit} OFFSET #{offset}
 		</if>
 	</select>
+
+	<delete id="delete" parameterType="map">
+		DELETE  FROM bottom_up_user_group
+		WHERE 1=1
+		<if test="userGroupID != null">
+			AND userGroupID = #{userGroupID}
+		</if>
+	</delete>
 
 
 </mapper>

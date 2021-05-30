@@ -24,7 +24,7 @@ public class ContentVitalService {
     @Autowired
     private ContentVitalMapper contentVitalMapper;
 
-    public Long getInsert(DoctorVitalSettingData settingData) throws BottomUpException{
+    public String getInsert(DoctorVitalSettingData settingData) throws BottomUpException{
         ContentVitalData contentVitalData = contentVitalMapper.getByName(settingData.getVitalName());
         if(contentVitalData == null){
             contentVitalData = new ContentVitalData();
@@ -44,7 +44,7 @@ public class ContentVitalService {
         contentVitalMapper.update(data);
     }
 
-    public ContentVitalData  getByID(Long ID)throws BottomUpException {
+    public ContentVitalData  getByID(String ID)throws BottomUpException {
         return this.contentVitalMapper.getByID(ID);
     }
 

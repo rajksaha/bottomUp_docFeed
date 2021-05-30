@@ -46,7 +46,7 @@ public class PrescriptionDrugService {
     @Autowired
     private DrugDefaultSetupMapper drugDefaultSetupMapper;
 
-    public void save(PrescriptionDrugData drugData, Long doctorID) throws BottomUpException {
+    public void save(PrescriptionDrugData drugData, String doctorID) throws BottomUpException {
         //TODO:Drug Name
         if(drugData.getPeriodList() != null){
             drugData.setDoseString(JsonConverter.convertListToJson(drugData.getPeriodList(), false));
@@ -86,7 +86,7 @@ public class PrescriptionDrugService {
         prescriptionDrugMapper.update(data);
     }
 
-    public PrescriptionDrugData getByID(Long ID)throws BottomUpException {
+    public PrescriptionDrugData getByID(String ID)throws BottomUpException {
         PrescriptionDrugData drugData = this.prescriptionDrugMapper.getByID(ID);
         if(drugData != null && drugData.getDoseString() != null){
             drugData.setPeriodList(JsonConverter.convertJsonToList(drugData.getDoseString(),DoseData.class));

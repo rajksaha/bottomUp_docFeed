@@ -17,7 +17,7 @@ public interface FollowUpResultMapper {
 
     public void update(FollowUpResultData data) throws BottomUpException;
 
-    public FollowUpResultData getByID(Long ID) throws BottomUpException;
+    public FollowUpResultData getByID(String ID) throws BottomUpException;
 
     public List<FollowUpResultData> getByParam(Map<String, Object> param) throws BottomUpException;
 

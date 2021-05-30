@@ -6,10 +6,13 @@
 
 
 
-	<insert id="create" parameterType="UserProfile"  useGeneratedKeys="true" keyProperty="userProfileID">
-
+	<insert id="create" parameterType="UserProfile">
+		<selectKey keyProperty="userProfileID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `bottom_up_user_profile`
 		(
+			`userProfileID`,
 			`userID`,
 			`firstName`,
 			`lastName`,
@@ -26,6 +29,7 @@
 		)
 		VALUES
 		(
+			#{userProfileID},
 			#{userID},
 			#{firstName},
 			#{lastName},
@@ -62,7 +66,7 @@
 
 	</update>
 
-	<select id="getUserProfileByID" parameterType="long" resultType="UserProfile">
+	<select id="getUserProfileByID" parameterType="string" resultType="UserProfile">
 
 		SELECT
 			`eup`.`userProfileID`,

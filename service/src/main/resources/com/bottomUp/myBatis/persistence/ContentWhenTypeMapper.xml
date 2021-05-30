@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentWhenTypeMapper">
 
-	<insert id="create" parameterType="contentWhenType" useGeneratedKeys="true" keyProperty="whenTypeID" >
+	<insert id="create" parameterType="contentWhenType">
+
+		<selectKey keyProperty="whenTypeID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_when_type`(
+			`whenTypeID`,
 			`bangla`,
 			`english`,
 			`pdf`,
@@ -16,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{whenTypeID},
 			#{bangla},
 			#{english},
 			#{pdf},
@@ -39,7 +45,7 @@
 		WHERE whenTypeID = #{whenTypeID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentWhenType">
+	<select id="getByID" parameterType="string" resultType="contentWhenType">
 		SELECT
 			`whenTypeID`,
 			`bangla`,

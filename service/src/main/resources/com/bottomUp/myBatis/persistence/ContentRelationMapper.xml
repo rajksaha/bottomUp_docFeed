@@ -6,7 +6,12 @@
 
 	<insert id="create" parameterType="contentRelation" useGeneratedKeys="true" keyProperty="relationID" >
 
+		<selectKey keyProperty="relationID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
+
 		INSERT INTO `content_relation`(
+			`relationID`,
 			`relationName`,
 			`updatedBy`,
 			`updatedOn`,
@@ -14,6 +19,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{relationID},
 			#{relationName},
 			#{updatedBy},
 			#{updatedOn},
@@ -33,7 +39,7 @@
 		WHERE relationID = #{relationID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentRelation">
+	<select id="getByID" parameterType="string" resultType="contentRelation">
 		SELECT
 			`relationID`,
 			`relationName`,

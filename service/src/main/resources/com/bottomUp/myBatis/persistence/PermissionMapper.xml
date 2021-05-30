@@ -4,12 +4,15 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.PermissionMapper">
 
+	<insert id="create" parameterType="Permission">
 
-
-	<insert id="create" parameterType="Permission"  useGeneratedKeys="true" keyProperty="permissionID">
+		<selectKey keyProperty="permissionID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `bottom_up_permission`
 		(
+			`permissionID`,
 			`companyModuleID`,
 			`functionCode`,
 			`shortName`,
@@ -21,6 +24,7 @@
 		)
 		VALUES
 		(
+			#{permissionID},
 			#{companyModuleID},
 			#{functionCode},
 			#{shortName},
@@ -46,7 +50,7 @@
 		WHERE `permissionID` = #{permissionID};
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="Permission">
+	<select id="getByID" parameterType="string" resultType="Permission">
 
 		SELECT
 			`p.permissionID`,

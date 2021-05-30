@@ -33,7 +33,7 @@ public class PrescriptionReferenceController extends BaseController {
 
     @RequestMapping(value = {"/getByAppointmentID/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<  PrescriptionReferenceData> getByAppointmentID(@PathVariable("appointmentID") Long appointmentID,
+    public List<  PrescriptionReferenceData> getByAppointmentID(@PathVariable("appointmentID") String appointmentID,
                                                                 HttpServletRequest request) throws BottomUpException {
         Map<String, Object> params = new HashMap<>();
         params.put("appointmentID", appointmentID);
@@ -42,8 +42,8 @@ public class PrescriptionReferenceController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{prescriptionReferenceID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public   PrescriptionReferenceData getByID(@PathVariable("prescriptionReferenceID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-        return this.prescriptionReferenceService.getByID(Long.valueOf(companyID));
+    public   PrescriptionReferenceData getByID(@PathVariable("prescriptionReferenceID") String prescriptionReferenceID, HttpServletRequest request) throws BottomUpException {
+        return this.prescriptionReferenceService.getByID(prescriptionReferenceID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -74,7 +74,7 @@ public class PrescriptionReferenceController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{prescriptionReferenceID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("prescriptionReferenceID") Integer prescriptionReferenceID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("prescriptionReferenceID") String prescriptionReferenceID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("prescriptionReferenceID", prescriptionReferenceID);
         this.prescriptionReferenceService.delete(param);

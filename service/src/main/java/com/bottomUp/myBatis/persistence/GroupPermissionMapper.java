@@ -16,9 +16,9 @@ public interface GroupPermissionMapper {
 
     public void update(GroupPermissionData data) throws BottomUpException;
 
-    public GroupPermissionData getByID(Integer ID) throws BottomUpException;
+    public GroupPermissionData getByID(String ID) throws BottomUpException;
 
-    public void deletePermissionByGroup(Long groupID) throws BottomUpException;
+    public void deletePermissionByGroup(String groupID) throws BottomUpException;
 
     public List<GroupPermissionData> getByParam(Map<String, Object> param) throws BottomUpException;
 }

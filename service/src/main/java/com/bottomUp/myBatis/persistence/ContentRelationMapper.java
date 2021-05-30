@@ -17,7 +17,7 @@ public interface ContentRelationMapper {
 
     public void update(ContentRelationData data) throws BottomUpException;
 
-    public ContentRelationData getByID(Long ID) throws BottomUpException;
+    public ContentRelationData getByID(String ID) throws BottomUpException;
 
     public List<ContentRelationData> getByParam(Map<String, Object> param) throws BottomUpException;
 

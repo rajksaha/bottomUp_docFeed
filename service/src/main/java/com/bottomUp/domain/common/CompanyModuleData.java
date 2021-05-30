@@ -5,36 +5,44 @@ package com.bottomUp.domain.common;
  */
 public class CompanyModuleData extends BaseData {
 
-    private Long companyModuleID;
-    private Long companyID;
-    private Integer moduleID;
+    private String companyModuleID;
+    private String companyID;
+    private String moduleID;
     private String shortName;
 
     private String companyName;
     private String moduleName;
 
-    public Long getCompanyModuleID() {
+    public String getCompanyModuleID() {
         return companyModuleID;
     }
 
-    public void setCompanyModuleID(Long companyModuleID) {
+    public void setCompanyModuleID(String companyModuleID) {
         this.companyModuleID = companyModuleID;
     }
 
-    public Long getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Long companyID) {
+    public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
 
-    public Integer getModuleID() {
+    public String getModuleID() {
         return moduleID;
     }
 
-    public void setModuleID(Integer moduleID) {
+    public void setModuleID(String moduleID) {
         this.moduleID = moduleID;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
     public String getCompanyName() {
@@ -51,13 +59,5 @@ public class CompanyModuleData extends BaseData {
 
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
     }
 }

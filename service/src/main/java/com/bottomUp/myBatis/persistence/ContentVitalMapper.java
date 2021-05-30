@@ -17,7 +17,7 @@ public interface ContentVitalMapper {
 
     public void update(ContentVitalData data) throws BottomUpException;
 
-    public ContentVitalData getByID(Long ID) throws BottomUpException;
+    public ContentVitalData getByID(String ID) throws BottomUpException;
 
     public ContentVitalData getByName(String name)throws BottomUpException;
 

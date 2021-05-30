@@ -9,7 +9,7 @@ public class DumpNextVisit {
 
     private Integer appointmentID;
     private Integer nextVisitType;
-    private Date    date;
+    private Date date;
     private Integer numOfDay;
     private Integer dayType;
 

@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class UserGroupData extends BaseData {
 
-    private Long userGroupID;
+    private String userGroupID;
     private String shortName;
     private String longDesc;
-    private Long companyModuleID;
-    private Long companyID;
+    private String companyModuleID;
+    private String companyID;
     private String companyModuleName;
     private String companyName;
     private String moduleName;
@@ -24,11 +24,11 @@ public class UserGroupData extends BaseData {
 
     private List<PermissionData> groupPermissionList;
 
-    public Long getUserGroupID() {
+    public String getUserGroupID() {
         return userGroupID;
     }
 
-    public void setUserGroupID(Long userGroupID) {
+    public void setUserGroupID(String userGroupID) {
         this.userGroupID = userGroupID;
     }
 
@@ -48,12 +48,20 @@ public class UserGroupData extends BaseData {
         this.longDesc = longDesc;
     }
 
-    public Long getCompanyModuleID() {
+    public String getCompanyModuleID() {
         return companyModuleID;
     }
 
-    public void setCompanyModuleID(Long companyModuleID) {
+    public void setCompanyModuleID(String companyModuleID) {
         this.companyModuleID = companyModuleID;
+    }
+
+    public String getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(String companyID) {
+        this.companyID = companyID;
     }
 
     public String getCompanyModuleName() {
@@ -80,28 +88,12 @@ public class UserGroupData extends BaseData {
         this.moduleName = moduleName;
     }
 
-    public Boolean getIsAssigned() {
+    public Boolean getAssigned() {
         return isAssigned;
     }
 
-    public void setIsAssigned(Boolean isAssigned) {
-        this.isAssigned = isAssigned;
-    }
-
-    public List<PermissionData> getGroupPermissionList() {
-        return groupPermissionList;
-    }
-
-    public void setGroupPermissionList(List<PermissionData> groupPermissionList) {
-        this.groupPermissionList = groupPermissionList;
-    }
-
-    public Long getCompanyID() {
-        return companyID;
-    }
-
-    public void setCompanyID(Long companyID) {
-        this.companyID = companyID;
+    public void setAssigned(Boolean assigned) {
+        isAssigned = assigned;
     }
 
     public Integer getIsUserDefined() {
@@ -110,5 +102,13 @@ public class UserGroupData extends BaseData {
 
     public void setIsUserDefined(Integer isUserDefined) {
         this.isUserDefined = isUserDefined;
+    }
+
+    public List<PermissionData> getGroupPermissionList() {
+        return groupPermissionList;
+    }
+
+    public void setGroupPermissionList(List<PermissionData> groupPermissionList) {
+        this.groupPermissionList = groupPermissionList;
     }
 }

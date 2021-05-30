@@ -17,7 +17,7 @@ public interface DoctorAdviceDiseaseTemplateMapper {
 
     public void update(DoctorAdviceDiseaseTemplateData data) throws BottomUpException;
 
-    public DoctorAdviceDiseaseTemplateData  getByID(Long ID) throws BottomUpException;
+    public DoctorAdviceDiseaseTemplateData  getByID(String ID) throws BottomUpException;
 
     public List<DoctorAdviceDiseaseTemplateData> getByParam(Map<String, Object> param) throws BottomUpException;
 

@@ -36,7 +36,7 @@ public class PatientFamilyHistoryService {
         patientFamilyHistoryMapper.update(data);
     }
 
-    public PatientFamilyHistoryData getByID(Long ID)throws BottomUpException {
+    public PatientFamilyHistoryData getByID(String ID)throws BottomUpException {
         return this.patientFamilyHistoryMapper.getByID(ID);
     }
 

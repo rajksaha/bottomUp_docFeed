@@ -34,7 +34,7 @@ public class AppointmentViewService {
     private PatientViewService patientViewService;
 
 
-    public void createForNewPatient(AppointmentViewData viewData, Long companyID) throws BottomUpException{
+    public void createForNewPatient(AppointmentViewData viewData, String companyID) throws BottomUpException{
 
         PatientData patientData = patientViewService.create(viewData.getPatient(), companyID);
         AppointmentData appointmentData = new AppointmentData();

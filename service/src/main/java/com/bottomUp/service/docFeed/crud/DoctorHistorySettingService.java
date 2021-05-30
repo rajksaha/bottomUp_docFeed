@@ -35,7 +35,7 @@ public class DoctorHistorySettingService {
         doctorHistorySettingMapper.update(data);
     }
 
-    public DoctorHistorySettingData getByID(Long ID)throws BottomUpException {
+    public DoctorHistorySettingData getByID(String ID)throws BottomUpException {
         return this.doctorHistorySettingMapper.getByID(ID);
     }
 

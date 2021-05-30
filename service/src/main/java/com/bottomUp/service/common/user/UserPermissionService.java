@@ -17,7 +17,7 @@ public class UserPermissionService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<GroupPermissionData> getUserPermissionByUserID (Long userID) throws BottomUpException {
+    public List<GroupPermissionData> getUserPermissionByUserID (String userID) throws BottomUpException {
         return userMapper.getUserPermissionByUserID(userID);
     }
 }

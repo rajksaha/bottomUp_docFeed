@@ -5,14 +5,14 @@ import com.bottomUp.domain.common.BaseData;
 
 public class InvCategoryData extends BaseData {
 
-  private long invCategoryID;
+  private String invCategoryID;
   private String name;
 
-  public long getInvCategoryID() {
+  public String getInvCategoryID() {
     return invCategoryID;
   }
 
-  public void setInvCategoryID(long invCategoryID) {
+  public void setInvCategoryID(String invCategoryID) {
     this.invCategoryID = invCategoryID;
   }
 

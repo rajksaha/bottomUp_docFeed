@@ -4,9 +4,13 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.FollowUpResultMapper">
 
-	<insert id="create" parameterType="followUpResult" useGeneratedKeys="true" keyProperty="resultID" >
+	<insert id="create" parameterType="followUpResult">
 
+		<selectKey keyProperty="resultID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `follow_up_result`(
+			`resultID`,
 			`appointmentID`,
 			`jsonData`,
 			`entryDate`,
@@ -17,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{resultID},
 			#{appointmentID},
 			#{jsonData},
 			#{entryDate},
@@ -43,7 +48,7 @@
 	</update>
 
 
-	<select id="getByID" parameterType="long" resultType="followUpResult">
+	<select id="getByID" parameterType="string" resultType="followUpResult">
 		SELECT
 			`resultID`,
 			`appointmentID`,

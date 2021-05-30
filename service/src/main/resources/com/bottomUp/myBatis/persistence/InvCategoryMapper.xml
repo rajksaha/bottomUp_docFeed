@@ -4,9 +4,13 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.InvCategoryMapper">
 
-	<insert id="create" parameterType="invCategory" useGeneratedKeys="true" keyProperty="invCategoryID" >
+	<insert id="create" parameterType="invCategory">
 
+		<selectKey keyProperty="invCategoryID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `inv_category`(
+			`invCategoryID`,
 			`name`,
 			`updatedBy`,
 			`updatedOn`,
@@ -14,6 +18,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{invCategoryID},
 			#{name},
 			#{updatedBy},
 			#{updatedOn},
@@ -33,7 +38,7 @@
 		WHERE invCategoryID = #{invCategoryID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="invCategory">
+	<select id="getByID" parameterType="string" resultType="invCategory">
 		SELECT
 			`invCategoryID`,
 			`name`,

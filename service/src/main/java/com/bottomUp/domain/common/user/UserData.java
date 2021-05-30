@@ -10,12 +10,12 @@ import java.sql.Timestamp;
  */
 public class UserData extends BaseData {
 
-    private Long userID;
+    private String userID;
     private String userName;
     private String password;
     private Integer status;
     private Boolean isBlocked;
-    private Long companyID;
+    private String companyID;
     private String secretKey;
     private Timestamp secretKeyCreatedOn;
 
@@ -23,27 +23,11 @@ public class UserData extends BaseData {
     private String appVersion;
     private Boolean isCompanyAdmin;
 
-    public Boolean getCompanyAdmin() {
-        return isCompanyAdmin;
-    }
-
-    public void setCompanyAdmin(Boolean companyAdmin) {
-        isCompanyAdmin = companyAdmin;
-    }
-
-    public String getAppVersion() {
-        return appVersion;
-    }
-
-    public void setAppVersion(String appVersion) {
-        this.appVersion = appVersion;
-    }
-
-    public Long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -71,19 +55,19 @@ public class UserData extends BaseData {
         this.status = status;
     }
 
-    public Boolean getIsBlocked() {
+    public Boolean getBlocked() {
         return isBlocked;
     }
 
-    public void setIsBlocked(Boolean isBlocked) {
-        this.isBlocked = isBlocked;
+    public void setBlocked(Boolean blocked) {
+        isBlocked = blocked;
     }
 
-    public Long getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Long companyID) {
+    public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
 
@@ -111,4 +95,19 @@ public class UserData extends BaseData {
         this.userProfileData = userProfileData;
     }
 
+    public String getAppVersion() {
+        return appVersion;
+    }
+
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
+    }
+
+    public Boolean getCompanyAdmin() {
+        return isCompanyAdmin;
+    }
+
+    public void setCompanyAdmin(Boolean companyAdmin) {
+        isCompanyAdmin = companyAdmin;
+    }
 }

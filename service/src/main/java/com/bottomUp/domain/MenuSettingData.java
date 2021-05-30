@@ -5,8 +5,8 @@ import com.bottomUp.domain.common.BaseData;
 
 public class MenuSettingData extends BaseData {
 
-  private Long menuSettingID;
-  private Long doctorID;
+  private String menuSettingID;
+  private String doctorID;
   private Integer menuID;
   private String menuHeader;
   private Integer displayOrder;
@@ -18,19 +18,19 @@ public class MenuSettingData extends BaseData {
   private Integer inPrescription;
   private Integer categoryID;
 
-  public Long getMenuSettingID() {
+  public String getMenuSettingID() {
     return menuSettingID;
   }
 
-  public void setMenuSettingID(Long menuSettingID) {
+  public void setMenuSettingID(String menuSettingID) {
     this.menuSettingID = menuSettingID;
   }
 
-  public Long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(Long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 

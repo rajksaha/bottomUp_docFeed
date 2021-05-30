@@ -12,16 +12,16 @@ import java.util.List;
  */
 public class DoctorViewData extends BaseData{
 
-    private long userID;
-    private long doctorID;
+    private String userID;
+    private String doctorID;
     private String doctorCode;
-    private long hospitalID;
+    private String hospitalID;
 
-    private long userProfileID;
+    private String userProfileID;
     private String userName;
     private String firstName;
     private String lastName;
-    private Long companyID;
+    private String companyID;
     private String sex;
     private String contactNo;
     private String emailAddress;
@@ -31,19 +31,19 @@ public class DoctorViewData extends BaseData{
     private List<PatientTypeData> patientTypeList;
 
 
-    public long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public long getDoctorID() {
+    public String getDoctorID() {
         return doctorID;
     }
 
-    public void setDoctorID(long doctorID) {
+    public void setDoctorID(String doctorID) {
         this.doctorID = doctorID;
     }
 
@@ -55,19 +55,19 @@ public class DoctorViewData extends BaseData{
         this.doctorCode = doctorCode;
     }
 
-    public long getHospitalID() {
+    public String getHospitalID() {
         return hospitalID;
     }
 
-    public void setHospitalID(long hospitalID) {
+    public void setHospitalID(String hospitalID) {
         this.hospitalID = hospitalID;
     }
 
-    public long getUserProfileID() {
+    public String getUserProfileID() {
         return userProfileID;
     }
 
-    public void setUserProfileID(long userProfileID) {
+    public void setUserProfileID(String userProfileID) {
         this.userProfileID = userProfileID;
     }
 
@@ -95,11 +95,11 @@ public class DoctorViewData extends BaseData{
         this.lastName = lastName;
     }
 
-    public Long getCompanyID() {
+    public String getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Long companyID) {
+    public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
 

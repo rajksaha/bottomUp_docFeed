@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentAdviceMapper">
 
-	<insert id="create" parameterType="contentAdvice" useGeneratedKeys="true" keyProperty="adviceID" >
+	<insert id="create" parameterType="contentAdvice">
+
+		<selectKey keyProperty="adviceID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_advice`(
+			`adviceID`,
 			`type`,
 			`lang`,
 			`advice`,
@@ -17,6 +22,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{adviceID},
 			#{type},
 			#{lang},
 			#{advice},
@@ -26,8 +32,6 @@
 			#{createdBy},
 			#{createdOn}
 		);
-
-
 	</insert>
 	
 	<update id="update" parameterType="contentAdvice">
@@ -42,7 +46,7 @@
 		WHERE adviceID = #{adviceID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentAdvice">
+	<select id="getByID" parameterType="string" resultType="contentAdvice">
 		SELECT
 			`adviceID`,
 			`type`,
@@ -53,9 +57,7 @@
 			`updatedOn`,
 			`createdBy`,
 			`createdOn`
-
 		FROM `content_advice`
-
 		WHERE adviceID = #{adviceID}
 	</select>
 
@@ -86,9 +88,7 @@
 		`updatedOn`,
 		`createdBy`,
 		`createdOn`
-
 		FROM `content_advice`
-
 		WHERE 1 = 1
 		<if test="adviceID != null">
 			AND adviceID = #{adviceID}

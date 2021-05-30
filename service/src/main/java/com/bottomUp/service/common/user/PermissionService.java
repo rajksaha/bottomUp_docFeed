@@ -27,7 +27,7 @@ public class PermissionService {
         permissionMapper.update(data);
     }
 
-    public PermissionData getByID(Integer ID)throws BottomUpException {
+    public PermissionData getByID(String ID)throws BottomUpException {
         return this.permissionMapper.getByID(ID);
     }
 

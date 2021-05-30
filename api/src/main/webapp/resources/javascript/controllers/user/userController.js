@@ -15,7 +15,7 @@ app.controller('UserController', function($scope, $rootScope, $state, $filter, $
 
     $scope.init = function(){
 
-        if($scope.dataSourceConfig.companyID == null && $rootScope.userData.userID == 1){
+        if($scope.dataSourceConfig.companyID == null && $rootScope.userData.userID == 'SUPER_ADMIN'){
             $scope.companySelected = false;
             UserCommonService.getAllCompany.query({}, {}).$promise.then(function(result) {
                 $scope.companyList = result;

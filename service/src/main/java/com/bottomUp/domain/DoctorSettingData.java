@@ -5,8 +5,8 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorSettingData extends BaseData {
 
-  private Long doctorSettingID;
-  private Long doctorID;
+  private String doctorSettingID;
+  private String doctorID;
   private Integer hospitalID;
   private Integer state;
   private Integer patientType;
@@ -15,19 +15,19 @@ public class DoctorSettingData extends BaseData {
   private Integer photoSupport;
   private String pdfPage;
 
-  public Long getDoctorSettingID() {
+  public String getDoctorSettingID() {
     return doctorSettingID;
   }
 
-  public void setDoctorSettingID(Long doctorSettingID) {
+  public void setDoctorSettingID(String doctorSettingID) {
     this.doctorSettingID = doctorSettingID;
   }
 
-  public Long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(Long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 

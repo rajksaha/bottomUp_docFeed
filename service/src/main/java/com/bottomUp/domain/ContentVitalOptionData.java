@@ -5,23 +5,23 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentVitalOptionData  extends BaseData {
 
-  private long vitalOptionID;
-  private long vitalID;
+  private String vitalOptionID;
+  private String vitalID;
   private String optionName;
 
-  public long getVitalOptionID() {
+  public String getVitalOptionID() {
     return vitalOptionID;
   }
 
-  public void setVitalOptionID(long vitalOptionID) {
+  public void setVitalOptionID(String vitalOptionID) {
     this.vitalOptionID = vitalOptionID;
   }
 
-  public long getVitalID() {
+  public String getVitalID() {
     return vitalID;
   }
 
-  public void setVitalID(long vitalID) {
+  public void setVitalID(String vitalID) {
     this.vitalID = vitalID;
   }
 

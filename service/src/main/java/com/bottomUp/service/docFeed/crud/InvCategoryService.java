@@ -31,7 +31,7 @@ public class InvCategoryService {
         invCategoryMapper.update(data);
     }
 
-    public InvCategoryData getByID(Long ID)throws BottomUpException {
+    public InvCategoryData getByID(String ID)throws BottomUpException {
         return this.invCategoryMapper.getByID(ID);
     }
 

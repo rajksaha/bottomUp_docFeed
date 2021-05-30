@@ -5,51 +5,43 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorFollowUpSettingData extends BaseData {
 
-  private Long followUpSettingID;
-  private Long doctorID;
-  private Long invID;
-  private Long patientTypeID;
+  private String followUpSettingID;
+  private String doctorID;
+  private String invID;
+  private String patientTypeID;
   private Integer displayOrder;
   private String invName;
 
-  public Long getFollowUpSettingID() {
+  public String getFollowUpSettingID() {
     return followUpSettingID;
   }
 
-  public void setFollowUpSettingID(Long followUpSettingID) {
+  public void setFollowUpSettingID(String followUpSettingID) {
     this.followUpSettingID = followUpSettingID;
   }
 
-  public Long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(Long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public Long getInvID() {
+  public String getInvID() {
     return invID;
   }
 
-  public void setInvID(Long invID) {
+  public void setInvID(String invID) {
     this.invID = invID;
   }
 
-  public Long getPatientTypeID() {
+  public String getPatientTypeID() {
     return patientTypeID;
   }
 
-  public void setPatientTypeID(Long patientTypeID) {
+  public void setPatientTypeID(String patientTypeID) {
     this.patientTypeID = patientTypeID;
-  }
-
-  public String getInvName() {
-    return invName;
-  }
-
-  public void setInvName(String invName) {
-    this.invName = invName;
   }
 
   public Integer getDisplayOrder() {
@@ -58,5 +50,13 @@ public class DoctorFollowUpSettingData extends BaseData {
 
   public void setDisplayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
+  }
+
+  public String getInvName() {
+    return invName;
+  }
+
+  public void setInvName(String invName) {
+    this.invName = invName;
   }
 }

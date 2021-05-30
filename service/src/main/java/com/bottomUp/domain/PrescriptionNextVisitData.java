@@ -8,27 +8,27 @@ import java.util.Date;
 
 public class PrescriptionNextVisitData  extends BaseData {
 
-  private Long presNextVisitID;
-  private Long appointmentID;
+  private String presNextVisitID;
+  private String appointmentID;
   private Integer nextVisitType;
   private Date visitDate;
   private String stringDate;
   private Integer numOfDay;
   private Integer durationType;
 
-  public Long getPresNextVisitID() {
+  public String getPresNextVisitID() {
     return presNextVisitID;
   }
 
-  public void setPresNextVisitID(Long presNextVisitID) {
+  public void setPresNextVisitID(String presNextVisitID) {
     this.presNextVisitID = presNextVisitID;
   }
 
-  public Long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(Long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 

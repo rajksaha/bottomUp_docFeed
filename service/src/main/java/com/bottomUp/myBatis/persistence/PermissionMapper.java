@@ -16,7 +16,7 @@ public interface PermissionMapper {
 
     public void update(PermissionData data) throws BottomUpException;
 
-    public PermissionData getByID(Integer ID) throws BottomUpException;
+    public PermissionData getByID(String ID) throws BottomUpException;
 
     public List<PermissionData> getByParam(Map<String, Object> param) throws BottomUpException;
 

@@ -36,7 +36,7 @@
 		WHERE invReportDateId = #{invReportDateId}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="invReportDate">
+	<select id="getByID" parameterType="string" resultType="invReportDate">
 		SELECT
 			`invReportDateId`,
 			`patientId`,

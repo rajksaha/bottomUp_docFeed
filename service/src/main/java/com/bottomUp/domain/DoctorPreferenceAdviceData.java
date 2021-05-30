@@ -5,37 +5,37 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorPreferenceAdviceData extends BaseData {
 
-  private Long advicePreferenceID;
-  private Long doctorID;
-  private Long adviceID;
+  private String advicePreferenceID;
+  private String doctorID;
+  private String adviceID;
   private Integer displayOrder;
   private Integer type;
   private Integer lang;
   private String advice;
-  private Long presAdviceID;
+  private String presAdviceID;
   private Boolean addedInPrescription;
 
-  public Long getAdvicePreferenceID() {
+  public String getAdvicePreferenceID() {
     return advicePreferenceID;
   }
 
-  public void setAdvicePreferenceID(Long advicePreferenceID) {
+  public void setAdvicePreferenceID(String advicePreferenceID) {
     this.advicePreferenceID = advicePreferenceID;
   }
 
-  public Long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(Long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public Long getAdviceID() {
+  public String getAdviceID() {
     return adviceID;
   }
 
-  public void setAdviceID(Long adviceID) {
+  public void setAdviceID(String adviceID) {
     this.adviceID = adviceID;
   }
 
@@ -71,11 +71,11 @@ public class DoctorPreferenceAdviceData extends BaseData {
     this.advice = advice;
   }
 
-  public Long getPresAdviceID() {
+  public String getPresAdviceID() {
     return presAdviceID;
   }
 
-  public void setPresAdviceID(Long presAdviceID) {
+  public void setPresAdviceID(String presAdviceID) {
     this.presAdviceID = presAdviceID;
   }
 

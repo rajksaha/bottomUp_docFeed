@@ -35,11 +35,8 @@ public class ContentDayTypeController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{dayTypeId}"}, method = RequestMethod.GET)
     @ResponseBody
-    public ContentDurationTypeData getByID(@PathVariable("dayTypeId") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.contentDayTypeService.getByID(Long.valueOf(companyID));
+    public ContentDurationTypeData getByID(@PathVariable("dayTypeId") String dayTypeId, HttpServletRequest request) throws BottomUpException {
+        return this.contentDayTypeService.getByID(dayTypeId);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,7 +58,7 @@ public class ContentDayTypeController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{dayTypeId}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("dayTypeId") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("dayTypeId") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("dayTypeId", appointmentID);
         this.contentDayTypeService.delete(param);

@@ -29,7 +29,7 @@ public class MedicalCertificateService {
         medicalCertificateMapper.update(data);
     }
 
-    public MedicalCertificateData getByAppointmentID(Long appointmentID)throws BottomUpException {
+    public MedicalCertificateData getByAppointmentID(String appointmentID)throws BottomUpException {
         return this.medicalCertificateMapper.getByAppointmentID(appointmentID);
     }
 

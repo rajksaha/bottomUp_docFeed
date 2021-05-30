@@ -42,27 +42,27 @@ public class DrugDefaultSetupController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{genericID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DrugDefaultSetupData getByID(@PathVariable("genericID") Integer genericID, HttpServletRequest request) throws BottomUpException {
-        return this.defaultSetupService.getByID(Long.valueOf(genericID));
+    public DrugDefaultSetupData getByID(@PathVariable("genericID") String genericID, HttpServletRequest request) throws BottomUpException {
+        return this.defaultSetupService.getByID(genericID);
     }
 
     @RequestMapping(value = {"/getDrugDefaultSetup/{drugID}/{genericID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DrugDefaultSetupData getDrugDefaultSetup(@PathVariable("drugID") Long drugID,
-                                                    @PathVariable("genericID") Long genericID,
+    public DrugDefaultSetupData getDrugDefaultSetup(@PathVariable("drugID") String drugID,
+                                                    @PathVariable("genericID") String genericID,
                                                      HttpServletRequest request) throws BottomUpException {
-        Long doctorID = null;
+        String doctorID = null;
         if(this.getUserDetail().getDoctorData() != null){
             doctorID = this.getUserDetail().getDoctorData().getDoctorID();
         }
-        return this.defaultSetupService.getDrugDefaultSetup(doctorID, drugID, genericID == 0 ? null : genericID);
+        return this.defaultSetupService.getDrugDefaultSetup(doctorID, drugID, genericID.equalsIgnoreCase("0") ? null : genericID);
     }
 
     @RequestMapping(value = {"/getGenericDefaultSetup/{genericID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DrugDefaultSetupData getGenericDefaultSetup(@PathVariable("genericID") Long genericID,
+    public DrugDefaultSetupData getGenericDefaultSetup(@PathVariable("genericID") String genericID,
                                                     HttpServletRequest request) throws BottomUpException {
-        Long doctorID = null;
+        String doctorID = null;
         if(this.getUserDetail().getDoctorData() != null){
             doctorID = this.getUserDetail().getDoctorData().getDoctorID();
         }
@@ -94,7 +94,7 @@ public class DrugDefaultSetupController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{drugSettingID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("drugSettingID") Integer drugSettingID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("drugSettingID") String drugSettingID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("drugSettingID", drugSettingID);
         this.defaultSetupService.delete(param);

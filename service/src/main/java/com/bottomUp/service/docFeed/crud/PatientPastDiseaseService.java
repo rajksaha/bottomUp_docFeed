@@ -36,7 +36,7 @@ public class PatientPastDiseaseService {
         patientPastDiseaseMapper.update(data);
     }
 
-    public PatientPastDiseaseData getByID(Long ID)throws BottomUpException {
+    public PatientPastDiseaseData getByID(String ID)throws BottomUpException {
         return this.patientPastDiseaseMapper.getByID(ID);
     }
 

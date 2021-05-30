@@ -35,16 +35,14 @@ public class PrescriptionFamilyDiseaseController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{presFamilyDiseaseID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public PrescriptionFamilyDiseaseData getByID(@PathVariable("presFamilyDiseaseID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.prescriptionFamilyDiseaseService.getByID(Long.valueOf(companyID));
+    public PrescriptionFamilyDiseaseData getByID(@PathVariable("presFamilyDiseaseID") String presFamilyDiseaseID, HttpServletRequest request) throws BottomUpException {
+        return this.prescriptionFamilyDiseaseService.getByID(presFamilyDiseaseID);
     }
 
     @RequestMapping(value = {"/addFamilyHistoryInPres/{familyHistoryID}/{appointmentID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> addFamilyHistoryInPres(HttpServletRequest request, @PathVariable Long familyHistoryID, @PathVariable Long appointmentID) throws BottomUpException {
+    public Map<String, Object> addFamilyHistoryInPres(HttpServletRequest request, @PathVariable String familyHistoryID,
+                                                      @PathVariable String appointmentID) throws BottomUpException {
         PrescriptionFamilyDiseaseData data = new PrescriptionFamilyDiseaseData();
         data.setAppointmentID(appointmentID);
         data.setFamilyDiseaseID(familyHistoryID);
@@ -75,7 +73,7 @@ public class PrescriptionFamilyDiseaseController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{presFamilyDiseaseID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("presFamilyDiseaseID") Integer presFamilyDiseaseID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("presFamilyDiseaseID") String presFamilyDiseaseID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("presFamilyDiseaseID", presFamilyDiseaseID);
         this.prescriptionFamilyDiseaseService.delete(param);

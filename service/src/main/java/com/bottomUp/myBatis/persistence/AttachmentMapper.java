@@ -16,9 +16,9 @@ public interface AttachmentMapper {
 
     void create(AttachmentData attachment) throws BottomUpException;
 
-    void delete(Long attachmentId) throws BottomUpException;
+    void delete(String attachmentId) throws BottomUpException;
 
-    AttachmentData getByID(Long attachmentId) throws BottomUpException;
+    AttachmentData getByID(String attachmentId) throws BottomUpException;
 
     List<AttachmentData> getAll(Map<String, Object> params) throws BottomUpException;
 

@@ -5,35 +5,35 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionAdviceData extends BaseData {
 
-  private Long presAdviceID;
-  private Long appointmentID;
-  private Long adviceID;
+  private String presAdviceID;
+  private String appointmentID;
+  private String adviceID;
   private Integer type;
   private Integer lang;
   private String advice;
   private String pdf;
 
-  public Long getPresAdviceID() {
+  public String getPresAdviceID() {
     return presAdviceID;
   }
 
-  public void setPresAdviceID(Long presAdviceID) {
+  public void setPresAdviceID(String presAdviceID) {
     this.presAdviceID = presAdviceID;
   }
 
-  public Long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(Long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public Long getAdviceID() {
+  public String getAdviceID() {
     return adviceID;
   }
 
-  public void setAdviceID(Long adviceID) {
+  public void setAdviceID(String adviceID) {
     this.adviceID = adviceID;
   }
 

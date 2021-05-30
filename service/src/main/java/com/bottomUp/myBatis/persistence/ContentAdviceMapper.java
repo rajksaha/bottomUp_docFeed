@@ -18,7 +18,7 @@ public interface ContentAdviceMapper {
 
     public void update(ContentAdviceData data) throws BottomUpException;
 
-    public ContentAdviceData getByID(Long ID) throws BottomUpException;
+    public ContentAdviceData getByID(String ID) throws BottomUpException;
 
     public ContentAdviceData getByName(String symptomName)throws BottomUpException;
 

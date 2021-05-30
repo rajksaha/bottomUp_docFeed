@@ -4,40 +4,40 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorAdviceDiseaseTemplateData  extends BaseData {
 
-  private long templateID;
-  private long doctorID;
-  private long diseaseID;
-  private long adviceID;
+  private String templateID;
+  private String doctorID;
+  private String diseaseID;
+  private String adviceID;
 
-  public long getTemplateID() {
+  public String getTemplateID() {
     return templateID;
   }
 
-  public void setTemplateID(long templateID) {
+  public void setTemplateID(String templateID) {
     this.templateID = templateID;
   }
 
-  public long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public long getDiseaseID() {
+  public String getDiseaseID() {
     return diseaseID;
   }
 
-  public void setDiseaseID(long diseaseID) {
+  public void setDiseaseID(String diseaseID) {
     this.diseaseID = diseaseID;
   }
 
-  public long getAdviceID() {
+  public String getAdviceID() {
     return adviceID;
   }
 
-  public void setAdviceID(long adviceID) {
+  public void setAdviceID(String adviceID) {
     this.adviceID = adviceID;
   }
 }

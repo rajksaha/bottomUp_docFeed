@@ -49,9 +49,9 @@ public class ContentVitalOptionController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{vitalOptionID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("vitalOptionID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("vitalOptionID") String vitalOptionID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("vitalOptionID", appointmentID);
+        param.put("vitalOptionID", vitalOptionID);
         this.contentVitalOptionService.delete(param);
     }
 }

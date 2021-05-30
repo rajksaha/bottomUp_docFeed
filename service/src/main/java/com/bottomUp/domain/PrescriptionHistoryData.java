@@ -5,35 +5,35 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionHistoryData  extends BaseData {
 
-  private Long presHistoryID;
-  private Long appointmentID;
-  private Long patientHistoryID;
+  private String presHistoryID;
+  private String appointmentID;
+  private String patientHistoryID;
   private String typeCode;
   private String historyName;
   private String historyShortName;
   private String historyResult;
 
-  public Long getPresHistoryID() {
+  public String getPresHistoryID() {
     return presHistoryID;
   }
 
-  public void setPresHistoryID(Long presHistoryID) {
+  public void setPresHistoryID(String presHistoryID) {
     this.presHistoryID = presHistoryID;
   }
 
-  public Long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(Long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public Long getPatientHistoryID() {
+  public String getPatientHistoryID() {
     return patientHistoryID;
   }
 
-  public void setPatientHistoryID(Long patientHistoryID) {
+  public void setPatientHistoryID(String patientHistoryID) {
     this.patientHistoryID = patientHistoryID;
   }
 

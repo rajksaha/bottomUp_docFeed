@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentVitalMapper">
 
-	<insert id="create" parameterType="contentVital" useGeneratedKeys="true" keyProperty="vitalID" >
+	<insert id="create" parameterType="contentVital">
+
+		<selectKey keyProperty="vitalID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_vital`(
+			`vitalID`,
 			`vitalName`,
 			`shortName`,
 			`vitalUnit`,
@@ -16,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{vitalID},
 			#{vitalName},
 			#{shortName},
 			#{vitalUnit},
@@ -39,7 +45,7 @@
 		WHERE vitalID = #{vitalID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentVital">
+	<select id="getByID" parameterType="string" resultType="contentVital">
 		SELECT
 			`vitalID`,
 			`vitalName`,

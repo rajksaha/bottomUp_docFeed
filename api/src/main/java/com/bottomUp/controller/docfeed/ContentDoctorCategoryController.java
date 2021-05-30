@@ -27,9 +27,7 @@ public class ContentDoctorCategoryController extends BaseController {
     @RequestMapping(value = {"/getByParam"}, method = RequestMethod.GET)
     @ResponseBody
     public List<ContentDoctorCategoryData> getAll(HttpServletRequest request) throws BottomUpException {
-
         Map<String, Object> params = new HashMap<>();
-
         return this.contentDoctorCategoryService.getByParam(params);
     }
 
@@ -52,7 +50,7 @@ public class ContentDoctorCategoryController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{categoryId}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("categoryId") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("categoryId") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("categoryId", appointmentID);
         this.contentDoctorCategoryService.delete(param);

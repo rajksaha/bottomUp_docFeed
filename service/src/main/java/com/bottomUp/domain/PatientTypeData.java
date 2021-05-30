@@ -5,23 +5,23 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PatientTypeData extends BaseData {
 
-  private long patientTypeID;
-  private long doctorType;
+  private String patientTypeID;
+  private String doctorType;
   private String typeName;
 
-  public long getPatientTypeID() {
+  public String getPatientTypeID() {
     return patientTypeID;
   }
 
-  public void setPatientTypeID(long patientTypeID) {
+  public void setPatientTypeID(String patientTypeID) {
     this.patientTypeID = patientTypeID;
   }
 
-  public long getDoctorType() {
+  public String getDoctorType() {
     return doctorType;
   }
 
-  public void setDoctorType(long doctorType) {
+  public void setDoctorType(String doctorType) {
     this.doctorType = doctorType;
   }
 

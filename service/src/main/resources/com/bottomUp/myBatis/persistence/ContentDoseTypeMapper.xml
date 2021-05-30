@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.ContentDoseTypeMapper">
 
-	<insert id="create" parameterType="contentDoseType" useGeneratedKeys="true" keyProperty="doseTypeID" >
+	<insert id="create" parameterType="contentDoseType">
+
+		<selectKey keyProperty="doseTypeID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `content_dose_type`(
+			`doseTypeID`,
 			`doseCode`,
 			`bangla`,
 			`english`,
@@ -17,6 +22,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{doseTypeID},
 			#{doseCode},
 			#{bangla},
 			#{english},
@@ -41,7 +47,7 @@
 		WHERE doseTypeID = #{doseTypeID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="contentDoseType">
+	<select id="getByID" parameterType="string" resultType="contentDoseType">
 		SELECT
 			`doseTypeID`,
 			`doseCode`,

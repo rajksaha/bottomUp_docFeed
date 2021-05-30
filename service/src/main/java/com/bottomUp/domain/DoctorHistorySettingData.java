@@ -5,42 +5,50 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorHistorySettingData extends BaseData {
 
-  private Long historySettingID;
-  private Long doctorID;
-  private Long historyID;
-  private Long displayOrder;
+  private String historySettingID;
+  private String doctorID;
+  private String historyID;
+  private Integer displayOrder;
 
   private String typeCode;
   private String name;
   private String shortName;
 
   private String historyResult;
-  private Long presHistoryID;
-  private Long appointmentID;
+  private String presHistoryID;
+  private String appointmentID;
   private Boolean addedInPrescription;
 
-  public Long getHistorySettingID() {
+  public String getHistorySettingID() {
     return historySettingID;
   }
 
-  public void setHistorySettingID(Long historySettingID) {
+  public void setHistorySettingID(String historySettingID) {
     this.historySettingID = historySettingID;
   }
 
-  public Long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(Long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public Long getHistoryID() {
+  public String getHistoryID() {
     return historyID;
   }
 
-  public void setHistoryID(Long historyID) {
+  public void setHistoryID(String historyID) {
     this.historyID = historyID;
+  }
+
+  public Integer getDisplayOrder() {
+    return displayOrder;
+  }
+
+  public void setDisplayOrder(Integer displayOrder) {
+    this.displayOrder = displayOrder;
   }
 
   public String getTypeCode() {
@@ -67,14 +75,6 @@ public class DoctorHistorySettingData extends BaseData {
     this.shortName = shortName;
   }
 
-  public Long getDisplayOrder() {
-    return displayOrder;
-  }
-
-  public void setDisplayOrder(Long displayOrder) {
-    this.displayOrder = displayOrder;
-  }
-
   public String getHistoryResult() {
     return historyResult;
   }
@@ -83,19 +83,19 @@ public class DoctorHistorySettingData extends BaseData {
     this.historyResult = historyResult;
   }
 
-  public Long getPresHistoryID() {
+  public String getPresHistoryID() {
     return presHistoryID;
   }
 
-  public void setPresHistoryID(Long presHistoryID) {
+  public void setPresHistoryID(String presHistoryID) {
     this.presHistoryID = presHistoryID;
   }
 
-  public Long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(Long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 

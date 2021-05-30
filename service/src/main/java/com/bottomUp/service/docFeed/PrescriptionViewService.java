@@ -81,7 +81,7 @@ public class PrescriptionViewService {
     private FollowUpResultMapper followUpResultMapper;
 
 
-    public Map<String, Object> getDetailsForPrescription(Long doctorID)throws BottomUpException{
+    public Map<String, Object> getDetailsForPrescription(String doctorID)throws BottomUpException{
         Map<String, Object> requestMap = new HashMap<String, Object>();
         DoctorData doctorData = doctorMapper.getByID(doctorID);
         DoctorSettingData doctorSettingData = doctorSettingMapper.getByDoctorID(doctorID);
@@ -99,7 +99,7 @@ public class PrescriptionViewService {
         return result;
     }
 
-    public Map<String, Object> getPrescriptionDetail(Long appointmentID)throws BottomUpException{
+    public Map<String, Object> getPrescriptionDetail(String appointmentID)throws BottomUpException{
         Map<String, Object> requestMap = new HashMap<String, Object>();
         requestMap.put("appointmentID", appointmentID);
 
@@ -135,7 +135,7 @@ public class PrescriptionViewService {
         return result;
     }
 
-    public List<PresNoteData> getPrescribedNote(Long appointmentID) throws BottomUpException{
+    public List<PresNoteData> getPrescribedNote(String appointmentID) throws BottomUpException{
         List<PresNoteData> presNoteDataList = new ArrayList<>();
         Map<String, Object> requestMap = new HashMap<String, Object>();
         requestMap.put("entityID", appointmentID);

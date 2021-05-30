@@ -36,7 +36,7 @@ public class CompanyModuleService {
     @Autowired
     private PermissionMapper permissionMapper;
 
-    private void createPermissionForModule(Integer moduleID, Long companyModuleID) throws BottomUpException{
+    private void createPermissionForModule(String moduleID, String companyModuleID) throws BottomUpException{
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("entityID", moduleID);
         params.put("entityType", "MODULE_PERMISSION");
@@ -60,7 +60,7 @@ public class CompanyModuleService {
         this.companyModuleMapper.update(data);
     }
 
-    public CompanyModuleData getByID(Integer ID)throws BottomUpException {
+    public CompanyModuleData getByID(String ID)throws BottomUpException {
         return this.companyModuleMapper.getByID(ID);
     }
 

@@ -4,9 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.DoctorAdviceDiseaseTemplateMapper">
 
-	<insert id="create" parameterType="doctorAdviceDiseaseTemplate" useGeneratedKeys="true" keyProperty="templateID" >
+	<insert id="create" parameterType="doctorAdviceDiseaseTemplate">
+
+		<selectKey keyProperty="templateID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 
 		INSERT INTO `doctor_advice_disease_template`(
+			`templateID`,
 			`doctorID`,
 			`diseaseID`,
 			`adviceID`,
@@ -16,6 +21,7 @@
 			`createdOn`
 		)
 		VALUES(
+			#{templateID},
 			#{doctorID},
 			#{diseaseID},
 			#{adviceID},
@@ -39,7 +45,7 @@
 		WHERE templateID = #{templateID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="doctorAdviceDiseaseTemplate">
+	<select id="getByID" parameterType="string" resultType="doctorAdviceDiseaseTemplate">
 		SELECT
 			`templateID`,
 			`doctorID`,

@@ -35,11 +35,8 @@ public class InvReportDateController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{invReportDateId}"}, method = RequestMethod.GET)
     @ResponseBody
-    public InvReportDateData getByID(@PathVariable("invReportDateId") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.invReportDateService.getByID(Long.valueOf(companyID));
+    public InvReportDateData getByID(@PathVariable("invReportDateId") String invReportDateId, HttpServletRequest request) throws BottomUpException {
+        return this.invReportDateService.getByID(invReportDateId);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,7 +58,7 @@ public class InvReportDateController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{invReportDateId}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("invReportDateId") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("invReportDateId") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("invReportDateId", appointmentID);
         this.invReportDateService.delete(param);

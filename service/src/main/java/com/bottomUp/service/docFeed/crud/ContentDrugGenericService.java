@@ -29,7 +29,7 @@ public class ContentDrugGenericService {
         contentDrugGenericMapper.update(data);
     }
 
-    public ContentDrugGenericData getByID(Long ID)throws BottomUpException {
+    public ContentDrugGenericData getByID(String ID)throws BottomUpException {
         return this.contentDrugGenericMapper.getByID(ID);
     }
 

@@ -75,7 +75,7 @@ public class PermissionController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{permissionID}", method = RequestMethod.DELETE)
-    public Map<String, Object> delete(@PathVariable("permissionID") Integer permissionID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public Map<String, Object> delete(@PathVariable("permissionID") String permissionID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("permissionID",permissionID);
         List<GroupPermissionData> listOfConnectedData = groupPermissionService.getByParam(param);

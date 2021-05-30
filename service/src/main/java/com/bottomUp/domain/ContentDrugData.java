@@ -4,10 +4,10 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentDrugData extends BaseData {
 
-  private Long drugID;
+  private String drugID;
   private Integer typeID;
-  private Long genericID;
-  private Long companyID;
+  private String genericID;
+  private String companyID;
   private String drugName;
   private String strength;
 
@@ -29,11 +29,11 @@ public class ContentDrugData extends BaseData {
     return getDisplayDrugName() + " [" + this.companyName + "]";
   }
 
-  public Long getDrugID() {
+  public String getDrugID() {
     return drugID;
   }
 
-  public void setDrugID(Long drugID) {
+  public void setDrugID(String drugID) {
     this.drugID = drugID;
   }
 
@@ -45,19 +45,19 @@ public class ContentDrugData extends BaseData {
     this.typeID = typeID;
   }
 
-  public Long getGenericID() {
+  public String getGenericID() {
     return genericID;
   }
 
-  public void setGenericID(Long genericID) {
+  public void setGenericID(String genericID) {
     this.genericID = genericID;
   }
 
-  public Long getCompanyID() {
+  public String getCompanyID() {
     return companyID;
   }
 
-  public void setCompanyID(Long companyID) {
+  public void setCompanyID(String companyID) {
     this.companyID = companyID;
   }
 

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class ContentDrugGenericData extends BaseData {
 
-    private Long genericID;
+    private String genericID;
     private String genericDrugName;
     private Integer typeID;
     private String drugTypeName;
@@ -26,11 +26,11 @@ public class ContentDrugGenericData extends BaseData {
 
     private List<ContentDrugData> compDrugList;
 
-    public Long getGenericID() {
+    public String getGenericID() {
         return genericID;
     }
 
-    public void setGenericID(Long genericID) {
+    public void setGenericID(String genericID) {
         this.genericID = genericID;
     }
 
@@ -58,19 +58,19 @@ public class ContentDrugGenericData extends BaseData {
         this.drugTypeName = drugTypeName;
     }
 
-    public List<ContentDrugData> getCompDrugList() {
-        return compDrugList;
-    }
-
-    public void setCompDrugList(List<ContentDrugData> compDrugList) {
-        this.compDrugList = compDrugList;
-    }
-
     public String getStrength() {
         return strength;
     }
 
     public void setStrength(String strength) {
         this.strength = strength;
+    }
+
+    public List<ContentDrugData> getCompDrugList() {
+        return compDrugList;
+    }
+
+    public void setCompDrugList(List<ContentDrugData> compDrugList) {
+        this.compDrugList = compDrugList;
     }
 }

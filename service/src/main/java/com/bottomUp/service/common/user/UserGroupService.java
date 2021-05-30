@@ -36,7 +36,7 @@ public class UserGroupService {
         this.userGroupMapper.update(data);
     }
 
-    public UserGroupData getByID(Integer ID) throws BottomUpException {
+    public UserGroupData getByID(String ID) throws BottomUpException {
         return this.userGroupMapper.getByID(ID);
     }
 
@@ -62,7 +62,7 @@ public class UserGroupService {
         this.groupPermissionMapper.deletePermissionByGroup(userGroupData.getUserGroupID());
 
         for(PermissionData permission : userGroupData.getGroupPermissionList()){
-            if(permission.getIsAssigned() != null && permission.getIsAssigned()){
+            if(permission.getAssigned() != null && permission.getAssigned()){
                 GroupPermissionData groupPermissionData = new GroupPermissionData();
                 groupPermissionData.setUserGroupID(userGroupData.getUserGroupID());
                 groupPermissionData.setStatusValue(1);
@@ -74,6 +74,10 @@ public class UserGroupService {
 
     public List<PermissionData> getPermissionByParam (Map<String, Object> param) throws BottomUpException {
         return this.permissionMapper.getByParam(param);
+    }
+
+    public void delete (Map<String,Object> param) throws BottomUpException {
+        this.userGroupMapper.delete(param);
     }
 
 

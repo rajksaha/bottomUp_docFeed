@@ -16,7 +16,7 @@ public interface ContentDrugGenericMapper {
 
     public void update(ContentDrugGenericData data) throws BottomUpException;
 
-    public ContentDrugGenericData getByID(Long ID) throws BottomUpException;
+    public ContentDrugGenericData getByID(String ID) throws BottomUpException;
 
     public ContentDrugGenericData getByName(String name) throws BottomUpException;
 

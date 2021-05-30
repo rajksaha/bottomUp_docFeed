@@ -35,11 +35,8 @@ public class PatientFollowUPController extends BaseController {
 
     @RequestMapping(value = {"/getByID/{patientFollowUpID}"}, method = RequestMethod.GET)
     @ResponseBody
-    public PatientFollowUpData getByID(@PathVariable("patientFollowUpID") Integer companyID, HttpServletRequest request) throws BottomUpException {
-
-        Map<String, Object> params = this.parseParameter(request);
-
-        return this.patientFollowUpService.getByID(Long.valueOf(companyID));
+    public PatientFollowUpData getByID(@PathVariable("patientFollowUpID") String patientFollowUpID, HttpServletRequest request) throws BottomUpException {
+        return this.patientFollowUpService.getByID(patientFollowUpID);
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -61,7 +58,7 @@ public class PatientFollowUPController extends BaseController {
     }
 
     @RequestMapping(value = "/delete/{patientFollowUpID}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("patientFollowUpID") Integer appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
+    public void delete(@PathVariable("patientFollowUpID") String appointmentID, HttpServletResponse httpResponse_p) throws BottomUpException {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("patientFollowUpID", appointmentID);
         this.patientFollowUpService.delete(param);

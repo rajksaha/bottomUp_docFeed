@@ -7,7 +7,7 @@ public class FollowUpDetail {
 
     private String result;
     private String followUpInvName;
-    private Long followUpID;
+    private String followUpID;
     private Integer displayOrder;
 
     public String getResult() {
@@ -26,11 +26,11 @@ public class FollowUpDetail {
         this.followUpInvName = followUpInvName;
     }
 
-    public Long getFollowUpID() {
+    public String getFollowUpID() {
         return followUpID;
     }
 
-    public void setFollowUpID(Long followUpID) {
+    public void setFollowUpID(String followUpID) {
         this.followUpID = followUpID;
     }
 

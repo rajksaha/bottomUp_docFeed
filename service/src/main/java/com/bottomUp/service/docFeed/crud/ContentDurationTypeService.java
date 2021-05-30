@@ -29,7 +29,7 @@ public class ContentDurationTypeService {
         contentDayTypeMapper.update(data);
     }
 
-    public ContentDurationTypeData getByID(Long ID)throws BottomUpException {
+    public ContentDurationTypeData getByID(String ID)throws BottomUpException {
         return this. contentDayTypeMapper.getByID(ID);
     }
 

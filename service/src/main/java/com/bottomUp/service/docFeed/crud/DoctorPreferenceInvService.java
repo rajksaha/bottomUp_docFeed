@@ -40,7 +40,7 @@ public class DoctorPreferenceInvService {
         doctorPreferenceInvMapper.update(data);
     }
 
-    public DoctorPreferenceInvData getByID(Long ID)throws BottomUpException {
+    public DoctorPreferenceInvData getByID(String ID)throws BottomUpException {
         return this.doctorPreferenceInvMapper.getByID(ID);
     }
 

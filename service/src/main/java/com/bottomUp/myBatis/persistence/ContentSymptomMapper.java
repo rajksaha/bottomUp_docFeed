@@ -17,7 +17,7 @@ public interface ContentSymptomMapper {
 
     public void update(ContentSymptomData  data) throws BottomUpException;
 
-    public ContentSymptomData getByID(Long ID) throws BottomUpException;
+    public ContentSymptomData getByID(String ID) throws BottomUpException;
 
     public ContentSymptomData getByName(String symptomName)throws BottomUpException;
 

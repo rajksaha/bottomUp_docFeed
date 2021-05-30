@@ -5,34 +5,34 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentAdviceData extends BaseData {
 
-  private long adviceID;
-  private long type;
-  private long lang;
+  private String adviceID;
+  private Integer type;
+  private Integer lang;
   private String advice;
   private String pdf;
 
 
-  public long getAdviceID() {
+  public String getAdviceID() {
     return adviceID;
   }
 
-  public void setAdviceID(long adviceID) {
+  public void setAdviceID(String adviceID) {
     this.adviceID = adviceID;
   }
 
-  public long getType() {
+  public Integer getType() {
     return type;
   }
 
-  public void setType(long type) {
+  public void setType(Integer type) {
     this.type = type;
   }
 
-  public long getLang() {
+  public Integer getLang() {
     return lang;
   }
 
-  public void setLang(long lang) {
+  public void setLang(Integer lang) {
     this.lang = lang;
   }
 

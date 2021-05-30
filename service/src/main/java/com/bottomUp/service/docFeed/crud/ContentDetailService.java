@@ -63,7 +63,7 @@ public class ContentDetailService {
         this.contentDetailMapper.create(contentDetailData);
     }
 
-    public Long createByDrugHistory(DrugHistory drugHistory) throws BottomUpException{
+    public String createByDrugHistory(DrugHistory drugHistory) throws BottomUpException{
         ContentDetailData contentDetailData = new ContentDetailData();
         if(drugHistory.getCurrentStatus() == 1){
             contentDetailData.setEntityType(PrescriptionContentType.CURRENT_DRUG.name());
@@ -81,7 +81,7 @@ public class ContentDetailService {
         return contentDetailData.getContentDetailID();
     }
 
-    public Long addFollowUpToPres(ContentDetailData detailData) throws BottomUpException{
+    public String addFollowUpToPres(ContentDetailData detailData) throws BottomUpException{
         detailData.setEntityType(PrescriptionContentType.FOLLOW_UP.name());
         contentDetailMapper.create(detailData);
         return detailData.getContentDetailID();
@@ -95,7 +95,7 @@ public class ContentDetailService {
         this.contentDetailMapper.update(data);
     }
 
-    public ContentDetailData getByID(Long ID)throws BottomUpException {
+    public ContentDetailData getByID(String ID)throws BottomUpException {
         return this.contentDetailMapper.getByID(ID);
     }
 

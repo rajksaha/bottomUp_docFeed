@@ -17,7 +17,7 @@ public interface ContentDoctorCategoryMapper {
 
     public void update(ContentDoctorCategoryData data) throws BottomUpException;
 
-    public ContentDoctorCategoryData getByID(Long ID) throws BottomUpException;
+    public ContentDoctorCategoryData getByID(String ID) throws BottomUpException;
 
     public List<ContentDoctorCategoryData> getByParam(Map<String, Object> param) throws BottomUpException;
 

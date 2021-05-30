@@ -33,7 +33,7 @@
 		WHERE patientID = #{patientID}
 	</update>
 
-	<select id="getByID" parameterType="long" resultType="patientDetail">
+	<select id="getByID" parameterType="string" resultType="patientDetail">
 		SELECT
 			`patientID`,
 			`type`,

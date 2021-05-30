@@ -77,7 +77,7 @@ public class UserService {
         this.userMapper.create(userData);
     }
 
-    public UserProfileData getUserProfileByID(Long userID) throws BottomUpException {
+    public UserProfileData getUserProfileByID(String userID) throws BottomUpException {
         UserProfileData userProfileData = this.userProfileMapper.getUserProfileByID(userID);
         if(userProfileData.getDoctorID() != null){
             Map<String, Object> param = new HashMap<String, Object>();
@@ -94,7 +94,7 @@ public class UserService {
         return userProfileData;
     }
 
-    public UserData createUserProfile(UserProfileData userProfileData, Long companyID) throws BottomUpException {
+    public UserData createUserProfile(UserProfileData userProfileData, String companyID) throws BottomUpException {
         UserData userData = new UserData();
         userData.setUserName(userProfileData.getUserName());
         userData.setCompanyID(companyID);
@@ -102,7 +102,7 @@ public class UserService {
         PasswordEncryptor encryptor = new PasswordEncryptor();
         userData.setPassword(encryptor.encrypt(defaultPassword));
         userData.setStatus(2);
-        userData.setIsBlocked(false);
+        userData.setBlocked(false);
         this.create(userData);
         this.createDoctor(userProfileData, userData.getUserID());
         userProfileData.setUserID(userData.getUserID());
@@ -222,7 +222,7 @@ public class UserService {
         return result;
     }
 
-    public void createDoctor(UserProfileData userProfileData, Long userID)throws BottomUpException{
+    public void createDoctor(UserProfileData userProfileData, String userID)throws BottomUpException{
         if(userProfileData.getIsDoctor() != null && userProfileData.getIsDoctor() == 1){
             DoctorData doctorData = userProfileData.getDoctorData();
             doctorData.setUserID(userID);

@@ -16,7 +16,7 @@ public interface CompanyMapper {
 
     public void update(CompanyData data) throws BottomUpException;
 
-    public CompanyData getByID(Long ID) throws BottomUpException;
+    public CompanyData getByID(String ID) throws BottomUpException;
 
     public List<CompanyData> getByParam(Map<String, Object> param) throws BottomUpException;
 

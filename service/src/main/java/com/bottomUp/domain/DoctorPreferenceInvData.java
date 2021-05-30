@@ -5,44 +5,44 @@ import com.bottomUp.domain.common.BaseData;
 
 public class DoctorPreferenceInvData extends BaseData {
 
-  private Long invPreferenceID;
-  private Long doctorID;
-  private Long invID;
-  private Long displayOrder;
+  private String invPreferenceID;
+  private String doctorID;
+  private String invID;
+  private Integer displayOrder;
   private String invName;
-  private Long invCategoryID;
-  private Long presInvID;
+  private String invCategoryID;
+  private String presInvID;
   private Boolean addedInPrescription;
 
-  public Long getInvPreferenceID() {
+  public String getInvPreferenceID() {
     return invPreferenceID;
   }
 
-  public void setInvPreferenceID(Long invPreferenceID) {
+  public void setInvPreferenceID(String invPreferenceID) {
     this.invPreferenceID = invPreferenceID;
   }
 
-  public Long getDoctorID() {
+  public String getDoctorID() {
     return doctorID;
   }
 
-  public void setDoctorID(Long doctorID) {
+  public void setDoctorID(String doctorID) {
     this.doctorID = doctorID;
   }
 
-  public Long getInvID() {
+  public String getInvID() {
     return invID;
   }
 
-  public void setInvID(Long invID) {
+  public void setInvID(String invID) {
     this.invID = invID;
   }
 
-  public Long getDisplayOrder() {
+  public Integer getDisplayOrder() {
     return displayOrder;
   }
 
-  public void setDisplayOrder(Long displayOrder) {
+  public void setDisplayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
   }
 
@@ -54,19 +54,19 @@ public class DoctorPreferenceInvData extends BaseData {
     this.invName = invName;
   }
 
-  public Long getInvCategoryID() {
+  public String getInvCategoryID() {
     return invCategoryID;
   }
 
-  public void setInvCategoryID(Long invCategoryID) {
+  public void setInvCategoryID(String invCategoryID) {
     this.invCategoryID = invCategoryID;
   }
 
-  public Long getPresInvID() {
+  public String getPresInvID() {
     return presInvID;
   }
 
-  public void setPresInvID(Long presInvID) {
+  public void setPresInvID(String presInvID) {
     this.presInvID = presInvID;
   }
 

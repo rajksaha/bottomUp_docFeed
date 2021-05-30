@@ -17,7 +17,7 @@ public interface PrescriptionReferenceMapper {
 
     public void update(PrescriptionReferenceData data) throws BottomUpException;
 
-    public PrescriptionReferenceData getByID(Long ID) throws BottomUpException;
+    public PrescriptionReferenceData getByID(String ID) throws BottomUpException;
 
     public List<PrescriptionReferenceData> getByParam(Map<String, Object> param) throws BottomUpException;
 

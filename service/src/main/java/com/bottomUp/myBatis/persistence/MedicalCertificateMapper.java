@@ -17,7 +17,7 @@ public interface MedicalCertificateMapper {
 
     public void update(MedicalCertificateData data) throws BottomUpException;
 
-    public MedicalCertificateData getByAppointmentID(Long ID) throws BottomUpException;
+    public MedicalCertificateData getByAppointmentID(String ID) throws BottomUpException;
 
     public List<MedicalCertificateData> getByParam(Map<String, Object> param) throws BottomUpException;
 

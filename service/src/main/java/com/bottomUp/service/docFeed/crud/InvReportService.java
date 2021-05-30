@@ -31,7 +31,7 @@ public class InvReportService {
         invReportMapper.update(data);
     }
 
-    public InvReportData getByID(Long ID)throws BottomUpException {
+    public InvReportData getByID(String ID)throws BottomUpException {
         return this.invReportMapper.getByID(ID);
     }
 

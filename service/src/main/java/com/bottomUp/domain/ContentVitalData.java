@@ -5,17 +5,16 @@ import com.bottomUp.domain.common.BaseData;
 
 public class ContentVitalData extends BaseData {
 
-  private long vitalID;
+  private String vitalID;
   private String vitalName;
   private String shortName;
   private String vitalUnit;
 
-
-  public long getVitalID() {
+  public String getVitalID() {
     return vitalID;
   }
 
-  public void setVitalID(long vitalID) {
+  public void setVitalID(String vitalID) {
     this.vitalID = vitalID;
   }
 

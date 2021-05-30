@@ -31,7 +31,7 @@ public class ContentDoctorCategoryService {
         contentDoctorCategoryMapper.update(data);
     }
 
-    public ContentDoctorCategoryData getByID(Long ID)throws BottomUpException {
+    public ContentDoctorCategoryData getByID(String ID)throws BottomUpException {
         return this.contentDoctorCategoryMapper.getByID(ID);
     }
 

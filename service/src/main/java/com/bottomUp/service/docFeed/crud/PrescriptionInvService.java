@@ -24,7 +24,7 @@ public class PrescriptionInvService {
     @Autowired
     private ContentInvService contentInvService;
 
-    public void create(Long appointmentID, Long invID) throws BottomUpException{
+    public void create(String appointmentID, String invID) throws BottomUpException{
         PrescriptionInvData prescriptionInvData = new PrescriptionInvData();
         prescriptionInvData.setAppointmentID(appointmentID);
         prescriptionInvData.setInvID(invID);
@@ -45,7 +45,7 @@ public class PrescriptionInvService {
         prescriptionInvMapper.update(data);
     }
 
-    public PrescriptionInvData  getByID(Long ID)throws BottomUpException {
+    public PrescriptionInvData  getByID(String ID)throws BottomUpException {
         return this.prescriptionInvMapper.getByID(ID);
     }
 

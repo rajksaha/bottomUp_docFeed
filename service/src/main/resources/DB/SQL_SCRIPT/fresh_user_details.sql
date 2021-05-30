@@ -14,6 +14,7 @@ INSERT INTO `bottom_up_user`
 )
 VALUES
   (
+
     'mathauser',
     '7c4a8d09ca3762af61e59520943dc26494f8941b',
     1,
@@ -43,7 +44,7 @@ INSERT INTO `bottom_up_user_profile`
 )
 VALUES
 (
-1,
+'c49f62c6-c140-11eb-a1cb-0668c7450820',
 'Super Admin',
 '',
 'rajkapursaha@gmail.com',

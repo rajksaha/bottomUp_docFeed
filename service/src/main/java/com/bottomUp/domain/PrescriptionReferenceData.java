@@ -5,33 +5,33 @@ import com.bottomUp.domain.common.BaseData;
 
 public class PrescriptionReferenceData extends BaseData {
 
-  private long prescriptionReferenceID;
-  private long appointmentID;
-  private long referredDoctorID;
+  private String prescriptionReferenceID;
+  private String appointmentID;
+  private String referredDoctorID;
   private String doctorName;
   private String doctorAddress;
 
-  public long getPrescriptionReferenceID() {
+  public String getPrescriptionReferenceID() {
     return prescriptionReferenceID;
   }
 
-  public void setPrescriptionReferenceID(long prescriptionReferenceID) {
+  public void setPrescriptionReferenceID(String prescriptionReferenceID) {
     this.prescriptionReferenceID = prescriptionReferenceID;
   }
 
-  public long getAppointmentID() {
+  public String getAppointmentID() {
     return appointmentID;
   }
 
-  public void setAppointmentID(long appointmentID) {
+  public void setAppointmentID(String appointmentID) {
     this.appointmentID = appointmentID;
   }
 
-  public long getReferredDoctorID() {
+  public String getReferredDoctorID() {
     return referredDoctorID;
   }
 
-  public void setReferredDoctorID(long referredDoctorID) {
+  public void setReferredDoctorID(String referredDoctorID) {
     this.referredDoctorID = referredDoctorID;
   }
 

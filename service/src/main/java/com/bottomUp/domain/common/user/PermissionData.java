@@ -8,28 +8,36 @@ import com.bottomUp.domain.common.BaseData;
  */
 public class PermissionData extends BaseData {
 
-    private Long permissionID;
-    private Long companyModuleID;
+    private String permissionID;
+    private String companyModuleID;
     private String companyModuleName;
     private String functionCode;
     private String shortName;
     private Boolean isAssigned;
     private Integer isUserDefined;
 
-    public Long getPermissionID() {
+    public String getPermissionID() {
         return permissionID;
     }
 
-    public void setPermissionID(Long permissionID) {
+    public void setPermissionID(String permissionID) {
         this.permissionID = permissionID;
     }
 
-    public Long getCompanyModuleID() {
+    public String getCompanyModuleID() {
         return companyModuleID;
     }
 
-    public void setCompanyModuleID(Long companyModuleID) {
+    public void setCompanyModuleID(String companyModuleID) {
         this.companyModuleID = companyModuleID;
+    }
+
+    public String getCompanyModuleName() {
+        return companyModuleName;
+    }
+
+    public void setCompanyModuleName(String companyModuleName) {
+        this.companyModuleName = companyModuleName;
     }
 
     public String getFunctionCode() {
@@ -48,20 +56,12 @@ public class PermissionData extends BaseData {
         this.shortName = shortName;
     }
 
-    public Boolean getIsAssigned() {
+    public Boolean getAssigned() {
         return isAssigned;
     }
 
-    public void setIsAssigned(Boolean isAssigned) {
-        this.isAssigned = isAssigned;
-    }
-
-    public String getCompanyModuleName() {
-        return companyModuleName;
-    }
-
-    public void setCompanyModuleName(String companyModuleName) {
-        this.companyModuleName = companyModuleName;
+    public void setAssigned(Boolean assigned) {
+        isAssigned = assigned;
     }
 
     public Integer getIsUserDefined() {

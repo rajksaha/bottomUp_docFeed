@@ -4,10 +4,14 @@
 
 <mapper namespace="com.bottomUp.myBatis.persistence.MedicalCertificateMapper">
 
-	<insert id="create" parameterType="medicalCert" useGeneratedKeys="true" keyProperty="medicalCertID" >
+	<insert id="create" parameterType="medicalCert">
 
+		<selectKey keyProperty="medicalCertID" resultType="String" order="BEFORE">
+			select UUID()
+		</selectKey>
 		INSERT INTO `medical_certificate`
 		(
+			`medicalCertID`,
 			`appointmentID`,
 			`startDate`,
 			`endDate`,
@@ -19,6 +23,7 @@
 		)
 		VALUES
 		(
+			#{medicalCertID},
 			#{appointmentID},
 			#{startDate},
 			#{endDate},
@@ -42,7 +47,7 @@
 		WHERE medicalCertID = #{medicalCertID}
 	</update>
 
-	<select id="getByAppointmentID" parameterType="long" resultType="medicalCert">
+	<select id="getByAppointmentID" parameterType="string" resultType="medicalCert">
 		SELECT medicalCertID, appointmentID, startDate, endDate, addComment, updatedBy, `createdOn`, `createdBy`
 		FROM medical_certificate
 		WHERE appointmentID = #{appointmentID}
